@@ -1,18 +1,20 @@
 ---
 title: "Jennifer HY Lin"
-image: profile.jpg
+image: profile avatar.jpg
 about:
   template: jolla
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com
+      href: https://twitter.com/jenhylin
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/jhylin
 ---
 
-About this blog
+**About this blog**
+
+Firstly a bit about me
