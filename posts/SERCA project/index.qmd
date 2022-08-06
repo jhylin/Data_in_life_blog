@@ -3,7 +3,7 @@ title: "SERCA project"
 author: "Jennifer HY Lin"
 date: "2022-08-06"
 categories: [research]
-image: "Research.jpg"
+#image: "Research.jpg"
 ---
 
 ![](Research.jpg)
