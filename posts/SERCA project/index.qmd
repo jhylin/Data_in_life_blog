@@ -6,7 +6,7 @@ categories: [research]
 image: "image.jpg"
 ---
 
-![](Research.jpeg)
+![](Research.jpg)
 
 Essentially, having completed this MPhil project^1^ was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 -- 2014) as no one in my previous lab group was working on it so it was literally a one-person project but we were collaborating with a distant research group. Unfortunately this project came to an early stop during my PhD stage (when I was working part-time still as a pharmacist to support my own cost of living while receiving a puny amount of scholarship plus working on this project at the time and then one extra project added on during PhD). The main reason that this project did no progress was that our collaborators decided to pull out from testing further compounds for us. Although it came as a bit of shock but later it felt less so. Later, I've decided that it would still be part of my portfolio to showcase a project that did not proceed further (or in plain words, in the "failed" section).
 
