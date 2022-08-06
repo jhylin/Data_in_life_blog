@@ -26,5 +26,12 @@
     "title": "Jennifer HY Lin",
     "section": "",
     "text": "I was initially trained as a pharmacist in New Zealand and my work then somehow sparked a detour for me to go into postgraduate studies, focussing on research in drug discovery and design with medicinal and computational chemistry involved (spent hours and hours in chemistry and computer labs for experiments). The research work happened in Australia, where I’ve also continued to work as a pharmacist while working on the research (thinking back, a lot of my brain cells have gone through a death and reborn process during those years, before I ended up with a MPhil and PhD).\nI’ve then decided to return to New Zealand and the pandemic hit, which meant most of my original plans after PhD were forced to change as well. Then another detour followed, where I discovered my more recent interests in the world of data science and analytics. This then subsequently led to this blog, which is really my portfolio, on data analytics work in the healthcare and pharmaceutical fields, as I came from these backgrounds. It’ll also, at random times, be another channel for me to write personal blog posts detailing my journey in data analytics."
+  },
+  {
+    "objectID": "posts/Blog move/index.html",
+    "href": "posts/Blog move/index.html",
+    "title": "Blog move",
+    "section": "",
+    "text": "So here is my very first Quarto blog, deployed using Netlify. The process was quite simple as many people have mentioned. I’m still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already written about it, I may not go down this path (consider visiting Bea Milz’s lovely post on “Creating a blog with Quarto in 10 steps” - this was what I followed to get my Quarto blog up and running).\nI will be slowly moving my current posts and portfolio projects from WordPress to Quarto blogs. Who knows, maybe I may end up working on building websites, or doing other things that I’ve never imagined I would do before!"
   }
 ]
