@@ -2,7 +2,7 @@
 title: "Blog move"
 author: "Jennifer HY Lin"
 date: "2022-08-06"
-categories: [blog]
+categories: [Blog]
 ---
 
 I've been working on my data analytics portfolio for the last few months, on and off, as I've also got another work commitment going on at the same time. While working on my very first portfolio blog at WordPress, I've also stumbled across on R programming language (due to a potential data analytics work interview where they tested me R!). This then opened up a whole new R world with its friendly online community. Since my interests in R grew further and further, I've been looking for places where I can use RStudio IDE and/or R to build blogs and gladly I found Quarto which led me to its Quarto blogs.
