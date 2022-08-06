@@ -6,20 +6,15 @@ categories: [Research]
 #image: "Research.jpg"
 ---
 
-Essentially, having completed this MPhil project^1^ was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 -- 2014) as no one in my previous lab group was working on it so it was literally a one-person project but we were collaborating with a distant research group. Unfortunately this project came to an early stop during my PhD stage (when I was working part-time still as a pharmacist to support my own cost of living while receiving a puny amount of scholarship plus working on this project at the time and then one extra project added on during PhD). The main reason that this project did no progress was that our collaborators decided to pull out from testing further compounds for us. Although it came as a bit of shock but later it felt less so. Later, I've decided that it would still be part of my portfolio to showcase a project that did not proceed further (or in plain words, in the "failed" section).
+Essentially, having completed this MPhil project^[this was not a perfect example of drug discovery, I was a complete research newbie prior to this MPhil project and thinking back, I think I was far too ambitious...] was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 -- 2014) as no one in my previous lab group was working on it so it was literally a one-person project but we were collaborating with a distant research group. Unfortunately this project came to an early stop during my PhD stage (when I was working part-time still as a pharmacist to support my own cost of living while receiving a puny amount of scholarship plus working on this project at the time and then one extra project added on during PhD). The main reason that this project did no progress was that our collaborators decided to pull out from testing further compounds for us. Although it came as a bit of shock but later it felt less so. Later, I've decided that it would still be part of my portfolio to showcase a project that did not proceed further (or in plain words, in the "failed" section).
 
 Reflecting back to the whole experience for this project, I've learned my lessons about working with collaborators whose research focus was on entirely different but related field (their one was on molecular biology, while our side was on chemistry, I've been spending time working in both computer and chemistry labs, trying to identify likely compound candidate from molecular modelling and then synthesise the compounds in the lab for them to test). There should have been more communications if possible and perhaps we could've terminated the project earlier if needed so that we could allocate more time to work on other research project that better suited to the situation of our lab group. To have a closure for this project, I've written up a chapter about it in my PhD thesis to show what have been done and what other future work can be added if we have all the time and money in the world.
 
 ![](Research.jpg)
+*Image: Rawpixel.com*
 
 [Link to MPhil thesis](http://hdl.handle.net/2123/12267) (beware: quite long)
 
 Abstract of this project:
 
 The goal of this research project was to discover potential chemical compounds that could be further developed to become lead compounds to target secretory pathway calcium ATPase 1 (SPCA1) and also sarcoplasmic-endoplasmic reticulum calcium ATPase (SERCA) pumps. The drug design process would need to be robust enough to ask the question; could a SERCA inhibitor be developed based on the drug design process involving molecular modelling, chemical synthesis and biological testing? If this first step was achieved then the next critical step was to design a SPCA1 inhibitor as SPCA1 was found to be highly involved in basal-like breast cancer. The potential lead compounds would then have the opportunity to become novel anti-cancer agents targeting basal-like breast cancer in this context. The ultimate aim was to widen the current therapeutic agents available for patients with basal-like subtype of breast cancer in the hope to further improve their quality of life and life expectancy.
-
-------------------------------------------------------------------------
-
-Footnotes:
-
-1.  this was not a perfect example of drug discovery, I was a complete research newbie prior to this MPhil project and thinking back, I think I was far too ambitious...
