@@ -18,7 +18,7 @@
     "href": "posts/welcome/index.html",
     "title": "Blog move",
     "section": "",
-    "text": "So here is my very first Quarto blog, deployed using Netlify. The process was quite simple as many people have mentioned. I’m still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already written about it, I may not go down this path (consider visiting Bea Milz’s lovely post on “Creating a blog with Quarto in 10 steps” - this was what I followed to get my Quarto blog up and running.\nI will be slowly moving my current blog posts or portfolio projects from WordPress to Quarto blogs. Who knows, maybe I may end up working on building websites, or doing other things that I’ve never imagined that I could do before!"
+    "text": "So here is my very first Quarto blog, deployed using Netlify. The process was quite simple as many people have mentioned. I’m still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already written about it, I may not go down this path (consider visiting Bea Milz’s lovely post on “Creating a blog with Quarto in 10 steps” - this was what I followed to get my Quarto blog up and running).\nI will be slowly moving my current blog posts and portfolio projects from WordPress to Quarto blogs. Who knows, maybe I may end up working on building websites, or doing other things that I’ve never imagined that I’ll do before!"
   },
   {
     "objectID": "about.html",
