@@ -5,7 +5,7 @@ date: "2022-08-06"
 categories: [Research]
 ---
 
-Throughout my PhD, I've also collaborated with our own lab group members and also other research groups in other academic research projects. The following publications^1^ were the ones I was involved in:
+Throughout my PhD, I've also collaborated with the lab group members and also other research groups in other academic research projects. The following publications^1^ were the ones I was involved in:
 
 -   Palanimuthu D, Poon R, Sahni S, Anjum R, Hibbs D, Lin JHY, Bernhardt PV, Kalinowski DS, Richardson DR. [A novel class of thiosemicarbazones show multi-functional activity for the treatment of Alzheimer's disease](https://pubmed.ncbi.nlm.nih.gov/28841514/). Eur J Med Chem. 2017; 139: 612-632. (IF = 4.816)
 
