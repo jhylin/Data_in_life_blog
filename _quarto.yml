@@ -12,7 +12,7 @@ website:
         href: https://twitter.com/jenhylin
 format:
   html:
-    theme: superhero
+    theme: sandstone
     css: styles.css
 
 editor: visual
