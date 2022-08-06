@@ -18,4 +18,8 @@ Abstract of this project:
 
 The goal of this research project was to discover potential chemical compounds that could be further developed to become lead compounds to target secretory pathway calcium ATPase 1 (SPCA1) and also sarcoplasmic-endoplasmic reticulum calcium ATPase (SERCA) pumps. The drug design process would need to be robust enough to ask the question; could a SERCA inhibitor be developed based on the drug design process involving molecular modelling, chemical synthesis and biological testing? If this first step was achieved then the next critical step was to design a SPCA1 inhibitor as SPCA1 was found to be highly involved in basal-like breast cancer. The potential lead compounds would then have the opportunity to become novel anti-cancer agents targeting basal-like breast cancer in this context. The ultimate aim was to widen the current therapeutic agents available for patients with basal-like subtype of breast cancer in the hope to further improve their quality of life and life expectancy.
 
-Footnotes: 1. this was not a perfect example of drug discovery, I was a complete research newbie prior to this MPhil project and thinking back, I think I was far too ambitious...
+---
+
+Footnotes: 
+
+1. this was not a perfect example of drug discovery, I was a complete research newbie prior to this MPhil project and thinking back, I think I was far too ambitious...
