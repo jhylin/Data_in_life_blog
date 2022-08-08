@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Data analytics and research blog",
     "section": "",
-    "text": "Research\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nData analytics projects\n\n\n\n\n\n\n\n\n\n\n\n\nMay 31, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\nNo matching items"
+    "text": "Research\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nData analytics projects\n\n\n\n\n\n\n\n\n\n\n\nJun 5, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nData analytics projects\n\n\n\n\n\n\n\n\n\n\n\n\nMay 31, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -61,5 +61,12 @@
     "title": "Long COVID dashboard",
     "section": "",
     "text": "Image: Rawpixel.com\nThe source of the dataset was from a relatively recent live systemic review paper: Michelen M, Manoharan L, Elkheir N, et al. Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427\nThis project can be accessed from this link from Tableau Public.\nIn summary, the data from this paper have shown a very heterogeneous variety of long COVID-related signs and symptoms. Among them, it appeared that female gender had higher risk of suffering from long COVID than the male populations. Other factors that might have contributed to higher risk of suffering from long COVID were people who were above 60-65 years old and also people who have multiple chronic illnesses such as cardiovascular diseases and diabetes. Since this paper only focussed on dataset up until March 2021, more recent variants of COVID would not be covered in the dataset, therefore, more work would be required to look into the long COVID risk inflicted by more recent COVID variants.\n\n\n\n\nFootnotes\n\n\nThe published date reflected the last day I worked on the associated files for this project, prior to the blog move↩︎"
+  },
+  {
+    "objectID": "posts/Long COVID data in SQL/LongCOVIDSQL.html",
+    "href": "posts/Long COVID data in SQL/LongCOVIDSQL.html",
+    "title": "Long COVID data in SQL",
+    "section": "",
+    "text": "Image: Rawpixel.com\nMySQL server was installed with DBeaver used as the GUI. Four tables (Continents, Countries, Risk factors and Hospitalisation) in .csv file formats were imported into the newly created database named LongCovid. A series of SQL queries were written and performed. For details of all the SQL queries, please access this GitHub link to view. Two views were created so that selected data were stored for future use, such as for data visualisations in Tableau.\n\n\n\n\nFootnotes\n\n\nThe published date reflected the most recent date I worked on associated file with the project, prior to the blog move↩︎"
   }
 ]
