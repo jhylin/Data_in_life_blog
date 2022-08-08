@@ -2,7 +2,7 @@
 title: "Long COVID dashboard"
 author: "Jennifer HY Lin"
 date: "2022-05-31"
-categories: [Data analytics projects]
+categories: [Data analytics projects, Tableau]
 ---
 
 This project[^1] was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
