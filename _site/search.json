@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Data analytics and research blog",
     "section": "",
-    "text": "Research\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\nNo matching items"
+    "text": "Research\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\n\n\nAug 6, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData analytics projects\n\n\n\n\n\n\n\n\n\n\n\n\nMay 31, 2022\n\n\nJennifer HY Lin\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -54,5 +54,12 @@
     "title": "Publications",
     "section": "",
     "text": "Palanimuthu D, Poon R, Sahni S, Anjum R, Hibbs D, Lin JHY, Bernhardt PV, Kalinowski DS, Richardson DR. A novel class of thiosemicarbazones show multi-functional activity for the treatment of Alzheimer’s disease. Eur J Med Chem. 2017; 139: 612-632. (IF = 4.816)\nPanda D, Bhattacharya D, Gao QH, Oza PM, Lin JHY, Hawkins B, Hibbs DE, Groundwater PW. Identification of agents targeting FtsZ assembly. Future Med Chem. 2016; 8(10):1111-32. (IF = 3.969)\nGao Q, Hanh J, Váradi L, Cairns R, Sjöström H, Liao VW, Wood P, Balaban S, Ong JA, Lin JHY, Lai F, Hoy AJ, Grewal T, Groundwater PW, Hibbs DE. Identification of dual PPARα/γ agonists and their effects on lipid metabolism. Bioorg Med Chem. 2015; 23(24):7676-84. (IF = 2.881)\n\n\n\n\n\nFootnotes\n\n\nNot a significantly large number of publications there, perhaps due to the research topics I’ve chosen, they tend to require months or years to see tangible results… so here is my very humble list as some others may be more productive than me…↩︎"
+  },
+  {
+    "objectID": "posts/Long COVID dashboard/TableauDashboard.html",
+    "href": "posts/Long COVID dashboard/TableauDashboard.html",
+    "title": "Long COVID dashboard",
+    "section": "",
+    "text": "The source of the dataset was from a relatively recent live systemic review paper: Michelen M, Manoharan L, Elkheir N, et al. Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427\nThis project can be accessed from this link from Tableau Public.\nIn summary, the data from this paper have shown a very heterogeneous variety of long COVID-related signs and symptoms. Among them, it appeared that female gender had higher risk of suffering from long COVID than the male populations. Other factors that might have contributed to higher risk of suffering from long COVID were people who were above 60-65 years old and also people who have multiple chronic illnesses such as cardiovascular diseases and diabetes. Since this paper only focussed on dataset up until March 2021, more recent variants of COVID would not be covered in the dataset, therefore, more work would be required to look into the long COVID risk inflicted by more recent COVID variants."
   }
 ]
