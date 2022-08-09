@@ -14,8 +14,7 @@ about:
       text: Github
       href: https://github.com/jhylin
     - icon: email
-      text: Email
-      href: jennyhylin@hotmail.com 
+      text: jennyhylin@gmail.com
 ---
 
 **About this blog**
