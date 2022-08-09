@@ -1,0 +1,15 @@
+---
+title: "Update on portfolio"
+author: "Jennifer HY Lin"
+date: "2022-06-13"
+categories: [Blog]
+---
+So things have gone a little busier than usual behind the scene from last week till this week. As we know it, it’s always hard to plan when things are on the flow, especially in the current climate. So, a little about what I’m working on lately:
+
+* I’ve started working on an extension project to the rare disease work (recent Python project) by delving further into the natural history of rare diseases by using Orphanet’s data source (having fun working with xml files)
+
+* With the turn of events lately, I’m now also learning R programming language (which is something I was planning to do much later, but… to do this now is also fine as this’ll keep me on the ball) and surprisingly it is quite similar to Python in some ways but not at all as well
+
+* Tableau project most likely needs further work apart from what the dashboard is looking like at the moment (might be still a bit bare) but at the moment, my focus is on above two projects in the meantime. I’ll try to squeeze more time to work on this soon
+
+Other than that, I’m grateful that I can still work on things of great interests and the world is somehow still functioning in its best possible ways – onwards and upwards hopefully.
