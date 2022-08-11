@@ -60,7 +60,7 @@
     "href": "posts/Blog move/index.html",
     "title": "Blog move",
     "section": "",
-    "text": "So here is my very first Quarto blog, deployed using Netlify. The process was quite simple as many people have mentioned. I’m still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already written about it, I may not go down this path (consider visiting Bea Milz’s lovely post on “Creating a blog with Quarto in 10 steps” - this was what I followed to get my Quarto blog up and running).\nI will be slowly moving my current posts and portfolio projects from WordPress to Quarto blogs. Who knows, maybe I may end up working on building websites, or doing other things that I’ve never imagined I would do before!"
+    "text": "So here is my very first Quarto blog, deployed using Netlify initially and then I also figured out how to deploy it on GitHub Pages, so now I’ve actually got two extra sites running. The process to deploy on Netlify was quite simple as many people have already mentioned (GitHub Pages were also not too complicated as well once I’ve grasped the deployment workflow). I’m still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already talked about it, I may not go down this route (consider visiting Bea Milz’s lovely post on “Creating a blog with Quarto in 10 steps” - this was what I followed to get my Quarto blog up and running).\nI will be slowly moving my current posts and portfolio projects from WordPress to Quarto blogs. Who knows, maybe I may end up working on building websites, or doing other things that I’ve never imagined I would do before!"
   },
   {
     "objectID": "posts/SERCA project/index.html",
