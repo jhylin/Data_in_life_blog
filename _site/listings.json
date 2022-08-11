@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Publications/SideProjects.html",
       "/posts/Blog move/index.html",
       "/posts/Phenotypes associated with rare diseases/PhenotypesRareDiseases.html",
       "/posts/Blog-Social network/EmbracingSocialNetwork.html",
@@ -14,6 +13,7 @@
       "/posts/Drugs in rare diseases/RareDiseasesDrugs.html",
       "/posts/Blog-Data analytics/FocussingOnDataAnalytics.html",
       "/posts/Blog-Cheminformatics and data science journey/DSandCheminformatics.html",
+      "/posts/Publications/SideProjects.html",
       "/posts/PhD projects/index.html",
       "/posts/SERCA project/index.html"
     ]
