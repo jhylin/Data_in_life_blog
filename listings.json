@@ -1,0 +1,21 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/Publications/SideProjects.html",
+      "/posts/PhD projects/index.html",
+      "/posts/Blog move/index.html",
+      "/posts/SERCA project/index.html",
+      "/posts/Phenotypes associated with rare diseases/PhenotypesRareDiseases.html",
+      "/posts/Blog-Social network/EmbracingSocialNetwork.html",
+      "/posts/Natural history of rare diseases – malformation syndrome/NaturalHistoryRareDiseasesMalSyn.html",
+      "/posts/Blog-Update/UpdateOnPortfolio.html",
+      "/posts/Long COVID data in SQL/LongCOVIDSQL.html",
+      "/posts/Blog-Portfolio projects/PortfolioProjects.html",
+      "/posts/Long COVID dashboard/TableauDashboard.html",
+      "/posts/Drugs in rare diseases/RareDiseasesDrugs.html",
+      "/posts/Blog-Data analytics/FocussingOnDataAnalytics.html",
+      "/posts/Blog-Cheminformatics and data science journey/DSandCheminformatics.html"
+    ]
+  }
+]
