@@ -204,6 +204,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+<section id="initial-data-wrangling" class="level5">
+<h5 class="anchored" data-anchor-id="initial-data-wrangling"><strong>Initial data wrangling</strong></h5>
+<p>This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity…). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.</p>
+</section>
+<section id="source-of-dataset" class="level5">
+<h5 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h5>
+<p>Orphadata: Free access data from Orphanet. © INSERM 1999. Available on <a href="http://www.orphadata.org/cgi-bin/index.php">http://www.orphadata.org</a>. Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.</p>
+<p><img src="Genes.jpg" class="img-fluid"></p>
+<p><em>Photo by <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
 <p>The following libraries were used for the exploratory data analysis:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -211,15 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="initial-data-wrangling" class="level5">
-<h5 class="anchored" data-anchor-id="initial-data-wrangling"><strong>Initial data wrangling</strong></h5>
-<p>This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity…). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.</p>
-</section>
-<section id="source-of-dataset" class="level5">
-<h5 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h5>
-<ul>
-<li>Orphadata: Free access data from Orphanet. © INSERM 1999. Available on <a href="http://www.orphadata.org/cgi-bin/index.php">http://www.orphadata.org</a>. Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.</li>
-</ul>
+<p>Read imported .csv file after data cleaning in Python.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"rare_disease_phenotypes.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
