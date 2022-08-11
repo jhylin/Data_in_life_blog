@@ -16,7 +16,6 @@ about:
     - icon: envelope
       text: Email
       href: mailto:jennyhylin@gmail.com
-      
 ---
 
 **About this blog**
