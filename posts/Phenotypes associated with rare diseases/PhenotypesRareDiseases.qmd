@@ -8,6 +8,22 @@ categories: [Data analytics projects, R, Python]
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+##### **Initial data wrangling**
+
+This dataset was also derived and downloaded from Orphanet, as another part in the "rare diseases" series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity...). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python[^1] there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
+
+[^1]: Used only for initial data cleaning stage - please see this [GitHub link](https://github.com/jhylin/Portfolio-projects/blob/main/Phenotypes%20associated%20with%20rare%20diseases%20-%20initial%20data%20cleaning.ipynb) for details. R was used for the rest of the analysis
+
+##### **Source of dataset**
+
+Orphadata: Free access data from Orphanet. © INSERM 1999. Available on [http://www.orphadata.org](http://www.orphadata.org/cgi-bin/index.php). 
+Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.
+
+![](Genes.jpg)
+
+*Photo by <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>*
+
+
 The following libraries were used for the exploratory data analysis:
 ```{r libraries, echo = TRUE, message = FALSE}
 library(tidyverse)
@@ -15,23 +31,15 @@ library(lubridate)
 library(ggplot2)
 library(knitr)
 ```
-##### **Initial data wrangling**
-
-This dataset was also derived and downloaded from Orphanet, as another part in the "rare diseases" series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity...). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python^[Used only for initial data cleaning stage - please see this [GitHub link](https://github.com/jhylin/Portfolio-projects/blob/main/Phenotypes%20associated%20with%20rare%20diseases%20-%20initial%20data%20cleaning.ipynb) for details. R was used for the rest of the analysis] there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
-
-##### **Source of dataset**
-
--   Orphadata: Free access data from Orphanet. © INSERM 1999. Available on [http://www.orphadata.org](http://www.orphadata.org/cgi-bin/index.php). Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.
-
+Read imported .csv file after data cleaning in Python.
 ```{r load file}
 df <- read_csv("rare_disease_phenotypes.csv")
 ```
-
 Note: HPO = human phenotype ontology
-
 ```{r column names}
 spec(df)
 ```
+
 ##### **Exploratory data analysis**
 
 Since I wasn't intending for this project to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
@@ -64,7 +72,9 @@ ggplot(data = df_type, aes(x = `Disorder type`, y = `Number`)) +
   coord_flip() 
 ```
 
-Two disorder types stood out the most, with "Disease" type appeared 57,920 times and "Malformation syndrome" at 37,634 times. To understand further what each of these two disorder types were, a direct reference^["Orphadata: Free access products description" - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2] was used. According to the source of the dataset:
+Two disorder types stood out the most, with "Disease" type appeared 57,920 times and "Malformation syndrome" at 37,634 times. To understand further what each of these two disorder types were, a direct reference[^2] was used. According to the source of the dataset:
+
+[^2]: "Orphadata: Free access products description" - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2
 
 The definition of "Disease" in the rare disorder context was "a disorder with homogeneous therapeutic possibilities and an identified physiopathological mechanism...", one thing also worth noting was that this type did not include any developmental anomalies.
 
@@ -184,9 +194,12 @@ It was also worth noting that there were 49 rows of non-finite values excluded f
 df_val_date_d %>% 
   count(year)
 ```
+
 ##### **Summary**
 
-To quickly summarise key findings from this work^[It's possible to dig further into the dataset e.g. diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I'd like to start on the COVID-19 antiviral work soon), I'll leave some room here for the interested to work on the data] regarding phenotypes associated with rare diseases:
+To quickly summarise key findings from this work[^3] regarding phenotypes associated with rare diseases:
+
+[^3]: It's possible to dig further into the dataset e.g. diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I'd like to start on the COVID-19 antiviral work soon), I'll leave some room here for the interested to work on the data
 
 -   **Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction** was one of the most common rare diseases under the Disease disorder type with the most phenotypic abnormalities recorded, which were:
 
