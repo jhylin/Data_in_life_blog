@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Portfolio"
+  page-footer: "Blog made with [Quarto](https://quarto.org/) and 💙 by Jennifer HY Lin"
   navbar:
     right:
       - about.qmd
