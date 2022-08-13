@@ -21,3 +21,6 @@ format:
 
 editor: visual
 
+comments:
+  giscus:
+    repo: jhylin/Data-analytics-and-research-blog
