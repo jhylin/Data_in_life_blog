@@ -3,6 +3,7 @@ title: "Publications"
 author: "Jennifer HY Lin"
 date: "2022-01-24"
 categories: [Research]
+comments: false
 ---
 
 Throughout my PhD, I've also collaborated with the lab group members and also other research groups in other academic research projects. The following publications[^1] were the ones I was involved in:
