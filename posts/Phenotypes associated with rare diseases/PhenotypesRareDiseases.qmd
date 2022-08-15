@@ -8,6 +8,7 @@ categories: [Data analytics projects, R, Python]
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 ##### **Initial data wrangling**
 
 This dataset was also derived and downloaded from Orphanet, as another part in the "rare diseases" series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity...). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python[^1] there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
@@ -16,33 +17,36 @@ This dataset was also derived and downloaded from Orphanet, as another part in t
 
 ##### **Source of dataset**
 
-Orphadata: Free access data from Orphanet. © INSERM 1999. Available on [http://www.orphadata.org](http://www.orphadata.org/cgi-bin/index.php). 
-Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.
+Orphadata: Free access data from Orphanet. © INSERM 1999. Available on [http://www.orphadata.org](http://www.orphadata.org/cgi-bin/index.php). Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.
 
 ![](Genes.jpg)
 
-*Photo by <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>*
-
+*Photo by* <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 The following libraries were used for the exploratory data analysis:
+
 ```{r libraries, echo = TRUE, message = FALSE}
 library(tidyverse)
 library(lubridate)
 library(ggplot2)
 library(knitr)
 ```
+
 Read imported .csv file after data cleaning in Python.
+
 ```{r load file}
 df <- read_csv("rare_disease_phenotypes.csv")
 ```
+
 Note: HPO = human phenotype ontology
+
 ```{r column names}
 spec(df)
 ```
 
 ##### **Exploratory data analysis**
 
-Since I wasn't intending for this project to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
+Since I wasn't intending for this project^[This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) if anyone is interested in exploring the dataset further] to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
 
 To answer it, let's observe the spread of the disorder groups and types first by formulating a contingency table.
 
