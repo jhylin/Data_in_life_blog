@@ -212,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h5 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h5>
 <p>Orphadata: Free access data from Orphanet. © INSERM 1999. Available on <a href="http://www.orphadata.org/cgi-bin/index.php">http://www.orphadata.org</a>. Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.</p>
 <p><img src="Genes.jpg" class="img-fluid"></p>
-<p><em>Photo by <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+<p><em>Photo by</em> <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 <p>The following libraries were used for the exploratory data analysis:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -259,7 +259,7 @@ dttm  (1): Validation date
 </section>
 <section id="exploratory-data-analysis" class="level5">
 <h5 class="anchored" data-anchor-id="exploratory-data-analysis"><strong>Exploratory data analysis</strong></h5>
-<p>Since I wasn’t intending for this project to be extremely long (as most people would likely lose interests by then), I’d like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here’s the question: what are the most common rare disorders and their associated phenotypic features?</p>
+<p>Since I wasn’t intending for this project<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to be extremely long (as most people would likely lose interests by then), I’d like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here’s the question: what are the most common rare disorders and their associated phenotypic features?</p>
 <p>To answer it, let’s observe the spread of the disorder groups and types first by formulating a contingency table.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_type <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
@@ -318,7 +318,7 @@ dttm  (1): Validation date
 <p><img src="PhenotypesRareDiseases_files/figure-html/lollypop%20chart-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Two disorder types stood out the most, with “Disease” type appeared 57,920 times and “Malformation syndrome” at 37,634 times. To understand further what each of these two disorder types were, a direct reference<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> was used. According to the source of the dataset:</p>
+<p>Two disorder types stood out the most, with “Disease” type appeared 57,920 times and “Malformation syndrome” at 37,634 times. To understand further what each of these two disorder types were, a direct reference<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> was used. According to the source of the dataset:</p>
 <p>The definition of “Disease” in the rare disorder context was “a disorder with homogeneous therapeutic possibilities and an identified physiopathological mechanism…”, one thing also worth noting was that this type did not include any developmental anomalies.</p>
 <p>For “Malformation syndrome”, this was defined as, “A disorder resulting from a developmental anomaly involving more than one morphogenetic field. Malformative sequences and associations are included.”</p>
 <p>To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following codes were used:</p>
@@ -752,7 +752,7 @@ dttm  (1): Validation date
 </section>
 <section id="summary" class="level5">
 <h5 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h5>
-<p>To quickly summarise key findings from this work<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> regarding phenotypes associated with rare diseases:</p>
+<p>To quickly summarise key findings from this work<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> regarding phenotypes associated with rare diseases:</p>
 <ul>
 <li><strong>Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction</strong> was one of the most common rare diseases under the Disease disorder type with the most phenotypic abnormalities recorded, which were:</li>
 </ul>
@@ -797,8 +797,9 @@ dttm  (1): Validation date
 
 <ol>
 <li id="fn1" role="doc-endnote"><p>Used only for initial data cleaning stage - please see this <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Phenotypes%20associated%20with%20rare%20diseases%20-%20initial%20data%20cleaning.ipynb">GitHub link</a> for details. R was used for the rest of the analysis<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>“Orphadata: Free access products description” - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>It’s possible to dig further into the dataset e.g.&nbsp;diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I’d like to start on the COVID-19 antiviral work soon), I’ll leave some room here for the interested to work on the data<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This work is under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 International License</a> if anyone is interested in exploring the dataset further<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>“Orphadata: Free access products description” - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>It’s possible to dig further into the dataset e.g.&nbsp;diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I’d like to start on the COVID-19 antiviral work soon), I’ll leave some room here for the interested to work on the data<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
