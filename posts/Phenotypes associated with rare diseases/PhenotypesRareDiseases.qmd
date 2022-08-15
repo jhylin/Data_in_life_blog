@@ -46,7 +46,9 @@ spec(df)
 
 ##### **Exploratory data analysis**
 
-Since I wasn't intending for this project^[This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) if anyone is interested in exploring the dataset further] to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
+Since I wasn't intending for this project[^2] to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
+
+[^2]: This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) if anyone is interested in exploring the dataset further
 
 To answer it, let's observe the spread of the disorder groups and types first by formulating a contingency table.
 
@@ -76,9 +78,9 @@ ggplot(data = df_type, aes(x = `Disorder type`, y = `Number`)) +
   coord_flip() 
 ```
 
-Two disorder types stood out the most, with "Disease" type appeared 57,920 times and "Malformation syndrome" at 37,634 times. To understand further what each of these two disorder types were, a direct reference[^2] was used. According to the source of the dataset:
+Two disorder types stood out the most, with "Disease" type appeared 57,920 times and "Malformation syndrome" at 37,634 times. To understand further what each of these two disorder types were, a direct reference[^3] was used. According to the source of the dataset:
 
-[^2]: "Orphadata: Free access products description" - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2
+[^3]: "Orphadata: Free access products description" - April 2020. http://www.orphadata.org/cgi-bin/img/PDF/OrphadataFreeAccessProductsDescription.pdf. Version 2
 
 The definition of "Disease" in the rare disorder context was "a disorder with homogeneous therapeutic possibilities and an identified physiopathological mechanism...", one thing also worth noting was that this type did not include any developmental anomalies.
 
@@ -201,9 +203,9 @@ df_val_date_d %>%
 
 ##### **Summary**
 
-To quickly summarise key findings from this work[^3] regarding phenotypes associated with rare diseases:
+To quickly summarise key findings from this work[^4] regarding phenotypes associated with rare diseases:
 
-[^3]: It's possible to dig further into the dataset e.g. diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I'd like to start on the COVID-19 antiviral work soon), I'll leave some room here for the interested to work on the data
+[^4]: It's possible to dig further into the dataset e.g. diagnostic criterion and perhaps even bring back some of the columns removed initially, however due to time constraints (due to being a one-person team and also I'd like to start on the COVID-19 antiviral work soon), I'll leave some room here for the interested to work on the data
 
 -   **Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction** was one of the most common rare diseases under the Disease disorder type with the most phenotypic abnormalities recorded, which were:
 
