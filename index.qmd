@@ -9,5 +9,6 @@ listing:
   filter-ui: false
 page-layout: full
 title-block-banner: true
+title-block-banner-color: "#0033cc"
 comments: false
 ---
