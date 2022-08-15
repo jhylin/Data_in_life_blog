@@ -7,7 +7,7 @@ categories: [Data analytics projects, Tableau]
 
 This project[^1] was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
 
-[^1]: The published date reflected the last day I worked on the associated files for this project, prior to the blog move
+[^1]: The published date reflected the last day I worked on the associated files for this project, prior to the blog move. This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) for anyone interested in exploring the topic further.
 
 ![](Long%20covid.jpg) *Image: Rawpixel.com*
 

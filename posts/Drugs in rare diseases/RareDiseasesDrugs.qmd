@@ -5,7 +5,7 @@ date: "2022-05-28"
 categories: [Data analytics projects, R, Python]
 ---
 
-Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I've also often wondered about drugs for rare diseases and how they're often for the minorities in the diseased populations. So here is the initial Python and R projects about rare disease drugs by using data extracted from FDA's [Orphan Drug Product designation database](https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field). I also have to acknowledge "Data Is Plural" website, which has inspired me to look into this dataset.
+Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I've also often wondered about drugs for rare diseases and how they're often for the minorities in the diseased populations. So here is the initial Python and R projects^[This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) for anyone interested in exploring the topic further.] about rare disease drugs by using data extracted from FDA's [Orphan Drug Product designation database](https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field). I also have to acknowledge "Data Is Plural" website, which has inspired me to look into this dataset.
 
 Unfortunately this particular dataset I've obtained does not contain information on incentives for pharmaceutical companies (from US's Orphan Drug Act of 1983), which could mean that I might be able to draw some preliminary, basic or raw correlations between incentives and rare disease drug marketing approvals (this might lead to other controversial discussions about this area, which was not my initial aim for this project as I just wanted to explore a dataset on rare disease drugs at the moment).
 
@@ -31,8 +31,7 @@ Short summary of findings from this dataset using Python:
 
 -   The data for Tiopronin appeared to be duplicates, but note that the two were formulated differently as one of them was the enteric-coated (EC) version (marketed as delayed-release tablets under the actual trade name of "Thiola EC", but recorded in the dataset as "Thiola" only), while the other one was the immediate-release form (Thiola)
 
-![](Pills.jpg)
-*Image: Rawpixel.com*
+![](Pills.jpg) *Image: Rawpixel.com*
 
 For R project[^2], there were two questions in mind to answer:
 
