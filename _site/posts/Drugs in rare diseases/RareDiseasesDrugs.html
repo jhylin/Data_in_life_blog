@@ -62,7 +62,7 @@ ul.task-list{list-style: none;}
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -134,7 +134,9 @@ ul.task-list{list-style: none;}
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -144,6 +146,8 @@ ul.task-list{list-style: none;}
 <p>Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I’ve also often wondered about drugs for rare diseases and how they’re often for the minorities in the diseased populations. So here is the initial Python and R projects<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> about rare disease drugs by using data extracted from FDA’s <a href="https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field">Orphan Drug Product designation database</a>. I also have to acknowledge “Data Is Plural” website, which has inspired me to look into this dataset.</p>
 <p>Unfortunately this particular dataset I’ve obtained does not contain information on incentives for pharmaceutical companies (from US’s Orphan Drug Act of 1983), which could mean that I might be able to draw some preliminary, basic or raw correlations between incentives and rare disease drug marketing approvals (this might lead to other controversial discussions about this area, which was not my initial aim for this project as I just wanted to explore a dataset on rare disease drugs at the moment).</p>
 <p>The datatset was for the period from 1983 till present, for approved rare disease drugs only.</p>
+<section id="python" class="level4">
+<h4 class="anchored" data-anchor-id="python">Python</h4>
 <p>For Python project<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, there was one question in mind to answer:</p>
 <p>How long did it take on average for a rare disease drug to reach marketing approval?</p>
 <p>Python version of the data analysis: <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20-%20approved%20only.ipynb">link</a></p>
@@ -156,6 +160,9 @@ ul.task-list{list-style: none;}
 <li><p>The data for Tiopronin appeared to be duplicates, but note that the two were formulated differently as one of them was the enteric-coated (EC) version (marketed as delayed-release tablets under the actual trade name of “Thiola EC”, but recorded in the dataset as “Thiola” only), while the other one was the immediate-release form (Thiola)</p></li>
 </ul>
 <p><img src="Pills.jpg" class="img-fluid"> <em>Image: Rawpixel.com</em></p>
+</section>
+<section id="r" class="level4">
+<h4 class="anchored" data-anchor-id="r">R</h4>
 <p>For R project<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, there were two questions in mind to answer:</p>
 <ol type="1">
 <li><p>What countries were involved in rare disease drug developments?</p></li>
@@ -172,6 +179,7 @@ ul.task-list{list-style: none;}
 </ul>
 
 
+</section>
 
 
 <div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
