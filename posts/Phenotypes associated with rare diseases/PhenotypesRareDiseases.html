@@ -125,7 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -197,19 +197,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#initial-data-wrangling" id="toc-initial-data-wrangling" class="nav-link active" data-scroll-target="#initial-data-wrangling"><strong>Initial data wrangling</strong></a></li>
+  <li><a href="#source-of-dataset" id="toc-source-of-dataset" class="nav-link" data-scroll-target="#source-of-dataset"><strong>Source of dataset</strong></a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><strong>Exploratory data analysis</strong></a>
+  <ul class="collapse">
+  <li><a href="#distributions-of-hpo-frequency" id="toc-distributions-of-hpo-frequency" class="nav-link" data-scroll-target="#distributions-of-hpo-frequency"><strong>Distributions of HPO frequency</strong></a></li>
+  <li><a href="#explore-rare-disease-validation-date" id="toc-explore-rare-disease-validation-date" class="nav-link" data-scroll-target="#explore-rare-disease-validation-date"><strong>Explore rare disease validation date</strong></a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><strong>Summary</strong></a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="initial-data-wrangling" class="level5">
-<h5 class="anchored" data-anchor-id="initial-data-wrangling"><strong>Initial data wrangling</strong></h5>
+<section id="initial-data-wrangling" class="level3">
+<h3 class="anchored" data-anchor-id="initial-data-wrangling"><strong>Initial data wrangling</strong></h3>
 <p>This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity…). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.</p>
 </section>
-<section id="source-of-dataset" class="level5">
-<h5 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h5>
+<section id="source-of-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h3>
 <p>Orphadata: Free access data from Orphanet. © INSERM 1999. Available on <a href="http://www.orphadata.org/cgi-bin/index.php">http://www.orphadata.org</a>. Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.</p>
 <p><img src="Genes.jpg" class="img-fluid"></p>
 <p><em>Photo by</em> <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
@@ -257,8 +272,8 @@ dttm  (1): Validation date
 </div>
 </div>
 </section>
-<section id="exploratory-data-analysis" class="level5">
-<h5 class="anchored" data-anchor-id="exploratory-data-analysis"><strong>Exploratory data analysis</strong></h5>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis"><strong>Exploratory data analysis</strong></h3>
 <p>Since I wasn’t intending for this project<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to be extremely long (as most people would likely lose interests by then), I’d like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here’s the question: what are the most common rare disorders and their associated phenotypic features?</p>
 <p>To answer it, let’s observe the spread of the disorder groups and types first by formulating a contingency table.</p>
 <div class="cell">
@@ -365,6 +380,8 @@ dttm  (1): Validation date
 11 Histopathological subtype                                 40 0.000356</code></pre>
 </div>
 </div>
+<section id="distributions-of-hpo-frequency" class="level5">
+<h5 class="anchored" data-anchor-id="distributions-of-hpo-frequency"><strong>Distributions of HPO frequency</strong></h5>
 <p>This was followed by checking out the distributions of HPO frequency to see which categories had the most and least number of counts.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_freq <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
@@ -666,6 +683,9 @@ dttm  (1): Validation date
 </table>
 </div>
 </div>
+</section>
+<section id="explore-rare-disease-validation-date" class="level5">
+<h5 class="anchored" data-anchor-id="explore-rare-disease-validation-date"><strong>Explore rare disease validation date</strong></h5>
 <p>Now, to add one more piece of work towards this exploratory data analysis, I thought to check out the Validation date column. “Validation date” in this context meant the dates when the annotations of HPO terms were made for each rare disorder, which were based on the source articles listed (as shown in the Source column).</p>
 <p>Firstly, I started with the “Disease” disorder type and singled out the year component from the Validation date column.</p>
 <div class="cell">
@@ -750,8 +770,9 @@ dttm  (1): Validation date
 </div>
 </div>
 </section>
-<section id="summary" class="level5">
-<h5 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h5>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h3>
 <p>To quickly summarise key findings from this work<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> regarding phenotypes associated with rare diseases:</p>
 <ul>
 <li><strong>Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction</strong> was one of the most common rare diseases under the Disease disorder type with the most phenotypic abnormalities recorded, which were:</li>

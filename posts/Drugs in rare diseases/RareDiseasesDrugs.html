@@ -62,7 +62,7 @@ ul.task-list{list-style: none;}
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -134,20 +134,35 @@ ul.task-list{list-style: none;}
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
+  <li><a href="#python-project" id="toc-python-project" class="nav-link" data-scroll-target="#python-project"><strong>Python project</strong></a></li>
+  <li><a href="#r-project" id="toc-r-project" class="nav-link" data-scroll-target="#r-project"><strong>R project</strong></a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<p>Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I’ve also often wondered about drugs for rare diseases and how they’re often for the minorities in the diseased populations. So here is the initial Python and R projects<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> about rare disease drugs by using data extracted from FDA’s <a href="https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field">Orphan Drug Product designation database</a>. I also have to acknowledge “Data Is Plural” website, which has inspired me to look into this dataset.</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h3>
+<p>Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I’ve also often wondered about drugs for rare diseases and how they’re often for the minorities in the diseased populations. So here is the initial Python and R projects<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> about rare disease drugs by using data extracted from FDA’s <a href="https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field">Orphan Drug Product designation database</a>. I also have to acknowledge “<a href="https://www.data-is-plural.com">Data Is Plural</a>” website, which has inspired me to look into this dataset.</p>
 <p>Unfortunately this particular dataset I’ve obtained does not contain information on incentives for pharmaceutical companies (from US’s Orphan Drug Act of 1983), which could mean that I might be able to draw some preliminary, basic or raw correlations between incentives and rare disease drug marketing approvals (this might lead to other controversial discussions about this area, which was not my initial aim for this project as I just wanted to explore a dataset on rare disease drugs at the moment).</p>
 <p>The datatset was for the period from 1983 till present, for approved rare disease drugs only.</p>
+</section>
+<section id="python-project" class="level3">
+<h3 class="anchored" data-anchor-id="python-project"><strong>Python project</strong></h3>
 <p>For Python project<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, there was one question in mind to answer:</p>
 <p>How long did it take on average for a rare disease drug to reach marketing approval?</p>
-<p>Python version of the data analysis: <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20-%20approved%20only.ipynb">link</a></p>
-<p>Short summary of findings from this dataset using Python:</p>
+<p><strong>Python version of the data analysis</strong>: <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20-%20approved%20only.ipynb">link</a></p>
+<p><strong>Short summary of findings from this dataset using Python</strong>:</p>
 <ul>
 <li><p>The orphan designation for rare disease drug that had the highest counts between 1983 till present was for the treatment of multiple myeloma</p></li>
 <li><p>The highest counts of final approved indication for rare disease drugs spanned across several different clinical indications – it often ended up with more indication details than the initial orphan designation phase</p></li>
@@ -156,15 +171,20 @@ ul.task-list{list-style: none;}
 <li><p>The data for Tiopronin appeared to be duplicates, but note that the two were formulated differently as one of them was the enteric-coated (EC) version (marketed as delayed-release tablets under the actual trade name of “Thiola EC”, but recorded in the dataset as “Thiola” only), while the other one was the immediate-release form (Thiola)</p></li>
 </ul>
 <p><img src="Pills.jpg" class="img-fluid"> <em>Image: Rawpixel.com</em></p>
+</section>
+<section id="r-project" class="level3">
+<h3 class="anchored" data-anchor-id="r-project"><strong>R project</strong></h3>
 <p>For R project<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, there were two questions in mind to answer:</p>
 <ol type="1">
 <li><p>What countries were involved in rare disease drug developments?</p></li>
 <li><p>How would the time from designation to approval be displayed in timeline style for selected rare disease drugs?</p></li>
 </ol>
-<p>R version of the data analysis:</p>
-<p>base R methods via Jupyter notebook with <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20(base%20R%20methods).ipynb">link</a></p>
-<p>tidyverse version via RStudio with <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare_diseases_drugs_RStudio.md">link</a> - done using RMarkdown</p>
-<p>Short summary of findings from this dataset using R:</p>
+<p><strong>R versions of the data analysis</strong>:</p>
+<ul>
+<li><p>base R methods via Jupyter notebook with <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20(base%20R%20methods).ipynb">link</a></p></li>
+<li><p>Tidyverse version via RStudio with <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Rare_diseases_drugs_RStudio.md">link</a> - done using RMarkdown</p></li>
+</ul>
+<p><strong>Short summary of findings from this dataset using R</strong>:</p>
 <ul>
 <li><p>US was the country that had the most involvement in rare disease drug developments, which was followed by Ireland and the UK, and also a number of other countries</p></li>
 <li><p>More work could possibly go into looking at the duplicates of brand names of the same generic drug e.g.&nbsp;cannabidiol with trade name as Epidiolex that had 5 repeated timelines (shown in link above), which appeared to be different clinical indications for each of these entries after further checks</p></li>
@@ -172,6 +192,7 @@ ul.task-list{list-style: none;}
 </ul>
 
 
+</section>
 
 
 <div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
