@@ -5,14 +5,22 @@ date: "2022-05-31"
 categories: [Data analytics projects, Tableau]
 ---
 
+### **Introduction**
+
 This project[^1] was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
 
 [^1]: The published date reflected the last day I worked on the associated files for this project, prior to the blog move. This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) for anyone interested in exploring the topic further.
 
 ![](Long%20covid.jpg) *Image: Rawpixel.com*
 
+### **Source of dataset**
+
 The source of the dataset was from a relatively recent live systemic review paper: Michelen M, Manoharan L, Elkheir N, et al. Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427
 
-This project can be accessed from this [link](https://public.tableau.com/app/profile/jennifer.hy.lin/viz/CharacterisinglongCOVID/Riskfactorswithclinicalassociations) from Tableau Public.
+### **Project link**
 
-In summary, the data from this paper have shown a very heterogeneous variety of long COVID-related signs and symptoms. Among them, it appeared that female gender had higher risk of suffering from long COVID than the male populations. Other factors that might have contributed to higher risk of suffering from long COVID were people who were above 60-65 years old and also people who have multiple chronic illnesses such as cardiovascular diseases and diabetes. Since this paper only focussed on dataset up until March 2021, more recent variants of COVID would not be covered in the dataset, therefore, more work would be required to look into the long COVID risk inflicted by more recent COVID variants.
+This project can be accessed at this [link](https://public.tableau.com/app/profile/jennifer.hy.lin/viz/CharacterisinglongCOVID/Riskfactorswithclinicalassociations) from Tableau Public.
+
+### **Summary**
+
+The data from this paper have shown a very heterogeneous variety of long COVID-related signs and symptoms. Among them, it appeared that female gender had higher risk of suffering from long COVID than the male populations. Other factors that might have contributed to higher risk of suffering from long COVID were people who were above 60-65 years old and also people who have multiple chronic illnesses such as cardiovascular diseases and diabetes. Since this paper only focussed on dataset up until March 2021, more recent variants of COVID would not be covered in the dataset, therefore, more work would be required to look into the long COVID risk inflicted by more recent COVID variants.
