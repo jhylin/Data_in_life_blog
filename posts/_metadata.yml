@@ -8,4 +8,4 @@ freeze: true
 title-block-banner: true
 
 toc: true
-toc-depth: 3
+toc-depth: 5

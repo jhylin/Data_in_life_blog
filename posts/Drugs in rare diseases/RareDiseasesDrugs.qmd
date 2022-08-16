@@ -3,7 +3,6 @@ title: "Drugs in rare diseases"
 author: "Jennifer HY Lin"
 date: "2022-05-28"
 categories: [Data analytics projects, R, Python]
-toc: true
 ---
 
 Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I've also often wondered about drugs for rare diseases and how they're often for the minorities in the diseased populations. So here is the initial Python and R projects[^1] about rare disease drugs by using data extracted from FDA's [Orphan Drug Product designation database](https://www.accessdata.fda.gov/scripts/opdlisting/oopd/index.cfm#Search_param_field%23Search_param_field). I also have to acknowledge "Data Is Plural" website, which has inspired me to look into this dataset.

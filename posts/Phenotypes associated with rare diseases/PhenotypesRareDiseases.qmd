@@ -3,6 +3,7 @@ title: "Phenotypes associated with rare diseases"
 author: "Jennifer HY Lin"
 date: '2022-08-02'
 categories: [Data analytics projects, R, Python]
+toc: true
 ---
 
 ```{r setup, include = FALSE}
