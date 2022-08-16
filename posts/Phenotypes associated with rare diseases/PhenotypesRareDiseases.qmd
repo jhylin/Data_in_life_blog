@@ -10,13 +10,13 @@ toc: true
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##### **Initial data wrangling**
+### **Initial data wrangling**
 
 This dataset was also derived and downloaded from Orphanet, as another part in the "rare diseases" series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity...). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python[^1] there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
 
 [^1]: Used only for initial data cleaning stage - please see this [GitHub link](https://github.com/jhylin/Portfolio-projects/blob/main/Phenotypes%20associated%20with%20rare%20diseases%20-%20initial%20data%20cleaning.ipynb) for details. R was used for the rest of the analysis
 
-##### **Source of dataset**
+### **Source of dataset**
 
 Orphadata: Free access data from Orphanet. © INSERM 1999. Available on [http://www.orphadata.org](http://www.orphadata.org/cgi-bin/index.php). Data version (XML data version). Dataset (.xml file) from http://www.orphadata.org/cgi-bin/epidemio.html. Latest date of update for the dataset: 14/6/2022 (last accessed 24/7/2022). Creative Commons Attribution 4.0 International.
 
@@ -45,7 +45,7 @@ Note: HPO = human phenotype ontology
 spec(df)
 ```
 
-##### **Exploratory data analysis**
+### **Exploratory data analysis**
 
 Since I wasn't intending for this project[^2] to be extremely long (as most people would likely lose interests by then), I'd like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here's the question: what are the most common rare disorders and their associated phenotypic features?
 
@@ -102,6 +102,8 @@ The table was then rearranged with proportions in descending order (from highest
 ```{r rearrage proportions}
 df1 %>% arrange(desc(prop))
 ```
+
+##### **Distributions of HPO frequency**
 
 This was followed by checking out the distributions of HPO frequency to see which categories had the most and least number of counts.
 
@@ -167,6 +169,7 @@ df_mal_syn <- df %>%
   select(`Disorder type`, `HPO frequency`, `Disorder name`, `Preferred HPO term`)
 kable(df_mal_syn)
 ```
+##### **Explore rare disease validation date**
 
 Now, to add one more piece of work towards this exploratory data analysis, I thought to check out the Validation date column. "Validation date" in this context meant the dates when the annotations of HPO terms were made for each rare disorder, which were based on the source articles listed (as shown in the Source column).
 
@@ -202,7 +205,7 @@ df_val_date_d %>%
   count(year)
 ```
 
-##### **Summary**
+### **Summary**
 
 To quickly summarise key findings from this work[^4] regarding phenotypes associated with rare diseases:
 
