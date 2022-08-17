@@ -15,7 +15,6 @@ Unfortunately this particular dataset I've obtained does not contain information
 
 The datatset was for the period from 1983 till present, for approved rare disease drugs only.
 
-
 ### **Python project**
 
 For Python project[^2], there was one question in mind to answer:
@@ -40,7 +39,6 @@ How long did it take on average for a rare disease drug to reach marketing appro
 
 ![](Pills.jpg) *Image: Rawpixel.com*
 
-
 ### **R project**
 
 For R project[^3], there were two questions in mind to answer:
@@ -51,12 +49,11 @@ For R project[^3], there were two questions in mind to answer:
 
 2.  How would the time from designation to approval be displayed in timeline style for selected rare disease drugs?
 
-
 **R versions of the data analysis**:
 
-* base R methods via Jupyter notebook with [link](https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20(base%20R%20methods).ipynb)
+-   base R methods via Jupyter notebook with [link](https://github.com/jhylin/Portfolio-projects/blob/main/Rare%20disease%20drugs%20(base%20R%20methods).ipynb)
 
-* Tidyverse version via RStudio with [link](https://github.com/jhylin/Portfolio-projects/blob/main/Rare_diseases_drugs_RStudio.md) - done using RMarkdown
+-   Tidyverse version via RStudio with [link](https://github.com/jhylin/Portfolio-projects/blob/main/Rare_diseases_drugs_RStudio.md) - done using RMarkdown
 
 **Short summary of findings from this dataset using R**:
 

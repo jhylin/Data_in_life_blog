@@ -67,9 +67,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -158,7 +158,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(15)</span></div><div class="category" data-category="Blog">Blog <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Data analytics projects">Data analytics projects <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Research">Research <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SQL">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tableau">Tableau <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(15)</span></div><div class="category" data-category="Blog">Blog <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Data analytics projects">Data analytics projects <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Research">Research <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SQL">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tableau">Tableau <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -171,7 +171,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1660704459118" data-listing-reading-time-sort="1.51">
+<div class="quarto-post image-right" data-index="0" data-categories="Data analytics projects,R" data-listing-date-sort="1660651200000" data-listing-file-modified-sort="1660716188278" data-listing-reading-time-sort="1.52">
 <div class="thumbnail">
 <a href="./posts/6. COVID-19 antivirals/Cov19Antivirals.html">
 <div class="thumbnail-image">
@@ -182,18 +182,35 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="body">
 <a href="./posts/6. COVID-19 antivirals/Cov19Antivirals.html">
 <h3 class="no-anchor listing-title">
-<strong>Introduction</strong>
+COVID-19 antivirals
 </h3>
 <div class="listing-subtitle">
-
+Are there any other potential COVID-19 antivirals coming soon?
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+</div>
+<a href="./posts/6. COVID-19 antivirals/Cov19Antivirals.html">
 <div class="listing-description">
 Since my other alternative identity is a registered pharmacist, I’m always interested in therapeutic drugs, and it’s hard to actually ignore what has been troubling us globally for the last two and half years at least. So this time I’m going to look at the data on antivirals under investigations for COVID-19. For several countries currently, there will be antivirals such as nirmatrelvir and ritonavir (Paxlovid) and molnupiravir (Lagevrio) available for treating COVID-19. However, there are pros<sup>1</sup> and cons<sup>2</sup> for each of these antivirals so it’s always worth looking into other potential or promising candidates under phase 3 clinical trial phase.
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./posts/6. COVID-19 antivirals/Cov19Antivirals.html"> </a>
+<a href="./posts/6. COVID-19 antivirals/Cov19Antivirals.html">
+<div class="listing-date">
+Aug 17, 2022
+</div>
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+</a>
 </div>
 </div>
 <div class="quarto-post image-right" data-index="1" data-categories="Blog" data-listing-date-sort="1659700800000" data-listing-file-modified-sort="1660551623942" data-listing-reading-time-sort="1.36">
@@ -512,7 +529,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1653652800000" data-listing-file-modified-sort="1660622437207" data-listing-reading-time-sort="3.265">
+<div class="quarto-post image-right" data-index="9" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1653652800000" data-listing-file-modified-sort="1660716114991" data-listing-reading-time-sort="3.285">
 <div class="thumbnail">
 <p><a href="./posts/1. Drugs in rare diseases/RareDiseasesDrugs.html"> <img src="./posts/1. Drugs in rare diseases/Pills.jpg" class="thumnail-image"> </a></p>
 </div>

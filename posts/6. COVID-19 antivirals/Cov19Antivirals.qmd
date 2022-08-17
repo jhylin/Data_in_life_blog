@@ -1,16 +1,16 @@
 ---
-Title: "COVID-19 antivirals"
-Subtitle: "Are there any other potential COVID-19 antivirals coming soon?"
-Author: "Jennifer HY Lin"
-Date: 2022-8-17
-Categories: [Data analytics projects, R]
+title: "COVID-19 antivirals"
+subtitle: "Are there any other potential COVID-19 antivirals coming soon?"
+author: "Jennifer HY Lin"
+date: 2022-8-17
+categories: [Data analytics projects, R]
 ---
 
 ### **Introduction**
 
 Since my other alternative identity is a registered pharmacist, I'm always interested in therapeutic drugs, and it's hard to actually ignore what has been troubling us globally for the last two and half years at least. So this time I'm going to look at the data on antivirals under investigations for COVID-19. For several countries currently, there will be antivirals such as nirmatrelvir and ritonavir (Paxlovid) and molnupiravir (Lagevrio) available for treating COVID-19. However, there are pros^[e.g. molnupiravir when compared with Paxlovid may have less drug interaction worries but it's known to be perhaps slightly less effective than Paxlovid, clinical judgements required when considering prescribing] and cons^[An example would be Paxlovid was known to induce quite a number of drug interactions such as when it's used with dabigatran, to just name one of them as an example] for each of these antivirals so it's always worth looking into other potential or promising candidates under phase 3 clinical trial phase.
 
-### Process of data search and source of dataset
+### **Process of data search and source of dataset**
 Keywords used to search on PubMed: COVID-19 antivirals. This led to [ClinicalTrials.gov](https://clinicaltrials.gov/ct2/home), which was where I've obtained the dataset.
 
 Search terms used:
@@ -21,8 +21,9 @@ Filters applied:
 * Study type: Interventional (Clinical Trial)                                                           * Study Phase: Phase 3
 
 
-### Questions about this data set
+### **Questions about this data set**
 1. How many drugs have (completed) or are currently (active) in phase 3 interventional studies for COVID-19?
 2. What are the results like for drugs that have the most potential to enter phase 4?
 
 
+**To be continued**
