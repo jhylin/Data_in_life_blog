@@ -12,6 +12,8 @@ website:
         href: https://github.com/jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
+      - text: Resume
+        href: https://jhylin.github.io
     
 format:
   html:
