@@ -169,6 +169,7 @@ df_mal_syn <- df %>%
   select(`Disorder type`, `HPO frequency`, `Disorder name`, `Preferred HPO term`)
 kable(df_mal_syn)
 ```
+
 ##### **Explore rare disease validation date**
 
 Now, to add one more piece of work towards this exploratory data analysis, I thought to check out the Validation date column. "Validation date" in this context meant the dates when the annotations of HPO terms were made for each rare disorder, which were based on the source articles listed (as shown in the Source column).

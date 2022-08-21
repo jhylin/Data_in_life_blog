@@ -25,6 +25,37 @@ Filters applied: \* Study Results: With results \* Study type: Interventional (C
 ### **Questions about this dataset**
 
 1.  How many drugs have (completed) or are currently (active) in phase 3 interventional studies for COVID-19?
+
 2.  What are the results like for drugs that have the most potential to enter phase 4?
+
+```{r message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+```
+Read the .csv file downloaded from ClinicalTrials.gov
+```{r}
+df <- read_csv("Cov19_studies.csv")
+df
+```
+Check all column names.
+```{r}
+spec(df)
+```
+Check how many studies are still active and if results are available.
+```{r}
+df_status <- df %>% 
+  group_by(Status, `Study Results`) %>% 
+  summarise(number = n())
+df_status
+```
+Filter out terminated studies and show their status and intervention details.
+```{r}
+df_status_studies <- df %>% 
+  filter(Status == "Terminated") %>% 
+  select(Status, Interventions)
+kable(df_status_studies)
+```
+Interestingly, three out of 15 terminated studies involved hydroxychloroquine and two out of the terminated studies involved testing convalscent plasma.
 
 **To be continued**
