@@ -1,0 +1,32 @@
+---
+Title: "Long COVID syndromes - an update"
+Author: "Jennifer HY Lin"
+Categories: [Data analytics projects]
+Draft: True
+---
+
+```{r}
+library(tidyverse)
+```
+```{r}
+df <- read_csv("Full_table.csv")
+```
+
+```{r}
+View(df)
+```
+
+
+```{r}
+df1 <- df %>% 
+  separate(`Author (country)`, c("Author", "Country"))
+head(df1)
+```
+
+```{r}
+
+```
+```{r}
+
+```
+
