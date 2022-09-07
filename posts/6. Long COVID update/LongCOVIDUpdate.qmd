@@ -1,32 +1,99 @@
 ---
 Title: "Long COVID syndromes - an update"
 Author: "Jennifer HY Lin"
-Categories: [Data analytics projects]
+Categories: [Data analytics projects, R, Python]
 Draft: True
 ---
 
+#### Source of dataset
+
+Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License
+
+```{r echo=FALSE}
+install.packages("wordcloud")
+install.packages("RColorBrewer")
+install.packages("tidytext")
+```
+Loading all the required libraries.
 ```{r}
 library(tidyverse)
+library(tidytext)
+library(wordcloud)
+library(RColorBrewer)
 ```
+The dataset has been scraped from the PDF of the journal paper by using tabula-py (please see here for Python codes). Unfortunately I had trouble installing a similar R package, tabulizer, remotely after it's been archived (known issues in its GitHub repository) so I trialled tabula-py instead, which is a Python wrapper for tabula-java and it worked for scraping all of the data from the table but it also had other issues (so nothing is perfect). 
+
+The scraped data did not inherit the original tabular format, with columns and rows all jumbled since the table I was intending to scrape had merged rows, which might have contributed to the problem. However, I've noted other examples online where if the table's columns and rows are clearly defined e.g. no merged rows or columns, then it'll likely work better with the scraped table looking more like the original one.
+
+So in short, the final scraped table was cleaned and saved as .csv file, which was imported as below.
 ```{r}
 df <- read_csv("Full_table.csv")
 ```
 
-```{r}
+```{r echo=FALSE}
 View(df)
 ```
+#### Data inspection and wrangling
 
+A very first look at the table would show the first column contained two different categories, author names and countries. So my instinct was to separate the author names and countries into separate columns to enable further analysis.
 
 ```{r}
 df1 <- df %>% 
   separate(`Author (country)`, c("Author", "Country"))
 head(df1)
 ```
+```{r}
+# Separate the listed co-morbidities into separate rows for each study (since separating into columns would in fact be quite complex, considering each study has varying lengths of co-morbidities collected)
+df_new <- df1 %>% 
+  separate_rows(Comorbidities, sep = ",")
+df_new
+```
+```{r}
+# faceted graphs?
+```
+
+#### Text mining exercise
+
+When skimming through the results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.
+```{r}
+# Pick out the results column
+text <- df1$Results
+# Remove numbers from the texts so that the digits won't appear in the wordcloud
+text1 <- str_replace_all(text, "[:digit:]", "")
+text1
+```
+
+```{r}
+library(dplyr)
+text_df <- tibble(line = 1:75, text = text1)
+text_df
+```
+
+Import tidytext library and tokenise the texts in the selected column.
+
+```{r}
+library(tidytext)
+text_df1 <- text_df %>% 
+  unnest_tokens(word, text)
+text_df1
+```
+Remove stop_words, count the frequency of appearance of each word, then create a wordcloud. 
+```{r}
+text_df1 %>% 
+  anti_join(stop_words) %>% 
+  count(word) %>% 
+  with(wordcloud(word, n, colors = brewer.pal(8,"Dark2")))
+#display.brewer.all to display all colour palettes
+```
+However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud.
+```{r}
+
+```
 
 ```{r}
 
 ```
+
 ```{r}
 
 ```
-
