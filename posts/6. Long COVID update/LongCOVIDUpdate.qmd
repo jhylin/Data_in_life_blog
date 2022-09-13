@@ -3,7 +3,7 @@ Title: "Long COVID syndromes - an update"
 Subtitle: "PDF table scraping, bar graph and wordcloud"
 Author: "Jennifer HY Lin"
 Categories: [Data analytics projects, R, Python]
-Draft: False
+#Draft: False
 ---
 
 #### Source of dataset
