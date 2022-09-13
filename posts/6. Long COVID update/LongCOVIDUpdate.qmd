@@ -1,8 +1,9 @@
 ---
 Title: "Long COVID syndromes - an update"
+Subtitle: "PDF table scraping, bar graph and wordcloud"
 Author: "Jennifer HY Lin"
 Categories: [Data analytics projects, R, Python]
-Draft: True
+Draft: False
 ---
 
 #### Source of dataset
@@ -14,18 +15,22 @@ install.packages("wordcloud")
 install.packages("RColorBrewer")
 install.packages("tidytext")
 ```
-Loading all the required libraries.
+
+Loading all the required libraries for now.
+
 ```{r}
 library(tidyverse)
 library(tidytext)
 library(wordcloud)
 library(RColorBrewer)
+library(ggplot2)
+library(knitr)
 ```
-The dataset has been scraped from the PDF of the journal paper by using tabula-py (please see here for Python codes). Unfortunately I had trouble installing a similar R package, tabulizer, remotely after it's been archived (known issues in its GitHub repository) so I trialled tabula-py instead, which is a Python wrapper for tabula-java and it worked for scraping all of the data from the table but it also had other issues (so nothing is perfect). 
 
-The scraped data did not inherit the original tabular format, with columns and rows all jumbled since the table I was intending to scrape had merged rows, which might have contributed to the problem. However, I've noted other examples online where if the table's columns and rows are clearly defined e.g. no merged rows or columns, then it'll likely work better with the scraped table looking more like the original one.
+The dataset has been scraped from the PDF of a journal paper (source as shown above) by using tabula-py (please see here for Python codes). Unfortunately I had trouble installing a similar R package, tabulizer, remotely after it's been archived (with known issues in its GitHub repository) so I trialled tabula-py instead, which is a Python wrapper for tabula-java and it worked for scraping all of the data from the table, but the downside was that the scraped data did not inherit the original tabular format, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping problems. I've also noticed other more successful examples were from tables that had well-defined columns and rows i.e. no merged rows or columns. The end result in these caes often ended up looking more like the original tables in the PDFs.
 
-So in short, the final scraped table was cleaned and saved as .csv file, which was imported as below.
+So in short, the final scraped table was cleaned and saved as .csv file, which was imported as shown below.
+
 ```{r}
 df <- read_csv("Full_table.csv")
 ```
@@ -33,31 +38,64 @@ df <- read_csv("Full_table.csv")
 ```{r echo=FALSE}
 View(df)
 ```
+
 #### Data inspection and wrangling
 
-A very first look at the table would show the first column contained two different categories, author names and countries. So my instinct was to separate the author names and countries into separate columns to enable further analysis.
+Here's a quick overview on the hospitalisation rates across all the studies from this paper.
 
 ```{r}
-df1 <- df %>% 
-  separate(`Author (country)`, c("Author", "Country"))
-head(df1)
+df_hosp <- df %>% 
+  select(`Author (country)`, `Hospital (%) {ICU (%)}`)
+df_hosp
 ```
+
+The table column of Hospital (%) {ICU (%)} was separated into two separate columns to specify hospital and ICU rates within each study. The data type for Hospital (%) column was also changed from character to numeric so we can plot a bar graph later on (otherwise the x-axis may be out-of-sync).
+
 ```{r}
-# Separate the listed co-morbidities into separate rows for each study (since separating into columns would in fact be quite complex, considering each study has varying lengths of co-morbidities collected)
-df_new <- df1 %>% 
-  separate_rows(Comorbidities, sep = ",")
-df_new
+df_hosp_icu <- df_hosp %>% 
+  separate(`Hospital (%) {ICU (%)}`, c("Hospital (%)", "ICU (%)"))%>% 
+  mutate(across(`Hospital (%)`, as.numeric))
+df_hosp_icu
 ```
+
+Then a line of code to filter out the results of "NA" under the column of Hospital (%) was added. Most of the cells with "NA" were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these "NA"s were removed in this instance. The horizontal bar graph below shows the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results of 0% to 100% hospitalisations across all studies.
+
+```{r}
+df_hosp_icu %>% 
+  filter(!is.na(`Hospital (%)`)) %>% #same effect will still be achieved without this line of code with a warning message of "Removed 58 rows containing missing values (position_stack)"
+  ggplot(aes(x = `Author (country)`, y = `Hospital (%)`)) + 
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+Note: two of the studies removed from the above, these studies were Chiesa-Estomba (Italy) and Mahmud (Bangladesh), which had "Not stated" recorded under Hospital (%) {ICU (%)} column. When the Hospital (%) column was converted from character to numeric, these two rows were converted to "NA" automatically. In total, there were 19 cohort studies as stated by the paper.
+
+The following shows separating the listed co-morbidities for each study into separate rows, since separating into columns would in fact make the table looking even more complex by adding too much more columns, adding difficulties in reading the data.
+```{r}
+df_new <- df %>% 
+  separate_rows(Comorbidities, sep = ",")
+kable(df_new)
+```
+I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities are present, then I'd like to remove these percentages first and to just focus on the listed diorders present in these study participants.
+```{r}
+df_new %>% 
+  mutate(Comorbidities = str_remove_all(Comorbidities, "[%]|[:digit:]")) %>% # Remove % symbol and numbers altogether in the column
+  filter(!is.na(Comorbidities)) %>% # Add this line to filter out all the "NA"s
+  count(Comorbidities, sort = TRUE) # Count all the comorbidities in descending order
+```
+
 ```{r}
 # faceted graphs?
+#ggplot(data = df_new, aes(x = `Country`, y = `Hospital (%)`)) + geom_bar(stat = "identity")
 ```
 
 #### Text mining exercise
 
 When skimming through the results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.
+
 ```{r}
 # Pick out the results column
-text <- df1$Results
+text <- df$Results
 # Remove numbers from the texts so that the digits won't appear in the wordcloud
 text1 <- str_replace_all(text, "[:digit:]", "")
 text1
@@ -77,7 +115,9 @@ text_df1 <- text_df %>%
   unnest_tokens(word, text)
 text_df1
 ```
-Remove stop_words, count the frequency of appearance of each word, then create a wordcloud. 
+
+Remove stop_words, count the frequency of appearance of each word, then create a wordcloud.
+
 ```{r}
 text_df1 %>% 
   anti_join(stop_words) %>% 
@@ -85,14 +125,8 @@ text_df1 %>%
   with(wordcloud(word, n, colors = brewer.pal(8,"Dark2")))
 #display.brewer.all to display all colour palettes
 ```
+
 However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud.
-```{r}
-
-```
-
-```{r}
-
-```
 
 ```{r}
 
