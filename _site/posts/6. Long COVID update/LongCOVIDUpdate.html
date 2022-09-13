@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2022-09-13">
+
+<title>Portfolio - Long COVID - an update</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Portfolio</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Jennifer HY Lin</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume/">Resume</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Long COVID - an update</h1>
+            <p class="subtitle lead">Hospitalisation rate, comorbidities and long COVID symptoms - PDF table scraping &amp; data analysis with visualisations</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Data analytics projects</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 13, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><strong>Background</strong></a></li>
+  <li><a href="#data-scraping-from-pdf" id="toc-data-scraping-from-pdf" class="nav-link" data-scroll-target="#data-scraping-from-pdf"><strong>Data scraping from PDF</strong></a></li>
+  <li><a href="#data-inspection-and-wrangling" id="toc-data-inspection-and-wrangling" class="nav-link" data-scroll-target="#data-inspection-and-wrangling">Data inspection and wrangling</a>
+  <ul class="collapse">
+  <li><a href="#separating-columns-and-change-column-type" id="toc-separating-columns-and-change-column-type" class="nav-link" data-scroll-target="#separating-columns-and-change-column-type"><strong>Separating columns and change column type</strong></a></li>
+  <li><a href="#bar-graph-for-hospitalisation-rate" id="toc-bar-graph-for-hospitalisation-rate" class="nav-link" data-scroll-target="#bar-graph-for-hospitalisation-rate"><strong>Bar graph for hospitalisation rate</strong></a></li>
+  <li><a href="#separating-rows" id="toc-separating-rows" class="nav-link" data-scroll-target="#separating-rows"><strong>Separating rows</strong></a></li>
+  <li><a href="#types-of-comorbidities-present-in-long-covid---a-frequency-count" id="toc-types-of-comorbidities-present-in-long-covid---a-frequency-count" class="nav-link" data-scroll-target="#types-of-comorbidities-present-in-long-covid---a-frequency-count"><strong>Types of comorbidities present in long COVID - a frequency count</strong></a></li>
+  </ul></li>
+  <li><a href="#text-mining-to-reveal-the-results" id="toc-text-mining-to-reveal-the-results" class="nav-link" data-scroll-target="#text-mining-to-reveal-the-results"><strong>Text mining to reveal the results</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="background" class="level4">
+<h4 class="anchored" data-anchor-id="background"><strong>Background</strong></h4>
+<p>This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (please see the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021 only). I’ve used Python for an initial table extraction from the PDF of the paper and also Excel to a smaller degree to assist with data cleaning. This was followed by using R to analyse and visualise the data.</p>
+<section id="source-of-dataset" class="level6">
+<h6 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h6>
+<p>Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License</p>
+<div class="cell">
+
+</div>
+<p>Before we begin, let’s load all the required libraries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="data-scraping-from-pdf" class="level4">
+<h4 class="anchored" data-anchor-id="data-scraping-from-pdf"><strong>Data scraping from PDF</strong></h4>
+<p>The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (please see here for Python codes). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. tabula-py was a Python wrapper for tabula-java and it worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping issues. I’ve also noticed other more successful examples were from tables that had well-defined columns and rows i.e.&nbsp;no merged rows or columns. The end result in these cases often ended up looking more like the original source tables.</p>
+<p>So in short, the final scraped table was cleaned in Excel and saved as .csv file, and then imported as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Full_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 75 Columns: 9
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(5): Author (country), Hospital (%) {ICU (%)}, Comorbidities, Body syste... dbl
+(2): Age (years), Follow-up time (days) lgl (2): ...8, ...9
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...8`
+• `` -&gt; `...9`</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="data-inspection-and-wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="data-inspection-and-wrangling">Data inspection and wrangling</h4>
+<p>Here’s a quick overview on the hospitalisation rates across all the studies from this paper.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_hosp <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Author (country)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Hospital (%) {ICU (%)}</span><span class="st">`</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_hosp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 75 × 2
+   `Author (country)` `Hospital (%) {ICU (%)}`
+   &lt;chr&gt;              &lt;chr&gt;                   
+ 1 Bellan (Italy)     100 {12}                
+ 2 Bellan (Italy)     &lt;NA&gt;                    
+ 3 Bellan (Italy)     &lt;NA&gt;                    
+ 4 Bellan (Italy)     &lt;NA&gt;                    
+ 5 Bellan (Italy)     &lt;NA&gt;                    
+ 6 Bliddal (Denmark)  0                       
+ 7 Bliddal (Denmark)  &lt;NA&gt;                    
+ 8 Bliddal (Denmark)  &lt;NA&gt;                    
+ 9 Bliddal (Denmark)  &lt;NA&gt;                    
+10 Bliddal (Denmark)  &lt;NA&gt;                    
+# … with 65 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+<section id="separating-columns-and-change-column-type" class="level5">
+<h5 class="anchored" data-anchor-id="separating-columns-and-change-column-type"><strong>Separating columns and change column type</strong></h5>
+<p>The table column of Hospital (%) {ICU (%)} was separated into two separate columns to allow clearer differentiation between hospital and ICU rates within each study. The data type for Hospital (%) column was also changed from character to numeric so we can plot a bar graph later on (otherwise the x-axis may not be properly shown).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_hosp_icu <span class="ot">&lt;-</span> df_hosp <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="st">`</span><span class="at">Hospital (%) {ICU (%)}</span><span class="st">`</span>, <span class="fu">c</span>(<span class="st">"Hospital (%)"</span>, <span class="st">"ICU (%)"</span>))<span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="st">`</span><span class="at">Hospital (%)</span><span class="st">`</span>, as.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Expected 2 pieces. Additional pieces discarded in 5 rows [1, 21, 23,
+29, 45].</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 12 rows [6, 13,
+14, 25, 33, 34, 39, 55, 56, 62, 69, 75].</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_hosp_icu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 75 × 3
+   `Author (country)` `Hospital (%)` `ICU (%)`
+   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;    
+ 1 Bellan (Italy)                100 12       
+ 2 Bellan (Italy)                 NA &lt;NA&gt;     
+ 3 Bellan (Italy)                 NA &lt;NA&gt;     
+ 4 Bellan (Italy)                 NA &lt;NA&gt;     
+ 5 Bellan (Italy)                 NA &lt;NA&gt;     
+ 6 Bliddal (Denmark)               0 &lt;NA&gt;     
+ 7 Bliddal (Denmark)              NA &lt;NA&gt;     
+ 8 Bliddal (Denmark)              NA &lt;NA&gt;     
+ 9 Bliddal (Denmark)              NA &lt;NA&gt;     
+10 Bliddal (Denmark)              NA &lt;NA&gt;     
+# … with 65 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="bar-graph-for-hospitalisation-rate" class="level5">
+<h5 class="anchored" data-anchor-id="bar-graph-for-hospitalisation-rate"><strong>Bar graph for hospitalisation rate</strong></h5>
+<p>Then a line of code to filter out the results of “NA” under the column of Hospital (%) was added. Most of the cells with “NA” were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these “NA”s were removed in this instance. The horizontal bar graph below shows the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results of 0% to 100% hospitalisations across all studies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_hosp_icu <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Hospital (%)</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="co"># Same effect will still be achieved without this line of code with a warning message of "Removed 58 rows containing missing values (position_stack)" shown</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Author (country)</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Hospital (%)</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note: two of the studies were removed from the above, these studies were Chiesa-Estomba (Italy) and Mahmud (Bangladesh), which had “Not stated” recorded under Hospital (%) {ICU (%)} column. When the Hospital (%) column was converted from character to numeric, these two rows were converted to “NA” automatically. In total, there were 19 cohort studies as mentioned by the paper.</p>
+</section>
+<section id="separating-rows" class="level5">
+<h5 class="anchored" data-anchor-id="separating-rows"><strong>Separating rows</strong></h5>
+<p>The following shows separating the listed co-morbidities for each study into separate rows, since separating into columns would in fact make the table looking even more complex by adding way too much columns, adding difficulties in data reading.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(Comorbidities, <span class="at">sep =</span> <span class="st">", "</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 178 × 9
+   Author (country…¹ Hospi…² Age  …³ Comor…⁴ Follo…⁵ Body …⁶ Results ...8  ...9 
+   &lt;chr&gt;             &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt; &lt;lgl&gt;
+ 1 Bellan (Italy)    100 {1…      61 "41% h…     107 Genera… 5.9% m… NA    NA   
+ 2 Bellan (Italy)    100 {1…      61 "15% d…     107 Genera… 5.9% m… NA    NA   
+ 3 Bellan (Italy)    100 {1…      61 "11% o…     107 Genera… 5.9% m… NA    NA   
+ 4 Bellan (Italy)    100 {1…      61 "11% e…     107 Genera… 5.9% m… NA    NA   
+ 5 Bellan (Italy)    100 {1…      61 "10% m…     107 Genera… 5.9% m… NA    NA   
+ 6 Bellan (Italy)    100 {1…      61 "9% IH…     107 Genera… 5.9% m… NA    NA   
+ 7 Bellan (Italy)    100 {1…      61 " 8% d…     107 Genera… 5.9% m… NA    NA   
+ 8 Bellan (Italy)    100 {1…      61 "7% AF"     107 Genera… 5.9% m… NA    NA   
+ 9 Bellan (Italy)    100 {1…      61 "6% CO…     107 Genera… 5.9% m… NA    NA   
+10 Bellan (Italy)    100 {1…      61 " 6% C…     107 Genera… 5.9% m… NA    NA   
+# … with 168 more rows, and abbreviated variable names ¹​`Author (country)`,
+#   ²​`Hospital (%) {ICU (%)}`, ³​`Age  (years)`, ⁴​Comorbidities,
+#   ⁵​`Follow-up time (days)`, ⁶​`Body system`
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="types-of-comorbidities-present-in-long-covid---a-frequency-count" class="level5">
+<h5 class="anchored" data-anchor-id="types-of-comorbidities-present-in-long-covid---a-frequency-count"><strong>Types of comorbidities present in long COVID - a frequency count</strong></h5>
+<p>I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, so I started by removing these digits and percentage symbols first. However, I kept getting stuck on not having count() actually counting unique elements under co-morbidities. If you look at the magnified circle in the right hand side column in the image below, you’ll notice the subtle difference in spacing, so yes the culprit that I forgot about was the spaces<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> first and focussing entirely on the listed disorders in the study participants.</p>
+<p><img src="Zoom-in%20shot.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Comorbidities =</span> <span class="fu">str_remove_all</span>(Comorbidities, <span class="st">"[:digit:]|[%]|[ ]"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Remove % symbol, numbers and don't forget to remove spaces as well in the column!</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Comorbidities)) <span class="sc">%&gt;%</span>  <span class="co"># Add this line to filter out all the "NA"s</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Comorbidities, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="co"># Count the comorbidities in descending order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 37 × 2
+   Comorbidities     n
+   &lt;chr&gt;         &lt;int&gt;
+ 1 diabetes         14
+ 2 hypertension     13
+ 3 IHD              10
+ 4 asthma            9
+ 5 COPD              9
+ 6 obesity           9
+ 7 CKD               6
+ 8 malignancy        5
+ 9 dyslipidaemia     4
+10 liverdisease      4
+# … with 27 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+<p>Now we can observe the top 3 frequency of all co-morbidities listed were diabetes, hypertension and IHD<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, then obesity, and also CKD<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, malignancy, dyslipidaemia and so on. These would be considered as high risk factors for ending up with long COVID symptoms if someone had caught the COVID-19 infection in the first place.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># faceted graphs?</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(data = df_new, aes(x = `Country`, y = `Hospital (%)`)) + geom_bar(stat = "identity")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="text-mining-to-reveal-the-results" class="level4">
+<h4 class="anchored" data-anchor-id="text-mining-to-reveal-the-results"><strong>Text mining to reveal the results</strong></h4>
+<p>When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out the results column</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> df<span class="sc">$</span>Results</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>text1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text, <span class="st">"[:digit:]"</span>, <span class="st">""</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>text1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] ".% myalgia, .% arthralgia"                                                                                                                                                                                                                                
+ [2] ".% dyspnoea, .% cough, .% chest pain, .% reduced DLCO, normal spirometry"                                                                                                                                                                                 
+ [3] "% PTSD symptoms"                                                                                                                                                                                                                                          
+ [4] "% gustatory dysfunction, .% olfactory dysfunction"                                                                                                                                                                                                        
+ [5] ".% diarrhoea"                                                                                                                                                                                                                                             
+ [6] "Fatigue, myalgia, arthralgia, chills, fever"                                                                                                                                                                                                              
+ [7] "Dyspnoea, cough, chest pain, sputum production"                                                                                                                                                                                                           
+ [8] "Memory issues, concentration issues, headache"                                                                                                                                                                                                            
+ [9] "Olfactory dysfunction, gustatory dysfunction, sore throat, rhinorrhoea, sneezing"                                                                                                                                                                         
+[10] "Diarrhoea, anorexia, abdominal pain, nausea"                                                                                                                                                                                                              
+[11] "Red runny eyes"                                                                                                                                                                                                                                           
+[12] "% olfactory dysfunction"                                                                                                                                                                                                                                  
+[13] ".% olfactory dysfunction, .% gustatory dysfunction"                                                                                                                                                                                                       
+[14] "% fatigue, % myalgia, % fever, slight pain/discomfort"                                                                                                                                                                                                    
+[15] "% dyspnoea, % cough. Normal spirometry, normal ABG, reduced DLCO, reduced distance on MWT"                                                                                                                                                                
+[16] "% cognitive issues, % headache, mild depression, subthreshold anxiety"                                                                                                                                                                                    
+[17] "% olfactory dysfunction, % rhinorrhoea, % gustatory dysfunction, % sore throat"                                                                                                                                                                           
+[18] "% diarrhoea, % nausea, % abdominal pain, normal LFTs"                                                                                                                                                                                                     
+[19] "% angina, normal left ventricular function, normal right ventricular function, normal cardiac biomarkers"                                                                                                                                                 
+[20] "Normal FBC, normal coagulation screen, raised ferritin, potentially raised D-dimer, normal U&amp;Es, normal CRP, normal procalcitonin, normal TFTs, normal IL-"                                                                                               
+[21] ".% fatigue"                                                                                                                                                                                                                                               
+[22] ".% dyspnoea, .% chest pain, .% cough"                                                                                                                                                                                                                     
+[23] "% fatigue"                                                                                                                                                                                                                                                
+[24] "Abnormal chest CT: % ground glass opacities, % reticulations, % fibrotic lesions/traction bronchiectasis, % consolidations. % reduced DLCO, % dyspnoea, % dry cough, % chest tightness, normal spirometry"                                                
+[25] "% fatigue"                                                                                                                                                                                                                                                
+[26] "Depression, concentration issues"                                                                                                                                                                                                                         
+[27] "% olfactory/gustatory dysfunction"                                                                                                                                                                                                                        
+[28] "Alopecia"                                                                                                                                                                                                                                                 
+[29] "Fatigue, arthralgia, myalgia"                                                                                                                                                                                                                             
+[30] "Dyspnoea, cough"                                                                                                                                                                                                                                          
+[31] "Headache"                                                                                                                                                                                                                                                 
+[32] "Rhinorrhoea, olfactory dysfunction, gustatory dysfunction, sore throat"                                                                                                                                                                                   
+[33] "% abnormal chest CT: % fibrotic-like changes, % ground glass opacities/interstitial thickening, nodules/masses, interlobar pleural traction, pulmonary atelectasis and bronchiectasis. % reduced DLCO, % mild dyspnoea, % sputum production, .% dry cough"
+[34] "% fatigue, .% arthralgia, .% myalgia"                                                                                                                                                                                                                     
+[35] ".% cough, % dyspnoea, .% chest pain"                                                                                                                                                                                                                      
+[36] ".% headache"                                                                                                                                                                                                                                              
+[37] ".% olfactory dysfunction, .% rhinorrhoea"                                                                                                                                                                                                                 
+[38] "No abdominal pain"                                                                                                                                                                                                                                        
+[39] ".% fatigue, .% myalgia, .% arthralgia, .% fever, .% ulcer"                                                                                                                                                                                                
+[40] ".% dyspnoea, .% cough, .% sputum production"                                                                                                                                                                                                              
+[41] ".% headache, .% cognitive issues"                                                                                                                                                                                                                         
+[42] ".% gustatory dysfunction, .% olfactory dysfunction"                                                                                                                                                                                                       
+[43] ".% diarrhoea"                                                                                                                                                                                                                                             
+[44] ".% eye irritation, .% ulcer"                                                                                                                                                                                                                              
+[45] "% fatigue, % myalgia"                                                                                                                                                                                                                                     
+[46] "% dyspnoea, % cough, % chest pain, % sputum production"                                                                                                                                                                                                   
+[47] "% concentration issues, % headache, % paraesthesia"                                                                                                                                                                                                       
+[48] "% gustatory dysfunction, % olfactory dysfunction, % sore throat"                                                                                                                                                                                          
+[49] "% abdominal pain, % diarrhoea, % nausea, % anorexia"                                                                                                                                                                                                      
+[50] "% fatigue, .% arthralgia, .% myalgia"                                                                                                                                                                                                                     
+[51] ".% cough, % dyspnoea, .% chest pain"                                                                                                                                                                                                                      
+[52] ".% circadian rhythm disorders, .% headache, .% sleep disturbance, .% adjustment disorder"                                                                                                                                                                 
+[53] ".% vertigo, % olfactory dysfunction"                                                                                                                                                                                                                      
+[54] ".% palpitation"                                                                                                                                                                                                                                           
+[55] ".% subjective olfactory dysfunction, .% objective olfactory  dysfunction (discrimination and identification issues)"                                                                                                                                      
+[56] ".% fatigue, .% rheumatological issues"                                                                                                                                                                                                                    
+[57] "% dyspnoea, % cough, .% chest pain"                                                                                                                                                                                                                       
+[58] ".% neurological disorders, .% psychiatric disorders, .% headache"                                                                                                                                                                                         
+[59] ".% olfactory/gustatory dysfunction,"                                                                                                                                                                                                                      
+[60] ".% gastrointestinal disorders"                                                                                                                                                                                                                            
+[61] ".% alopecia, .% cutaneous manifestations, .% ocular symptoms"                                                                                                                                                                                             
+[62] "% night sweats, % fever"                                                                                                                                                                                                                                  
+[63] "% abnormal chest CT: ground-glass opacities, reticular lesions, consolidations, bronchial dilation. % dyspnoea, abnormal spirometry: % reduced FVC, % reduced FEV, normal FEV/FVC. % reduced DLCO, % cough"                                               
+[64] "% sleep disorders"                                                                                                                                                                                                                                        
+[65] "% olfactory dysfunction"                                                                                                                                                                                                                                  
+[66] "% diarrhoea/vomiting"                                                                                                                                                                                                                                     
+[67] "% normal LVEF, % diastolic dysfunction on echo, % raised NT-proBNP, % pulmonary hypertension, % pericardial effusion"                                                                                                                                     
+[68] "Raised D-dimer, potentially raised ferritin, normal CRP, normal procalcitonin, normal IL-"                                                                                                                                                                
+[69] "Fatigue, myalgia, fever"                                                                                                                                                                                                                                  
+[70] "Dyspnoea, cough, chest pain"                                                                                                                                                                                                                              
+[71] "Headache, paraesthesia, numbness, concentration/ memory issues"                                                                                                                                                                                           
+[72] "Olfactory dysfunction, sore throat, hoarse voice, tinnitus, earache"                                                                                                                                                                                      
+[73] "Diarrhoea, abdominal pain"                                                                                                                                                                                                                                
+[74] "Palpitations/tachycardia"                                                                                                                                                                                                                                 
+[75] "% olfactory dysfunction, .% gustatory dysfunction"                                                                                                                                                                                                        </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="at">text =</span> text1)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>text_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 75 × 2
+    line text                                                                   
+   &lt;int&gt; &lt;chr&gt;                                                                  
+ 1     1 .% myalgia, .% arthralgia                                              
+ 2     2 .% dyspnoea, .% cough, .% chest pain, .% reduced DLCO, normal spiromet…
+ 3     3 % PTSD symptoms                                                        
+ 4     4 % gustatory dysfunction, .% olfactory dysfunction                      
+ 5     5 .% diarrhoea                                                           
+ 6     6 Fatigue, myalgia, arthralgia, chills, fever                            
+ 7     7 Dyspnoea, cough, chest pain, sputum production                         
+ 8     8 Memory issues, concentration issues, headache                          
+ 9     9 Olfactory dysfunction, gustatory dysfunction, sore throat, rhinorrhoea…
+10    10 Diarrhoea, anorexia, abdominal pain, nausea                            
+# … with 65 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+<p>Import tidytext library and tokenise the texts in the selected column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="ot">&lt;-</span> text_df <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>text_df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 399 × 2
+    line word      
+   &lt;int&gt; &lt;chr&gt;     
+ 1     1 myalgia   
+ 2     1 arthralgia
+ 3     2 dyspnoea  
+ 4     2 cough     
+ 5     2 chest     
+ 6     2 pain      
+ 7     2 reduced   
+ 8     2 dlco      
+ 9     2 normal    
+10     2 spirometry
+# … with 389 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+<p>Remove stop_words, count the frequency of appearance of each word, then create a wordcloud.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">wordcloud</span>(word, n, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "word"</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#display.brewer.all to display all colour palettes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud. Nevertheless, it is one of the ways to get a rough idea about the most common terms cropping up in the collected results for long COVID in different countries.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>I swear it’s probably taken me a good half an hour to figure this out… as I went searching on stack overflow and google about how to count distinct observations in columns in R<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>ischaemic heart disease<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>chronic obstructive pulmonary disease<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>chronic kidney disease<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data-analytics-and-research-blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Blog made with <a href="https://quarto.org/">Quarto</a> 🧡 by Jennifer HY Lin © 2022</div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -2,14 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/6. Long COVID update/LongCOVIDUpdate.html",
       "/posts/Blog move/index.html",
       "/posts/5. Phenotypes associated with rare diseases/PhenotypesRareDiseases.html",
       "/posts/Blog-Social network/EmbracingSocialNetwork.html",
       "/posts/4. Natural history of rare diseases – malformation syndrome/NaturalHistoryRareDiseasesMalSyn.html",
       "/posts/Blog-Update/UpdateOnPortfolio.html",
-      "/posts/2. Long COVID data in SQL/LongCOVIDSQL.html",
+      "/posts/3. Long COVID data in SQL/LongCOVIDSQL.html",
+      "/posts/2. Long COVID dashboard/TableauDashboard.html",
       "/posts/Blog-Portfolio projects/PortfolioProjects.html",
-      "/posts/3. Long COVID dashboard/TableauDashboard.html",
       "/posts/1. Drugs in rare diseases/RareDiseasesDrugs.html",
       "/posts/Blog-Data analytics/FocussingOnDataAnalytics.html",
       "/posts/Blog-Cheminformatics and data science journey/DSandCheminformatics.html",
