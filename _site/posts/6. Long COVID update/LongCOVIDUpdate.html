@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2022-09-13">
+<meta name="dcterms.date" content="2022-09-15">
 
 <title>Portfolio - Long COVID - an update</title>
 <style>
@@ -200,7 +200,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 13, 2022</p>
+        <p class="date">September 15, 2022</p>
       </div>
     </div>
       
@@ -236,14 +236,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="background" class="level4">
 <h4 class="anchored" data-anchor-id="background"><strong>Background</strong></h4>
-<p>This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (please see the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021 only). I’ve used Python for an initial table extraction from the PDF of the paper and also Excel to a smaller degree to assist with data cleaning. This was followed by using R to analyse and visualise the data.</p>
-<section id="source-of-dataset" class="level6">
-<h6 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h6>
-<p>Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License</p>
+<p>This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (details in the <a href="https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html">SQL</a> and <a href="https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html">Tableau</a> projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021). I’ve used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.</p>
+<section id="source-of-dataset-and-acknowledgement-of-data" class="level6">
+<h6 class="anchored" data-anchor-id="source-of-dataset-and-acknowledgement-of-data"><strong>Source of dataset and acknowledgement of data</strong></h6>
+<p>Thank you to the authors of this paper which was available under Creative Commons Attribution 4.0 International Public License. Citation of the paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014.</p>
 <div class="cell">
 
 </div>
-<p>Before we begin, let’s load all the required libraries.</p>
+<p>Before we begin, let’s load all the required libraries. If you can’t find any of the listed libraries by any means, consider trying to install them first via install.packages(), with the names of the desired libraries typed within the bracket, then load as shown.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
@@ -256,7 +256,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="data-scraping-from-pdf" class="level4">
 <h4 class="anchored" data-anchor-id="data-scraping-from-pdf"><strong>Data scraping from PDF</strong></h4>
-<p>The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (please see here for Python codes). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. tabula-py was a Python wrapper for tabula-java and it worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping issues. I’ve also noticed other more successful examples were from tables that had well-defined columns and rows i.e.&nbsp;no merged rows or columns. The end result in these cases often ended up looking more like the original source tables.</p>
+<p>The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (for details please see this post). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. tabula-py was a Python wrapper for tabula-java and it worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping issues. I’ve also noticed other more successful examples were from tables that had well-defined columns and rows i.e.&nbsp;no merged rows or columns. The end result in these cases often ended up looking more like the original source tables.</p>
 <p>So in short, the final scraped table was cleaned in Excel and saved as .csv file, and then imported as shown below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Full_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -385,11 +385,12 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </section>
 <section id="types-of-comorbidities-present-in-long-covid---a-frequency-count" class="level5">
 <h5 class="anchored" data-anchor-id="types-of-comorbidities-present-in-long-covid---a-frequency-count"><strong>Types of comorbidities present in long COVID - a frequency count</strong></h5>
-<p>I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, so I started by removing these digits and percentage symbols first. However, I kept getting stuck on not having count() actually counting unique elements under co-morbidities. If you look at the magnified circle in the right hand side column in the image below, you’ll notice the subtle difference in spacing, so yes the culprit that I forgot about was the spaces<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> first and focussing entirely on the listed disorders in the study participants.</p>
+<p>I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, then it would give a quick overall picture. So I started by removing these digits and percentage symbols. Obviously since I’m newish to R (two months into using it), I soon ran into a problem, I kept on getting stuck with not having the count() function to actually count unique elements under the column of co-morbidities.</p>
+<p>If you look at the magnified circle, as one of the examples, in the column on the right in the image below, you’ll notice the subtle difference in spacing, so yes the culprit was the <strong>space</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g.&nbsp;“liver disease” became “liverdisease”, but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.</p>
 <p><img src="Zoom-in%20shot.jpg" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_new <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Comorbidities =</span> <span class="fu">str_remove_all</span>(Comorbidities, <span class="st">"[:digit:]|[%]|[ ]"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Remove % symbol, numbers and don't forget to remove spaces as well in the column!</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Comorbidities =</span> <span class="fu">str_remove_all</span>(Comorbidities, <span class="st">"[:digit:]|[%]|[ ]"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Remove % symbol, numbers and don't forget to remove spaces as well in the column! </span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Comorbidities)) <span class="sc">%&gt;%</span>  <span class="co"># Add this line to filter out all the "NA"s</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Comorbidities, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="co"># Count the comorbidities in descending order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -414,21 +415,17 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <div class="cell">
 
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># faceted graphs?</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(data = df_new, aes(x = `Country`, y = `Hospital (%)`)) + geom_bar(stat = "identity")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 </section>
 <section id="text-mining-to-reveal-the-results" class="level4">
 <h4 class="anchored" data-anchor-id="text-mining-to-reveal-the-results"><strong>Text mining to reveal the results</strong></h4>
 <p>When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out the results column</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> df<span class="sc">$</span>Results</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>text1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text, <span class="st">"[:digit:]"</span>, <span class="st">""</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>text1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out the results column</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> df<span class="sc">$</span>Results</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>text1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text, <span class="st">"[:digit:]"</span>, <span class="st">""</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>text1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] ".% myalgia, .% arthralgia"                                                                                                                                                                                                                                
  [2] ".% dyspnoea, .% cough, .% chest pain, .% reduced DLCO, normal spirometry"                                                                                                                                                                                 
@@ -508,9 +505,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="at">text =</span> text1)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>text_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="at">text =</span> text1)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>text_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 75 × 2
     line text                                                                   
@@ -531,10 +528,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Import tidytext library and tokenise the texts in the selected column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="ot">&lt;-</span> text_df <span class="sc">%&gt;%</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>text_df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="ot">&lt;-</span> text_df <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>text_df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 399 × 2
     line word      
@@ -555,17 +552,17 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Remove stop_words, count the frequency of appearance of each word, then create a wordcloud.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">wordcloud</span>(word, n, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">wordcloud</span>(word, n, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining, by = "word"</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#display.brewer.all to display all colour palettes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#display.brewer.all to display all colour palettes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud. Nevertheless, it is one of the ways to get a rough idea about the most common terms cropping up in the collected results for long COVID in different countries.</p>
 
@@ -576,7 +573,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1" role="doc-endnote"><p>I swear it’s probably taken me a good half an hour to figure this out… as I went searching on stack overflow and google about how to count distinct observations in columns in R<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1" role="doc-endnote"><p>I swear it’s taken me a good half an hour to figure this out… eventually I thought to look at the column itself in order to see if I’ve missed anything… I even went on a frantic search in Stack Overflow and googled about how to count distinct observations in columns in R<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>ischaemic heart disease<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>chronic obstructive pulmonary disease<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>chronic kidney disease<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
