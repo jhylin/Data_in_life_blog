@@ -1,0 +1,49 @@
+---
+title: "Table scraping from PDF"
+subtitle: "Using tabula-py in Python"
+author: "Jennifer HY Lin"
+date: 2022-09-15
+categories: [Data analytics projects, Python]
+jupyter: python3
+---
+
+##### **Quick introduction**
+A requirement to run tabula-py was to ensure that Java was installed first in order for tabula-py to work, since tabula-py was essentially a Python wrapper for tabula-java. I relied on Homebrew to install Java, but there were also a few other different options available to do this so I won't go into details here. Once it was installed, we could then check for the Java version to ensure it was installed properly. 
+
+```{python}
+!java -version
+```
+##### **Installing and importing libraries**
+Then we would install any libraries needed for scraping table data from PDF, where in this case I ended up only using one.
+
+```{python}
+!pip install -q tabula-py
+```
+
+```{python}
+# import read_pdf from the tabula library
+from tabula import read_pdf
+```
+##### **Data source**
+Source of the table was from this journal paper by Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License
+
+##### **Table scraping**
+Firstly, I trialled scraping the table from page 4 of the journal paper, which only really scraped about half of the table. I then went on to add in another line of code to specify the scraping area^[Thanks to Stack Overflow as I've managed to find this solution from several different scenarios and comments.] on the PDF page in inches (this part could be deduced by using the in-built PDF tool).
+
+One thing I wasn't too sure about was that the tabula-py documentation did state that the default = full page, but in fact, it appeared to be not the case (only half of the table showed up). Also, the journal paper I was using had the tables printed in landscape layout (rather than the more common portrait style), so it wasn't completely clear if landscape version was making this harder or the other way.
+
+```{python}
+test_area = "10.05,6.60,10.05,6.60" #specify the scraping area (top, left, bottom, right)
+df = read_pdf("Journal.pdf", pages = "4", area = test_area, guess = False, stream = True, pandas_options={'header':None})
+df
+```
+Once above worked, I moved onto scraping the whole table across pages 4 to 6 of the PDF, and then saved the scraped table into a .csv file, which appeared automatically in the working directory.
+```{python}
+import tabula
+test_area = "10.05,6.60,10.05,6.60"
+tabula.convert_into("Journal.pdf", "Full_table_scraped.csv", output_format = "csv", pages = "4-6", area = test_area, guess = False, stream = True)
+!cat Full_table_scraped.csv
+```
+
+##### **Short summary**
+The PDF scraping exercise only worked to a certain degree^[or could be my ignorance to other better methods, which I'm more than happy if someone is keen to point it out by leaving a comment as I'd like to learn!], as the data did not arrive in a proper tabular format. I've also gone on to read several online resources and looked into tabula-py and tabula-java, it was clearly shown in their GitHub repo that there were existing issues for tables that have merged cells, empty cells or no column lines (which was what I had in this case). All of them tend to result in jumbled or merged rows or columns. It tends to work better if the tables in the PDFs are already in a proper table format i.e. columns and rows marked by lines. Nevertheless, the purpose of scraping the table data was achieved as full data were there after checking, but just not in a clean and tidy state so the next post named, "Long COVID - an update" would take us into the next stage to see what this tabular data would tell us about long COVID (all done in R).

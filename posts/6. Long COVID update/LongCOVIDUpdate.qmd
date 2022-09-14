@@ -2,15 +2,15 @@
 title: "Long COVID - an update"
 subtitle: "Hospitalisation rate, comorbidities and long COVID symptoms - PDF table scraping & data analysis with visualisations"
 author: "Jennifer HY Lin"
-date: 2022-09-13
+date: 2022-09-15
 categories: [Data analytics projects, R, Python]
 ---
 
 #### **Background**
-This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (please see the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021 only). I've used Python for an initial table extraction from the PDF of the paper and also Excel to a smaller degree to assist with data cleaning. This was followed by using R to analyse and visualise the data.
+This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (details in the [SQL](https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html) and [Tableau](https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html) projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021). I've used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
 
-###### **Source of dataset**
-Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License
+###### **Source of dataset and acknowledgement of data**
+Thank you to the authors of this paper which was available under Creative Commons Attribution 4.0 International Public License. Citation of the paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. 
 
 ```{r echo=FALSE}
 # install.packages("wordcloud")
@@ -18,7 +18,7 @@ Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A r
 # install.packages("tidytext")
 ```
 
-Before we begin, let's load all the required libraries.
+Before we begin, let's load all the required libraries. If you can't find any of the listed libraries by any means, consider trying to install them first via install.packages(), with the names of the desired libraries typed within the bracket, then load as shown.
 ```{r message=FALSE}
 library(tidyverse)
 library(tidytext)
@@ -84,7 +84,7 @@ df_new
 ##### **Types of comorbidities present in long COVID - a frequency count**
 I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, then it would give a quick overall picture. So I started by removing these digits and percentage symbols. Obviously since I'm newish to R (two months into using it), I soon ran into a problem, I kept on getting stuck with not having the count() function to actually count unique elements under the column of co-morbidities. 
 
-If you look at the magnified circle in the column on the right in the image below, you'll notice the subtle difference in spacing, so yes the culprit was the **space**^[I swear it's taken me a good half an hour to figure this out... eventually I thought to look at the column itself in order to see if I've missed anything... I even went on a frantic search in Stack Overflow and googled about how to count distinct observations in columns in R] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.
+If you look at the magnified circle, as one of the examples, in the column on the right in the image below, you'll notice the subtle difference in spacing, so yes the culprit was the **space**^[I swear it's taken me a good half an hour to figure this out... eventually I thought to look at the column itself in order to see if I've missed anything... I even went on a frantic search in Stack Overflow and googled about how to count distinct observations in columns in R] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.
 
 ![](Zoom-in shot.jpg)
 ```{r}
@@ -97,13 +97,6 @@ Now we can observe the top 3 frequency of all co-morbidities listed were diabete
 ```{r}
 
 ```
-
-
-```{r}
-# faceted graphs?
-#ggplot(data = df_new, aes(x = `Country`, y = `Hospital (%)`)) + geom_bar(stat = "identity")
-```
-
 #### **Text mining to reveal the results**
 When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.
 
