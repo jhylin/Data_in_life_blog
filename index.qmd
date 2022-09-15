@@ -1,5 +1,5 @@
 ---
-title: "Data analytics and research blog"
+title: "Data in life - the untold stories"
 listing:
   contents: posts
   sort: "date desc"
