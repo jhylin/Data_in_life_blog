@@ -1,4 +1,4 @@
-# Data_in_life_blog
+# Data in life blog
 
 As my data journey progresses, I've found a new place for my portfolio blog which is built by using Quarto. I've deployed it to two sites for now:
 
