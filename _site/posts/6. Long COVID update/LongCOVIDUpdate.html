@@ -9,7 +9,7 @@
 <meta name="author" content="Jennifer HY Lin">
 <meta name="dcterms.date" content="2022-09-15">
 
-<title>Portfolio - Long COVID - an update</title>
+<title>Home - Long COVID - an update</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Portfolio</span>
+    <span class="navbar-title">Home</span>
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -217,7 +217,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <ul>
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><strong>Background</strong></a></li>
   <li><a href="#data-scraping-from-pdf" id="toc-data-scraping-from-pdf" class="nav-link" data-scroll-target="#data-scraping-from-pdf"><strong>Data scraping from PDF</strong></a></li>
-  <li><a href="#data-inspection-and-wrangling" id="toc-data-inspection-and-wrangling" class="nav-link" data-scroll-target="#data-inspection-and-wrangling">Data inspection and wrangling</a>
+  <li><a href="#data-inspection-and-wrangling" id="toc-data-inspection-and-wrangling" class="nav-link" data-scroll-target="#data-inspection-and-wrangling"><strong>Data inspection and wrangling</strong></a>
   <ul class="collapse">
   <li><a href="#separating-columns-and-change-column-type" id="toc-separating-columns-and-change-column-type" class="nav-link" data-scroll-target="#separating-columns-and-change-column-type"><strong>Separating columns and change column type</strong></a></li>
   <li><a href="#bar-graph-for-hospitalisation-rate" id="toc-bar-graph-for-hospitalisation-rate" class="nav-link" data-scroll-target="#bar-graph-for-hospitalisation-rate"><strong>Bar graph for hospitalisation rate</strong></a></li>
@@ -237,9 +237,9 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="background" class="level4">
 <h4 class="anchored" data-anchor-id="background"><strong>Background</strong></h4>
 <p>This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (details in the <a href="https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html">SQL</a> and <a href="https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html">Tableau</a> projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021). I’ve used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.</p>
-<section id="source-of-dataset-and-acknowledgement-of-data" class="level6">
-<h6 class="anchored" data-anchor-id="source-of-dataset-and-acknowledgement-of-data"><strong>Source of dataset and acknowledgement of data</strong></h6>
-<p>Thank you to the authors of this paper which was available under Creative Commons Attribution 4.0 International Public License. Citation of the paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014.</p>
+<section id="source-of-dataset" class="level6">
+<h6 class="anchored" data-anchor-id="source-of-dataset"><strong>Source of dataset</strong></h6>
+<p>Thank you to the authors of this paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. <em>Creative Commons Attribution 4.0 International Public License</em></p>
 <div class="cell">
 
 </div>
@@ -278,7 +278,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </section>
 <section id="data-inspection-and-wrangling" class="level4">
-<h4 class="anchored" data-anchor-id="data-inspection-and-wrangling">Data inspection and wrangling</h4>
+<h4 class="anchored" data-anchor-id="data-inspection-and-wrangling"><strong>Data inspection and wrangling</strong></h4>
 <p>Here’s a quick overview on the hospitalisation rates across all the studies from this paper.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_hosp <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
@@ -413,7 +413,1121 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Now we can observe the top 3 frequency of all co-morbidities listed were diabetes, hypertension and IHD<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, then obesity, and also CKD<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, malignancy, dyslipidaemia and so on. These would be considered as high risk factors for ending up with long COVID symptoms if someone had caught the COVID-19 infection in the first place.</p>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_new_a <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(Results, <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Author (country)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Body system</span><span class="st">`</span>, Results)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(df_new_a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 13%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Author (country)</th>
+<th style="text-align: left;">Body system</th>
+<th style="text-align: left;">Results</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">5.9% myalgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">5.9% arthralgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">5.5% dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">2.5% cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">0.4% chest pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">51.6% reduced DLCO</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">normal spirometry</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">43% PTSD symptoms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">5% gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">4.6% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bellan (Italy)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">1.3% diarrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">Fatigue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">myalgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">arthralgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">chills</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">fever</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">Dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">chest pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">sputum production</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">Memory issues</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">concentration issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">Olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">sore throat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">rhinorrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">sneezing</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">Diarrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">anorexia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">abdominal pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">nausea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bliddal (Denmark)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">Red runny eyes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chiesa-Estomba (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">51% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cousyn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">16.8% olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cousyn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">9.6% gustatory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">45% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">15% myalgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">3% fever</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">slight pain/discomfort</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">33% dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">33% cough. Normal spirometry</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">normal ABG</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">reduced DLCO</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">reduced distance on 6MWT</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">18% cognitive issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">15% headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">mild depression</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">subthreshold anxiety</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">12% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">12% rhinorrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">9% gustatory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">9% sore throat</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">9% diarrhoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">6% nausea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">3% abdominal pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">normal LFTs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">18% angina</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">normal left ventricular function</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">normal right ventricular function</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">normal cardiac biomarkers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">Normal FBC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal coagulation screen</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">raised ferritin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">potentially raised D-dimer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal U&amp;Es</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal CRP</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal procalcitonin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal TFTs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Daher (Germany)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal IL-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fernandez-de-Las-Penas (Spain)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">61.2% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fernandez-de-Las-Penas (Spain)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">23.3% dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fernandez-de-Las-Penas (Spain)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">6.5% chest pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fernandez-de-Las-Penas (Spain)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">2.5% cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">25% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">Abnormal chest CT: 67% ground glass opacities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">44% reticulations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">20% fibrotic lesions/traction bronchiectasis</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">7% consolidations. 46% reduced DLCO</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">35% dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">10% dry cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">4% chest tightness</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Froidure (Belgium)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">normal spirometry</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gerhards (Germany)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">17% fatigue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gerhards (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">Depression</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gerhards (Germany)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">concentration issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gerhards (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">27% olfactory/gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gerhards (Germany)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">Alopecia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">Fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">arthralgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">myalgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">Dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">Headache</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">Rhinorrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ghosn (France)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">sore throat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">62% abnormal chest CT: 35% fibrotic-like changes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">27% ground glass opacities/interstitial thickening</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">nodules/masses</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">interlobar pleural traction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">pulmonary atelectasis and bronchiectasis. 26% reduced DLCO</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">14% mild dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">10% sputum production</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Han (China)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">6.1% dry cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">50% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">35.7% arthralgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">21.4% myalgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">28.6% cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">25% dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">3.6% chest pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">10.7% headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">28.6% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">14.3% rhinorrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holmes (Australia)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">No abdominal pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">44.8% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">21.3% myalgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">15.8% arthralgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">1.1% fever</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">1.1% ulcer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">31.7% dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">25.1% cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">14.8% sputum production</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">12.6% headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">8.7% cognitive issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">9.8% gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">9.3% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">3.8% diarrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">8.2% eye irritation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jacobs (USA)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">1.1% ulcer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">63% fatigue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">35% myalgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">53% dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">24% cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">20% chest pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">12% sputum production</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">45% concentration issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">27% headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">27% paraesthesia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">31% gustatory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">27% olfactory dysfunction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">10% sore throat</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">10% abdominal pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">8% diarrhoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">8% nausea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leth (Denmark)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">4% anorexia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">33% fatigue</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">1.4% arthralgia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">0.6% myalgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">8.5% cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">7% dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">0.8% chest pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">3.9% circadian rhythm disorders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">3.4% headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">2.3% sleep disturbance</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">1.4% adjustment disorder</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">2.3% vertigo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">2% olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mahmud (Bangladesh)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">1.4% palpitation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Otte (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">42.3% subjective olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Otte (Germany)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">26.9% objective olfactory dysfunction (discrimination and identification issues)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">13.1% fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">8.2% rheumatological issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">6% dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">2% cough</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">0.8% chest pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">9.6% neurological disorders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">4.9% psychiatric disorders</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">2.7% headache</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">10.4% olfactory/gustatory dysfunction,</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">1.5% gastrointestinal disorders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">3.7% alopecia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">3.4% cutaneous manifestations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peghin (Italy)</td>
+<td style="text-align: left;">Others</td>
+<td style="text-align: left;">0.3% ocular symptoms</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">24% night sweats</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">0% fever</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">63% abnormal chest CT: ground-glass opacities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">reticular lesions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">consolidations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">bronchial dilation. 36% dyspnoea</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">abnormal spirometry: 22% reduced FVC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">22% reduced FEV1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">normal FEV1/FVC. 21% reduced DLCO</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">17% cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">22% sleep disorders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">19% olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">9% diarrhoea/vomiting</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">97% normal LVEF</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">55% diastolic dysfunction on echo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">23% raised NT-proBNP</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">10% pulmonary hypertension</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">1% pericardial effusion</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">Raised D-dimer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">potentially raised ferritin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal CRP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal procalcitonin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sonnweber (Austria)</td>
+<td style="text-align: left;">Other biomarkers</td>
+<td style="text-align: left;">normal IL-6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">Fatigue</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">myalgia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Generalised/MSK</td>
+<td style="text-align: left;">fever</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">Dyspnoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">cough</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Respiratory</td>
+<td style="text-align: left;">chest pain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">Headache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">paraesthesia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">numbness</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Neuropsychiatric</td>
+<td style="text-align: left;">concentration/ memory issues</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">Olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">sore throat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">hoarse voice</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">tinnitus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">earache</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">Diarrhoea</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Gastrointestinal</td>
+<td style="text-align: left;">abdominal pain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudre (UK, USA, Sweden)</td>
+<td style="text-align: left;">Cardiovascular</td>
+<td style="text-align: left;">Palpitations/tachycardia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vaira (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">21% olfactory dysfunction</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vaira (Italy)</td>
+<td style="text-align: left;">ENT</td>
+<td style="text-align: left;">7.9% gustatory dysfunction</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chloropleth graph - MAP</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -421,11 +1535,11 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <h4 class="anchored" data-anchor-id="text-mining-to-reveal-the-results"><strong>Text mining to reveal the results</strong></h4>
 <p>When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out the results column</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> df<span class="sc">$</span>Results</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>text1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text, <span class="st">"[:digit:]"</span>, <span class="st">""</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>text1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out the results column</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> df<span class="sc">$</span>Results</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>text1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(text, <span class="st">"[:digit:]"</span>, <span class="st">""</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>text1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] ".% myalgia, .% arthralgia"                                                                                                                                                                                                                                
  [2] ".% dyspnoea, .% cough, .% chest pain, .% reduced DLCO, normal spirometry"                                                                                                                                                                                 
@@ -505,9 +1619,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="at">text =</span> text1)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>text_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>, <span class="at">text =</span> text1)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>text_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 75 × 2
     line text                                                                   
@@ -528,10 +1642,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Import tidytext library and tokenise the texts in the selected column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="ot">&lt;-</span> text_df <span class="sc">%&gt;%</span> </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>text_df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="ot">&lt;-</span> text_df <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>text_df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 399 × 2
     line word      
@@ -552,17 +1666,17 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Remove stop_words, count the frequency of appearance of each word, then create a wordcloud.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">wordcloud</span>(word, n, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>text_df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">wordcloud</span>(word, n, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining, by = "word"</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="LongCOVIDUpdate_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#display.brewer.all to display all colour palettes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#display.brewer.all to display all colour palettes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud. Nevertheless, it is one of the ways to get a rough idea about the most common terms cropping up in the collected results for long COVID in different countries.</p>
 

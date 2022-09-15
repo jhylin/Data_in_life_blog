@@ -4,13 +4,14 @@ subtitle: "Hospitalisation rate, comorbidities and long COVID symptoms - PDF tab
 author: "Jennifer HY Lin"
 date: 2022-09-15
 categories: [Data analytics projects, R, Python]
+draft: true
 ---
 
 #### **Background**
 This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (details in the [SQL](https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html) and [Tableau](https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html) projects). This time the dataset was obtained from another journal paper, which had data collected till July 2021 (the previous paper was only until March 2021). I've used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
 
-###### **Source of dataset and acknowledgement of data**
-Thank you to the authors of this paper which was available under Creative Commons Attribution 4.0 International Public License. Citation of the paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. 
+###### **Source of dataset**
+Thank you to the authors of this paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. *Creative Commons Attribution 4.0 International Public License*
 
 ```{r echo=FALSE}
 # install.packages("wordcloud")
@@ -41,7 +42,7 @@ df <- read_csv("Full_table.csv")
 #View(df)
 ```
 
-#### Data inspection and wrangling
+#### **Data inspection and wrangling**
 Here's a quick overview on the hospitalisation rates across all the studies from this paper.
 
 ```{r}
@@ -95,11 +96,17 @@ df_new %>%
 ```
 Now we can observe the top 3 frequency of all co-morbidities listed were diabetes, hypertension and IHD^[ischaemic heart disease]. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD^[chronic obstructive pulmonary disease], then obesity, and also CKD^[chronic kidney disease], malignancy, dyslipidaemia and so on. These would be considered as high risk factors for ending up with long COVID symptoms if someone had caught the COVID-19 infection in the first place. 
 ```{r}
+df_new_a <- df %>% 
+  separate_rows(Results, sep = ", ") %>% 
+  select(`Author (country)`, `Body system`, Results)
+kable(df_new_a)
+```
 
+```{r}
+# Chloropleth graph - MAP
 ```
 #### **Text mining to reveal the results**
 When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.
-
 ```{r}
 # Pick out the results column
 text <- df$Results
