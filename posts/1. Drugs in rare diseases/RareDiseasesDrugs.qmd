@@ -2,7 +2,7 @@
 title: "Drugs in rare diseases"
 author: "Jennifer HY Lin"
 date: "2022-05-28"
-categories: [Data analytics projects, R, Python]
+categories: [Data analytics projects, R, Python, Rare diseases]
 ---
 
 ### **Introduction**

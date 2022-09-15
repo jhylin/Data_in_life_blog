@@ -2,7 +2,7 @@
 title: "Long COVID dashboard"
 author: "Jennifer HY Lin"
 date: "2022-05-31"
-categories: [Data analytics projects, Tableau]
+categories: [Data analytics projects, Tableau, Long COVID]
 ---
 
 ### **Introduction**

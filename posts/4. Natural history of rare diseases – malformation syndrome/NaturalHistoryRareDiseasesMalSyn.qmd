@@ -2,7 +2,7 @@
 title: "Natural history of rare diseases - malformation syndrome"
 author: "Jennifer HY Lin"
 date: "2022-06-27"
-categories: [Data analytics projects, Python]
+categories: [Data analytics projects, Python, Rare diseases]
 ---
 
 ### **Introduction**
@@ -11,11 +11,9 @@ So my current interests are still in rare diseases from Orphanet website so the 
 
 [^1]: This project was last committed on 27th June 2022 on GitHub so I've set it as the published date, prior to the blog move. This work is under [CC BY-SA 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) for anyone interested in exploring the topic further.
 
-
 ### **Project link**
 
-The .ipynb file can be found in my GitHub repository of Portfolio-projects at this URL: [https://github.com/jhylin/Portfolio-projects](https://github.com/jhylin/Portfolio-projects) or go to this [link](https://github.com/jhylin/Portfolio-projects/blob/main/Natural%20history%20of%20rare%20disease%20-%20malformation%20syndrome.ipynb), which will take you to the Jupyter notebook for this work to show the differences in life spans for different rare diseases under this particular disorder type.
-
+The .ipynb file can be found in my GitHub repository of Portfolio-projects at this URL: <https://github.com/jhylin/Portfolio-projects> or go to this [link](https://github.com/jhylin/Portfolio-projects/blob/main/Natural%20history%20of%20rare%20disease%20-%20malformation%20syndrome.ipynb), which will take you to the Jupyter notebook for this work to show the differences in life spans for different rare diseases under this particular disorder type.
 
 ### **Summary**
 

@@ -3,7 +3,7 @@ title: "Long COVID - an update"
 subtitle: "Hospitalisation rate, comorbidities and long COVID symptoms - PDF table scraping & data analysis with visualisations"
 author: "Jennifer HY Lin"
 date: 2022-09-15
-categories: [Data analytics projects, R, Python]
+categories: [Data analytics projects, R, Python, Long COVID]
 draft: true
 ---
 

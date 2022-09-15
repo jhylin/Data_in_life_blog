@@ -2,7 +2,7 @@
 title: "Long COVID data in SQL"
 author: "Jennifer HY Lin"
 date: "2022-06-05"
-categories: [Data analytics projects, SQL]
+categories: [Data analytics projects, SQL, Long COVID]
 ---
 
 ### **Introduction**
