@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Portfolio"
+  title: "Home"
   page-footer: "Blog made with [Quarto](https://quarto.org/) 🧡 by Jennifer HY Lin © 2022"
   google-analytics: "G-5CHVP3K63C"
   navbar:
