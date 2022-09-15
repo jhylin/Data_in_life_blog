@@ -1,5 +1,5 @@
 ---
-title: "Data in life - the untold stories"
+title: "Data in life"
 listing:
   contents: posts
   sort: "date desc"
