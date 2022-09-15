@@ -182,6 +182,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
                                 <div class="quarto-categories">
                 <div class="quarto-category">Data analytics projects</div>
                 <div class="quarto-category">Python</div>
+                <div class="quarto-category">Long COVID</div>
               </div>
                   </div>
   </div>
@@ -230,25 +231,29 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="quick-introduction" class="level5">
 <h5 class="anchored" data-anchor-id="quick-introduction"><strong>Quick introduction</strong></h5>
-<p>A requirement to run tabula-py was to ensure that Java was installed first in order for tabula-py to work, since tabula-py was essentially a Python wrapper for tabula-java. I relied on Homebrew to install Java, but there were also a few other different options available to do this so I won’t go into details here. Once it was installed, we could then check for the Java version to ensure it was installed properly.</p>
+<p>Recently I had the idea of continuing the long COVID exploration and thought that I’ve never tried scraping a PDF before, so by combining these two ideas together, I ended up with this little piece of work as another post.</p>
+<p>A quick heads up: Java should be installed in order for tabula-py to work seamlessly, since tabula-py is actually a Python wrapper for tabula-java. In this case, I’ve relied on Homebrew to install Java, but there are several other different options available online and I’ll leave this open for people who’re interested to explore themselves. Once it’s installed, we can then check for the Java version to ensure it’s installed properly.</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>java <span class="op">-</span>version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the version of Java</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>java <span class="op">-</span>version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>openjdk version "17.0.4.1" 2022-08-12
-OpenJDK Runtime Environment Temurin-17.0.4.1+1 (build 17.0.4.1+1)
+<pre><code>openjdk version "17.0.4.1" 2022-08-12</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OpenJDK Runtime Environment Temurin-17.0.4.1+1 (build 17.0.4.1+1)
 OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode, sharing)</code></pre>
 </div>
 </div>
 </section>
 <section id="installing-and-importing-libraries" class="level5">
 <h5 class="anchored" data-anchor-id="installing-and-importing-libraries"><strong>Installing and importing libraries</strong></h5>
-<p>Then we would install any libraries needed for scraping table data from PDF, where in this case I ended up only using one.</p>
+<p>Then we would install any libraries needed for scraping table data from PDF, which in this case, I ended up using only one library.</p>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">-</span>q tabula<span class="op">-</span>py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">-</span>q tabula<span class="op">-</span>py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import read_pdf from the tabula library</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabula <span class="im">import</span> read_pdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import read_pdf from the tabula library</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabula <span class="im">import</span> read_pdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-source" class="level5">
@@ -260,9 +265,10 @@ OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode, shari
 <p>Firstly, I trialled scraping the table from page 4 of the journal paper, which only really scraped about half of the table. I then went on to add in another line of code to specify the scraping area<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> on the PDF page in inches (this part could be deduced by using the in-built PDF tool).</p>
 <p>One thing I wasn’t too sure about was that the tabula-py documentation did state that the default = full page, but in fact, it appeared to be not the case (only half of the table showed up). Also, the journal paper I was using had the tables printed in landscape layout (rather than the more common portrait style), so it wasn’t completely clear if landscape version was making this harder or the other way.</p>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>test_area <span class="op">=</span> <span class="st">"10.05,6.60,10.05,6.60"</span> <span class="co">#specify the scraping area (top, left, bottom, right)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_pdf(<span class="st">"Journal.pdf"</span>, pages <span class="op">=</span> <span class="st">"4"</span>, area <span class="op">=</span> test_area, guess <span class="op">=</span> <span class="va">False</span>, stream <span class="op">=</span> <span class="va">True</span>, pandas_options<span class="op">=</span>{<span class="st">'header'</span>:<span class="va">None</span>})</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#specify the scraping area (top, left, bottom, right)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>test_area <span class="op">=</span> <span class="st">"10.05,6.60,10.05,6.60"</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_pdf(<span class="st">"Journal.pdf"</span>, pages <span class="op">=</span> <span class="st">"4"</span>, area <span class="op">=</span> test_area, guess <span class="op">=</span> <span class="va">False</span>, stream <span class="op">=</span> <span class="va">True</span>, pandas_options<span class="op">=</span>{<span class="st">'header'</span>:<span class="va">None</span>})</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>[                                                    0
  0   VREIESWEAPROCINHT TSHEME 1:  Healey et al. COV...
@@ -327,10 +333,11 @@ OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode, shari
 </div>
 <p>Once above worked, I moved onto scraping the whole table across pages 4 to 6 of the PDF, and then saved the scraped table into a .csv file, which appeared automatically in the working directory.</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tabula</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test_area <span class="op">=</span> <span class="st">"10.05,6.60,10.05,6.60"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tabula.convert_into(<span class="st">"Journal.pdf"</span>, <span class="st">"Full_table_scraped.csv"</span>, output_format <span class="op">=</span> <span class="st">"csv"</span>, pages <span class="op">=</span> <span class="st">"4-6"</span>, area <span class="op">=</span> test_area, guess <span class="op">=</span> <span class="va">False</span>, stream <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat Full_table_scraped.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tabula</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test_area <span class="op">=</span> <span class="st">"10.05,6.60,10.05,6.60"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert and save scraped data into specified file format</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tabula.convert_into(<span class="st">"Journal.pdf"</span>, <span class="st">"Full_table_scraped.csv"</span>, output_format <span class="op">=</span> <span class="st">"csv"</span>, pages <span class="op">=</span> <span class="st">"4-6"</span>, area <span class="op">=</span> test_area, guess <span class="op">=</span> <span class="va">False</span>, stream <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat Full_table_scraped.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>VREIESWEAPROCINHT TSHEME 1:  Healey et al. COVID-19 PANDEMIC
 Table 1. Characteristics of the included studies
@@ -504,7 +511,7 @@ Cardiovascular Palpitations/tachycardia
 
 <ol>
 <li id="fn1" role="doc-endnote"><p>Thanks to Stack Overflow as I’ve managed to find this solution from several different scenarios and comments.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>or could be my ignorance to other better methods, which I’m more than happy if someone is keen to point it out by leaving a comment as I’d like to learn!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>or it could be my ignorance to other better methods - please leave a comment as I’d like to learn!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
