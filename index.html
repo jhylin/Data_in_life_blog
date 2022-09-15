@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Portfolio - Data analytics and research blog</title>
+<title>Home - Data in life - the untold stories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,9 +67,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -108,7 +108,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Portfolio</span>
+    <span class="navbar-title">Home</span>
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -144,7 +144,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Data analytics and research blog</h1>
+      <h1 class="title">Data in life - the untold stories</h1>
                       </div>
   </div>
     
@@ -161,7 +161,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(14)</span></div><div class="category" data-category="Blog">Blog <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Data analytics projects">Data analytics projects <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Research">Research <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SQL">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tableau">Tableau <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(15)</span></div><div class="category" data-category="Blog">Blog <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Data analytics projects">Data analytics projects <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Research">Research <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SQL">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tableau">Tableau <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -174,7 +174,50 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Blog" data-listing-date-sort="1659700800000" data-listing-file-modified-sort="1660551623942" data-listing-reading-time-sort="1.36">
+<div class="quarto-post image-right" data-index="0" data-categories="Data analytics projects,Python" data-listing-date-sort="1663156800000" data-listing-file-modified-sort="1663145339315" data-listing-reading-time-sort="2.875">
+<div class="thumbnail">
+<a href="./posts/6. Long COVID update/ExtractTableFromPDF.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/6. Long COVID update/ExtractTableFromPDF.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/6. Long COVID update/ExtractTableFromPDF.html">
+<h3 class="no-anchor listing-title">
+Table scraping from PDF
+</h3>
+<div class="listing-subtitle">
+Using tabula-py in Python
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+</div>
+<a href="./posts/6. Long COVID update/ExtractTableFromPDF.html">
+<div class="listing-description">
+
+A requirement to run tabula-py was to ensure that Java was installed first in order for tabula-py to work, since tabula-py was essentially a Python wrapper for tabula-java. I relied on Homebrew to install Java, but there were also a few other different options available to do this so I won’t go into details here. Once it was installed, we could then check for the Java version to ensure it was installed properly.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/6. Long COVID update/ExtractTableFromPDF.html">
+<div class="listing-date">
+Sep 15, 2022
+</div>
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Blog" data-listing-date-sort="1659700800000" data-listing-file-modified-sort="1660551623942" data-listing-reading-time-sort="1.36">
 <div class="thumbnail">
 <a href="./posts/Blog move/index.html">
 <div class="thumbnail-image">
@@ -213,7 +256,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1659355200000" data-listing-file-modified-sort="1661068304801" data-listing-reading-time-sort="7.995">
+<div class="quarto-post image-right" data-index="2" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1659355200000" data-listing-file-modified-sort="1661068304801" data-listing-reading-time-sort="7.995">
 <div class="thumbnail">
 <p><a href="./posts/5. Phenotypes associated with rare diseases/PhenotypesRareDiseases.html"> <img src="./posts/5. Phenotypes associated with rare diseases/Genes.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -254,7 +297,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="Blog" data-listing-date-sort="1657800000000" data-listing-file-modified-sort="1660178089682" data-listing-reading-time-sort="1.76">
+<div class="quarto-post image-right" data-index="3" data-categories="Blog" data-listing-date-sort="1657800000000" data-listing-file-modified-sort="1660178089682" data-listing-reading-time-sort="1.76">
 <div class="thumbnail">
 <a href="./posts/Blog-Social network/EmbracingSocialNetwork.html">
 <div class="thumbnail-image">
@@ -293,7 +336,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="Data analytics projects,Python" data-listing-date-sort="1656244800000" data-listing-file-modified-sort="1660627954676" data-listing-reading-time-sort="1.285">
+<div class="quarto-post image-right" data-index="4" data-categories="Data analytics projects,Python" data-listing-date-sort="1656244800000" data-listing-file-modified-sort="1660627954676" data-listing-reading-time-sort="1.285">
 <div class="thumbnail">
 <a href="./posts/4. Natural history of rare diseases – malformation syndrome/NaturalHistoryRareDiseasesMalSyn.html">
 <div class="thumbnail-image">
@@ -335,7 +378,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Blog" data-listing-date-sort="1655035200000" data-listing-file-modified-sort="1660178089944" data-listing-reading-time-sort="1.12">
+<div class="quarto-post image-right" data-index="5" data-categories="Blog" data-listing-date-sort="1655035200000" data-listing-file-modified-sort="1660178089944" data-listing-reading-time-sort="1.12">
 <div class="thumbnail">
 <a href="./posts/Blog-Update/UpdateOnPortfolio.html">
 <div class="thumbnail-image">
@@ -374,12 +417,12 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Data analytics projects,SQL" data-listing-date-sort="1654344000000" data-listing-file-modified-sort="1660628089089" data-listing-reading-time-sort="1.165">
+<div class="quarto-post image-right" data-index="6" data-categories="Data analytics projects,SQL" data-listing-date-sort="1654344000000" data-listing-file-modified-sort="1660628089089" data-listing-reading-time-sort="1.165">
 <div class="thumbnail">
-<p><a href="./posts/2. Long COVID data in SQL/LongCOVIDSQL.html"> <img src="./posts/2. Long COVID data in SQL/Long covid pic.jpg" class="thumnail-image"> </a></p>
+<p><a href="./posts/3. Long COVID data in SQL/LongCOVIDSQL.html"> <img src="./posts/3. Long COVID data in SQL/Long covid pic.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
-<a href="./posts/2. Long COVID data in SQL/LongCOVIDSQL.html">
+<a href="./posts/3. Long COVID data in SQL/LongCOVIDSQL.html">
 <h3 class="no-anchor listing-title">
 Long COVID data in SQL
 </h3>
@@ -395,14 +438,14 @@ Data analytics projects
 SQL
 </div>
 </div>
-<a href="./posts/2. Long COVID data in SQL/LongCOVIDSQL.html">
+<a href="./posts/3. Long COVID data in SQL/LongCOVIDSQL.html">
 <div class="listing-description">
 For this SQL project<sup>1</sup>, I’ve used the same set of data as the Tableau project in order to see if there will be any other new insights when using SQL for data analysis. Dataset is from this paper – Michelen M, Manoharan L, Elkheir N, et al.&nbsp;Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427, which was discovered through PubMed. One other thing of note was that the paper only collected long COVID-related data up until 17th March 2021. All other more recent developments of long COVID will likely require more time before further data are more readily available, for example, the long COVID impact from Omicron variants.
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./posts/2. Long COVID data in SQL/LongCOVIDSQL.html">
+<a href="./posts/3. Long COVID data in SQL/LongCOVIDSQL.html">
 <div class="listing-date">
 Jun 5, 2022
 </div>
@@ -412,7 +455,46 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="Blog" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1660178089681" data-listing-reading-time-sort="0.685">
+<div class="quarto-post image-right" data-index="7" data-categories="Data analytics projects,Tableau" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1660627744718" data-listing-reading-time-sort="1.44">
+<div class="thumbnail">
+<p><a href="./posts/2. Long COVID dashboard/TableauDashboard.html"> <img src="./posts/2. Long COVID dashboard/Long covid.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2. Long COVID dashboard/TableauDashboard.html">
+<h3 class="no-anchor listing-title">
+Long COVID dashboard
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Tableau'); return false;">
+Tableau
+</div>
+</div>
+<a href="./posts/2. Long COVID dashboard/TableauDashboard.html">
+<div class="listing-description">
+
+This project<sup>1</sup> was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2. Long COVID dashboard/TableauDashboard.html">
+<div class="listing-date">
+May 31, 2022
+</div>
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="Blog" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1660178089681" data-listing-reading-time-sort="0.685">
 <div class="thumbnail">
 <a href="./posts/Blog-Portfolio projects/PortfolioProjects.html">
 <div class="thumbnail-image">
@@ -451,46 +533,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="Data analytics projects,Tableau" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1660627744718" data-listing-reading-time-sort="1.44">
-<div class="thumbnail">
-<p><a href="./posts/3. Long COVID dashboard/TableauDashboard.html"> <img src="./posts/3. Long COVID dashboard/Long covid.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/3. Long COVID dashboard/TableauDashboard.html">
-<h3 class="no-anchor listing-title">
-Long COVID dashboard
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
-Data analytics projects
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Tableau'); return false;">
-Tableau
-</div>
-</div>
-<a href="./posts/3. Long COVID dashboard/TableauDashboard.html">
-<div class="listing-description">
-
-This project<sup>1</sup> was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/3. Long COVID dashboard/TableauDashboard.html">
-<div class="listing-date">
-May 31, 2022
-</div>
-<div class="listing-author">
-Jennifer HY Lin
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1653652800000" data-listing-file-modified-sort="1660716114991" data-listing-reading-time-sort="3.285">
+<div class="quarto-post image-right" data-index="9" data-categories="Data analytics projects,R,Python" data-listing-date-sort="1653652800000" data-listing-file-modified-sort="1660716114991" data-listing-reading-time-sort="3.285">
 <div class="thumbnail">
 <p><a href="./posts/1. Drugs in rare diseases/RareDiseasesDrugs.html"> <img src="./posts/1. Drugs in rare diseases/Pills.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -531,7 +574,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Blog" data-listing-date-sort="1649937600000" data-listing-file-modified-sort="1660178089680" data-listing-reading-time-sort="0.69">
+<div class="quarto-post image-right" data-index="10" data-categories="Blog" data-listing-date-sort="1649937600000" data-listing-file-modified-sort="1660178089680" data-listing-reading-time-sort="0.69">
 <div class="thumbnail">
 <a href="./posts/Blog-Data analytics/FocussingOnDataAnalytics.html">
 <div class="thumbnail-image">
@@ -570,7 +613,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="Blog" data-listing-date-sort="1643281200000" data-listing-file-modified-sort="1660640470471" data-listing-reading-time-sort="3.455">
+<div class="quarto-post image-right" data-index="11" data-categories="Blog" data-listing-date-sort="1643281200000" data-listing-file-modified-sort="1660640470471" data-listing-reading-time-sort="3.455">
 <div class="thumbnail">
 <a href="./posts/Blog-Cheminformatics and data science journey/DSandCheminformatics.html">
 <div class="thumbnail-image">
@@ -609,7 +652,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660364412176" data-listing-reading-time-sort="1.005">
+<div class="quarto-post image-right" data-index="12" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660364412176" data-listing-reading-time-sort="1.005">
 <div class="thumbnail">
 <a href="./posts/Publications/SideProjects.html">
 <div class="thumbnail-image">
@@ -648,7 +691,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660366191783" data-listing-reading-time-sort="5.005">
+<div class="quarto-post image-right" data-index="13" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660366191783" data-listing-reading-time-sort="5.005">
 <div class="thumbnail">
 <p><a href="./posts/PhD projects/index.html"> <img src="./posts/PhD projects/End of PhD.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -683,7 +726,7 @@ Jennifer HY Lin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660184189569" data-listing-reading-time-sort="2.635">
+<div class="quarto-post image-right" data-index="14" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660184189569" data-listing-reading-time-sort="2.635">
 <div class="thumbnail">
 <p><a href="./posts/SERCA project/index.html"> <img src="./posts/SERCA project/Research.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -926,7 +969,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Blog made with <a href="https://quarto.org/">Quarto</a> 🧡 by Jennifer HY Lin ©2022</div>
+      <div class="nav-footer-center">Blog made with <a href="https://quarto.org/">Quarto</a> 🧡 by Jennifer HY Lin © 2022</div>
   </div>
 </footer>
 
