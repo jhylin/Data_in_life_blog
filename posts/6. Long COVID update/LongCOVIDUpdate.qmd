@@ -1,38 +1,43 @@
 ---
 title: "Long COVID - an update"
-subtitle: "Hospitalisation rate, comorbidities and long COVID symptoms - PDF table scraping & data analysis with visualisations"
+subtitle: "PDF table scraping, interactive map & wordcloud"
 author: "Jennifer HY Lin"
-date: 2022-09-15
+date: 2022-09-17
 categories: [Data analytics projects, R, Python, Long COVID]
 draft: true
 ---
 
 #### **Background**
+
 This was another update on the current long COVID climate around the world that I thought to follow up from my earlier work (details in the [SQL](https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html) and [Tableau](https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html) projects). This time the dataset was obtained from another journal paper, which had data collected until July 2021 (the previous paper was only until March 2021). I've used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
 
-###### **Source of dataset**
+#### **Source of dataset**
+
 Thank you to the authors of this paper: Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. *Creative Commons Attribution 4.0 International Public License*
 
-```{r echo=FALSE}
+```{r echo=TRUE}
+# Uncomment below if requiring installations of packages
 # install.packages("wordcloud")
 # install.packages("RColorBrewer")
 # install.packages("tidytext")
-# install.packages("rgdal")
 # install.packages("leaflet")
 ```
 
-Before we begin, let's load all the required libraries. If you can't find any of the listed libraries by any means, consider trying to install them first via install.packages("name_of_library"), then load as shown.
+Before we begin, let's load all the required libraries. If you can't find any of the listed libraries by any means, install as shown in above codes.
+
 ```{r message=FALSE}
 library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(leaflet)
 library(tidytext)
 library(wordcloud)
 library(RColorBrewer)
-library(ggplot2)
-library(knitr)
 ```
 
 #### **Data scraping from PDF**
-The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (*for details please see this post*). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. tabula-py was a Python wrapper for tabula-java and it worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping issues. I've also noticed other more successful examples were from tables that had well-defined columns and rows i.e. no merged rows or columns. The end result in these cases often ended up looking more like the original source tables.
+
+The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (*for details please see this post, "[Table scraping from PDF](https://jhylin.github.io/Data_in_life_blog/posts/6.%20Long%20COVID%20update/ExtractTableFromPDF.html)"*). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. tabula-py was a Python wrapper for tabula-java and it worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. One possible reason could be that the table I was intending to scrape had merged rows, which were known to cause scraping issues. I've also noticed other more successful examples were from tables that had well-defined columns and rows i.e. no merged rows or columns. The end result in these cases often ended up looking more like the original source tables.
 
 So in short, the final scraped table was cleaned in Excel and saved as .csv file, and then imported as shown below.
 
@@ -45,6 +50,7 @@ df <- read_csv("Full_table.csv")
 ```
 
 #### **Data inspection and wrangling**
+
 Here's a quick overview on the hospitalisation rates across all the studies from this paper.
 
 ```{r}
@@ -54,21 +60,64 @@ df_hosp
 ```
 
 ##### **Separating columns and change column type**
+
 The table column of Hospital (%) {ICU (%)} was separated into two separate columns to allow clearer differentiation between hospital and ICU rates within each study. The data type for Hospital (%) column was also changed from character to numeric so we can plot a bar graph later on (otherwise the x-axis may not be properly shown).
 
-```{r}
+```{r message=FALSE}
 df_hosp_icu <- df_hosp %>% 
   separate(`Hospital (%) {ICU (%)}`, c("Hospital (%)", "ICU (%)"))%>% 
   mutate(across(`Hospital (%)`, as.numeric))
 df_hosp_icu
 ```
 
+##### **Separating rows**
+
+The following shows separating the listed co-morbidities for each study into separate rows, since separating into columns would in fact make the table looking even more complex by adding way too much columns, adding difficulties in data reading.
+
+```{r}
+df_new <- df %>% 
+  separate_rows(Comorbidities, sep = ", ")
+kable(df_new)
+```
+
+##### **Types of comorbidities present in long COVID - a frequency count**
+
+I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, then it would give a quick overall picture. So I started by removing these digits and percentage symbols. Obviously since I'm newish to R (two months into using it), I soon ran into a problem, I kept on getting stuck with not having the count() function to actually count unique elements under the column of co-morbidities.
+
+If you look at the magnified circle, as one of the examples, in the column on the right in the image below, you'll notice the subtle difference in spacing, so yes the culprit was the **space**[^1] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.
+
+[^1]: I swear it's taken me a good half an hour to figure this out... eventually I thought to look at the column itself in order to see if I've missed anything... I even went on a frantic search in Stack Overflow and googled about how to count distinct observations in columns in R
+
+![](Zoom-in%20shot.jpg)
+
+```{r}
+df_new %>% 
+  # Remove % symbol, numbers and don't forget to remove spaces as well in the column! 
+  mutate(Comorbidities = str_remove_all(Comorbidities, "[:digit:]|[%]|[ ]")) %>% 
+  # Add this line to filter out all the "NA"s
+  filter(!is.na(Comorbidities)) %>% 
+  # Count the comorbidities in descending order
+  count(Comorbidities, sort = TRUE) 
+```
+
+Now we can observe the top 3 frequency of all co-morbidities listed were diabetes, hypertension and IHD[^2]. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD[^3], then obesity, and also CKD[^4], malignancy, dyslipidaemia and so on. These would be considered as high risk factors for ending up with long COVID symptoms if someone had caught the COVID-19 infection in the first place.
+
+[^2]: ischaemic heart disease
+
+[^3]: chronic obstructive pulmonary disease
+
+[^4]: chronic kidney disease
+
+#### **Data visualisations**
+
 ##### **Bar graph for hospitalisation rate**
+
 Then a line of code to filter out the results of "NA" under the column of Hospital (%) was added. Most of the cells with "NA" were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these "NA"s were removed in this instance. The horizontal bar graph below shows the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results of 0% to 100% hospitalisations across all studies.
 
 ```{r}
 df_hosp_icu %>% 
-  filter(!is.na(`Hospital (%)`)) %>% # Same effect will still be achieved without this line of code with a warning message of "Removed 58 rows containing missing values (position_stack)" shown
+  # Same effect will still be achieved without this line of code with a warning message of "Removed 58 rows containing missing values (position_stack)" shown
+  filter(!is.na(`Hospital (%)`)) %>% 
   ggplot(aes(x = `Author (country)`, y = `Hospital (%)`)) + 
   geom_bar(stat = "identity") +
   coord_flip()
@@ -76,42 +125,23 @@ df_hosp_icu %>%
 
 Note: two of the studies were removed from the above, these studies were Chiesa-Estomba (Italy) and Mahmud (Bangladesh), which had "Not stated" recorded under Hospital (%) {ICU (%)} column. When the Hospital (%) column was converted from character to numeric, these two rows were converted to "NA" automatically. In total, there were 19 cohort studies as mentioned by the paper.
 
-##### **Separating rows**
-The following shows separating the listed co-morbidities for each study into separate rows, since separating into columns would in fact make the table looking even more complex by adding way too much columns, adding difficulties in data reading.
-```{r}
-df_new <- df %>% 
-  separate_rows(Comorbidities, sep = ", ")
-df_new
-```
+##### **Interactive map for long COVID results**
 
-##### **Types of comorbidities present in long COVID - a frequency count**
-I have noticed how the comorbidities for each studies were listed with different percentages and thought if we could just gather a very initial idea about what sort of comorbidities were present, then it would give a quick overall picture. So I started by removing these digits and percentage symbols. Obviously since I'm newish to R (two months into using it), I soon ran into a problem, I kept on getting stuck with not having the count() function to actually count unique elements under the column of co-morbidities. 
+###### **Preparing dataframe for map**
 
-If you look at the magnified circle, as one of the examples, in the column on the right in the image below, you'll notice the subtle difference in spacing, so yes the culprit was the **space**^[I swear it's taken me a good half an hour to figure this out... eventually I thought to look at the column itself in order to see if I've missed anything... I even went on a frantic search in Stack Overflow and googled about how to count distinct observations in columns in R] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.
-
-![](Zoom-in shot.jpg)
-```{r}
-df_new %>% 
-  mutate(Comorbidities = str_remove_all(Comorbidities, "[:digit:]|[%]|[ ]")) %>% # Remove % symbol, numbers and don't forget to remove spaces as well in the column! 
-  filter(!is.na(Comorbidities)) %>%  # Add this line to filter out all the "NA"s
-  count(Comorbidities, sort = TRUE) # Count the comorbidities in descending order
-```
-Now we can observe the top 3 frequency of all co-morbidities listed were diabetes, hypertension and IHD^[ischaemic heart disease]. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD^[chronic obstructive pulmonary disease], then obesity, and also CKD^[chronic kidney disease], malignancy, dyslipidaemia and so on. These would be considered as high risk factors for ending up with long COVID symptoms if someone had caught the COVID-19 infection in the first place. 
-
-
-#### **Chloropleth map of long COVID results across several countries**
-
-##### **Preparing dataframe for map**
-```{r}
+```{r message=FALSE}
 df_new_a <- df %>% 
-  # separate Author (country) column into two columns (note: to rename country to region - needed for combining data later on)
+  # separate Author (country) column into two columns 
+  # note: rename country as region - needed for combining data later on
   separate(`Author (country)`, c("Author", "region")) %>% 
   # print only the columns as selected
   select(`region`, Results)
+
 # replace "de" under Country column with actual country name of Spain
 df_new_a[df_new_a == "de"] <- "Spain" 
-df_new_a
+kable(df_new_a)
 ```
+
 ```{r}
 df1 <- df_new_a %>% 
   # re-group dataframe based on region column
@@ -122,77 +152,66 @@ df1
 ```
 
 ```{r}
-# # Chloropleth map
-# # Download the shape (.shp) file
-# download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , destfile="world_shape_file.zip")
-# # The file should be in the current working directory (as long as it's set up!)
-# # Unzip this file by using R code as below or by clicking on the object downloaded
-# system("unzip world_shape_file.zip")
-# #  -- > There are now 4 files shown with one of them as a .shp file (TM_WORLD_BORDERS_SIMPL-0.3.shp)
-```
-```{r}
 # grab the world map data from ggplot
 mapdata <- map_data("world") 
+# view full dataset in separate tab 
 view(mapdata)
+```
 
-# combine mapdata dataframe (contains longitudes & latitudes of each country) with df_new_a dataframe (contains country info)
+```{r}
+# combine mapdata dataframe (contains longitudes & latitudes of each country) 
+# with df_new_a dataframe (contains country info)
 mapdata <- left_join(mapdata, df1, by = "region")
-view(mapdata)
+head(mapdata)
+```
 
+```{r}
 # filter out all the empty or "NA" cells
 mapdata_new <- mapdata %>% filter(!is.na(mapdata$Results))
-view(mapdata_new)
+head(mapdata_new)
+```
+
+I realised that map_data("world") shows all the longitudes and latitudes for subregions of each country, which after trialling the map visualisation several times (and scratching my head numerous times), I've eventually opted to use centroids of each country stated in the original dataset intead. Otherwise one of the maps I had tested before had countless blobs of circles marking the boundaries of each country!
+
+```{r}
+mapdata_final <- mapdata_new %>% 
+  group_by(region) %>% 
+  # Using centroids of countries = means of longitudes and latitudes for each country
+  summarise(long = mean(long), lat = mean(lat))
+kable(mapdata_final)
 ```
 
 ```{r}
-# # Read the shape file with the rgdal library. 
-# library(rgdal)
-# world_spdf <- readOGR(
-#   # use current working directory 
-#   # or alternatively use full file path e.g. "x:/file" or relative path e.g. "file"
-#   dsn = ".",
-#   # use file name
-#   layer = "TM_WORLD_BORDERS_SIMPL-0.3",
-#   verbose = FALSE
-# )
-
-# # Clean the data object
-# library(dplyr)
-# # world_spdf@data$POP2005[ which(world_spdf@data$POP2005 == 0)] = NA
-# # world_spdf@data$POP2005 <- as.numeric(as.character(world_spdf@data$POP2005)) / 1000000 %>% round(2)
-# 
-# # Now we have a Spdf object (spatial polygon data frame)
+# join above mapdata_final with the df1 which contains countries and long COVID results
+df1_mapdata <- left_join(mapdata_final, df1, by = "region")
+kable(df1_mapdata)
 ```
 
 ```{r}
-library(leaflet)
+# Prepare pop up information
+df1_mapdata <- df1_mapdata %>% 
+  # paste region and Results columns into popup_info and add it as a new column into dataset
+  # bold texts and add break lines by using html tags as shown
+  mutate(popup_info = paste("<b>",region,"</b>","<br/>","<b>","Long COVID symptoms:","</b>","<br/>", Results))
+df1_mapdata
+```
+
+```{r}
 leaflet() %>% 
   # initialising the graphics environment for map
   addTiles() %>% 
   # add circle markers to map
-  addCircleMarkers(data = mapdata_new, lat = ~lat, lng = ~long, radius = ~1)
+  # use the df1_mapdata dataset containing countries, longitudes, latitudes and long COVID results
+  # add pop up information
+  addCircleMarkers(data = df1_mapdata, lat = ~lat, lng = ~long, radius = ~3, popup = ~popup_info)
 ```
 
+Add abbreviation info.
 
-```{r}
-# # Create a color palette for the map
-# mypalette <- colorNumeric(palette = "viridis", domain = world_spdf@data$POP2005, na.color="transparent")
-# mypalette(c(45,43))
-# 
-# # Basic choropleth with leaflet?
-# b <- leaflet(world_spdf) %>% 
-#   addTiles()  %>% 
-#   setView( lat=10, lng=0 , zoom=2) %>%
-#   addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
-# 
-# b
+##### **Text mining to reveal the results**
 
-# save the widget in a html file if needed.
-# library(htmlwidgets)
-# saveWidget(m, file=paste0( getwd(), "/HtmlWidget/choroplethLeaflet1.html"))
-```
-#### **Text mining to reveal the results**
 When skimming through the Results column, it appears some of the terms recorded are repetitive, I thought it may be quite interesting (in a less formal way) to do a wordcloud to see if it highlights any particular terms that would jump out from this meta-analysis about long COVID, which in a way may paint us a picture about how long COVID syndrome looked like for some of the sufferers.
+
 ```{r}
 # Pick out the results column
 text <- df$Results
@@ -227,4 +246,3 @@ text_df1 %>%
 ```
 
 However, this may not be the best way to visualise the data here, given a few known drawbacks of wordcloud such as the length of a word may influence how big it may appear in the wordcloud, so frequency is not the only factor affecting how words appear in wordcloud. Nevertheless, it is one of the ways to get a rough idea about the most common terms cropping up in the collected results for long COVID in different countries.
-
