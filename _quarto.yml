@@ -14,6 +14,8 @@ website:
         href: https://twitter.com/jenhylin
       - text: Resume
         href: https://jhylin.github.io/CV_resume/
+  repo-url: https://github.com/jhylin/Data_in_life_blog
+  repo-actions: [edit, issue]
     
 format:
   html:
@@ -27,4 +29,4 @@ editor: visual
 
 comments:
   giscus:
-    repo: jhylin/Data-analytics-and-research-blog
+    repo: jhylin/Data_in_life_blog
