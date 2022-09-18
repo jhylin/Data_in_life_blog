@@ -15,7 +15,7 @@ website:
       - text: Resume
         href: https://jhylin.github.io/CV_resume/
   repo-url: https://github.com/jhylin/Data_in_life_blog
-  repo-actions: [edit, issue]
+  repo-actions: [issue]
     
 format:
   html:

@@ -11,16 +11,13 @@ draft: false
 
 This was another update on the current long COVID saga around the world that I thought to follow up from my earlier work (details in the [SQL](https://jhylin.github.io/Data-analytics-and-research-blog/posts/2.%20Long%20COVID%20data%20in%20SQL/LongCOVIDSQL.html) and [Tableau](https://jhylin.github.io/Data-analytics-and-research-blog/posts/3.%20Long%20COVID%20dashboard/TableauDashboard.html) projects). This time the dataset was obtained from another journal paper, which had data collected until July 2021 (the previous paper was only until March 2021). I've used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
 
-
 #### **Source of dataset**
 
 Journal paper by Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. *Creative Commons Attribution 4.0 International Public License*
 
-
 #### **Data scraping from PDF**
 
 The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (*for details please see this post, "[Table scraping from PDF](https://jhylin.github.io/Data_in_life_blog/posts/6.%20Long%20COVID%20update/ExtractTableFromPDF.html)"*). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. It worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. I've discussed a little bit more on the likely reason for this in the blog post link above. So in short, the final scraped table was cleaned in Excel and saved as .csv file, which was then imported as shown below.
-
 
 #### **Data inspection and wrangling**
 
@@ -112,7 +109,6 @@ Now we can observe the top 3 frequency of all co-morbidities listed were: diabet
 [^3]: chronic obstructive pulmonary disease
 
 [^4]: chronic kidney disease
-
 
 #### **Data visualisations**
 
@@ -219,6 +215,7 @@ leaflet() %>%
   # add pop up information
   addCircleMarkers(data = df1_mapdata, lat = ~lat, lng = ~long, radius = ~3, popup = ~popup_info)
 ```
+
 *ABG = arterial blood gas, CT = computed tomography, CRP = c-reactive protein, DLCO = diffusing capacity for carbon monoxide, FBC = full blood count, FEV1 = forced expiratory volume in one second, FVC = forced vital capacity, IL-6 = interleukin-6, LFT = liver function test, LVEF = left ventricular ejection fraction, NT-proBNP = N-terminal pro B-type natriuretic peptide, PTSD = posttraumatic stress disorder, 6MWT = 6-min walk test, U&E = urea and electrolyte, TFT = thyroid function test*
 
 ##### **Text mining for word cloud**
@@ -264,14 +261,13 @@ Long COVID had shown a very versatile and diverse range of signs and symptoms, o
 
 ##### **Acknowledgement**
 
-I have to thank several online resources when I was trying to build the interactive map. Most notably, I've adapted my codes based on these two useful online resources: 
+I have to thank several online resources when I was trying to build the interactive map. Most notably, I've adapted my codes based on these two useful online resources:
 
-1. [R tutorial: Creating Maps and mapping data with ggplot2](https://www.youtube.com/watch?v=AgWgPSZ7Gp0) by Dr Paul Christiansen 
+1.  [R tutorial: Creating Maps and mapping data with ggplot2](https://www.youtube.com/watch?v=AgWgPSZ7Gp0) by Dr Paul Christiansen
 
-2. [Creating interactive maps in R](https://www.youtube.com/watch?v=dx3khWsUO1Y) by A&G Statworks
+2.  [Creating interactive maps in R](https://www.youtube.com/watch?v=dx3khWsUO1Y) by A&G Statworks
 
 I also have to thank all the package creators for all the packages used here and all the authors of the journal paper (as mentioned under "Source of dataset") which provided the long COVID data.
-
 
 ```{r}
 sessionInfo()
