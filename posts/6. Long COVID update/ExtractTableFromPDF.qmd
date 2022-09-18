@@ -9,9 +9,10 @@ jupyter: python3
 
 ##### **Quick introduction**
 
-Recently I had the idea of continuing the long COVID exploration and thought that I've never tried scraping a PDF before, so by combining these two ideas together, I ended up with this little piece of work as another post. 
+Recently I had the idea of continuing the long COVID exploration and thought that I've never tried scraping a PDF before, so by combining these two ideas together, I ended up with this little piece of work as another post.
 
 A quick heads up: Java should be installed in order for tabula-py to work seamlessly, since tabula-py is actually a Python wrapper for tabula-java. In this case, I've relied on Homebrew to install Java, but there are several other different options available online and I'll leave this open for people who're interested to explore themselves. Once it's installed, we can then check for the Java version to ensure it's installed properly.
+
 ```{python}
 # Check the version of Java
 !java -version
