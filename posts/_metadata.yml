@@ -9,3 +9,7 @@ title-block-banner: true
 
 toc: true
 toc-depth: 5
+
+website:
+  repo-url: https://github.com/jhylin/Data_in_life_blog
+  repo-actions: [edit, issue]
