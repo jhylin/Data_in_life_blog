@@ -245,7 +245,7 @@ text_df1 <- text_df %>%
 text_df1
 ```
 
-```{r message=FALSE}
+```{r warning=FALSE, message=FALSE}
 text_df1 %>% 
   # Remove stop_words
   anti_join(stop_words) %>% 
