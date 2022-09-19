@@ -17,7 +17,7 @@ Journal paper by Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs o
 
 #### **Data scraping from PDF**
 
-The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (*for details please see this post, "[Table scraping from PDF](https://jhylin.github.io/Data_in_life_blog/posts/6.%20Long%20COVID%20update/ExtractTableFromPDF.html)"*). Unfortunately I had trouble installing a similar R package remotely after being archived (tabulizer with known issues in its GitHub repository) so I trialled tabula-py instead. It worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. I've discussed a little bit more on the likely reason for this in the blog post link above. So in short, the final scraped table was cleaned in Excel and saved as .csv file, which was then imported as shown below.
+The dataset was scraped from a PDF obtained via PubMed (journal paper source as shown above) by using tabula-py (*for details please see this post, "[Table scraping from PDF](https://jhylin.github.io/Data_in_life_blog/posts/6.%20Long%20COVID%20update/ExtractTableFromPDF.html)"*). Unfortunately I had trouble installing a similar R package remotely after it was archived (tabulizer package with known issues in its GitHub repository) so I trialled tabula-py instead. It worked for scraping all the data from the target table, but the downside was that the scraped data did not inherit the original tabular format on PDF, with columns and rows all jumbled. I've discussed a little bit more on the likely reason for this in the blog post link above. So in short, the final scraped table was cleaned in Excel and saved as .csv file, which was then imported as shown below.
 
 #### **Data inspection and wrangling**
 
@@ -63,7 +63,9 @@ The table column of Hospital (%) {ICU (%)} was separated into two separate colum
 
 ```{r warning=FALSE}
 df_hosp_icu <- df_hosp %>% 
+  # separate column into two columns
   separate(`Hospital (%) {ICU (%)}`, c("Hospital (%)", "ICU (%)"))%>% 
+  # change column type
   mutate(across(`Hospital (%)`, as.numeric))
 # show the first 10 rows as example
 c <- head(df_hosp_icu, 10)
@@ -72,7 +74,7 @@ kable(c)
 
 ##### **Separating rows**
 
-The following shows separating the listed co-morbidities for each study into separate rows, since separating into columns would most likely make the table looking even more complex by adding way too much columns, which would add more difficulties in reading the data.
+The listed co-morbidities for each study were separated into separate rows, rather than into columns, to avoid adding too many columns all at once.
 
 ```{r}
 df_new <- df %>% 
@@ -84,11 +86,11 @@ kable(e)
 
 ##### **A frequency count showing types of comorbidities in long COVID**
 
-I have noticed how the comorbidities for each study were listed with different percentages and thought to gather just an initial idea about what types of comorbidities were present in order to see the overall picture. I started by removing these digits and percentage symbols. Obviously since I'm still quite new to R (started using R in July), I soon ran into a problem, I kept on getting stuck with not having the count() function to actually count unique elements under the co-morbidities column.
+I then noticed how the comorbidities for each study were listed with different percentages and to gather a quick initial overall picture of the data, I started by removing these digits and percentage symbols. Obviously since I was still quite new to R (started using R in July), I soon ran into a problem as I kept on getting stuck with not having the count() function to actually count unique elements under the co-morbidities column.
 
-If you look within the magnified circle on the right in the image below, you'll notice a subtle difference in spacing, so yes the culprit was the **space**[^1] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do a good count on all the co-morbidities, I left it as it was.
+By looking at the magnified circle on the right in the image below, you would notice a subtle difference in spacing, so yes the culprit was the **space**[^1] and once it was removed, count() worked nicely as how it should be. One small downside was that it would also remove the space between the co-morbidity terms e.g. "liver disease" became "liverdisease", but since it achieved the aim intended to do unique counts on all the co-morbidities, I left it as it was.
 
-[^1]: I swear it's taken me a good half an hour to figure this out... eventually I thought to look at the column itself in order to see if I've missed anything... then voila!
+[^1]: It took probably at least half an hour to figure this out... eventually I thought to look at the column itself long enough to see if I'd missed anything... then voila!
 
 ![Screenshot of the extra space(s) in dataframe](Zoom-in%20shot.jpg)
 
@@ -102,7 +104,7 @@ df_new %>%
   count(Comorbidities, sort = TRUE) 
 ```
 
-Now we can observe the top 3 frequency of all co-morbidities listed were: diabetes, hypertension and IHD[^2]. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD[^3], then obesity, and also CKD[^4], malignancy, dyslipidaemia and so on. These would be considered as high risk factors of developing long COVID symptoms if someone had these co-morbidities present before being infected by the coronoviruses.
+Now we could observe the top 3 frequency of all co-morbidities listed were: diabetes, hypertension and IHD[^2]. These were followed by, unsurprisingly, common respiratory illnesses such as asthma, COPD[^3], then obesity, and also CKD[^4], malignancy, dyslipidaemia and so on. These would be considered as high risk factors of developing long COVID symptoms if someone had these co-morbidities present before being infected by the coronoviruses.
 
 [^2]: ischaemic heart disease
 
@@ -114,7 +116,7 @@ Now we can observe the top 3 frequency of all co-morbidities listed were: diabet
 
 ##### **Bar graph for hospitalisation rate**
 
-Then a line of code to filter out the results of "NA" under the column of Hospital (%) was added. Most of the cells with "NA" were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these "NA"s were removed in this instance. The horizontal bar graph below shows the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results between 0% and 100% hospitalisations across all 19 cohort studies.
+Then a line of code to filter out the results of "NA" under the column of Hospital (%) was added. Most of the cells with "NA" were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these "NA"s were removed in this instance. The horizontal bar graph below showed the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results between 0% and 100% hospitalisations across all 19 cohort studies.
 
 ```{r}
 #| fig-cap: 
@@ -128,7 +130,7 @@ df_hosp_icu %>%
   coord_flip()
 ```
 
-Note: two of the studies were removed from above, these studies were by Chiesa-Estomba (Italy) and Mahmud (Bangladesh), which had "Not stated" recorded under Hospital (%) {ICU (%)} column. When the Hospital (%) column was converted from character to numeric, these two rows were converted to "NA" automatically.
+*Note*: two of the studies were removed from above, these studies were by Chiesa-Estomba (Italy) and Mahmud (Bangladesh), which had "Not stated" recorded under Hospital (%) {ICU (%)} column. When the Hospital (%) column was converted from character to numeric, these two rows were converted to "NA" automatically.
 
 ##### **Interactive map for long COVID results**
 
@@ -179,7 +181,7 @@ mapdata_new <- mapdata %>% filter(!is.na(mapdata$Results))
 head(mapdata_new)
 ```
 
-I realised that map_data("world") shows all the longitudes and latitudes for subregions of each country, which after trialling the map visualisation several times (and scratching my head numerous times), I've eventually opted to use centroids of each country stated in the original dataset intead. Otherwise one of the maps I had tested before had countless blobs of circles marking the boundaries of each country!
+I realised that map_data("world") showed all the longitudes and latitudes for subregions of each country, which might not be required for the map I wanted. So after trialling the map visualisation several times, I opted to use centroids of each country instead, to leave the map in a cleaner and easy-to-see state. Otherwise one of the maps I tested before ended up with countless blobs of circles marking the boundaries of each country, looking like a 5-year-old's map drawing!
 
 ```{r}
 mapdata_final <- mapdata_new %>% 
@@ -212,7 +214,7 @@ leaflet() %>%
   addTiles() %>% 
   # add circle markers to map
   # use the df1_mapdata dataset containing countries, longitudes, latitudes and long COVID results
-  # add pop up information
+  # add data, latitudes, longitudes, radius of circles, pop up information
   addCircleMarkers(data = df1_mapdata, lat = ~lat, lng = ~long, radius = ~3, popup = ~popup_info)
 ```
 
@@ -220,7 +222,7 @@ leaflet() %>%
 
 ##### **Text mining for word cloud**
 
-When skimming through the Results column, it appeared some of the terms recorded were repetitive, so a wordcloud might be another interesting way to see if it could highlight any particular long COVID symptoms that might jump out from this meta-analysis.
+When skimming through the Results column, it appeared some of the terms recorded were repetitive, so a wordcloud might be another interesting way to see if it could highlight any particular long COVID symptoms from this meta-analysis.
 
 ```{r}
 # Select the results column
@@ -231,33 +233,34 @@ text1
 ```
 
 ```{r}
+# Change the text into a tibble
 text_df <- tibble(line = 1:75, text = text1)
 text_df
 ```
 
-Import tidytext library and tokenise the texts in the selected column.
-
 ```{r}
+# Tokenise the texts in the selected column
 text_df1 <- text_df %>% 
   unnest_tokens(word, text)
 text_df1
 ```
 
-Remove stop_words, count the frequency of appearance of each word, then create a wordcloud.
-
 ```{r message=FALSE}
 text_df1 %>% 
+  # Remove stop_words
   anti_join(stop_words) %>% 
+  # Count the frequency of appearance of each word
   count(word) %>% 
+  # Then create a wordcloud
   with(wordcloud(word, n, colors = brewer.pal(8,"Dark2")))
-#display.brewer.all to display all colour palettes
+# display.brewer.all to display all colour palettes if wanting to use different colours
 ```
 
-A known drawback of wordcloud was that the length of a word might influence how big it might appear in the wordcloud, so it was not wholly dependent on the frequency of words in a set of texts. Nevertheless, it was one of the ways to get a rough idea about the most common terms cropping up in collected texts. So this last part was more like a small exercise for anyone who also wanted to try this.
+A known drawback of wordcloud was that the length of a word might influence how big it might appear in the wordcloud, so it was not completely dependent on the word frequencies in a set of texts. Nevertheless, it was one of the ways to get a rough idea about the most common terms cropping up in collected texts. This last part was more like a small exercise for me and also for anyone who might want to try this but did not where to start.
 
 #### **Summary**
 
-Long COVID had shown a very versatile and diverse range of signs and symptoms, often resembling the after-effects from other known viral illnesses, the interactive map above would enable readers to see specific long COVID symptoms for selected countries. People with diabetes, hypertension and IHD might have higher risk of suffering from long COVID if they were infected with the coronoviruses. The types of co-morbidities were not limited to these three unfortunately and several other chronic illnesses mentioned above might also contribute to similar risk. The most affected body systems in long COVID were in respiratory tract, ear, nose and throat areas, musculoskeletal parts, gastrointestinal tract and last, but not the lease, neuropsychiatric systems which could bring fatigue and memory/concentration issue, or more widely known as the "brain fog". All of these outcomes also did not vary widely from earlier meta-analyses on long COVID, reiterating the wide health ramifications that COVID-19 could inflict upon global populations.
+Long COVID had shown a very versatile and diverse range of signs and symptoms, often resembling other known post-viral illnesses such as myalgic encephalomyelitis and chronic fatigue syndrome, the interactive map above would enable readers to see specific long COVID symptoms for selected countries. People with diabetes, hypertension and IHD might have higher risk of suffering from long COVID if they were infected with the coronoviruses. The types of co-morbidities were not limited to these three unfortunately and several other chronic illnesses mentioned above might also contribute to similar risk. The most affected body systems in long COVID were in respiratory tract, ear, nose and throat areas, musculoskeletal parts, gastrointestinal tract and last, but not the lease, neuropsychiatric systems which could bring fatigue and memory/concentration issue, or more widely known as the "brain fog". All of these outcomes also did not vary widely from earlier meta-analyses on long COVID, reiterating the wide health ramifications that COVID-19 could inflict upon global populations.
 
 ##### **Acknowledgement**
 

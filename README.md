@@ -1,6 +1,6 @@
 # Data in life blog
 
-As my data journey progresses, I've found a new place for my portfolio blog which is built by using Quarto. I've deployed it to two sites for now:
+This repository holds all files pertaining to my portfolio blog, which is built by using Quarto. I've deployed it to two sites:
 
 -   [GitHub Pages](https://jhylin.github.io/Data-analytics-and-research-blog/)
 
