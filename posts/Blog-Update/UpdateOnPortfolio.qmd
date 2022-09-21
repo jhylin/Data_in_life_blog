@@ -7,6 +7,8 @@ categories: [Blog]
 
 So things have gone a little busier than usual behind the scene from last week till this week. As we know it, it's always hard to plan when things are on the flow, especially in the current climate. So, a little about what I'm working on lately:
 
+![Photo by <a href="https://unsplash.com/@retrosupply?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">RetroSupply</a> on <a href="https://unsplash.com/s/photos/portfolio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](PortfolioPic.jpg)
+
 -   I've started working on an extension project to the rare disease work (recent Python project) by delving further into the natural history of rare diseases by using Orphanet's data source (having fun working with xml files)
 
 -   With the turn of events lately, I'm now also learning R programming language (which is something I was planning to do much later, but... to do this now is also fine as this'll keep me on the ball) and surprisingly it is quite similar to Python in some ways but not at all as well
