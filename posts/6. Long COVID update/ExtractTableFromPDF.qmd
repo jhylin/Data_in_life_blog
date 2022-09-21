@@ -35,6 +35,8 @@ from tabula import read_pdf
 
 Source of the table was from this journal paper by Healey Q, Sheikh A, Daines L, Vasileiou E. Symptoms and signs of long COVID: A rapid review and meta-analysis. J Glob Health 2022;12:05014. Creative Commons Attribution 4.0 International Public License
 
+![Photo by <a href="https://unsplash.com/@steverichey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Steve Richey</a> on <a href="https://unsplash.com/s/photos/data-table?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](Table.jpg)
+
 ##### **Table scraping**
 
 Firstly, I trialled scraping the table from page 4 of the journal paper, which only really scraped about half of the table. I then went on to add in another line of code to specify the scraping area[^1] on the PDF page in inches (this part could be deduced by using the in-built PDF tool).
