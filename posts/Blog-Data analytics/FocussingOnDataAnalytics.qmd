@@ -4,6 +4,9 @@ author: "Jennifer HY Lin"
 date: "2022-04-15"
 categories: [Blog]
 ---
-So after a short period of trials and errors of job applications with serious thoughts into a career change, I’m planning to go for the more practical and realistic approach – starting from an entry-level data analyst role. However, I’m aware that I’ll need to build up a relatively decent portfolio of data analytics work before I’ll even be able to reach that very first stage.
 
-So I’m planning to work on other projects at the moment that are not from my certificate course, but are self-motivated ones which would be more relevant to data science and analytics and the ones that I have personal interests in. New projects will be showcased in the portfolio section when they’re ready. The most current one would be the Tableau project about characterising long COVID symptoms (more on this in portfolio section).
+So after a short period of trials and errors of job applications with serious thoughts into a career change, I'm planning to go for the more practical and realistic approach -- starting from an entry-level data analyst role. However, I'm aware that I'll need to build up a relatively decent portfolio of data analytics work before I'll even be able to reach that very first stage.
+
+![Photo by <a href="https://unsplash.com/@tofi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tobias Fischer</a> on <a href="https://unsplash.com/s/photos/data-analytics?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](DataAnalytics.jpg)
+
+So I'm planning to work on other projects at the moment that are not from my certificate course, but are self-motivated ones which would be more relevant to data science and analytics and the ones that I have personal interests in. New projects will be showcased in the portfolio section when they're ready. The most current one would be the Tableau project about characterising long COVID symptoms (more on this in portfolio section).
