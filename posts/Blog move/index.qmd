@@ -5,6 +5,8 @@ date: "2022-08-06"
 categories: [Blog]
 ---
 
+![Photo by <a href="https://unsplash.com/@melodi2?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lia Trevarthen</a> on <a href="https://unsplash.com/s/photos/boxes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](Box.jpg)
+
 I've been working on my data analytics portfolio for the last few months, on and off, as I've also got another work commitment going on at the same time. While working on my very first portfolio blog at WordPress, I've also stumbled across R programming language (due to a data analytics work interview where they actually tested me R!). This then opened up a whole new R world with its friendly online community. Since my interests in R grew further and further, I've been looking for places where I can use RStudio IDE and/or R to build blogs and gladly I found Quarto which led me to its Quarto blogs.
 
 So here is my very first Quarto blog, deployed using Netlify initially and then I also figured out how to deploy it on GitHub Pages, so now I've actually got two extra sites running. The process to deploy on Netlify was quite simple as many people have already mentioned (GitHub Pages were also not too complicated as well once I've grasped the deployment workflow). I'm still pondering if I should write something on how I started Quarto blogs, but considering so many talented people have already talked about it, I may not go down this route (consider visiting Bea Milz's lovely post on ["Creating a blog with Quarto in 10 steps"](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/index.html) - this was what I followed to get my Quarto blog up and running).
