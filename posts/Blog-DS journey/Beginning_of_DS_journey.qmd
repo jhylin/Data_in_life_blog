@@ -1,5 +1,5 @@
 ---
-title: "The beginning of cheminformatics and data science journey"
+title: "The beginning of the data science journey"
 author: "Jennifer HY Lin"
 date: "2022-01-28"
 categories: [Blog]
