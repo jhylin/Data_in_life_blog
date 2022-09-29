@@ -2,22 +2,22 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/6. Long COVID update/LongCOVIDUpdate.html",
+      "/posts/6. Long COVID update/Long_COVID_update.html",
       "/posts/6. Long COVID update/ExtractTableFromPDF.html",
-      "/posts/Blog move/index.html",
-      "/posts/5. Phenotypes associated with rare diseases/PhenotypesRareDiseases.html",
-      "/posts/Blog-Social network/EmbracingSocialNetwork.html",
-      "/posts/4. Natural history of rare diseases – malformation syndrome/NaturalHistoryRareDiseasesMalSyn.html",
-      "/posts/Blog-Update/UpdateOnPortfolio.html",
-      "/posts/3. Long COVID data in SQL/LongCOVIDSQL.html",
-      "/posts/2. Long COVID dashboard/TableauDashboard.html",
-      "/posts/Blog-Portfolio projects/PortfolioProjects.html",
-      "/posts/1. Drugs in rare diseases/RareDiseasesDrugs.html",
-      "/posts/Blog-Data analytics/FocussingOnDataAnalytics.html",
-      "/posts/Blog-Cheminformatics and data science journey/DSandCheminformatics.html",
-      "/posts/Publications/SideProjects.html",
-      "/posts/PhD projects/index.html",
-      "/posts/SERCA project/index.html"
+      "/posts/Blog-Blog move/Blog_move.html",
+      "/posts/5. Phenotypes associated with rare diseases/Phenotypes_rare_diseases.html",
+      "/posts/Blog-Social network/Embracing_social_network.html",
+      "/posts/4. Natural history of rare diseases – malformation syndrome/Natural_history_rare_diseases_mal_syn.html",
+      "/posts/Blog-Update/Update_on_portfolio.html",
+      "/posts/3. Long COVID data in SQL/Long_COVID_SQL.html",
+      "/posts/2. Long COVID dashboard/Tableau_dashboard.html",
+      "/posts/Blog-Portfolio projects/Portfolio_projects.html",
+      "/posts/1. Drugs in rare diseases/Rare_diseases_drugs.html",
+      "/posts/Blog-Data analytics/Focussing_on_data_analytics.html",
+      "/posts/Blog-DS journey/Beginning_of_DS_journey.html",
+      "/posts/Publications/Side_projects.html",
+      "/posts/PhD projects/PhD_projects.html",
+      "/posts/SERCA project/SERCA_project.html"
     ]
   }
 ]
