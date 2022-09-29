@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2022-01-24">
+<meta name="dcterms.date" content="2022-09-27">
 
-<title>Home - PhD project</title>
+<title>Home - Cheminformatics with Rcdk</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,6 +17,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -114,13 +177,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">PhD project</h1>
-            <p class="subtitle lead">A research saga that went beyond the pandemic</p>
-                                <div class="quarto-categories">
-                <div class="quarto-category">Research</div>
-                <div class="quarto-category">Drug discovery and design</div>
-              </div>
-                  </div>
+      <h1 class="title">Cheminformatics with Rcdk</h1>
+                      </div>
   </div>
     
   
@@ -136,7 +194,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 24, 2022</p>
+        <p class="date">September 27, 2022</p>
       </div>
     </div>
       
@@ -147,15 +205,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-projects" id="toc-the-projects" class="nav-link active" data-scroll-target="#the-projects"><strong>The projects</strong></a></li>
-  <li><a href="#phd-thesis-link" id="toc-phd-thesis-link" class="nav-link" data-scroll-target="#phd-thesis-link"><strong>PhD thesis link</strong></a></li>
-  <li><a href="#abstract-of-the-projects" id="toc-abstract-of-the-projects" class="nav-link" data-scroll-target="#abstract-of-the-projects"><strong>Abstract of the projects</strong></a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -163,45 +213,33 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
-<section id="the-projects" class="level5">
-<h5 class="anchored" data-anchor-id="the-projects"><strong>The projects</strong></h5>
-<p>My PhD<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> started about 6 months after I’ve finished my MPhil so it was around the beginning of 2015 that I’ve officially begun my PhD and it took a solid 4 years to finish (while working part-time as a hospital pharmacist). In simple words, there were two main research projects going on concurrently in my PhD:</p>
-<ul>
-<li><strong>SERCA project</strong> (details in a separate post as named)</li>
-<li><strong>Filamenting temperature-sensitive Z protein project</strong> (also known as FtsZ project)</li>
-</ul>
-<p>FtsZ project was not a new project at the time, but rather a continuation from my previous predecessors in the lab group. Its primary focus was to look for other novel anti-bacterial hit compounds that were different from the ones that were already synthesised and tested in the group. This project was better than the SERCA project in a way that the collaborators were much easier to communicate with even though they were based in India. One down side was that because they’re based overseas, it did take a long time for the compound testing to happen and to have the results returned on time. However, overall, there were much more progress in this project which involved 3 main iterative stages:</p>
-<p><strong>Computational work</strong> – involved molecular/homology modelling, virtual compound screening (compound size roughly in several 100,000s, please see below links for details) and compound selection for synthesis (using Schrödinger software mainly for this first stage of work)</p>
-<p><strong>Compound synthesis</strong> – this was certainly the part that has painstakingly taken a lot of time in a chemistry lab out of my four years with many failures in between but with some successes in the end obviously…</p>
-<p><strong>Compound testing</strong> – it was mainly done by our research collaborators After the completion of these two projects, I was less of a research newbie but I would still humbly call myself a junior researcher, considering how the field of drug discovery can have such an unfathomable depth and breadth…</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="End%20of%20PhD.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Image taken by author</figcaption><p></p>
-</figure>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment below if requiring to install rcdk package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rcdk")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The image above was taken literally when I packed up everything after I’ve completed my PhD, which was physically summed into this little box, but what I’ve gained from the journey was far bigger than this. The two hardcover books on the left hand side were my MPhil and PhD theses (potentially useful as treatment for insomnia due to their lengths and time required to read).</p>
-</section>
-<section id="phd-thesis-link" class="level5">
-<h5 class="anchored" data-anchor-id="phd-thesis-link"><strong>PhD thesis link</strong></h5>
-<p>Please visit <a href="http://hdl.handle.net/2123/20236">http://hdl.handle.net/2123/20236</a> if anyone is even remotely wanting to read the full thesis, for completeness, here it is (beware: very long).</p>
-</section>
-<section id="abstract-of-the-projects" class="level5">
-<h5 class="anchored" data-anchor-id="abstract-of-the-projects"><strong>Abstract of the projects</strong></h5>
-<p>Drug discovery is one of the most challenging research fields that contributes to the birth of novel drugs for therapeutic use. Due to the complexity and intricate nature of the research, lengthy processes are involved in identifying potential hit molecules for a therapeutic target. To shorten the time required to reach the hit-to-lead stage, computer-aided drug design (CADD) has been used to expedite the process and reduce laboratory expenses. Common strategies used within CADD involve structure-based drug design (SBDD) and ligand-based drug design (LBDD). Both strategies were used extensively in two projects showing the complementarity of each strategy throughout the process. In this work, two separate drug discovery projects are detailed: Design, synthesis and molecular docking study of novel tetrahydrocurcumin analogues as potential sarcoplasmic-endoplasmic reticulum calcium ATPases (SERCA) inhibitors – details the identification, synthesis and testing of potential hit candidate(s) targeting SERCA by using SBDD Filamenting temperature-sensitive mutant Z (FtsZ) as therapeutic target in ligand-based drug design – details the identification, synthesis and testing of potential hit molecule(s) targeting FtsZ In the first project, homology modelling and virtual compound library screening were utilised as the SBDD methods to identify potential hit molecules for testing in P-type calcium ATPases such as SERCA. Preliminary results have found compound 20, an analogue of tetrahydrocurcumin, to show some SERCA inhibitory effect at 300µM based on a SERCA-specific calcium signalling assay performed via fluorometric imaging plate reader. Molecular docking study has also reflected this outcome with desirable ligand-protein binding energies found for 20 when compared with other tested ligands. Pharmacophore screening was used as the main LBDD method in the second project to identify probable hit candidates targeting FtsZ. Potential ligands were synthesised, and tested for antibacterial effect in Bacillus Subtilis strain 168 (Bs168) and Streptococcus pneumoniae strain R6 (SpnR6) cells. One of the tetrahydrocurcumin analogues, compound 4, was found to have minimum inhibitory concentration (MIC) ≤ 10 µM in Bs168 cells and ≤ 2 µM in spnR6 cells. The IC50 values for 4 were 9.1 ± 0.01 µM and 1 ± 0.01 µM in Bs168 and SpnR6 cells respectively. The MIC of 4 was found to be very similar to the MIC of compound 1, a known hit compound targeting against Bs168 cells. On the other hand, the MIC of 4 was lower than the MIC (&gt; 64 µg/mL) of a well-known FtsZ inhibitor, PC190723, against S. pneumoniae. Subsequent molecular docking analyses were completed to evaluate the ligand-protein binding energies to correlate against the testing results. Both compounds 20 and 4 possess some structural similarities and differences that may confer their different effects in these protein targets, which render both with potentials to become the next lead molecules for future development.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rcdk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rcdklibs</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rJava</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the version of CDK being used in the package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cdk.version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2.8"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which molecules?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
 
-
-<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1" role="doc-endnote"><p>I’ve attempted to communicate with both of my PhD advisers and our research collaborators to publish this work, but to no avail due to the severe restrictions imposed by the COVID-19 situation from the beginning of 2020 and basically also in 2021 (our collaborators were unable to perform any experiments during lockdowns…), a direct publication in a scientific journal is not going to happen any time soon so I thought to provide at least my part to showcase what I’ve done at least…<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p><strong><em>Updates on 31/1/2022</em></strong> – it appeared that my supervisors are in communications with our overseas research collaborators recently about the manuscript so there is a higher chance now that we may be able to publish this work towards the end of 2022 (fingers-crossed…).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p><strong><em>Updates on 29/9/2022</em></strong> – small progress to report, finally saw the more complete version of manuscript draft yesterday, helped a little with incorporating the draft into the journal template, and now most likely more editing and reviewing, then aiming to submit in two weeks (again I’m not going to bet anything on this, as time is always my best friend, hopefully more news next year).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

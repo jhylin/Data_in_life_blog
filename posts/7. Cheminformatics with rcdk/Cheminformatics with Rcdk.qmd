@@ -1,0 +1,24 @@
+---
+title: "Cheminformatics with Rcdk"
+author: "Jennifer HY Lin"
+date: 2022-09-27
+format: html
+editor: visual
+draft: true
+---
+
+```{r echo=TRUE}
+# Uncomment below if requiring to install rcdk package
+# install.packages("rcdk")
+```
+
+```{r}
+library(rcdk)
+```
+```{r}
+# Check the version of CDK being used in the package
+cdk.version()
+```
+```{r}
+# Which molecules?
+```
