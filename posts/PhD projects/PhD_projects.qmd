@@ -3,7 +3,7 @@ title: "PhD project"
 subtitle: "A research saga that went beyond the pandemic"
 author: "Jennifer HY Lin"
 date: "2022-01-24"
-categories: [Research, Drug discovery and design]
+categories: [Research, Drug discovery & design]
 ---
 
 ##### **The projects**
