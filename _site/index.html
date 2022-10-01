@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Home - Data in life</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Home</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">Jennifer HY Lin</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume/">Resume</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Data in life</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(16)</span></div><div class="category" data-category="Blog">Blog <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Data analytics projects">Data analytics projects <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Drug discovery &amp; design">Drug discovery &amp; design <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Long COVID">Long COVID <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Rare diseases">Rare diseases <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Research">Research <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SQL">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tableau">Tableau <span class="quarto-category-count">(1)</span></div></div></div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="Data analytics projects,R,Python,Long COVID" data-listing-date-sort="1663502400000" data-listing-file-modified-sort="1663567858365" data-listing-reading-time-sort="9.785">
+<a href="./posts/6. Long COVID update/Long_COVID_update.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/6. Long COVID update/Zoom-in shot.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Long COVID - an update
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Long COVID'); return false;">
+Long COVID
+</div>
+</div>
+<div class="card-text listing-description">
+This was another update on the current long COVID saga around the world that I thought to follow up from my earlier work (details in the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected until July 2021 (the previous paper was only until March 2021). I’ve used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Sep 19, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="Data analytics projects,Python,Long COVID" data-listing-date-sort="1663156800000" data-listing-file-modified-sort="1663747068041" data-listing-reading-time-sort="3.12">
+<a href="./posts/6. Long COVID update/ExtractTableFromPDF.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/6. Long COVID update/Table.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Table scraping from PDF
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Long COVID'); return false;">
+Long COVID
+</div>
+</div>
+<div class="card-text listing-description">
+
+Recently I had the idea of continuing the long COVID exploration and thought that I’ve never tried scraping a PDF before, so by combining these two ideas together, I ended up with this little piece of work as another post.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Sep 15, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="Blog" data-listing-date-sort="1659700800000" data-listing-file-modified-sort="1663748127680" data-listing-reading-time-sort="1.395">
+<a href="./posts/Blog-Blog move/Blog_move.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-Blog move/Box.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Blog move
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+I’ve been working on my data analytics portfolio for the last few months, on and off, as I’ve also got another work commitment going on at the same time. While working on my very first portfolio blog at WordPress, I’ve also stumbled across R programming language (due to a data analytics work interview where they actually tested me R!). This then opened up a whole new R world with its friendly online community. Since my interests in R grew further and further, I’ve been looking for places where I can use RStudio IDE and/or R to build blogs and gladly I found Quarto which led me to its Quarto blogs.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Aug 6, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="Data analytics projects,R,Python,Rare diseases" data-listing-date-sort="1659355200000" data-listing-file-modified-sort="1663233094935" data-listing-reading-time-sort="7.995">
+<a href="./posts/5. Phenotypes associated with rare diseases/Phenotypes_rare_diseases.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/5. Phenotypes associated with rare diseases/Genes.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Phenotypes associated with rare diseases
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Rare diseases'); return false;">
+Rare diseases
+</div>
+</div>
+<div class="card-text listing-description">
+This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity…). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python<sup>1</sup> there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Aug 2, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="4" data-categories="Blog" data-listing-date-sort="1657800000000" data-listing-file-modified-sort="1663748498206" data-listing-reading-time-sort="1.79">
+<a href="./posts/Blog-Social network/Embracing_social_network.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-Social network/SocialMedia.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Embracing social network
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+I’ve managed to post my first ever tweet on Twitter yesterday on the R project I’ve done recently on rare disease drugs. I’m not used to posting anything on social media as I almost always prefer to stay low-profile, rather than the opposite, and this may not be a good thing especially if I’m trying to transition into a different job field. So I did it finally…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jul 15, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="5" data-categories="Data analytics projects,Python,Rare diseases" data-listing-date-sort="1656244800000" data-listing-file-modified-sort="1663748812379" data-listing-reading-time-sort="1.32">
+<a href="./posts/4. Natural history of rare diseases – malformation syndrome/Natural_history_rare_diseases_mal_syn.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/4. Natural history of rare diseases – malformation syndrome/Genes.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Natural history of rare diseases - malformation syndrome
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Rare diseases'); return false;">
+Rare diseases
+</div>
+</div>
+<div class="card-text listing-description">
+So my current interests are still in rare diseases from Orphanet website so the next focus is on natural history of rare diseases, specifically I’d like to focus on malformation syndrome<sup>1</sup> for now. There are so much more data available on Orphanet, which I’d really like to look further into such as phenotypes associated with different rare diseases, so this is likely the next one I’ll be working on.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jun 27, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="6" data-categories="Blog" data-listing-date-sort="1655035200000" data-listing-file-modified-sort="1663749762608" data-listing-reading-time-sort="1.15">
+<a href="./posts/Blog-Update/Update_on_portfolio.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-Update/PortfolioPic.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Update on portfolio
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+So things have gone a little busier than usual behind the scene from last week till this week. As we know it, it’s always hard to plan when things are on the flow, especially in the current climate. So, a little about what I’m working on lately:
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jun 13, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="7" data-categories="Data analytics projects,SQL,Long COVID" data-listing-date-sort="1654344000000" data-listing-file-modified-sort="1663233316203" data-listing-reading-time-sort="1.165">
+<a href="./posts/3. Long COVID data in SQL/Long_COVID_SQL.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/3. Long COVID data in SQL/Long covid pic.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Long COVID data in SQL
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('SQL'); return false;">
+SQL
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Long COVID'); return false;">
+Long COVID
+</div>
+</div>
+<div class="card-text listing-description">
+For this SQL project<sup>1</sup>, I’ve used the same set of data as the Tableau project in order to see if there will be any other new insights when using SQL for data analysis. Dataset is from this paper – Michelen M, Manoharan L, Elkheir N, et al.&nbsp;Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427, which was discovered through PubMed. One other thing of note was that the paper only collected long COVID-related data up until 17th March 2021. All other more recent developments of long COVID will likely require more time before further data are more readily available, for example, the long COVID impact from Omicron variants.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jun 5, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="8" data-categories="Data analytics projects,Tableau,Long COVID" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1663233167362" data-listing-reading-time-sort="1.44">
+<a href="./posts/2. Long COVID dashboard/Tableau_dashboard.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/2. Long COVID dashboard/Long covid.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Long COVID dashboard
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Tableau'); return false;">
+Tableau
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Long COVID'); return false;">
+Long COVID
+</div>
+</div>
+<div class="card-text listing-description">
+
+This project<sup>1</sup> was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+May 31, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="9" data-categories="Blog" data-listing-date-sort="1653912000000" data-listing-file-modified-sort="1663749542603" data-listing-reading-time-sort="0.72">
+<a href="./posts/Blog-Portfolio projects/Portfolio_projects.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-Portfolio projects/Portfolio.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Portfolio projects
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+To keep myself somewhat occupied, I’m still working on the Tableau project at the moment (while I’m working towards the end of a Tableau course) and have then added two further projects – one a Python one about rare disease drugs and the other one using SQL. I’ve just completed and published the Python one (please see Portfolio section for details) and within this week I’m aiming to start the SQL project. This time I’ll not be using IBM Db2 or SQLite, which was what I’ve used for the course but rather I’ve managed to install MySQL server and also DBeaver GUI to work on the SQL project. The dataset is still to be decided as I sort of want to integrate the SQL one with Tableau and the latest Python project. I’ll have another look again…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+May 31, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="10" data-categories="Data analytics projects,R,Python,Rare diseases" data-listing-date-sort="1653652800000" data-listing-file-modified-sort="1663232960585" data-listing-reading-time-sort="3.285">
+<a href="./posts/1. Drugs in rare diseases/Rare_diseases_drugs.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/1. Drugs in rare diseases/Pills.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Drugs in rare diseases
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data analytics projects'); return false;">
+Data analytics projects
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Rare diseases'); return false;">
+Rare diseases
+</div>
+</div>
+<div class="card-text listing-description">
+Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I’ve also often wondered about drugs for rare diseases and how they’re often for the minorities in the diseased populations. So here is the initial Python and R projects<sup>1</sup> about rare disease drugs by using data extracted from FDA’s Orphan Drug Product designation database. I also have to acknowledge “Data Is Plural” website, which has inspired me to look into this dataset.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+May 28, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="11" data-categories="Blog" data-listing-date-sort="1649937600000" data-listing-file-modified-sort="1663750135567" data-listing-reading-time-sort="0.725">
+<a href="./posts/Blog-Data analytics/Focussing_on_data_analytics.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-Data analytics/DataAnalytics.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Focussing on data analytics
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+So after a short period of trials and errors of job applications with serious thoughts into a career change, I’m planning to go for the more practical and realistic approach – starting from an entry-level data analyst role. However, I’m aware that I’ll need to build up a relatively decent portfolio of data analytics work before I’ll even be able to reach that very first stage.
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Apr 15, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="12" data-categories="Blog" data-listing-date-sort="1643281200000" data-listing-file-modified-sort="1664316642873" data-listing-reading-time-sort="3.49">
+<a href="./posts/Blog-DS journey/Beginning_of_DS_journey.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Blog-DS journey/DataScience.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+The beginning of the data science journey
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Blog'); return false;">
+Blog
+</div>
+</div>
+<div class="card-text listing-description">
+After my PhD study came to an end at around the end of 2018 to early 2019, I’ve decided to return to New Zealand. This was followed by my tumultuous postdoc searching story and also a solitude time for myself to dig deeper into what I would really like to do research-wise. This, of course, then led to the beginning of the COVID-19 pandemic in early 2020, which in a sense has been world-changing (I don’t know what other words or terms can better describe it) and its after-effect is still hanging around until this very moment…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jan 28, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="13" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1663750966031" data-listing-reading-time-sort="1.04">
+<a href="./posts/Publications/Side_projects.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/Publications/Ink.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Publications
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Research'); return false;">
+Research
+</div>
+</div>
+<div class="card-text listing-description">
+Throughout my PhD, I’ve also collaborated with the lab group members and also other research groups in other academic research projects. The following publications<sup>1</sup> were the ones I was involved in:
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jan 24, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="14" data-categories="Research,Drug discovery &amp; design" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1664410968233" data-listing-reading-time-sort="5.275">
+<a href="./posts/PhD projects/PhD_projects.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/PhD projects/End of PhD.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+PhD project
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Research'); return false;">
+Research
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Drug discovery &amp; design'); return false;">
+Drug discovery &amp; design
+</div>
+</div>
+<div class="card-text listing-description">
+My PhD<sup>1</sup><sup>2</sup><sup>3</sup> started about 6 months after I’ve finished my MPhil so it was around the beginning of 2015 that I’ve officially begun my PhD and it took a solid 4 years to finish (while working part-time as a hospital pharmacist). In simple words, there were two main research projects going on concurrently in my PhD:
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jan 24, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="15" data-categories="Research" data-listing-date-sort="1642935600000" data-listing-file-modified-sort="1660184189569" data-listing-reading-time-sort="2.635">
+<a href="./posts/SERCA project/SERCA_project.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/SERCA project/Research.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+SERCA project
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Research'); return false;">
+Research
+</div>
+</div>
+<div class="card-text listing-description">
+Essentially, having completed this MPhil project<sup>1</sup> was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 – 2014) as no one in my previous lab group was working on it so it was literally a one-person project but we were collaborating with a distant research group. Unfortunately this project came to an early stop during my PhD stage (when I was working part-time still as a pharmacist to support my own cost of living while receiving a puny amount of scholarship plus working on this project at the time and then one extra project added on during PhD). The main reason that this project did no progress was that our collaborators decided to pull out from testing further compounds for us. Although it came as a bit of shock but later it felt less so. Later, I’ve decided that it would still be part of my portfolio to showcase a project that did not proceed further (or in plain words, in the “failed” section).
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Jennifer HY Lin
+</div>
+<div class="listing-date">
+Jan 24, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Blog made with <a href="https://quarto.org/">Quarto</a> 🧡 by Jennifer HY Lin © 2022 📙 Citation as author and blog link</div>
+  </div>
+</footer>
+
+
+
+</body></html>
