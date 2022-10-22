@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/PhD projects/PhD_projects.html",
       "/posts/6. Long COVID update/Long_COVID_update.html",
       "/posts/6. Long COVID update/ExtractTableFromPDF.html",
       "/posts/Blog-Blog move/Blog_move.html",
@@ -16,7 +17,6 @@
       "/posts/Blog-Data analytics/Focussing_on_data_analytics.html",
       "/posts/Blog-DS journey/Beginning_of_DS_journey.html",
       "/posts/Publications/Side_projects.html",
-      "/posts/PhD projects/PhD_projects.html",
       "/posts/SERCA project/SERCA_project.html"
     ]
   }

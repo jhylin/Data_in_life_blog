@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2022-10-01">
+
+<title>Home - Cheminformatics in Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Jennifer HY Lin</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume/">Resume</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Cheminformatics in Python</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Cheminformatics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 1, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="op">!</span>pip install rdkit<span class="op">-</span>pypi pandas seaborn mols2grid requests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: rdkit-pypi in /opt/anaconda3/lib/python3.9/site-packages (2022.3.5)
+Requirement already satisfied: pandas in /opt/anaconda3/lib/python3.9/site-packages (1.4.2)
+Requirement already satisfied: seaborn in /opt/anaconda3/lib/python3.9/site-packages (0.11.2)
+Requirement already satisfied: mols2grid in /opt/anaconda3/lib/python3.9/site-packages (1.0.0)
+Requirement already satisfied: requests in /opt/anaconda3/lib/python3.9/site-packages (2.27.1)
+Requirement already satisfied: Pillow in /opt/anaconda3/lib/python3.9/site-packages (from rdkit-pypi) (9.0.1)
+Requirement already satisfied: numpy in /opt/anaconda3/lib/python3.9/site-packages (from rdkit-pypi) (1.21.5)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: python-dateutil&gt;=2.8.1 in /opt/anaconda3/lib/python3.9/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /opt/anaconda3/lib/python3.9/site-packages (from pandas) (2021.3)
+Requirement already satisfied: scipy&gt;=1.0 in /opt/anaconda3/lib/python3.9/site-packages (from seaborn) (1.7.3)
+Requirement already satisfied: matplotlib&gt;=2.2 in /opt/anaconda3/lib/python3.9/site-packages (from seaborn) (3.5.1)
+Requirement already satisfied: jinja2&gt;=2.11.0 in /opt/anaconda3/lib/python3.9/site-packages (from mols2grid) (2.11.3)
+Requirement already satisfied: ipywidgets&lt;8,&gt;=7 in /opt/anaconda3/lib/python3.9/site-packages (from mols2grid) (7.6.5)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /opt/anaconda3/lib/python3.9/site-packages (from requests) (1.26.9)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /opt/anaconda3/lib/python3.9/site-packages (from requests) (3.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /opt/anaconda3/lib/python3.9/site-packages (from requests) (2021.10.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from requests) (2.0.4)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: widgetsnbextension~=3.5.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (3.5.2)
+Requirement already satisfied: nbformat&gt;=4.2.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (5.3.0)
+Requirement already satisfied: ipython&gt;=4.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (8.2.0)
+Requirement already satisfied: traitlets&gt;=4.3.1 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (5.1.1)
+Requirement already satisfied: ipykernel&gt;=4.5.1 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (6.9.1)
+Requirement already satisfied: jupyterlab-widgets&gt;=1.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.0.0)
+Requirement already satisfied: ipython-genutils~=0.2.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.2.0)
+Requirement already satisfied: appnope in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.1.2)
+Requirement already satisfied: debugpy&lt;2.0,&gt;=1.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.5.1)
+Requirement already satisfied: tornado&lt;7.0,&gt;=4.2 in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (6.1)
+Requirement already satisfied: jupyter-client&lt;8.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (6.1.12)
+Requirement already satisfied: nest-asyncio in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.5.5)
+Requirement already satisfied: matplotlib-inline&lt;0.2.0,&gt;=0.1.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.1.2)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (3.0.20)
+Requirement already satisfied: pygments&gt;=2.4.0 in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (2.11.2)
+Requirement already satisfied: setuptools&gt;=18.5 in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (61.2.0)
+Requirement already satisfied: jedi&gt;=0.16 in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.18.1)
+Requirement already satisfied: pexpect&gt;4.3 in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (4.8.0)
+Requirement already satisfied: stack-data in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.2.0)
+Requirement already satisfied: pickleshare in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.7.5)
+Requirement already satisfied: decorator in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (5.1.1)
+Requirement already satisfied: backcall in /opt/anaconda3/lib/python3.9/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.2.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.0 in /opt/anaconda3/lib/python3.9/site-packages (from jedi&gt;=0.16-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.8.3)
+Requirement already satisfied: MarkupSafe&gt;=0.23 in /opt/anaconda3/lib/python3.9/site-packages (from jinja2&gt;=2.11.0-&gt;mols2grid) (2.0.1)
+Requirement already satisfied: jupyter-core&gt;=4.6.0 in /opt/anaconda3/lib/python3.9/site-packages (from jupyter-client&lt;8.0-&gt;ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (4.9.2)
+Requirement already satisfied: pyzmq&gt;=13 in /opt/anaconda3/lib/python3.9/site-packages (from jupyter-client&lt;8.0-&gt;ipykernel&gt;=4.5.1-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (22.3.0)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/anaconda3/lib/python3.9/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (4.25.0)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/anaconda3/lib/python3.9/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (0.11.0)
+Requirement already satisfied: packaging&gt;=20.0 in /opt/anaconda3/lib/python3.9/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (21.3)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/anaconda3/lib/python3.9/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (1.3.2)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /opt/anaconda3/lib/python3.9/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (3.0.4)
+Requirement already satisfied: fastjsonschema in /opt/anaconda3/lib/python3.9/site-packages (from nbformat&gt;=4.2.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (2.15.1)
+Requirement already satisfied: jsonschema&gt;=2.6 in /opt/anaconda3/lib/python3.9/site-packages (from nbformat&gt;=4.2.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (4.4.0)
+Requirement already satisfied: attrs&gt;=17.4.0 in /opt/anaconda3/lib/python3.9/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=4.2.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (21.4.0)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,&gt;=0.14.0 in /opt/anaconda3/lib/python3.9/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=4.2.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.18.0)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/anaconda3/lib/python3.9/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.7.0)
+Requirement already satisfied: wcwidth in /opt/anaconda3/lib/python3.9/site-packages (from prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.2.5)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: six&gt;=1.5 in /opt/anaconda3/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
+Requirement already satisfied: notebook&gt;=4.4.1 in /opt/anaconda3/lib/python3.9/site-packages (from widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (6.4.8)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: terminado&gt;=0.8.3 in /opt/anaconda3/lib/python3.9/site-packages (from notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.13.1)
+Requirement already satisfied: Send2Trash&gt;=1.8.0 in /opt/anaconda3/lib/python3.9/site-packages (from notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.8.0)
+Requirement already satisfied: argon2-cffi in /opt/anaconda3/lib/python3.9/site-packages (from notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (21.3.0)
+Requirement already satisfied: nbconvert in /opt/anaconda3/lib/python3.9/site-packages (from notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (6.4.4)
+Requirement already satisfied: prometheus-client in /opt/anaconda3/lib/python3.9/site-packages (from notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.13.1)
+Requirement already satisfied: argon2-cffi-bindings in /opt/anaconda3/lib/python3.9/site-packages (from argon2-cffi-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (21.2.0)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: cffi&gt;=1.0.1 in /opt/anaconda3/lib/python3.9/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.15.0)
+Requirement already satisfied: pycparser in /opt/anaconda3/lib/python3.9/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (2.21)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: testpath in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.5.0)
+Requirement already satisfied: bleach in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (4.1.0)
+Requirement already satisfied: beautifulsoup4 in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (4.11.1)
+Requirement already satisfied: nbclient&lt;0.6.0,&gt;=0.5.0 in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.5.13)
+Requirement already satisfied: mistune&lt;2,&gt;=0.8.1 in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.8.4)
+Requirement already satisfied: jupyterlab-pygments in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.1.2)
+Requirement already satisfied: defusedxml in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.7.1)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (1.5.0)
+Requirement already satisfied: entrypoints&gt;=0.2.2 in /opt/anaconda3/lib/python3.9/site-packages (from nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.4)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: soupsieve&gt;1.2 in /opt/anaconda3/lib/python3.9/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (2.3.1)
+Requirement already satisfied: webencodings in /opt/anaconda3/lib/python3.9/site-packages (from bleach-&gt;nbconvert-&gt;notebook&gt;=4.4.1-&gt;widgetsnbextension~=3.5.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.5.1)
+Requirement already satisfied: asttokens in /opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (2.0.5)
+Requirement already satisfied: executing in /opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.8.3)
+Requirement already satisfied: pure-eval in /opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&lt;8,&gt;=7-&gt;mols2grid) (0.2.2)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RDKit Chemistry</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit <span class="im">import</span> Chem</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RDKit drawing</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit.Chem.Draw <span class="im">import</span> IPythonConsole</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit.Chem <span class="im">import</span> Draw</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># A few settings to improve the quality of structures</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit.Chem <span class="im">import</span> rdDepictor</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>IPythonConsole.ipython_useSVG <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>rdDepictor.SetPreferCoordGen(<span class="va">True</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the ability to add a molecule to a dataframe</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit.Chem <span class="im">import</span> PandasTools</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The mols2grid library provides a convenient way of displaying molecules in a grid</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mols2grid</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mol <span class="op">=</span> Chem.MolFromSmiles(<span class="st">"c1ccccc1"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<!--?xml version='1.0' encoding='iso-8859-1'?-->
+<svg version="1.1" baseprofile="full" xmlns="http://www.w3.org/2000/svg" xmlns:rdkit="http://www.rdkit.org/xml" xlink="http://www.w3.org/1999/xlink" space="preserve" width="450px" height="150px" viewbox="0 0 450 150">
+<!-- END OF HEADER -->
+<rect style="opacity:1.0;fill:#FFFFFF;stroke:none" width="450.0" height="150.0" x="0.0" y="0.0"> </rect>
+<path class="bond-0 atom-0 atom-1" d="M 165.9,109.0 L 166.0,40.9" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-0 atom-0 atom-1" d="M 178.2,98.8 L 178.2,51.1" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-1 atom-1 atom-2" d="M 166.0,40.9 L 225.1,6.8" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-2 atom-2 atom-3" d="M 225.1,6.8 L 284.1,40.9" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-2 atom-2 atom-3" d="M 227.8,22.6 L 269.1,46.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-3 atom-3 atom-4" d="M 284.1,40.9 L 284.0,109.1" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-4 atom-4 atom-5" d="M 284.0,109.1 L 224.9,143.2" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-4 atom-4 atom-5" d="M 269.0,103.6 L 227.7,127.4" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+<path class="bond-5 atom-5 atom-0" d="M 224.9,143.2 L 165.9,109.0" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path>
+</svg>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Blog made with <a href="https://quarto.org/">Quarto</a> 🧡 by Jennifer HY Lin © 2022 📙 Citation as author and blog link</div>
+  </div>
+</footer>
+
+
+
+</body></html>
