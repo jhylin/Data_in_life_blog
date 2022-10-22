@@ -1,6 +1,6 @@
 ---
 title: "PhD project"
-subtitle: "A research saga that went beyond the pandemic"
+subtitle: "A research saga"
 author: "Jennifer HY Lin"
 date: "2022-01-24"
 categories: [Research, Drug discovery & design]
@@ -10,12 +10,11 @@ categories: [Research, Drug discovery & design]
 
 My PhD[^1][^2][^3] started about 6 months after I've finished my MPhil so it was around the beginning of 2015 that I've officially begun my PhD and it took a solid 4 years to finish (while working part-time as a hospital pharmacist). In simple words, there were two main research projects going on concurrently in my PhD:
 
-[^1]: I've attempted to communicate with both of my PhD advisers and our research collaborators to publish this work, but to no avail due to the severe restrictions imposed by the COVID-19 situation from the beginning of 2020 and basically also in 2021 (our collaborators were unable to perform any experiments during lockdowns...), a direct publication in a scientific journal is not going to happen any time soon so I thought to provide at least my part to showcase what I've done at least... 
+[^1]: I've attempted to communicate with both of my PhD advisers and our research collaborators to publish this work, but to no avail due to the severe restrictions imposed by the COVID-19 situation from the beginning of 2020 and basically also in 2021 (our collaborators were unable to perform any experiments during lockdowns...), a direct publication in a scientific journal is not going to happen any time soon so I thought to provide at least my part to showcase what I've done at least...
 
-[^2]: ***Updates on 31/1/2022*** – it appeared that my supervisors are in communications with our overseas research collaborators recently about the manuscript so there is a higher chance now that we may be able to publish this work towards the end of 2022 (fingers-crossed…).
+[^2]: ***Updates on 31/1/2022*** -- it appeared that my supervisors are in communications with our overseas research collaborators recently about the manuscript so there is a higher chance now that we may be able to publish this work towards the end of 2022 (fingers-crossed...).
 
-[^3]: ***Updates on 29/9/2022*** -- small progress to report, finally saw the more complete version of manuscript draft yesterday, helped a little with incorporating the draft into the journal template, and now most likely more editing and reviewing, then aiming to submit in two weeks (again I'm not going to bet anything on this, as time is always my best friend, hopefully more news next year). 
-
+[^3]: ***Updates on 29/9/2022*** -- small progress to report, finally saw the more complete version of manuscript draft yesterday, helped a little with incorporating the draft into the journal template, and now most likely more editing and reviewing, then aiming to submit in two weeks (again I'm not going to bet anything on this, as time is always my best friend, hopefully more news next year).
 
 -   **SERCA project** (details in a separate post as named)
 -   **Filamenting temperature-sensitive Z protein project** (also known as FtsZ project)
@@ -32,12 +31,16 @@ FtsZ project was not a new project at the time, but rather a continuation from m
 
 The image above was taken literally when I packed up everything after I've completed my PhD, which was physically summed into this little box, but what I've gained from the journey was far bigger than this. The two hardcover books on the left hand side were my MPhil and PhD theses (potentially useful as treatment for insomnia due to their lengths and time required to read).
 
-
 ##### **PhD thesis link**
 
-Please visit [http://hdl.handle.net/2123/20236](http://hdl.handle.net/2123/20236) if anyone is even remotely wanting to read the full thesis, for completeness, here it is (beware: very long).
-
+Please visit <http://hdl.handle.net/2123/20236> if anyone is even remotely wanting to read the full thesis, for completeness, here it is (beware: very long).
 
 ##### **Abstract of the projects**
 
 Drug discovery is one of the most challenging research fields that contributes to the birth of novel drugs for therapeutic use. Due to the complexity and intricate nature of the research, lengthy processes are involved in identifying potential hit molecules for a therapeutic target. To shorten the time required to reach the hit-to-lead stage, computer-aided drug design (CADD) has been used to expedite the process and reduce laboratory expenses. Common strategies used within CADD involve structure-based drug design (SBDD) and ligand-based drug design (LBDD). Both strategies were used extensively in two projects showing the complementarity of each strategy throughout the process. In this work, two separate drug discovery projects are detailed: Design, synthesis and molecular docking study of novel tetrahydrocurcumin analogues as potential sarcoplasmic-endoplasmic reticulum calcium ATPases (SERCA) inhibitors -- details the identification, synthesis and testing of potential hit candidate(s) targeting SERCA by using SBDD Filamenting temperature-sensitive mutant Z (FtsZ) as therapeutic target in ligand-based drug design -- details the identification, synthesis and testing of potential hit molecule(s) targeting FtsZ In the first project, homology modelling and virtual compound library screening were utilised as the SBDD methods to identify potential hit molecules for testing in P-type calcium ATPases such as SERCA. Preliminary results have found compound 20, an analogue of tetrahydrocurcumin, to show some SERCA inhibitory effect at 300µM based on a SERCA-specific calcium signalling assay performed via fluorometric imaging plate reader. Molecular docking study has also reflected this outcome with desirable ligand-protein binding energies found for 20 when compared with other tested ligands. Pharmacophore screening was used as the main LBDD method in the second project to identify probable hit candidates targeting FtsZ. Potential ligands were synthesised, and tested for antibacterial effect in Bacillus Subtilis strain 168 (Bs168) and Streptococcus pneumoniae strain R6 (SpnR6) cells. One of the tetrahydrocurcumin analogues, compound 4, was found to have minimum inhibitory concentration (MIC) ≤ 10 µM in Bs168 cells and ≤ 2 µM in spnR6 cells. The IC50 values for 4 were 9.1 ± 0.01 µM and 1 ± 0.01 µM in Bs168 and SpnR6 cells respectively. The MIC of 4 was found to be very similar to the MIC of compound 1, a known hit compound targeting against Bs168 cells. On the other hand, the MIC of 4 was lower than the MIC (\> 64 µg/mL) of a well-known FtsZ inhibitor, PC190723, against S. pneumoniae. Subsequent molecular docking analyses were completed to evaluate the ligand-protein binding energies to correlate against the testing results. Both compounds 20 and 4 possess some structural similarities and differences that may confer their different effects in these protein targets, which render both with potentials to become the next lead molecules for future development.
+
+##### **Final update on FtsZ project**
+As time was ticking along towards the end of 2022, my last attempt to try to get this work published occurred around end of August, where I contacted one of my previous PhD advisers. After that I actually thought there was no way I could carry on in this line of research work, or even thinking about expanding into cheminformatics for drug discovery and design etc. So in September, I thought about leaving all of this behind and that I need to change direction completely (again), e.g. into health data science or similar. Perhaps it was the universe's answering or for other unknown reasons, in early October, I got a random email saying our manuscript was submitted, after the manuscript was finally completed by both sides (overseas-based collaborating research group in India and our side in Australia). Then it seems things started to roll again, after 2019. During these years, one of the biggest obstacle was COVID, which had delayed experiments in India. 
+
+##### **Published paper link**
+This will complete the story for the FtsZ project: https://www.mdpi.com/1420-3049/27/20/6993/htm
