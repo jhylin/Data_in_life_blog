@@ -2,16 +2,34 @@
 title: "Molecular similarities in selected COVID-19 antivirals"
 subtitle: "Using RDKit's similarity map and fingerprint generator"
 author: "Jennifer HY Lin"
-date: 2022-11-13
+date: 2022-11-15
 categories: [Data analytics projects, Cheminformatics, Python, Research]
 jupyter: python3
 draft: true
 ---
 
 ##### **Why this post?**
-Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data analytic project since my time in Australia. It was heavily inspired by the research saga mentioned in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html) related to my PhD. About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD (for reasons already explained in the blog post), so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now (thank you universe and also everyone I've met and worked with so far of course). 
+Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project since I came back home after my time in Australia. The desire to prepare and write this post was mainly triggered by the research saga mentioned in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD (for reasons already explained in the blog post), so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now (thank you universe and also everyone I've met and worked with so far of course). 
 
 The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely (as in, I'll never touch Chemistry ever again, despite I used to enjoy it a lot since my first year at university). Therefore, this was how I got myself started on this post - a small piece of cheminformatics work on molecular similarity for selected FDA-approved COVID-19 antivirals, as taking my first baby step in this field.
+
+<br>
+
+##### **The COVID-19 antivirals**
+
+Without going into too much pharmacodynamic profiles for these antivirals as that could easily be another blog post, I'll provide only brief overviews on how these medicines were used mainly in the New Zealand context (may vary for different countries).
+
+###### ***nirmatrelvir & ritonavir***
+One of the oral COVID-19 antivirals, marketed as Paxlovid, was indicated for mild to moderate symptoms, or at risk of severe disease. For effectiveness, it needed to be taken within 5 days of symptom onset, otherwise it might not work as expected. As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. One of the well-known downsides for this medicine was that it could cause drug interactions with several other commonly used medications such as dabigatran, clopidogrel or potent CYP3A inducers such as carbamazepine as one of the examples (for full drug interaction profiles, please consult local guidelines). Renal functions was also another important factor to consider when dosing.
+
+###### ***molnupiravir***
+This was the other known oral COVID-19 antiviral, also indicated for mild to moderate symptoms or at risk of severe disease, and also if nirmatrelvir with ritonavir was unsuitable. It was often selected as an oral alternative to nirmatrelvir with ritonavir to avoid drug interactions. It also needed to be taken within 5 days of symptom onset to reach optimal effect.
+
+###### ***remdesivir***
+This was administered via intravenous infusion for selected adult or paediatric patients (depends on local guidelines) when they were hospitalised and at risk of developing severe disease. Current consideration for its use would be within 7 days of symptom onset. It was classed as a section 29 medicine, which meant it was unapproved, but could be prescribed on a case-by-case basis by qualified medical practitioners. 
+
+###### ***baricitinib***
+This was also another unapproved, section 29 medicine, indicated for use in hospitalised patients on a case-by-case basis. It was indicated for moderate to severe disease with renally-adjusted dose via oral or nasogastric route. 
 
 <br>
 
@@ -32,6 +50,9 @@ The URLs to obtain canonical simplified molecular input line entry systems (SMIL
 
 ##### **Install modules/libraries**
 For anyone who would like to repeat my work here, I'd just want to give you a heads up - this work was coded entirely in Python and initially saved as .ipynb file which was executed in Jupyter Notebook. It was later converted into .qmd file via CLI^[Command line interface], which was then run without problems in RStudio IDE. One thing to note was that all 2D chemical structures or simialrity maps did not show up in the RStudio IDE after code executions, but after saving and rendering the document, all of them appeared nicely in the published version in my blog.
+
+The coding will start from here:
+
 ```{python}
 # Uncomment and install the following libraries if required 
 #!pip install rdkit-pypi pandas mols2grid matplotlib
@@ -70,7 +91,7 @@ import matplotlib.pyplot as plt
 
 Before any actual molecular manipulation work could begin, I actually needed to download the SMILES of all 5 molecules as mentioned above from the source URLs. I've downloaded all 5 molecules' SMILES and saved as .sdf files (selected 2D structure option).
 
-One of the most well-known COVID-19 oral antivirals was Paxlovid (brand name), which consisted of two active drugs, nirmatrelvir and ritonavir (generic names). As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. So I started off with nirmatrelvir with its canonical SMILES retrieved from PubChem. To display a molecule as a 2D chemical structure graphically, an open-source cheminformatics toolkit library, RDKit, was used.
+So I started off with nirmatrelvir with its canonical SMILES retrieved from PubChem. To display a molecule as a 2D chemical structure graphically, an open-source cheminformatics toolkit library, RDKit, was used.
 
 ```{python}
 # Generate a RDKit molecule representing nirmatrelvir
@@ -136,7 +157,7 @@ Draw.MolsToGridImage(cpds,
 
 ##### **Similarity maps**
 
-Now this part was interesting to me and I spent at least a day or two to just try and understand the fundamentals behind this functionality in RDKit. One of the biggest help for me to fully understand this was this paper: Riniker, S.; Landrum, G. A. “Similarity Maps - A Visualization Strategy for Molecular Fingerprints and Machine-Learning Methods” J. Cheminf. 5:43 (2013). It explained the full methodology behind generating similarity map using fingerprints. 
+Now this part was interesting to me and I've spent at least a day or two to just try and understand the fundamentals behind this functionality in RDKit. One of the biggest help for me to fully understand this was this paper: Riniker, S.; Landrum, G. A. “Similarity Maps - A Visualization Strategy for Molecular Fingerprints and Machine-Learning Methods” J. Cheminf. 5:43 (2013). It explained the full methodology behind generating similarity map using fingerprints. 
 
 ```{python}
 # Build similarity maps between molecules
@@ -344,14 +365,17 @@ fp1 = [fp.GetFingerprint(x) for x in mols]
 fp1
 ```
 
+A loop was created to iterate through all 5 antivirals to compare their molecular similarities by using Tanimoto coefficient (TC)^[where 1.0 indicates high similarity, and zero indicates otherwise]. Particularly, each molecule was compared to the other four molecules, with results printed as shown below.
+
 ```{python}
-# Create a loop to iterate through all 5 COVID antivirals 
-# to compare the molecular similarities by using Tanimoto coefficient
+
 for i in range(len(fp1)):
     for a in range(i):
         tc = DataStructs.TanimotoSimilarity(fp1[i], fp1[a])
         print(f'mol{i+1}-mol{a+1}: Tanimoto coefficient {tc}')
 ```
+
+I then saved each TC separately between nirmatrelvir and other 4 molecules. This was to create another list of these TCs for data visualisation later.
 
 ```{python}
 # Tanimoto coefficient between nirmatrelvir (mol1) & ritonavir (mol2)
@@ -367,10 +391,14 @@ tc_mol1_mol4 = DataStructs.TanimotoSimilarity(fp1[0], fp1[3])
 tc_mol1_mol5 = DataStructs.TanimotoSimilarity(fp1[0], fp1[4])
 ```
 
+A new list was created to save all TCs for nirmatrelvir versus other 4 molecules.
+
 ```{python}
 tc_mols = [tc_mol1_mol2, tc_mol1_mol3, tc_mol1_mol4, tc_mol1_mol5]
 tc_mols
 ```
+
+I thought to include following codes to ensure I wasn't losing track on which molecule was which by having them displayed as 2D structures with labels.
 
 ```{python}
 # Display compounds to help with recognising which antivirals are being compared
@@ -382,10 +410,14 @@ Draw.MolsToGridImage(mols,
                     )
 ```
 
+Another list was generated to save all maximum weights between nirmatrelvir and the rest of the molecules.
+
 ```{python}
 maxw_diff = [mol2_rit_maxw_mol1, mol3_mol_maxw_mol1, mol4_rem_maxw_mol1, mol5_bar_maxw_mol1]
 maxw_diff
 ```
+
+A new dataframe was also created to include maximum weights and TCs of all 5 molecules.
 
 ```{python}
 df_ms = pd.DataFrame(list(zip(maxw_diff, tc_mols)),
@@ -395,18 +427,24 @@ df_ms = pd.DataFrame(list(zip(maxw_diff, tc_mols)),
 df_ms
 ```
 
+To produce a bar graph representing these parameters, I realised I would probably need to change the index into a column instead. 
+
 ```{python}
 df_ms.reset_index(inplace = True)
 df_ms_new = df_ms.rename(columns = {'index': 'Molecules'})
 df_ms_new
 ```
 
+<br>
+
+##### **Data visualisation and some findings**
+
+A side-by-side bar graph showing two different molecular similarity parameters - maximum weights from similarity map and Tanimoto coefficients calculated from Morgan fingerprints - was plotted based on the dataframe created above. It showed similar trend between these two molecular similarity tests for these known COVID-19 antivirals.
+
 ```{python}
 # Set the overall font size to make all labels on graph easier to read
 plt.rcParams.update({'font.size': 12})
-# Plot a bar graph showing two different molecular similarity parameters 
-# Maximum weight from similarity map & Tanimoto coefficient calculated based on Morgan fingerprints 
-# Used on 5 known FDA-approved COVID-19 antivirals
+
 # Used nirmatrelvir as reference compound (mol1) and compared it with 4 other antivirals
 df_ms_new.plot(x = 'Molecules', 
                y = ['Maxweight', 'T_coeff'], 
@@ -417,7 +455,7 @@ df_ms_new.plot(x = 'Molecules',
 plt.title(label = 'Molecular similarities between 5 known COVID-19 antivirals')
 
 
-# Add caption for the graph about the abbreviations of all the molecules compared 
+# Add caption for graph re. abbreviations of all the molecules compared 
 # Import textwrap module
 import textwrap
 t = "nmt = nirmatrelvir, "\
@@ -433,11 +471,18 @@ plt.text(len(x) / 2, 0, b, ha = 'left', va = 'bottom')
 
 <br>
 
-##### **Final words and acknowledgement**
-I have read quite a few blog posts from P. Walter and Iwatobipen, and have enjoyed them but never quite got around to write one myself, so finally I did it... although this post itself is not written in an amazing style or grand scale, but I hope to project what I did here in the future, e.g. to apply them for a larger set of compounds. My very draft thought now is to perhaps trial using ChEMBL library, which from what I've heard and seen, is a useful open-source cheminformatics compounds library, which includes many other relevant compound information (not just chemical structures). 
+##### **Acknowledgement**
 
-As a little prelude to what other work I'm also planning to do, um... I've managed to start learning Rust as well (there is also a story about why I started learning Rust, which I'll leave for another future post to explain if I feel it fits the context of the blog post. I think from what I tried so far, only at the seedling stage currently, it's going to be an even steeper learning curve than Python and R, but I feel it's going to benefit whatever I'm planning to do consciously/unconsciously in the future).
+The codes used in this post were heavily inspired by and adapted from the following blogs and website shown below. I've learnt a lot from them, and would like to thank their existence to help readers like me to learn in an open-source manner. I particularly like the clear and concise writing style from P. Walter's Practical Cheminformatics blog which is easy to follow, whereas Iwatobipen's is life worth it? blog is full of surprises to show a wide diverse range of cheminformatics tools available to use.
 
 * [P. Walter's blog](https://practicalcheminformatics.blogspot.com)
 * [Iwatobipen's blog](https://iwatobipen.wordpress.com)
 * [RDKit documentation](https://www.rdkit.org/docs/index.html) by G. Landrum
+
+<br>
+
+##### **Final words**
+
+I have read quite a few blog posts from P. Walter and Iwatobipen, and have enjoyed them but never quite got around to write one myself, so finally I did it... although this post itself was not written in a grand scale, I hope to project what I did here in the future, e.g. to apply them to a larger set of compounds. My very draft thought now is to perhaps trial using ChEMBL library, which from what I've heard, is a useful open-source cheminformatics compounds library. 
+
+As a little prelude to what other work I'm also planning to do, um... I've managed to start learning Rust as well (there is also a story about why I started learning Rust, which I'll leave for another future post to explain if I feel it fits the context of the post. I think from what I tried so far, only at the seedling stage currently, it's going to be an even steeper learning curve than Python and R, but I feel it's going to benefit whatever I'm planning to do consciously/unconsciously in the future).
