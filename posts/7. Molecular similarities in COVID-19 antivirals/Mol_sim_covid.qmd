@@ -2,7 +2,7 @@
 title: "Molecular similarities in selected COVID-19 antivirals"
 subtitle: "Using RDKit's similarity map and fingerprint generator"
 author: "Jennifer HY Lin"
-date: 2022-11-15
+date: 2022-11-16
 categories: [Data analytics projects, Cheminformatics, Python, Research]
 jupyter: python3
 draft: true
@@ -439,13 +439,23 @@ df_ms_new
 
 ##### **Data visualisation and some findings**
 
-A side-by-side bar graph showing two different molecular similarity parameters - maximum weights from similarity map and Tanimoto coefficients calculated from Morgan fingerprints - was plotted based on the dataframe created above. It showed similar trend between these two molecular similarity tests for these known COVID-19 antivirals.
+A side-by-side bar graph showing two different molecular similarity parameters - maximum weights from similarity map and Tanimoto coefficients calculated from Morgan fingerprints - was plotted based on the dataframe created above. It showed similar trend between these two molecular similarity tests for these known COVID-19 antivirals. In that, nirmatrelvir versus ritonavir showed the largest molecular difference out of all 5 compounds with the highest of maximum weight, which was reflected in the seemingly lowest Tanimoto coefficient (shortest orange bar) shown. Interestingly, between nirmatrelvir and remdesivir, it appeared its maximum weight was lowest of all 5 molecules, but the Tanimoto coefficient did not quite reflect that (being lower than that for nirmatrelvir versus molnupiravir and baricitinib), showing that there could be some variances in the similarity parameters. 
 
 ```{python}
 # Set the overall font size to make all labels on graph easier to read
-plt.rcParams.update({'font.size': 12})
+plt.rcParams.update({'font.size': 10})
 
 # Used nirmatrelvir as reference compound (mol1) and compared it with 4 other antivirals
+# If wanting stacked bar graph:
+#df_ms_new.plot(x = 'Molecules', 
+               #kind = 'bar', 
+               #width = 0.3, 
+               #stacked = True, 
+               #title = 'Molecular similarities between 5 known COVID-19 antivirals'
+               #)
+#plt.show()
+
+# Side-by-side bar graph
 df_ms_new.plot(x = 'Molecules', 
                y = ['Maxweight', 'T_coeff'], 
                kind = 'bar', 
@@ -453,7 +463,6 @@ df_ms_new.plot(x = 'Molecules',
                )
 # Add title
 plt.title(label = 'Molecular similarities between 5 known COVID-19 antivirals')
-
 
 # Add caption for graph re. abbreviations of all the molecules compared 
 # Import textwrap module
@@ -468,6 +477,13 @@ x = 'Molecules'
 y = ['Maxweight', 'T_coeff']
 plt.text(len(x) / 2, 0, b, ha = 'left', va = 'bottom')
 ```
+
+However. if we bring back the dataframe itself and have a look again:
+
+```{python}
+df_ms_new
+```
+All 3 molecular comparisons' T_coeff from rows 1 to 3 showed very similar results for T_coeff if we rounded the results to two decimal places. Also, this was probably not a very good example of using these two molecular similarity parameters in RDKit due to the small sample size.
 
 <br>
 
