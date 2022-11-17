@@ -9,9 +9,15 @@ draft: true
 ---
 
 ##### **Why this post?**
-Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project since I came back home after my time in Australia. The desire to prepare and write this post was mainly triggered by the research saga mentioned in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD (for reasons already explained in the blog post), so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now (thank you universe and also everyone I've met and worked with so far of course). 
+Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project since I came back home after my time in Australia. It was also partly due to the research saga mentioned in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD, so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now (thank goodness...). 
 
-The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely (as in, I'll never touch Chemistry ever again, despite I used to enjoy it a lot since my first year at university). Therefore, this was how I got myself started on this post - a small piece of cheminformatics work on molecular similarity for selected FDA-approved COVID-19 antivirals, as taking my first baby step in this field.
+The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely. Therefore, this was how I got myself started on this post - a small piece of cheminformatics work on molecular similarity for selected FDA-approved COVID-19 antivirals, as taking my first baby step in this field.
+
+<br>
+
+###### ***Heads up***
+
+This work was coded entirely in Python3 and saved as .ipynb file initially in Jupyter Notebook. It was later converted into .qmd file via CLI^[Command line interface], which was then run without problems in RStudio IDE. One thing to note was that all 2D chemical structures or simialrity maps did not physically show up in RStudio IDE after code executions, but after file rendering, all of them appeared accordingly in the published version.
 
 <br>
 
@@ -20,10 +26,10 @@ The funny thing was that before I knew this paper was coming, I've already made 
 Without going into too much pharmacodynamic profiles for these antivirals as that could easily be another blog post, I'll provide only brief overviews on how these medicines were used mainly in the New Zealand context (may vary for different countries).
 
 ###### ***nirmatrelvir & ritonavir***
-One of the oral COVID-19 antivirals, marketed as Paxlovid, was indicated for mild to moderate symptoms, or at risk of severe disease. For effectiveness, it needed to be taken within 5 days of symptom onset, otherwise it might not work as expected. As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. One of the well-known downsides for this medicine was that it could cause drug interactions with several other commonly used medications such as dabigatran, clopidogrel or potent CYP3A inducers such as carbamazepine as one of the examples (for full drug interaction profiles, please consult local guidelines). Renal functions was also another important factor to consider when dosing.
+One of the oral COVID-19 antivirals, marketed as Paxlovid, was indicated for mild to moderate symptoms, or at risk of severe disease. For effectiveness, it needed to be taken within 5 days of symptom onset, otherwise it might not work as expected. As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. One of the well-known downsides for this medicine was that it could cause drug interactions with several other commonly used medications such as dabigatran, or potent CYP3A inducers such as carbamazepine as one of the examples (for full drug interaction profiles, please consult local guidelines). Renal functions was also another important factor to consider when dosing.
 
 ###### ***molnupiravir***
-This was the other known oral COVID-19 antiviral, also indicated for mild to moderate symptoms or at risk of severe disease, and also if nirmatrelvir with ritonavir was unsuitable. It was often selected as an oral alternative to nirmatrelvir with ritonavir to avoid drug interactions. It also needed to be taken within 5 days of symptom onset to reach optimal effect.
+This was the other oral COVID-19 antiviral, also indicated for mild to moderate symptoms or at risk of severe disease, and also if nirmatrelvir with ritonavir was unsuitable. It was often selected as an oral alternative to nirmatrelvir with ritonavir to avoid drug interactions. It also needed to be taken within 5 days of symptom onset to reach optimal effect.
 
 ###### ***remdesivir***
 This was administered via intravenous infusion for selected adult or paediatric patients (depends on local guidelines) when they were hospitalised and at risk of developing severe disease. Current consideration for its use would be within 7 days of symptom onset. It was classed as a section 29 medicine, which meant it was unapproved, but could be prescribed on a case-by-case basis by qualified medical practitioners. 
@@ -34,7 +40,7 @@ This was also another unapproved, section 29 medicine, indicated for use in hosp
 <br>
 
 ##### **Source of dataset**
-The URLs to obtain canonical simplified molecular input line entry systems (SMILES) of all 5 molecules are listed below (there are several different options to obtain SMILES for molecules, this was what I decided to do in this case):
+The URLs to obtain canonical simplified molecular input line entry systems (SMILES) of all 5 molecules are listed below (there are several different options to obtain SMILES for molecules, I've decided to use PubChem in this case):
 
 1. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 155903259, Nirmatrelvir; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Nirmatrelvir](https://pubchem.ncbi.nlm.nih.gov/compound/155903259)
 
@@ -49,19 +55,18 @@ The URLs to obtain canonical simplified molecular input line entry systems (SMIL
 <br>
 
 ##### **Install modules/libraries**
-For anyone who would like to repeat my work here, I'd just want to give you a heads up - this work was coded entirely in Python and initially saved as .ipynb file which was executed in Jupyter Notebook. It was later converted into .qmd file via CLI^[Command line interface], which was then run without problems in RStudio IDE. One thing to note was that all 2D chemical structures or simialrity maps did not show up in the RStudio IDE after code executions, but after saving and rendering the document, all of them appeared nicely in the published version in my blog.
 
-The coding will start from here:
+Install relevant libraries if needed.
 
 ```{python}
 # Uncomment and install the following libraries if required 
 #!pip install rdkit-pypi pandas mols2grid matplotlib
 ```
 
-Import libraries needed for this work as shown below.
+Import libraries needed as shown below.
 
 ```{python}
-# RDKit Chemistry
+# RDKit chemistry
 from rdkit import Chem
 # RDKit drawing
 from rdkit.Chem.Draw import IPythonConsole
@@ -89,7 +94,7 @@ import matplotlib.pyplot as plt
 
 ##### **Generate RDKit molecules based on SMILES**
 
-Before any actual molecular manipulation work could begin, I actually needed to download the SMILES of all 5 molecules as mentioned above from the source URLs. I've downloaded all 5 molecules' SMILES and saved as .sdf files (selected 2D structure option).
+Before any actual molecular manipulation work could begin, the SMILES of all 5 molecules were downloaded from the source URLs. I've downloaded all 5 molecules' SMILES and saved them as separate .sdf files (selected 2D structure option).
 
 So I started off with nirmatrelvir with its canonical SMILES retrieved from PubChem. To display a molecule as a 2D chemical structure graphically, an open-source cheminformatics toolkit library, RDKit, was used.
 
@@ -483,7 +488,7 @@ However. if we bring back the dataframe itself and have a look again:
 ```{python}
 df_ms_new
 ```
-All 3 molecular comparisons' T_coeff from rows 1 to 3 showed very similar results for T_coeff if we rounded the results to two decimal places. Also, this was probably not a very good example of using these two molecular similarity parameters in RDKit due to the small sample size.
+All 3 molecular comparisons' T_coeff from rows 1 to 3 showed very similar results for T_coeff if we rounded the results to two decimal places. Also, this was probably not a very good example of using these two RDKit molecular similarity parameters  due to the very small sample size.
 
 <br>
 
