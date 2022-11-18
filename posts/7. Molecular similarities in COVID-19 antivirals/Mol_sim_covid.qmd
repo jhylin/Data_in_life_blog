@@ -2,16 +2,16 @@
 title: "Molecular similarities in selected COVID-19 antivirals"
 subtitle: "Using RDKit's similarity map and fingerprint generator"
 author: "Jennifer HY Lin"
-date: 2022-11-18
+date: 2022-11-19
 categories: [Data analytics projects, Cheminformatics, Python, RDKit]
 jupyter: python3
 draft: false
 ---
 
 ##### **Why this post?**
-Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project. It was partly due to the research saga detailed in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD, so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now (thank goodness...). 
+Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project. It was partly due to the research saga detailed in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD, so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now...
 
-The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely. Therefore, this was how I got myself started on this post - a small piece of cheminformatics work on molecular similarity for selected COVID-19 antivirals, as taking my first baby step in this field.
+The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely. Therefore, this was how I got myself started on this post, a small piece of cheminformatics work on molecular similarity for selected COVID-19 antivirals, as taking my first baby step in this field.
 
 <br>
 
@@ -374,7 +374,7 @@ fp1 = [fp.GetFingerprint(x) for x in mols]
 fp1
 ```
 
-A loop was created to iterate through all 5 antivirals to compare their molecular similarities by using Tanimoto coefficient (TC)^[where 1.0 indicates high similarity, and zero indicates otherwise]. Particularly, each molecule was compared to the other 4 molecules, with results printed as shown below.
+A loop was created to iterate through all 5 antivirals to compare their molecular similarities by using Tanimoto coefficient (TC)^[Ranged from zero (lowest similarity) to 1.0 (highest similarity), more on this in the next section]. Particularly, each molecule was compared to the other 4 molecules, with results printed as shown below.
 
 ```{python}
 
@@ -448,7 +448,7 @@ df_ms_new
 
 ##### **Data visualisation and some findings**
 
-A side-by-side bar graph showing two different molecular similarity parameters - maximum weights from similarity map and Tanimoto coefficients calculated from Morgan fingerprints - was plotted based on the dataframe created above. It showed similar trend between these two molecular similarity tests for these known COVID-19 antivirals. In that, nirmatrelvir versus ritonavir showed the largest molecular difference out of all 5 compounds with the highest maximum weight. This was reflected in the lowest Tanimoto coefficient as the shortest orange bar, which implied a low similarity between the two molecules. Interestingly, between nirmatrelvir and remdesivir, it appeared the maximum weight was lowest of all 5 molecules, but the Tanimoto coefficient did not quite reflect that (being lower than that for nirmatrelvir versus molnupiravir and baricitinib).
+A side-by-side bar graph showing two different molecular similarity parameters - maximum weights from similarity map and TCs calculated from Morgan fingerprints - was plotted based on the dataframe created above. It showed similar trend between these two molecular similarity tests for these known COVID-19 antivirals. In that, nirmatrelvir versus ritonavir showed the largest molecular difference out of all 5 compounds with the highest maximum weight. This was reflected in the lowest TC as the shortest orange bar, which implied a low similarity between the two molecules. Interestingly, between nirmatrelvir and remdesivir, it appeared the maximum weight was lowest of all 5 molecules, but the TC did not quite reflect that (being lower than that for nirmatrelvir versus molnupiravir and baricitinib).
 
 ```{python}
 # Set the overall font size to make all labels on graph easier to read
@@ -493,15 +493,16 @@ One possibility for this difference could be that the maximum weight parameter i
 
 ###### ***Tanimoto similarity/coefficient***
 
-Equation:
+TC was the ratio of the number of chemical features common to two molecules (e.g. molecule *a* and molecule *b*) to the total number of chemical features in the two molecules. The following equation summarised this.
+
 $$
-\text{Tanimoto coefficiant} = \frac{(a \cap b)}{(a + b - (a \cap b))}
+\text{Tanimoto coefficient} = \frac{(a \cap b)}{(a + b - (a \cap b))}
 $$
-TC was summarised as the ratio of the number of chemical features common to two molecules (e.g. molecule *a* and molecule *b*) to the total number of chemical features in the two molecules. 
+
 
 ###### ***Dice similarity/coefficient***
 
-On the other hand, Dice coefficient described the number of features in common for molecules *a* and *b*, relative to the average size of the total number of chemical features present in the two molecules. The weighting factor of 0.5 was shown in the denominator (or can be 2 in the numerator). The coefficient also ranges from zero to 1.
+On the other hand, Dice coefficient described the number of features in common for molecules *a* and *b*, relative to the average size of the total number of chemical features present in the two molecules. The weighting factor of 0.5 was shown in the denominator (or can be 2 in the numerator). The coefficient also ranges from zero to 1. The following showed the equation of Dice similarity.
 
 $$
 \text{Dice coefficient} = \frac{(a \cap b)}{0.5\times(a + b)}
