@@ -5,7 +5,6 @@ author: "Jennifer HY Lin"
 date: 2022-11-19
 categories: [Data analytics projects, Cheminformatics, Python, RDKit]
 jupyter: python3
-draft: false
 ---
 
 ##### **Why this post?**
