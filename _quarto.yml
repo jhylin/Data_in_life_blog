@@ -1,7 +1,8 @@
 project:
   type: website
   resources: 
-     - "*.jpg" 
+     - "*.jpg"
+     - "*.qmd"
 
 website:
   title: "Home"
