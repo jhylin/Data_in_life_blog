@@ -22,6 +22,8 @@ This work was coded entirely in Python3 and saved as .ipynb file initially in Ju
 
 ![Photo by <a href="https://unsplash.com/@dkoi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">D koi</a> on <a href="https://unsplash.com/s/photos/chemistry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](H2O.jpg){fig-align="left"}
 
+<br>
+
 ##### **The COVID-19 antivirals**
 
 Without going into too much pharmacodynamic profiles for these antivirals, as that could easily be another blog post, I'll provide only brief overviews on how these medicines were used mainly in the New Zealand context (may vary for different countries).
