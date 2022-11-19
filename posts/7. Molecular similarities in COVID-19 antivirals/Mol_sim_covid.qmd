@@ -5,9 +5,11 @@ author: "Jennifer HY Lin"
 date: 2022-11-19
 categories: [Data analytics projects, Cheminformatics, Python, RDKit]
 jupyter: python3
+draft: false
 ---
 
 ##### **Why this post?**
+
 Well, I've always had a thought sitting at the back of my mind about working on a chemistry-related data project. It was partly due to the research saga detailed in another [blog post](https://jhylin.github.io/Data_in_life_blog/posts/PhD%20projects/PhD_projects.html). About two months ago, I thought I will never be able to get anything decent (e.g. first-author paper) published out of my PhD, so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now...
 
 The funny thing was that before I knew this paper was coming, I've already made up my mind about working on at least one piece of chemistry-related work before leaving it behind completely. Therefore, this was how I got myself started on this post, a small piece of cheminformatics work on molecular similarity for selected COVID-19 antivirals, as taking my first baby step in this field.
@@ -16,7 +18,9 @@ The funny thing was that before I knew this paper was coming, I've already made 
 
 ###### ***Heads up***
 
-This work was coded entirely in Python3 and saved as .ipynb file initially in Jupyter Notebook. It was later converted into .qmd file via CLI^[Command line interface], which was run without problems in RStudio IDE. One thing to note was that all 2D chemical structures or similarity maps did not physically show up in RStudio IDE after code executions, but after file rendering, all of them appeared accordingly in the published version.
+This work was coded entirely in Python3 and saved as .ipynb file initially in Jupyter Notebook. It was later converted into .qmd file via CLI[^1], which was run without problems in RStudio IDE. One thing to note was that all 2D chemical structures or similarity maps did not physically show up in RStudio IDE after code executions, but after file rendering, all of them appeared accordingly in the published version.
+
+[^1]: Command line interface
 
 <br>
 
@@ -29,31 +33,38 @@ This work was coded entirely in Python3 and saved as .ipynb file initially in Ju
 Without going into too much pharmacodynamic profiles for these antivirals, as that could easily be another blog post, I'll provide only brief overviews on how these medicines were used mainly in the New Zealand context (may vary for different countries).
 
 ###### ***nirmatrelvir & ritonavir***
-One of the oral COVID-19 antivirals, marketed as Paxlovid, was indicated for mild to moderate symptoms, or at risk of severe disease. For effectiveness, it needed to be taken within 5 days of symptom onset, otherwise it might not work as expected. As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A^[Cytochrome P450 enzymes of 3A subfamily]-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. One of the well-known downsides for this medicine was that it could cause drug interactions with several other commonly used medications such as dabigatran, or potent CYP3A inducers such as carbamazepine as one of the examples (for full drug interaction profiles, please consult local guidelines). Renal functions was also another important factor to consider when dosing.
+
+One of the oral COVID-19 antivirals, marketed as Paxlovid, was indicated for mild to moderate symptoms, or at risk of severe disease. For effectiveness, it needed to be taken within 5 days of symptom onset, otherwise it might not work as expected. As a side note, ritonavir was added like an enhancer agent for nirmatrelvir, due to its known ability to inhibit CYP3A[^2]-mediated metabolism of nirmatrelvir, therefore, by having it also inside the oral tablet, it would ensure that the plasma concentration of nirmatrelvir would be kept at an optimal therapeutic level *in vivo*, vital for the antiviral effect. One of the well-known downsides for this medicine was that it could cause drug interactions with several other commonly used medications such as dabigatran, or potent CYP3A inducers such as carbamazepine as one of the examples (for full drug interaction profiles, please consult local guidelines). Renal functions was also another important factor to consider when dosing.
+
+[^2]: Cytochrome P450 enzymes of 3A subfamily
 
 ###### ***molnupiravir***
+
 This was the other oral COVID-19 antiviral, also indicated for mild to moderate symptoms or at risk of severe disease, and also if the option of nirmatrelvir with ritonavir was unsuitable. It was often selected as an oral alternative to nirmatrelvir with ritonavir to avoid drug interactions. It also needed to be taken within 5 days of symptom onset to reach optimal effect.
 
 ###### ***remdesivir***
-This was administered via intravenous infusion for selected adult or paediatric patients (depends on local guidelines) when they were hospitalised and at risk of developing severe disease. Current consideration for its use would be within 7 days of symptom onset. It was classed as a section 29 medicine, which meant it was unapproved, but could be prescribed on a case-by-case basis by qualified medical practitioners. 
+
+This was administered via intravenous infusion for selected adult or paediatric patients (depends on local guidelines) when they were hospitalised and at risk of developing severe disease. Current consideration for its use would be within 7 days of symptom onset. It was classed as a section 29 medicine, which meant it was unapproved, but could be prescribed on a case-by-case basis by qualified medical practitioners.
 
 ###### ***baricitinib***
-This was also another unapproved, section 29 medicine, indicated for use in hospitalised patients on a case-by-case basis. It was indicated for moderate to severe disease with renally-adjusted dose via oral or nasogastric route. 
+
+This was also another unapproved, section 29 medicine, indicated for use in hospitalised patients on a case-by-case basis. It was indicated for moderate to severe disease with renally-adjusted dose via oral or nasogastric route.
 
 <br>
 
 ##### **Source of dataset**
+
 The URLs to obtain canonical simplified molecular input line entry systems (SMILES) of all 5 molecules are listed below (there are several different ways to obtain SMILES for molecules, I've decided to use PubChem in this case):
 
-1. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 155903259, Nirmatrelvir; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Nirmatrelvir](https://pubchem.ncbi.nlm.nih.gov/compound/155903259)
+1.  [PubChem \[Internet\]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 155903259, Nirmatrelvir; \[cited 2022 Nov. 13\]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Nirmatrelvir](https://pubchem.ncbi.nlm.nih.gov/compound/155903259)
 
-2. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 392622, Ritonavir; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Ritonavir](https://pubchem.ncbi.nlm.nih.gov/compound/ritonavir)
+2.  [PubChem \[Internet\]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 392622, Ritonavir; \[cited 2022 Nov. 13\]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Ritonavir](https://pubchem.ncbi.nlm.nih.gov/compound/ritonavir)
 
-3. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 145996610, EIDD-2801; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/eidd-2801](https://pubchem.ncbi.nlm.nih.gov/compound/145996610)
+3.  [PubChem \[Internet\]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 145996610, EIDD-2801; \[cited 2022 Nov. 13\]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/eidd-2801](https://pubchem.ncbi.nlm.nih.gov/compound/145996610)
 
-4. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 121304016, Remdesivir; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Remdesivir](https://pubchem.ncbi.nlm.nih.gov/compound/145996610)
+4.  [PubChem \[Internet\]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 121304016, Remdesivir; \[cited 2022 Nov. 13\]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Remdesivir](https://pubchem.ncbi.nlm.nih.gov/compound/145996610)
 
-5. [PubChem [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 44205240, Baricitinib; [cited 2022 Nov. 13]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Baricitinib](https://pubchem.ncbi.nlm.nih.gov/compound/44205240)
+5.  [PubChem \[Internet\]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004-. PubChem Compound Summary for CID 44205240, Baricitinib; \[cited 2022 Nov. 13\]. Available from: https://pubchem.ncbi.nlm.nih.gov/compound/Baricitinib](https://pubchem.ncbi.nlm.nih.gov/compound/44205240)
 
 <br>
 
@@ -135,7 +146,8 @@ bar
 
 ##### **Display 2D molecules in grid view**
 
-To display all 5 molecules in a grid view, I've saved all separate .sdf files into  one .sdf file (e.g. covid_antivirals.sdf). A quick way to do this was via CLI by using one line of code: cat *.sdf > file_name.sdf (replace "file_name" as the actual file name wanted). One thing to be aware of was to make sure which working directory this was saved to, as it needed to be in the same directory as the .qmd file for it to work.
+To display all 5 molecules in a grid view, I've saved all separate .sdf files into one .sdf file (e.g. covid_antivirals.sdf). A quick way to do this was via CLI by using one line of code: cat \*.sdf \> file_name.sdf (replace "file_name" as the actual file name wanted). One thing to be aware of was to make sure which working directory this was saved to, as it needed to be in the same directory as the .qmd file for it to work.
+
 ```{python}
 # Save all 5 COVID-19 antivirals as a list in a cpds object
 cpds = [x for x in Chem.SDMolSupplier("covid_antivirals.sdf")]
@@ -149,7 +161,9 @@ Well, this flexible grid view with function to select molecules would be much mo
 mols2grid.display(cpds)
 ```
 
-Then I thought about adding drug names to each molecule, rather than listing their IUPAC^[International Union of Pure and Applied Chemistry] names, for the sake of easier reading and viewing. One of the ways to do this was to add legend with the drug names in the same order.
+Then I thought about adding drug names to each molecule, rather than listing their IUPAC[^3] names, for the sake of easier reading and viewing. One of the ways to do this was to add legend with the drug names in the same order.
+
+[^3]: International Union of Pure and Applied Chemistry
 
 ```{python}
 # Display compounds in grid view with drug names shown
@@ -165,7 +179,7 @@ Draw.MolsToGridImage(cpds,
 
 ##### **Similarity maps**
 
-Now this part was interesting to me and I've spent at least a day or two to just try and understand the fundamentals behind this functionality in RDKit. One of the biggest help for me to fully understand this was this paper: Riniker, S.; Landrum, G. A. “Similarity Maps - A Visualization Strategy for Molecular Fingerprints and Machine-Learning Methods” J. Cheminf. 5:43 (2013). It explained the full methodology behind generating similarity map between compounds using molecular fingerprints. 
+Now this part was interesting to me and I've spent at least a day or two to just try and understand the fundamentals behind this functionality in RDKit. One of the biggest help for me to fully understand this was this paper: Riniker, S.; Landrum, G. A. "Similarity Maps - A Visualization Strategy for Molecular Fingerprints and Machine-Learning Methods" J. Cheminf. 5:43 (2013). It explained the full methodology behind generating similarity map between compounds using molecular fingerprints.
 
 ```{python}
 # Build similarity maps between molecules
@@ -208,11 +222,13 @@ show_png(a.GetDrawingText())
 
 To quickly explain how to look at the contour or topographical map in different colours for the molecule:
 
-* Green shades represented a positive difference or where the similarity decreased when the bits^[Bits in a bit vector or counts in a count vector are converted from structural features in chemical structures to formulate molecular fingerprints, which subsequently allows a more efficient way to compare chemical structures computationally] were removed
+-   Green shades represented a positive difference or where the similarity decreased when the bits[^4] were removed
 
-* Pink shades showed negative difference or where the similarity increased when the bits were removed 
+-   Pink shades showed negative difference or where the similarity increased when the bits were removed
 
-* Grey shades meant there was no change
+-   Grey shades meant there was no change
+
+[^4]: Bits in a bit vector or counts in a count vector are converted from structural features in chemical structures to formulate molecular fingerprints, which subsequently allows a more efficient way to compare chemical structures computationally
 
 Another parameter that might allow us to interpret more easily was to obtain the maximum weight (also known as "maxweight" in the code) for the structure comparison between two molecules. Maximum weight could be understood as maximum difference between the reference and probe molecules. By default, maximum weight was capped at 1.0. This function was already built in above code, so to find out the maximum weight or difference for nirmatrelvir and ritonavir, simply just use the print() function.
 
@@ -229,7 +245,8 @@ mol2_rit_maxw_mol1
 ```
 
 To further explain and understand the parameter of maximum weight, this paper by Riniker and Landrum have included a full calculation styled as pseudocodes in Python. I have attempted to summarise them in words, along with the codes (adapted from the paper), as below:
-```{{python}}
+
+``` {{python}}
 # 1. Calculate the fingerprint for reference molecule
 ref_fp = calculate_fingerprint (ref_mol)
 
@@ -340,9 +357,9 @@ print(mol5_bar_maxw_mol1)
 
 Short summary:
 
-* Nirmatrelvir vs. remdesivir had the smallest maximum weight or difference out of all 5 compounds
+-   Nirmatrelvir vs. remdesivir had the smallest maximum weight or difference out of all 5 compounds
 
-* Nirmatrelvir vs. ritonavir had the biggest maximum weight or difference out of all compounds, the second biggest one would be between nirmatrelvir and molnupiravir
+-   Nirmatrelvir vs. ritonavir had the biggest maximum weight or difference out of all compounds, the second biggest one would be between nirmatrelvir and molnupiravir
 
 <br>
 
@@ -373,7 +390,9 @@ fp1 = [fp.GetFingerprint(x) for x in mols]
 fp1
 ```
 
-A loop was created to iterate through all 5 antivirals to compare their molecular similarities by using Tanimoto coefficient (TC)^[Ranged from zero (lowest similarity) to 1.0 (highest similarity), more on this in the next section]. Particularly, each molecule was compared to the other 4 molecules, with results printed as shown below.
+A loop was created to iterate through all 5 antivirals to compare their molecular similarities by using Tanimoto coefficient (TC)[^5]. Particularly, each molecule was compared to the other 4 molecules, with results printed as shown below.
+
+[^5]: Ranged from zero (lowest similarity) to 1.0 (highest similarity), more on this in the next section
 
 ```{python}
 
@@ -435,7 +454,7 @@ df_ms = pd.DataFrame(list(zip(maxw_diff, tc_mols)),
 df_ms
 ```
 
-To produce a bar graph representing these parameters, I realised I would probably need to change the index into a column instead. 
+To produce a bar graph representing these parameters, I realised I would probably need to change the index into a column instead.
 
 ```{python}
 df_ms.reset_index(inplace = True)
@@ -498,7 +517,6 @@ $$
 \text{Tanimoto coefficient} = \frac{(a \cap b)}{(a + b - (a \cap b))}
 $$
 
-
 ###### ***Dice similarity/coefficient***
 
 On the other hand, Dice coefficient described the number of features in common for molecules *a* and *b*, relative to the average size of the total number of chemical features present in the two molecules. The weighting factor of 0.5 was shown in the denominator (or can be 2 in the numerator). The coefficient also ranges from zero to 1. The following showed the equation of Dice similarity.
@@ -513,9 +531,9 @@ $$
 
 The codes used in this post were heavily inspired by and adapted from the following blogs and website shown below. I've learnt a lot from them, and would like to thank the existence of these blogs and website, which are helping readers like me to learn in an open-source manner. I particularly like the clear and concise writing style from P. Walter's Practical Cheminformatics blog which is easy to follow. Iwatobipen's is life worth living? blog has shown a very diverse range of cheminformatics tools available for use, and I'm constantly surprised by how many there are from this blog and also the generous sharing of all the codes.
 
-* P. Walter's [blog](https://practicalcheminformatics.blogspot.com)
-* Iwatobipen's [blog](https://iwatobipen.wordpress.com)
-* [RDKit documentation](https://www.rdkit.org/docs/index.html) by G. Landrum
+-   P. Walter's [blog](https://practicalcheminformatics.blogspot.com)
+-   Iwatobipen's [blog](https://iwatobipen.wordpress.com)
+-   [RDKit documentation](https://www.rdkit.org/docs/index.html) by G. Landrum
 
 <br>
 
