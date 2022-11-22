@@ -4,7 +4,6 @@ subtitle: "PDF table scraping, bar graph, interactive map & wordcloud"
 author: "Jennifer HY Lin"
 date: 2022-09-19
 categories: [Data analytics projects, R, Python, Long COVID]
-draft: false
 ---
 
 #### **Background**
