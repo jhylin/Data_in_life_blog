@@ -13,7 +13,7 @@ website:
       - icon: twitter
         href: https://twitter.com/jenhylin
       - text: Resume
-        href: https://jhylin.github.io/CV_resume_quarto/index.pdf
+        href: https://jhylin.github.io/CV_resume_quarto/
   repo-url: https://github.com/jhylin/Data_in_life_blog
   repo-actions: [issue]
     
