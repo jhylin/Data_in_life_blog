@@ -18,7 +18,7 @@ website:
         href: https://github.com/jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
-      - text: Resume
+      - text: CV
         href: https://jhylin.github.io/CV_resume_quarto/
   repo-url: https://github.com/jhylin/Data_in_life_blog
   repo-actions: [issue]
