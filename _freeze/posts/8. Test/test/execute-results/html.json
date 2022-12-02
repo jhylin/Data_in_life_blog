@@ -1,0 +1,11 @@
+{
+  "hash": "6b2d4a9afe064be6ac1448b27894a7ff",
+  "result": {
+    "markdown": "---\ntitle: Test\nauthor: Jennifer HY Lin\ndate: 2022-5-20\nformat:\n  html:\n    code-fold: true\nkeep-ipynb: true\ncategories:\n  - Data analytics projects\n  - R\n  - Python\n  - Long COVID\n---\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\npip install polars\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nRequirement already satisfied: polars in /opt/anaconda3/lib/python3.9/site-packages (0.15.1)\r\n```\n:::\n\n::: {.cell-output .cell-output-stdout}\n```\nRequirement already satisfied: typing_extensions>=4.0.0 in /opt/anaconda3/lib/python3.9/site-packages (from polars) (4.1.1)\r\n```\n:::\n\n::: {.cell-output .cell-output-stdout}\n```\nNote: you may need to restart the kernel to use updated packages.\n```\n:::\n:::\n\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\nimport polars as pl\n\ndf = pl.read_csv(\"https://j.mp/iriscsv\")\nprint(df.filter(pl.col(\"sepal_length\") > 5)\n      .groupby(\"species\")\n      .agg(pl.all().sum())\n)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nshape: (3, 5)\n┌────────────┬──────────────┬─────────────┬──────────────┬─────────────┐\n│ species    ┆ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width │\n│ ---        ┆ ---          ┆ ---         ┆ ---          ┆ ---         │\n│ str        ┆ f64          ┆ f64         ┆ f64          ┆ f64         │\n╞════════════╪══════════════╪═════════════╪══════════════╪═════════════╡\n│ versicolor ┆ 281.9        ┆ 131.8       ┆ 202.9        ┆ 63.3        │\n├╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌┤\n│ setosa     ┆ 116.9        ┆ 81.7        ┆ 33.2         ┆ 6.1         │\n├╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌┤\n│ virginica  ┆ 324.5        ┆ 146.2       ┆ 273.1        ┆ 99.6        │\n└────────────┴──────────────┴─────────────┴──────────────┴─────────────┘\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
