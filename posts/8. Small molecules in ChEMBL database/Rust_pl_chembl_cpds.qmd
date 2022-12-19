@@ -1,0 +1,565 @@
+---
+title: Small molecules in ChEMBL database
+subtitle: Polars dataframe library and machine learning in scikit-learn
+author: Jennifer HY Lin
+date: '2022-12-19'
+keep-ipynb: true
+draft: true
+categories:
+  - Data analytics projects
+  - Python
+  - Polars
+  - Rust
+  - Jupyter
+  - Cheminformatics
+jupyter: python3
+---
+
+#### **Background for this Python-Polars project**
+
+As my interests for Rust gradually grew, I realised why so many people said it could be a hard programming language to learn. My head was spinning after reading the Rust programming language book and also watching a few Youtube videos about it. One likely reason could be that I didn't come from a computer science major. 
+
+I've then decided to start from something I was more familiar with, which was Jupyter notebook or lab. Then somehow through various online ventures and surfing, I managed to start two projects in parallel. One was where I used Polars, a blazingly fast dataframe library that was written completely in Rust with a very light Python binding. This meant I could utilise it in Python or Rust, so I started with Python version first (obviously), which so far had been very pleasing and indeed fast as it claimed. 
+
+This work was purely on small molecules downloaded from the ChEMBL database, and would be detailed in this portfolio blog post.
+
+I began with importing Polars dataframe library as shown below (note: installation needs to occur first prior to this step - detailed steps were available in its GitHub repo) - **add link**
+
+```{python}
+# Update Polars version
+# Uncomment the following line if needing to update Polars
+!pip install --upgrade polars
+```
+
+```{python}
+import polars as pl
+```
+
+```{python}
+# Show version of Polars 
+pl.show_versions()
+```
+
+Next step would be to access and download the compound dataset from ChEMBL database. So this was done and the file saved as .csv file, which was imported and read via read_csv() as shown below.
+
+```{python}
+df = pl.read_csv("chembl_mols.csv")
+df.head() #read first 5 rows
+#df #read full dataset
+```
+
+#### **Data wrangling**
+
+Now first problem appeared without surprises as this dataset was downloaded as .csv file, which meant it was likely to have a certain delimiter in between each variable. The dataset showed all data were packed as strings for each compound in each row. Each variable is separated or delimited by semicolons. To read the dataframe properly, I've added a delimiter term into the code to transform the dataframe into a more readable format.
+
+```{python}
+# Going back to polars documentation, use "sep" to set the delimiter of the file
+# which in this case is semicolon
+df = pl.read_csv("chembl_mols.csv", sep = ";")
+# Show the first 10 rows of data
+#df.head(10)
+df
+```
+
+Initially, I only wanted to download about 24 compounds from ChEMBL database to trial first. Unknowingly, I ended up downloading the whole curated set of 2,331,700 small molecules (!), and I found this out when I loaded the dataframe after setting the delimiter for the csv file. Loading these 2,331,700 rows of data was fast, which occurred within a few seconds. This echoed many users' experiences with Polars, so I was quite impressed with Rust actually, as this was the core programming language used to write the dataframe library.
+
+So now there was the full dataframe, I wanted to find out what types of physicochemical properties were there.
+
+```{python}
+# Print all column names and data types to see what compound properties are stored in chEMBL database
+print(df.glimpse())
+```
+
+A separate dataframe was saved as df_col_list to show all the column names used, which reflected the physicochemical properties of all the small molecules curated by ChEMBL database. There were a few I wasn't sure of so I went through the ChEMBL_31 schema documentation and ChEMBL database website to find out.
+
+Selected definitions of the physicochemical properties of compounds were adapted from ChEMBL_31 schema documentation (available as "Release notes" on website), or if not available from the documentation, I resorted to interpret them myself by going into compounds randomly in that particular physicochemical category on ChEMBL database (e.g. bioactivities was not included in the documentation).
+
+The definitions for these properties were shown below:
+
+'Max Phase' - Maximum phase of development reached for the compound (4 = approved). Null where max phase has not yet been assigned.
+
+'Bioactivities' - Various biological assays used for the compounds e.g. IC50s, GI50s, potency tests etc.
+
+'AlogP' - Calculated partition coefficient
+
+'HBA' - Number of hydrogen bond acceptors
+
+'HBD' - Number of hydrogen bond donors
+
+'#RO5 Violations' - Number of violations of Lipinski's rule-of-five, using HBA and HBD definitions
+
+'Passes Ro3' - Indicates whether the compound passes the rule-of-three (mw \< 300, logP \< 3 etc)
+
+'QED Weighted' - Weighted quantitative estimate of drug likeness (as defined by Bickerton et al., Nature Chem 2012)
+
+'Inorganic flag' - Indicates whether the molecule is inorganic (i.e., containing only metal atoms and \<2 carbon atoms), where 1 = inorganic compound and -1 = not inorganic compound (assume 0 means it's neither case or yet to be assigned)
+
+'Heavy Atoms' - Number of heavy (non-hydrogen) atoms
+
+'CX Acidic pKa' - The most acidic pKa calculated using ChemAxon v17.29.0
+
+'CX Basic pKa' - The most basic pKa calculated using ChemAxon v17.29.0
+
+'CX LogP' - The calculated octanol/water partition coefficient using ChemAxon v17.29.0
+
+'CX LogD' - The calculated octanol/water distribution coefficient at pH7.4 using ChemAxon v17.29.0
+
+'Structure Type' - based on compound_structures table, where SEQ indicates an entry in the protein_therapeutics table instead, NONE indicates an entry in neither tables, e.g. structure unknown
+
+'Inchi Key' - the IUPAC international chemical identifier key
+
+Now, next step was also quite important, which was to check the data types for each column in the dataset.
+
+So from what I could see, a lot of the columns were of data type "Utf8" (with only two columns that had "Int64"), which meant they were strings. However, a lot of these columns were actually storing numbers as integers or floats. So to make my life easier for this project, I then went on to convert these data types to the relevant ones for these columns.
+
+```{python}
+# Convert data types for multiple selected columns
+# Note: only takes two positional arguments, so needed to use the [] in code to change 
+# multiple columns all at once (use alias if wanting to keep original data type in column, 
+# as it adds the new column under an alias name to dataframe
+df_new = df.with_columns(
+    [
+        (pl.col("Molecular Weight")).cast(pl.Float64, strict = False),
+        (pl.col("Targets")).cast(pl.Int64, strict = False),
+        (pl.col("Bioactivities")).cast(pl.Int64, strict = False),
+        (pl.col("AlogP")).cast(pl.Float64, strict = False),
+        (pl.col("Polar Surface Area")).cast(pl.Float64, strict = False),
+        (pl.col("HBA")).cast(pl.Int64, strict = False),
+        (pl.col("HBD")).cast(pl.Int64, strict = False),
+        (pl.col("#RO5 Violations")).cast(pl.Int64, strict = False),
+        (pl.col("#Rotatable Bonds")).cast(pl.Int64, strict = False),
+        (pl.col("QED Weighted")).cast(pl.Float64, strict = False),
+        (pl.col("CX Acidic pKa")).cast(pl.Float64, strict = False),
+        (pl.col("CX Basic pKa")).cast(pl.Float64, strict = False),
+        (pl.col("CX LogP")).cast(pl.Float64, strict = False),
+        (pl.col("CX LogD")).cast(pl.Float64, strict = False),
+        (pl.col("Aromatic Rings")).cast(pl.Int64, strict = False),
+        (pl.col("Heavy Atoms")).cast(pl.Int64, strict = False),
+        (pl.col("HBA (Lipinski)")).cast(pl.Int64, strict = False),
+        (pl.col("HBD (Lipinski)")).cast(pl.Int64, strict = False),
+        (pl.col("#RO5 Violations (Lipinski)")).cast(pl.Int64, strict = False),
+        (pl.col("Molecular Weight (Monoisotopic)")).cast(pl.Float64, strict = False)
+    ]
+)
+df_new.head()
+```
+
+Once all the columns' data types have been checked and converted to appropriate types accordingly, I used null_count() to see the distributions of all null entries in the dataset.
+
+```{python}
+# Check for any null or NA or "" entries in the dataset
+# Alternative line that works similarly is df.select(pl.all().null_count())
+df_new.null_count()
+```
+
+```{python}
+# Drop rows with null entries
+df_dn = df_new.drop_nulls()
+df_dn 
+# Number of rows reduced to 736,570
+```
+
+```{python}
+# Check that all rows with null values were dropped
+df_dn.null_count()
+```
+
+```{python}
+# To see summary statistics for df_dn dataset
+df_dn.describe()
+```
+
+One of the columns that jumped out from the summary statistics of the df_dn dataset, was the "Targets" column. It ranged from 1 to 1334 targets. Out of curiosity, I went through several places on ChEMBL website to find out the exact definition of "Target". Eventually I settled on an answer which explained that the "Target" column represented the number of targets associated with the particular ChEMBL compound listed. I then singled out the ChEMBL compound with 1334 targets recorded, it turned out to be imatinib, which was marketed as Gleevec, and was a well-known prescription medicine for leukaemia and other selected oncological disorders with many well-documented drug interactions.
+
+```{python}
+# This was confirmed via a filter function, which brought up CHEMBL1421, or also known as dasatinib
+df_dn.filter(pl.col("Targets") == 1334)
+```
+
+To explore other physicochemical and molecular properties in the dataframe, "Max Phase" was one of the first few that drew my interests. So it tagged each ChEMBL compound with a max phase number from 0 to 4, where 4 meant the compound was approved (usually also meant it was already a precription medicine). Thinking along this line, I thought what about those compounds that had max phase as 0, because they were the ones still pending to be assigned with a max phase number tag. So here I thought this might be a good time to introduce some machine learning model, to predict whether these 0 max phase compounds would enter the approved max phase.
+
+Firstly, I had a look at the overall distribution of the max phase compounds in this dataframe df_dn.
+
+```{python}
+# Interested in what types of "Max Phase" were recorded for the curated small molecules in ChEMBL database
+df_dn.groupby("Max Phase", maintain_order = True).agg(pl.count())
+```
+
+A quick groupby function showed that there were only 954 small molecules approved. Phase 3 recorded a total of 303 small molecules. For phase 2, there were 441 small molecules, followed by 239 compounds in phase 1. There were, however, a total amount of 734,633 small molecules that had zero or null as phase number, that were still pending for a max phase number (as per ChEMBL_31 schema documentation).
+
+One of the other parameters I was interested in was "QED Weighted". So I went further into understanding what it meant, as the original reference was nicely provided in the ChEMBL_31 schema documentation. The reference paper was by [Bickerton, G., Paolini, G., Besnard, J. et al. Quantifying the chemical beauty of drugs. Nature Chem 4, 90--98 (2012)](https://doi.org/10.1038/nchem.1243)(note: author's manuscript is available to view via PubMed link, the Nature Chemistry link only provides abstract with access to article via other means as stated). In simple words, it was a measure of druglikeness for small molecules based on the concept of desirability, which is based on a total of 8 different molecular properties. These molecular properties included: molecular weight, ALogP, polar surface area, number of hydrogen bond acceptors, number of hydrogen bond donors, number of rotatable bonds, number of aromatic rings and structural alerts. Without going into too much details for this QED Weighted parameter, it is normally recorded as a number that ranges from 0 to 1, with 0 being the least druglike and 1 being the most druglike.
+
+#### **Prepare dataframe prior to running ML model**
+
+A rough plan at this stage was to filter out Max Phase 4 and 0 compounds. Max phase 0 compounds were the ones that were not assigned with any max phase numbers yet, so I thought this would be ideal to be used as part of the testing set. The idea was to use "Max Phase" parameter as the target y variable for a logistic regression model, because ultimately stakeholders would be most interested in which candidate compounds would have the most likely potentials to reach the approved stage during the drug discovery and development pipeline, with the smallest possible amount of resources and time needed, in order to provide the greatest public benefit. The goal of this ML model was to answer the question: which physicochemical parameters would be the most suitable ones to predict whether a compound will enter max phase 4 (approved) or not?
+
+```{python}
+# To see full df_dn dataframe only
+df_dn
+```
+
+Narrow down df_dn dataset to fulfill the following criteria: \* only small molecule type \* max phase of 0 and 4
+
+The reason behind choosing only small molecules that had max phase of 0 and 4 was that a confusion matrix can be built in the end to see if the parameters selected would give us a reasonably good model to predict whether the next small molecule would enter into the approved or max phase of development. For now, I've chosen the following columns (by using the select() method) to appear in this interim df_f dataset.
+
+```{python}
+df_0 = df_dn.filter(
+    (pl.col("Type") == "Small molecule") &
+    ((pl.col("Max Phase") == 0))
+).select(["ChEMBL ID", 
+          "Type", 
+          "Max Phase",
+          "#RO5 Violations", 
+          "QED Weighted", 
+          "CX LogP", 
+          "CX LogD", 
+          "Heavy Atoms"]
+        )
+df_0
+```
+
+```{python}
+df_4 = df_dn.filter(
+    (pl.col("Type") == "Small molecule") &
+    (pl.col("Max Phase") == 4)
+).select(["ChEMBL ID", 
+          "Type", 
+          "Max Phase",
+          "#RO5 Violations", 
+          "QED Weighted", 
+          "CX LogP", 
+          "CX LogD", 
+          "Heavy Atoms"]
+        )
+df_4
+```
+
+##### **Re-sampling via under-sampling**
+
+Because of the large number of Max Phase 0 compounds, I've sampled about 950 from this group, so that there were similar amount of data in each group.
+
+```{python}
+df_s_0 = df_0.sample(n = 950, shuffle = True, seed = 0)
+df_s_0
+```
+
+```{python}
+# Plan is to use logistic regression method for ML model, so the y variable I'm interested in
+# here is whether a small molecule will be approved or not so it's going to be a binary 
+# categorical variable - means it needs to be 0 (not approved) or 1 (approved)
+# To do this, add a new column with a new name of "Max_Phase" & replace "4" as "1" (by dividing
+# by 4 to reach this new label)
+df_4_f = df_4.with_columns((pl.col("Max Phase") / 4).alias("Max_Phase"))
+df_4_f
+```
+
+```{python}
+# Change the data type of "Max_Phase" from float to integer
+# So that the two different dataframes can be concatenated
+df_4_f = df_4_f.with_column((pl.col("Max_Phase")).cast(pl.Int64, strict = False))
+df_4_f
+```
+
+```{python}
+# Also create a new column with the same name of "Max_Phase"
+# So that the dataframes can be combined
+df_s_0_f = df_s_0.with_column((pl.col("Max Phase")).alias("Max_Phase"))
+df_s_0_f
+```
+
+```{python}
+# Combine df_s_0_f (dataframe with max phase 0 compounds) & df_4_f (df with max phase 4 compounds)
+df_concat = pl.concat([df_s_0_f, df_4_f], how = "vertical",)
+print(df_concat)
+```
+
+```{python}
+# Check this df_concat dataset has all compounds in Max Phase 0 & 4 only
+# Note Max Phase 4 (approved) compounds were re-labelled as Max_Phase = 1 
+df_concat.groupby("Max_Phase").count()
+```
+
+```{python}
+# Check df_concat dataset only has small molecules
+df_concat.groupby("Type").count()
+```
+
+```{python}
+# Final version of dataset before entering ML phase 
+# Leave out ChEMBL ID and Type
+df_ml = df_concat.select(["Max_Phase", 
+                          "#RO5 Violations", 
+                          "QED Weighted", 
+                          "CX LogP", 
+                          "CX LogD", 
+                          "Heavy Atoms"]
+                        )
+df_ml
+```
+
+```{python}
+df_ml.null_count()
+```
+
+```{python}
+# Check data types in df_ml dataset
+# Needs to be integers or floats for scikit-learn algorithms to work
+df_ml.dtypes
+```
+
+#### **Import libraries for ML**
+
+```{python}
+# Install scikit-learn - an open-source ML library
+# Uncomment the line below if needing to install this library
+#!pip install -U scikit-learn
+```
+
+```{python}
+# Import scikit-learn
+import sklearn
+
+# Check scikit-learn version
+print(sklearn.__version__)
+```
+
+```{python}
+# Import other libraries needed to generate ML model (in this case - logistic regression)
+# To use NumPy arrays to prepare X & y variables
+import numpy as np
+# Needed for dataframe to be used in scikit-learn ML
+!pip install pandas
+import pandas as pd
+# To normalise dataset prior to running ML
+from sklearn import preprocessing
+# To split dataset into training & testing sets
+from sklearn.model_selection import train_test_split
+# To show data viz/graphs in Jupyter notebook
+#%matplotlib inline
+# Import matplotlib/pyplot for data viz
+!pip install matplotlib
+import matplotlib.pyplot as plt
+```
+
+```{python}
+# Install pyarrow to convert Polars dataframe into Pandas dataframe (needed to run scikit-Learn)
+!pip install pyarrow
+```
+
+```{python}
+# Convert Polars df to Pandas df so that scikit-learn can be used for ML
+df_ml_pd = df_ml.to_pandas()
+type(df_ml_pd)
+```
+
+#### **Logistic regression with *scikit-learn***
+
+Logistic regression was one of the supervised learning strategies in the machine learning realm. As the term "supervised" suggested, this type of ML was purely data-driven to allow computers to learn patterns from input data with the aim of reaching a predictive model in the end to help answer our questions.
+
+```{python}
+# Define X variables from df_ml_pd dataset
+X = np.asarray(df_ml_pd[["#RO5 Violations", 
+                         "QED Weighted", 
+                         "CX LogP", 
+                         "CX LogD", 
+                         "Heavy Atoms"]]
+              )
+X[0:5]
+```
+
+```{python}
+# Define y variable - note to use "Max_Phase", not the original "Max Phase"
+y = np.asarray(df_ml_pd["Max_Phase"])
+y[0:5]
+```
+
+```{python}
+# Split dataset into trainging & testing sets
+rng = np.random.RandomState(0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = rng)
+print('Training set:', X_train.shape, y_train.shape)
+print('Testing set:', X_test.shape, y_test.shape)
+```
+
+```{python}
+# Normalise & clean the dataset
+# Fit on the training set (not on testing set as this may lead to data leakage)
+# Transform on the testing set
+X = preprocessing.StandardScaler().fit(X_train).transform(X_test)
+X[0:5]
+```
+
+```{python}
+# Import logistic regression 
+from sklearn.linear_model import LogisticRegression
+# Create an instance of logistic regression classifier and fit the data
+LogR = LogisticRegression().fit(X_train, y_train)
+LogR
+```
+
+```{python}
+y_mp = LogR.predict(X_test)
+y_mp
+```
+
+```{python}
+# Convert the predicted values (in terms of log odds) into a dataframe
+# Then use describe() method to get characteristics of the distribution
+pred = pd.DataFrame(LogR.predict_log_proba(X))
+pred.describe()
+```
+
+```{python}
+# Or a quicker way to get the predicted probabilities is via predict_proba() method
+y_mp_proba = LogR.predict_proba(X_test)
+# Uncomment below to see the predicted probabilities printed
+#print(y_mp_proba)
+```
+
+```{python}
+# Convert predicted probabilities into a dataframe
+# then use describe() to show distributions
+y_mp_prob = pd.DataFrame(y_mp_proba)
+y_mp_prob.describe()
+```
+
+```{python}
+# Note: for imbalanced dataset, accuracy score may not be very informative, use other metrics
+# to evaluate or use other strategies to compensate for it
+from sklearn.metrics import accuracy_score
+accuracy_score(y_mp, y_test)
+```
+
+##### **Pipeline method for logistic regression**
+
+```{python}
+# Test pipline from scikit-Learn
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+LR = make_pipeline(StandardScaler(), LogisticRegression())
+LR.fit(X_train, y_train)
+```
+
+```{python}
+LR.score(X_test, y_test)
+```
+
+#### **Evaluation of the logistic regression model**
+
+##### **Jaccard score**
+
+```{python}
+from sklearn.metrics import jaccard_score
+jaccard_score(y_test, y_mp, pos_label = 0)
+```
+
+##### **Confusion matrix**
+
+```{python}
+# Import classification report & confusion matrix from scikit-learn library
+from sklearn.metrics import confusion_matrix
+# Import itertools - functions to create iterators for efficient looping
+import itertools
+
+# Function to plot confusion matrix
+# cm = confusion matrix
+# classes = 0 or 1 (no success/max phase 0-3 or success/max phase 4)
+def plot_confusion_matrix(# Sets a cm object
+                          cm, 
+                          # Sets classes of '1s' (Successes) & '0s' (Non-successes) for the cm
+                          classes,
+                          # If setting normalize = true, reports in ratios instead of counts
+                          normalize,
+                          title = 'Confusion matrix',
+                          # Choose colour of the cm (colourmap recognised by matplotlib)
+                          cmap = plt.cm.Reds):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize = True`.
+    """
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis = 1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    # Plot the confusion matrix 
+    plt.imshow(cm, interpolation = 'nearest', cmap = cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation = 45)
+    plt.yticks(tick_marks, classes)
+
+    # Sets the decimal places of ratios if using normalize = True
+    fmt = '.2f' if normalize else 'd'
+    # Sets threshold for normalised results (ratios)
+    thresh = cm.max() / 2.
+    # Iterate through the ratios and differentiate between the text colours 
+    # by using the threshold cut-off
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment = "center",
+                 color = "white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    
+print(confusion_matrix(y_test, y_mp, labels = [1,0]))
+```
+
+```{python}
+# Compute confusion matrix
+matrix = confusion_matrix(y_test, y_mp, labels = [1,0])
+np.set_printoptions(precision = 2)
+
+# Plot confusion matrix without normalisation
+plt.figure()
+plot_confusion_matrix(matrix, 
+                      classes = ['Max_Phase = 0','Max_Phase = 1'], 
+                      normalize = False, 
+                      title = "Confusion matrix without normalisation"
+                     )
+```
+
+```{python}
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_mp))
+```
+
+```{python}
+# Log loss
+# The further the predicted probability is from the actual/true value, the larger the log loss
+# Ideally, the smaller the log loss the better the model will be
+# Gauge how good the log regression model is at figuring out whether the parameters
+# used are good to predict if a small molecule will be approved or not
+from sklearn.metrics import log_loss
+log_loss(y_test, y_mp_proba)
+```
+
+**Distributions of features in the df_dn dataset**
+
+```{python}
+# Check the types of compounds in the database
+df_dn.groupby("Type").agg(pl.count())
+```
+
+```{python}
+# Viz - bar graphs for each category
+```
+
+```{python}
+df_dn.groupby("Molecular Species").agg(pl.count())
+```
+
+```{python}
+df_dn.groupby("Structure Type").agg(pl.count())
+```
+
+```{python}
+df_dn.groupby("Inorganic Flag", maintain_order = True).agg(pl.count())
+```
