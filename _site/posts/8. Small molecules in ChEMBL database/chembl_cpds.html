@@ -1,0 +1,3358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2022-12-02">
+
+<title>Home - Small molecules in ChEMBL database</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Jennifer HY Lin</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">CV</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Small molecules in ChEMBL database</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Data analytics projects</div>
+                <div class="quarto-category">Polars</div>
+                <div class="quarto-category">Rust</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Cheminformatics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 2, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"chembl_mols.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df[1, :] - reading first row and column only</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="co">#read full dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<small>shape: (2331700, 1)</small><table class="dataframe table table-sm table-striped">
+
+<thead>
+<tr>
+<th>
+ChEMBL ID";"Name";"Synonyms";"Type";"Max Phase";"Molecular Weight";"Targets";"Bioactivities";"AlogP";"Polar Surface Area";"HBA";"HBD";"#RO5 Violations";"#Rotatable Bonds";"Passes Ro3";"QED Weighted";"CX Acidic pKa";"CX Basic pKa";"CX LogP";"CX LogD";"Aromatic Rings";"Structure Type";"Inorganic Flag";"Heavy Atoms";"HBA (Lipinski)";"HBD (Lipinski)";"#RO5 Violations (Lipinski)";"Molecular Weight (Monoisotopic)";"Molecular Species";"Molecular Formula";"Smiles";"Inchi Key
+</th>
+</tr>
+<tr>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+"CHEMBL1206185;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL539070;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3335528;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2419030;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL4301448;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3827271;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1969944;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3465961;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL587495;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3824158;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL194112;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2047226;...
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL387315;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL540121;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2387650;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL374041;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL394794;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2035815;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1586325;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2017916;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL374652;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1416264;...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL213734;"...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1531634;...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The dataset shows a fully integrated dataframe with all data packed as strings for each compound in each row. Each variable is separated by semicolons. To read the dataframe properly, let’s separate them and transform the dataframe to a more readable format.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Going back to polars documentation, use "sep" to set the delimiter of the file</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># which in this case is semicolon</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"chembl_mols.csv"</span>, sep <span class="op">=</span> <span class="st">";"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<small>shape: (2331700, 32)</small><table class="dataframe table table-sm table-striped">
+
+<thead>
+<tr>
+<th>
+ChEMBL ID
+</th>
+<th>
+Name
+</th>
+<th>
+Synonyms
+</th>
+<th>
+Type
+</th>
+<th>
+Max Phase
+</th>
+<th>
+Molecular Weight
+</th>
+<th>
+Targets
+</th>
+<th>
+Bioactivities
+</th>
+<th>
+AlogP
+</th>
+<th>
+Polar Surface Area
+</th>
+<th>
+HBA
+</th>
+<th>
+HBD
+</th>
+<th>
+#RO5 Violations
+</th>
+<th>
+#Rotatable Bonds
+</th>
+<th>
+Passes Ro3
+</th>
+<th>
+QED Weighted
+</th>
+<th>
+CX Acidic pKa
+</th>
+<th>
+CX Basic pKa
+</th>
+<th>
+CX LogP
+</th>
+<th>
+CX LogD
+</th>
+<th>
+Aromatic Rings
+</th>
+<th>
+Structure Type
+</th>
+<th>
+Inorganic Flag
+</th>
+<th>
+Heavy Atoms
+</th>
+<th>
+HBA (Lipinski)
+</th>
+<th>
+HBD (Lipinski)
+</th>
+<th>
+#RO5 Violations (Lipinski)
+</th>
+<th>
+Molecular Weight (Monoisotopic)
+</th>
+<th>
+Molecular Species
+</th>
+<th>
+Molecular Formula
+</th>
+<th>
+Smiles
+</th>
+<th>
+Inchi Key
+</th>
+</tr>
+<tr>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+"CHEMBL1206185"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"607.88"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"9.46"
+</td>
+<td>
+"89.62"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"2"
+</td>
+<td>
+"17"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.09"
+</td>
+<td>
+"-1.91"
+</td>
+<td>
+"8.38"
+</td>
+<td>
+"9.40"
+</td>
+<td>
+"9.36"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"42"
+</td>
+<td>
+"5"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"607.2790"
+</td>
+<td>
+"ACID"
+</td>
+<td>
+"C35H45NO4S2"
+</td>
+<td>
+"CCCCCCCCCCC#CC...
+</td>
+<td>
+"UFBLKYIDZFRLPR...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL539070"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"286.79"
+</td>
+<td>
+"1"
+</td>
+<td>
+"1"
+</td>
+<td>
+"2.28"
+</td>
+<td>
+"73.06"
+</td>
+<td>
+"6"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"5"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.63"
+</td>
+<td>
+"13.84"
+</td>
+<td>
+"3.64"
+</td>
+<td>
+"2.57"
+</td>
+<td>
+"2.57"
+</td>
+<td>
+"2"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"17"
+</td>
+<td>
+"5"
+</td>
+<td>
+"3"
+</td>
+<td>
+"0"
+</td>
+<td>
+"250.0888"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C11H15ClN4OS"
+</td>
+<td>
+"CCCOc1ccccc1-c...
+</td>
+<td>
+"WPEWNRKLKLNLSO...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3335528"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"842.80"
+</td>
+<td>
+"2"
+</td>
+<td>
+"6"
+</td>
+<td>
+"0.18"
+</td>
+<td>
+"269.57"
+</td>
+<td>
+"18"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"17"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.09"
+</td>
+<td>
+"3.20"
+</td>
+<td>
+"None"
+</td>
+<td>
+"3.31"
+</td>
+<td>
+"-0.14"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"60"
+</td>
+<td>
+"19"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"842.2633"
+</td>
+<td>
+"ACID"
+</td>
+<td>
+"C41H46O19"
+</td>
+<td>
+"COC(=O)[C@H](O...
+</td>
+<td>
+"KGUJQZWYZPYYRZ...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2419030"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"359.33"
+</td>
+<td>
+"4"
+</td>
+<td>
+"4"
+</td>
+<td>
+"3.94"
+</td>
+<td>
+"85.13"
+</td>
+<td>
+"6"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"3"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.66"
+</td>
+<td>
+"None"
+</td>
+<td>
+"None"
+</td>
+<td>
+"3.66"
+</td>
+<td>
+"3.66"
+</td>
+<td>
+"2"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"24"
+</td>
+<td>
+"6"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"359.0551"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C14H12F3N3O3S"
+</td>
+<td>
+"O=c1nc(NC2CCCC...
+</td>
+<td>
+"QGDMYSDFCXOKML...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL4301448"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"465.55"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"5.09"
+</td>
+<td>
+"105.28"
+</td>
+<td>
+"6"
+</td>
+<td>
+"4"
+</td>
+<td>
+"1"
+</td>
+<td>
+"10"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.15"
+</td>
+<td>
+"None"
+</td>
+<td>
+"12.14"
+</td>
+<td>
+"4.41"
+</td>
+<td>
+"2.00"
+</td>
+<td>
+"4"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"33"
+</td>
+<td>
+"7"
+</td>
+<td>
+"5"
+</td>
+<td>
+"1"
+</td>
+<td>
+"465.1635"
+</td>
+<td>
+"BASE"
+</td>
+<td>
+"C24H24FN5O2S"
+</td>
+<td>
+"N=C(N)NCCCOc1c...
+</td>
+<td>
+"RXTJPHLPHOZLFS...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3827271"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"712.85"
+</td>
+<td>
+"1"
+</td>
+<td>
+"1"
+</td>
+<td>
+"-2.84"
+</td>
+<td>
+"319.06"
+</td>
+<td>
+"10"
+</td>
+<td>
+"11"
+</td>
+<td>
+"2"
+</td>
+<td>
+"16"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.07"
+</td>
+<td>
+"4.08"
+</td>
+<td>
+"10.49"
+</td>
+<td>
+"-6.88"
+</td>
+<td>
+"-8.95"
+</td>
+<td>
+"0"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"50"
+</td>
+<td>
+"19"
+</td>
+<td>
+"14"
+</td>
+<td>
+"3"
+</td>
+<td>
+"712.4232"
+</td>
+<td>
+"ZWITTERION"
+</td>
+<td>
+"C31H56N10O9"
+</td>
+<td>
+"CC(C)C[C@@H]1N...
+</td>
+<td>
+"QJQNNLICZLLPMB...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1969944"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+""
+</td>
+<td>
+"56"
+</td>
+<td>
+"56"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"NONE"
+</td>
+<td>
+-1
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3465961"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"319.42"
+</td>
+<td>
+"16"
+</td>
+<td>
+"22"
+</td>
+<td>
+"2.22"
+</td>
+<td>
+"50.50"
+</td>
+<td>
+"4"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"6"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.87"
+</td>
+<td>
+"None"
+</td>
+<td>
+"9.38"
+</td>
+<td>
+"2.13"
+</td>
+<td>
+"-0.44"
+</td>
+<td>
+"1"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"23"
+</td>
+<td>
+"4"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"319.2060"
+</td>
+<td>
+"BASE"
+</td>
+<td>
+"C18H26FN3O"
+</td>
+<td>
+"CC(O)CN1CCC(CN...
+</td>
+<td>
+"FZEVYCHTADTXPM...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL587495"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"478.54"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"6.85"
+</td>
+<td>
+"66.73"
+</td>
+<td>
+"4"
+</td>
+<td>
+"3"
+</td>
+<td>
+"1"
+</td>
+<td>
+"6"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.23"
+</td>
+<td>
+"10.67"
+</td>
+<td>
+"8.47"
+</td>
+<td>
+"6.04"
+</td>
+<td>
+"4.93"
+</td>
+<td>
+"5"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"34"
+</td>
+<td>
+"4"
+</td>
+<td>
+"4"
+</td>
+<td>
+"1"
+</td>
+<td>
+"478.1439"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C26H21F3N4S"
+</td>
+<td>
+"Nc1cccc(CNCc2c...
+</td>
+<td>
+"KZOHKPSNJBXTRJ...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL3824158"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"422.48"
+</td>
+<td>
+"2"
+</td>
+<td>
+"4"
+</td>
+<td>
+"5.09"
+</td>
+<td>
+"109.54"
+</td>
+<td>
+"6"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"10"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.31"
+</td>
+<td>
+"4.59"
+</td>
+<td>
+"7.99"
+</td>
+<td>
+"2.49"
+</td>
+<td>
+"2.42"
+</td>
+<td>
+"2"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"31"
+</td>
+<td>
+"7"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"422.1842"
+</td>
+<td>
+"ACID"
+</td>
+<td>
+"C24H26N2O5"
+</td>
+<td>
+"CCCCCCCNC(C1=C...
+</td>
+<td>
+"AXOVDUYYBUYLPC...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL194112"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"366.38"
+</td>
+<td>
+"2"
+</td>
+<td>
+"3"
+</td>
+<td>
+"4.80"
+</td>
+<td>
+"57.53"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"1"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.75"
+</td>
+<td>
+"8.98"
+</td>
+<td>
+"None"
+</td>
+<td>
+"4.84"
+</td>
+<td>
+"4.83"
+</td>
+<td>
+"1"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"26"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"366.1443"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C20H21F3O3"
+</td>
+<td>
+"C[C@]12CCC3c4c...
+</td>
+<td>
+"FIBOSLUEJGPVMK...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2047226"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"452.40"
+</td>
+<td>
+"4"
+</td>
+<td>
+"8"
+</td>
+<td>
+"4.93"
+</td>
+<td>
+"53.08"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"7"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.53"
+</td>
+<td>
+"None"
+</td>
+<td>
+"8.47"
+</td>
+<td>
+"4.51"
+</td>
+<td>
+"3.29"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"29"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"451.1372"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C23H26BrN5"
+</td>
+<td>
+"Brc1ccc(CNc2cc...
+</td>
+<td>
+"WOAVNWHCIXCOIZ...
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL387315"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"673.99"
+</td>
+<td>
+"2"
+</td>
+<td>
+"2"
+</td>
+<td>
+"9.83"
+</td>
+<td>
+"43.86"
+</td>
+<td>
+"3"
+</td>
+<td>
+"0"
+</td>
+<td>
+"2"
+</td>
+<td>
+"21"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.08"
+</td>
+<td>
+"None"
+</td>
+<td>
+"9.57"
+</td>
+<td>
+"10.60"
+</td>
+<td>
+"8.45"
+</td>
+<td>
+"4"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"50"
+</td>
+<td>
+"5"
+</td>
+<td>
+"0"
+</td>
+<td>
+"2"
+</td>
+<td>
+"673.4607"
+</td>
+<td>
+"BASE"
+</td>
+<td>
+"C45H59N3O2"
+</td>
+<td>
+"CCCCCc1ccc(C(=...
+</td>
+<td>
+"HVSKDFHVTFRADD...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL540121"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"540.05"
+</td>
+<td>
+"2"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2.39"
+</td>
+<td>
+"147.14"
+</td>
+<td>
+"6"
+</td>
+<td>
+"4"
+</td>
+<td>
+"1"
+</td>
+<td>
+"8"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.22"
+</td>
+<td>
+"5.02"
+</td>
+<td>
+"11.48"
+</td>
+<td>
+"-0.75"
+</td>
+<td>
+"-0.78"
+</td>
+<td>
+"4"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"36"
+</td>
+<td>
+"9"
+</td>
+<td>
+"5"
+</td>
+<td>
+"1"
+</td>
+<td>
+"503.1627"
+</td>
+<td>
+"ZWITTERION"
+</td>
+<td>
+"C26H26ClN5O4S"
+</td>
+<td>
+"Cc1ccn(NS(=O)(...
+</td>
+<td>
+"TZLGWENJAJXWGA...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2387650"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"496.01"
+</td>
+<td>
+"2"
+</td>
+<td>
+"13"
+</td>
+<td>
+"6.03"
+</td>
+<td>
+"66.84"
+</td>
+<td>
+"5"
+</td>
+<td>
+"1"
+</td>
+<td>
+"1"
+</td>
+<td>
+"7"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.32"
+</td>
+<td>
+"3.57"
+</td>
+<td>
+"None"
+</td>
+<td>
+"6.77"
+</td>
+<td>
+"3.42"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"33"
+</td>
+<td>
+"5"
+</td>
+<td>
+"1"
+</td>
+<td>
+"1"
+</td>
+<td>
+"495.0366"
+</td>
+<td>
+"ACID"
+</td>
+<td>
+"C25H18ClNO4S2"
+</td>
+<td>
+"O=C(O)[C@@H](C...
+</td>
+<td>
+"LSYQEQADGPAMNF...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL374041"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"504.50"
+</td>
+<td>
+"2"
+</td>
+<td>
+"4"
+</td>
+<td>
+"3.04"
+</td>
+<td>
+"144.95"
+</td>
+<td>
+"8"
+</td>
+<td>
+"3"
+</td>
+<td>
+"1"
+</td>
+<td>
+"10"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.28"
+</td>
+<td>
+"6.59"
+</td>
+<td>
+"4.37"
+</td>
+<td>
+"2.17"
+</td>
+<td>
+"1.33"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"37"
+</td>
+<td>
+"11"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"504.1645"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C26H24N4O7"
+</td>
+<td>
+"CCOCCC1(Oc2ccc...
+</td>
+<td>
+"ABCSNHDQYHOLOO...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL394794"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"707.86"
+</td>
+<td>
+"1"
+</td>
+<td>
+"2"
+</td>
+<td>
+"4.31"
+</td>
+<td>
+"183.99"
+</td>
+<td>
+"12"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"9"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.18"
+</td>
+<td>
+"12.10"
+</td>
+<td>
+"None"
+</td>
+<td>
+"3.09"
+</td>
+<td>
+"3.09"
+</td>
+<td>
+"0"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"50"
+</td>
+<td>
+"13"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2"
+</td>
+<td>
+"707.3881"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C37H57NO12"
+</td>
+<td>
+"C=C1[C@@H](O)C...
+</td>
+<td>
+"CFMSPOHWBQUTHN...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2035815"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"534.89"
+</td>
+<td>
+"10"
+</td>
+<td>
+"10"
+</td>
+<td>
+"4.46"
+</td>
+<td>
+"146.01"
+</td>
+<td>
+"10"
+</td>
+<td>
+"3"
+</td>
+<td>
+"1"
+</td>
+<td>
+"8"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.28"
+</td>
+<td>
+"None"
+</td>
+<td>
+"6.22"
+</td>
+<td>
+"3.48"
+</td>
+<td>
+"3.48"
+</td>
+<td>
+"4"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"37"
+</td>
+<td>
+"11"
+</td>
+<td>
+"4"
+</td>
+<td>
+"2"
+</td>
+<td>
+"534.1142"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C22H18ClF3N8O3...
+</td>
+<td>
+"C=CC(=O)NCc1co...
+</td>
+<td>
+"ZRZKVZZVULTROL...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1586325"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"425.47"
+</td>
+<td>
+"6"
+</td>
+<td>
+"7"
+</td>
+<td>
+"3.11"
+</td>
+<td>
+"109.62"
+</td>
+<td>
+"5"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"8"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.44"
+</td>
+<td>
+"13.84"
+</td>
+<td>
+"None"
+</td>
+<td>
+"3.24"
+</td>
+<td>
+"3.24"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"30"
+</td>
+<td>
+"8"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"425.1045"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C21H19N3O5S"
+</td>
+<td>
+"O=C(CN(c1cccc(...
+</td>
+<td>
+"XVDMUGUIAWGPNU...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL2017916"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"312.35"
+</td>
+<td>
+"3"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2.86"
+</td>
+<td>
+"77.00"
+</td>
+<td>
+"6"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"4"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.80"
+</td>
+<td>
+"8.13"
+</td>
+<td>
+"3.49"
+</td>
+<td>
+"2.17"
+</td>
+<td>
+"2.10"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"22"
+</td>
+<td>
+"6"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"312.0681"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C15H12N4O2S"
+</td>
+<td>
+"COc1ccc(-c2nnc...
+</td>
+<td>
+"XIZUJGDKNPVNQA...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL374652"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"403.83"
+</td>
+<td>
+"1"
+</td>
+<td>
+"1"
+</td>
+<td>
+"5.98"
+</td>
+<td>
+"36.02"
+</td>
+<td>
+"2"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"4"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.42"
+</td>
+<td>
+"13.65"
+</td>
+<td>
+"None"
+</td>
+<td>
+"5.36"
+</td>
+<td>
+"5.36"
+</td>
+<td>
+"3"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"26"
+</td>
+<td>
+"2"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"403.0421"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C18H14ClF4NOS"
+</td>
+<td>
+"CC(O)(CSc1ccc(...
+</td>
+<td>
+"CRPQTBRTHURKII...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1416264"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"380.41"
+</td>
+<td>
+"6"
+</td>
+<td>
+"8"
+</td>
+<td>
+"3.06"
+</td>
+<td>
+"85.07"
+</td>
+<td>
+"7"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"5"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.54"
+</td>
+<td>
+"13.85"
+</td>
+<td>
+"3.86"
+</td>
+<td>
+"2.47"
+</td>
+<td>
+"2.47"
+</td>
+<td>
+"4"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"27"
+</td>
+<td>
+"7"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"380.0856"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C18H13FN6OS"
+</td>
+<td>
+"O=C(CSc1ccc2nn...
+</td>
+<td>
+"QVYIEKHEJKFNAT...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL213734"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"288.26"
+</td>
+<td>
+"2"
+</td>
+<td>
+"3"
+</td>
+<td>
+"2.32"
+</td>
+<td>
+"101.70"
+</td>
+<td>
+"5"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"5"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.50"
+</td>
+<td>
+"7.20"
+</td>
+<td>
+"None"
+</td>
+<td>
+"2.36"
+</td>
+<td>
+"1.95"
+</td>
+<td>
+"2"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"21"
+</td>
+<td>
+"7"
+</td>
+<td>
+"2"
+</td>
+<td>
+"0"
+</td>
+<td>
+"288.0746"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C14H12N2O5"
+</td>
+<td>
+"O=C(COc1ccccc1...
+</td>
+<td>
+"PZTWAHGBGTWVEB...
+</td>
+</tr>
+<tr>
+<td>
+"CHEMBL1531634"
+</td>
+<td>
+""
+</td>
+<td>
+""
+</td>
+<td>
+"Small molecule...
+</td>
+<td>
+0
+</td>
+<td>
+"320.16"
+</td>
+<td>
+"19"
+</td>
+<td>
+"21"
+</td>
+<td>
+"4.40"
+</td>
+<td>
+"29.10"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"4"
+</td>
+<td>
+"N"
+</td>
+<td>
+"0.67"
+</td>
+<td>
+"None"
+</td>
+<td>
+"None"
+</td>
+<td>
+"4.04"
+</td>
+<td>
+"4.04"
+</td>
+<td>
+"2"
+</td>
+<td>
+"MOL"
+</td>
+<td>
+-1
+</td>
+<td>
+"19"
+</td>
+<td>
+"2"
+</td>
+<td>
+"1"
+</td>
+<td>
+"0"
+</td>
+<td>
+"319.0008"
+</td>
+<td>
+"NEUTRAL"
+</td>
+<td>
+"C15H11BrFNO"
+</td>
+<td>
+"O=C(/C=C/Nc1cc...
+</td>
+<td>
+"DKPWCCDDKFLKEC...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List all column names to see what compound properties are stored in chEMBL database</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_col_list <span class="op">=</span> <span class="bu">list</span>(df.columns)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_col_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>['ChEMBL ID',
+ 'Name',
+ 'Synonyms',
+ 'Type',
+ 'Max Phase',
+ 'Molecular Weight',
+ 'Targets',
+ 'Bioactivities',
+ 'AlogP',
+ 'Polar Surface Area',
+ 'HBA',
+ 'HBD',
+ '#RO5 Violations',
+ '#Rotatable Bonds',
+ 'Passes Ro3',
+ 'QED Weighted',
+ 'CX Acidic pKa',
+ 'CX Basic pKa',
+ 'CX LogP',
+ 'CX LogD',
+ 'Aromatic Rings',
+ 'Structure Type',
+ 'Inorganic Flag',
+ 'Heavy Atoms',
+ 'HBA (Lipinski)',
+ 'HBD (Lipinski)',
+ '#RO5 Violations (Lipinski)',
+ 'Molecular Weight (Monoisotopic)',
+ 'Molecular Species',
+ 'Molecular Formula',
+ 'Smiles',
+ 'Inchi Key']</code></pre>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Blog made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 📕 Citation as author and blog URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
