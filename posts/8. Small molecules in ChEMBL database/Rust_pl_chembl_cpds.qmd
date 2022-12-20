@@ -353,12 +353,13 @@ df_ml.dtypes
 # Import scikit-learn
 import sklearn
 
-# Check scikit-learn version
+# Check version of scikit-learn 
 print(sklearn.__version__)
 ```
 
+Other libraries needed to generate ML model were imported as below.
+
 ```{python}
-# Import other libraries needed to generate ML model (in this case - logistic regression)
 # To use NumPy arrays to prepare X & y variables
 import numpy as np
 # Needed for dataframe to be used in scikit-learn ML
@@ -375,7 +376,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 ```
 
-I've then installed pyarrow, in order to convert Polars dataframe into a Pandas dataframe, which was needed to run *scikit-Learn*.
+I've then installed pyarrow, to convert Polars dataframe into a Pandas dataframe, which was needed to run *scikit-Learn*.
 
 ```{python}
 # Uncomment line below to install pyarrow
@@ -390,7 +391,9 @@ type(df_ml_pd)
 
 ##### **Logistic regression with *scikit-learn***
 
-Logistic regression was one of the supervised learning strategies in the machine learning realm. As the term "supervised" suggested, this type of ML was purely data-driven to allow computers to learn patterns from input data with the aim of reaching a predictive model in the end to help answer our questions.
+Logistic regression was one of the supervised methods in statistical machine learning realm. As the term "supervised" suggested, this type of ML was purely data-driven to allow computers to learn patterns from input data with known outcomes, in order to predict new outcomes on novel data.
+
+###### **Defining X and y variables**
 
 ```{python}
 # Define X variables from df_ml_pd dataset
@@ -404,26 +407,32 @@ X[0:5]
 ```
 
 ```{python}
-# Define y variable - note to use "Max_Phase", not the original "Max Phase"
+# Define y variable
+# Note to use "Max_Phase", not the original "Max Phase"
 y = np.asarray(df_ml_pd["Max_Phase"])
 y[0:5]
 ```
 
+###### **Training and testing sets**
+
 ```{python}
-# Split dataset into trainging & testing sets
+# Split dataset into training & testing sets
 rng = np.random.RandomState(0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = rng)
 print('Training set:', X_train.shape, y_train.shape)
 print('Testing set:', X_test.shape, y_test.shape)
 ```
 
+###### **Preprocessing data**
+
 ```{python}
 # Normalise & clean the dataset
-# Fit on the training set (not on testing set as this may lead to data leakage)
+# Fit on the training set - not on testing set as this might lead to data leakage
 # Transform on the testing set
 X = preprocessing.StandardScaler().fit(X_train).transform(X_test)
 X[0:5]
 ```
+###### **Fitting logistic regression classifier on training set**
 
 ```{python}
 # Import logistic regression 
@@ -433,40 +442,48 @@ LogR = LogisticRegression().fit(X_train, y_train)
 LogR
 ```
 
+###### **Applying LR classifier on testing set for prediction**
+
 ```{python}
 y_mp = LogR.predict(X_test)
 y_mp
 ```
 
+###### **Converting predicted values into a dataframe**
+
 ```{python}
-# Convert the predicted values (in terms of log odds) into a dataframe
-# Then use describe() method to get characteristics of the distribution
+# Predicted values were based on log odds
+# Use describe() method to get characteristics of the distribution
 pred = pd.DataFrame(LogR.predict_log_proba(X))
 pred.describe()
 ```
+Alternatively, a quicker way to get predicted probabilities was via predict_proba() method in *scikit-learn*.
 
 ```{python}
-# Or a quicker way to get the predicted probabilities is via predict_proba() method
 y_mp_proba = LogR.predict_proba(X_test)
 # Uncomment below to see the predicted probabilities printed
 #print(y_mp_proba)
 ```
 
+###### **Converting predicted probabilities into a dataframe**
+
 ```{python}
-# Convert predicted probabilities into a dataframe
-# then use describe() to show distributions
+# Use describe() to show distributions
 y_mp_prob = pd.DataFrame(y_mp_proba)
 y_mp_prob.describe()
 ```
+###### **Accuracy score for the LR classifier**
+
+One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, consider using other evaluation metrics. Here, we had an accuracy score of 0.7, which was not too low but also not extremely high either.
 
 ```{python}
-# Note: for imbalanced dataset, accuracy score may not be very informative, use other metrics
-# to evaluate or use other strategies to compensate for it
 from sklearn.metrics import accuracy_score
 accuracy_score(y_mp, y_test)
 ```
 
 ##### **Pipeline method for logistic regression**
+
+This was something I thought to try when I was reading through *scikit-learn* documentation.
 
 ```{python}
 # Test pipline from scikit-Learn
