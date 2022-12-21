@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2022-12-20">
+<meta name="dcterms.date" content="2022-12-21">
 
 <title>Home - Small molecules in ChEMBL database</title>
 <style>
@@ -138,6 +138,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -215,7 +216,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 20, 2022</p>
+        <p class="date">December 21, 2022</p>
       </div>
     </div>
     
@@ -259,6 +260,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#classification-report" id="toc-classification-report" class="nav-link" data-scroll-target="#classification-report"><strong>Classification report</strong></a></li>
   <li><a href="#log-loss" id="toc-log-loss" class="nav-link" data-scroll-target="#log-loss"><strong>Log loss</strong></a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -17396,7 +17399,6 @@ Testing set: (379, 5) (379,)</code></pre>
 </section>
 <section id="evaluation-of-the-logistic-regression-model" class="level4">
 <h4 class="anchored" data-anchor-id="evaluation-of-the-logistic-regression-model"><strong>Evaluation of the logistic regression model</strong></h4>
-<p><br></p>
 <section id="accuracy-scores" class="level6">
 <h6 class="anchored" data-anchor-id="accuracy-scores"><strong>Accuracy scores</strong></h6>
 <div class="cell" data-execution_count="42">
@@ -17418,86 +17420,90 @@ Testing set: (379, 5) (379,)</code></pre>
 </section>
 <section id="confusion-matrix" class="level6">
 <h6 class="anchored" data-anchor-id="confusion-matrix"><strong>Confusion matrix</strong></h6>
+<p>Next I’ve built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I’ve taken around the end of last year. I’ve added comments to try and explain what each section of the codes meant.</p>
 <div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import classification report &amp; confusion matrix from scikit-learn library</span></span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import confusion matrix from scikit-learn</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import itertools - functions to create iterators for efficient looping</span></span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to plot confusion matrix</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cm = confusion matrix</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co"># classes = 0 or 1 (no success/max phase 0-3 or success/max phase 4)</span></span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_confusion_matrix(<span class="co"># Sets a cm object</span></span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>                          cm, </span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Sets classes of '1s' (Successes) &amp; '0s' (Non-successes) for the cm</span></span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>                          classes,</span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># If setting normalize = true, reports in ratios instead of counts</span></span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>                          normalize,</span>
-<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>                          title <span class="op">=</span> <span class="st">'Confusion matrix'</span>,</span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Choose colour of the cm (colourmap recognised by matplotlib)</span></span>
-<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>                          cmap <span class="op">=</span> plt.cm.Reds):</span>
-<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a><span class="co">    This function prints and plots the confusion matrix.</span></span>
-<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a><span class="co">    Normalization can be applied by setting `normalize = True`.</span></span>
-<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> normalize:</span>
-<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>        cm <span class="op">=</span> cm.astype(<span class="st">'float'</span>) <span class="op">/</span> cm.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)[:, np.newaxis]</span>
-<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Normalized confusion matrix"</span>)</span>
-<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Confusion matrix, without normalization'</span>)</span>
-<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(cm)</span>
-<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the confusion matrix </span></span>
-<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a>    plt.imshow(cm, interpolation <span class="op">=</span> <span class="st">'nearest'</span>, cmap <span class="op">=</span> cmap)</span>
-<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="cb57-33"><a href="#cb57-33" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb57-34"><a href="#cb57-34" aria-hidden="true" tabindex="-1"></a>    tick_marks <span class="op">=</span> np.arange(<span class="bu">len</span>(classes))</span>
-<span id="cb57-35"><a href="#cb57-35" aria-hidden="true" tabindex="-1"></a>    plt.xticks(tick_marks, classes, rotation <span class="op">=</span> <span class="dv">45</span>)</span>
-<span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a>    plt.yticks(tick_marks, classes)</span>
-<span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-38"><a href="#cb57-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sets the decimal places of ratios if using normalize = True</span></span>
-<span id="cb57-39"><a href="#cb57-39" aria-hidden="true" tabindex="-1"></a>    fmt <span class="op">=</span> <span class="st">'.2f'</span> <span class="cf">if</span> normalize <span class="cf">else</span> <span class="st">'d'</span></span>
-<span id="cb57-40"><a href="#cb57-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sets threshold for normalised results (ratios)</span></span>
-<span id="cb57-41"><a href="#cb57-41" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> cm.<span class="bu">max</span>() <span class="op">/</span> <span class="fl">2.</span></span>
-<span id="cb57-42"><a href="#cb57-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through the ratios and differentiate between the text colours </span></span>
-<span id="cb57-43"><a href="#cb57-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by using the threshold cut-off</span></span>
-<span id="cb57-44"><a href="#cb57-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> itertools.product(<span class="bu">range</span>(cm.shape[<span class="dv">0</span>]), <span class="bu">range</span>(cm.shape[<span class="dv">1</span>])):</span>
-<span id="cb57-45"><a href="#cb57-45" aria-hidden="true" tabindex="-1"></a>        plt.text(j, i, <span class="bu">format</span>(cm[i, j], fmt),</span>
-<span id="cb57-46"><a href="#cb57-46" aria-hidden="true" tabindex="-1"></a>                 horizontalalignment <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a>                 color <span class="op">=</span> <span class="st">"white"</span> <span class="cf">if</span> cm[i, j] <span class="op">&gt;</span> thresh <span class="cf">else</span> <span class="st">"black"</span>)</span>
-<span id="cb57-48"><a href="#cb57-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-49"><a href="#cb57-49" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb57-50"><a href="#cb57-50" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'True label'</span>)</span>
-<span id="cb57-51"><a href="#cb57-51" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Predicted label'</span>)</span>
-<span id="cb57-52"><a href="#cb57-52" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb57-53"><a href="#cb57-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_matrix(y_test, y_mp, labels <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[128  62]
- [ 51 138]]</code></pre>
-</div>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to print and plot confusion matrix</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_confusion_matrix(<span class="co"># Sets a cm object (cm = confusion matrix)</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>                          cm, </span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Sets classes of '1s' (Successes) &amp; '0s' (Non-successes) for the cm</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>                          classes,</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># If setting normalize = true, reports in ratios instead of counts</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>                          normalize,</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>                          title <span class="op">=</span> <span class="st">'Confusion matrix'</span>,</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Choose colour of the cm (using colourmap recognised by matplotlib)</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>                          cmap <span class="op">=</span> plt.cm.Reds):</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> normalize:</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>        cm <span class="op">=</span> cm.astype(<span class="st">'float'</span>) <span class="op">/</span> cm.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)[:, np.newaxis]</span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Normalized confusion matrix"</span>)</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Confusion matrix, without normalization'</span>)</span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(cm)</span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the confusion matrix </span></span>
+<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>    plt.imshow(cm, interpolation <span class="op">=</span> <span class="st">'nearest'</span>, cmap <span class="op">=</span> cmap)</span>
+<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a>    tick_marks <span class="op">=</span> np.arange(<span class="bu">len</span>(classes))</span>
+<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a>    plt.xticks(tick_marks, classes, rotation <span class="op">=</span> <span class="dv">45</span>)</span>
+<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a>    plt.yticks(tick_marks, classes)</span>
+<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-33"><a href="#cb57-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Floats to be round up to two decimal places if using normalize = True</span></span>
+<span id="cb57-34"><a href="#cb57-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># or else use integers</span></span>
+<span id="cb57-35"><a href="#cb57-35" aria-hidden="true" tabindex="-1"></a>    fmt <span class="op">=</span> <span class="st">'.2f'</span> <span class="cf">if</span> normalize <span class="cf">else</span> <span class="st">'d'</span></span>
+<span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sets threshold of 0.5</span></span>
+<span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> cm.<span class="bu">max</span>() <span class="op">/</span> <span class="fl">2.</span></span>
+<span id="cb57-38"><a href="#cb57-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through the results and differentiate between two text colours </span></span>
+<span id="cb57-39"><a href="#cb57-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by using the threshold as a cut-off</span></span>
+<span id="cb57-40"><a href="#cb57-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> itertools.product(<span class="bu">range</span>(cm.shape[<span class="dv">0</span>]), <span class="bu">range</span>(cm.shape[<span class="dv">1</span>])):</span>
+<span id="cb57-41"><a href="#cb57-41" aria-hidden="true" tabindex="-1"></a>        plt.text(j, i, <span class="bu">format</span>(cm[i, j], fmt),</span>
+<span id="cb57-42"><a href="#cb57-42" aria-hidden="true" tabindex="-1"></a>                 horizontalalignment <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span id="cb57-43"><a href="#cb57-43" aria-hidden="true" tabindex="-1"></a>                 color <span class="op">=</span> <span class="st">"white"</span> <span class="cf">if</span> cm[i, j] <span class="op">&gt;</span> thresh <span class="cf">else</span> <span class="st">"black"</span>)</span>
+<span id="cb57-44"><a href="#cb57-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-45"><a href="#cb57-45" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb57-46"><a href="#cb57-46" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'True label'</span>)</span>
+<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Predicted label'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute confusion matrix</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> confusion_matrix(y_test, y_mp, labels <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">0</span>])</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot confusion matrix without normalisation</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>plot_confusion_matrix(matrix, </span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>                      classes <span class="op">=</span> [<span class="st">'Max_Phase = 0'</span>,<span class="st">'Max_Phase = 1'</span>], </span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>                      normalize <span class="op">=</span> <span class="va">False</span>, </span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>                      title <span class="op">=</span> <span class="st">"Confusion matrix without normalisation"</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute confusion matrix</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> confusion_matrix(y_test, y_mp, labels <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>])</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot confusion matrix without normalisation</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>plot_confusion_matrix(matrix, </span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Define classes of outcomes</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>                      classes <span class="op">=</span> [<span class="st">'Max_Phase = 0'</span>,<span class="st">'Max_Phase = 1'</span>], </span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Set normalize = True if wanting ratios instead</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>                      normalize <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>                      title <span class="op">=</span> <span class="st">"Confusion matrix without normalisation"</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Confusion matrix, without normalization
-[[128  62]
- [ 51 138]]</code></pre>
+<pre><code>Confusion matrix, without normalization</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[138  51]
+ [ 62 128]]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Rust_pl_chembl_cpds_files/figure-html/cell-46-output-2.png" width="570" height="488"></p>
+<p><img src="Rust_pl_chembl_cpds_files/figure-html/cell-46-output-3.png" width="570" height="488"></p>
 </div>
 </div>
+<p>A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were:</p>
+<ul>
+<li>True positive - Predicted Max_Phase = 1 &amp; True Max_Phase = 1 (128 out of 179 samples)</li>
+<li>True negative - Predicted Max_Phase = 0 &amp; True Max_Phase = 0 (138 out of 200 samples)</li>
+<li>False positive - Predicted Max_Phase = 1 &amp; True Max_Phase = 0 (51 out of 179 samples)</li>
+<li>False negative - Predicted Max_Phase = 0 &amp; True Max_Phase = 1 (62 out of 200 samples)</li>
+</ul>
+<p>By having these four categories known would then lead us to the next section about classification report, which showed all the precision, recall, f1-score and support metrics to evaluate the performance of this classifier.</p>
 <p><br></p>
 </section>
 <section id="classification-report" class="level6">
@@ -17517,6 +17523,20 @@ weighted avg       0.70      0.70      0.70       379
 </code></pre>
 </div>
 </div>
+<p><em>Precision</em> was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:</p>
+<p><span class="math display">\[
+\text{Precision} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Positive)}
+\]</span></p>
+<p><em>Recall</em>, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:</p>
+<p><span class="math display">\[
+\text{Recall} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Negative)}
+\]</span></p>
+<p>The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.</p>
+<p><em>f1-score</em>, or also known as balanced F-score or F-measure, here denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved for sure. It was defined as:</p>
+<p><span class="math display">\[
+\text{F1-score} = \frac{2 \times (Precision \times Recall)}{(Precision + Recall)}
+\]</span></p>
+<p><em>Support</em>, which some readers might have already spotted how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.</p>
 <p><br></p>
 </section>
 <section id="log-loss" class="level6">
@@ -17533,9 +17553,23 @@ weighted avg       0.70      0.70      0.70       379
 <pre><code>0.6149705820831467</code></pre>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="conclusion" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h4>
+<p><br></p>
+</section>
+<section id="references" class="level4">
+<h4 class="anchored" data-anchor-id="references"><strong>References</strong></h4>
+<p>I’ve listed down below a few main references that I’ve used throughout this project, which might be helpful to anyone who would like to do similar work on different datasets.</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/index.html">scikit-learn documentation</a></li>
+<li><a href="https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html">Scikit-learn: Machine Learning in Python</a>, Pedregosa et al., JMLR 12, pp.&nbsp;2825-2830, 2011.</li>
+<li>Practical statistics for data scientists book</li>
+<li>Stack Overflow</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

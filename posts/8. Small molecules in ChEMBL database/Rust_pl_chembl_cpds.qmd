@@ -2,7 +2,7 @@
 title: Small molecules in ChEMBL database
 subtitle: Polars dataframe library and machine learning in *scikit-learn*
 author: Jennifer HY Lin
-date: '2022-12-20'
+date: '2022-12-21'
 keep-ipynb: true
 draft: false
 categories:
@@ -37,11 +37,11 @@ This project was about using Polars, a blazingly fast dataframe library that was
 
 Some Polars references (which I've found particularly useful):
 
-* [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
+-   [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
 
-* [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
+-   [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
 
-* [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars
+-   [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars
 
 Once Polars was installed, the next step was to import it for use.
 
@@ -58,7 +58,7 @@ pl.show_versions()
 
 ##### **Download dataset**
 
-The dataset, which was purely about small molecules and their physicochemical properties, was downloaded from [ChEMBL database](https://www.ebi.ac.uk/chembl/) and saved as a .csv file. As a side note, if anyone was curious why I haven't uploaded the "chembl_mols.csv" file into my GitHub repository was because I was still in the process of figuring out how to add it into my repo due to its file size (it was approximately 0.6GB). I was trialling along the line of using Git large file system, but haven't quite figured it out yet (would be on my to-do list I guess). 
+The dataset, which was purely about small molecules and their physicochemical properties, was downloaded from [ChEMBL database](https://www.ebi.ac.uk/chembl/) and saved as a .csv file. As a side note, if anyone was curious why I haven't uploaded the "chembl_mols.csv" file into my GitHub repository was because I was still in the process of figuring out how to add it into my repo due to its file size (it was approximately 0.6GB). I was trialling along the line of using Git large file system, but haven't quite figured it out yet (would be on my to-do list I guess).
 
 For anyone who would like to reproduce this work, the file I used would be equivalent to a straight download from the home page of ChEMBL database, via clicking on the "Distinct compounds" (please see the circled area in the image below). Options were available to download the files as .csv, .tsv or .sdf formats (located at the top right of the page).
 
@@ -232,7 +232,7 @@ df_dn.groupby("Max Phase", maintain_order = True).agg(pl.count())
 
 A quick groupby function showed that there were only 954 small molecules approved. Phase 3 recorded a total of 303 small molecules. For phase 2, there were 441 small molecules, followed by 239 compounds in phase 1. There were, however, a total amount of 734,633 small molecules that had zero as phase number (as per ChEMBL_31 schema documentation).
 
-One of the other parameters I was interested in was "QED Weighted". So I went further into understanding what it meant, as the original reference was conveniently provided in the ChEMBL_31 schema documentation. The reference paper was by [Bickerton, G., Paolini, G., Besnard, J. et al. Quantifying the chemical beauty of drugs. Nature Chem 4, 90--98 (2012)](https://doi.org/10.1038/nchem.1243)(note: author's manuscript was available to view via PubMed link, the Nature Chemistry link only provided abstract with access to article via other means as stated). 
+One of the other parameters I was interested in was "QED Weighted". So I went further into understanding what it meant, as the original reference was conveniently provided in the ChEMBL_31 schema documentation. The reference paper was by [Bickerton, G., Paolini, G., Besnard, J. et al. Quantifying the chemical beauty of drugs. Nature Chem 4, 90--98 (2012)](https://doi.org/10.1038/nchem.1243)(note: author's manuscript was available to view via PubMed link, the Nature Chemistry link only provided abstract with access to article via other means as stated).
 
 In short, it was a measure of druglikeness for small molecules based on the concept of desirability, which was based on a total of 8 different molecular properties. These molecular properties included molecular weight, ALogP, polar surface area, number of hydrogen bond acceptors, number of hydrogen bond donors, number of rotatable bonds, number of aromatic rings and structural alerts. Without going into too much details for this QED Weighted parameter, it was normally recorded as a number that ranged from 0 to 1, with 0 being the least druglike and 1 being the most druglike.
 
@@ -240,7 +240,7 @@ In short, it was a measure of druglikeness for small molecules based on the conc
 
 ##### **Prepare dataframe prior to running ML model**
 
-A rough plan at this stage was to filter out Max Phase 4 and 0 compounds. Max phase 0 compounds were the ones that were not assigned with any max phase numbers yet, so I thought this would be ideal to be used as part of the testing set. The idea was to use "Max Phase" parameter as the target y variable for a logistic regression model, because ultimately stakeholders would be most interested in which candidate compounds would have the most likely chance to reach the final approved stage during a drug discovery and development pipeline, with only smallest possible amount of resources and time required, in order to provide the greatest public benefit. 
+A rough plan at this stage was to filter out Max Phase 4 and 0 compounds. Max phase 0 compounds were the ones that were not assigned with any max phase numbers yet, so I thought this would be ideal to be used as part of the testing set. The idea was to use "Max Phase" parameter as the target y variable for a logistic regression model, because ultimately stakeholders would be most interested in which candidate compounds would have the most likely chance to reach the final approved stage during a drug discovery and development pipeline, with only smallest possible amount of resources and time required, in order to provide the greatest public benefit.
 
 The goal of this ML model was to answer the question: which physicochemical parameters would be the most suitable ones to predict whether a compound would enter max phase 4 (approved) or not? (implicitly, this might also help indicate whether if we could predict if any of the max phase 0 compounds would likely enter max phase 4 in the end)
 
@@ -298,8 +298,7 @@ df_s_0 = df_0.sample(n = 950, shuffle = True, seed = 0)
 df_s_0
 ```
 
-The plan was to use logistic regression method for ML model, so the y variable I was interested in here was whether a small molecule would be approved or not, so it was going to be a binary categorical variable - meaning it needed to be 0 (not approved) or 1 (approved).
-To do this, add a new column with a new name of "Max_Phase" and replace "4" as "1" by dividing by 4 to reach this new label.
+The plan was to use logistic regression method for ML model, so the y variable I was interested in here was whether a small molecule would be approved or not, so it was going to be a binary categorical variable - meaning it needed to be 0 (not approved) or 1 (approved). To do this, add a new column with a new name of "Max_Phase" and replace "4" as "1" by dividing by 4 to reach this new label.
 
 ```{python}
 df_4_f = df_4.with_columns((pl.col("Max Phase") / 4).alias("Max_Phase"))
@@ -320,7 +319,7 @@ df_s_0_f = df_s_0.with_column((pl.col("Max Phase")).alias("Max_Phase"))
 df_s_0_f
 ```
 
-Then I combined df_s_0_f (dataframe with max phase 0 compounds) and df_4_f (dataframe with max phase 4 compounds).
+Then I combined df_s\_0_f (dataframe with max phase 0 compounds) and df_4\_f (dataframe with max phase 4 compounds).
 
 ```{python}
 df_concat = pl.concat([df_s_0_f, df_4_f], how = "vertical",)
@@ -332,6 +331,7 @@ This df_concat dataset was checked to see it had all compounds in Max Phase 0 an
 ```{python}
 df_concat.groupby("Max_Phase").count()
 ```
+
 I then checked df_concat dataset only had small molecules to confirm what I've tried to achieve.
 
 ```{python}
@@ -499,6 +499,7 @@ y_mp
 pred = pd.DataFrame(LogR.predict_log_proba(X))
 pred.describe()
 ```
+
 Alternatively, a quicker way to get predicted probabilities was via predict_proba() method in *scikit-learn*.
 
 ```{python}
@@ -538,8 +539,6 @@ LR.fit(X_train, y_train)
 
 #### **Evaluation of the logistic regression model**
 
-<br>
-
 ###### **Accuracy scores**
 
 ```{python}
@@ -547,7 +546,7 @@ from sklearn.metrics import accuracy_score
 accuracy_score(y_mp, y_test)
 ```
 
-The accuracy score was 0.7 based on the original data preprocessing method, which meant that there were around 70% of the cases (or compounds) classified correctly by using this LR classifier. Accuracy literally provided a measure of how close the predicted samples were to the true values. One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, and other evaluation metrics would need to be considered instead. 
+The accuracy score was 0.7 based on the original data preprocessing method, which meant that there were around 70% of the cases (or compounds) classified correctly by using this LR classifier. Accuracy literally provided a measure of how close the predicted samples were to the true values. One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, and other evaluation metrics would need to be considered instead.
 
 The accuracy score shown below was from the pipeline method used previously, which showed a very similar accuracy score of 0.6965699 (close to 0.7), confirming the method was in line with the original preprocessing method.
 
@@ -559,28 +558,25 @@ LR.score(X_test, y_test)
 
 ###### **Confusion matrix**
 
+Next I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
+
 ```{python}
-# Import classification report & confusion matrix from scikit-learn library
+# Import confusion matrix from scikit-learn
 from sklearn.metrics import confusion_matrix
 # Import itertools - functions to create iterators for efficient looping
 import itertools
 
-# Function to plot confusion matrix
-# cm = confusion matrix
-# classes = 0 or 1 (no success/max phase 0-3 or success/max phase 4)
-def plot_confusion_matrix(# Sets a cm object
+# Function to print and plot confusion matrix
+def plot_confusion_matrix(# Sets a cm object (cm = confusion matrix)
                           cm, 
                           # Sets classes of '1s' (Successes) & '0s' (Non-successes) for the cm
                           classes,
                           # If setting normalize = true, reports in ratios instead of counts
                           normalize,
                           title = 'Confusion matrix',
-                          # Choose colour of the cm (colourmap recognised by matplotlib)
+                          # Choose colour of the cm (using colourmap recognised by matplotlib)
                           cmap = plt.cm.Reds):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize = True`.
-    """
+    
     if normalize:
         cm = cm.astype('float') / cm.sum(axis = 1)[:, np.newaxis]
         print("Normalized confusion matrix")
@@ -597,12 +593,13 @@ def plot_confusion_matrix(# Sets a cm object
     plt.xticks(tick_marks, classes, rotation = 45)
     plt.yticks(tick_marks, classes)
 
-    # Sets the decimal places of ratios if using normalize = True
+    # Floats to be round up to two decimal places if using normalize = True
+    # or else use integers
     fmt = '.2f' if normalize else 'd'
-    # Sets threshold for normalised results (ratios)
+    # Sets threshold of 0.5
     thresh = cm.max() / 2.
-    # Iterate through the ratios and differentiate between the text colours 
-    # by using the threshold cut-off
+    # Iterate through the results and differentiate between two text colours 
+    # by using the threshold as a cut-off
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], fmt),
                  horizontalalignment = "center",
@@ -611,23 +608,31 @@ def plot_confusion_matrix(# Sets a cm object
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    
-print(confusion_matrix(y_test, y_mp, labels = [1,0]))
 ```
 
 ```{python}
 # Compute confusion matrix
-matrix = confusion_matrix(y_test, y_mp, labels = [1,0])
+matrix = confusion_matrix(y_test, y_mp, labels = [0,1])
 np.set_printoptions(precision = 2)
 
 # Plot confusion matrix without normalisation
 plt.figure()
 plot_confusion_matrix(matrix, 
+                      # Define classes of outcomes
                       classes = ['Max_Phase = 0','Max_Phase = 1'], 
+                      # Set normalize = True if wanting ratios instead
                       normalize = False, 
                       title = "Confusion matrix without normalisation"
                      )
 ```
+A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were: 
+
+* True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 (128 out of 179 samples)
+* True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 (138 out of 200 samples)
+* False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 (51 out of 179 samples)
+* False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 (62 out of 200 samples)
+
+By having these four categories known would then lead us to the next section about classification report, which showed all the precision, recall, f1-score and support metrics to evaluate the performance of this classifier.
 
 <br>
 
@@ -637,6 +642,27 @@ plot_confusion_matrix(matrix,
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_mp))
 ```
+*Precision* was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:
+
+$$
+\text{Precision} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Positive)}
+$$
+
+*Recall*, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:
+
+$$
+\text{Recall} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Negative)}
+$$
+
+The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.
+
+*f1-score*, or also known as balanced F-score or F-measure, here denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved for sure. It was defined as:
+
+$$
+\text{F1-score} = \frac{2 \times (Precision \times Recall)}{(Precision + Recall)}
+$$
+
+*Support*, which some readers might have already spotted how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.
 
 <br>
 
@@ -651,6 +677,16 @@ print(classification_report(y_test, y_mp))
 from sklearn.metrics import log_loss
 log_loss(y_test, y_mp_proba)
 ```
+#### **Conclusion**
 
 
+<br>
 
+#### **References**
+
+I've listed down below a few main references that I've used throughout this project, which might be helpful to anyone who would like to do similar work on different datasets.
+
+* [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
+* [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+* Practical statistics for data scientists book
+* Stack Overflow
