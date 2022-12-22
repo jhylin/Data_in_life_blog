@@ -56,7 +56,11 @@ The dataset, which was purely about small molecules and their physicochemical pr
 
 For anyone who would like to reproduce this work, the file I used would be equivalent to a straight download from the home page of ChEMBL database, via clicking on the "Distinct compounds" (please see the circled area in the image below). Options were available to download the files as .csv, .tsv or .sdf formats (located at the top right of the page).
 
+<br>
+
 ![Image adapted from ChEMBL database website](ChEMBL_cpds.jpg)
+
+<br>
 
 Once we've had the file ready, it would be read via the usual read_csv() method.
 
