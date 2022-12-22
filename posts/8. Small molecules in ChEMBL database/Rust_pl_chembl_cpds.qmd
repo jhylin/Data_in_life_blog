@@ -12,6 +12,7 @@ categories:
   - Python
   - Jupyter
   - Cheminformatics
+  - Machine learning
 jupyter: python3
 ---
 
@@ -34,7 +35,6 @@ This project was about using Polars, a blazingly fast dataframe library that was
 # Uncomment the line below to update Polars
 #!pip install --upgrade polars
 ```
-
 
 Once Polars was installed, the next step was to import it for use.
 
@@ -236,10 +236,10 @@ Before I got too carried away with further EDA, I wanted to get started on prepa
 
 The goal of this ML model was to answer the question: which physicochemical parameters would be the most suitable ones to predict whether a compound would enter max phase 4 (approved) or not? (implicitly, this might also help indicate whether if we could predict if any of the max phase 0 compounds would likely enter max phase 4 in the end)
 
-I've then narrowed down the df_dn dataset to fulfill the following criteria: 
+I've then narrowed down the df_dn dataset to fulfill the following criteria:
 
-\* Only small molecules present
-\* Max phase of 0 and 4 only
+- Only small molecules present 
+- Max phase of 0 and 4 only
 
 Another reason behind choosing only small molecules that had max phase of 0 and 4 was that a confusion matrix could be built in the end to see if the parameters selected would give us a reasonably good model for predicting the outcomes of these small molecules. For now, I've chosen the following columns (or physicochemical parameters) to appear in this interim df_f dataset.
 
@@ -615,12 +615,13 @@ plot_confusion_matrix(matrix,
                       title = "Confusion matrix without normalisation"
                      )
 ```
-A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were: 
 
-* True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 (128 out of 179 samples)
-* True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 (138 out of 200 samples)
-* False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 (51 out of 179 samples)
-* False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 (62 out of 200 samples)
+A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were:
+
+-   True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 (128 out of 179 samples)
+-   True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 (138 out of 200 samples)
+-   False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 (51 out of 179 samples)
+-   False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 (62 out of 200 samples)
 
 By having these four categories known would then lead us to the next section about classification report, which showed all the precision, recall, f1-score and support metrics to evaluate the performance of this classifier.
 
@@ -632,6 +633,7 @@ By having these four categories known would then lead us to the next section abo
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_mp))
 ```
+
 *Precision* was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:
 
 $$
@@ -665,13 +667,14 @@ Log loss could be used as another gauge to show how good the classifier was at m
 from sklearn.metrics import log_loss
 log_loss(y_test, y_mp_proba)
 ```
+
 #### **Discussions and conclusion**
 
-So here I've completed a very basic LR classifier model for ChEMBL compound dataset. By no means was this a perfect ML model as I haven't actually changed the default settings of *scikit-learn*'s LogisticRegression() classifier, with examples such as adjusting C, a regularization parameter which was set at '1.0' by default, and also solvers, which could take in different algorithms for use in optimisation problems and normally set as 'lbfgs' by default. 
+So here I've completed a very basic LR classifier model for ChEMBL compound dataset. By no means was this a perfect ML model as I haven't actually changed the default settings of *scikit-learn*'s LogisticRegression() classifier, with examples such as adjusting C, a regularization parameter which was set at '1.0' by default, and also solvers, which could take in different algorithms for use in optimisation problems and normally set as 'lbfgs' by default.
 
 So with this default LR model, the evaluation metrics demonstrated a LR classifer of moderate quality to make the approval outcomes on ChEMBL small molecules, with a lot of rooms for improvements. Therefore, I could not yet confirm fully that the physicochemical parameters chosen would be the best ones to predict the approval outcomes of any small molecules. However, I might be okay to say that these molecular parameters were on the right track to help with making this prediction.
 
-To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question. 
+To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question.
 
 <br>
 
@@ -687,12 +690,11 @@ However, before jumping too far, I'll need to work on my second project first, w
 
 I've listed below some references used throughout this project. Again, huge thanks to our online communities in any forms or ways.
 
-* [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
-* [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
-* Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
-* [Stack Overflow](https://stackoverflow.com)
-* Polars references:
-  1. [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
-  2. [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
-  3. [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars
-
+-   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
+-   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+-   Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
+-   [Stack Overflow](https://stackoverflow.com)
+-   Polars references:
+    1.  [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
+    2.  [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
+    3.  [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars
