@@ -56,11 +56,7 @@ The dataset, which was purely about small molecules and their physicochemical pr
 
 For anyone who would like to reproduce this work, the file I used would be equivalent to a straight download from the home page of ChEMBL database, via clicking on the "Distinct compounds" (please see the circled area in the image below). Options were available to download the files as .csv, .tsv or .sdf formats (located at the top right of the page).
 
-<br>
-
 ![Image adapted from ChEMBL database website](ChEMBL_cpds.jpg)
-
-<br>
 
 Once we've had the file ready, it would be read via the usual read_csv() method.
 
@@ -238,8 +234,8 @@ The goal of this ML model was to answer the question: which physicochemical para
 
 I've then narrowed down the df_dn dataset to fulfill the following criteria:
 
-- Only small molecules present 
-- Max phase of 0 and 4 only
+-   Only small molecules present
+-   Max phase of 0 and 4 only
 
 Another reason behind choosing only small molecules that had max phase of 0 and 4 was that a confusion matrix could be built in the end to see if the parameters selected would give us a reasonably good model for predicting the outcomes of these small molecules. For now, I've chosen the following columns (or physicochemical parameters) to appear in this interim df_f dataset.
 
