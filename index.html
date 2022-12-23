@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.37">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -107,29 +112,33 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Home</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">Jennifer HY Lin</a>
+    <a class="nav-link" href="./about.html">
+ <span class="menu-text">Jennifer HY Lin</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">CV</a>
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
   </li>  
 </ul>
               <div class="quarto-toggle-container">
@@ -152,6 +161,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-meta">
 
       
+    
       
     </div>
     
@@ -174,7 +184,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="Data analytics projects,Polars,Rust,Python,Jupyter,Cheminformatics,Machine learning" data-listing-date-sort="1671620400000" data-listing-file-modified-sort="1671684989223" data-listing-reading-time-sort="28.2">
+<div class="g-col-1" data-index="0" data-categories="Data analytics projects,Polars,Rust,Python,Jupyter,Cheminformatics,Machine learning" data-listing-date-sort="1671706800000" data-listing-file-modified-sort="1671765654801" data-listing-reading-time-sort="28.29">
 <a href="./posts/8. Small molecules in ChEMBL database/Rust_pl_chembl_cpds.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -208,14 +218,14 @@ Machine learning
 </div>
 </div>
 <div class="card-text listing-description">
-As my interests gradually grew for Rust, I realised why so many people said it might be a hard programming language to learn. My head was spinning after reading the Rust programming language book and watching a few online teaching videos about it. I then decided to start from something I was more familiar with, and somehow through various online ventures and searching, I’ve managed to start two projects in parallel. The first one was where I used Polars dataframe library, and the second one would be about using Rust through an interactive user interface such as Jupyter notebook. I’ve anticipated that the second project would take much longer time for me to finish, so I would be tackling the first project for now.
+As my interests gradually grew for Rust, I realised why so many people said it might be a hard programming language to learn. My head was spinning after reading the Rust…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Jennifer HY Lin
 </div>
 <div class="listing-date">
-Dec 22, 2022
+Dec 23, 2022
 </div>
 </div>
 </div>
@@ -247,7 +257,7 @@ RDKit
 </div>
 </div>
 <div class="card-text listing-description">
-Well, I’ve always had a thought sitting at the back of my mind about working on a chemistry-related data project. It was partly due to the research saga detailed in another blog post. About two months ago, I thought I will never be able to get anything decent (e.g.&nbsp;first-author paper) published out of my PhD, so I was thinking of going down the route of working on health data science, which was where I could tie in my pharmacist background. Miraculously, the paper actually got published last month, which meant I might have more career options now…
+Well, I’ve always had a thought sitting at the back of my mind about working on a chemistry-related data project. It was partly due to the research saga detailed in another blog…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -277,7 +287,7 @@ Research
 </div>
 </div>
 <div class="card-text listing-description">
-Throughout my PhD, I’ve also collaborated with the lab group members and also other research groups in other academic research projects. The following publications<sup>1</sup> were the ones I was involved in:
+Throughout my PhD, I’ve also collaborated with the lab group members and also other research groups in other academic research projects. The following publications<sup>1</sup> were the ones I was…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -310,7 +320,7 @@ Drug discovery &amp; design
 </div>
 </div>
 <div class="card-text listing-description">
-My PhD<sup>1</sup><sup>2</sup> started about 6 months after I’ve finished my MPhil so it was around the beginning of 2015 that I’ve officially begun my PhD and it took a solid 4 years to finish (while working part-time as a hospital pharmacist). In simple words, there were two main research projects going on concurrently in my PhD:
+My PhD<sup>1</sup><sup>2</sup> started about 6 months after I’ve finished my MPhil so it was around the beginning of 2015 that I’ve officially begun my PhD and it…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -349,7 +359,7 @@ Long COVID
 </div>
 </div>
 <div class="card-text listing-description">
-This was another update on the current long COVID saga around the world that I thought to follow up from my earlier work (details in the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected until July 2021 (the previous paper was only until March 2021). I’ve used Python to extract a table from the PDF of the paper and also Excel to assist with data cleaning. This was followed by using R to analyse and visualise all the data.
+This was another update on the current long COVID saga around the world that I thought to follow up from my earlier work (details in the SQL and Tableau projects). This time the dataset was obtained from another journal paper, which had data collected until July 2021 (the previous paper was only until March 2021). I’ve used…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -386,7 +396,7 @@ Long COVID
 </div>
 <div class="card-text listing-description">
 
-Recently I had the idea of continuing the long COVID exploration and thought that I’ve never tried scraping a PDF before, so by combining these two ideas together, I ended up with this little piece of work as another post.
+Recently I had the idea of continuing the…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -416,7 +426,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-I’ve been working on my data analytics portfolio for the last few months, on and off, as I’ve also got another work commitment going on at the same time. While working on my very first portfolio blog at WordPress, I’ve also stumbled across R programming language (due to a data analytics work interview where they actually tested me R!). This then opened up a whole new R world with its friendly online community. Since my interests in R grew further and further, I’ve been looking for places where I can use RStudio IDE and/or R to build blogs and gladly I found Quarto which led me to its Quarto blogs.
+I’ve been working on my data analytics portfolio for the last few months, on and off, as I’ve also got another work commitment going on at the same time. While working on my…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -455,7 +465,7 @@ Rare diseases
 </div>
 </div>
 <div class="card-text listing-description">
-This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took quite a long time to load on RStudio (or could be due to my laptop capacity…). It loaded relatively faster on Jupyter notebook from Anaconda, so I then decided to clean it up first using Python<sup>1</sup> there. Some columns were removed which reduced the total number of columns from 37 to 13, while not changing any of the rows at all. The columns were also renamed to make it easier to read.
+This dataset was also derived and downloaded from Orphanet, as another part in the “rare diseases” series. It contained 37 columns with 112,243 rows originally, which took…<sup></sup>
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -485,7 +495,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-I’ve managed to post my first ever tweet on Twitter yesterday on the R project I’ve done recently on rare disease drugs. I’m not used to posting anything on social media as I almost always prefer to stay low-profile, rather than the opposite, and this may not be a good thing especially if I’m trying to transition into a different job field. So I did it finally…
+I’ve managed to post my first ever tweet on Twitter yesterday on the R project I’ve done recently on rare disease drugs. I’m not used to posting anything on social media as…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -521,7 +531,7 @@ Rare diseases
 </div>
 </div>
 <div class="card-text listing-description">
-So my current interests are still in rare diseases from Orphanet website so the next focus is on natural history of rare diseases, specifically I’d like to focus on malformation syndrome<sup>1</sup> for now. There are so much more data available on Orphanet, which I’d really like to look further into such as phenotypes associated with different rare diseases, so this is likely the next one I’ll be working on.
+So my…<sup></sup>
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -551,7 +561,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-So things have gone a little busier than usual behind the scene from last week till this week. As we know it, it’s always hard to plan when things are on the flow, especially in the current climate. So, a little about what I’m working on lately:
+So things have gone a little busier than usual behind the scene from…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -587,7 +597,7 @@ Long COVID
 </div>
 </div>
 <div class="card-text listing-description">
-For this SQL project<sup>1</sup>, I’ve used the same set of data as the Tableau project in order to see if there will be any other new insights when using SQL for data analysis. Dataset is from this paper – Michelen M, Manoharan L, Elkheir N, et al.&nbsp;Characterising long COVID: a living systematic review. BMJ Global Health 2021;6:e005427, which was discovered through PubMed. One other thing of note was that the paper only collected long COVID-related data up until 17th March 2021. All other more recent developments of long COVID will likely require more time before further data are more readily available, for example, the long COVID impact from Omicron variants.
+For this SQL project<sup>1</sup>, I’ve used the same set of data as the Tableau project in order to see if there will be any other new insights when using SQL for data analysis. Dataset is from this paper…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -624,7 +634,7 @@ Long COVID
 </div>
 <div class="card-text listing-description">
 
-This project<sup>1</sup> was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on this project. This has also made me realised that I might have started from the harder end first by learning Python programming language first in 2019 and then picking up the rest of the data analytics tools towards late 2021. It was completely interesting and absolutely fascinating at how different softwares vary but with common themes in mind.
+This project<sup>1</sup> was entirely self-motivated and out of personal interests since COVID has widely and deeply affected many people nowadays. I was also learning Tableau while I worked on…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -654,7 +664,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-To keep myself somewhat occupied, I’m still working on the Tableau project at the moment (while I’m working towards the end of a Tableau course) and have then added two further projects – one a Python one about rare disease drugs and the other one using SQL. I’ve just completed and published the Python one (please see Portfolio section for details) and within this week I’m aiming to start the SQL project. This time I’ll not be using IBM Db2 or SQLite, which was what I’ve used for the course but rather I’ve managed to install MySQL server and also DBeaver GUI to work on the SQL project. The dataset is still to be decided as I sort of want to integrate the SQL one with Tableau and the latest Python project. I’ll have another look again…
+To keep myself somewhat occupied, I’m still working on the Tableau project at the moment (while I’m working towards the end of a Tableau course) and have then added two…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -693,7 +703,7 @@ Rare diseases
 </div>
 </div>
 <div class="card-text listing-description">
-Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic drugs. I’ve also often wondered about drugs for rare diseases and how they’re often for the minorities in the diseased populations. So here is the initial Python and R projects<sup>1</sup> about rare disease drugs by using data extracted from FDA’s Orphan Drug Product designation database. I also have to acknowledge “Data Is Plural” website, which has inspired me to look into this dataset.
+Since it is common knowledge that it takes a very long time to discover and develop novel therpapeutic…<sup></sup>
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -723,7 +733,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-So after a short period of trials and errors of job applications with serious thoughts into a career change, I’m planning to go for the more practical and realistic approach – starting from an entry-level data analyst role. However, I’m aware that I’ll need to build up a relatively decent portfolio of data analytics work before I’ll even be able to reach that very first stage.
+So after a short period of trials and errors of job applications with serious thoughts into a career change, I’m planning to go for the more practical and realistic approach…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -753,7 +763,7 @@ Blog
 </div>
 </div>
 <div class="card-text listing-description">
-After my PhD study came to an end at around the end of 2018 to early 2019, I’ve decided to return to New Zealand. This was followed by my tumultuous postdoc searching story and also a solitude time for myself to dig deeper into what I would really like to do research-wise. This, of course, then led to the beginning of the COVID-19 pandemic in early 2020, which in a sense has been world-changing (I don’t know what other words or terms can better describe it) and its after-effect is still hanging around until this very moment…
+After my PhD study came to an end at around the end of 2018 to early 2019, I’ve decided to return to New Zealand. This was followed by my tumultuous postdoc searching story…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -783,7 +793,7 @@ Research
 </div>
 </div>
 <div class="card-text listing-description">
-Essentially, having completed this MPhil project<sup>1</sup> was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 – 2014) as no one in my previous lab group was working on it so it was literally a one-person project but we were collaborating with a distant research group. Unfortunately this project came to an early stop during my PhD stage (when I was working part-time still as a pharmacist to support my own cost of living while receiving a puny amount of scholarship plus working on this project at the time and then one extra project added on during PhD). The main reason that this project did no progress was that our collaborators decided to pull out from testing further compounds for us. Although it came as a bit of shock but later it felt less so. Later, I’ve decided that it would still be part of my portfolio to showcase a project that did not proceed further (or in plain words, in the “failed” section).
+Essentially, having completed this MPhil project<sup>1</sup> was more like a warm-up before participating in a real research project at a grand scale. This was a new project at the time (between 2012 – 2014) as no one in my previous…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -873,6 +883,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
     }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
   }
   const isFileUrl = () => { 
     return window.location.protocol === 'file:';
@@ -924,7 +944,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -946,7 +968,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -974,31 +1013,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
