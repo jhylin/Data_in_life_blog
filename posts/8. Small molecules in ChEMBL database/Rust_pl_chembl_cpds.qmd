@@ -2,7 +2,7 @@
 title: Small molecules in ChEMBL database
 subtitle: Polars dataframe library and machine learning in *scikit-learn*
 author: Jennifer HY Lin
-date: '2022-12-22'
+date: '2022-12-23'
 draft: false
 categories:
   - Data analytics projects
@@ -73,23 +73,24 @@ df.head() #read first 5 rows
 
 ##### **Data wrangling**
 
-Now an obvious issue appeared without surprises as this dataset was downloaded as .csv file, which meant it was likely to have a certain delimiter between each variable. The dataset showed all data were packed as strings for each compound in each row. Each variable was separated or delimited by semicolons. To read the dataframe properly, I've added a delimiter term into the code to transform the dataframe into a more readable format.
+Now, since this dataset was downloaded as a .csv file, this meant it was likely to have a certain delimiter between each variable. So the whole dataset was presented as strings where each string represented each compound in each row. Each variable was separated by semicolons. To read it properly, I've added a delimiter term in the code to transform the dataframe into a more readable format.
 
 ```{python}
 # By referring to Polars documentation, 
 # use "sep" to set the delimiter of the file
-# which in this case was semicolons
+# which was semicolons in this case
 df = pl.read_csv("chembl_mols.csv", sep = ";")
 # Show the first 10 rows of data
 #df.head(10)
-
 # or full dataset
 df
 ```
 
-Initially, I only wanted to download about 24 compounds from ChEMBL database to trial first. Unknowingly, I ended up downloading the whole curated set of 2,331,700 small molecules (!), and I found this out when I loaded the dataframe after setting the delimiter for the csv file, which later led to the problem of uploading the .csv file into GitHub repo mentioned earlier.
+<br>
 
-Loading these 2,331,700 rows of data was fast, which occurred within a few seconds without exaggeration. This echoed many users' experiences with Polars, so this was another nice surprise, and once again confirmed that Rust (and also Apache arrow, which was used as Polars' foundation) were solid in speed.
+Initially, I only wanted to download around 24 compounds from the ChEMBL database first. Unknowingly, I ended up downloading the whole curated set of 2,331,700 small molecules (!), and I found this out when I loaded the dataframe after setting up the delimiter for the csv file, which later led to the file size problem mentioned earlier.
+
+Loading these 2,331,700 rows of data was fast, which occurred within a few seconds without exaggeration. This echoed many users' experiences with Polars, so this was another nice surprise, and once again confirmed that Rust, and also Apache arrow, which was used as Polars' foundation, were solid in speed.
 
 Now I had the full dataframe, and I wanted to find out what types of physicochemical properties were there for the compounds.
 
@@ -98,11 +99,11 @@ Now I had the full dataframe, and I wanted to find out what types of physicochem
 print(df.glimpse())
 ```
 
-There were a few terms where I wasn't sure of their exact meanings, so I went through the ChEMBL_31 schema documentation and ChEMBL database website to find out. This took a while and was an important step so that I would be interpreting the results or meanings of these data appropriately later on.
+There were a few terms where I wasn't sure of their exact meanings, so I went through the ChEMBL_31 schema documentation and ChEMBL database website to find out. This took a while and was an important step to take so that I would know what to do when reaching the ML phase.
 
-I have selected a few physicochemical properties down below so that readers and I could gather reasonable understandings of each term. The explanations for each term were adapted from ChEMBL_31 schema documentation (available as "Release notes" on the website), or if definitions for certain terms were not available from the documentation, I resorted to interpret them myself by going into "Dinstict compounds" section on the ChEMBL database, where I would click on, e.g. bioactivities, for a random compound in there to see what results showed up and then described them below.
+I have selected a few physicochemical properties down below so that readers and I could gather some reasonable understandings for each term. The explanations for each term were adapted from ChEMBL_31 schema documentation (available as "Release notes" on the website), or if definitions for certain terms were not available from the documentation, I resorted to interpret them myself by going into "Dinstict compounds" section on the ChEMBL database, where I would click on, e.g. bioactivities, for a random compound in there to see what results showed up and then described them below.
 
-The definitions for these physicochemical properties were listed as below:
+The definitions for some of the listed physicochemical properties were:
 
 **Max Phase** - Maximum phase of development reached for the compound (where 4 = approved). Null was where max phase has not yet been assigned.
 
@@ -116,7 +117,7 @@ The definitions for these physicochemical properties were listed as below:
 
 **#RO5 Violations** - Number of violations of Lipinski's rule-of-five, using HBA and HBD definitions
 
-**Passes Ro3** - Indicated whether the compound passes the rule-of-three (MW \< 300, logP \< 3 etc)
+**Passes Ro3** - Indicated whether the compound passed the rule-of-three (MW \< 300, logP \< 3 etc)
 
 **QED Weighted** - Weighted quantitative estimate of drug likeness (as defined by Bickerton *et al.*, Nature Chem 2012)
 
@@ -141,7 +142,7 @@ From the df.glimpse() method previously, there were a lot of columns with the da
 ```{python}
 # Convert data types for multiple selected columns
 # Note: only takes two positional arguments, 
-# so needed to use [] in code to change 
+# so needed to use [] in code to allow more than two
 
 # Multiple columns all at once - with_columns()
 # Single column - with_column()
@@ -211,7 +212,7 @@ One of the columns that jumped out from the summary statistics of the df_dn data
 df_dn.filter(pl.col("Targets") == 1334)
 ```
 
-To explore other physicochemical and molecular properties in the dataframe, "Max Phase" was one of the first few that drew my interests. So it tagged each ChEMBL compound with a max phase number from 0 to 4, where 4 meant the compound was approved (usually also meant it was already a prescription medicine). Thinking along this line, I thought what about those compounds that had max phase as 0, because they were the ones still pending associations with max phase numbers. So I thought this might be a good opportunity to introduce some ML into this project, to predict whether these zero max phase compounds would enter the approved max phase.
+To explore other physicochemical and molecular properties in the dataframe, "Max Phase" was one of the first few that drew my interests. So it tagged each ChEMBL compound with a max phase number from 0 to 4, where 4 meant the compound was approved (usually also meant it was already a prescription medicine). Thinking along this line, I thought what about those compounds that had max phase as 0, because they were the ones still pending associations with max phase numbers. By extending on this idea, this could be a good opportunity to introduce some ML to predict whether these zero max phase compounds would enter the approved max phase.
 
 Firstly, I had a look at the overall distribution of the max phase compounds in this dataframe df_dn.
 
@@ -223,7 +224,7 @@ df_dn.groupby("Max Phase", maintain_order = True).agg(pl.count())
 
 A quick groupby function showed that there were only 954 small molecules approved. Phase 3 recorded a total of 303 small molecules. For phase 2, there were 441 small molecules, followed by 239 compounds in phase 1. There were, however, a total amount of 734,633 small molecules that had zero as phase number (as per ChEMBL_31 schema documentation). Note: these figures were only for ChEMBL compounds with full documentations in the dataset (excluding entries or compounds with N/A or "" (empty) string cells).
 
-One of the other parameters I was interested in was "QED Weighted". So I went further into understanding what it meant, as the original reference was conveniently provided in the ChEMBL_31 schema documentation. The reference paper was by [Bickerton, G., Paolini, G., Besnard, J. et al. Quantifying the chemical beauty of drugs. Nature Chem 4, 90--98 (2012)](https://doi.org/10.1038/nchem.1243)(note: author's manuscript was available to view via PubMed link, the Nature Chemistry link only provided abstract with access to article via other means as stated).
+One of the other parameters I was interested in was "QED Weighted". So I went further into understanding what it meant, as the original reference was conveniently provided in the ChEMBL_31 schema documentation. The reference paper was by [Bickerton, G., Paolini, G., Besnard, J. et al. Quantifying the chemical beauty of drugs. Nature Chem 4, 90--98 (2012)](https://doi.org/10.1038/nchem.1243) (note: author's manuscript was available to view via PubMed link, the Nature Chemistry link only provided abstract with access to article via other means as stated).
 
 In short, it was a measure of druglikeness for small molecules based on the concept of desirability, which was based on a total of 8 different molecular properties. These molecular properties included molecular weight, ALogP, polar surface area, number of hydrogen bond acceptors, number of hydrogen bond donors, number of rotatable bonds, number of aromatic rings and structural alerts. Without going into too much details for this QED Weighted parameter, it was normally recorded as a number that ranged from 0 to 1, with 0 being the least druglike and 1 being the most druglike.
 
@@ -231,16 +232,18 @@ In short, it was a measure of druglikeness for small molecules based on the conc
 
 ##### **Prepare dataframe prior to running machine learning model**
 
-Before I got too carried away with further EDA, I wanted to get started on preparing a dataframe for the ML model. A rough plan at this stage was to filter out Max Phase 4 and 0 compounds. Max phase 0 compounds were the ones that were not assigned with any max phase numbers yet, so I thought they would be ideal for use as the testing set. The main idea was to use "Max Phase" parameter as the target y variable for a LR model, because ultimately stakeholders would be more interested in knowing which candidate compounds had the most likely chance to reach the final approved phase during a drug discovery and development project, with also a chance to potentially reduce resources and time required in such a complex matter.
+Before I got too carried away with further EDA, I wanted to get started on preparing a dataframe for the ML model. A rough plan at this stage was to filter out Max Phase 4 and 0 compounds. Max phase 0 compounds were the ones that were not assigned with any max phase numbers yet, so they would be ideal for use as the testing set. Another main idea was to use "Max Phase" parameter as the target y variable for a LR model, because ultimately stakeholders would be more interested in knowing which candidate compounds had the most likely chance to reach the final approved phase during a drug discovery and development project or otherwise. This would also provide a chance to potentially reduce the amount of resources and time required in such a complex and sophisticated matter.
 
-The goal of this ML model was to answer the question: which physicochemical parameters would be the most suitable ones to predict whether a compound would enter max phase 4 (approved) or not? (implicitly, this might also help indicate whether if we could predict if any of the max phase 0 compounds would likely enter max phase 4 in the end)
+The goal of this ML model was to answer this question: which physicochemical parameters would be the most suitable ones to predict whether a compound would enter max phase 4 (approved) or not? (implicitly, this might also help to predict which max phase 0 compounds would likely enter max phase 4 in the end)
 
 I've then narrowed down the df_dn dataset to fulfill the following criteria:
 
 -   Only small molecules present
 -   Max phase of 0 and 4 only
 
-Another reason behind choosing only small molecules that had max phase of 0 and 4 was that a confusion matrix could be built in the end to see if the parameters selected would give us a reasonably good model for predicting the outcomes of these small molecules. For now, I've chosen the following columns (or physicochemical parameters) to appear in this interim df_f dataset.
+Another reason behind choosing only small molecules that had max phase of 0 and 4 was that a confusion matrix could be built in the end to see if the parameters selected would give us a reasonably good model for predicting the outcomes of these small molecules. 
+
+For now, I've chosen the following columns (or physicochemical parameters) to appear in the interim df_0 and df_4 datasets.
 
 ```{python}
 # Selecting Max phase 0 small molecules with desired parameters
@@ -287,7 +290,7 @@ df_s_0 = df_0.sample(n = 950, shuffle = True, seed = 0)
 df_s_0
 ```
 
-Since the plan was to use LR method for ML model, the y variable I was interested in was whether a small molecule would be approved or not, so it was going to be a binary categorical variable - meaning it needed to be 0 (not approved) or 1 (approved). To do this, I've added a new column with a new name of "Max_Phase" and replace "4" as "1" by dividing the whole column by 4 to reach this new label.
+Since the plan was to use LR method for ML model, the y variable I was interested in was going to be a binary categorical variable - meaning it needed to be 0 (not approved) or 1 (approved). To do this, I've added a new column with a new name of "Max_Phase" and replace "4" as "1" by dividing the whole column by 4 to reach this new label.
 
 ```{python}
 df_4_f = df_4.with_columns((pl.col("Max Phase") / 4).alias("Max_Phase"))
@@ -547,7 +550,7 @@ LR.score(X_test, y_test)
 
 ###### **Confusion matrix**
 
-Next I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
+Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
 
 ```{python}
 # Import confusion matrix from scikit-learn
@@ -671,23 +674,23 @@ log_loss(y_test, y_mp_proba)
 
 So here I've completed a very basic LR classifier model for ChEMBL compound dataset. By no means was this a perfect ML model as I haven't actually changed the default settings of *scikit-learn*'s LogisticRegression() classifier, with examples such as adjusting C, a regularization parameter which was set at '1.0' by default, and also solvers, which could take in different algorithms for use in optimisation problems and normally set as 'lbfgs' by default.
 
-So with this default LR model, the evaluation metrics demonstrated a LR classifer of moderate quality to make the approval outcomes on ChEMBL small molecules, with a lot of rooms for improvements. Therefore, I could not yet confirm fully that the physicochemical parameters chosen would be the best ones to predict the approval outcomes of any small molecules. However, I might be okay to say that these molecular parameters were on the right track to help with making this prediction.
+So with this default LR model, the evaluation metrics demonstrated a LR classifer of moderate quality to predict the approval outcomes on ChEMBL small molecules, with a lot of rooms for improvements. Therefore, I could not yet confirm fully that the physicochemical parameters chosen would be the best ones to predict the approval outcomes for any small molecules. However, I might be okay to say that these molecular parameters were on the right track to help with making this prediction.
 
-To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question.
+To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved, or even add more molecular parameters in the model to test. I could have also trialled adding more class labels, e.g. making it between max phase 1, 2 and 4, or a mix-and-match between each max phase category. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question. 
 
 <br>
 
 #### **Final words**
 
-I've experienced the fun of ML after completing this project. The idea is to build on what I know gradually and enjoy what ML can do when we're making critical decisions. I think from what I've got from previous readings about ML is that the quality of data needs to be high or well enough to a point that we can interpret meaningful or significant results out of them.
+I've experienced the fun of ML after completing this project. The idea was to build on what I knew gradually and enjoy what ML could do when making critical decisions. From what I've learnt about ML so far (and definitely more to learn) was that the quality of data was vital for making meaningful interpretations of the results.
 
-However, before jumping too far, I'll need to work on my second project first, which is about using Rust interactively via Jupyter notebook. At the moment, I'm not sure how long it will take or how the content will play out. I'll certainly do as much as I can since Rust is very new to me. If I get bored or very stuck on it, I'd most likely continue on this ML series. Thanks for reading.
+However, jumping back to present time, I'll need to work on my second project first, which is about using Rust interactively via Jupyter notebook. At the moment, I'm not sure how long it will take or how the content will play out. I'll certainly do as much as I can since Rust is very new to me. If I get very stuck, I'd most likely continue on this ML series. Thanks for reading.
 
 <br>
 
 #### **References**
 
-I've listed below some references used throughout this project. Again, huge thanks to our online communities in any forms or ways.
+I've listed below most of the references used throughout this project. Again, huge thanks could not be forgotten for our online communities, and definitely also towards the references I've used here.
 
 -   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
 -   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
