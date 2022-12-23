@@ -10,6 +10,7 @@ categories:
   - Rust
   - Python
   - Jupyter
+  - ChEMBL database
   - Cheminformatics
   - Machine learning
 jupyter: python3
