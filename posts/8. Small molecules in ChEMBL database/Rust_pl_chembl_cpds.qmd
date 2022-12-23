@@ -3,7 +3,6 @@ title: Small molecules in ChEMBL database
 subtitle: Polars dataframe library and machine learning in *scikit-learn*
 author: Jennifer HY Lin
 date: '2022-12-22'
-keep-ipynb: true
 draft: false
 categories:
   - Data analytics projects
@@ -58,7 +57,7 @@ For anyone who would like to reproduce this work, the file I used would be equiv
 
 <br>
 
-![Image adapted from ChEMBL database website](ChEMBL_cpds.jpg)
+![Image adapted from ChEMBL database website](ChEMBL_cpds.jpg){fig-align="center"}
 
 <br>
 
