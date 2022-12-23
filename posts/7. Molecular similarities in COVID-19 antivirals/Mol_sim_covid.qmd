@@ -3,7 +3,7 @@ title: "Molecular similarities in selected COVID-19 antivirals"
 subtitle: "Using RDKit's similarity map and fingerprint generator"
 author: "Jennifer HY Lin"
 date: 2022-11-19
-categories: [Data analytics projects, Cheminformatics, Python, RDKit]
+categories: [Data analytics projects, Python, Jupyter, RDKit, Cheminformatics]
 jupyter: python3
 ---
 
