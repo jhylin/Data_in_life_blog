@@ -693,7 +693,7 @@ However, jumping back to present time, I'll need to work on my second project fi
 I've listed below most of the references used throughout this project. Again, huge thanks could not be forgotten for our online communities, and definitely also towards the references I've used here.
 
 -   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
--   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+-   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa *et al.*, JMLR 12, pp. 2825-2830, 2011.
 -   Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
 -   [Stack Overflow](https://stackoverflow.com)
 -   Polars references:
