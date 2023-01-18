@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html  lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-22737364-1"></script>
+<meta name="description" content="This web page has a list of dosage form terms and National Cancer Institute Thesaurus concept codes associated with those term for use in Structured Product Labeling (SPL) documents submitted to FDA." />
+<meta name="dcterms.title" content="Dosage Forms" />
+<meta name="dcterms.creator" content="Office of the Commissioner" />
+<meta name="dcterms.description" content="This web page has a list of dosage form terms and National Cancer Institute Thesaurus concept codes associated with those term for use in Structured Product Labeling (SPL) documents submitted to FDA." />
+<meta name="dcterms.publisher" content="FDA" />
+<meta name="dcterms.contributor" content="DO NOT USE - Office of Health Informatics" />
+<meta name="dcterms.type" content="Article" />
+<meta name="dcterms.source" content="FDA" />
+<meta name="dcterms.audience" content="Manufacturers" />
+<meta property="og:site_name" content="U.S. Food and Drug Administration" />
+<meta property="og:type" content="Article" />
+<meta property="og:url" content="https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms" />
+<meta property="og:title" content="Dosage Forms" />
+<meta property="og:updated_time" content="Thu, 02/03/2022 - 10:05" />
+<meta property="article:publisher" content="FDA" />
+<meta property="article:published_time" content="Thu, 02/03/2022 - 09:02" />
+<meta property="article:modified_time" content="Thu, 02/03/2022 - 10:05" />
+<meta name="google-site-verification" content="tWxlDhm4ANdksJZPj7TBmHgNoMqZCnecPp0Aa2vC9XA" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@US_FDA" />
+<meta name="twitter:title" content="Dosage Forms" />
+<meta name="twitter:creator" content="@US_FDA" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Article",
+            "headline": "Dosage Forms",
+            "name": "Dosage Forms",
+            "description": "This web page has a list of dosage form terms and National Cancer Institute Thesaurus concept codes associated with those term for use in Structured Product Labeling (SPL) documents submitted to FDA.",
+            "image": {
+                "@type": "ImageObject",
+                "representativeOfPage": "True"
+            },
+            "datePublished": "\u003Ctime datetime=\u00222022-02-03T09:02:47Z\u0022\u003EThu, 02/03/2022 - 09:02\u003C/time\u003E",
+            "dateModified": "\u003Ctime datetime=\u00222022-02-03T10:05:00Z\u0022\u003EThu, 02/03/2022 - 10:05\u003C/time\u003E",
+            "author": {
+                "@type": "Organization",
+                "name": "\u003Ca href=\u0022/taxonomy/term/819\u0022 hreflang=\u0022en\u0022\u003EOffice of the Commissioner\u003C/a\u003E"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "FDA"
+            }
+        },
+        {
+            "@type": "WebSite"
+        }
+    ]
+}</script>
+<meta property="og:image" content="https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png" />
+<meta name="twitter:image" content="https://www.fda.gov/themes/custom/preview/img/FDA-Social-Graphic.png" />
+<meta property="og:description" content="This web page has a list of dosage form terms and National Cancer Institute Thesaurus concept codes associated with those term for use in Structured Product Labeling (SPL) documents submitted to FDA." />
+<meta property="twitter:description" content="This web page has a list of dosage form terms and National Cancer Institute Thesaurus concept codes associated with those term for use in Structured Product Labeling (SPL) documents submitted to FDA." />
+<link rel="icon" href="/themes/custom/preview/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="alternate" hreflang="en" href="https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms" />
+<link rel="canonical" href="https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms" />
+<link rel="shortlink" href="https://www.fda.gov/node/358928" />
+<script src="/files/google_tag/production/google_tag.script.js?ro1h2c" defer></script>
+
+    <title>Dosage Forms | FDA</title>
+    <link rel="stylesheet" media="all" href="/files/css/css_VQK8mppKquBsweKvwlYQE65XHMoWqDIaAS_w8yNPtaw.css" />
+<link rel="stylesheet" media="all" href="/files/css/css_n8jaIwaGAEBwhyOVADYKEvBfI14hjYfW5coDh69qBY0.css" />
+
+    <script src="https://script.crazyegg.com/pages/scripts/0024/3700.js" async></script>
+<script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=HHS&amp;subagency=FDA&amp;sdor=fda.gov&amp;dclink=true" language="javascript" id="_fed_an_ua_tag"></script>
+
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("config", "UA-22737364-1", {"groups":"default","anonymize_ip":true,"allow_ad_personalization_signals":false});</script>
+        
+  </head>
+  <body class="role-anonymous path-node page-node-type-article has-glyphicons">
+      <div id="quicklinks" class="sr-only">
+        <ul>
+          <li><a href="#main-content" class="sr-only sr-only-focusable" tabindex="1">Skip to main content</a></li>
+          <li><a href="#search-form" class="sr-only sr-only-focusable" tabindex="1">Skip to FDA Search</a></li>
+          <li><a href="#section-nav" class="sr-only sr-only-focusable" tabindex="1">Skip to in this section menu</a></li>
+          <li><a href="#footer-heading" class="sr-only sr-only-focusable" tabindex="1">Skip to footer links</a></li>
+        </ul>   
+      </div>    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M95XGZW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+     
+  <div class="main-container container-fluid">     <div class="row">
+                                                               
+
+
+	
+	<header class="lcds-header container-fluid" role="header">
+		                    			<div class="row us-masthead">                            
+
+				<div class="usa-banner col-xs-12">
+
+					<img class="usa-banner__us-flag" src="/themes/custom/preview/assets/images/US_Flag.png" alt="U.S. flag" />
+
+					<span>An official website of the United States government</span>
+
+					<a id="USMenuButton" class="collapsed" data-toggle="collapse" data-target="#USABannerMenu" aria-expanded="false" aria-controls="USABannerMenu">Here’s how you know <span class="toggle-indicator"> </span></a>
+          			<div class="col-xs-12 collapse usa-banner__menu" id="USABannerMenu" aria-labelledby="USMenuButton">
+
+
+						<div id="gov-banner" class="row usa-banner-content usa-grid usa-accordion-content" aria-hidden="true">
+							      <div class="col-xs-12 col-sm-6 col-md-3">
+							        <img class="usa-banner-icon usa-media_block-img" src="/themes/custom/preview/assets/images/icon-dot-gov.svg" alt="Dot gov" style="width:3em;">
+									<div class="usa-media_block-body">
+								      <p><strong>The .gov means it’s official.</strong><br>Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you're on a federal government site.</p>
+								    </div>
+							      </div>
+							      <div class="col-xs-12 col-sm-6 col-md-3">
+							        <img class="usa-banner-icon usa-media_block-img" src="/themes/custom/preview/assets/images/icon-https.svg" alt="SSL" style="width:3em;">
+							        <div class="usa-media_block-body">
+								         <p><strong>The site is secure.</strong><br> The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.</p>
+							        </div>
+							      </div>
+						</div>
+					</div>
+
+				</div>
+			</div> 
+			<div class="row fda-masthead">
+							<div class="col-xs-4 col-md-8"> 
+					<a href="/" title="FDA Homepage">
+						<h1 class="fda-masthead__fda-logo">U.S. Food and Drug Administration</h1>
+					</a>
+       	</div>
+				
+        <div class="col-xs-8 col-md-4">
+          <ul class='fda-masthead__item-list'>
+            <li><a title="" id="btn-search" class="btn btn-default btn-sm fda-masthead__btn-search">
+              <span class="fa fa-search" aria-hidden="true">&nbsp;</span>
+              <span class="fda-masthead__btn-label">Search</span>
+            </a></li>
+            <li><a id="menu-btn" class="btn btn-default btn-sm fda-masthead__btn-menu collapsed" href="#primary-nav" data-toggle="collapse" aria-expanded="true">
+              <span class="fa fa-bars" aria-hidden="true">&nbsp;</span>
+              <span class='fda-masthead__btn-label'>Menu</span>
+            </a></li>
+          </ul>
+				</div>
+							
+						<form class="fda-masthead__search sr-only" role="search" action="/search" method="GET" name="searchForm" id="search-form" accept-charset="UTF-8" >
+							
+							<div class="search-popover" id="search-popover">
+								<div class="input-group pull-right" id="search-group">
+									<label class="sr-only" for="search-query">Search FDA</label>
+									
+									<input class="form-control search-input" id="search-query" name="s" aria-autocomplete="list" aria-haspopup="true" title="Enter the terms you wish to search for." placeholder="Search FDA"  type="text" /> 
+									
+									<span class="input-group-btn" id="input-group-btn">
+										
+										<button type="submit" class="btn btn-danger search-btn" id="search-btn" title="Search"><span class="fa fa-search" aria-hidden="true"><span class="sr-only">Submit search</span></span></button>
+
+									</span>
+
+								</div>
+							</div>
+																				
+						</form>					
+
+			</div> 
+		<nav id="primary-nav" class="lcds-primary-nav row collapse">					<div class="col-md-5 col-lg-4">
+						<section class="lcds-primary-nav__group lcds-primary-nav__group--bordered">
+							<h2 class="lcds-primary-nav__group-heading">Featured</h2>
+							<ul class="lcds-primary-nav__list lcds-primary-nav__list--featured">
+	                <li class="lcds-primary-nav__list-item"><a href="/about-fda/contact-fda">Contact FDA</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/regulatory-information/search-fda-guidance-documents">FDA Guidance Documents</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/safety/recalls-market-withdrawals-safety-alerts">Recalls, Market Withdrawals and Safety Alerts</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/news-events/newsroom/press-announcements">Press Announcements</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters">Warning Letters</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/advisory-committees">Advisory Committees</a></li>
+	                <li class="lcds-primary-nav__list-item"><a href="/about-fda/en-espanol">En Espa&#241ol</a></li>
+							</ul>
+						</section>
+					</div>
+
+					<div class="col-md-7 col-lg-8">
+          <section class="lcds-primary-nav__group lcds-primary-nav__group--bordered">
+            <h2 class="lcds-primary-nav__group-heading">Products</h2>
+            <ul class="lcds-primary-nav__list">
+							<li class="lcds-primary-nav__list-item"><a href="/food">Food</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/drugs">Drugs</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/medical-devices">Medical Devices</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/radiation-emitting-products">Radiation-Emitting Products</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/vaccines-blood-biologics">Vaccines, Blood, and Biologics</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/animal-veterinary">Animal and Veterinary</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/cosmetics">Cosmetics</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/tobacco-products">Tobacco Products</a></li>
+            </ul>
+          </section>
+          <section class="lcds-primary-nav__group lcds-primary-nav__group--bordered">
+            <h2 class="lcds-primary-nav__group-heading">Topics</h2>
+            <ul class="lcds-primary-nav__list">
+							<li class="lcds-primary-nav__list-item"><a href="/about-fda">About FDA</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/combination-products">Combination Products</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/regulatory-information">Regulatory Information</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/safety">Safety</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/emergency-preparedness-and-response">Emergency Preparedness</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/international-programs">International Programs</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/news-events">News and Events</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/training-and-continuing-education">Training and Continuing Education</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/inspections-compliance-enforcement-and-criminal-investigations">Inspections and Compliance</a></li>
+							<li class="lcds-primary-nav__list-item"><a href="/science-research">Science and Research</a></li>
+            </ul>
+          </section>
+          <section class="lcds-primary-nav__group lcds-primary-nav__group--bordered">
+            <h2 class="lcds-primary-nav__group-heading">Information For</h2>
+            <ul class="lcds-primary-nav__list">
+	            <li class="lcds-primary-nav__list-item"><a href="/consumers">Consumers</a></li>
+	            <li class="lcds-primary-nav__list-item"><a href="/patients">Patients</a></li>
+	            <li class="lcds-primary-nav__list-item"><a href="/industry">Industry</a></li>
+	            <li class="lcds-primary-nav__list-item"><a href="/health-professionals">Health Professionals</a></li>
+	            <li class="lcds-primary-nav__list-item"><a href="/federal-state-local-tribal-and-territorial-officials">Federal, State and Local Officials</a></li>
+            </ul>
+          </section>
+					</div>
+	      </nav>
+    </header>
+
+<div class="col-xs-12">
+	<div data-drupal-messages-fallback class="hidden"></div>
+
+</div>
+
+                              
+                                                                     <section id="block-entityviewcontent" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+      
+
+<a class="lcds-button--expandable collapsed hidden-md hidden-lg" data-toggle="collapse" href="#section-nav" >In this section<span class="visible-sm-inline-block">:
+
+                Structured Product Labeling Resources
+    
+    </span>
+</a>
+
+<nav id="section-nav" class="lcds-card lcds-section-nav lcds-section-nav hidden-md hidden-lg collapse">
+
+    <ul class="lcds-section-nav__list">
+
+      <li>
+
+              <a href="/industry/fda-data-standards-advisory-board/structured-product-labeling-resources" title="Structured Product Labeling Resources" class="lcds-section-nav__section-link lcds-section-nav__link lcds-section-nav__parent-link visible-xs-block visible-sm-block">
+                                        Structured Product Labeling Resources
+                    </a>
+
+                        <div class="views-element-container form-group"><div class="view view-in-this-section view-id-in_this_section view-display-id-block_5 js-view-dom-id-8c22d646e1a9878c7adcb1581c013aa9adb6949f4be3cebd8405334855c9bd2f">
+  
+    
+      
+  
+      <div>
+  
+  <ul class="lcds-section-nav__section-link__active lcds-section-nav__list">
+
+          <li><a href="/industry/structured-product-labeling-resources/risk-evaluation-and-mitigation-strategies-rems-spl-resources" class="lcds-section-nav__link">Risk Evaluation and Mitigation Strategies (REMS) SPL Resources</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-entity-identifiers" class="lcds-section-nav__link">Business Entity Identifiers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-operation" class="lcds-section-nav__link">Business Operation</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-operation-qualifier" class="lcds-section-nav__link">Business Operation Qualifier</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/code-system-object-identifiers" class="lcds-section-nav__link">Code System Object Identifiers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/combination-product-types" class="lcds-section-nav__link">Combination Product Types</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/contributing-factor-general" class="lcds-section-nav__link">Contributing Factor - General</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/document-type-including-content-labeling-type" class="lcds-section-nav__link">Document Type including Content of Labeling Type</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/dosage-forms" class="lcds-section-nav__link">Dosage Forms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/electronic-animal-drug-product-listing-directory" class="lcds-section-nav__link">Electronic Animal Drug Product Listing Directory</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/equivalence-codes" class="lcds-section-nav__link">Equivalence Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/flavor" class="lcds-section-nav__link">Flavor</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/geopolitical-entities-names-and-codes-genc" class="lcds-section-nav__link">Geopolitical Entities, Names, and Codes (GENC)</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/indication-category" class="lcds-section-nav__link">Indication Category</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/intent-use" class="lcds-section-nav__link">Intent of Use</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/lab-test" class="lcds-section-nav__link">Lab Test</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/license-disciplinary-action" class="lcds-section-nav__link">License Disciplinary Action</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/licensed" class="lcds-section-nav__link">Licensed</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/limitation-useissues" class="lcds-section-nav__link">Limitation of Use/Issues</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/marketing-category" class="lcds-section-nav__link">Marketing Category</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/marketing-status" class="lcds-section-nav__link">Marketing Status</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/medical-condition" class="lcds-section-nav__link">Medical Condition</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/ndcnhric-labeler-codes" class="lcds-section-nav__link">NDC/NHRIC Labeler Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/nsde" class="lcds-section-nav__link">NSDE</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/package-type" class="lcds-section-nav__link">Package Type</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/pharmacokinetic-effect" class="lcds-section-nav__link">Pharmacokinetic Effect</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/pharmacologic-class" class="lcds-section-nav__link">Pharmacologic Class</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/positron-emission-tomography-pet-drug-spl" class="lcds-section-nav__link">Positron Emission Tomography (PET) Drug SPL</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/precondition-categories" class="lcds-section-nav__link">Precondition Categories</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/race" class="lcds-section-nav__link">Race</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-approval" class="lcds-section-nav__link">REMS Approval</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-protocol" class="lcds-section-nav__link">REMS Protocol</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-requirements" class="lcds-section-nav__link">REMS Requirements</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-stakeholder" class="lcds-section-nav__link">REMS Stakeholder</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/resources-spl-commercial-software-and-conversion-vendors-and-fda-regulated-company-self-generated" class="lcds-section-nav__link">Resources for SPL Commercial Software and Conversion Vendors and FDA-Regulated Company Self-Generated SPL Software Developers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/route-administration" class="lcds-section-nav__link">Route of Administration</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/section-headings-loinc" class="lcds-section-nav__link">Section Headings (LOINC)</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/sex" class="lcds-section-nav__link">Sex</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-color" class="lcds-section-nav__link">SPL Color</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-dea-schedule" class="lcds-section-nav__link">SPL DEA Schedule</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-lot-distribution-data-distribution-codes" class="lcds-section-nav__link">SPL Lot Distribution Data - Distribution Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-shape" class="lcds-section-nav__link">SPL Shape</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-standard-training" class="lcds-section-nav__link">SPL Standard Training</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-xforms" class="lcds-section-nav__link">SPL Xforms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/time-units" class="lcds-section-nav__link">Time Units</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/type-consequence" class="lcds-section-nav__link">Type of Consequence</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/uniis-preferred-substance-names-and-their-identified-synonyms" class="lcds-section-nav__link">UNIIs, Preferred Substance Names, and their Identified Synonyms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/units-measure" class="lcds-section-nav__link">Units of Measure</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/units-presentation" class="lcds-section-nav__link">Units of Presentation</a></li>
+    
+  </ul>
+
+</div>
+
+
+  
+          </div>
+</div>
+
+
+                        <div class="views-element-container form-group"><div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_2 js-view-dom-id-0dc9f5762b21df07850aa692abbafaffb4355c602c5da89dc3f33583ce5bd576">
+  
+    
+      
+  
+          </div>
+</div>
+
+
+      </li>
+
+    </ul>
+
+</nav>
+
+  </section>
+
+<section id="block-entityviewcontent-15" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+      
+    <ol class="lcds-breadcrumb visible-md visible-lg">
+          <li >
+                  <a href="/">Home</a>
+              </li>
+          <li >
+                  <a href="/industry">For Industry</a>
+              </li>
+          <li >
+                  <a href="/industry/fda-data-standards-advisory-board">FDA Data Standards Advisory Board</a>
+              </li>
+          <li >
+                  <a href="/industry/fda-data-standards-advisory-board/structured-product-labeling-resources">Structured Product Labeling Resources</a>
+              </li>
+          <li >
+                  <a class="current-link">Dosage Forms</a>
+              </li>
+      </ol>
+
+
+
+
+<ol class="lcds-breadcrumb visible-sm visible-xs">
+  <li>
+    <a href="/industry/fda-data-standards-advisory-board/structured-product-labeling-resources" title="Structured Product Labeling Resources">
+     Structured Product Labeling Resources
+    </a>
+  </li>
+</ol>
+
+  </section>
+
+
+
+
+
+
+                                
+      <main>
+
+                                 <article id="main-content" class="article main-content container-fluid" role="article">
+          
+                                                                <header class="row content-header" role="heading">
+                         <section id="block-entityviewcontent-2" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+      
+<div class="col-sm-12 col-md-8 col-md-offset-2">
+
+  <h1 class="content-title text-center">Dosage Forms</h1>
+  
+  	
+    <div class="lcds-toolbar lcds-toolbar--social">
+      <ul class="lcds-share lcds-share--default">
+    <li class="lcds-share__item">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.fda.gov%2Findustry%2Fstructured-product-labeling-resources%2Fdosage-forms" class="lcds-share__btn lcds-share--default__btn-facebook js-share" id="fb-share" target="_blank"><span class="fa icon-facebook" aria-hidden="true"></span>Share</a>
+    </li>
+    <li class="lcds-share__item">
+      <a href="https://twitter.com/intent/tweet/?text=Dosage%20Forms&amp;url=https://www.fda.gov%2Findustry%2Fstructured-product-labeling-resources%2Fdosage-forms" target="_blank" class="lcds-share__btn lcds-share--default__btn-twitter js-share" id="twitter-share"><span class="fa icon-twitter" aria-hidden="true"></span>Tweet</a>
+    </li>
+    <li class="lcds-share__item hidden-xs">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.fda.gov%2Findustry%2Fstructured-product-labeling-resources%2Fdosage-forms&amp;title=Dosage%20Forms&amp;source=FDA" class="lcds-share__btn lcds-share--default__btn-linkedin js-share" id="linkedin-share" target="_blank"><span class="fa icon-linkedin" aria-hidden="true"></span>Linkedin</a>
+    </li>
+
+    <li class="lcds-share__item">
+      <a href="mailto:?subject=Dosage%20Forms&amp;body=https://www.fda.gov%2Findustry%2Fstructured-product-labeling-resources%2Fdosage-forms" class="lcds-share__btn lcds-share--default__btn-mail"><span class="fa icon-envelope" aria-hidden="true"></span>Email</a>
+      </li>
+    <li class=" lcds-share__item hidden-xs">
+      <a href="javascript:window.print();" title="Print this page" class="lcds-share__btn lcds-share--default__btn-print"><span class="fa icon-print" aria-hidden="true"></span>Print</a>
+    </li>
+  </ul>
+  <div class="form-group">
+    
+  </div>
+</div>
+ 
+</div>
+
+  </section>
+
+
+
+
+
+
+                      </header>
+                              
+                                                                           <div class="col-md-8 col-md-push-2" role="main">
+
+                            
+                            
+                            
+                            
+                                              
+  
+<p>NCI Thesaurus OID: 2.16.840.1.113883.3.26.1.1</p>
+
+<p>NCI concept code for pharmaceutical dosage form: C42636</p>
+
+<p> </p>
+
+<table align="center" cellpadding="0" cellspacing="0" style="height: 2683px;" width="95%"><tbody><tr><th scope="col" style="height: 13px; text-align: left;" valign="top" width="400"><strong>SPL Acceptable Term</strong></th>
+			<th scope="col" style="height: 13px; text-align: left;" valign="top" width="316"><strong>Code</strong></th>
+		</tr><tr><td scope="row" style="height: 21px; text-align: left;" valign="top">AEROSOL</td>
+			<td style="height: 21px;" valign="top" width="316">C42887</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">AEROSOL, FOAM</td>
+			<td valign="top" width="316">C42888</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">AEROSOL, METERED</td>
+			<td valign="top" width="316">C42960</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">AEROSOL, POWDER</td>
+			<td valign="top" width="316">C42971</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">AEROSOL, SPRAY</td>
+			<td valign="top" width="316">C42889</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">BAR, CHEWABLE</td>
+			<td valign="top" width="316">C42892</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">BEAD</td>
+			<td valign="top" width="316">C42890</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE</td>
+			<td valign="top" width="316">C25158</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, COATED</td>
+			<td valign="top" width="316">C42895</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, COATED PELLETS</td>
+			<td valign="top" width="316">C42896</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, COATED, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42917</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, DELAYED RELEASE</td>
+			<td valign="top" width="316">C42902</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, DELAYED RELEASE PELLETS</td>
+			<td valign="top" width="316">C42904</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42916</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, FILM COATED, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42928</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, GELATIN COATED</td>
+			<td valign="top" width="316">C42936</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CAPSULE, LIQUID FILLED</td>
+			<td valign="top" width="316">C42954</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CELLULAR SHEET</td>
+			<td valign="top" width="316">C100103</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CHEWABLE GEL</td>
+			<td valign="top" width="316">C134876</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CLOTH</td>
+			<td valign="top" width="316">C60884</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CONCENTRATE</td>
+			<td valign="top" width="316">C60891</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CREAM</td>
+			<td valign="top" width="316">C28944</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CREAM, AUGMENTED</td>
+			<td valign="top" width="316">C60897</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">CRYSTAL</td>
+			<td valign="top" width="316">C42901</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">DISC</td>
+			<td valign="top" width="316">C43525</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">DOUCHE</td>
+			<td valign="top" width="316">C42679</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">DRESSING</td>
+			<td valign="top" width="316">C42763</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">DRUG-ELUTING CONTACT LENS</td>
+			<td valign="top" width="316">C185352</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">ELIXIR</td>
+			<td valign="top" width="316">C42912</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">EMULSION</td>
+			<td valign="top" width="316">C42913</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">ENEMA</td>
+			<td valign="top" width="316">C42915</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">EXTRACT</td>
+			<td valign="top" width="316">C42929</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FIBER, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C60926</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FILM</td>
+			<td valign="top" width="316">C42932</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FILM, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42920</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FILM, SOLUBLE</td>
+			<td valign="top" width="316">C42984</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FOR SOLUTION</td>
+			<td valign="top" width="316">C60927</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FOR SUSPENSION</td>
+			<td valign="top" width="316">C60928</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">FOR SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C60929</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GAS</td>
+			<td valign="top" width="316">C42933</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GEL</td>
+			<td valign="top" width="316">C42934</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GEL, DENTIFRICE</td>
+			<td valign="top" width="316">C42906</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GEL, METERED</td>
+			<td valign="top" width="316">C60930</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GLOBULE</td>
+			<td valign="top" width="316">C42937</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE</td>
+			<td valign="top" width="316">C42938</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE, DELAYED RELEASE</td>
+			<td valign="top" width="316">C42903</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE, EFFERVESCENT</td>
+			<td valign="top" width="316">C42909</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE, FOR SOLUTION</td>
+			<td valign="top" width="316">C42939</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE, FOR SUSPENSION</td>
+			<td valign="top" width="316">C42940</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GRANULE, FOR SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42921</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">GUM, CHEWING</td>
+			<td valign="top" width="316">C42894</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">IMPLANT</td>
+			<td valign="top" width="316">C42942</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INHALANT</td>
+			<td valign="top" width="316">C42944</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTABLE FOAM</td>
+			<td valign="top" width="316">C113106</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTABLE, LIPOSOMAL</td>
+			<td valign="top" width="316">C60931</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION</td>
+			<td valign="top" width="316">C42946</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, EMULSION</td>
+			<td valign="top" width="316">C42914</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, LIPID COMPLEX</td>
+			<td valign="top" width="316">C42950</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, FOR SOLUTION</td>
+			<td valign="top" width="316">C42974</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, FOR SUSPENSION</td>
+			<td valign="top" width="316">C42976</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, FOR SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42977</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, LYOPHILIZED, FOR LIPOSOMAL SUSPENSION</td>
+			<td valign="top" width="316">C42959</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION</td>
+			<td valign="top" width="316">C42957</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION</td>
+			<td valign="top" width="316">C42958</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, POWDER, LYOPHILIZED, FOR SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42956</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SOLUTION</td>
+			<td valign="top" width="316">C42945</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SOLUTION, CONCENTRATE</td>
+			<td valign="top" width="316">C42899</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SUSPENSION</td>
+			<td valign="top" width="316">C42995</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42926</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SUSPENSION, LIPOSOMAL</td>
+			<td valign="top" width="316">C42951</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INJECTION, SUSPENSION, SONICATED</td>
+			<td valign="top" width="316">C42988</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INSERT</td>
+			<td valign="top" width="316">C60933</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INSERT, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42922</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">INTRAUTERINE DEVICE</td>
+			<td valign="top" width="316">C47915</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">IRRIGANT</td>
+			<td valign="top" width="316">C42947</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">JELLY</td>
+			<td valign="top" width="316">C42948</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">KIT</td>
+			<td valign="top" width="316">C47916</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LINIMENT</td>
+			<td valign="top" width="316">C42949</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LIPSTICK</td>
+			<td valign="top" width="316">C42952</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LIQUID</td>
+			<td valign="top" width="316">C42953</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LIQUID, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C60934</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LOTION</td>
+			<td valign="top" width="316">C29167</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LOTION, AUGMENTED</td>
+			<td valign="top" width="316">C60957</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LOTION/SHAMPOO</td>
+			<td valign="top" width="316">C60958</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">LOZENGE</td>
+			<td valign="top" width="316">C42955</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">MOUTHWASH</td>
+			<td valign="top" width="316">C29269</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">NOT APPLICABLE</td>
+			<td valign="top" width="316">C48624</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">OIL</td>
+			<td valign="top" width="316">C42965</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">OINTMENT</td>
+			<td valign="top" width="316">C42966</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">OINTMENT, AUGMENTED</td>
+			<td valign="top" width="316">C60984</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PASTE</td>
+			<td valign="top" width="316">C42967</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PASTE, DENTIFRICE</td>
+			<td valign="top" width="316">C42907</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PASTILLE</td>
+			<td valign="top" width="316">C60985</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PATCH</td>
+			<td valign="top" width="316">C42968</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PATCH, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42923</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PATCH, EXTENDED RELEASE, ELECTRICALLY CONTROLLED</td>
+			<td valign="top" width="316">C42911</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PELLET</td>
+			<td valign="top" width="316">C42969</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PELLET, IMPLANTABLE</td>
+			<td valign="top" width="316">C42943</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PELLETS, COATED, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42918</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PILL</td>
+			<td valign="top" width="316">C25394</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">PLASTER</td>
+			<td valign="top" width="316">C42970</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POULTICE</td>
+			<td valign="top" width="316">C47913</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POWDER</td>
+			<td valign="top" width="316">C42972</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POWDER, DENTIFRICE</td>
+			<td valign="top" width="316">C42908</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POWDER, FOR SOLUTION</td>
+			<td valign="top" width="316">C42973</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POWDER, FOR SUSPENSION</td>
+			<td valign="top" width="316">C42975</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">POWDER, METERED</td>
+			<td valign="top" width="316">C42961</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">RING</td>
+			<td valign="top" width="316">C60988</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">RINSE</td>
+			<td valign="top" width="316">C42979</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SALVE</td>
+			<td valign="top" width="316">C42980</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SHAMPOO</td>
+			<td valign="top" width="316">C42981</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SHAMPOO, SUSPENSION</td>
+			<td valign="top" width="316">C42982</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOAP</td>
+			<td valign="top" width="316">C42983</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION</td>
+			<td valign="top" width="316">C42986</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION, CONCENTRATE</td>
+			<td valign="top" width="316">C42898</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION, FOR SLUSH</td>
+			<td valign="top" width="316">C42987</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION, GEL FORMING / DROPS</td>
+			<td valign="top" width="316">C60994</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION, GEL FORMING, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42935</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SOLUTION/ DROPS</td>
+			<td valign="top" width="316">C60992</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SPONGE</td>
+			<td valign="top" width="316">C47912</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SPRAY</td>
+			<td valign="top" width="316">C42989</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SPRAY, METERED</td>
+			<td valign="top" width="316">C42962</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SPRAY, SUSPENSION</td>
+			<td valign="top" width="316">C42990</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">STICK</td>
+			<td valign="top" width="316">C42991</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">STRIP</td>
+			<td valign="top" width="316">C47914</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SUPPOSITORY</td>
+			<td valign="top" width="316">C42993</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SUPPOSITORY, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42924</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SUSPENSION</td>
+			<td valign="top" width="316">C42994</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SUSPENSION, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42925</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SUSPENSION/ DROPS</td>
+			<td valign="top" width="316">C60995</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SWAB</td>
+			<td valign="top" width="316">C47898</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SYRUP</td>
+			<td valign="top" width="316">C42996</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">SYSTEM</td>
+			<td valign="top" width="316">C17423</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET</td>
+			<td valign="top" width="316">C42998</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, CHEWABLE</td>
+			<td valign="top" width="316">C42893</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, CHEWABLE, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C124794</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, COATED</td>
+			<td valign="top" width="316">C42897</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, COATED PARTICLES</td>
+			<td valign="top" width="316">C60997</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, DELAYED RELEASE</td>
+			<td valign="top" width="316">C42905</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, DELAYED RELEASE PARTICLES</td>
+			<td valign="top" width="316">C42997</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, EFFERVESCENT</td>
+			<td valign="top" width="316">C42910</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42927</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, FILM COATED</td>
+			<td valign="top" width="316">C42931</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, FILM COATED, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42930</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, FOR SOLUTION</td>
+			<td valign="top" width="316">C61004</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, FOR SUSPENSION</td>
+			<td valign="top" width="316">C61005</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, MULTILAYER</td>
+			<td valign="top" width="316">C42964</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, MULTILAYER, EXTENDED RELEASE</td>
+			<td valign="top" width="316">C42963</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, ORALLY DISINTEGRATING</td>
+			<td valign="top" width="316">C42999</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE</td>
+			<td valign="top" width="316">C61006</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, SOLUBLE</td>
+			<td valign="top" width="316">C42985</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET, SUGAR COATED</td>
+			<td valign="top" width="316">C42992</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TABLET WITH SENSOR</td>
+			<td valign="top" width="316">C147579</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TAMPON</td>
+			<td valign="top" width="316">C47892</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TAPE</td>
+			<td valign="top" width="316">C47897</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TINCTURE</td>
+			<td valign="top" width="316">C43000</td>
+		</tr><tr><td scope="row" style="text-align: left;" valign="top">TROCHE</td>
+			<td valign="top" width="316">C43001</td>
+		</tr><tr><td scope="row" style="height: 13px; text-align: left;" valign="top">WAFER</td>
+			<td style="height: 13px;" valign="top" width="316">C43003</td>
+		</tr></tbody></table><p> </p>
+
+
+
+
+
+
+              
+                                            
+              
+            </div>
+
+                                                                                  <aside class="col-md-2 col-md-push-2" role="complementary">
+                  <section id="block-entityviewcontent-4" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+      
+
+<div role="article" about="/industry/structured-product-labeling-resources/dosage-forms" class="region region-">
+  <aside class="lcds-card lcds-card--border-top" role="menu">
+    <ul class="lcds-description-list">
+      
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="node-current-date">
+  <li class="lcds-description-list__item">
+    <div>
+      <h2 class="lcds-description-list__item-heading">Content current as of:</h2>
+      <p class="lcds-description-list__item-text"><time datetime="2022-02-03T10:05:00Z">02/03/2022</time>
+</p>
+    </div>
+  </li>
+</div>
+              
+              
+<li class="lcds-description-list__item">  
+	<div>
+		 
+			     
+						       
+
+			  
+						  
+
+			  
+						 
+	</div>
+</li>   
+
+    </ul>
+
+  </aside>
+</div>
+
+
+  </section>
+
+
+                </aside>
+            
+
+                                                                                <aside class="col-md-2 col-md-pull-10" role="complementary">
+                  <section id="block-entityviewcontent-3" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+        <div role="article" about="/industry/structured-product-labeling-resources/dosage-forms" class="region region-">
+        <nav id="section-nav"class="lcds-card lcds-section-nav lcds-section-nav--side hidden-xs hidden-sm">
+      <ul class="lcds-section-nav__list lcds-section-nav--side__list">
+        <li>
+
+                    <a href="/industry/fda-data-standards-advisory-board/structured-product-labeling-resources" class="lcds-section-nav__link lcds-section-nav--side__link lcds-section-nav__parent-link lcds-section-nav--side__parent-link">
+                                        Structured Product Labeling Resources
+                      </a>
+
+          
+                        <div class="views-element-container form-group"><div class="view view-in-this-section view-id-in_this_section view-display-id-block_4 js-view-dom-id-b6d39f4002670e31156953d38d3d5d887e4340a3370128234a513718be0797bf">
+  
+    
+      
+  
+      <div class="item-list">
+  
+  <ul class="lcds-section-nav__active lcds-section-nav__list lcds-section-nav--side__list">
+
+          <li><a href="/industry/structured-product-labeling-resources/risk-evaluation-and-mitigation-strategies-rems-spl-resources" class="lcds-section-nav__link lcds-section-nav--side__link">REMS SPL Resources</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-entity-identifiers" class="lcds-section-nav__link lcds-section-nav--side__link">Business Entity Identifiers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-operation" class="lcds-section-nav__link lcds-section-nav--side__link">Business Operation</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/business-operation-qualifier" class="lcds-section-nav__link lcds-section-nav--side__link">Business Operation Qualifier</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/code-system-object-identifiers" class="lcds-section-nav__link lcds-section-nav--side__link">Code System Object Identifiers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/combination-product-types" class="lcds-section-nav__link lcds-section-nav--side__link">Combination Product Types</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/contributing-factor-general" class="lcds-section-nav__link lcds-section-nav--side__link">Contributing Factor - General</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/document-type-including-content-labeling-type" class="lcds-section-nav__link lcds-section-nav--side__link">Document Type including Content of Labeling Type</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/dosage-forms" class="lcds-section-nav__link lcds-section-nav--side__link">Dosage Forms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/electronic-animal-drug-product-listing-directory" class="lcds-section-nav__link lcds-section-nav--side__link">Electronic Animal Drug Product Listing Directory</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/equivalence-codes" class="lcds-section-nav__link lcds-section-nav--side__link">Equivalence Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/flavor" class="lcds-section-nav__link lcds-section-nav--side__link">Flavor</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/geopolitical-entities-names-and-codes-genc" class="lcds-section-nav__link lcds-section-nav--side__link">Geopolitical Entities, Names, and Codes (GENC)</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/indication-category" class="lcds-section-nav__link lcds-section-nav--side__link">Indication Category</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/intent-use" class="lcds-section-nav__link lcds-section-nav--side__link">Intent of Use</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/lab-test" class="lcds-section-nav__link lcds-section-nav--side__link">Lab Test</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/license-disciplinary-action" class="lcds-section-nav__link lcds-section-nav--side__link">License Disciplinary Action</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/licensed" class="lcds-section-nav__link lcds-section-nav--side__link">Licensed</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/limitation-useissues" class="lcds-section-nav__link lcds-section-nav--side__link">Limitation of Use/Issues</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/marketing-category" class="lcds-section-nav__link lcds-section-nav--side__link">Marketing Category</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/marketing-status" class="lcds-section-nav__link lcds-section-nav--side__link">Marketing Status</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/medical-condition" class="lcds-section-nav__link lcds-section-nav--side__link">Medical Condition</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/ndcnhric-labeler-codes" class="lcds-section-nav__link lcds-section-nav--side__link">NDC/NHRIC Labeler Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/nsde" class="lcds-section-nav__link lcds-section-nav--side__link">NSDE</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/package-type" class="lcds-section-nav__link lcds-section-nav--side__link">Package Type</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/pharmacokinetic-effect" class="lcds-section-nav__link lcds-section-nav--side__link">Pharmacokinetic Effect</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/pharmacologic-class" class="lcds-section-nav__link lcds-section-nav--side__link">Pharmacologic Class</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/positron-emission-tomography-pet-drug-spl" class="lcds-section-nav__link lcds-section-nav--side__link">Positron Emission Tomography (PET) Drug SPL</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/precondition-categories" class="lcds-section-nav__link lcds-section-nav--side__link">Precondition Categories</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/race" class="lcds-section-nav__link lcds-section-nav--side__link">Race</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-approval" class="lcds-section-nav__link lcds-section-nav--side__link">REMS Approval</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-protocol" class="lcds-section-nav__link lcds-section-nav--side__link">REMS Protocol</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-requirements" class="lcds-section-nav__link lcds-section-nav--side__link">REMS Requirements</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/rems-stakeholder" class="lcds-section-nav__link lcds-section-nav--side__link">REMS Stakeholder</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/resources-spl-commercial-software-and-conversion-vendors-and-fda-regulated-company-self-generated" class="lcds-section-nav__link lcds-section-nav--side__link">Resources for SPL Commercial Software and Conversion Vendors and FDA-Regulated Company Self-Generated SPL Software Developers</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/route-administration" class="lcds-section-nav__link lcds-section-nav--side__link">Route of Administration</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/section-headings-loinc" class="lcds-section-nav__link lcds-section-nav--side__link">Section Headings (LOINC)</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/sex" class="lcds-section-nav__link lcds-section-nav--side__link">Sex</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-color" class="lcds-section-nav__link lcds-section-nav--side__link">SPL Color</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-dea-schedule" class="lcds-section-nav__link lcds-section-nav--side__link">SPL DEA Schedule</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-lot-distribution-data-distribution-codes" class="lcds-section-nav__link lcds-section-nav--side__link">SPL Lot Distribution Data - Distribution Codes</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-shape" class="lcds-section-nav__link lcds-section-nav--side__link">SPL Shape</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-standard-training" class="lcds-section-nav__link lcds-section-nav--side__link">SPL Standard Training</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/spl-xforms" class="lcds-section-nav__link lcds-section-nav--side__link">SPL Xforms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/time-units" class="lcds-section-nav__link lcds-section-nav--side__link">Time Units</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/type-consequence" class="lcds-section-nav__link lcds-section-nav--side__link">Type of Consequence</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/uniis-preferred-substance-names-and-their-identified-synonyms" class="lcds-section-nav__link lcds-section-nav--side__link">UNIIs, Preferred Substance Names, and their Identified Synonyms</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/units-measure" class="lcds-section-nav__link lcds-section-nav--side__link">Units of Measure</a></li>
+          <li><a href="/industry/structured-product-labeling-resources/units-presentation" class="lcds-section-nav__link lcds-section-nav--side__link">Units of Presentation</a></li>
+    
+  </ul>
+
+</div>
+
+
+  
+          </div>
+</div>
+
+
+                        <div class="views-element-container form-group"><div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_1 js-view-dom-id-ff8b1c74ffd5c7f8c8405657cc0068abfb662efc839b6782c25ac2561fac14bd">
+  
+    
+      
+  
+          </div>
+</div>
+
+
+        </li>
+      </ul>
+    </nav>
+    </div>
+
+  </section>
+
+
+                </aside>
+            
+                 </article>        
+      </main>
+
+    </div>  </div>
+
+                <div class="region region-subscribe">
+    <section id="block-entityviewcontent-5" data-block-plugin-id="entity_view:node" class="block block-ctools block-entity-viewnode clearfix">
+  
+    
+
+      
+
+  </section>
+
+
+  </div>
+
+  
+      <footer class="lcds-footer container-fluid">
+        
+    <div class="row lcds-footer__primary">
+    <h2 id="footer-heading" class="sr-only">Footer Links</h2>
+    <nav class="text-center">
+      <div class="col-sm-4">
+        <ul class="nav">
+          <li><a href="/about-fda/about-website/fdagov-archive" >FDA Archive</a></li>
+          <li><a href="/about-fda" >About FDA</a></li>
+          <li><a href="/about-fda/about-website/internet-accessibility" >Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4">
+        <ul class="nav">
+          <li><a href="/about-fda/visitor-information" >Visitor Information</a> </li>
+          <li><a href="/about-fda/about-website/website-policies" >Website Policies / Privacy</a></li>
+          <li><a href="/about-fda/jobs-and-training-fda/no-fear-act" >No FEAR Act</a></li>
+          <li><a href="https://www.hhs.gov/vulnerability-disclosure-policy/index.html" >Vulnerability Disclosure Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4">
+        <ul class="nav">
+          <li><a href="/regulatory-information/freedom-information" title="Freedom of Information Act">FOIA</a></li>
+          <li><a href="https://www.hhs.gov/" title="Health and Human Services" target="_blank">HHS.gov</a></li>
+          <li><a href="https://www.usa.gov/" target="_blank">USA.gov</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+    <div class="row lcds-footer__secondary">
+    <div class="col-sm-12 col-md-6 col-lg-4 lcds-footer__social-links">
+      <a href="/about-fda/contact-fda" class="btn btn-default btn-md">Contact FDA</a>
+      <a href="https://www.facebook.com/FDA" title="Follow FDA on Facebook" class="no-disclaimer"> 
+        <span class="fa fa-facebook fa-2x" aria-hidden="true">
+          <span class="sr-only">Follow FDA on Facebook</span> 
+        </span>
+      </a>
+      <a href="https://www.twitter.com/US_FDA" title="Follow FDA on Twitter" class="no-disclaimer"> 
+        <span class="fa fa-twitter fa-2x" aria-hidden="true">
+          <span class="sr-only">Follow FDA on Twitter</span> 
+        </span> 
+      </a>
+      <a href="https://instagram.com/FDA" title="Follow FDA on Instagram" class="no-disclaimer">
+        <span class="fa fa-instagram fa-2x" aria-hidden="true"> 
+          <span class="sr-only">Follow FDA on Instagram</span>
+        </span>
+      </a>
+      <br class='visible-xs-inline'/>
+      <a href="https://youtube.com/@US_FDA" title="View FDA videos on YouTube" class="no-disclaimer">
+        <span class="fa fa-youtube fa-2x" aria-hidden="true"> 
+          <span class="sr-only">View FDA videos on YouTube</span>
+        </span>
+      </a>
+      <a href="/about-fda/contact-fda/subscribe-podcasts-and-news-feeds" title="Subscribe to FDA RSS feeds">
+        <span class="fa fa-rss fa-2x" aria-hidden="true">
+          <span class="sr-only">Subscribe to FDA RSS feeds</span>
+        </span>
+      </a>
+    </div>
+    <a href="/" title="FDA Homepage">
+        <div class="visible-lg-block col-lg-4 text-center lcds-footer__logo">
+          <span class="sr-only">FDA Homepage</span>
+        </div>
+    </a>
+    <div class="col-sm-12 col-md-6 col-lg-4 text-center lcds-footer__contact-number">
+      <span class="fa fa-phone" aria-hidden="true"> </span> 
+     <span class="sr-only">Contact Number</span>
+      1-888-INFO-FDA (1-888-463-6332)
+    </div>
+  </div>
+  
+    <script type='text/javascript'>
+  (function(){var g=function(e,h,f,g){
+  this.get=function(a){for(var a=a+"=",c=document.cookie.split(";"),b=0,e=c.length;b<e;b++){for(var d=c[b];" "==d.charAt(0);)d=d.substring(1,d.length);if(0==d.indexOf(a))return d.substring(a.length,d.length)}return null};
+  this.set=function(a,c){var b="",b=new Date;b.setTime(b.getTime()+6048E5);b="; expires="+b.toGMTString();document.cookie=a+"="+c+b+"; path=/; "};
+  this.check=function(){var a=this.get(f);if(a)a=a.split(":");else if(100!=e)"v"==h&&(e=Math.random()>=e/100?0:100),a=[h,e,0],this.set(f,a.join(":"));else return!0;var c=a[1];if(100==c)return!0;switch(a[0]){case "v":return!1;case "r":return c=a[2]%Math.floor(100/c),a[2]++,this.set(f,a.join(":")),!c}return!0};
+  this.go=function(){if(this.check()){var a=document.createElement("script");a.type="text/javascript";a.src=g+ "&t=" + (new Date()).getTime();document.body&&document.body.appendChild(a)}};
+  this.start=function(){var a=this;window.addEventListener?window.addEventListener("load",function(){a.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){a.go()})}};
+  try{(new g(100,"r","QSI_S_ZN_6FpQ8uiCQiPh6SN","https://zn6fpq8uicqiph6sn-fdawebcx.gov1.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_6FpQ8uiCQiPh6SN")).start()}catch(i){}})();
+  </script><div id='ZN_6FpQ8uiCQiPh6SN'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+  <!--END WEBSITE FEEDBACK SNIPPET-->
+    
+
+    </footer>
+    <a href="" id="btn-top" class="btn btn-primary btn-top"><span class="sr-only">Back to </span>Top</a>
+  
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/358928","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"jquery":{"ui":{"datepicker":{"isRTL":false,"firstDay":0}}},"fda_ckeditor_enhancements":{"basePath":"modules\/custom\/fda_ckeditor_enhancements"},"google_analytics":{"account":"UA-22737364-1","trackOutbound":true,"trackMailto":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click"},"ajax":[],"user":{"uid":0,"permissionsHash":"3aef67b4ac7d861d8624bf1f7ab2bc9cfc56d3c25b7d709dc15466dfa996dfb0"}}</script>
+<script src="/files/js/js_Dci7uLWeq40FWcpIjiQjBlWDUvAHJXOZvUm0MMnj0C8.js"></script>
+
+  </body>
+</html>
