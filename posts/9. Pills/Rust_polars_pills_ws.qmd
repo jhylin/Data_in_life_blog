@@ -1,12 +1,13 @@
 ---
 title: Pills dataset - Part 1
-subtitle: Web scraping & Polars dataframe library
+subtitle: Web scraping & polars dataframe library
 author: Jennifer HY Lin
-date: 2023-1-18
+date: 2023-1-19
 draft: true
 categories:
   - Data analytics projects
   - Polars
+  - Pandas
   - Python
   - Jupyter
 jupyter: python3
@@ -14,19 +15,34 @@ jupyter: python3
 
 #### **Introduction**
 
-As I've mentioned in my last project that I might look into using Rust interactively via Jupyter lab, I thought to stick to this idea first. So I used evcxr_jupyter. The name, "evcxr", was quite hard to remember at first (pronounced as e-vix-ser according to the author, which I've randomly come across in an online tech interview when I was looking into evcxr), but I've sort of worked out a way to memorise it by taking letters out of "**ev**aluation **c**onte**x**t for **r**ust" (which was what it was called by the author of evcxr in its GitHub repository).
+As mentioned in my last project, I've tried using Evcxr, which provided a way to use Rust interactively in a Jupyter environment. The name, "Evcxr", was quite hard to remember at first. It was pronounced as "e-vic-ser" according to the author, which I've randomly come across in an online tech interview when I was looking into it. I've also sort of worked out a way to memorise its spelling by taking specific letters out of "**ev**aluation **c**onte**x**t for **r**ust" (which was what it was called by the author of Evcxr in its [GitHub repository](https://github.com/google/evcxr)).
 
-For users of Jupyter Notebook or Lab, they might be quite used to the working speed of the cell outputs in Python kernel. However, one thing I've noticed when I was using evcxr_jupyter or Rust kernel in Jupyter lab was that the speed of cell outputs was noticeably slower (especially at the beginning when loading all dependencies required). The speed improved when loading external crates and modules, and generally it was faster afterward. Due to this reason (note: I did not look into any other optimising strategies for this so this was purely based on the original state of evcxr at the time), I think evcxr was not ideal for a very large and complex data science project at this stage. One thing of note when I was combing through issues in evcxr's GitHub repository was someone mentioned one likely reason of the slow speed could be due to the slow compile time of the Rust compiler, so compile time could be slow in Rust but running speed is blazingly fast. However, Rust, being a systems programming language, still has many advantages such as memory and type safety, fast running speed and concurrency.
+For users of Jupyter Notebook/Lab and Python, they might be quite used to the working speed of the cell outputs. However, one thing I've noticed when I was using Evcxr or Rust kernel in Jupyter Lab was that the speed of cell outputs was noticeably slower (especially at the beginning while loading all the dependencies required). The speed improved when loading external crates and modules, and generally it was faster afterward. 
 
-Because of the dependency loading speed issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I've opted to use Polars-Python again for the data wrangling part, and then trialled using Rust kernel for a small dataframe for data visualisation by using Plotly.rs. This work would be separated into 3 parts:
+Due to this reason (note: I did not look into any other optimising strategies for this so this was purely based on the original state of Evcxr at the time), I think Evcxr was not ideal for a very large and complex data science project yet (however if its ecosystem kept developing, it might be improved in the future). One thing of note was that when I was combing through issues in Evcxr's GitHub repository, someone mentioned the slow compile time of the Rust compiler, which would have likely caused the snail speed, but knowing that the actual program running speed was blazingly fast, some sacrifice were needed at the beginning. Overall, Rust was really a systems programming language with memory efficiency (with no garbage collector), type safety and concurrency as its notable advantages.
 
--   Part 1: Initial dataset loading and web-scraping
--   Part 2: Data wrangling and mining for data visualisation
+Because of the dependency loading issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I've opted to use Polars-Python again for the data wrangling part of this project, and then I went on to trial using Rust for data visualisation based on a small dataframe by using Plotly.rs. This project would be separated into 3 parts:
+
+-   Part 1: Initial pillbox dataset loading and web-scraping
+-   Part 2: Data wrangling and mining for data visualisations
 -   Part 3: Using Rust for data visualisation
 
-The main reason I wanted to try evcxr was that I could see the potential of using Rust interactively to showcase the results in an relatively fast and efficient manner. This meant specific data exploratory results could reach wider public audience, and provide more impacts in different fields.
+The main reason I wanted to try Evcxr was that I could see the potential of using Rust interactively to showcase the results in a relatively fast and efficient manner. This meant specific data exploratory results could reach wider audience, leading to more impacts in different fields, in a very broad term. Oppositely, for more specific users such as scientists or engineers, this meant experiments could be carried out in a safe and efficient manner, with test results readily available for future work planning.
+
+<br>
+
+#### **Download dataset**
+
+This time the dataset was spotted from [Data Is Plural](https://www.data-is-plural.com/archive/2022-11-30-edition/), specifically the 2022.11.30 edition. The section I was interested in was the first paragraph at the top, about "Pills". By going into one of the links provided in the paragraph, this brought me to the [Pillbox dataset](https://datadiscovery.nlm.nih.gov/Drugs-and-Chemicals/Pillbox-retired-January-28-2021-/crzr-uvwg) from the US National Library of Medicine (NLM). The .csv file was downloaded via the "Export" button at the top right of the webpage.
+
+This pillbox dataset was actually retired since 28th January 2021, but was still available for educational or research purposes only. Therefore, it was **not recommended** for pill identifications as the dataset was not up-to-date. Alternative resources such as [DailyMed](https://dailymed.nlm.nih.gov/dailymed/) would be more appropriate for readers in the US (as one of the examples). For readers in other countries, local health professionals and resources would be recommended for up-to-date information.
+
+<br>
+
+#### **Importing library & dataset**
 
 ```{python}
+# Install/upgrade polars if needed (uncomment the line below)
 #pip install --upgrade polars
 ```
 
@@ -35,31 +51,28 @@ import polars as pl
 ```
 
 ```{python}
-pl.show_versions()
+# Check version of polars (uncomment line below)
+#pl.show_versions()
 ```
-
-#### **Download dataset**
-
-Dataset was initially spotted and sourced from [Data Is Plural](https://www.data-is-plural.com/archive/2022-11-30-edition/) website (specifically the 2022.11.30 edition). The section I was interested in was the first paragraph at the top, about Pills. By going into one of the links provided in the paragraph, this brought me to the [Pillbox dataset](https://datadiscovery.nlm.nih.gov/Drugs-and-Chemicals/Pillbox-retired-January-28-2021-/crzr-uvwg) from the US National Library of Medicine (NLM), which was actually retired from 28th January 2021, but was still available for downloads, purely for educational or research purposes only. It was **not recommended** for pill identifications (as the dataset was not the most up-to-date version). Alternative resources such as [DailyMed](https://dailymed.nlm.nih.gov/dailymed/) would be more appropriate for readers in the US (for readers in other countries, please consult local health professionals and resources for up-to-date information).
-
-#### **Importing dataset**
-
-When importing pillbox.csv file initially, an error message came up with "...Could not parse '10.16' as dtype Int64 at column 7...". One way to get around this was to add "ignore_errors" to bypass this error first in order to load the dataset. This error could be fixed when checking and converting data types for columns in later steps.
 
 ```{python}
 df = pl.read_csv("pillbox.csv", ignore_errors = True)
 df
 ```
 
-#### **Data wrangling**
+When importing pillbox.csv file initially, an error message actually came up that showed, "...Could not parse '10.16' as dtype Int64 at column 7...". One way to get around this was to add "ignore_errors" to bypass this error first in order to load the dataset first. This error could be fixed when checking and converting data types for columns.
 
-The [Pillbox URL link from NLM](https://datadiscovery.nlm.nih.gov/Drugs-and-Chemicals/Pillbox-retired-January-28-2021-/crzr-uvwg) provided a list of column information for users. Here, we could keep what were needed for our data visualisation in part 2 of the project by extracting a subset of data from the full dataset.
+<br>
+
+#### **Initial data wrangling**
+
+The [Pillbox dataset link from NLM](https://datadiscovery.nlm.nih.gov/Drugs-and-Chemicals/Pillbox-retired-January-28-2021-/crzr-uvwg) provided a list of column information for users. To quickly see what were the columns in the dataset, we could use "df.glimpse()" to read column names, data types and the first 10 items in each column.
 
 ```{python}
 print(df.glimpse())
 ```
 
-Since the plan was for a data visualisation in Rust-evcxr eventually, a relatively simple dataset would be extracted for these pills data. Therefore, only certain columns would be selected for this purpose.
+A relatively simple dataset would be extracted first for these pills data since I was a very new and inexperienced user of Rust. Therefore, I've selected only certain columns for this purpose.
 
 ```{python}
 df_med = df.select([# shapes of medicines
@@ -76,9 +89,11 @@ df_med = df.select([# shapes of medicines
 df_med
 ```
 
+<br>
+
 #### **Web scraping**
 
-This was not planned initially but I thought it would be a lot easier if I could scrape the dosage form table information from the link I've found through the Pillbox link, as the dosage form column only provided codes! These codes were hard to decipher, and definitely meant something so I searched for it and decided to do a bit of web scraping and also planned to import the web-scraped information as a dataframe, which would be helpful to make this column more meaningful.
+This was not planned initially but this might make my life a lot easier if I could scrape the dosage form table found through the Pillbox link, since the dosage form column was full of C-letter codes. These dosage form codes were hard to understand, so once I've got the codes along with corresponding dosage forms in texts, the web-scraped information would be converted into a dataframe for further data manipulations.
 
 ```{python}
 # web scraping the FDA Dosage Forms URL link 
@@ -90,54 +105,92 @@ This was not planned initially but I thought it would be a lot easier if I could
 #!pip install beautifulsoup4
 ```
 
+##### **Import libraries**
+
 ```{python}
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 ```
 
+I've opted for using Beautiful Soup as the web-scraping library in Python, along with the requests library to be able to make a URL request call to retrieve web information. There were of course many other tools available as well. A caveat to be taken into consideration was that when web-scraping, it was always recommended to check whether the information being scraped were under a specific copyright license and so on. In this case, I've checked that the [dosage form table link - https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms](https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms) was from US FDA and it was stated that the information (both texts and graphs) were not copyrighted (unless otherwise stated, for this particular web page, there was nothing stated along those lines), but a link to this webpage should be provided so that readers could access most current information in the future.
+
+##### **Send web requests**
+
 ```{python}
+# Specify URL address with information intended for web-scraping
 url = "https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms"
+# Request the web information via requests library & save under a data object
 data = requests.get(url)
 ```
 
+##### **Parse web content**
+
 ```{python}
+# Parse the web content from the URL link by using Beautiful Soup
 soup = BeautifulSoup(data.content, "html.parser")
 ```
 
+##### **Print web content**
+
 ```{python}
+# Print out the scraped web information
 print(soup.prettify())
 ```
+
+The following step was optional, but might be useful later, the web content could be saved as a file as shown below.
 
 ```{python}
 # Create a file by passing the request content into write () method
 # and save the dosage form table as a file in binary format
-# for sake of future retrieval of information
 with open("FDA_dosage_form", "wb") as file:
     file.write(data.content)
 ```
 
+<br>
+
 #### **Transform web-scraped data into dataframe**
+
+<br>
 
 ##### **Using Pandas dataframe library**
 
-The original pandas.append() method was going to be deprecated in the future versions of Pandas.
+###### **Pandas.append()**
 
-dosage_form = pd.DataFrame(columns = \["Dosage_form", "Code"\])
+The original pandas.append() method was going to be deprecated in future versions of Pandas. This old method was shown as below:
 
-for row in soup.find_all("tr"): col = row.find_all("td") if (col != \[\]): dosage = col\[0\].text code = col\[1\].text dosage_form = dosage_form.append({"Dosage_form":dosage, "Code":code}, ignore_index = True)
+```{{python}}
+# Create an empty dataframe with columns named "Dosage_form" & "Code"
+dosage_form = pd.DataFrame(columns = ["Dosage_form", "Code"])
 
+# Create a loop to find all <tr> tags in the soup object (scraped html content)
+for row in soup.find_all("tr"): 
+  # Set the columns to contain contents under <td> tags by searching all rows
+  col = row.find_all("td") 
+    # if columns are not an empty list, 
+    # add the texts under columns as specified below
+    if (col != []): 
+    dosage = col[0].text 
+    code = col[1].text 
+
+# Append each text item into the dosage_form dataframe
+dosage_form = dosage_form.append({"Dosage_form":dosage, "Code":code}, ignore_index = True)
+
+# Show dataframe
 dosage_form
+```
 
-This method might still work currently, however, we could use the pandas.concat() method as shown below.
+This method might still work currently, however, the newer and recommended methods would be to use the pandas.concat() method as shown below.
+
+###### **Pandas.concat()**
+
+First example:
 
 ```{python}
-# Using pd.concat() method
-
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (web-scraped html content)
+# Create a loop to iterate through the html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
     # each column would hold the items under the html tags that began with <td>
@@ -151,26 +204,29 @@ for row in soup.find_all("tr"):
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
 # Check if the loop was iterating through the html tags in the soup
-# and also it was appending each dosage form & code into the dictionary (uncomment line below)
+# and that it was appending each dosage form & code into the dictionary 
+# Uncomment line below
 #print(dict)
 
 # Create an empty dataframe with the column names wanted
 dosage_form = pd.DataFrame(columns = ["DosageForm", "dosage_form"])
 
-# Concatenate dosage_form dataframe & the dataframe converted from dict
+# Concatenate the dosage_form dataframe with the dataframe converted from dict
 df_new = pd.concat([dosage_form, pd.DataFrame.from_dict(dict)])
 
 # Print the combined dataframe df_new
 df_new
 ```
 
-```{python}
-# Using pd.from_dict() method (a quicker way)
+###### **Pandas.from_dict()**
 
+Second example by using pd.from_dict() method, which might have less lines of codes:
+
+```{python}
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (web-scraped html content)
+# Create a loop to iterate through the html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
     # each column would hold the items under the html tags that began with <td>
@@ -184,7 +240,8 @@ for row in soup.find_all("tr"):
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
 # Check if the loop was working to iterate through the html tags in the soup
-# and also it was appending each dosage form & code into the dictionary (uncomment line below)
+# and that it was appending each dosage form & code into the dictionary 
+# Uncomment line below
 #print(dict)
 
 # Convert the dictionary into a dataframe
@@ -196,13 +253,13 @@ df_new
 
 ##### **Using Polars dataframe library**
 
-```{python}
-# Using Polars df library
+Polars dataframe library also had a from_dict() method that could convert dictionary into a dataframe as shown below:
 
+```{python}
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (web-scraped html content)
+# Create a loop to iterate through the html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
     # each column would hold the items under the html tags that began with <td>
@@ -216,7 +273,8 @@ for row in soup.find_all("tr"):
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
 # Check if the loop was iterating through the html tags in the soup
-# and that it was also appending each dosage form & code into the dictionary (uncomment line below)
+# and that it was also appending each dosage form & code into the dictionary 
+# Uncomment line below
 #print(dict)
 
 # Convert dictionary to dataframe
@@ -226,6 +284,8 @@ new_df
 
 #### **Preparation of dataframe for data visualisation**
 
+Once we have the scraped dataframe ready, we could combine it with our original dataframe from the .csv file (the idea was basically doing dataframe join). Then the dosage form code column could be removed to make it easier to read.
+
 ```{python}
 # Join the two dataframes together
 df_final = df_med.join(new_df, on = "dosage_form")
@@ -234,8 +294,12 @@ df_final = df_final.drop("dosage_form")
 df_final
 ```
 
+<br>
+
+Here, we could save the intended dataframe for data visualisation as a .csv file, so that further data wrangling and mining could be done later for part 2. This also avoided making request calls to the website again and again by extracting the scraped web information as a stand-alone file which could be imported when needed later on.
+
 ```{python}
-# Save the cleaned dataframe as .csv file
-# for use in a new .ipynb file using Rust kernel
+# Save the inital cleaned dataframe as .csv file
+# for use in a new .ipynb file with Rust kernel
 df_final.write_csv("pills.csv", sep = ",")
 ```
