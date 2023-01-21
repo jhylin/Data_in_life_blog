@@ -1,9 +1,9 @@
 ---
 title: Pills dataset - Part 1
-subtitle: Web scraping & polars dataframe library
+subtitle: Web scraping, Polars & Pandas dataframe libraries
 author: Jennifer HY Lin
-date: 2023-1-19
-draft: true
+date: 2023-1-21
+draft: false
 categories:
   - Data analytics projects
   - Polars
@@ -15,13 +15,13 @@ jupyter: python3
 
 #### **Introduction**
 
-As mentioned in my last project, I've tried using Evcxr, which provided a way to use Rust interactively in a Jupyter environment. The name, "Evcxr", was quite hard to remember at first. It was pronounced as "e-vic-ser" according to the author, which I've randomly come across in an online tech interview when I was looking into it. I've also sort of worked out a way to memorise its spelling by taking specific letters out of "**ev**aluation **c**onte**x**t for **r**ust" (which was what it was called by the author of Evcxr in its [GitHub repository](https://github.com/google/evcxr)).
+As mentioned in my last project, I've tried using Evcxr, which provided a way to use Rust interactively in a Jupyter environment. The name, "Evcxr", was quite hard to remember at first. It was pronounced as "e-vic-ser" according to the author, which I've randomly come across in an online tech interview when I was looking into it. I've also sort of worked out a way to memorise its spelling by taking specific letters out of "**ev**aluation **c**onte**x**t for **r**ust" (which was what it was called in its [GitHub repository](https://github.com/google/evcxr)).
 
 For users of Jupyter Notebook/Lab and Python, they might be quite used to the working speed of the cell outputs. However, one thing I've noticed when I was using Evcxr or Rust kernel in Jupyter Lab was that the speed of cell outputs was noticeably slower (especially at the beginning while loading all the dependencies required). The speed improved when loading external crates and modules, and generally it was faster afterward. 
 
-Due to this reason (note: I did not look into any other optimising strategies for this so this was purely based on the original state of Evcxr at the time), I think Evcxr was not ideal for a very large and complex data science project yet (however if its ecosystem kept developing, it might be improved in the future). One thing of note was that when I was combing through issues in Evcxr's GitHub repository, someone mentioned the slow compile time of the Rust compiler, which would have likely caused the snail speed, but knowing that the actual program running speed was blazingly fast, some sacrifice were needed at the beginning. Overall, Rust was really a systems programming language with memory efficiency (with no garbage collector), type safety and concurrency as its notable advantages.
+Due to this reason (note: I did not look into any other optimising strategies for this and this could be restricted to my computer hardware specs, so this might differ for other users), I think Evcxr was not ideal for a very large and complex data science project yet (however if its ecosystem kept developing, it might be improved in the future). One thing of note was that when I was combing through issues in Evcxr's GitHub repository, someone mentioned the slow compile time of the Rust compiler, which would have likely caused the snail speed, but knowing that the actual program running speed was blazingly fast, some sacrifice at the beginning made sense to me. Overall, Rust was really a systems programming language with memory efficiency (with no garbage collector), type safety and concurrency as some of its notable advantages.
 
-Because of the dependency loading issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I've opted to use Polars-Python again for the data wrangling part of this project, and then I went on to trial using Rust for data visualisation based on a small dataframe by using Plotly.rs. This project would be separated into 3 parts:
+Because of the dependency loading issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I've opted to use Polars-Python again for the data wrangling part of this project. This was also accompanied by the good old Pandas library as well (under the section of "Transform web-scraped data into dataframe" if anyone wants to jump to that part to see the codes). I then went on to trial using Rust via Evcxr for data visualisation based on a small dataframe by using Plotly.rs. This project would be separated into 3 parts:
 
 -   Part 1: Initial pillbox dataset loading and web-scraping
 -   Part 2: Data wrangling and mining for data visualisations
@@ -72,7 +72,7 @@ The [Pillbox dataset link from NLM](https://datadiscovery.nlm.nih.gov/Drugs-and-
 print(df.glimpse())
 ```
 
-A relatively simple dataset would be extracted first for these pills data since I was a very new and inexperienced user of Rust. Therefore, I've selected only certain columns for this purpose.
+A relatively simple dataset would be extracted first for these pills data since I was an inexperienced user of Rust. Therefore, I've selected only certain columns for this purpose.
 
 ```{python}
 df_med = df.select([# shapes of medicines
@@ -91,15 +91,13 @@ df_med
 
 <br>
 
+![Photo by <a href="https://unsplash.com/@sloppyperfectionist?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hans-Peter Gauster</a> on <a href="https://unsplash.com/photos/3y1zF4hIPCg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](jigsaw.jpg){fig-align="left"}
+
 #### **Web scraping**
 
 This was not planned initially but this might make my life a lot easier if I could scrape the dosage form table found through the Pillbox link, since the dosage form column was full of C-letter codes. These dosage form codes were hard to understand, so once I've got the codes along with corresponding dosage forms in texts, the web-scraped information would be converted into a dataframe for further data manipulations.
 
 ```{python}
-# web scraping the FDA Dosage Forms URL link 
-# https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms
-# to be able to tell what codes correspond to which dosage forms
-
 # Uncomment lines below to install libraries needed for web-scraping
 #!pip install requests
 #!pip install beautifulsoup4
@@ -168,7 +166,7 @@ for row in soup.find_all("tr"):
   # Set the columns to contain contents under <td> tags by searching all rows
   col = row.find_all("td") 
     # if columns are not an empty list, 
-    # add the texts under columns as specified below
+    # add the texts under columns in specified orders
     if (col != []): 
     dosage = col[0].text 
     code = col[1].text 
@@ -190,20 +188,20 @@ First example:
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (scraped html content)
+# Create a loop to iterate through html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
-    # each column would hold the items under the html tags that began with <td>
+    # each column would hold the items under <td> tags
     col = row.find_all("td")
     if (col != []): 
         # dosage form in column 1
         dosage = col[0].text
         # code in column 2
         code = col[1].text
-        # Append each dosage form & code into the dict
+        # Append each dosage form & code into the dictionary
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
-# Check if the loop was iterating through the html tags in the soup
+# Check if the loop was iterating through the html tags
 # and that it was appending each dosage form & code into the dictionary 
 # Uncomment line below
 #print(dict)
@@ -226,10 +224,10 @@ Second example by using pd.from_dict() method, which might have less lines of co
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (scraped html content)
+# Create a loop to iterate through html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
-    # each column would hold the items under the html tags that began with <td>
+    # each column would hold the items under <td> tags
     col = row.find_all("td")
     if (col != []): 
         # dosage form in column 1
@@ -239,7 +237,7 @@ for row in soup.find_all("tr"):
         # Append each dosage form & code into the dict
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
-# Check if the loop was working to iterate through the html tags in the soup
+# Check if the loop was working to iterate through the html tags
 # and that it was appending each dosage form & code into the dictionary 
 # Uncomment line below
 #print(dict)
@@ -259,10 +257,10 @@ Polars dataframe library also had a from_dict() method that could convert dictio
 # Create an empty dictionary
 dict = []
 
-# Create a loop to iterate through the html tags from the soup (scraped html content)
+# Create a loop to iterate through html tags from the soup (scraped html content)
 # find all html tags that began with <tr>
 for row in soup.find_all("tr"):
-    # each column would hold the items under the html tags that began with <td>
+    # each column would hold the items under <td> tags
     col = row.find_all("td")
     if (col != []): 
         # dosage form in column 1
@@ -272,7 +270,7 @@ for row in soup.find_all("tr"):
         # Append each dosage form & code into the dict
         dict.append({"DosageForm": dosage, "dosage_form": code})
 
-# Check if the loop was iterating through the html tags in the soup
+# Check if the loop was iterating through the html tags
 # and that it was also appending each dosage form & code into the dictionary 
 # Uncomment line below
 #print(dict)
