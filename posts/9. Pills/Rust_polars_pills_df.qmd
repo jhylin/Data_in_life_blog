@@ -1,0 +1,309 @@
+---
+title: Pills dataset - Part 2
+subtitle: Data wrangling and visualisations
+author: Jennifer HY Lin
+date: 2023-1-28
+draft: true
+keep-ipynb: true
+categories:
+  - Data analytics projects
+  - Polars
+  - Python
+  - Plotly
+  - Jupyter
+jupyter: python3
+---
+
+Part 2 of this project aimed to look at the pills data up close, particularly into the dosage forms, colours, shapes and inactive excipients used in the dataset. Plotly was used as the main data visualisation library here, with the last part generating a small dataframe in preparation for a trial of data visualisation in Rust-Evcxr in part 3.
+
+#### **Import dataframe library and pills dataset**
+
+```{python}
+import polars as pl
+import plotly.express as px
+```
+
+The pills.csv file saved from part 1 was imported as shown below.
+
+```{python}
+df = pl.read_csv("pills.csv")
+df
+```
+
+#### **Change column names**
+
+Again, column names were changed to something easier to understand.
+
+```{python}
+# Rename all column names
+df_new = df.rename({"splcolor_text": "Colour", 
+                    "splshape_text": "Shape", 
+                    "spl_strength": "Drug_strength", 
+                    "spl_inactive_ing": "Inactive_excipients", 
+                    "DosageForm": "Dosage_form"}
+                  )
+df_new
+```
+
+#### **Visualising oral dosage forms & colours in pills**
+
+Grabbing only unique drugs in the dataset to minimise duplications.
+
+```{python}
+# for colour, dosage form & drug strengths scatter plot
+df_viz_2 = df_new.unique(subset = "Drug_strength")
+df_viz_2
+```
+
+One way to avoid switching Polars dataframe to a Pandas one, which might be one of the options to plot data from Polars dataframes in Plotly, was to call the x-axis and y-axis datasets directly as shown in the codes below.
+
+```{python}
+# scatter plot for colour, dosage form & drug strengths for all unique drugs in this dataset
+fig = px.scatter(x = df_viz_2["Colour"], 
+                 y = df_viz_2["Dosage_form"], 
+                 color = df_viz_2["Colour"],
+                 hover_name = df_viz_2["Drug_strength"],
+                 width = 900, 
+                 height = 400,
+                 title = "Oral dosage forms and colours of pills")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Colours"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Dosage forms"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+White was the most common colour, especially after zooming in the plot. Capsule was very commonly used as the oral dosage form of choice in this dataset.
+
+#### **Visualising shapes & colours in pills**
+
+```{python}
+# Scatter plot between shape and colour
+
+fig = px.scatter(x = df_viz_2["Colour"], 
+                 y = df_viz_2["Shape"], 
+                 color = df_viz_2["Colour"],
+                 hover_name = df_viz_2["Drug_strength"],
+                 width = 900, 
+                 height = 400,
+                 title = "Shapes and colours of pills")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Colours"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Shapes"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+Capsule was again the most common oral dosage shape used for pills in the dataset. Common colours included red, brown, blue, purple, pink, orange, green, white and yellow. Combination colours followed these common ones, which had a mixture of a variety of colours used simultaneously, likely to avoid confusions and errors in dispensings or administrations.
+
+#### **Visualising inactive excipients in pills**
+
+The messiest part of the data actually lied in the column of "Inactive_excipients", with numerous different punctuations used inconsistently, such as forward slashes, commas and semi-colons. There were vast quantities of different inactive components used for oral dosage forms. Because of this, I had to spend a bit more time cleaning up the texts in order to observe what sort of visulaisations would result in the end.
+
+```{python}
+# Formulated a separate dataframe with just "Inactive_excipients"
+df_ie = df_new.select([pl.col("Inactive_excipients")])
+df_ie
+```
+
+##### **Text cleaning for inactive excipients column**
+
+In order to prepare this column for data visualisations, I used Polars' string expressions to try and tidy up the raw texts.
+
+```{python}
+# Clean string texts
+
+df_de = (df_ie.with_column(pl.col("Inactive_excipients").str.to_lowercase(
+    ).str.replace_all(
+        ";", ", "
+    ).str.replace_all(
+        " /", ", "
+    ).str.replace_all(
+        "/", ", "
+    ).str.strip(
+        " "
+    ).str.strip(
+        ","
+    ).str.split(
+        by = ", "
+    ).alias(
+        "Inactive"
+    )
+).explode(
+    "Inactive"
+)
+)
+
+df_de
+```
+
+```{python}
+
+```
+
+```{python}
+# Quick look at the dataframe to see before and after text cleaning
+print(df_de.glimpse())
+```
+
+As shown above, the "Inactive_excipients" column was the original column for excipients, where the second column named, "Inactive" was the new column shown after the first string strip and row text explosion. The excipients were broken down into smaller units than previously.
+
+```{python}
+# Re-organise the dataframe to choose the cleaned "Inactive" column
+df_final = df_de.select(["Inactive"])
+df_final
+```
+
+```{python}
+# Remove all cells with null values
+df_final = df_final.drop_nulls()
+```
+
+```{python}
+# Group the data by different inactive excipients with counts shown
+df_final = df_final.groupby("Inactive").agg(pl.count())
+df_final.head()
+```
+
+##### **Inactive excipient counts**
+
+```{python}
+df_final = df_final.with_column((pl.col("count")).cast(pl.Int64, strict = False))
+df_final
+```
+
+##### **Overview of inactive excipients used in oral dosage forms**
+
+```{python}
+fig = px.scatter(x = df_final["Inactive"], 
+                 y = df_final["count"], 
+                 hover_name = df_final["Inactive"],
+                 title = "Inactive excipients and their respective counts in pills")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 10),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Inactive excipients"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Counts"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+
+fig.show()
+```
+
+##### **Frequently used inactive excipients**
+
+```{python}
+df_ex = df_final.sort("count", reverse = True).filter((pl.col("count")) >= 10000)
+df_ex.head()
+```
+
+```{python}
+fig = px.bar(x = df_ex["Inactive"], 
+             y = df_ex["count"], 
+             color = df_ex["Inactive"],
+             title = "Commonly used inactive excipients in pills")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 10, r = 10, t = 40, b = 5),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Inactive excipients"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Counts"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+#### **Create a small dataframe for data visualisation in Rust-Evcxr**
+
+Filter out acetaminophen in the "Drug_strength" column and remove all duplicates in the dataset.
+
+```{python}
+# Find all drugs that started with certain letters
+df_ac = df_new.filter(
+    pl.col("Drug_strength")
+    .str.starts_with("acetam")).unique(subset = ["Drug_strength"])
+
+df_ac
+```
+
+```{python}
+df_ac = df_ac.groupby("Colour").agg(pl.count())
+df_ac
+```
+
+```{python}
+fig = px.scatter(x = df_ac["Colour"], 
+                 y = df_ac["count"], 
+                 size = df_ac["count"], 
+                 color = df_ac["Colour"],
+                 title = "Frequency of colours in acetaminophen (paracetamol) oral dosage forms"
+                )
+
+fig.update_layout(
+    xaxis = dict(
+        title = "Colours"
+    ), 
+    yaxis = dict(
+        title = "Counts"
+    )
+)
+
+fig.show()
+```
