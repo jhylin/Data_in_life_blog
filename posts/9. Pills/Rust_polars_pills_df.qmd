@@ -107,6 +107,8 @@ fig.update_layout(
 fig.show()
 ```
 
+<br>
+
 White was the most common colour, especially after zooming in the plot. Capsule was very commonly used as the oral dosage form of choice in this dataset.
 
 <br>
@@ -150,6 +152,8 @@ fig.update_layout(
 
 fig.show()
 ```
+
+<br>
 
 Capsule was again the most common oral dosage shape used for pills in the dataset. Common colours included red, brown, blue, purple, pink, orange, green, white and yellow. Combination colours followed these common ones, which had a mixture of a variety of colours used simultaneously, likely to avoid confusions and errors in dispensings or administrations.
 
