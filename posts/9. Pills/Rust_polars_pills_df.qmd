@@ -2,7 +2,7 @@
 title: Pills dataset - Part 2
 subtitle: Text cleaning using Polars & visualising pills with Plotly
 author: Jennifer HY Lin
-date: 2023-1-30
+date: 2023-1-31
 draft: true
 keep-ipynb: true
 categories:
@@ -16,7 +16,7 @@ jupyter: python3
 
 ##### **Quick overview**
 
-Part 2 of this project aimed to look at the pills data up close, particularly into the dosage forms, colours, shapes and inactive excipients used in the dataset. Plotly was used as the main data visualisation library here, with a section in the end to generate a small dataframe in preparation for a data visualisation in Rust-Evcxr for part 3.
+Part 2 of this project aimed to look at the pills data up close, particularly into the types of dosage forms, colours, shapes and inactive excipients used in oral medications. Plotly was used as the main data visualisation library, which was followed by some text cleaning for a particularly busy column in the dataset. This was then completed with a section in the end to generate a small dataframe, preparing for a simple data visualisation in Rust-Evcxr for the final part of this project (part 3).
 
 <br>
 
@@ -62,7 +62,7 @@ df_viz = df_new.unique(subset = "Drug_strength")
 df_viz
 ```
 
-One way to avoid switching Polars dataframe to a Pandas one, which might be one of the options to plot data from Polars dataframes in Plotly, was to call the x-axis and y-axis datasets directly as shown in the codes below.
+One way to avoid switching Polars dataframe to a Pandas one, which could be one of the options to plot data from Polars dataframes in Plotly, was to call the x-axis and y-axis data directly from the dataframe as shown in the codes below.
 
 ```{python}
 # scatter plot for colours, dosage forms & drug strengths 
@@ -74,21 +74,28 @@ fig = px.scatter(x = df_viz["Colour"],
                  height = 400,
                  title = "Oral dosage forms and colours of pills")
 
+# Update layout of the plot
 fig.update_layout(
+    # Change title font size
     title = dict(
         font = dict(
             size = 15)),
+    # Centre the title
     title_x = 0.5,
+    # Edit margins
     margin = dict(
         l = 20, r = 20, t = 40, b = 3),
+    # Change x-axis
     xaxis = dict(
         tickfont = dict(size = 9), 
         title = "Colours"
     ),
+    # Change y-axis
     yaxis = dict(
         tickfont = dict(size = 9), 
         title = "Dosage forms"
     ),
+    # Edit lengend font size
     legend = dict(
         font = dict(
             size = 9)))
@@ -146,7 +153,7 @@ Capsule was again the most common oral dosage shape used for pills in the datase
 
 ##### **Visualising inactive excipients in pills**
 
-The messiest part of the data actually lied in the column of "Inactive_excipients", with numerous different punctuations used inconsistently, such as forward slashes, commas and semi-colons. There were vast quantities of different inactive components used for oral dosage forms. Because of this, I had to spend a bit more time cleaning up the texts in order to observe what sort of visulaisations would result in the end.
+The messiest part of the data actually lied in the column of "Inactive_excipients", with numerous different punctuations used inconsistently, such as forward slashes, commas and semi-colons. There were vast quantities of different inactive components used for oral dosage forms. Because of this, I had to spend a bit more time cleaning up the texts in order to find out what were the commonly used inactive ingredients in the end.
 
 ```{python}
 # Formulated a separate dataframe with just "Inactive_excipients"
@@ -156,27 +163,34 @@ df_ie
 
 ###### **Text cleaning for inactive excipients column**
 
-In order to prepare this column for data visualisations, I used Polars' string expressions to try and tidy up the raw texts. When I did the text cleaning in Jupyter Lab initially, the line of code for .str.strip(" ,") worked, but when I converted the .ipynb file into a .qmd (Quarto markdown) one, and used the same line, it failed to work due to the extra space in front of the comma. However, I got around the error by splitting it into two separate units as space and comma, and it worked without problem. One possible reason would be due to the reticulate package needed to run Python in RStudio IDE, and how Polars dataframe library was relatively newer than Pandas dataframe library, which meant certain features in Polars might not have been taken on board in the reticulate package (only my guess).
+To prepare this column for data visualisations, I used Polars' string expressions (or more commonly known as regex - regular expressions) to try and tidy up the raw texts. When I did the text cleaning in Jupyter Lab initially, the line of code for .str.strip(" ,") worked, but when I converted the .ipynb file into a .qmd (Quarto markdown) one, and used the same line, it failed to work due to the extra space in front of the comma. However, I got around the error by splitting it into two separate units as space and comma, and it worked without problem. One possible reason would be due to the reticulate package needed to run Python in RStudio IDE, and how Polars dataframe library was relatively newer than Pandas dataframe library, which meant certain features in Polars might not have been taken on board in the reticulate package (only my guess).
 
 ```{python}
-# Clean string texts
+# Clean string texts 
+# Convert uppercase letters into lowercase ones in the excipients column
 df_de = (df_ie.with_column(pl.col("Inactive_excipients").str.to_lowercase(
+    # replace old punctuations (1st position) with new one (2nd position)
     ).str.replace_all(
         ";", ", "
     ).str.replace_all(
         " /", ", "
     ).str.replace_all(
         "/", ", "
-    # In Jupyter notebook/lab: .str.strip(" ,") - combine space & comma
+    # Remove extra space & comma by stripping
+    # In Jupyter notebook/lab - can combine space & comma: .str.strip(" ,")
+    # For RStudio IDE - separate into two for this to work
     ).str.strip(
         " "
     ).str.strip(
         ","
+    # Split the texts by the specified punctuation e.g. comma with space
     ).str.split(
         by = ", "
+    # Create a new column with a new name
     ).alias(
         "Inactive"
     )
+# Explode the splitted texts into separate rows within the new column
 ).explode(
     "Inactive"
 )
@@ -190,7 +204,7 @@ df_de
 print(df_de.glimpse())
 ```
 
-As shown above, the "Inactive_excipients" column was the original column for excipients, where the second column named, "Inactive" was the new column shown after the first string strip and row text explosion. The excipients were broken down into smaller units than previously.
+As shown above, the "Inactive_excipients" column was the original column for excipients, where the second column named, "Inactive" was the new column shown after the punctuation tidy-ups, string strip and row text explosion. The excipients were broken down into individual terms, rather than in massively long strings which might not make sense to some readers.
 
 ```{python}
 # Re-organise the dataframe to choose the cleaned "Inactive" column
@@ -287,9 +301,13 @@ fig.show()
 
 <br>
 
+The text cleaning might not be perfect at this stage, but I think I've managed to get most of the core texts cleaned into a more sensible and readable formats. From what I've worked out here, the most frequently used inactive ingredient was magnesium stearate, which was followed by titanium dioxide, and then interestingly "unspecified", which was exactly how it was documented in the original pillbox dataset at the beginning. I didn't go further digging into what this "unspecified" inactive excipients might be, as in whether it meant it in a singular or plural forms. So this still remained a mystery at this stage, but if all these oral medications were FDA-approved, we would've hoped each and everyone of these pills would be verified in safety, quality and effectiveness before they entered into the market for wide prescriptions. In the worst case, each therapeutic drug should also have post-marketing surveillance, for long-term safety monitoring.
+
+<br>
+
 ##### **Create a small dataframe for data visualisation in Rust-Evcxr**
 
-Filtered out all acetaminophens in the "Drug_strength" column and removed all duplicates in the dataset.
+All acetaminophens were filtered out in the "Drug_strength" column and all duplicates were removed in the dataset.
 
 ```{python}
 df_ac = df_new.filter(
@@ -298,6 +316,8 @@ df_ac = df_new.filter(
 
 df_ac
 ```
+
+I've opted for finding out the different types of colours with their respective counts in oral acetaminophen, or also known as paracetamol in some other countries.
 
 ```{python}
 df_ac = df_ac.groupby("Colour").agg(pl.count())
@@ -324,4 +344,6 @@ fig.update_layout(
 fig.show()
 ```
 
-I've decided to keep the dataframe very simple for part 3 as my original intention was to trial plotting a graph in Evcxr only (nothing fancy at this stage), and also to gain some familiarities with Rust as another new programming language for me. Readers might notice that I've opted for a scatter plot here for this last dataframe, and when we finally got to part 3 (hopefully coming soon as I needed to figure how to publish Rust codes in Quarto...), I might very likely revert this to a bar graph, due to some technical issues and being a new Rust-Evcxr user. At the very least, I've kind of tried something I've planned for, although it might not look very elegant yet.
+<br>
+
+I've decided to keep the dataframe very simple for part 3 as my original intention was to trial plotting a graph in Evcxr only (nothing fancy at this stage), and also to gain some familiarities with Rust as another new programming language for me. Readers might notice that I've opted for a scatter plot in Plotly (in Python3 kernel) here for this last dataframe, and when we finally got to part 3 (hopefully coming soon as I needed to figure how to publish Rust codes in Quarto...), I might very likely revert this to a bar graph (in Rust kernel), due to some technical issues (slow dependency loading, and somehow with Plotly.rs in Evcxr, the scatter graph looked more like scatter line graph instead... more stories to follow) and being a new Rust-Evcxr user. At the very least, I've kind of tried something I've planned for, although not looking very elegant yet, with rooms for improvements in the future.
