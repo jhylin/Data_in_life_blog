@@ -20,6 +20,10 @@ Part 2 of this project aimed to look at the pills data up close, particularly in
 
 <br>
 
+![Photo by <a href="https://unsplash.com/@myriamzilles?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Myriam Zilles</a> on <a href="https://unsplash.com/photos/KltoLK6Mk-g?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](pills.jpg){fig-align="left"}
+
+<br>
+
 ##### **Import libraries and pills dataset**
 
 ```{python}
