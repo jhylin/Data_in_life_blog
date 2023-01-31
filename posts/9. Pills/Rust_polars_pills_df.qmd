@@ -3,7 +3,7 @@ title: Pills dataset - Part 2
 subtitle: Text cleaning using Polars & visualising pills with Plotly
 author: Jennifer HY Lin
 date: 2023-1-31
-draft: true
+draft: false
 keep-ipynb: true
 categories:
   - Data analytics projects
