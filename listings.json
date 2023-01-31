@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/9. Pills/Rust_polars_pills_df.html",
       "/posts/9. Pills/Rust_polars_pills_ws.html",
       "/posts/8. Small molecules in ChEMBL database/Rust_pl_chembl_cpds.html",
       "/posts/7. Molecular similarities in COVID-19 antivirals/Mol_sim_covid.html",
