@@ -12,6 +12,8 @@ website:
         href: https://github.com/jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
+      - text: Portfolio
+        href: https://www.datascienceportfol.io/jhylin
       - text: CV
         href: https://jhylin.github.io/CV_resume_quarto/
   repo-url: https://github.com/jhylin/Data_in_life_blog
