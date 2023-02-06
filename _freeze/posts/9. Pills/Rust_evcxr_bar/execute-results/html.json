@@ -1,0 +1,11 @@
+{
+  "hash": "282fe534b1e3367f51efe94dfe89a21a",
+  "result": {
+    "markdown": "---\ntitle: Pills dataset - Part 3\nsubtitle: Plotting in Rust by using jupyter-evcxr\nauthor: Jennifer HY Lin\ndate: 2023-2-4\ndraft: true\nkeep-ipynb: true\ncategories:\n  - Data analytics projects\n  - Rust\n  - evcxr\n  - Jupyter\n---\n\n```{{rust}}\n// Set up required dependencies\n:dep ndarray = \"0.15.6\"\n```\n\n```{{rust}}\n:dep plotly = { version = \">=0.8.0\" }\n```\n\n```{{rust}}\n// Import external crates needed\nextern crate ndarray;\nextern crate plotly;\n```\n\n```{{rust}}\n// Specify imports/modules required\nuse ndarray::Array;\nuse plotly::common::{\n    ColorScale, ColorScalePalette, DashType, Fill, Font, Line, LineShape, Marker, Mode, Title,\n};\nuse plotly::layout::{Axis, BarMode, Layout, Legend, TicksDirection};\nuse plotly::{Plot, Scatter, Bar};\n```\n\n```{{rust}}\n// Use vec! macro to create new vectors to hold x & y variables for plotting\nlet x = vec![\"yellow/white\", \"orange\", \"orange/brown\", \"red\", \"white\", \"blue\"];\nlet y = vec![1, 1, 1, 1, 7, 2];\n\n// Use trace as a graph module & choose which type of plots is needed with x & y variables called\n// Graph options e.g. Scatter, Line\nlet trace1 = Bar::new(x, y);\n\n// Set plot variable as mutable and initiate a plot\nlet mut plot = Plot::new();\n// Add trace (graph) into the plot variable\nplot.add_trace(trace1);\n\n// Specify the specs for plot\nlet layout = Layout::new()\n    // Choose height of graph\n    .height(500)\n    // Name x-axis\n    .x_axis(Axis::new().title(Title::new(\"Colours\")))\n    // Name y-axis\n    .y_axis(Axis::new().title(Title::new(\"Count\")))\n    // Add title of graph\n    .title(Title::new(\"Frequency of colours in acetaminophen (paracetamol) oral dosage forms\"));\n\n// Set the layout of the plot\nplot.set_layout(layout);\n\n// Display the plot in Jupyter Lab format \n// note for Jupyter Notebook - plot.notebook_display();\nplot.lab_display();\nformat!(\"EVCXR_BEGIN_CONTENT application/vnd.plotly.v1+json\\n{}\\nEVCXR_END_CONTENT\", plot.to_json())\n```\n\n",
+    "supporting": [
+      "Rust_evcxr_bar_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

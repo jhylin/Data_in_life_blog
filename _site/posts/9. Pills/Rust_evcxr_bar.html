@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-01-16">
+<meta name="dcterms.date" content="2023-02-04">
 
-<title>Home - Pills dataset (Part 3)</title>
+<title>Home - Pills dataset - Part 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -170,6 +170,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="https://www.datascienceportfol.io/jhylin">
+ <span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
  <span class="menu-text">CV</span></a>
   </li>  
@@ -186,7 +190,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Pills dataset (Part 3)</h1>
+      <h1 class="title">Pills dataset - Part 3</h1>
             <p class="subtitle lead">Plotting in Rust by using jupyter-evcxr</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Data analytics projects</div>
@@ -210,7 +214,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 16, 2023</p>
+        <p class="date">February 4, 2023</p>
       </div>
     </div>
     
@@ -230,63 +234,60 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Set up required dependencies</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep ndarray <span class="op">=</span> <span class="st">"0.15.6"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>dep plotly <span class="op">=</span> <span class="op">{</span> version <span class="op">=</span> <span class="st">"&gt;=0.8.0"</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Import external crates needed</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="kw">crate</span> ndarray<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="kw">crate</span> plotly<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Specify imports/modules required</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">ndarray::</span>Array<span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">plotly::common::</span><span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ColorScale<span class="op">,</span> ColorScalePalette<span class="op">,</span> DashType<span class="op">,</span> Fill<span class="op">,</span> Font<span class="op">,</span> Line<span class="op">,</span> LineShape<span class="op">,</span> Marker<span class="op">,</span> Mode<span class="op">,</span> Title<span class="op">,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">plotly::layout::</span><span class="op">{</span>Axis<span class="op">,</span> BarMode<span class="op">,</span> Layout<span class="op">,</span> Legend<span class="op">,</span> TicksDirection<span class="op">};</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">plotly::</span><span class="op">{</span>Plot<span class="op">,</span> Scatter<span class="op">,</span> Bar<span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Use vec! macro to create new vectors to hold x &amp; y variables for plotting</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="pp">vec!</span>[<span class="st">"yellow/white"</span><span class="op">,</span> <span class="st">"orange"</span><span class="op">,</span> <span class="st">"orange/brown"</span><span class="op">,</span> <span class="st">"red"</span><span class="op">,</span> <span class="st">"white"</span><span class="op">,</span> <span class="st">"blue"</span>]<span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Use trace as a graph module &amp; choose which type of plots is needed with x &amp; y variables called</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Graph options e.g. Scatter, Line</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> trace1 <span class="op">=</span> <span class="pp">Bar::</span>new(x<span class="op">,</span> y)<span class="op">;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Set plot variable as mutable and initiate a plot</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> plot <span class="op">=</span> <span class="pp">Plot::</span>new()<span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Add trace (graph) into the plot variable</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plot<span class="op">.</span>add_trace(trace1)<span class="op">;</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Specify the specs for plot</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> layout <span class="op">=</span> <span class="pp">Layout::</span>new()</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Choose height of graph</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>height(<span class="dv">500</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Name x-axis</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>x_axis(<span class="pp">Axis::</span>new()<span class="op">.</span>title(<span class="pp">Title::</span>new(<span class="st">"Colours"</span>)))</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Name y-axis</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>y_axis(<span class="pp">Axis::</span>new()<span class="op">.</span>title(<span class="pp">Title::</span>new(<span class="st">"Count"</span>)))</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add title of graph</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>title(<span class="pp">Title::</span>new(<span class="st">"Frequency of colours in acetaminophen (paracetamol) oral dosage forms"</span>))<span class="op">;</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">// Set the layout of the plot</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>plot<span class="op">.</span>set_layout(layout)<span class="op">;</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">// Display the plot in Jupyter Lab format </span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">// note for Jupyter Notebook - plot.notebook_display();</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>plot<span class="op">.</span>lab_display()<span class="op">;</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="pp">format!</span>(<span class="st">"EVCXR_BEGIN_CONTENT application/vnd.plotly.v1+json</span><span class="sc">\n</span><span class="st">{}</span><span class="sc">\n</span><span class="st">EVCXR_END_CONTENT"</span><span class="op">,</span> plot<span class="op">.</span>to_json())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<p><img src="Rust_evcxr_bar_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
-</div>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set up required dependencies</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep ndarray <span class="ot">=</span> <span class="st">"0.15.6"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep plotly <span class="ot">=</span> { version <span class="ot">=</span> <span class="st">"&gt;=0.8.0"</span> }</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Import external crates needed</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>extern crate ndarray;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>extern crate plotly;</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Specify imports<span class="sc">/</span>modules required</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>use ndarray<span class="sc">::</span>Array;</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>common<span class="sc">::</span>{</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ColorScale, ColorScalePalette, DashType, Fill, Font, Line, LineShape, Marker, Mode, Title,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>layout<span class="sc">::</span>{Axis, BarMode, Layout, Legend, TicksDirection};</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>{Plot, Scatter, Bar};</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Use vec<span class="sc">!</span> macro to create new vectors to hold x <span class="sc">&amp;</span> y variables <span class="cf">for</span> plotting</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>let x <span class="ot">=</span> vec<span class="sc">!</span>[<span class="st">"yellow/white"</span>, <span class="st">"orange"</span>, <span class="st">"orange/brown"</span>, <span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"blue"</span>];</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>let y <span class="ot">=</span> vec<span class="sc">!</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">2</span>];</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Use trace as a graph module <span class="sc">&amp;</span> choose which type of plots is needed with x <span class="sc">&amp;</span> y variables called</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Graph options e.g. Scatter, Line</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>let trace1 <span class="ot">=</span> Bar<span class="sc">::</span><span class="fu">new</span>(x, y);</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set plot variable as mutable and initiate a plot</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>let mut plot <span class="ot">=</span> Plot<span class="sc">::</span><span class="fu">new</span>();</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Add <span class="fu">trace</span> (graph) into the plot variable</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.add_trace</span>(trace1);</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Specify the specs <span class="cf">for</span> plot</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>let layout <span class="ot">=</span> Layout<span class="sc">::</span><span class="fu">new</span>()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Choose height of graph</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.height</span>(<span class="dv">500</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Name x<span class="sc">-</span>axis</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.x_axis</span>(Axis<span class="sc">::</span><span class="fu">new</span>()<span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Colours"</span>)))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Name y<span class="sc">-</span>axis</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.y_axis</span>(Axis<span class="sc">::</span><span class="fu">new</span>()<span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Count"</span>)))</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Add title of graph</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Frequency of colours in acetaminophen (paracetamol) oral dosage forms"</span>));</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set the layout of the plot</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.set_layout</span>(layout);</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Display the plot <span class="cf">in</span> Jupyter Lab format </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> note <span class="cf">for</span> Jupyter Notebook <span class="sc">-</span> <span class="fu">plot.notebook_display</span>();</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.lab_display</span>();</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>format<span class="sc">!</span>(<span class="st">"EVCXR_BEGIN_CONTENT application/vnd.plotly.v1+json</span><span class="sc">\n</span><span class="st">{}</span><span class="sc">\n</span><span class="st">EVCXR_END_CONTENT"</span>, <span class="fu">plot.to_json</span>())</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
