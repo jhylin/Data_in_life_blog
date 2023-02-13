@@ -2,7 +2,7 @@
 title: Pills dataset - Part 3
 subtitle: Using Rust for data visualisation
 author: Jennifer HY Lin
-date: 2023-2-13
+date: 2023-2-14
 draft: true
 keep-ipynb: true
 categories:
@@ -17,13 +17,13 @@ jupyter: rust
 
 ###### **Background**
 
-The aim of this final part (part 3) for the pills dataset was really for me to start using Rust in a beginner-friendly way. Overall, these 3 parts to the pills dataset project formulated an overview of how to use Polars in Python (mainly), Pandas in Python (smaller section) and Rust (even little less as this is new to me) with Plotly. Over the time, I find myself learning the best by doing and applying, rather than only reading and thinking, so I've got myself started in this very new programming language, Rust, to get some familiarisations. I anticipate that I'll still work with Python and R mainly in the near future, so that I'll at least be proficient in at least one to two programming languages at the very minimum.
+The aim of this final part (part 3) for the pills dataset was really for me to start using Rust in a beginner-friendly way. Overall, this trilogy (parts 1 - 3) for the pills dataset formulated an overview of how to use Polars in Python (mainly), Pandas in Python (smaller section) and Polars in Rust (even little less as this was new to me) with Plotly. Over time, I've been finding myself learning more optimally by doing and applying, rather than just reading and thinking, so I've got myself started in this very new programming language, Rust, to get some familiarities. I anticipated that I would still work with Python and R mainly in the near future, so that I'm not diverting too much and at least would be proficient in at least one programming language.
 
-My very initial idea was to integrate Rust-Polars, Plotly in Rust (Plotly.rs) and Jupyter-Evcxr together, and see if I could manage to get a simple data visualisation from a small dataset. That was all, and I was actually quite stuck at the step of importing one of the columns as x-axis variables in Rust-Polars to Plotly.rs. I figured it might possibly be due to my very lack-of-knowledge and lack-of-familiarities with Rust (I do need to continue reading the Rust programming language book), Polars (I'm better with Python-Polars actually), Plotly.rs and also Evcxr. Another possibility could be that Plotly.rs mainly had ndarray support, and Polars was not mentioned explicitly so my guess was that these two might not be flowing very well together (hoping in the future there might be some Polars support in Plotly.rs?). Also, Polars itself was constantly evolving and growing as well.
+My very initial idea was to integrate Rust-Polars, Plotly in Rust (Plotly.rs) and Jupyter-Evcxr together, and see if I could get a simple data visualisation out of a small dataset. Although the idea sounded simple enough, I was actually quite stuck at the step of importing one of the columns as x-axis variables in Rust-Polars to Plotly.rs. I figured it might possibly be due to my very lack-of-knowledge and lack-of-familiarities with Rust (I do need to continue reading the Rust programming language book), Polars (I'm better with Python-Polars actually), Plotly.rs and also Evcxr. Another possibility could be that Plotly.rs mainly had ndarray support, and Polars was not mentioned explicitly in Plotly.rs so my guess was that these two might not flow very well together. Also, Polars itself was constantly evolving and growing as well.
 
 So I've decided to leave things as how it would be for now, before I delayed this post any further, if I happened to figure out how to do this in the future then I'll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I've managed to deconstruct Polars dataframe in Rust in Evcxr. So I'll show a little bit about it below. One slightly good news that came out from all of this, was that I've managed to import the other column as y-axis variables, which contained numbers, without problems. I've also figured out the Rust codes to convert Series/ChunkedArray to vectors in Rust IDEs (e.g. VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could grow further on this later.
 
-**Note: I've published all Rust codes as print-only since it's not possible to run them in RStudio IDE (not supported). So all Rust codes were run on Jupyter Lab, with code outputs being captured as screenshots which would be shown as photos in this post. I'll try to include a link to the full .ipynb file in my GitHub repository for this portfolio blog, in case anyone wanted to see the .ipynb version.**
+**Note: I've published all Rust codes as print-only in Quarto markdown file, since it's not possible to run them in RStudio IDE (Rust was not supported). So all Rust codes were run on Jupyter Lab, with code outputs being captured as screenshots, which were shown as photos in this post. I'll try to include a link to the full .ipynb file in my GitHub repository for this portfolio blog, in case anyone wanted to see the .ipynb version.**
 
 <br>
 
@@ -41,7 +41,7 @@ These dependencies were known as crates in the world of Rust. I'd also like to t
 ```
 
 ```{{rust}}
-// May take a few minutes to load polars crate (depending on your machine specs)
+// May take a few minutes to load polars crate (might depend on your machine specs)
 :dep polars = { version = ">=0.26.0", features = ["lazy", "csv-file", "strings", "dtype-duration", "dtype-categorical", "concat_str", "rank", "lazy_regex", "ndarray"]}
 ```
 
@@ -77,7 +77,7 @@ use itertools::Itertools;
 
 ##### **Reading csv file**
 
-Here, I've imported the .csv file saved from part 2.
+Here, I've imported the .csv file saved from part 2 of the project.
 
 ```{{rust}}
 // Reading .csv file
@@ -94,7 +94,7 @@ df
 
 ###### **Converting columns into ndarrays**
 
-I've tested plotting in Plotly.rs by a few trials and errors at the beginning, but luckily I've spotted the ndarray support from the [Plotly.rs book](https://igiagkiozis.github.io/plotly/content/plotly_rs.html) soon enough to figure out that I could convert the "count" column into a ndarray first, which was shown in the code below.
+I've tested plotting in Plotly.rs after a few trials and errors at the beginning, but luckily I've spotted the ndarray support from the [Plotly.rs book](https://igiagkiozis.github.io/plotly/content/plotly_rs.html) soon enough to figure out that I could convert the "count" column into a ndarray first, which was shown in the code below.
 
 ```{{rust}}
 // Switch Polars dataframe into 2D array
@@ -106,7 +106,7 @@ let ndarray = df.to_ndarray::<Float64Type>().unwrap();
 println!("{:?}", ndarray);
 */
 
-//Note: ndarray for numbers only, not strings, so only count column was converted
+//Note: ndarray for numbers only, not strings, so only "count" column was converted
 let ndarray = df.to_ndarray::<Float64Type>().unwrap();
 println!("{:?}", ndarray);
 ```
@@ -117,7 +117,7 @@ println!("{:?}", ndarray);
 
 ###### **Deconstructing Polars dataframe in Rust**
 
-So because to_ndarray was only for numerics and not strings, I ran into a problem trying to figure out how to best import this other "Colour" column into Plotly.rs. This led to my little convoluted journey to work with Polars dataframe in Rust, trying to see if I could convert the "Colour" column into a vector, as I've tried plotting with the "count" column in ndarray as a vector with success. I didn't quite achieve my goal but I've managed to break down the Polars dataframe into different formats.
+Because to_ndarray was only for numerics and not strings, I ran into a problem trying to figure out how to best import this other "Colour" column into Plotly.rs. This led to my little convoluted journey to work with Polars dataframe in Rust, trying to see if I could convert the "Colour" column into a vector (which might not be the best way to do it, but as part of my Rust learning, I went for it anyway). I've subsequently tried plotting the "count" column in ndarray as a vector with success, based on the reference from Plotly.rs book that variables for x or y-axis could be placed into a vector by using a vector macro. Eventually, I didn't quite achieve my goal but I've managed to break down the Polars dataframe into different formats.
 
 ```{{rust}}
 // Select specific column or series by position
@@ -131,69 +131,95 @@ let Colours = df[0].clone();
 Colours
 ```
 
+![Photo by author](series.jpg){fig-align="left"}
+
+There was a mention of storing series (column) in a vec in Polars' documentation, which I've tried to plot in Plotly.rs, but unfortunately it failed to recognise it. Then I was searching on StackOverflow for similar questions, then I found something related to what I wanted to do from Polars documentations as shown below.
+
+```{{rust}}
+// Adapted from: https://docs.rs/polars/latest/polars/docs/eager/index.html#series 
+// Extracting data: 
+// To be able to extract data out of Series, 
+// either by iterating over them or converting them to other datatypes like a Vec<T>, 
+// we first need to downcast them to a ChunkedArray<T>. 
+// This is needed because we don't know the data type that is held by the Series.
+
+/*use polars::prelude::*; 
+  use polars::df;
+
+  fn extract_data() -> PolarsResult<()> { 
+  let df = df! [ "a" => [None, Some(1.0f32), Some(2.0)], "str" => ["foo", "bar", "ham"]]?;
+
+// first extract ChunkedArray to get the inner type.
+
+  let ca = df.column("a")?.f32()?;
+
+// Then convert to vec
+
+  let _to_vec: Vec<Option<f32>> = Vec::from(ca);
+
+// We can also do this with iterators
+
+  let ca = df.column("str")?.utf8()?; 
+  let _to_vec: Vec<Option<&str>> = ca.into_iter().collect(); 
+  let _to_vec_no_options: Vec<&str> = ca.into_no_null_iter().collect();
+
+  Ok(())
+
+}*/
+```
+
+Initially, I trialled the iterator function first.
+
 ```{{rust}}
 // Print out items in column by applying an iterator to it
 println!("{}", &Colours.iter().format("\n"));
 ```
 
-There was a mention of storing series (column) in a vec as Vec<Series> in Polars' documentation, which I've tried to plot in Plotly.rs and unfortunately it failed to recognise it. Then I was searching on StackOverflow for similar questions, then I found something relating to what I wanted to do form Polars docs as shown below.
+![Photo by author](iterate.jpg){fig-align="left"}
 
-// From: https://docs.rs/polars/latest/polars/docs/eager/index.html#series //Extracting data: //To be able to extract data out of Series, //either by iterating over them or converting them to other datatypes like a Vec<T>, //we first need to downcast them to a ChunkedArray<T>. //This is needed because we don't know the data type that is held by the Series.
-
-/*use polars::prelude::*; use polars::df;
-
-//fn extract_data() -\> PolarsResult\<()\> { let df = df! \[ "a" =\> \[None, Some(1.0f32), Some(2.0)\], "str" =\> \["foo", "bar", "ham"\]\]?;
-
-    // first extract ChunkedArray to get the inner type.
-
-let ca = df.column("a")?.f32()?;
-
-    // Then convert to vec
-
-let \_to_vec: Vec\<Option<f32>\> = Vec::from(ca);
-
-    // ***We can also do this with iterators***
-
-let ca = df.column("str")?.utf8()?; let \_to_vec: Vec\<Option\<&str\>\> = ca.into_iter().collect(); let \_to_vec_no_options: Vec\<&str\> = ca.into_no_null_iter().collect();
-
-    //Ok(())
-
-//}
-
-It took me quite a long time to just downcast series into chunkedarray, but somehow I've managed to figure the code myself below.
+Then, it took me quite a long time to just downcast Series into ChunkedArray, but somehow I've managed to figure out the code myself below. One of the likely reasons was due to my choice of using Evcxr, which required Rust codes in slightly different formats than the ones in Rust IDEs (although almost the same).
 
 ```{{rust}}
 // Somehow worked out how to convert series to chunkedarray by accident!
 println!("{:?}", Colours.utf8().unwrap());
 ```
 
-Then I moved onto trying to figure out how to convert or place a chunkedarray into a vector, with the closest answer shown below. However, bear in mind that these Rust codes were for Rust IDEs, and not for Evcxr, so this added slightly more complexities to what I was trying to do (perhaps I should just stick with Rust IDEs in the future...).
+![Photo by author](chunkedarray.jpg){fig-align="left"}
 
-/\*From StackOverflow - How to get a Vec from polars Series or ChunkedArray?
+Then I moved onto trying to figure out how to convert or place a ChunkedArray into a vector, with the closest answer shown below. However, bear in mind that these Rust codes were for Rust IDEs, and not for Evcxr, so this added slightly more complexities to what I was trying to do (perhaps I should just stick with Rust IDEs in the future...).
 
-You can collect the values into a Vec.
+```{{rust}}
+//Adpated from StackOverflow - How to get a Vec from polars Series or ChunkedArray?
+//You can collect the values into a Vec.
 
-use polars::prelude::\*;
+/*use polars::prelude::*;
 
-fn main() -\> Result\<()\> { let s = Series::new("a", 0..10i32);
+fn main() -> Result<()> { let s = Series::new("a", 0..10i32);
 
     let as_vec: Vec<Option<i32>> = s.i32()?.into_iter().collect();
 
-    // if we are certain we don't have missing values
+    //if we are certain we don't have missing values
     let as_vec: Vec<i32> = s.i32()?.into_no_null_iter().collect();
     Ok(())
 
-} \*/
+}*/
+```
 
-/*fn iter_forward(ca: &Float32Chunked) { ca.into_iter() .for_each(\|opt_v\| println!("{:?}", opt_v)) }* /
+I also found another way to iterate the ChunkedArray.
 
-I then tested using the iterator method, and came up with another line of code as shown below, which listed the colours in the "Colour" column.
+```{{rust}}
+//fn iter_forward(ca: &Float32Chunked) { ca.into_iter().for_each(|opt_v| println!("{:?}", opt_v)) } 
+```
+
+I then tested another iterator method, and came up with another line of code as shown below, which listed the colours in the "Colour" column.
 
 ```{{rust}}
 Colours.utf8().unwrap().into_iter().for_each(|array|println!("{:?}", array));
 ```
 
-I then found out, randomly, how to slice strings for ChunkedArrays in Polars.
+![Photo by author](iterate_series.jpg){fig-align="left"}
+
+I also found out, randomly, how to slice strings for Series in Polars. By changing the number of letters to slice through in Some(), the strings or words would vary length accordingly. Here, I've used "15" so it covered all the colours (note: the longest would be 12 characters for combination colours).
 
 ```{{rust}}
 // Another method to use if needing to slice strings
@@ -201,32 +227,36 @@ let x = Colours.utf8().unwrap().str_slice(0, Some(15));
 x
 ```
 
-Lastly, before we got too carried away, I just wanted to show the method shown from Polars doc that this was the way to select a specific column from Polars dataframe.
+![Photo by author](slice_strings.jpg){fig-align="left"}
+
+Lastly, before I got too carried away, I just wanted to show the method from Polars documentations that this was the Polars' way to select a specific column from Polars dataframe.
 
 ```{{rust}}
-// This was the Polars' way to select a column in a dataframe
 let ca = df.clone().lazy().select([cols(["Colour"])]).collect()?;
 ca
 ```
+
+![Photo by author](pl_select_col.jpg){fig-align="left"}
 
 <br>
 
 ###### **Plotting Polars dataframe in Plotly.rs**
 
-For the x-axis, eventually, I reverted for manual input due to the issue mentioned in the background section. So the colours from the "Colour" column were stored in a vector set up manually, rather than coming directly from the dataframe. While searching for answers, I've also learnt several other tricks, although not directly solving the problem. For the y-axis, the ndarray for the "count" column was converted into a vector first before being fed into the trace (graph module), and thankfully it worked nicely.
+For the x-axis, eventually, I reverted for manual input due to the issue mentioned in the background section. So the colours from the "Colour" column were stored in a vector set up manually, rather than coming directly from the dataframe. While searching for answers, I've also learnt several other tricks, although not really solving the problem, they might still be useful in the future. For the y-axis, the ndarray for the "count" column was converted into a vector first before being fed into the trace (graph module), and thankfully the plot worked nicely.
 
 ```{{rust}}
-// MANUAL Sample method:
-// Use vec! macro to create new vectors to hold x variables (words as strings) for plotting
+// MANUAL method:
+// Use vec! macro to create new vectors to hold x variables (words as strings)
 // Manually input the colour names (as ndarray is only for numbers)
 let x = vec!["RED", "ORANGE;BROWN", "YELLOW;WHITE", "ORANGE", "WHITE", "BLUE"];
 
-// Plot using ndarray, which is supported by Plotly.rs (?Polars not supported yet)
-// Convert ndarray (holding counts as y variables) into vector for plotting
+// Plot using ndarray, which is supported by Plotly.rs 
+// Polars likely not supported yet
+// Convert ndarray (holding counts as y variables) into vector 
 let y = ndarray.column(1).to_vec();
 
 // Use trace as a graph module,
-// choose which type of plots is needed with x & y variables called
+// choose type of plots needed for x & y variables called
 // Graph options e.g. Scatter, Line or Bar
 let trace = Scatter::new(x, y);
 
@@ -250,13 +280,29 @@ let layout = Layout::new()
 plot.set_layout(layout);
 
 // Display the plot in Jupyter Lab format 
-// note for Jupyter Notebook: use plot.notebook_display();
+// For Jupyter Notebook, use: plot.notebook_display();
 plot.lab_display();
 format!("EVCXR_BEGIN_CONTENT application/vnd.plotly.v1+json\n{}\nEVCXR_END_CONTENT", plot.to_json())
 ```
 
+![Photo by author](plot.jpg){fig-align="left"}
+
 <br>
 
-##### **Conclusion**
+###### **Conclusion**
 
-This last part was the hardest for me out of all 3 parts of pills dataset, as Rust was completely new to me, but it was interesting to be able to get a feel of how this programming language was applied in Polars dataframe library. Also, I'd just like to get a taste of using Rust in data visualisations. All that I wanted to show was that there were a variety of data tools that could be utilised, and knowing your tools of trade would be the most critical when working on data projects as certain tools would only be best suited for certain tasks and scenarios.
+This last part was the hardest for me to execute out of all 3 parts (it likely took me a good whole week to figure out deconstructing Polars dataframe and trying to work with vectors), as Rust was completely new to me. At one point I thought about jumping back to Python, but I persisted and although I didn't quite solve the string importation issue, I was somehow happy that I was at least able to see how this programming language could be applied in Polars dataframe library. I also got a taste of using Rust in data visualisations. All I wanted to show was that there were a variety of data tools to use, and knowing your tools of trade would be the most critical when working on different data projects as certain tools would only work the best for certain tasks and scenarios. This warm-up lesson in Rust was quite interesting and I might continue either in VS Code or Evcxr depending on my next topic of interest.
+
+<br>
+
+###### **References**
+
+Polars documentations:
+
+Plotly.rs book:
+
+Plotly.rs GitHub:
+
+Rust programming language book:
+
+Evcxr:
