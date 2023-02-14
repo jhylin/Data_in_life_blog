@@ -3,7 +3,7 @@ title: Pills dataset - Part 3
 subtitle: Using Rust for data visualisation
 author: Jennifer HY Lin
 date: 2023-2-14
-draft: true
+draft: false
 keep-ipynb: true
 categories:
   - Data analytics projects
