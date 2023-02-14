@@ -236,13 +236,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#import-dependencies" id="toc-import-dependencies" class="nav-link" data-scroll-target="#import-dependencies"><strong>Import dependencies</strong></a></li>
   <li><a href="#import-external-crates" id="toc-import-external-crates" class="nav-link" data-scroll-target="#import-external-crates"><strong>Import external crates</strong></a></li>
   <li><a href="#specify-imports-or-modules-required" id="toc-specify-imports-or-modules-required" class="nav-link" data-scroll-target="#specify-imports-or-modules-required"><strong>Specify imports or modules required</strong></a></li>
-  <li><a href="#reading-csv-file" id="toc-reading-csv-file" class="nav-link" data-scroll-target="#reading-csv-file"><strong>Reading csv file</strong></a>
-  <ul>
+  <li><a href="#reading-csv-file" id="toc-reading-csv-file" class="nav-link" data-scroll-target="#reading-csv-file"><strong>Reading csv file</strong></a></li>
   <li><a href="#converting-columns-into-ndarrays" id="toc-converting-columns-into-ndarrays" class="nav-link" data-scroll-target="#converting-columns-into-ndarrays"><strong>Converting columns into ndarrays</strong></a></li>
   <li><a href="#deconstructing-polars-dataframe-in-rust" id="toc-deconstructing-polars-dataframe-in-rust" class="nav-link" data-scroll-target="#deconstructing-polars-dataframe-in-rust"><strong>Deconstructing Polars dataframe in Rust</strong></a></li>
   <li><a href="#plotting-polars-dataframe-in-plotly.rs" id="toc-plotting-polars-dataframe-in-plotly.rs" class="nav-link" data-scroll-target="#plotting-polars-dataframe-in-plotly.rs"><strong>Plotting Polars dataframe in Plotly.rs</strong></a></li>
-  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -254,10 +253,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="background" class="level6">
 <h6 class="anchored" data-anchor-id="background"><strong>Background</strong></h6>
-<p>The aim of this final part (part 3) for the pills dataset was really for me to start using Rust in a beginner-friendly way. Overall, this trilogy (parts 1 - 3) for the pills dataset formulated an overview of how to use Polars in Python (mainly), Pandas in Python (smaller section) and Polars in Rust (even little less as this was new to me) with Plotly. Over time, I’ve been finding myself learning more optimally by doing and applying, rather than just reading and thinking, so I’ve got myself started in this very new programming language, Rust, to get some familiarities. I anticipated that I would still work with Python and R mainly in the near future, so that I’m not diverting too much and at least would be proficient in at least one programming language.</p>
+<p>The aim of this final part (part 3) for the pills dataset was really for me to start using Rust in a beginner-friendly way. Overall, this trilogy (parts 1 - 3) for the pills dataset formulated an overview of how to use Polars in Python (mainly), Pandas in Python (smaller section) and Polars in Rust (even little less as this was new to me) with Plotly. Over time, I’ve been finding myself learning more optimally by doing and applying, rather than just reading and thinking, so I’ve got myself started in this very new programming language, Rust, to get some familiarities. I anticipated that I would still work with Python and R mainly in the near future, so that I’m not diverting too much and would be at least proficient in at least one programming language.</p>
 <p>My very initial idea was to integrate Rust-Polars, Plotly in Rust (Plotly.rs) and Jupyter-Evcxr together, and see if I could get a simple data visualisation out of a small dataset. Although the idea sounded simple enough, I was actually quite stuck at the step of importing one of the columns as x-axis variables in Rust-Polars to Plotly.rs. I figured it might possibly be due to my very lack-of-knowledge and lack-of-familiarities with Rust (I do need to continue reading the Rust programming language book), Polars (I’m better with Python-Polars actually), Plotly.rs and also Evcxr. Another possibility could be that Plotly.rs mainly had ndarray support, and Polars was not mentioned explicitly in Plotly.rs so my guess was that these two might not flow very well together. Also, Polars itself was constantly evolving and growing as well.</p>
-<p>So I’ve decided to leave things as how it would be for now, before I delayed this post any further, if I happened to figure out how to do this in the future then I’ll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I’ve managed to deconstruct Polars dataframe in Rust in Evcxr. So I’ll show a little bit about it below. One slightly good news that came out from all of this, was that I’ve managed to import the other column as y-axis variables, which contained numbers, without problems. I’ve also figured out the Rust codes to convert Series/ChunkedArray to vectors in Rust IDEs (e.g.&nbsp;VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could grow further on this later.</p>
-<p><strong>Note: I’ve published all Rust codes as print-only in Quarto markdown file, since it’s not possible to run them in RStudio IDE (Rust was not supported). So all Rust codes were run on Jupyter Lab, with code outputs being captured as screenshots, which were shown as photos in this post. I’ll try to include a link to the full .ipynb file in my GitHub repository for this portfolio blog, in case anyone wanted to see the .ipynb version.</strong></p>
+<p>So I’ve decided to leave things as how it would be for now, before I delayed this post any further. If I happened to figure out how to do this in the future, then I’ll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I’ve managed to deconstruct Polars dataframe in Rust in Evcxr. So I’ll show a little bit about it below. One slightly good news that came out from all of this, was that I’ve managed to import the other column as y-axis variables, which contained numbers, without problems. I’ve also figured out the Rust codes to convert Series/ChunkedArray to vectors in Rust IDEs (e.g.&nbsp;VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could expand further on this later.</p>
+<p><strong>Note: I’ve published all Rust codes as print-only in Quarto markdown file, since it’s not possible to run them in RStudio IDE (Rust was not supported). So all Rust codes were originally run on Jupyter Lab in MacOS, with code outputs being captured as screenshots, which were shown as photos in this post. I’ll try to include a link to the .ipynb file in the GitHub repository for this portfolio website, in case anyone wanted to see the full .ipynb version.</strong></p>
 <p><br></p>
 </section>
 <section id="import-dependencies" class="level6">
@@ -301,9 +300,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>{Plot, Scatter, Bar};</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>use itertools<span class="sc">::</span>Itertools;</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
 </section>
-<section id="reading-csv-file" class="level5">
-<h5 class="anchored" data-anchor-id="reading-csv-file"><strong>Reading csv file</strong></h5>
+<section id="reading-csv-file" class="level6">
+<h6 class="anchored" data-anchor-id="reading-csv-file"><strong>Reading csv file</strong></h6>
 <p>Here, I’ve imported the .csv file saved from part 2 of the project.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Reading .csv file</span>
@@ -319,6 +319,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </figure>
 </div>
 <p><br></p>
+</section>
 <section id="converting-columns-into-ndarrays" class="level6">
 <h6 class="anchored" data-anchor-id="converting-columns-into-ndarrays"><strong>Converting columns into ndarrays</strong></h6>
 <p>I’ve tested plotting in Plotly.rs after a few trials and errors at the beginning, but luckily I’ve spotted the ndarray support from the <a href="https://igiagkiozis.github.io/plotly/content/plotly_rs.html">Plotly.rs book</a> soon enough to figure out that I could convert the “count” column into a ndarray first, which was shown in the code below.</p>
@@ -346,7 +347,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="deconstructing-polars-dataframe-in-rust" class="level6">
 <h6 class="anchored" data-anchor-id="deconstructing-polars-dataframe-in-rust"><strong>Deconstructing Polars dataframe in Rust</strong></h6>
-<p>Because to_ndarray was only for numerics and not strings, I ran into a problem trying to figure out how to best import this other “Colour” column into Plotly.rs. This led to my little convoluted journey to work with Polars dataframe in Rust, trying to see if I could convert the “Colour” column into a vector (which might not be the best way to do it, but as part of my Rust learning, I went for it anyway). I’ve subsequently tried plotting the “count” column in ndarray as a vector with success, based on the reference from Plotly.rs book that variables for x or y-axis could be placed into a vector by using a vector macro (vec[ ]). Eventually, I didn’t quite achieve my goal but I’ve managed to break down the Polars dataframe into different formats.</p>
+<p>Because “to_ndarray” was only for numerics and not strings, I ran into a problem trying to figure out how to best import this other “Colour” column into Plotly.rs. This led to my little convoluted journey to work with Polars dataframe in Rust, trying to see if I could convert the “Colour” column into a vector (which might not be the best way to do it, but as part of my Rust learning, I went for it anyway). I’ve subsequently tried plotting the “count” column in ndarray as a vector with success, based on the reference from Plotly.rs book that variables for x or y-axis could be placed into a vector by using a vector macro. Eventually, I didn’t quite achieve my goal but I’ve managed to break down or convert the Polars dataframe into different formats.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Select specific column or series by position</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>let Colours <span class="ot">=</span> df[<span class="dv">0</span>]<span class="fu">.clone</span>();</span>
@@ -363,38 +364,39 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
 </figure>
 </div>
-<p>There was a mention of storing series (column) in a vec as Vec<series> in Polars’ documentation, which I’ve tried to plot in Plotly.rs, but unfortunately it failed to recognise it. Then I was searching on StackOverflow for similar questions, then I found something related to what I wanted to do from Polars documentations as shown below.</series></p>
+<p>There was a mention of storing series (column) in a vec (as series vector, not vector for strings) in Polars’ documentation, which I’ve tried to plot in Plotly.rs, but it unfortunately failed to work. One of my guesses could be due to the data type used for vector, as Rust was a very type-specific programming language, which also brought its well-known memory safety and other benefits in the long run. My immediate thought was that it probably needed to be a vector for strings, not series, which might make it work. Then I was searching on StackOverflow for similar questions and answers, then I found something related to what I wanted to do from Polars documentations as shown below.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Adapted from<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>docs.rs<span class="sc">/</span>polars<span class="sc">/</span>latest<span class="sc">/</span>polars<span class="sc">/</span>docs<span class="sc">/</span>eager<span class="sc">/</span>index.html<span class="co">#series // Extracting data: </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> To be able to extract data out of Series, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> either by iterating over them or converting them to other datatypes like a Vec<span class="sc">&lt;</span>T<span class="sc">&gt;</span>, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> we first need to downcast them to a ChunkedArray<span class="sc">&lt;</span>T<span class="sc">&gt;</span>. </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This is needed because we don<span class="st">'t know the data type that is held by the Series.</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">/*use polars::prelude::*; </span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">  use polars::df;</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="st">  fn extract_data() -&gt; PolarsResult\&lt;()\&gt; { </span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="st">  let df = df! [ "a" =&gt; [None, Some(1.0f32), Some(2.0)], "str" =&gt; ["foo", "bar",     "ham"]]?;</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="st">// first extract ChunkedArray to get the inner type.</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("a")?.f32()?;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="st">// Then convert to vec</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;f32&gt;&gt; = Vec::from(ca);</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="st">// We can also do this with iterators</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("str")?.utf8()?; </span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;&amp;str&gt;&gt; = ca.into_iter().collect(); </span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec_no_options: Vec&lt;&amp;str&gt; = ca.into_no_null_iter().collect();</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="st">  Ok(())</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="st">}*/</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Adapted from<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>docs.rs<span class="sc">/</span>polars<span class="sc">/</span>latest<span class="sc">/</span>polars<span class="sc">/</span>docs<span class="sc">/</span>eager<span class="sc">/</span>index.html<span class="co">#series </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Extracting data<span class="sc">:</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> To be able to extract data out of Series, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> either by iterating over them or converting them to other datatypes like a Vec<span class="sc">&lt;</span>T<span class="sc">&gt;</span>, </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> we first need to downcast them to a ChunkedArray<span class="sc">&lt;</span>T<span class="sc">&gt;</span>. </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This is needed because we don<span class="st">'t know the data type that is held by the Series.</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">/*use polars::prelude::*; </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">  use polars::df;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="st">  fn extract_data() -&gt; PolarsResult&lt;()&gt; { </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="st">  let df = df! [ "a" =&gt; [None, Some(1.0f32), Some(2.0)], "str" =&gt; ["foo", "bar", "ham"]]?;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="st">// first extract ChunkedArray to get the inner type.</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("a")?.f32()?;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="st">// Then convert to vec</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;f32&gt;&gt; = Vec::from(ca);</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="st">// We can also do this with iterators</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("str")?.utf8()?; </span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;&amp;str&gt;&gt; = ca.into_iter().collect(); </span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec_no_options: Vec&lt;&amp;str&gt; = ca.into_no_null_iter().collect();</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="st">  Ok(())</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="st">}*/</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Initially, I trialled the iterator function first.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Print out items <span class="cf">in</span> column by applying an iterator to it</span>
@@ -436,9 +438,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I also found another way to iterate the ChunkedArray.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">*</span>fn <span class="fu">iter_forward</span>(ca<span class="sc">:</span> <span class="er">&amp;</span>Float32Chunked) { <span class="fu">ca.into_iter</span>()<span class="fu">.for_each</span>(<span class="sc">|</span>opt_v<span class="sc">|</span> println<span class="sc">!</span>(<span class="st">"{:?}"</span>, opt_v)) } </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span><span class="er">/</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>fn <span class="fu">iter_forward</span>(ca<span class="sc">:</span> <span class="er">&amp;</span>Float32Chunked) { <span class="fu">ca.into_iter</span>()<span class="fu">.for_each</span>(<span class="sc">|</span>opt_v<span class="sc">|</span> println<span class="sc">!</span>(<span class="st">"{:?}"</span>, opt_v)) } </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I then tested another iterator method, and came up with another line of code as shown below, which listed the colours in the “Colour” column.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Colours.utf8</span>()<span class="fu">.unwrap</span>()<span class="fu">.into_iter</span>()<span class="fu">.for_each</span>(<span class="sc">|</span>array<span class="sc">|</span>println<span class="sc">!</span>(<span class="st">"{:?}"</span>, array));</span>
@@ -449,7 +450,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
 </figure>
 </div>
-<p>I also found out, randomly, how to slice strings for ChunkedArrays in Polars. By changing the number of letters to slice through in Some(), the strings or words would vary length accordingly. Here, I’ve used “15” so it covered all the colours (note: the longest would be 12 characters for combination colours).</p>
+<p>I also found out, randomly, how to slice strings for Series in Polars. By changing the number of letters to slice through in Some(), the strings or words would vary length accordingly. Here, I’ve used “15” so it covered all the colours (note: the longest would be 12 characters for combination colours).</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Another method to use <span class="cf">if</span> needing to slice strings</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>let x <span class="ot">=</span> <span class="fu">Colours.utf8</span>()<span class="fu">.unwrap</span>()<span class="fu">.str_slice</span>(<span class="dv">0</span>, <span class="fu">Some</span>(<span class="dv">15</span>));</span>
@@ -525,10 +526,17 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 <p><br></p>
 </section>
+<section id="conclusion" class="level6">
+<h6 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h6>
+<p>This last part was the hardest for me to execute out of all 3 parts (it likely took me a good whole week to figure out deconstructing Polars dataframe and trying to work with vectors), as Rust was completely new to me. At one point I thought about jumping back to Python, but I persisted and although I didn’t quite solve the string importation issue, I was somehow happy that I was at least able to see how this programming language could be applied in Polars dataframe library. I also got a taste of using Rust in data visualisations. All I wanted to show was that there were a variety of data tools to use, and knowing your tools of trade would be the most critical when working on different data projects as certain tools would only work the best for certain tasks and scenarios. This warm-up lesson in Rust was quite interesting and I might continue either in VS Code or Evcxr depending on my next topic of interest.</p>
+<p><br></p>
 </section>
-<section id="conclusion" class="level5">
-<h5 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h5>
-<p>This last part was the hardest for me to execute out of all 3 parts, as Rust was completely new to me. At one point I thought about jumping back to Python, but I persisted and although I didn’t quite solve the string importation issue, I was somehow happy that I was at least able to see how this programming language could be applied in Polars dataframe library. I also got a taste of using Rust in data visualisations. All I wanted to show was that there were a variety of data tools to use, and knowing your tools of trade would be the most critical when working on different data projects as certain tools would only work the best for certain tasks and scenarios. This warm-up lesson in Rust was quite interesting and I might continue either in VS Code or Evcxr depending on my next topic of interest.</p>
+<section id="references" class="level6">
+<h6 class="anchored" data-anchor-id="references"><strong>References</strong></h6>
+<p><a href="https://doc.rust-lang.org/book/title-page.html">Rust programming language book</a>: https://doc.rust-lang.org/book/title-page.html</p>
+<p><a href="https://docs.rs/polars/latest/polars/">Polars crate documentations</a>: https://docs.rs/polars/latest/polars/</p>
+<p><a href="https://github.com/igiagkiozis/plotly">Plotly.rs GitHub repository</a>: https://github.com/igiagkiozis/plotly (link to the Plotly.rs book can be found in “Converting columns into ndarrays” section)</p>
+<p><a href="https://github.com/google/evcxr">Evcxr GitHub repository</a>: https://github.com/google/evcxr</p>
 
 
 </section>
