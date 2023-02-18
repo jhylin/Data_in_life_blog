@@ -4,7 +4,7 @@ subtitle: Text cleaning using Polars & visualising pills with Plotly
 author: Jennifer HY Lin
 date: 2023-1-31
 draft: false
-keep-ipynb: true
+keep-ipynb: false
 categories:
   - Data analytics projects
   - Polars
