@@ -5,15 +5,18 @@ author: Jennifer HY Lin
 date: '2023-1-4'
 draft: false
 categories:
-  - Data analytics projects
+  - Machine learning projects
   - Polars
   - Python
   - Jupyter
   - ChEMBL database
   - Cheminformatics
-  - Machine learning
 jupyter: python3
 ---
+
+##### ***Machine learning in drug discovery - series 1***
+
+<br>
 
 ##### **Background**
 
@@ -51,7 +54,7 @@ import polars as pl
 
 ##### **Download dataset**
 
-The dataset, which was purely about small molecules and their physicochemical properties, was downloaded from [ChEMBL database](https://www.ebi.ac.uk/chembl/) and saved as a .csv file. I've decided not to upload the "chembl_mols.csv" file due to its sheer size (around 0.6 GB), and also I'd like to stay using free open-source resources (including GitHub) at this stage. I've looked into the Git large file system, but for the free version it only provides 2 GB, which at this stage, I think by adding this larger than usual .csv file along with my portfolio blog repository may exceed this limit in no time. 
+The dataset, which was purely about small molecules and their physicochemical properties, was downloaded from [ChEMBL database](https://www.ebi.ac.uk/chembl/) and saved as a .csv file. I've decided not to upload the "chembl_mols.csv" file due to its sheer size (around 0.6 GB), and also I'd like to stay using free open-source resources (including GitHub) at this stage. I've looked into the Git large file system, but for the free version it only provides 2 GB, which at this stage, I think by adding this larger than usual .csv file along with my portfolio blog repository may exceed this limit in no time.
 
 For anyone who would like to use the same dataset, the file I used would be equivalent to a straight download from the home page of ChEMBL database, via clicking on the "Distinct compounds" (please see the circled area in the image below). Options were available to download the files as .csv, .tsv or .sdf formats (located at the top right of the page).
 
