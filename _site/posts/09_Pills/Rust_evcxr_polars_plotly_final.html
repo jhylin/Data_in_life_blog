@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-02-14">
+
+<title>Home - Pills dataset - Part 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Jennifer HY Lin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.datascienceportfol.io/jhylin">
+ <span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Pills dataset - Part 3</h1>
+            <p class="subtitle lead">Using Rust for data visualisation</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Data analytics projects</div>
+                <div class="quarto-category">Rust</div>
+                <div class="quarto-category">Polars</div>
+                <div class="quarto-category">Plotly</div>
+                <div class="quarto-category">Evcxr</div>
+                <div class="quarto-category">Jupyter</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 14, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><strong>Background</strong></a></li>
+  <li><a href="#import-dependencies" id="toc-import-dependencies" class="nav-link" data-scroll-target="#import-dependencies"><strong>Import dependencies</strong></a></li>
+  <li><a href="#import-external-crates" id="toc-import-external-crates" class="nav-link" data-scroll-target="#import-external-crates"><strong>Import external crates</strong></a></li>
+  <li><a href="#specify-imports-or-modules-required" id="toc-specify-imports-or-modules-required" class="nav-link" data-scroll-target="#specify-imports-or-modules-required"><strong>Specify imports or modules required</strong></a></li>
+  <li><a href="#reading-csv-file" id="toc-reading-csv-file" class="nav-link" data-scroll-target="#reading-csv-file"><strong>Reading csv file</strong></a></li>
+  <li><a href="#converting-columns-into-ndarrays" id="toc-converting-columns-into-ndarrays" class="nav-link" data-scroll-target="#converting-columns-into-ndarrays"><strong>Converting columns into ndarrays</strong></a></li>
+  <li><a href="#deconstructing-polars-dataframe-in-rust" id="toc-deconstructing-polars-dataframe-in-rust" class="nav-link" data-scroll-target="#deconstructing-polars-dataframe-in-rust"><strong>Deconstructing Polars dataframe in Rust</strong></a></li>
+  <li><a href="#plotting-polars-dataframe-in-plotly.rs" id="toc-plotting-polars-dataframe-in-plotly.rs" class="nav-link" data-scroll-target="#plotting-polars-dataframe-in-plotly.rs"><strong>Plotting Polars dataframe in Plotly.rs</strong></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References</strong></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="background" class="level6">
+<h6 class="anchored" data-anchor-id="background"><strong>Background</strong></h6>
+<p>The aim of this final part (part 3) for the pills dataset was really for me to start using Rust in a beginner-friendly way. Overall, this trilogy (parts 1 - 3) for the pills dataset formulated an overview of how to use Polars in Python (mainly), Pandas in Python (smaller section) and Polars in Rust (even little less as this was new to me) with Plotly. Over time, I’ve been finding myself learning more optimally by doing and applying, rather than just reading and thinking, so I’ve got myself started in this very new programming language, Rust, to get some familiarities. I anticipated that I would still work with Python and R mainly in the near future, so that I’m not diverting too much and would be at least proficient in at least one programming language.</p>
+<p>My very initial idea was to integrate Rust-Polars, Plotly in Rust (Plotly.rs) and Jupyter-Evcxr together, and see if I could get a simple data visualisation out of a small dataset. Although the idea sounded simple enough, I was actually quite stuck at the step of importing one of the columns as x-axis variables in Rust-Polars to Plotly.rs. I figured it might possibly be due to my very lack-of-knowledge and lack-of-familiarities with Rust (I do need to continue reading the Rust programming language book), Polars (I’m better with Python-Polars actually), Plotly.rs and also Evcxr. Another possibility could be that Plotly.rs mainly had ndarray support, and Polars was not mentioned explicitly in Plotly.rs so my guess was that these two might not flow very well together. Also, Polars itself was constantly evolving and growing as well.</p>
+<p>So I’ve decided to leave things as how it would be for now, before I delayed this post any further. If I happened to figure out how to do this in the future, then I’ll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I’ve managed to deconstruct Polars dataframe in Rust in Evcxr. So I’ll show a little bit about it below. One slightly good news that came out from all of this, was that I’ve managed to import the other column as y-axis variables, which contained numbers, without problems. I’ve also figured out the Rust codes to convert Series/ChunkedArray to vectors in Rust IDEs (e.g.&nbsp;VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could expand further on this later.</p>
+<p><strong>Note: I’ve published all Rust codes as print-only in Quarto markdown file, since it’s not possible to run them in RStudio IDE (Rust was not supported). So all Rust codes were originally run on Jupyter Lab in MacOS, with code outputs being captured as screenshots, which were shown as photos in this post. Here’s the <a href="https://github.com/jhylin/Rust_projects/blob/main/Rust_evcxr_polars_plotly_final.ipynb">link</a> to the .ipynb file in the GitHub repository for this portfolio website (or alternatively, you could access it from the GitHub icon link at the top of the web page), in case anyone wanted to see the full .ipynb version.</strong></p>
+<p><br></p>
+</section>
+<section id="import-dependencies" class="level6">
+<h6 class="anchored" data-anchor-id="import-dependencies"><strong>Import dependencies</strong></h6>
+<p>These dependencies were known as crates in the world of Rust. I’d also like to think of them as libraries or packages we would install or import in Python and R. So this step was necessary before I even started anything decent in Rust. Similar things would also apply to Rust IDEs as well since I’ve played a little bit in VS Code previously.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set up required dependencies</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep ndarray <span class="ot">=</span> <span class="st">"0.15.6"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep plotly <span class="ot">=</span> { version <span class="ot">=</span> <span class="st">"&gt;=0.8.0"</span>, features <span class="ot">=</span> [<span class="st">"plotly_ndarray"</span>]}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> May take a few minutes to load polars <span class="fu">crate</span> (might depend on your machine specs)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep polars <span class="ot">=</span> { version <span class="ot">=</span> <span class="st">"&gt;=0.26.0"</span>, features <span class="ot">=</span> [<span class="st">"lazy"</span>, <span class="st">"csv-file"</span>, <span class="st">"strings"</span>, <span class="st">"dtype-duration"</span>, <span class="st">"dtype-categorical"</span>, <span class="st">"concat_str"</span>, <span class="st">"rank"</span>, <span class="st">"lazy_regex"</span>, <span class="st">"ndarray"</span>]}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="sc">:</span>dep itertools <span class="ot">=</span> {version <span class="ot">=</span> <span class="st">"0.9.0"</span>}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+</section>
+<section id="import-external-crates" class="level6">
+<h6 class="anchored" data-anchor-id="import-external-crates"><strong>Import external crates</strong></h6>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Import external crates needed</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>extern crate ndarray;</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>extern crate plotly;</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>extern crate polars;</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+</section>
+<section id="specify-imports-or-modules-required" class="level6">
+<h6 class="anchored" data-anchor-id="specify-imports-or-modules-required"><strong>Specify imports or modules required</strong></h6>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>use ndarray<span class="sc">::</span>prelude<span class="sc">::</span><span class="er">*</span>;</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>use polars<span class="sc">::</span>prelude<span class="sc">::</span><span class="er">*</span>;</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>common<span class="sc">::</span>{</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    ColorScale, ColorScalePalette, DashType, Fill, Font, Line, LineShape, Marker, Mode, Title,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>layout<span class="sc">::</span>{Axis, BarMode, Layout, Legend, TicksDirection};</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>use plotly<span class="sc">::</span>{Plot, Scatter, Bar};</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>use itertools<span class="sc">::</span>Itertools;</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+</section>
+<section id="reading-csv-file" class="level6">
+<h6 class="anchored" data-anchor-id="reading-csv-file"><strong>Reading csv file</strong></h6>
+<p>Here, I’ve imported the .csv file saved from part 2 of the project.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Reading .csv file</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>let df <span class="ot">=</span> CsvReader<span class="sc">::</span><span class="fu">from_path</span>(<span class="st">"ace_para_count.csv"</span>)<span class="fu">.unwrap</span>()<span class="fu">.finish</span>()<span class="fu">.unwrap</span>();</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="rs-pl_df.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="converting-columns-into-ndarrays" class="level6">
+<h6 class="anchored" data-anchor-id="converting-columns-into-ndarrays"><strong>Converting columns into ndarrays</strong></h6>
+<p>I’ve tested plotting in Plotly.rs after a few trials and errors at the beginning, but luckily I’ve spotted the ndarray support from the <a href="https://igiagkiozis.github.io/plotly/content/plotly_rs.html">Plotly.rs book</a> soon enough to figure out that I could convert the “count” column into a ndarray first, which was shown in the code below.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Switch Polars dataframe into 2D array</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Ensure <span class="st">"ndarray"</span> was added as one of the features <span class="cf">for</span> polars under dependencies</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">*</span>Example from Polars documentation<span class="sc">:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>let df <span class="ot">=</span> DataFrame<span class="sc">::</span><span class="fu">new</span>(vec<span class="sc">!</span>[a, b])<span class="fu">.unwrap</span>();</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>let ndarray <span class="ot">=</span> df.to_ndarray<span class="sc">::</span><span class="er">&lt;</span>Float64Type<span class="sc">&gt;</span>()<span class="fu">.unwrap</span>();</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>println<span class="sc">!</span>(<span class="st">"{:?}"</span>, ndarray);</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span><span class="er">/</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="er">//</span>Note<span class="sc">:</span> ndarray <span class="cf">for</span> numbers only, not strings, so only <span class="st">"count"</span> column was converted</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>let ndarray <span class="ot">=</span> df.to_ndarray<span class="sc">::</span><span class="er">&lt;</span>Float64Type<span class="sc">&gt;</span>()<span class="fu">.unwrap</span>();</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>println<span class="sc">!</span>(<span class="st">"{:?}"</span>, ndarray);</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="ndarray.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="deconstructing-polars-dataframe-in-rust" class="level6">
+<h6 class="anchored" data-anchor-id="deconstructing-polars-dataframe-in-rust"><strong>Deconstructing Polars dataframe in Rust</strong></h6>
+<p>Because “to_ndarray” was only for numerics and not strings, I ran into a problem trying to figure out how to best import this other “Colour” column into Plotly.rs. This led to my little convoluted journey to work with Polars dataframe in Rust, trying to see if I could convert the “Colour” column into a vector (which might not be the best way to do it, but as part of my Rust learning, I went for it anyway). I’ve subsequently tried plotting the “count” column in ndarray as a vector with success, based on the reference from Plotly.rs book that variables for x or y-axis could be placed into a vector by using a vector macro. Eventually, I didn’t quite achieve my goal but I’ve managed to break down or convert the Polars dataframe into different formats.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Select specific column or series by position</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>let Colours <span class="ot">=</span> df[<span class="dv">0</span>]<span class="fu">.clone</span>();</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>Alternative way to select specific column or series by name</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>let u <span class="ot">=</span> <span class="fu">df.select_series</span>(<span class="sc">&amp;</span>[<span class="st">"Colour"</span>]);</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Colours</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="series.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p>There was a mention of storing series (column) in a vec (as series vector, not vector for strings) in Polars’ documentation, which I’ve tried to plot in Plotly.rs, but it unfortunately failed to work. One of my guesses could be due to the data type used for vector, as Rust was a very type-specific programming language, which also brought its well-known memory safety and other benefits in the long run. My immediate thought was that it probably needed to be a vector for strings, not series, which might make it work. Then I was searching on StackOverflow for similar questions and answers, then I found something related to what I wanted to do from Polars documentations as shown below.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Adapted from<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>docs.rs<span class="sc">/</span>polars<span class="sc">/</span>latest<span class="sc">/</span>polars<span class="sc">/</span>docs<span class="sc">/</span>eager<span class="sc">/</span>index.html<span class="co">#series </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Extracting data<span class="sc">:</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> To be able to extract data out of Series, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> either by iterating over them or converting them to other datatypes like a Vec<span class="sc">&lt;</span>T<span class="sc">&gt;</span>, </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> we first need to downcast them to a ChunkedArray<span class="sc">&lt;</span>T<span class="sc">&gt;</span>. </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This is needed because we don<span class="st">'t know the data type that is held by the Series.</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">/*use polars::prelude::*; </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">  use polars::df;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="st">  fn extract_data() -&gt; PolarsResult&lt;()&gt; { </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="st">  let df = df! [ "a" =&gt; [None, Some(1.0f32), Some(2.0)], "str" =&gt; ["foo", "bar", "ham"]]?;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="st">// first extract ChunkedArray to get the inner type.</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("a")?.f32()?;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="st">// Then convert to vec</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;f32&gt;&gt; = Vec::from(ca);</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="st">// We can also do this with iterators</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="st">  let ca = df.column("str")?.utf8()?; </span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec: Vec&lt;Option&lt;&amp;str&gt;&gt; = ca.into_iter().collect(); </span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="st">  let _to_vec_no_options: Vec&lt;&amp;str&gt; = ca.into_no_null_iter().collect();</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="st">  Ok(())</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="st">}*/</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Initially, I trialled the iterator function first.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Print out items <span class="cf">in</span> column by applying an iterator to it</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>println<span class="sc">!</span>(<span class="st">"{}"</span>, <span class="sc">&amp;</span><span class="fu">Colours.iter</span>()<span class="fu">.format</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>));</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="iterate.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p>Then, it took me quite a long time to just downcast Series into ChunkedArray, but somehow I’ve managed to figure out the code myself below. One of the likely reasons was due to my choice of using Evcxr, which required Rust codes in slightly different formats than the ones in Rust IDEs (although almost the same).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Somehow worked out how to convert series to chunkedarray by accident<span class="sc">!</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>println<span class="sc">!</span>(<span class="st">"{:?}"</span>, <span class="fu">Colours.utf8</span>()<span class="fu">.unwrap</span>());</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="chunkedarray.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p>Then I moved onto trying to figure out how to convert or place a ChunkedArray into a vector, with the closest answer shown below. However, bear in mind that these Rust codes were for Rust IDEs, and not for Evcxr, so this added slightly more complexities to what I was trying to do (perhaps I should just stick with Rust IDEs in the future…).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>Adpated from StackOverflow <span class="sc">-</span> How to get a Vec from polars Series or ChunkedArray?</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>You can collect the values into a Vec.</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">*</span>use polars<span class="sc">::</span>prelude<span class="sc">::</span><span class="er">*</span>;</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>fn <span class="fu">main</span>() <span class="ot">-&gt;</span> Result<span class="sc">&lt;</span>()<span class="sc">&gt;</span> { let s <span class="ot">=</span> Series<span class="sc">::</span><span class="fu">new</span>(<span class="st">"a"</span>, <span class="dv">0</span>..10i32);</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    let as_vec<span class="sc">:</span> Vec<span class="sc">&lt;</span>Option<span class="sc">&lt;</span>i32<span class="sc">&gt;</span><span class="er">&gt;</span> <span class="er">=</span> <span class="fu">s.i32</span>()?<span class="fu">.into_iter</span>()<span class="fu">.collect</span>();</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span><span class="cf">if</span> we are certain we don<span class="st">'t have missing values</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="st">    let as_vec: Vec&lt;i32&gt; = s.i32()?.into_no_null_iter().collect();</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="st">    Ok(())</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="st">}*/</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I also found another way to iterate the ChunkedArray.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>fn <span class="fu">iter_forward</span>(ca<span class="sc">:</span> <span class="er">&amp;</span>Float32Chunked) { <span class="fu">ca.into_iter</span>()<span class="fu">.for_each</span>(<span class="sc">|</span>opt_v<span class="sc">|</span> println<span class="sc">!</span>(<span class="st">"{:?}"</span>, opt_v)) } </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I then tested another iterator method, and came up with another line of code as shown below, which listed the colours in the “Colour” column.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Colours.utf8</span>()<span class="fu">.unwrap</span>()<span class="fu">.into_iter</span>()<span class="fu">.for_each</span>(<span class="sc">|</span>array<span class="sc">|</span>println<span class="sc">!</span>(<span class="st">"{:?}"</span>, array));</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="iterate_series.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p>I also found out, randomly, how to slice strings for Series in Polars. By changing the number of letters to slice through in Some(), the strings or words would vary length accordingly. Here, I’ve used “15” so it covered all the colours (note: the longest would be 12 characters for combination colours).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Another method to use <span class="cf">if</span> needing to slice strings</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>let x <span class="ot">=</span> <span class="fu">Colours.utf8</span>()<span class="fu">.unwrap</span>()<span class="fu">.str_slice</span>(<span class="dv">0</span>, <span class="fu">Some</span>(<span class="dv">15</span>));</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="slice_strings.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p>Lastly, before I got too carried away, I just wanted to show the method from Polars documentations that this was the Polars’ way to select a specific column from Polars dataframe.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>let ca <span class="ot">=</span> <span class="fu">df.clone</span>()<span class="fu">.lazy</span>()<span class="fu">.select</span>([<span class="fu">cols</span>([<span class="st">"Colour"</span>])])<span class="fu">.collect</span>()?;</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ca</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="pl_select_col.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="plotting-polars-dataframe-in-plotly.rs" class="level6">
+<h6 class="anchored" data-anchor-id="plotting-polars-dataframe-in-plotly.rs"><strong>Plotting Polars dataframe in Plotly.rs</strong></h6>
+<p>For the x-axis, eventually, I reverted for manual input due to the issue mentioned in the background section. So the colours from the “Colour” column were stored in a vector set up manually, rather than coming directly from the dataframe. While searching for answers, I’ve also learnt several other tricks, although not really solving the problem, they might still be useful in the future. For the y-axis, the ndarray for the “count” column was converted into a vector first before being fed into the trace (graph module), and thankfully the plot worked nicely.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{rust}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> MANUAL method<span class="sc">:</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> Use vec<span class="sc">!</span> macro to create new vectors to hold x <span class="fu">variables</span> (words as strings)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Manually input the colour <span class="fu">names</span> (as ndarray is only <span class="cf">for</span> numbers)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>let x <span class="ot">=</span> vec<span class="sc">!</span>[<span class="st">"RED"</span>, <span class="st">"ORANGE;BROWN"</span>, <span class="st">"YELLOW;WHITE"</span>, <span class="st">"ORANGE"</span>, <span class="st">"WHITE"</span>, <span class="st">"BLUE"</span>];</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Plot using ndarray, which is supported by Plotly.rs </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Polars likely not supported yet</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Convert <span class="fu">ndarray</span> (holding counts as y variables) into vector </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>let y <span class="ot">=</span> <span class="fu">ndarray.column</span>(<span class="dv">1</span>)<span class="fu">.to_vec</span>();</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Use trace as a graph module,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> choose type of plots needed <span class="cf">for</span> x <span class="sc">&amp;</span> y variables called</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Graph options e.g. Scatter, Line or Bar</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>let trace <span class="ot">=</span> Scatter<span class="sc">::</span><span class="fu">new</span>(x, y);</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set plot variable as mutable and initiate a plot</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>let mut plot <span class="ot">=</span> Plot<span class="sc">::</span><span class="fu">new</span>();</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Add <span class="fu">trace</span> (graph) into the plot variable</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.add_trace</span>(trace);</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Specify the specs <span class="cf">for</span> plot</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>let layout <span class="ot">=</span> Layout<span class="sc">::</span><span class="fu">new</span>()</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Choose height of graph</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.height</span>(<span class="dv">500</span>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Name x<span class="sc">-</span>axis</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.x_axis</span>(Axis<span class="sc">::</span><span class="fu">new</span>()<span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Colours"</span>)))</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Name y<span class="sc">-</span>axis</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.y_axis</span>(Axis<span class="sc">::</span><span class="fu">new</span>()<span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Count"</span>)))</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Add title of graph</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.title</span>(Title<span class="sc">::</span><span class="fu">new</span>(<span class="st">"Frequency of colours in acetaminophen (paracetamol) oral dosage forms"</span>));</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Set the layout of the plot</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.set_layout</span>(layout);</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Display the plot <span class="cf">in</span> Jupyter Lab format </span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> For Jupyter Notebook, use<span class="sc">:</span> <span class="fu">plot.notebook_display</span>();</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.lab_display</span>();</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>format<span class="sc">!</span>(<span class="st">"EVCXR_BEGIN_CONTENT application/vnd.plotly.v1+json</span><span class="sc">\n</span><span class="st">{}</span><span class="sc">\n</span><span class="st">EVCXR_END_CONTENT"</span>, <span class="fu">plot.to_json</span>())</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="plot.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="conclusion" class="level6">
+<h6 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h6>
+<p>This last part was the hardest for me to execute out of all 3 parts (it likely took me a good whole week to figure out deconstructing Polars dataframe and trying to work with vectors), as Rust was completely new to me. At one point I thought about jumping back to Python, but I persisted and although I didn’t quite solve the string importation issue, I was somehow happy that I was at least able to see how this programming language could be applied in Polars dataframe library. I also got a taste of using Rust in data visualisations. All I wanted to show was that there were a variety of data tools to use, and knowing your tools of trade would be the most critical when working on different data projects as certain tools would only work the best for certain tasks and scenarios. This warm-up lesson in Rust was quite interesting and I might continue either in VS Code or Evcxr depending on my next topic of interest.</p>
+<p><br></p>
+</section>
+<section id="references" class="level6">
+<h6 class="anchored" data-anchor-id="references"><strong>References</strong></h6>
+<p><a href="https://doc.rust-lang.org/book/title-page.html">Rust programming language book</a>: https://doc.rust-lang.org/book/title-page.html</p>
+<p><a href="https://docs.rs/polars/latest/polars/">Polars crate documentations</a>: https://docs.rs/polars/latest/polars/</p>
+<p><a href="https://github.com/igiagkiozis/plotly">Plotly.rs GitHub repository</a>: https://github.com/igiagkiozis/plotly (link to the Plotly.rs book can be found in “Converting columns into ndarrays” section)</p>
+<p><a href="https://github.com/google/evcxr">Evcxr GitHub repository</a>: https://github.com/google/evcxr</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Blog made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and blog URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
