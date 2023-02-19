@@ -7,6 +7,7 @@ draft: false
 keep-ipynb: false
 categories:
   - Data analytics projects
+  - Pills dataset series
   - Polars
   - Python
   - Plotly
