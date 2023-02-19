@@ -3,7 +3,8 @@ title: "Data in life"
 listing:
   contents: posts
   sort: "date desc"
-  type: grid
+  type: default
+  fields: [image, date, title, author]
   categories: true
   sort-ui: false
   filter-ui: false
@@ -11,3 +12,26 @@ page-layout: full
 title-block-banner: true
 comments: false
 ---
+
+Welcome to my portfolio. To quickly navigate, all of the data projects fall into one of the two main themes as shown below. When you click on any specific category tags, the relevant project post will be shown below this introductory section (please scroll down), or if you would like to see all of the projects posts at once, then simply scroll down past this section.
+
+##### **Cheminformatics & data science projects**
+
+These projects are mainly for drug discovery and pharmaceuticals, with category tags as follow:
+
+- Machine learning projects
+- RDKit
+- Cheminformatics
+- ChEMBL database
+
+##### **Healthcare data projects**
+
+These projects look at selected illnesses of my personal interests, with possibility of being extended in the future if I get time to explore further.
+
+- Data analytics projects
+- Rare diseases
+- Long COVID
+- Pills dataset series
+
+<br>
+
