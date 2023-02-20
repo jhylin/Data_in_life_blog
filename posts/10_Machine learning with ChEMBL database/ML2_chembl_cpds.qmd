@@ -1,0 +1,393 @@
+---
+title: Machine learning with ChEMBL small molecules
+subtitle: Going deeper with *scikit-learn* 
+author: Jennifer HY Lin
+date: '2023-2-18'
+draft: true
+categories:
+  - Machine learning projects
+  - Polars
+  - Python
+  - ChEMBL database
+  - Cheminformatics
+jupyter: python3
+---
+
+##### ***Machine learning in drug discovery - series 2***
+
+<br>
+
+##### **Foreword**
+
+::: callout-note
+Feel free to skip this part as this is really me speaking my thoughts out loud about my situation lately.
+:::
+
+After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst...). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. This is not to say I'm an expert in data analysis already, but I think I have some general understandings of different types of data analytical techniques available and the ones being used commonly. This will always be an important part that I'll keep coming back to practise and improve, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research and data science job market in the pharmaceutical field (which is actually my preferred way to gain actual, real-world ML experience, but alas I'll have to self-create some first to show that I can start doing it...). I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot in NZ.
+
+I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/) by V. Boykis, who had suggested to go broadly in topics, then go deep in one of them, which I've agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI's ChatGPT has limits - being restricted by the amount and types of input data being fed into the training of the GPT). So since I've branched into 3 programming languages so far, I've decided not to expand further into new programming languages for now, to avoid being "half-bucket-full" for everything, I should really narrow down my focus now. To name the 3 programming languages I've learnt, in the order I've learnt them, it would be Python, R and Rust. In that, I'm most comfortable with Python as that was my first language, then it would be R, and for Rust, I'm practically a kindy student trying to explore. I think right now is a good time for me to go deep into an area that I know will matter a lot to me and has always grabbed my attention and interests ever since I've diverted into the research world previously.
+
+<br>
+
+##### **Introduction**
+
+This post was really a continuation of the first series - Small molecules in ChEMBL database - in that I wanted to carry on with cross validation of the logistic regression model I've built in series 1.
+
+
+
+
+##### **Import dataframe from ML series 1 - small molecules in ChEMBL database**
+
+I've exported the final dataframe from ML series 1 as csv file, so that we could continue working on this ML series for a logistic regression model.
+
+<br>
+
+##### **Import libraries for machine learning**
+
+```{python}
+# Install scikit-learn - an open-source ML library
+# Uncomment the line below if needing to install this library
+#!pip install -U scikit-learn
+```
+
+```{python}
+# Import scikit-learn
+import sklearn
+
+# Check version of scikit-learn 
+print(sklearn.__version__)
+```
+
+Other libraries needed to generate ML model were imported as below.
+
+```{python}
+# To use NumPy arrays to prepare X & y variables
+import numpy as np
+
+# Needed for dataframe in scikit-learn ML
+# Uncomment line below if requiring to install pandas
+#!pip install pandas
+import pandas as pd
+
+# To normalise dataset prior to running ML
+from sklearn import preprocessing
+# To split dataset into training & testing sets
+from sklearn.model_selection import train_test_split
+
+# For data visualisations
+# Uncomment line below if requiring to install matplotlib
+#!pip install matplotlib
+import matplotlib.pyplot as plt
+```
+
+I've then installed pyarrow, to convert Polars dataframe into a Pandas dataframe, which was needed to run *scikit-learn*.
+
+```{python}
+# Uncomment line below to install pyarrow
+#!pip install pyarrow
+```
+
+```{python}
+# Convert Polars df to Pandas df 
+df_ml_pd = df_ml.to_pandas()
+type(df_ml_pd)
+```
+
+<br>
+
+##### **Logistic regression with *scikit-learn***
+
+LR was one of the supervised methods in statistical ML realm. As the term "supervised" suggested, this type of ML was purely data-driven to allow computers to learn patterns from input data with known outcomes, in order to predict new outcomes on novel data.
+
+<br>
+
+###### **Defining X and y variables**
+
+```{python}
+# Define X variables from df_ml_pd dataset
+X = np.asarray(df_ml_pd[["#RO5 Violations", 
+                         "QED Weighted", 
+                         "CX LogP", 
+                         "CX LogD", 
+                         "Heavy Atoms"]]
+              )
+X[0:5]
+```
+
+```{python}
+# Define y variable
+# Note to use "Max_Phase", not the original "Max Phase"
+y = np.asarray(df_ml_pd["Max_Phase"])
+y[0:5]
+```
+
+<br>
+
+###### **Training and testing sets**
+
+```{python}
+# Split dataset into training & testing sets
+rng = np.random.RandomState(0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = rng)
+print('Training set:', X_train.shape, y_train.shape)
+print('Testing set:', X_test.shape, y_test.shape)
+```
+
+<br>
+
+###### **Preprocessing data**
+
+```{python}
+# Normalise & clean the dataset
+# Fit on the training set - not on testing set as this might lead to data leakage
+# Transform on the testing set
+X = preprocessing.StandardScaler().fit(X_train).transform(X_test)
+X[0:5]
+```
+
+<br>
+
+###### **Fitting LR classifier on training set**
+
+```{python}
+# Import logistic regression 
+from sklearn.linear_model import LogisticRegression
+# Create an instance of logistic regression classifier and fit the data
+LogR = LogisticRegression().fit(X_train, y_train)
+LogR
+```
+
+<br>
+
+###### **Applying LR classifier on testing set for prediction**
+
+```{python}
+y_mp = LogR.predict(X_test)
+y_mp
+```
+
+<br>
+
+###### **Converting predicted values into a dataframe**
+
+```{python}
+# Predicted values were based on log odds
+# Use describe() method to get characteristics of the distribution
+pred = pd.DataFrame(LogR.predict_log_proba(X))
+pred.describe()
+```
+
+Alternatively, a quicker way to get predicted probabilities was via predict_proba() method in *scikit-learn*.
+
+```{python}
+y_mp_proba = LogR.predict_proba(X_test)
+# Uncomment below to see the predicted probabilities printed
+#print(y_mp_proba)
+```
+
+<br>
+
+###### **Converting predicted probabilities into a dataframe**
+
+```{python}
+# Use describe() to show distributions
+y_mp_prob = pd.DataFrame(y_mp_proba)
+y_mp_prob.describe()
+```
+
+<br>
+
+###### **Pipeline method for LR**
+
+This was something I thought to try when I was reading through *scikit-learn* documentation. One major advantage of using pipeline was that it was designed to chain all the estimators used for ML. The benefit of this was that we only had to call fit and predict once in our data to fit the whole chain of estimators. The other useful thing was that this could avoid data leakage from our testing set into the training set by making sure the same set of samples were used to train the transformers and predictors. One other key thing it also helped was that it also avoided the possibility of missing out on the transformation step.
+
+The example below used the function of make_pipeline, which took in a number of estimators as inputted, and then constructed a pipeline based on them.
+
+```{python}
+# Test pipline from scikit-Learn
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+LR = make_pipeline(StandardScaler(), LogisticRegression())
+LR.fit(X_train, y_train)
+```
+
+<br>
+
+#### **Evaluation of the logistic regression model**
+
+###### **Accuracy scores**
+
+```{python}
+from sklearn.metrics import accuracy_score
+accuracy_score(y_mp, y_test)
+```
+
+The accuracy score was 0.7 based on the original data preprocessing method, which meant that there were around 70% of the cases (or compounds) classified correctly by using this LR classifier. Accuracy literally provided a measure of how close the predicted samples were to the true values. One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, and other evaluation metrics would need to be considered instead.
+
+The accuracy score shown below was from the pipeline method used previously, which showed a very similar accuracy score of 0.6965699 (close to 0.7), confirming the method was in line with the original preprocessing method.
+
+```{python}
+LR.score(X_test, y_test)
+```
+
+<br>
+
+###### **Confusion matrix**
+
+Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
+
+```{python}
+# Import confusion matrix from scikit-learn
+from sklearn.metrics import confusion_matrix
+# Import itertools - functions to create iterators for efficient looping
+import itertools
+
+# Function to print and plot confusion matrix
+def plot_confusion_matrix(# Sets a cm object (cm = confusion matrix)
+                          cm, 
+                          # Sets classes of '1s' (Successes) & '0s' (Non-successes) for the cm
+                          classes,
+                          # If setting normalize = true, reports in ratios instead of counts
+                          normalize,
+                          title = 'Confusion matrix',
+                          # Choose colour of the cm (using colourmap recognised by matplotlib)
+                          cmap = plt.cm.Reds):
+    
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis = 1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    # Plot the confusion matrix 
+    plt.imshow(cm, interpolation = 'nearest', cmap = cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation = 45)
+    plt.yticks(tick_marks, classes)
+
+    # Floats to be round up to two decimal places if using normalize = True
+    # or else use integers
+    fmt = '.2f' if normalize else 'd'
+    # Sets threshold of 0.5
+    thresh = cm.max() / 2.
+    # Iterate through the results and differentiate between two text colours 
+    # by using the threshold as a cut-off
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment = "center",
+                 color = "white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+```
+
+```{python}
+# Compute confusion matrix
+matrix = confusion_matrix(y_test, y_mp, labels = [0,1])
+np.set_printoptions(precision = 2)
+
+# Plot confusion matrix without normalisation
+plt.figure()
+plot_confusion_matrix(matrix, 
+                      # Define classes of outcomes
+                      classes = ['Max_Phase = 0','Max_Phase = 1'], 
+                      # Set normalize = True if wanting ratios instead
+                      normalize = False, 
+                      title = "Confusion matrix without normalisation"
+                     )
+```
+
+A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were:
+
+-   True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 (128 out of 179 samples)
+-   True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 (138 out of 200 samples)
+-   False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 (51 out of 179 samples)
+-   False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 (62 out of 200 samples)
+
+By having these four categories known would then lead us to the next section about classification report, which showed all the precision, recall, f1-score and support metrics to evaluate the performance of this classifier.
+
+<br>
+
+###### **Classification report**
+
+```{python}
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_mp))
+```
+
+*Precision* was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:
+
+$$
+\text{Precision} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Positive)}
+$$
+
+*Recall*, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (which = 0.674, for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:
+
+$$
+\text{Recall} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Negative)}
+$$
+
+The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.
+
+*f1-score*, or also known as balanced F-score or F-measure, denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved. It was defined as:
+
+$$
+\text{F1-score} = \frac{2 \times (Precision \times Recall)}{(Precision + Recall)}
+$$
+
+*Support*, which some readers might have already worked out how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.
+
+<br>
+
+###### **Log loss**
+
+Log loss could be used as another gauge to show how good the classifier was at making the outcome predictions. The further the predicted probability was from the true value, the larger the log loss, which was also ranged from 0 to 1. Ideally, the smaller the log loss the better the model would be. Here, we had a log loss of 0.61 for this particular model.
+
+```{python}
+# Log loss
+from sklearn.metrics import log_loss
+log_loss(y_test, y_mp_proba)
+```
+
+#### **Discussions and conclusion**
+
+So here I've completed a very basic LR classifier model for ChEMBL compound dataset. By no means was this a perfect ML model as I haven't actually changed the default settings of *scikit-learn*'s LogisticRegression() classifier, with examples such as adjusting C, a regularization parameter which was set at '1.0' by default, and also solvers, which could take in different algorithms for use in optimisation problems and normally set as 'lbfgs' by default.
+
+So with this default LR model, the evaluation metrics demonstrated a LR classifer of moderate quality to predict the approval outcomes on ChEMBL small molecules, with a lot of rooms for improvements. Therefore, I could not yet confirm fully that the physicochemical parameters chosen would be the best ones to predict the approval outcomes for any small molecules. However, I might be okay to say that these molecular parameters were on the right track to help with making this prediction.
+
+To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved, or even add more molecular parameters in the model to test. I could have also trialled adding more class labels, e.g. making it between max phase 1, 2 and 4, or a mix-and-match between each max phase category. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question.
+
+<br>
+
+
+##### **Cross validation**
+
+```{python3}
+from sklearn.model_selection import cross_val_score
+```
+
+
+#### **Final words**
+
+
+
+<br>
+
+#### **References**
+
+I've listed below most of the references used throughout this project. Again, huge thanks could not be forgotten for our online communities, and definitely also towards the references I've used here.
+
+-   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
+-   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa *et al.*, JMLR 12, pp. 2825-2830, 2011.
+-   Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
+-   [Stack Overflow](https://stackoverflow.com)
+-   Polars references:
+    1.  [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
+    2.  [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
+    3.  [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars

@@ -358,6 +358,11 @@ df_ml.null_count()
 df_ml.dtypes
 ```
 
+```{{python}}
+# Note: exported df_ml dataframe as csv file for ML series 2.
+df_ml.write_csv("df_ml.csv", sep = ",")
+```
+
 <br>
 
 ##### **Import libraries for machine learning**
