@@ -1,8 +1,8 @@
 ---
 title: Machine learning with ChEMBL small molecules
-subtitle: Going deeper with *scikit-learn* 
+subtitle: Cross validation with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-2-18'
+date: '2023-2-20'
 draft: true
 categories:
   - Machine learning projects
@@ -31,14 +31,18 @@ I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-
 
 ##### **Introduction**
 
-This post was really a continuation of the first series - Small molecules in ChEMBL database - in that I wanted to carry on with cross validation of the logistic regression model I've built in series 1.
+This post was really a continuation of the first series - Small molecules in ChEMBL database. In particular, I wanted to work on the logistics regression (LR) model with cross validation at least with perhaps some hyper-parameter tuning if needed. The intention was to try and improve the existing LR model for now. It was also possible that maybe I would end up thinking LR was not a good approach, and should really move onto another ML approach, which could be another excuse to continue this ML series.
 
-
-
+<br>
 
 ##### **Import dataframe from ML series 1 - small molecules in ChEMBL database**
 
 I've exported the final dataframe from ML series 1 as csv file, so that we could continue working on this ML series for a logistic regression model.
+
+```{python}
+df_ml = read_csv
+```
+
 
 <br>
 
@@ -365,17 +369,13 @@ To further improve this model, I could possibly trial changing the C value and u
 
 <br>
 
-
 ##### **Cross validation**
 
 ```{python3}
 from sklearn.model_selection import cross_val_score
 ```
 
-
 #### **Final words**
-
-
 
 <br>
 
