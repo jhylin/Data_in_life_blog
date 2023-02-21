@@ -37,7 +37,7 @@ This post was really a continuation of the first series - Small molecules in ChE
 
 ##### **Import dataframe from ML series 1 - small molecules in ChEMBL database**
 
-Pandas dataframe library was chosen this time, as Scikit-learn mainly supports Pandas dataframes for ML (so Polars not used here).
+Since Scikit-learn mainly supports Pandas dataframes for ML (so Polars not used here), I've opted to use Pandas instead of Polars dataframe library.
 
 ```{python}
 import pandas as pd
