@@ -37,12 +37,18 @@ This post was really a continuation of the first series - Small molecules in ChE
 
 ##### **Import dataframe from ML series 1 - small molecules in ChEMBL database**
 
-I've exported the final dataframe from ML series 1 as csv file, so that we could continue working on this ML series for a logistic regression model.
+Pandas dataframe library was chosen this time, as Scikit-learn mainly supports Pandas dataframes for ML (so Polars not used here).
 
 ```{python}
-df_ml = read_csv
+import pandas as pd
 ```
 
+I've exported the final dataframe from ML series 1 as csv file, so that we could continue working on this ML series for a logistic regression model. Here, I've imported the df_ml dataset again.
+
+```{python}
+df_ml = pd.read_csv("df_ml.csv")
+df_ml.head()
+```
 
 <br>
 
@@ -68,11 +74,6 @@ Other libraries needed to generate ML model were imported as below.
 # To use NumPy arrays to prepare X & y variables
 import numpy as np
 
-# Needed for dataframe in scikit-learn ML
-# Uncomment line below if requiring to install pandas
-#!pip install pandas
-import pandas as pd
-
 # To normalise dataset prior to running ML
 from sklearn import preprocessing
 # To split dataset into training & testing sets
@@ -84,17 +85,12 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 ```
 
-I've then installed pyarrow, to convert Polars dataframe into a Pandas dataframe, which was needed to run *scikit-learn*.
+##### **Cross validation**
 
-```{python}
-# Uncomment line below to install pyarrow
-#!pip install pyarrow
-```
+Check scikit-learn for cross validation method
 
-```{python}
-# Convert Polars df to Pandas df 
-df_ml_pd = df_ml.to_pandas()
-type(df_ml_pd)
+```{python3}
+from sklearn.model_selection import cross_val_score
 ```
 
 <br>
@@ -368,12 +364,6 @@ So with this default LR model, the evaluation metrics demonstrated a LR classife
 To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved, or even add more molecular parameters in the model to test. I could have also trialled adding more class labels, e.g. making it between max phase 1, 2 and 4, or a mix-and-match between each max phase category. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question.
 
 <br>
-
-##### **Cross validation**
-
-```{python3}
-from sklearn.model_selection import cross_val_score
-```
 
 #### **Final words**
 
