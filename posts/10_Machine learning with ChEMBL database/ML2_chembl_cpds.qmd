@@ -205,11 +205,11 @@ The example below used the function of make_pipeline, which took in a number of 
 
 ```{python}
 # Test pipline from scikit-Learn
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
+#from sklearn.pipeline import make_pipeline
+#from sklearn.preprocessing import StandardScaler
 
-LR = make_pipeline(StandardScaler(), LogisticRegression())
-LR.fit(X_train, y_train)
+#LR = make_pipeline(StandardScaler(), LogisticRegression())
+#LR.fit(X_train, y_train)
 ```
 
 <br>
@@ -237,8 +237,8 @@ LogR.get_params()
 ###### **Accuracy scores**
 
 ```{python}
-from sklearn.metrics import accuracy_score
-accuracy_score(y_mp, y_test)
+#from sklearn.metrics import accuracy_score
+#accuracy_score(y_mp, y_test)
 ```
 
 The accuracy score was 0.7 based on the original data preprocessing method, which meant that there were around 70% of the cases (or compounds) classified correctly by using this LR classifier. Accuracy literally provided a measure of how close the predicted samples were to the true values. One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, and other evaluation metrics would need to be considered instead.
@@ -246,7 +246,7 @@ The accuracy score was 0.7 based on the original data preprocessing method, whic
 The accuracy score shown below was from the pipeline method used previously, which showed a very similar accuracy score of 0.6965699 (close to 0.7), confirming the method was in line with the original preprocessing method.
 
 ```{python}
-LR.score(X_test, y_test)
+#LR.score(X_test, y_test)
 ```
 
 <br>
@@ -255,7 +255,7 @@ LR.score(X_test, y_test)
 
 Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
 
-```{python}
+```{{python}}
 # Import confusion matrix from scikit-learn
 from sklearn.metrics import confusion_matrix
 # Import itertools - functions to create iterators for efficient looping
@@ -305,7 +305,7 @@ def plot_confusion_matrix(# Sets a cm object (cm = confusion matrix)
     plt.xlabel('Predicted label')
 ```
 
-```{python}
+```{{python}}
 # Compute confusion matrix
 matrix = confusion_matrix(y_test, y_mp, labels = [0,1])
 np.set_printoptions(precision = 2)
@@ -334,7 +334,7 @@ By having these four categories known would then lead us to the next section abo
 
 ###### **Classification report**
 
-```{python}
+```{{python}}
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_mp))
 ```
@@ -367,7 +367,7 @@ $$
 
 Log loss could be used as another gauge to show how good the classifier was at making the outcome predictions. The further the predicted probability was from the true value, the larger the log loss, which was also ranged from 0 to 1. Ideally, the smaller the log loss the better the model would be. Here, we had a log loss of 0.61 for this particular model.
 
-```{python}
+```{{python}}
 # Log loss
 from sklearn.metrics import log_loss
 log_loss(y_test, y_mp_proba)
