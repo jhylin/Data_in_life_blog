@@ -2,11 +2,11 @@
 title: Machine learning with ChEMBL small molecules
 subtitle: Cross validation with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-2-20'
+date: '2023-2-23'
 draft: true
 categories:
   - Machine learning projects
-  - Polars
+  - Scikit-learn
   - Python
   - ChEMBL database
   - Cheminformatics
@@ -23,15 +23,9 @@ jupyter: python3
 Feel free to skip this part as this is really me speaking my thoughts out loud about my situation lately.
 :::
 
-After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst...). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. This is not to say I'm an expert in data analysis already, but I think I have some general understandings of different types of data analytical techniques available and the ones being used commonly. This will always be an important part that I'll keep coming back to practise and improve, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research and data science job market in the pharmaceutical field (which is actually my preferred way to gain actual, real-world ML experience, but alas I'll have to self-create some first to show that I can start doing it...). I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot in NZ.
+After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst... this was the latest impression/feedback I've received). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I'll continue improving the data analysis aspect, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field (which is actually my preferred way to gain actual, real-world ML experience, but alas I'll have to self-create some first to show that I can start doing it...). I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot in NZ.
 
 I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/) by V. Boykis, who had suggested to go broadly in topics, then go deep in one of them, which I've agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI's ChatGPT has limits - being restricted by the amount and types of input data being fed into the training of the GPT). So since I've branched into 3 programming languages so far, I've decided not to expand further into new programming languages for now, to avoid being "half-bucket-full" for everything, I should really narrow down my focus now. To name the 3 programming languages I've learnt, in the order I've learnt them, it would be Python, R and Rust. In that, I'm most comfortable with Python as that was my first language, then it would be R, and for Rust, I'm practically a kindy student trying to explore. I think right now is a good time for me to go deep into an area that I know will matter a lot to me and has always grabbed my attention and interests ever since I've diverted into the research world previously.
-
-<br>
-
-##### **Introduction**
-
-This post was really a continuation of the first series - Small molecules in ChEMBL database. In particular, I wanted to work on the logistics regression (LR) model with cross validation at least with perhaps some hyper-parameter tuning if needed. The intention was to try and improve the existing LR model for now. It was also possible that maybe I would end up thinking LR was not a good approach, and should really move onto another ML approach, which could be another excuse to continue this ML series.
 
 <br>
 
@@ -85,19 +79,21 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 ```
 
-##### **Cross validation**
+<br>
 
-Check scikit-learn for cross validation method
+##### **Review of ML series 1 and quick intro of ML series 2**
 
-```{python3}
-from sklearn.model_selection import cross_val_score
-```
+This post was really a continuation of the first series - "Small molecules in ChEMBL database". In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use on the model. The intention was to try and improve the existing LR model. Last time, I used LogisticRegression() method on the df_ml dataframe, which was the one without the feature for tuning the hyper-parameter C. I've not changed any parameters for the estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of LR classifer, which most likely would be too simplistic, not reflecting the real-world scenarios, but it sort of helped me to think in the LR context.
+
+This time, with a goal of trying to improve this LR model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I've planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.
+
+::: callout-note
+In *scikit-learn*, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g. naive Bayes, logistic regression), regression (e.g. support vector regression), clustering (e.g. K-means clustering) and dimensionality reduction (e.g. principal component analysis). A useful guide to help with choosing the right estimator can be found here - https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+:::
 
 <br>
 
-##### **Logistic regression with *scikit-learn***
-
-LR was one of the supervised methods in statistical ML realm. As the term "supervised" suggested, this type of ML was purely data-driven to allow computers to learn patterns from input data with known outcomes, in order to predict new outcomes on novel data.
+##### **Logistic regression***
 
 <br>
 
@@ -105,7 +101,7 @@ LR was one of the supervised methods in statistical ML realm. As the term "super
 
 ```{python}
 # Define X variables from df_ml_pd dataset
-X = np.asarray(df_ml_pd[["#RO5 Violations", 
+X = np.asarray(df_ml[["#RO5 Violations", 
                          "QED Weighted", 
                          "CX LogP", 
                          "CX LogD", 
@@ -117,7 +113,7 @@ X[0:5]
 ```{python}
 # Define y variable
 # Note to use "Max_Phase", not the original "Max Phase"
-y = np.asarray(df_ml_pd["Max_Phase"])
+y = np.asarray(df_ml["Max_Phase"])
 y[0:5]
 ```
 
@@ -149,11 +145,15 @@ X[0:5]
 
 ###### **Fitting LR classifier on training set**
 
+One major difference to this LR classifier this time was that cross-validation was included when creating and fitting the training data.
+
 ```{python}
 # Import logistic regression 
-from sklearn.linear_model import LogisticRegression
-# Create an instance of logistic regression classifier and fit the data
-LogR = LogisticRegression().fit(X_train, y_train)
+from sklearn.linear_model import LogisticRegressionCV
+
+# Change to use LogisticRegressionCV() - LR with built-in cross validation
+# Create an instance of logistic regression CV classifier and fit the data
+LogR = LogisticRegressionCV().fit(X_train, y_train)
 LogR
 ```
 
@@ -213,6 +213,24 @@ LR.fit(X_train, y_train)
 ```
 
 <br>
+
+##### **Looking for best parameters - hyper-parameter tuning**
+
+1. Find the names and values of current parameters for the estimator:
+```{{python}}
+estimator.get_params()
+```
+```{python}
+# In this example, the LR model was LogR
+LogR.get_params()
+```
+
+
+2. Consider using GridSearchCV
+
+
+<br>
+
 
 #### **Evaluation of the logistic regression model**
 
@@ -355,13 +373,11 @@ from sklearn.metrics import log_loss
 log_loss(y_test, y_mp_proba)
 ```
 
+<br>
+
 #### **Discussions and conclusion**
 
-So here I've completed a very basic LR classifier model for ChEMBL compound dataset. By no means was this a perfect ML model as I haven't actually changed the default settings of *scikit-learn*'s LogisticRegression() classifier, with examples such as adjusting C, a regularization parameter which was set at '1.0' by default, and also solvers, which could take in different algorithms for use in optimisation problems and normally set as 'lbfgs' by default.
 
-So with this default LR model, the evaluation metrics demonstrated a LR classifer of moderate quality to predict the approval outcomes on ChEMBL small molecules, with a lot of rooms for improvements. Therefore, I could not yet confirm fully that the physicochemical parameters chosen would be the best ones to predict the approval outcomes for any small molecules. However, I might be okay to say that these molecular parameters were on the right track to help with making this prediction.
-
-To further improve this model, I could possibly trial changing the C value and use different solvers to see if better outcomes could be achieved, or even add more molecular parameters in the model to test. I could have also trialled adding more class labels, e.g. making it between max phase 1, 2 and 4, or a mix-and-match between each max phase category. Other things to consider would be to use other types of ML methods such as naive Bayes, K-nearest neighbours or decision trees and so on. To tackle the problem thoroughly, I would most likely need to do an ensemble of different ML models to find out which model would be the most optimal to answer our target question.
 
 <br>
 
