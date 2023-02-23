@@ -1,6 +1,6 @@
 ---
 title: Machine learning with ChEMBL small molecules
-subtitle: Cross validation with *scikit-learn* 
+subtitle: Cross validation & hyper-parameter tuning with *scikit-learn* 
 author: Jennifer HY Lin
 date: '2023-2-23'
 draft: true

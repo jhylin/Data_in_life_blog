@@ -6,6 +6,7 @@ date: '2023-1-4'
 draft: false
 categories:
   - Machine learning projects
+  - Scikit-learn
   - Polars
   - Python
   - Jupyter
