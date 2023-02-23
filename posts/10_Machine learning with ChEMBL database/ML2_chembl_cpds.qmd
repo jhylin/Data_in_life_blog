@@ -29,9 +29,9 @@ I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-
 
 <br>
 
-##### **Import dataframe from ML series 1 - small molecules in ChEMBL database**
+##### **Import dataframe from ML series 1**
 
-Since Scikit-learn mainly supports Pandas dataframes for ML (so Polars not used here), I've opted to use Pandas instead of Polars dataframe library.
+Since *Scikit-learn* mainly supports Pandas dataframes for ML, I've opted to use Pandas instead of Polars dataframe library.
 
 ```{python}
 import pandas as pd
@@ -81,19 +81,19 @@ import matplotlib.pyplot as plt
 
 <br>
 
-##### **Review of ML series 1 and quick intro of ML series 2**
+##### **Review of ML series 1 and quick intro of series 2**
 
 This post was really a continuation of the first series - "Small molecules in ChEMBL database". In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use on the model. The intention was to try and improve the existing LR model. Last time, I used LogisticRegression() method on the df_ml dataframe, which was the one without the feature for tuning the hyper-parameter C. I've not changed any parameters for the estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of LR classifer, which most likely would be too simplistic, not reflecting the real-world scenarios, but it sort of helped me to think in the LR context.
 
 This time, with a goal of trying to improve this LR model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I've planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.
 
 ::: callout-note
-In *scikit-learn*, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g. naive Bayes, logistic regression), regression (e.g. support vector regression), clustering (e.g. K-means clustering) and dimensionality reduction (e.g. principal component analysis). A useful guide to help with choosing the right estimator can be found here - https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+In *scikit-learn*, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g. naive Bayes, logistic regression), regression (e.g. support vector regression), clustering (e.g. K-means clustering) and dimensionality reduction (e.g. principal component analysis). A useful guide to help with choosing the right estimator can be found [here](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 :::
 
 <br>
 
-##### **Logistic regression***
+##### **Logistic regression**
 
 <br>
 
@@ -224,9 +224,13 @@ estimator.get_params()
 # In this example, the LR model was LogR
 LogR.get_params()
 ```
+Quoted from *scikit-learn* - [cross-validation estimator](https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator):
+
+"An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), ...). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters."
 
 
-2. Consider using GridSearchCV
+
+2. Since we've used LogisticRegressionCV(), this meant it would be unnecessary to use GridSearchCV, as this was already taken into account.
 
 
 <br>

@@ -237,10 +237,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <ul>
   <li><a href="#machine-learning-in-drug-discovery---series-2" id="toc-machine-learning-in-drug-discovery---series-2" class="nav-link active" data-scroll-target="#machine-learning-in-drug-discovery---series-2"><strong><em>Machine learning in drug discovery - series 2</em></strong></a></li>
   <li><a href="#foreword" id="toc-foreword" class="nav-link" data-scroll-target="#foreword"><strong>Foreword</strong></a></li>
-  <li><a href="#import-dataframe-from-ml-series-1---small-molecules-in-chembl-database" id="toc-import-dataframe-from-ml-series-1---small-molecules-in-chembl-database" class="nav-link" data-scroll-target="#import-dataframe-from-ml-series-1---small-molecules-in-chembl-database"><strong>Import dataframe from ML series 1 - small molecules in ChEMBL database</strong></a></li>
+  <li><a href="#import-dataframe-from-ml-series-1" id="toc-import-dataframe-from-ml-series-1" class="nav-link" data-scroll-target="#import-dataframe-from-ml-series-1"><strong>Import dataframe from ML series 1</strong></a></li>
   <li><a href="#import-libraries-for-machine-learning" id="toc-import-libraries-for-machine-learning" class="nav-link" data-scroll-target="#import-libraries-for-machine-learning"><strong>Import libraries for machine learning</strong></a></li>
-  <li><a href="#review-of-ml-series-1-and-quick-intro-of-ml-series-2" id="toc-review-of-ml-series-1-and-quick-intro-of-ml-series-2" class="nav-link" data-scroll-target="#review-of-ml-series-1-and-quick-intro-of-ml-series-2"><strong>Review of ML series 1 and quick intro of ML series 2</strong></a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><strong>Logistic regression</strong>*</a>
+  <li><a href="#review-of-ml-series-1-and-quick-intro-of-series-2" id="toc-review-of-ml-series-1-and-quick-intro-of-series-2" class="nav-link" data-scroll-target="#review-of-ml-series-1-and-quick-intro-of-series-2"><strong>Review of ML series 1 and quick intro of series 2</strong></a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><strong>Logistic regression</strong></a>
   <ul>
   <li><a href="#defining-x-and-y-variables" id="toc-defining-x-and-y-variables" class="nav-link" data-scroll-target="#defining-x-and-y-variables"><strong>Defining X and y variables</strong></a></li>
   <li><a href="#training-and-testing-sets" id="toc-training-and-testing-sets" class="nav-link" data-scroll-target="#training-and-testing-sets"><strong>Training and testing sets</strong></a></li>
@@ -294,9 +294,9 @@ Note
 <p>I once read a <a href="https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/">blog post on learning ML</a> by V. Boykis, who had suggested to go broadly in topics, then go deep in one of them, which I’ve agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI’s ChatGPT has limits - being restricted by the amount and types of input data being fed into the training of the GPT). So since I’ve branched into 3 programming languages so far, I’ve decided not to expand further into new programming languages for now, to avoid being “half-bucket-full” for everything, I should really narrow down my focus now. To name the 3 programming languages I’ve learnt, in the order I’ve learnt them, it would be Python, R and Rust. In that, I’m most comfortable with Python as that was my first language, then it would be R, and for Rust, I’m practically a kindy student trying to explore. I think right now is a good time for me to go deep into an area that I know will matter a lot to me and has always grabbed my attention and interests ever since I’ve diverted into the research world previously.</p>
 <p><br></p>
 </section>
-<section id="import-dataframe-from-ml-series-1---small-molecules-in-chembl-database" class="level5">
-<h5 class="anchored" data-anchor-id="import-dataframe-from-ml-series-1---small-molecules-in-chembl-database"><strong>Import dataframe from ML series 1 - small molecules in ChEMBL database</strong></h5>
-<p>Since Scikit-learn mainly supports Pandas dataframes for ML (so Polars not used here), I’ve opted to use Pandas instead of Polars dataframe library.</p>
+<section id="import-dataframe-from-ml-series-1" class="level5">
+<h5 class="anchored" data-anchor-id="import-dataframe-from-ml-series-1"><strong>Import dataframe from ML series 1</strong></h5>
+<p>Since <em>Scikit-learn</em> mainly supports Pandas dataframes for ML (so Polars not used here), I’ve opted to use Pandas instead of Polars dataframe library.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -304,7 +304,7 @@ Note
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_ml <span class="op">=</span> pd.read_csv(<span class="st">"df_ml.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ml.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="20">
 
 <div>
 
@@ -407,8 +407,8 @@ Note
 </div>
 <p><br></p>
 </section>
-<section id="review-of-ml-series-1-and-quick-intro-of-ml-series-2" class="level5">
-<h5 class="anchored" data-anchor-id="review-of-ml-series-1-and-quick-intro-of-ml-series-2"><strong>Review of ML series 1 and quick intro of ML series 2</strong></h5>
+<section id="review-of-ml-series-1-and-quick-intro-of-series-2" class="level5">
+<h5 class="anchored" data-anchor-id="review-of-ml-series-1-and-quick-intro-of-series-2"><strong>Review of ML series 1 and quick intro of series 2</strong></h5>
 <p>This post was really a continuation of the first series - “Small molecules in ChEMBL database”. In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use on the model. The intention was to try and improve the existing LR model. Last time, I used LogisticRegression() method on the df_ml dataframe, which was the one without the feature for tuning the hyper-parameter C. I’ve not changed any parameters for the estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of LR classifer, which most likely would be too simplistic, not reflecting the real-world scenarios, but it sort of helped me to think in the LR context.</p>
 <p>This time, with a goal of trying to improve this LR model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I’ve planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -421,13 +421,13 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <em>scikit-learn</em>, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g.&nbsp;naive Bayes, logistic regression), regression (e.g.&nbsp;support vector regression), clustering (e.g.&nbsp;K-means clustering) and dimensionality reduction (e.g.&nbsp;principal component analysis). A useful guide to help with choosing the right estimator can be found here - https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html</p>
+<p>In <em>scikit-learn</em>, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g.&nbsp;naive Bayes, logistic regression), regression (e.g.&nbsp;support vector regression), clustering (e.g.&nbsp;K-means clustering) and dimensionality reduction (e.g.&nbsp;principal component analysis). A useful guide to help with choosing the right estimator can be found <a href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html">here</a></p>
 </div>
 </div>
 <p><br></p>
 </section>
 <section id="logistic-regression" class="level5">
-<h5 class="anchored" data-anchor-id="logistic-regression"><strong>Logistic regression</strong>*</h5>
+<h5 class="anchored" data-anchor-id="logistic-regression"><strong>Logistic regression</strong></h5>
 <p><br></p>
 <section id="defining-x-and-y-variables" class="level6">
 <h6 class="anchored" data-anchor-id="defining-x-and-y-variables"><strong>Defining X and y variables</strong></h6>
@@ -440,7 +440,7 @@ Note
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Heavy Atoms"</span>]]</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>              )</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>array([[ 0.  ,  0.91,  2.05,  0.62, 21.  ],
        [ 2.  ,  0.16,  1.51, -0.41, 48.  ],
        [ 2.  ,  0.2 ,  5.05,  3.27, 46.  ],
@@ -453,7 +453,7 @@ Note
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note to use "Max_Phase", not the original "Max Phase"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.asarray(df_ml[<span class="st">"Max_Phase"</span>])</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>array([0, 0, 0, 0, 0])</code></pre>
 </div>
 </div>
@@ -482,7 +482,7 @@ Testing set: (379, 5) (379,)</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform on the testing set</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> preprocessing.StandardScaler().fit(X_train).transform(X_test)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([[-0.61683613,  0.76594864,  0.29675851,  0.52596937, -0.79684902],
        [ 0.61602236,  0.45724627,  1.96615599,  1.92002856, -0.11325544],
        [ 1.84888085, -1.43906824, -2.1393532 , -3.75082759,  0.37502569],
@@ -503,8 +503,8 @@ Testing set: (379, 5) (379,)</code></pre>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of logistic regression CV classifier and fit the data</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>LogR <span class="op">=</span> LogisticRegressionCV().fit(X_train, y_train)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>LogR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegressionCV()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegressionCV</label><div class="sk-toggleable__content"><pre>LogisticRegressionCV()</pre></div></div></div></div></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegressionCV()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegressionCV</label><div class="sk-toggleable__content"><pre>LogisticRegressionCV()</pre></div></div></div></div></div>
 </div>
 </div>
 <p><br></p>
@@ -514,7 +514,7 @@ Testing set: (379, 5) (379,)</code></pre>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_mp <span class="op">=</span> LogR.predict(X_test)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y_mp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>array([0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0,
        0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1,
        0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1,
@@ -544,7 +544,7 @@ Testing set: (379, 5) (379,)</code></pre>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use describe() method to get characteristics of the distribution</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> pd.DataFrame(LogR.predict_log_proba(X))</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>pred.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="30">
 
 <div>
 
@@ -616,7 +616,7 @@ Testing set: (379, 5) (379,)</code></pre>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use describe() to show distributions</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y_mp_prob <span class="op">=</span> pd.DataFrame(y_mp_proba)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>y_mp_prob.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="32">
 
 <div>
 
@@ -702,7 +702,7 @@ Testing set: (379, 5) (379,)</code></pre>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In this example, the LR model was LogR</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>LogR.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>{'Cs': 10,
  'class_weight': None,
  'cv': None,
