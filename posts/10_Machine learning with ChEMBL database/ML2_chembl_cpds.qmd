@@ -1,8 +1,8 @@
 ---
-title: Machine learning with ChEMBL small molecules
+title: Machine learning with small molecules in ChEMBL database
 subtitle: Cross validation & hyper-parameter tuning with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-2-23'
+date: '2023-2-24'
 draft: true
 categories:
   - Machine learning projects
@@ -23,21 +23,21 @@ jupyter: python3
 Feel free to skip this part as this is really me speaking my thoughts out loud about my situation lately.
 :::
 
-After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst... this was the latest impression/feedback I've received). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I'll continue improving the data analysis aspect, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field (which is actually my preferred way to gain actual, real-world ML experience, but alas I'll have to self-create some first to show that I can start doing it...). I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot in NZ.
+After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst... this was the latest impression/feedback I've received). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I'll continue improving the data analytics aspect, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field. I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot domestically.
 
-I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/) by V. Boykis, who had suggested to go broadly in topics, then go deep in one of them, which I've agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI's ChatGPT has limits - being restricted by the amount and types of input data being fed into the training of the GPT). So since I've branched into 3 programming languages so far, I've decided not to expand further into new programming languages for now, to avoid being "half-bucket-full" for everything, I should really narrow down my focus now. To name the 3 programming languages I've learnt, in the order I've learnt them, it would be Python, R and Rust. In that, I'm most comfortable with Python as that was my first language, then it would be R, and for Rust, I'm practically a kindy student trying to explore. I think right now is a good time for me to go deep into an area that I know will matter a lot to me and has always grabbed my attention and interests ever since I've diverted into the research world previously.
+I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/) by V. Boykis, who has suggested to go broadly in topics, then go deep in one of them, which I've agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI's ChatGPT has limits - being restricted by the amount and types of input data being fed into the GPT). So since I've branched into 3 programming languages so far, I've decided not to expand further into new programming languages for now, to avoid being "half-bucket-full" for everything, I should really narrow down my focus now. To name the 3 programming languages in the order I've learnt them, they are Python, R and Rust. In that, I'm most comfortable with Python as that is my first language, then it's R, followed by Rust, which is almost brand new. I think right now is a good time for me to go deep into an area that has always caught my attentions.
 
 <br>
 
 ##### **Import dataframe from ML series 1**
 
-Since *Scikit-learn* mainly supports Pandas dataframes for ML, I've opted to use Pandas instead of Polars dataframe library.
+Since *scikit-learn* mainly supports Pandas dataframes for ML, I've opted to use Pandas instead of Polars dataframe library, to avoid the extra step of converting a Polars dataframe into a Pandas one.
 
 ```{python}
 import pandas as pd
 ```
 
-I've exported the final dataframe from ML series 1 as csv file, so that we could continue working on this ML series for a logistic regression model. Here, I've imported the df_ml dataset again.
+I've exported the final dataframe from ML series 1 as a .csv file, so that we could continue on this ML series and work on the logistic regression model further. For this ML series 2, the .csv file was imported as shown below.
 
 ```{python}
 df_ml = pd.read_csv("df_ml.csv")
@@ -83,9 +83,9 @@ import matplotlib.pyplot as plt
 
 ##### **Review of ML series 1 and quick intro of series 2**
 
-This post was really a continuation of the first series - "Small molecules in ChEMBL database". In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use on the model. The intention was to try and improve the existing LR model. Last time, I used LogisticRegression() method on the df_ml dataframe, which was the one without the feature for tuning the hyper-parameter C. I've not changed any parameters for the estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of LR classifer, which most likely would be too simplistic, not reflecting the real-world scenarios, but it sort of helped me to think in the LR context.
+This post was really a continuation of the first ML series - "Small molecules in ChEMBL database". In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I've not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in terms of a LR context.
 
-This time, with a goal of trying to improve this LR model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I've planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.
+This time, with a goal of trying to improve the model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I've planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.
 
 ::: callout-note
 In *scikit-learn*, an estimator is often referring to the different ML approaches, which are usually grouped into classification (e.g. naive Bayes, logistic regression), regression (e.g. support vector regression), clustering (e.g. K-means clustering) and dimensionality reduction (e.g. principal component analysis). A useful guide to help with choosing the right estimator can be found [here](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
@@ -95,24 +95,25 @@ In *scikit-learn*, an estimator is often referring to the different ML approache
 
 ##### **Logistic regression**
 
+To get the LR model ready, we would define our X and y variables from the df_ml dataset.
+
 <br>
 
 ###### **Defining X and y variables**
 
 ```{python}
-# Define X variables from df_ml_pd dataset
+# Define X variables from df_ml dataset
 X = np.asarray(df_ml[["#RO5 Violations", 
-                         "QED Weighted", 
-                         "CX LogP", 
-                         "CX LogD", 
-                         "Heavy Atoms"]]
+                      "QED Weighted", 
+                      "CX LogP", 
+                      "CX LogD", 
+                      "Heavy Atoms"]]
               )
 X[0:5]
 ```
 
 ```{python}
 # Define y variable
-# Note to use "Max_Phase", not the original "Max Phase"
 y = np.asarray(df_ml["Max_Phase"])
 y[0:5]
 ```
@@ -145,7 +146,7 @@ X[0:5]
 
 ###### **Fitting LR classifier on training set**
 
-One major difference to this LR classifier this time was that cross-validation was included when creating and fitting the training data.
+One major difference to this LR classifier this time was that cross-validation was included, via using the LogisticRegressionCV model, when creating and fitting the training data.
 
 ```{python}
 # Import logistic regression 
@@ -199,42 +200,46 @@ y_mp_prob.describe()
 
 ###### **Pipeline method for LR**
 
-This was something I thought to try when I was reading through *scikit-learn* documentation. One major advantage of using pipeline was that it was designed to chain all the estimators used for ML. The benefit of this was that we only had to call fit and predict once in our data to fit the whole chain of estimators. The other useful thing was that this could avoid data leakage from our testing set into the training set by making sure the same set of samples were used to train the transformers and predictors. One other key thing it also helped was that it also avoided the possibility of missing out on the transformation step.
-
-The example below used the function of make_pipeline, which took in a number of estimators as inputted, and then constructed a pipeline based on them.
+A quick trial of applying pipeline method with LogisticRegressionCV was done as shown below.
 
 ```{python}
 # Test pipline from scikit-Learn
-#from sklearn.pipeline import make_pipeline
-#from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
-#LR = make_pipeline(StandardScaler(), LogisticRegression())
-#LR.fit(X_train, y_train)
+LogReg = make_pipeline(StandardScaler(), LogisticRegressionCV())
+LogReg.fit(X_train, y_train)
 ```
 
 <br>
 
-##### **Looking for best parameters - hyper-parameter tuning**
+##### **Cross-validation**
 
-1. Find the names and values of current parameters for the estimator:
+Quoted from *scikit-learn* - [cross-validation estimator](https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator):
+
+
+<q>An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), ...). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters.
+
+Since we've used LogisticRegressionCV(), this meant it would be unnecessary to use GridSearchCV again (as shown from the quote above that GridSearchCV was quite similar to the cross-validation estimators such as LogisticRegressionCV).
+
+<br>
+
+##### **Hyper-parameter tuning**
+
+Firstly, we would find the names and values of current parameters for the estimator:
 ```{{python}}
 estimator.get_params()
 ```
 ```{python}
-# In this example, the LR model was LogR
+# In this example, the first LR model was LogR
 LogR.get_params()
 ```
-Quoted from *scikit-learn* - [cross-validation estimator](https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator):
-
-"An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), ...). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters."
-
-
-
-2. Since we've used LogisticRegressionCV(), this meant it would be unnecessary to use GridSearchCV, as this was already taken into account.
-
+```{python}
+# Second LR model built using pipeline method
+LogReg.get_params()
+```
 
 <br>
-
 
 #### **Evaluation of the logistic regression model**
 
