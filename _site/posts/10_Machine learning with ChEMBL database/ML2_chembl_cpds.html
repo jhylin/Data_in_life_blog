@@ -195,7 +195,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Machine learning with small molecules in ChEMBL database</h1>
-            <p class="subtitle lead">Cross validation &amp; hyper-parameter tuning with <em>scikit-learn</em></p>
+            <p class="subtitle lead">Cross-validation &amp; hyper-parameter tuning with <em>scikit-learn</em></p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine learning projects</div>
                 <div class="quarto-category">Scikit-learn</div>
@@ -251,8 +251,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#converting-predicted-probabilities-into-a-dataframe" id="toc-converting-predicted-probabilities-into-a-dataframe" class="nav-link" data-scroll-target="#converting-predicted-probabilities-into-a-dataframe"><strong>Converting predicted probabilities into a dataframe</strong></a></li>
   <li><a href="#pipeline-method-for-lr" id="toc-pipeline-method-for-lr" class="nav-link" data-scroll-target="#pipeline-method-for-lr"><strong>Pipeline method for LR</strong></a></li>
   </ul></li>
+  <li><a href="#cross-validation-hyper-parameter-tuning" id="toc-cross-validation-hyper-parameter-tuning" class="nav-link" data-scroll-target="#cross-validation-hyper-parameter-tuning"><strong>Cross-validation &amp; hyper-parameter tuning</strong></a>
+  <ul>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><strong>Cross-validation</strong></a></li>
-  <li><a href="#hyper-parameter-tuning" id="toc-hyper-parameter-tuning" class="nav-link" data-scroll-target="#hyper-parameter-tuning"><strong>Hyper-parameter tuning</strong></a></li>
+  <li><a href="#decoding-logisticregressioncv-classifer" id="toc-decoding-logisticregressioncv-classifer" class="nav-link" data-scroll-target="#decoding-logisticregressioncv-classifer"><strong>Decoding LogisticRegressionCV classifer</strong></a></li>
+  <li><a href="#best-parameters" id="toc-best-parameters" class="nav-link" data-scroll-target="#best-parameters"><strong>Best parameters</strong></a></li>
+  </ul></li>
   <li><a href="#evaluation-of-the-logistic-regression-model" id="toc-evaluation-of-the-logistic-regression-model" class="nav-link" data-scroll-target="#evaluation-of-the-logistic-regression-model"><strong>Evaluation of the logistic regression model</strong></a>
   <ul>
   <li><a href="#accuracy-scores" id="toc-accuracy-scores" class="nav-link" data-scroll-target="#accuracy-scores"><strong>Accuracy scores</strong></a></li>
@@ -410,7 +414,7 @@ Note
 </section>
 <section id="review-of-ml-series-1-and-quick-intro-of-series-2" class="level5">
 <h5 class="anchored" data-anchor-id="review-of-ml-series-1-and-quick-intro-of-series-2"><strong>Review of ML series 1 and quick intro of series 2</strong></h5>
-<p>This post was really a continuation of the first ML series - “Small molecules in ChEMBL database”. In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I’ve not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in a LR context.</p>
+<p>This post was really a continuation of the first ML series - “Small molecules in ChEMBL database”. In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I’ve not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in terms of a LR context.</p>
 <p>This time, with a goal of trying to improve the model (without considering whether LR was actually the best ML strategy for this particular dataset, which might actually need to evolve into a separate post), I’ve planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -434,7 +438,7 @@ Note
 <section id="defining-x-and-y-variables" class="level6">
 <h6 class="anchored" data-anchor-id="defining-x-and-y-variables"><strong>Defining X and y variables</strong></h6>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define X variables from df_ml_pd dataset</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define X variables from df_ml dataset</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.asarray(df_ml[[<span class="st">"#RO5 Violations"</span>, </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"QED Weighted"</span>, </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"CX LogP"</span>, </span>
@@ -452,9 +456,8 @@ Note
 </div>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define y variable</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note to use "Max_Phase", not the original "Max Phase"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.asarray(df_ml[<span class="st">"Max_Phase"</span>])</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.asarray(df_ml[<span class="st">"Max_Phase"</span>])</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>array([0, 0, 0, 0, 0])</code></pre>
 </div>
@@ -697,22 +700,45 @@ Testing set: (379, 5) (379,)</code></pre>
 <p><br></p>
 </section>
 </section>
-<section id="cross-validation" class="level5">
-<h5 class="anchored" data-anchor-id="cross-validation"><strong>Cross-validation</strong></h5>
-<p>Quoted from <em>scikit-learn</em> - <a href="https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator">cross-validation estimator</a>:</p>
-<p><q>An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), …). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters.</q></p>
-<p>Since we’ve used LogisticRegressionCV(), this meant it would be unnecessary to use GridSearchCV again (as shown from the quote above that GridSearchCV was quite similar to the cross-validation estimators such as LogisticRegressionCV).</p>
+<section id="cross-validation-hyper-parameter-tuning" class="level5">
+<h5 class="anchored" data-anchor-id="cross-validation-hyper-parameter-tuning"><strong>Cross-validation &amp; hyper-parameter tuning</strong></h5>
+<section id="cross-validation" class="level6">
+<h6 class="anchored" data-anchor-id="cross-validation"><strong>Cross-validation</strong></h6>
+<p>Cross-validation was designed to minimise the amount of samples lost if we were to always partition all of our datasets into three lots for training, testing and validation. Readers with eagle eyes might notice a new set of data named validation set here. One of the biggest reasons to add this validation set was that often overfitting could happen on testing set with testing data being leaked into the model, which most likely would occur because all the parameters could be edited until the model performs optimally. By having a validation set of the data, this overfitting problem would be avoided.</p>
+<p>In general, model training could take place initially on the training set, with the validation set used for first evaluation, which would be followed by a final evaluation on the testing set if the model testing worked as expected. The “cross” part of the cross-validation was the part that prevented data loss, in that the training set was splitted into many smaller number (<em>k</em>) of sets, which was where cross-validation was often also called “k-fold cross validation”. With the use of k-fold cross-validation, the training set was essentially equivalent to <em>k</em>-1 of the folds of training data. The trained model would then be validated by using the remaining part of the training data, which was almost like being used as a testing data to measure the performance of the trained model.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In case above explanation was too long and confusing, in short, cross-validation was simply a commonly used out-of-sample evaluation metric with effective use of data, where each observation was used for both training and testing.</p>
+</div>
+</div>
 <p><br></p>
 </section>
-<section id="hyper-parameter-tuning" class="level5">
-<h5 class="anchored" data-anchor-id="hyper-parameter-tuning"><strong>Hyper-parameter tuning</strong></h5>
-<p>Firstly, we would find the names and values of current parameters for the estimator:</p>
+<section id="decoding-logisticregressioncv-classifer" class="level6">
+<h6 class="anchored" data-anchor-id="decoding-logisticregressioncv-classifer"><strong>Decoding LogisticRegressionCV classifer</strong></h6>
+<p>Since we’ve used LogisticRegressionCV classifer for the LR models, this meant it would be unnecessary to use GridSearchCV again if we read the definition of the estimatorCV closely.</p>
+<p>Quoted from <em>scikit-learn</em> on <a href="https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator">cross-validation estimator</a>:</p>
+<p><q>An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), …). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters.</q></p>
+<p>However, to further dissect LogisticRegressionCV classifer, I wanted to find out what was the cross-validation method actually used. <strong><em>Explain Stratified K-folds</em></strong></p>
+<p><br></p>
+</section>
+<section id="best-parameters" class="level6">
+<h6 class="anchored" data-anchor-id="best-parameters"><strong>Best parameters</strong></h6>
+<p>To explicitly see the details of all the parameters after cross-validation and/or hyper-parameter tuning, we could find the names and values of these parameters for the estimator by using the code below.</p>
+<p>To find the parameters of any ML estimator, use code as suggested by <em>scikit-learn</em> as shown here.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>estimator.get_params()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, the first LR model built was named LogR.</p>
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In this example, the first LR model was LogR</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>LogR.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>LogR.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>{'Cs': 10,
  'class_weight': None,
@@ -733,9 +759,9 @@ Testing set: (379, 5) (379,)</code></pre>
  'verbose': 0}</code></pre>
 </div>
 </div>
+<p>The second LR model built using pipeline method was called LogReg.</p>
 <div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Second LR model built using pipeline method</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>LogReg.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>LogReg.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>{'memory': None,
  'steps': [('standardscaler', StandardScaler()),
@@ -765,7 +791,10 @@ Testing set: (379, 5) (379,)</code></pre>
  'logisticregressioncv__verbose': 0}</code></pre>
 </div>
 </div>
+<p>Both models provided exactly the same set of parameters when LogisticRegressionCV classifier was used.</p>
 <p><br></p>
+<p><strong><em>To evaluate both LogR &amp; LogReg models - perhaps keep it small e.g.&nbsp;only accuracy scores &amp; confusion matrix (?), so can leave retraining model and final evaluation (full set of evaluation metrics) of model for ML series 3</em></strong></p>
+</section>
 </section>
 <section id="evaluation-of-the-logistic-regression-model" class="level4">
 <h4 class="anchored" data-anchor-id="evaluation-of-the-logistic-regression-model"><strong>Evaluation of the logistic regression model</strong></h4>
