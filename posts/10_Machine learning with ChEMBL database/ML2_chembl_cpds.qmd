@@ -234,9 +234,9 @@ Therefore, the cross validation part for the LR model was taken care of by the L
 
 <br>
 
-###### **Best parameters**
+###### **Hyper-parameter tuning - finding best parameters**
 
-To explicitly see the details of all the parameters after cross-validation and/or hyper-parameter tuning, we could find the names and values of these parameters for the estimator by using the code below.
+To explicitly see the details of all the parameters after cross-validation, we could find the names and values of these parameters for the estimator by using the code below.
 
 To find the parameters of any ML estimator, use code as suggested by *scikit-learn* as shown here.
 
@@ -254,8 +254,52 @@ The second LR model built using pipeline method was called LogReg.
 ```{python}
 LogReg.get_params()
 ```
-
 Both models provided exactly the same set of parameters when LogisticRegressionCV classifier was used.
+
+However, to find out how the parameters influence the LR model, it was probably best to test them all out. I've had two parameters in mind that I thought would affect the confusion matrix at least - cv and random_state parameters. While reading the *scikit-learn* documentation on LR (specifically for LogisticRegressionCV), two other parameters might also affect LR prediction outcomes were C and l1-ratio - however, this was likely already taken care of by using LogisticRegressionCV itself. Therefore, we've got 2 parameters here to test out against the LR model.
+
+```{{python}}
+# **Draft code only - work-in-progress - ?need this**
+
+# Idea is to show the variations/trends in these 2 parameters 
+# when they are used in combinations to fit and evaluate the models
+
+# Code adapted from: "Practical statistics for data scientists" by P. Bruce, A. Bruce and P. Gedeck, 2nd edition. O'Reilly Media, Inc.
+
+idx = np.random.choice(range(5), size = len(X), replace = True)
+error = []
+
+# import itertools.product from PyPi
+from itertools import product
+
+for cv, random_state in product([10, 20, 30], [200, 250, 300]):
+    logreg = LogisticRegressionCV(cv = cv, random_state = random_state)
+    cv_error = []
+    
+    # Update code
+    for k in range(5):
+        fold_idx = idx == k
+        train_X = X.loc[~fold_idx]; train_y = y[~fold_idx]
+        valid_X = X.loc[fold_idx]; valid_y = y[fold_idx]
+        
+        logreg.fit(train_X, train_y)
+        pred = logreg.predict_proba(valid_X)[:, 1]
+        
+        # Obtain differences between the predicted and actual probabilities
+        # then get the mean value of all the values that are > 0.5
+        # as the cv_error
+        cv_error.append(np.mean(abs(valid_y - pred) > 0.5))
+        
+    error.append({
+    'cross-val': cv,
+    'random_state': random_state,
+    'avg_error': np.mean(cv_error)
+    })
+    
+#print(error[-1])
+
+errors = pd.DataFrame(error)
+```
 
 <br>
 
@@ -364,23 +408,11 @@ print(classification_report(y_test, y_mp))
 
 *Precision* was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:
 
-$$
-\text{Precision} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Positive)}
-$$
-
 *Recall*, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (which = 0.674, for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:
-
-$$
-\text{Recall} = \frac{\Sigma\ True\ Positive}{(\Sigma\ True\ Positive + \Sigma\ False\ Negative)}
-$$
 
 The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.
 
 *f1-score*, or also known as balanced F-score or F-measure, denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved. It was defined as:
-
-$$
-\text{F1-score} = \frac{2 \times (Precision \times Recall)}{(Precision + Recall)}
-$$
 
 *Support*, which some readers might have already worked out how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.
 
