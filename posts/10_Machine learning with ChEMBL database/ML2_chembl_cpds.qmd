@@ -2,7 +2,7 @@
 title: Machine learning with small molecules in ChEMBL database
 subtitle: Cross-validation & hyper-parameter tuning with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-2-27'
+date: '2023-2-28'
 draft: true
 categories:
   - Machine learning projects
@@ -17,7 +17,7 @@ jupyter: python3
 
 <br>
 
-##### **Review of ML series 1 and quick intro of series 2**
+##### **Review of ML series 1 & introduction of series 2**
 
 This post was really a continuation of the first ML series - "Small molecules in ChEMBL database". In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I've not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in terms of a LR context.
 
@@ -112,8 +112,13 @@ y[0:5]
 
 ```{python}
 # Split dataset into training & testing sets
-rng = np.random.RandomState(0)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = rng)
+
+# Random number generator
+#rng = np.random.RandomState(0) - note: this may produce different result each time
+
+# Edited post to use random_state = 250 to show comparison with ML series 1
+# for reproducible result
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 250)
 print('Training set:', X_train.shape, y_train.shape)
 print('Testing set:', X_test.shape, y_test.shape)
 ```
@@ -195,7 +200,7 @@ A quick trial of applying pipeline method with LogisticRegressionCV was done as 
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-LogReg = make_pipeline(StandardScaler(), LogisticRegressionCV())
+LogReg = make_pipeline(StandardScaler(), LogisticRegressionCV(cv = 15))
 LogReg.fit(X_train, y_train)
 ```
 
@@ -254,32 +259,28 @@ Both models provided exactly the same set of parameters when LogisticRegressionC
 
 <br>
 
-***To evaluate both LogR & LogReg models - perhaps keep it small e.g. only accuracy scores & confusion matrix, so can leave retraining model and final evaluation (full set of evaluation metrics) of model for ML series 3***
-
-#### **Evaluation of the logistic regression model**
+#### **Evaluation of the logistic regression CV model**
 
 ###### **Accuracy scores**
 
 ```{python}
-#from sklearn.metrics import accuracy_score
-#accuracy_score(y_mp, y_test)
+from sklearn.metrics import accuracy_score
+accuracy_score(y_mp, y_test)
 ```
 
-The accuracy score was 0.7 based on the original data preprocessing method, which meant that there were around 70% of the cases (or compounds) classified correctly by using this LR classifier. Accuracy literally provided a measure of how close the predicted samples were to the true values. One caveat to note was that for imbalanced dataset, accuracy score might not be very informative, and other evaluation metrics would need to be considered instead.
-
-The accuracy score shown below was from the pipeline method used previously, which showed a very similar accuracy score of 0.6965699 (close to 0.7), confirming the method was in line with the original preprocessing method.
+The accuracy score was still around 0.7 this time for LogR model, but slightly higher at 0.715 as it was 0.6992084 from ML series 1. The accuracy from the pipeline method (LogReg model) was 0.6939314 this time (which was 0.6965699 from ML series 1).
 
 ```{python}
-#LR.score(X_test, y_test)
+LogReg.score(X_test, y_test)
 ```
 
 <br>
 
 ###### **Confusion matrix**
 
-Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
+Again, to visualise the LR classifer built this time using LogisticRegressionCV estimator in a confusion matrix, the same code was used as previously.
 
-```{{python}}
+```{python}
 # Import confusion matrix from scikit-learn
 from sklearn.metrics import confusion_matrix
 # Import itertools - functions to create iterators for efficient looping
@@ -329,7 +330,7 @@ def plot_confusion_matrix(# Sets a cm object (cm = confusion matrix)
     plt.xlabel('Predicted label')
 ```
 
-```{{python}}
+```{python}
 # Compute confusion matrix
 matrix = confusion_matrix(y_test, y_mp, labels = [0,1])
 np.set_printoptions(precision = 2)
@@ -345,20 +346,18 @@ plot_confusion_matrix(matrix,
                      )
 ```
 
-A common rule of thumb for confusion matrix was that all predicted outcomes were columns and all the true outcomes were rows. However, there might be exceptions where this was the other way round. Four different categories could be seen in the confusion matrix which were:
+The four different categories in the confusion matrix were:
 
--   True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 (128 out of 179 samples)
--   True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 (138 out of 200 samples)
--   False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 (51 out of 179 samples)
--   False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 (62 out of 200 samples)
-
-By having these four categories known would then lead us to the next section about classification report, which showed all the precision, recall, f1-score and support metrics to evaluate the performance of this classifier.
+-   True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 ( out of  samples)
+-   True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 ( out of  samples)
+-   False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 ( out of  samples)
+-   False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 ( out of  samples)
 
 <br>
 
 ###### **Classification report**
 
-```{{python}}
+```{python}
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_mp))
 ```
@@ -391,7 +390,7 @@ $$
 
 Log loss could be used as another gauge to show how good the classifier was at making the outcome predictions. The further the predicted probability was from the true value, the larger the log loss, which was also ranged from 0 to 1. Ideally, the smaller the log loss the better the model would be. Here, we had a log loss of 0.61 for this particular model.
 
-```{{python}}
+```{python}
 # Log loss
 from sklearn.metrics import log_loss
 log_loss(y_test, y_mp_proba)
@@ -419,13 +418,7 @@ I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-
 
 #### **References**
 
-I've listed below most of the references used throughout this project. Again, huge thanks could not be forgotten for our online communities, and definitely also towards the references I've used here.
-
 -   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
 -   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa *et al.*, JMLR 12, pp. 2825-2830, 2011.
 -   Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
 -   [Stack Overflow](https://stackoverflow.com)
--   Polars references:
-    1.  [Polars - User Guide](https://pola-rs.github.io/polars-book/user-guide/introduction.html) - https://pola-rs.github.io/polars-book/user-guide/introduction.html
-    2.  [Polars documentation](https://pola-rs.github.io/polars/py-polars/html/index.html#) - https://pola-rs.github.io/polars/py-polars/html/index.html#
-    3.  [Polars GitHub repository](https://github.com/pola-rs/polars) - https://github.com/pola-rs/polars
