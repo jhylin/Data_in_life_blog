@@ -270,7 +270,7 @@ In order to search and see the variations in the LR parameters, I've opted to us
 
 ```{python}
 # Re-sampled y variable so that there were same numbers of samples as X variables
-y = np.asarray(df_ml["Max_Phase"].sample(n = 379, random_state = 1))
+y = np.asarray(df_ml["Max_Phase"].sample(n = 379, random_state = 250))
 y.shape
 ```
 
