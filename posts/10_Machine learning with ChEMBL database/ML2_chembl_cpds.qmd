@@ -278,7 +278,7 @@ y.shape
 ```{python}
 # **Draft code only - work-in-progress**
 
-# Idea is to show the variations/trends in cv, C, l1-ratio
+# Idea is to show the variations/trends in cv, C, solvers & penalties
 # when they are used in combinations to fit and evaluate the models
 
 # Code adapted from: https://machinelearningmastery.com/hyperparameters-for-classification-machine-learning-algorithms/
@@ -291,7 +291,7 @@ from sklearn.model_selection import GridSearchCV
 model = LogisticRegressionCV()
 # Note: default value for cv = 5-fold
 cv = [5, 10, 20, 30]
-# Note: default value for Cs = 10
+# Note: default value for Cs = 10 (integers or floats only)
 Cs = [1, 10, 50, 100]
 # Note: default solver = "lbfgs"
 solvers = ["lbfgs", "liblinear", "newton-cg", "newton-cholesky"]
