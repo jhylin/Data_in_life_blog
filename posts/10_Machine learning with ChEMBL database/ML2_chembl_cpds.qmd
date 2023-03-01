@@ -269,7 +269,7 @@ Note: only certain penalties and solvers work together.
 In order to search and see the variations in the LR parameters, I've opted to use RepeatedStratifiedKFold as the cross-validation method (which was also the default cross-validator method used in LogisticRegressionCV classifier). The "repeat" version would repeat Stratified K-Fold at stated (n) times. Because of this, GridSearchCV would be used to exhaustively search for the best parameters in this case, with the aim to see how the changes in parameters would affect the accuracy scores for each model.
 
 ```{python}
-# Re-sample y variable so that there are same numbers of samples as X variables
+# Re-sampled y variable so that there were same numbers of samples as X variables
 y = np.asarray(df_ml["Max_Phase"].sample(n = 379, random_state = 1))
 y.shape
 ```
