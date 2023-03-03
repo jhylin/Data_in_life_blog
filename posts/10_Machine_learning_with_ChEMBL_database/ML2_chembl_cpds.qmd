@@ -1,5 +1,5 @@
 ---
-title: Machine learning with small molecules in ChEMBL database
+title: Small molecules in ChEMBL database
 subtitle: Cross-validation & hyper-parameter tuning with *scikit-learn* 
 author: Jennifer HY Lin
 date: '2023-3-2'
@@ -77,25 +77,20 @@ import numpy as np
 from sklearn import preprocessing
 # To split dataset into training & testing sets
 from sklearn.model_selection import train_test_split
-
-# For data visualisations
-# Uncomment line below if requiring to install matplotlib
-#!pip install matplotlib
-import matplotlib.pyplot as plt
 ```
 
 <br>
 
 ##### **Logistic regression**
 
-To get the LR model ready, we needed to define our X and y variables from the df_ml dataset.
+To get the LR model ready, the X and y variables were defined with the same sets of small molecule physicochemical features from the df_ml dataset.
 
 <br>
 
 ###### **Defining X and y variables**
 
 ```{python}
-# Define X variables from df_ml dataset (by selecting certain features)
+# Define X variables from df_ml dataset
 X = np.asarray(df_ml[["#RO5 Violations", 
                       "QED Weighted", 
                       "CX LogP", 
@@ -144,7 +139,7 @@ X[0:5]
 
 ###### **Fitting LR classifier on training set**
 
-One major difference to this LR classifier this time was that cross-validation was included, via using LogisticRegressionCV model, when fitting the training data.
+One major difference to this LR classifier this time was that cross-validation was included via using LogisticRegressionCV model when fitting the training data.
 
 ```{python}
 # Import logistic regression CV estimator
@@ -202,55 +197,54 @@ y_mp_prob.describe()
 
 ###### **Cross-validation**
 
-Cross-validation was designed to minimise the amount of samples lost if we were to always partition all of our datasets into three lots for training, testing and validation. Readers with eagle eyes might notice a new set of data named validation set here. One of the biggest reasons to add this validation set was that often overfitting could happen on testing set with testing data being leaked into the model, which most likely would occur because all the parameters could be edited until the model performs optimally. By having a validation set of the data, this overfitting problem would be avoided.
+Cross-validation was designed to minimise sample loss if all of our datasets were partitioned into three lots for training, testing and validation purposes. Readers might notice an additional set of data for validation here. One of the biggest reasons to add this validation set was that often overfitting could happen on the testing set with testing data being leaked into the model, due to parameter tweaking until the model performed optimally as desired. By having a validation set of the data, this overfitting problem could be avoided.
 
-In general, model training could take place initially on the training set, with the validation set used for first evaluation, which would be followed by a final evaluation on the testing set if the model testing worked as expected. The "cross" part of the cross-validation was the part that described the process of splitting the training data into many smaller number (*k*) of sets, which was also why cross-validation was also often known as "*k*-fold cross-validation" as well. With the use of *k*-fold cross-validation, the training set was essentially equivalent to *k*-1 of the folds of training data. The trained model would then be validated by using the remaining parts of the training data, which was almost like being used as a testing data to measure the performance of the trained model.
+In general, model training could take place initially on the training set, with the validation set used for first evaluation, which would be followed by a final evaluation on the testing set if the model testing worked as expected. The "cross" part of the cross-validation was the part that described the process of splitting the training data into many smaller number ("*k*") of sets, which was also why cross-validation was also known as "*k*-fold cross-validation". With the use of *k*-fold cross-validation, the training set was essentially equivalent to *k*-1 of the folds of training data. The trained model would then be validated by using the remaining parts of the training data, which was almost like being used as a testing data to measure the performance of the trained model.
 
 ::: callout-note
-In short, cross-validation was simply a commonly used out-of-sample evaluation metric with effective use of data, where each observation was used for both training and testing.
+In short, cross-validation was a commonly used out-of-sample evaluation metric with effective use of data, where each observation was used for both training and testing.
 :::
 
 <br>
 
 ###### **Decoding LogisticRegressionCV classifier**
 
-Since we've used LogisticRegressionCV classifier for the LR models, this meant it would be unnecessary to use GridSearchCV again if we read the definition of the estimatorCV closely, as shown below.
+Since we've used LogisticRegressionCV classifier for the LR models, this meant it would be unnecessary to use GridSearchCV again according to the definition of the estimatorCV as shown below.
 
 As quoted from *scikit-learn* on [cross-validation estimator](https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator):
 
 <q>An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), ...). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters.
 
-Therefore, the cross validation part for the LR model was taken care of by the LogisticRegressionCV() classifier. However, I wanted to find out more about this particular estimator, so to further dissect LogisticRegressionCV classifer, I looked into the documentation in *scikit-learn*, in that Stratified K-Folds cross-validator was used specifically at the default setting. One of the parameters in the classifier that was closely related to the Stratified K-Folds was the cv parameter, which was the cross-validation generator that could be tuned by providing integers as its equivalent number of folds used. Its default value for LogisticRegressionCV was set as "None", which was changed from 3-fold to 5-fold in version 0.22.
+Therefore, the cross validation part for the LR model was taken care of by the LogisticRegressionCV() classifier. However, I wanted to find out more about this particular estimator, so to further dissect LogisticRegressionCV classifer, Stratified K-Folds cross-validator was used specifically as the default setting. One of the parameters in the classifier that was closely related to the Stratified K-Folds was the cv parameter. It was the cross-validation generator that could be tuned by providing integers as its equivalent number of folds used. Its default value for LogisticRegressionCV was set as "None", which was equivalent to and changed from 3-fold to 5-fold in version 0.22.
 
 <br>
 
 ###### **Hyper-parameter tuning - how parameters affect LR model**
 
-To explicitly see the details of all the parameters after cross-validation, we could find the names and values of these parameters for the estimator by using the code below.
-
-To find the parameters of any ML estimator, the code suggested by *scikit-learn* was shown below.
+To explicitly see the details of all the parameters after the cross-validation, the names and values of these parameters could be checked for the estimator by using the code below.
 
 ``` {{python}}
+# To find the parameters of any ML estimator as suggested by *scikit-learn*
 estimator.get_params()
 ```
 
-In this example, the first LR model built was named LogR. All the parameters used for LogR by the LogisticRegressionCV classifer could be shown by using the code below.
+In this example, the LR model built was named LogR. All the parameters used for LogR by the LogisticRegressionCV classifer were:
 
 ```{python}
 LogR.get_params()
 ```
 
-However, by showing this set of parameters used won't really tell much about whether any of these parameters were indeed the best ones to fit the model with. So to find out how these parameters influence the LR model, it was probably best to run a test by using several different parameters on the model to observe the effects. I've had two parameters in mind that I thought would affect the confusion matrix at least - cv and random_state parameters after doing some manual trial and errors by changing cv and random_state values in the code. However, upon reading and digging more online information and resources, I quickly realised that cv parameter would probably matter more than random_state parameter. This was based this line from *scikit-learn* on LogisticRegressionCV classifer,
+However, by showing this set of parameters used by LogisticRegressionCV classifier won't really tell much about whether any of these parameters were indeed the best ones to fit the model with. So to find out how these parameters influenced the LR model, it was probably best to run a test by using several different parameters on the model to observe the effects. I've had two parameters in mind that I thought would affect the confusion matrix at least - cv and random_state parameters after doing some manual trial and errors by changing the cv and random_state values in the code. However, upon reading and digging further in the online information and resource pools, I quickly realised that cv parameter would probably matter more than random_state parameter. This was based on this line from *scikit-learn* about the LogisticRegressionCV classifer,
 
 <q> For the grid of Cs values and l1_ratios values, the best hyperparameter is selected by the cross-validator StratifiedKFold, but it can be changed using the cv parameter.
 
-So it appeared changing cv parameter could affect Cs and l1_ratios values as well. Also from *scikit-learn* documentation on LR, other parameters that could be tuned were solvers, penalties and C (controls regularisation or penalty strengths, which would be already taken care of if using LogisticRegressionCV classifier). ***Explain solvers & penalties***
-
-Quite a few other similar online projects using logistic regression in *scikit-learn* had also mentioned that logistic regression in general did not have a lot of critical hyper-parameters to be tuned. Another post I happened to bump into even concluded that better time should be used to link the model results with actual business metrics, rather than trying to use hyper-parameter tuning on LR model. Nevertheless, I still wanted to see how these parameters would affect the LR model in this case, even if it was of minor significance, so that I would fully understand how all of them work together.
+So it appeared that changing cv parameter could affect Cs and l1_ratios values as well. Also from *scikit-learn* documentation on LR, other parameters that could be tuned were *solvers* (algorithms used in classifiers), *penalties* (or also known as regularisation, which was to reduce model generalisation errors and to regulate or prevent overfitting) and *C* (controls regularisation or penalty strengths, which would be already taken care of if using LogisticRegressionCV classifier). 
 
 ![Table summary for different penalties supported by different solvers in logistic regression - adapted from *scikit-learn*: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression. Note: only certain penalties and solvers work together. OVR = One-vs-Rest.](LR_penalties_solvers.jpg)
 
-In order to search and see the variations in the LR parameters, I've opted to use RepeatedStratifiedKFold as the cross-validation method (which was also the default cross-validator method used in LogisticRegressionCV classifier). The "repeat" version would repeat Stratified K-Fold at stated (n) times. Because of this, GridSearchCV would be used to exhaustively search for the best parameters in this case, with the aim to see how the changes in parameters would affect the accuracy scores for each model.
+A few other online projects or tutorials using logistic regression in *scikit-learn* had also mentioned that logistic regression in general did not have a lot of key hyper-parameters to be tuned. Another post I happened to bump into even concluded that better time should be used to link the model results with actual business metrics, rather than trying to use hyper-parameter tuning on the LR model. Nevertheless, I still wanted to see how these parameters would affect the LR model in this case, even if it was of minor significance, so that I would fully understand how all of them would work together.
+
+In order to search and test the LR parameters on the models, I've opted to use RepeatedStratifiedKFold as the cross-validation method (which was also the default cross-validator method used in LogisticRegressionCV classifier). The "Repeated" version would repeat Stratified K-Fold at the stated (*n*) times. Because of this, GridSearchCV would be used to exhaustively search for all the best parameters in this case, with the aim to see how the changes in parameters would affect the accuracy scores for each model.
 
 ```{python}
 # Re-sampled y variable so that there were same numbers of samples as X variables
@@ -259,59 +253,53 @@ y.shape
 ```
 
 ```{python}
-# **Draft code only - work-in-progress**
-
-# Idea is to show the variations/trends in cv, C, solvers & penalties
-# when they are used in combinations to fit and evaluate the models
-
 # Code adapted from: https://machinelearningmastery.com/hyperparameters-for-classification-machine-learning-algorithms/
 
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.model_selection import GridSearchCV
-#from sklearn.linear_model import LogisticRegression
 
-# Set up model and parameters to test
+# Set up model to test
 model = LogisticRegressionCV()
+
+# Set up parameters to test
 # Note: default value for cv = 5-fold
 cv = [5, 10, 20, 30]
 # Note: default value for Cs = 10 (integers or floats only)
 Cs = [1, 10, 50, 100]
 # Note: default solver = "lbfgs"
 solvers = ["lbfgs", "liblinear", "newton-cg", "newton-cholesky"]
-#  removed to test
 # "sag", "saga" not used as these were faster for large datasets
 # (the dataset used in this case was small)
 penalty = ["l2"]
 
 # Set up grid search
+# Specify grid
 grid = dict(cv = cv, Cs = Cs, solver = solvers, penalty = penalty)
-
+# Specify type of cross-validation method to be used
 CV = RepeatedStratifiedKFold(n_splits = 5, n_repeats = 2, random_state = 2)
-
 grid_search = GridSearchCV(estimator = model, param_grid = grid, n_jobs = -1, cv = CV, scoring = "accuracy", error_score = 0)
-
 grid_result = grid_search.fit(X, y)
 
-# Results
+# Results with means, standard deviations of accuracy scores 
+# and best parameters used
 print("Best mean test score: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_["mean_test_score"]
 std = grid_result.cv_results_["std_test_score"]
 params = grid_result.cv_results_["params"]
 for mean, stdv, param in zip(means, std, params):
     print("%f (%f) with: %r" % (mean, stdv, param))
-
 ```
 
 <br>
 
-#### **Discussions and conclusion**
+#### **Results & discussions**
 
 <br>
 
 #### **Final words**
 
 ::: callout-note
-Feel free to skip this part as this is really me speaking my thoughts out loud about my situation lately.
+Feel free to skip this final part as this is really me speaking my thoughts out loud about my situation lately.
 :::
 
 After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst... this was the latest impression/feedback I've received). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I'll continue improving the data analytics aspect, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field. I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot domestically.
