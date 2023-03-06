@@ -235,7 +235,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#machine-learning-in-drug-discovery---series-2" id="toc-machine-learning-in-drug-discovery---series-2" class="nav-link active" data-scroll-target="#machine-learning-in-drug-discovery---series-2"><strong><em>Machine learning in drug discovery - series 2</em></strong></a></li>
-  <li><a href="#review-of-ml-series-1-introduction-of-series-2" id="toc-review-of-ml-series-1-introduction-of-series-2" class="nav-link" data-scroll-target="#review-of-ml-series-1-introduction-of-series-2"><strong>Review of ML series 1 &amp; introduction of series 2</strong></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
   <li><a href="#import-dataframe-from-ml-series-1" id="toc-import-dataframe-from-ml-series-1" class="nav-link" data-scroll-target="#import-dataframe-from-ml-series-1"><strong>Import dataframe from ML series 1</strong></a></li>
   <li><a href="#import-libraries-for-machine-learning" id="toc-import-libraries-for-machine-learning" class="nav-link" data-scroll-target="#import-libraries-for-machine-learning"><strong>Import libraries for machine learning</strong></a></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><strong>Logistic regression</strong></a>
@@ -270,10 +270,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="machine-learning-in-drug-discovery---series-2"><strong><em>Machine learning in drug discovery - series 2</em></strong></h5>
 <p><br></p>
 </section>
-<section id="review-of-ml-series-1-introduction-of-series-2" class="level5">
-<h5 class="anchored" data-anchor-id="review-of-ml-series-1-introduction-of-series-2"><strong>Review of ML series 1 &amp; introduction of series 2</strong></h5>
-<p>This post was really a continuation of the first machine learning (ML) series, “Small molecules in ChEMBL database”. In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I’ve not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in terms of a LR and ML context.</p>
-<p>This time, with a goal of trying to improve the model, I’ve planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance. It was also worth evaluating whether LR was the best ML approach for the df_ml dataset, which would likely need to be kept as a separate post to avoid another lengthy read. I also, on the other hand, have had an idea in mind of doing a ML series 3 looking at re-training the model and a final evaluation, which would keep me busy in the coming weeks or months.</p>
+<section id="introduction" class="level5">
+<h5 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h5>
+<p>This work was really a continuation of the first machine learning (ML) in drug discovery series, “Small molecules in ChEMBL database - Polars dataframe library and machine learning in <em>scikit-learn</em>” (referred to as ML series 1 from here onwards). In particular, I wanted to work on the logistics regression (LR) model, and look into other strategies that I could use to improve it. Last time, I used LogisticRegression() method on the df_ml dataframe (df_ml_pd was the actual dataframe name used in ML series 1, to denote a conversion from a Polars to Pandas dataframe). I’ve not changed any parameters for the LR estimator, which meant everything was kept at default settings. Overall, this was an example of a default prototype of a LR classifer, which most likely would be too simplistic and not really reflecting real-world equivalents, but it sort of helped me to think in terms of a LR and ML context.</p>
+<p>This time, with a goal of trying to improve the model, I’ve planned to use cross-validation and hyper-parameter tuning at least to evaluate the estimator performance. It was also worth evaluating whether LR was the best ML approach for the df_ml dataset, which would likely need to be kept as a separate post to avoid another lengthy read. I also, on the other hand, have had an idea in mind of doing a ML series 3 looking at re-training the model and a final evaluation, which would keep me busy in the coming weeks.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -443,7 +443,7 @@ Note
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rng = np.random.RandomState(0) </span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Edited post to use random_state = 250 </span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to show comparison with ML series 1 for reproducible result</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to be the same as ML series 1 for reproducible result</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">250</span>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Training set:'</span>, X_train.shape, y_train.shape)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Testing set:'</span>, X_test.shape, y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -674,7 +674,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In short, cross-validation was commonly used as an out-of-sample evaluation metric, where each observation was used for both training and testing, leading to effective use of data.</p>
+<p>In short, cross-validation was commonly used as an out-of-sample evaluation metric, where each observation was used for both training and testing, leading to more effective use of data.</p>
 </div>
 </div>
 <p><br></p>
@@ -684,12 +684,12 @@ Note
 <p>Since we’ve used LogisticRegressionCV classifier for the LR models, this meant it would be unnecessary to use GridSearchCV again according to the definition of the estimatorCV as shown below.</p>
 <p>As quoted from <em>scikit-learn</em> on <a href="https://scikit-learn.org/stable/glossary.html#term-cross-validation-estimator">cross-validation estimator</a>:</p>
 <p><q>An estimator that has built-in cross-validation capabilities to automatically select the best hyper-parameters (see the User Guide). Some example of cross-validation estimators are ElasticNetCV and LogisticRegressionCV. Cross-validation estimators are named EstimatorCV and tend to be roughly equivalent to GridSearchCV(Estimator(), …). The advantage of using a cross-validation estimator over the canonical estimator class along with grid search is that they can take advantage of warm-starting by reusing precomputed results in the previous steps of the cross-validation process. This generally leads to speed improvements. An exception is the RidgeCV class, which can instead perform efficient Leave-One-Out (LOO) CV. By default, all these estimators, apart from RidgeCV with an LOO-CV, will be refitted on the full training dataset after finding the best combination of hyper-parameters.</q></p>
-<p>Therefore, the cross validation part for the LR model was taken care of by the LogisticRegressionCV classifier. However, I wanted to find out more about this particular estimator, so to further dissect LogisticRegressionCV classifer, Stratified K-Folds cross-validator was actually used in the default setting. One of the parameters in the classifier that was closely related to the Stratified K-Folds was the cv parameter. It was a cross-validation generator that could be tuned by providing integers as its equivalent number of folds used. Its default value for LogisticRegressionCV was set as “None”, which was equivalent to and changed from 3-fold to 5-fold in <em>scikit-learn</em> version 0.22.</p>
+<p>Therefore, the cross validation part for the LR model was taken care of by the LogisticRegressionCV classifier. However, I wanted to find out more about this particular estimator, so to further dissect LogisticRegressionCV classifer, Stratified K-Folds cross-validator was actually found to be used in its default setting. One of the parameters in the classifier that was closely related to the Stratified K-Folds was the cv parameter. It was a cross-validation generator that could be tuned by providing integers as its equivalent number of folds used. Its default value for LogisticRegressionCV was set as “None”, which was equivalent to and changed from 3-fold to 5-fold in <em>scikit-learn</em> version 0.22.</p>
 <p><br></p>
 </section>
 <section id="hyper-parameter-tuning---how-parameters-affect-lr-model" class="level6">
 <h6 class="anchored" data-anchor-id="hyper-parameter-tuning---how-parameters-affect-lr-model"><strong>Hyper-parameter tuning - how parameters affect LR model</strong></h6>
-<p>To explicitly see the details of all the parameters after the cross-validation, the names and values of these parameters could be checked for the estimator by using the code below.</p>
+<p>To explicitly see the details of all the parameters used after the cross-validation, the names and values of these parameters could be checked for the estimator by using the code below.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To find the parameters of any ML estimator as suggested by *scikit-learn*</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>estimator.get_params()</span>
@@ -728,7 +728,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="LR_penalties_solvers.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Table summary for different penalties supported by different solvers in logistic regression, adapted from <em>scikit-learn</em> - https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression. Note: only certain penalties and solvers work together, OVR = One-vs-Rest.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Summary table for different penalties supported by different solvers in logistic regression, adapted from <em>scikit-learn</em> - https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression. Note: only certain penalties and solvers work together, OVR = One-vs-Rest.</figcaption><p></p>
 </figure>
 </div>
 <p>A few other online projects or tutorials using logistic regression in <em>scikit-learn</em> had also mentioned that logistic regression in general did not have a lot of key hyper-parameters for tuning. Another post I happened to bump into even concluded that better time should be used to link the model results with the actual business metrics instead, rather than trying to use hyper-parameter tuning on the LR model. Nevertheless, I still wanted to see how these parameters would affect the LR model in this case, even if it was of minor significance, so that I would fully understand how all of them would work together, and how tuning hyper-parameters would be like.</p>
@@ -761,39 +761,45 @@ Note
 <span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co"># they were mainly used for large datasets for speed</span></span>
 <span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>penalty <span class="op">=</span> [<span class="st">"l2"</span>]</span>
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up grid search</span></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify grid for parameters to test</span></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>(cv <span class="op">=</span> cv, Cs <span class="op">=</span> Cs, solver <span class="op">=</span> solvers, penalty <span class="op">=</span> penalty)</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify type of cross-validation method to be used</span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>CV <span class="op">=</span> RepeatedStratifiedKFold(n_splits <span class="op">=</span> <span class="dv">5</span>, n_repeats <span class="op">=</span> <span class="dv">2</span>, random_state <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify grid for parameters to test in grid search</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>(cv <span class="op">=</span> cv, Cs <span class="op">=</span> Cs, solver <span class="op">=</span> solvers, penalty <span class="op">=</span> penalty)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify type of cross-validation method to be used</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>CV <span class="op">=</span> RepeatedStratifiedKFold(n_splits <span class="op">=</span> <span class="dv">5</span>, n_repeats <span class="op">=</span> <span class="dv">2</span>, random_state <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up grid search</span></span>
 <span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify grid search parameters</span></span>
 <span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(</span>
 <span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Specify model</span></span>
 <span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  estimator <span class="op">=</span> model,</span>
 <span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Specify parameters to test</span></span>
 <span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  param_grid <span class="op">=</span> grid,</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Number of jobs to run in parallel (1 = no parallel jobs; None = unset, but could be interpreted as "1" unless otherwise specified; -1 = all processors used)</span></span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Type of cross-validation method to be used (if none set, default 5-fold cv will be used)</span></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  cv <span class="op">=</span> CV, </span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Type of scoring to be used to evaluate the model</span></span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>  scoring <span class="op">=</span> <span class="st">"accuracy"</span>,</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Value to assign to the "scoring" of the model if an error occurs during model fitting</span></span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  error_score <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the grid search on X and y variables</span></span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(X, y)</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Results with means &amp; standard deviations of accuracy scores with parameters used</span></span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best mean test score: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> grid_result.cv_results_[<span class="st">"mean_test_score"</span>]</span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>std <span class="op">=</span> grid_result.cv_results_[<span class="st">"std_test_score"</span>]</span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> grid_result.cv_results_[<span class="st">"params"</span>]</span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mean, stdv, param <span class="kw">in</span> <span class="bu">zip</span>(means, std, params):</span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="sc">%f</span><span class="st"> (</span><span class="sc">%f</span><span class="st">) with: </span><span class="sc">%r</span><span class="st">"</span> <span class="op">%</span> (mean, stdv, param))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Number of jobs to run in parallel </span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1 = no parallel jobs; </span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># None = unset, but could be interpreted as "1" unless otherwise specified; </span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -1 = all processors used</span></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>  n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Type of cross-validation method to be used </span></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (if none set, default 5-fold cv will be used)</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  cv <span class="op">=</span> CV, </span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Type of scoring to be used to evaluate the model</span></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>  scoring <span class="op">=</span> <span class="st">"accuracy"</span>,</span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Value to assign to the "scoring" of the model </span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if an error occurs during model fitting</span></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>  error_score <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the grid search on X and y variables</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(X, y)</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Results with means &amp; standard deviations of accuracy scores </span></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="co"># with parameters used</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best mean test score: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> grid_result.cv_results_[<span class="st">"mean_test_score"</span>]</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>std <span class="op">=</span> grid_result.cv_results_[<span class="st">"std_test_score"</span>]</span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> grid_result.cv_results_[<span class="st">"params"</span>]</span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mean, stdv, param <span class="kw">in</span> <span class="bu">zip</span>(means, std, params):</span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="sc">%f</span><span class="st"> (</span><span class="sc">%f</span><span class="st">) with: </span><span class="sc">%r</span><span class="st">"</span> <span class="op">%</span> (mean, stdv, param))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best mean test score: 0.699263 using {'Cs': 50, 'cv': 5, 'penalty': 'l2', 'solver': 'lbfgs'}
 0.532982 (0.005887) with: {'Cs': 1, 'cv': 5, 'penalty': 'l2', 'solver': 'lbfgs'}
@@ -867,7 +873,15 @@ Note
 </section>
 <section id="results-discussions" class="level4">
 <h4 class="anchored" data-anchor-id="results-discussions"><strong>Results &amp; discussions</strong></h4>
-<p>From the grid search, the values of Cs and cv parameters that generated the best mean accuracy score were 50 and 5 respectively. The best mean accuracy score produced was 0.699263 with a standard deviation of 0.043226. Solver-wise, there were actually 3 other solvers, liblinear, newton-cg and newton-cholesky, in addition to the default one (lbfgs), that also generated the same mean accuracy score with the same standard deviations, while using Cs = 50 and cv = 5. In my initial LogisticRegressionCV model, I have used a different value of Cs parameter (at 10), but with the same cv and penalty parameters. For the next ML series 3, I was planning to re-train the LogisticRegressionCV model with the found best parameters and do a final round of evaluation, and see if there would be any particular differences, although I suspected the difference might be small, as shown from the current mean accuracy score found from this grid search. However, the goal of this post was to understand how cross-valiadation could be used for hyper-parameter tuning to find the optimal parameters to avoid overfitting a ML model.</p>
+<p>Trends observed from the grid search above (when penalty = l2):</p>
+<ul>
+<li><p>For Cs = 1, the best accuracy score was 0.670281 across all 4 different cv parameters (5, 10, 20, 30), and the best solver was liblinear</p></li>
+<li><p>For Cs = 10, the best accuracy score was 0.699246 for cv = 20 and when solver was set as liblinear</p></li>
+<li><p>for Cs = 50, the best accuracy score was 0.699263 for cv = 5 across all 4 solvers</p></li>
+<li><p>for Cs = 100, the best accuracy score was 0.697930 for cv = 10 across 3 out of 4 solvers only, which were lbfgs, newton-cg and newton-cholesky</p></li>
+</ul>
+<p>It appeared that for smaller values of Cs, liblinear might be more suitable than the default lbfgs solver. However, for higher values of Cs, e.g.&nbsp;50 and above, liblinear might not always be the best solver. The values of Cs and cv parameters that generated the best mean accuracy score were 50 and 5 respectively. The best mean accuracy score produced was 0.699263 with a standard deviation of 0.043226. Solver-wise, there were actually 3 other solvers, liblinear, newton-cg and newton-cholesky, along with the default lbfgs that generated the same mean accuracy score and standard deviations while using Cs = 50 and cv = 5. In my initial LogisticRegressionCV model, I used a different value of Cs parameter (at 10), but with the same cv and penalty parameters.</p>
+<p>Therefore, for the next ML series 3, the plan was to re-train the LogisticRegression model with the newly-discovered best parameters and re-evaluate the model to see if there would be any particular differences. Although currently I suspected the differences might be small (which probably also echoed other ML work on different datasets that also used LR), since the accuracy scores generated from this grid search and ML series 1 were very similar. However, the goal of this post was to understand how cross-validation could be used for hyper-parameter tuning to find the optimal parameters to avoid overfitting a ML model, and this was likely more applicable in other ML approaches.</p>
 <p><br></p>
 </section>
 <section id="final-words" class="level4">
@@ -882,11 +896,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Feel free to skip this final part as this was really me speaking my thoughts out loud about my situation lately.</p>
+<p>Feel free to skip this final part as this was really me speaking my thoughts out loud about my portfolio lately.</p>
 </div>
 </div>
-<p>After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I’m going for (I might be over-qualified for being a general health data analyst… this was the latest impression/feedback I’ve received). So here it is, I’m going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I’ll continue improving the data analytics aspect, but I’ll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field. I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot domestically.</p>
-<p>I once read a <a href="https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/">blog post on learning ML</a>, which has suggested to go broadly in topics, then go deep in one of them, which I’ve agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI’s ChatGPT has limits - being restricted by the amount and types of input data being fed into the GPT). So since I’ve branched into 3 programming languages so far, I’ve decided not to expand further into new programming languages for now, to avoid being “half-bucket-full” for everything, I should really narrow down my focus now. To name the 3 programming languages in the order I’ve learnt them, they are Python, R and Rust. In that, I’m most comfortable with Python as that is my first language, then it’s R, followed by Rust, which is almost brand new. I think right now is a good time for me to go deep into an area that has always caught my attentions.</p>
+<p>I once read a <a href="https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/">blog post on learning ML</a>, which has suggested to go broadly in topics, then go deep in one of them, which I’ve agreed wholeheartedly as the approach to go about in the tech world, since there are no ways on earth to learn absolutely everything completely (even OpenAI’s ChatGPT has limits - being restricted by the amount and types of input data being fed into the GPT). So, since I’ve branched into 3 programming languages so far, I’ve decided not to expand further into new programming languages for now, to avoid being “half-bucket-full” for everything, I should really narrow down my focus now. To name the 3 programming languages in the order I’ve learnt them, they are Python, R and Rust. In that, I’m most comfortable with Python as that is my first language, then it’s R, followed by Rust, which is almost brand new. I think right now is a good time for me to go deep into an area that has always caught my attentions. So I’ll be concentrating more on ML in my portfolio in the near future.</p>
 <p><br></p>
 </section>
 <section id="references" class="level4">
