@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/10_ML2_Small_molecules_in_ChEMBL_database/ML_CV_flowchart.html",
       "/posts/10_ML2_Small_molecules_in_ChEMBL_database/ML2_chembl_cpds.html",
       "/posts/09_Pills/Rust_evcxr_polars_plotly_final.html",
       "/posts/09_Pills/Rust_polars_pills_df.html",

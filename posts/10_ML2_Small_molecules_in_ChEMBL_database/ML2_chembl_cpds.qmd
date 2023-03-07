@@ -2,7 +2,7 @@
 title: Small molecules in ChEMBL database
 subtitle: Cross-validation & hyper-parameter tuning with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-3-6'
+date: '2023-3-7'
 draft: false
 categories:
   - Machine learning projects

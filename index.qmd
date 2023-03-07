@@ -4,7 +4,7 @@ listing:
   contents: posts
   sort: "date desc"
   type: default
-  fields: [image, date, title, author]
+  fields: [image, date, title, author, reading-time]
   categories: true
   sort-ui: false
   filter-ui: false
@@ -13,13 +13,9 @@ title-block-banner: true
 comments: false
 ---
 
-🌟Welcome to my portfolio🌟 
+🌟Welcome to my portfolio🌟 - to quickly navigate, all of the data projects fall into one of the two main themes: 
 
-To quickly navigate, all of the data projects fall into one of the two main themes as shown below. When you click on any specific category tags, the relevant project post(s) will be shown below this introductory section, or to access all of the projects posts all at once, then simply scroll down past this section. Please click on other individual category tags not mentioned here as they are likely used for all projects in both themes, so they are not mentioned below specifically to avoid duplications.
-
-##### **Cheminformatics & data science projects**
-
-These projects are mainly for drug discovery and pharmaceuticals, with category tags as follow:
+###### **Cheminformatics & data science projects**
 
 - Machine learning projects
 - RDKit
@@ -27,13 +23,10 @@ These projects are mainly for drug discovery and pharmaceuticals, with category 
 - ChEMBL database
 - Pills dataset series
 
-##### **Healthcare data projects**
-
-These projects look at selected illnesses of my personal interests, with possibility of being extended in the future if I get time to explore further.
+###### **Healthcare data projects**
 
 - Data analytics projects
 - Rare diseases
 - Long COVID
 
 <br>
-
