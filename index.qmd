@@ -13,20 +13,30 @@ title-block-banner: true
 comments: false
 ---
 
-🌟Welcome to my portfolio🌟 - to quickly navigate, all of the data projects fall into one of the two main themes: 
+🌟Welcome to my portfolio🌟 
 
-###### **Cheminformatics & data science projects**
+| Cheminformatics & data science projects | Healthcare data projects | 
+|-----------------------------------------|:-------------------------|
+| - Machine learning projects             | - Data analytics projects|  
+| - RDKit                                 | - Rare diseases          |  
+| - Cheminformatics                       | - Long COVID             |     
+| - ChEMBL database                       |                          |
+| - Pills dataset series                  |                          |
 
-- Machine learning projects
-- RDKit
-- Cheminformatics
-- ChEMBL database
-- Pills dataset series
+: Two main project themes
 
-###### **Healthcare data projects**
+<!-- ###### **Cheminformatics & data science projects** -->
 
-- Data analytics projects
-- Rare diseases
-- Long COVID
+<!-- - Machine learning projects -->
+<!-- - RDKit -->
+<!-- - Cheminformatics -->
+<!-- - ChEMBL database -->
+<!-- - Pills dataset series -->
 
-<br>
+<!-- ###### **Healthcare data projects** -->
+
+<!-- - Data analytics projects -->
+<!-- - Rare diseases -->
+<!-- - Long COVID -->
+
+<!-- <br> -->

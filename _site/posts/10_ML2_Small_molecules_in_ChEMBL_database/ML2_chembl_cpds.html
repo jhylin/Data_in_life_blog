@@ -758,7 +758,7 @@ Note
 </div>
 </div>
 <p>However, by showing this set of parameters used by LogisticRegressionCV classifier wouldn’t really tell much about whether any of these parameters were indeed the best ones to fit the model with. So to find out how these parameters influenced the LR model, it was probably best to run a test by using several different parameters on the model to observe the effects. I’ve had two parameters in mind that I thought would affect the confusion matrix at least - cv and random_state parameters after doing some manual trial and errors by changing the cv and random_state values in the code. However, upon reading and digging further in the online information and resource pools, I quickly realised that cv parameter would probably matter more than random_state parameter. This was based on this line from <em>scikit-learn</em> about the LogisticRegressionCV classifer,</p>
-<p><q> For the grid of Cs values and l1_ratios values, the best hyperparameter is selected by the cross-validator StratifiedKFold, but it can be changed using the cv parameter.</q></p>
+<p><q>For the grid of Cs values and l1_ratios values, the best hyperparameter is selected by the cross-validator StratifiedKFold, but it can be changed using the cv parameter.</q></p>
 <p>So it appeared that changing cv parameter could affect Cs and l1_ratios values as well. Also from <em>scikit-learn</em> documentation on LR, other parameters that could be tuned were:</p>
 <ul>
 <li><p><strong><em>solvers</em></strong> - algorithms used in classifiers</p></li>
