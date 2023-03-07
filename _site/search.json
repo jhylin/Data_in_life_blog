@@ -166,26 +166,5 @@
     "title": "Jennifer HY Lin",
     "section": "",
     "text": "About me & this blog\nPersonally, I was born in Taiwan but was raised in New Zealand since I was a young kid. So practically I’m more like a Kiwi, although to be more precise, I’m more like half-a-Kiwi and half-a-Taiwanese. There was always an East-meets-West fusion element in me, forever. Professionally, I started my career as a pharmacist in New Zealand, and spent several years working at community and hospital pharmacies, across metropolitan and rural areas.\nThen somehow life took me on a detour where I went down the path of doing postgraduate studies. The research mainly focussed on drug discovery and design with medicinal and computational chemistry involved, with numerous hours spent in chemistry (wet) and computer (dry) labs doing experiments. The research work happened in Australia, where I’ve also continued to work as a hospital pharmacist while working on the research projects. Reflecting back, it felt like my brain cells have gone through a major metamorphasis during those years, before I ended up with a MPhil and PhD.\nI’ve then decided to return to New Zealand and the pandemic hit within a few months after (I couldn’t even make it to my PhD graduation in 2020, because it was cancelled due to COVID), which meant most of my original plans after PhD were forced to change. Subsequently, I discovered my more recent interests in the world of data science and analytics. This then led to this blog, which is really my portfolio, on data analytics work in the healthcare and pharmaceutical fields, as I came from these backgrounds with boundless interests. It’ll also be another channel for me to write random personal blog posts detailing my journey in data analytics."
-  },
-  {
-    "objectID": "posts/10_ML2_Small_molecules_in_ChEMBL_database/FlowChart.html",
-    "href": "posts/10_ML2_Small_molecules_in_ChEMBL_database/FlowChart.html",
-    "title": "Home",
-    "section": "",
-    "text": "flowchart TB\n  A[Dataset] --> B(Training data)\n  A --> C(Testing data)\n  B --> D(Re-training model)\n  C --> E[Final evaluation]\n  D --> E\n  B --> G(Cross validation & hyper-parameter tuning)\n  G --> H(Best parameter)\n  F(Parameters) --> G\n  H --> D"
-  },
-  {
-    "objectID": "posts/10_ML2_Small_molecules_in_ChEMBL_database/ML_CV_flowchart.html",
-    "href": "posts/10_ML2_Small_molecules_in_ChEMBL_database/ML_CV_flowchart.html",
-    "title": "Home",
-    "section": "",
-    "text": "%%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%\nflowchart TB\n  subgraph ML series 1\n  A[Wrangled dataset] --> B(Train data)\n  A --> C(Test data)\n  end\n  subgraph ML series 3\n  B --> D(Re-trained model)\n  C --> E[Final evaluation]\n  D --> E\n  end\n  subgraph ML series 2\n  B --> G([Cross validation & hyper-parameter tuning])\n  G --> H([Best parameters])\n  F([Parameters]) --> G\n  H --> D\n  end\n  //| fig-cap: This is a simple graphviz graph."
-  },
-  {
-    "objectID": "Intro.html",
-    "href": "Intro.html",
-    "title": "Home",
-    "section": "",
-    "text": "Introduction\n🌟Welcome to my portfolio🌟 - to quickly navigate, all of the data projects fall into one of the two main themes as shown below.\nCheminformatics & data science projects\nThese projects are mainly for drug discovery and pharmaceuticals, with category tags as follow:\n\nMachine learning projects\nRDKit\nCheminformatics\nChEMBL database\nPills dataset series\n\nHealthcare data projects\nThese projects have looked at selected illnesses of my personal interests, with possibility of being extended in the future if I get time to explore further.\n\nData analytics projects\nRare diseases\nLong COVID"
   }
 ]
