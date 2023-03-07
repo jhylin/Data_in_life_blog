@@ -762,7 +762,7 @@ Note
 <p>So it appeared that changing cv parameter could affect Cs and l1_ratios values as well. Also from <em>scikit-learn</em> documentation on LR, other parameters that could be tuned were:</p>
 <ul>
 <li><p><strong><em>solvers</em></strong> - algorithms used in classifiers</p></li>
-<li><p><strong><em>penalties (or regularisation) </em></strong> - aims to reduce model generalisation errors and regulate or prevent overfitting</p></li>
+<li><p><strong><em>penalties (or regularisation)</em></strong> - aims to reduce model generalisation errors and regulate or prevent overfitting</p></li>
 <li><p><strong><em>C</em></strong> - controls regularisation or penalty strengths (which would be already taken care of in this case if using LogisticRegressionCV classifier).</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -917,8 +917,8 @@ Note
 <ul>
 <li><p>For Cs = 1, the best accuracy score was 0.670281 across all 4 different cv parameters (5, 10, 20, 30), and the best solver was liblinear</p></li>
 <li><p>For Cs = 10, the best accuracy score was 0.699246 for cv = 20 and when solver was set as liblinear</p></li>
-<li><p>for Cs = 50, the best accuracy score was 0.699263 for cv = 5 across all 4 solvers</p></li>
-<li><p>for Cs = 100, the best accuracy score was 0.697930 for cv = 10 across 3 out of 4 solvers only, which were lbfgs, newton-cg and newton-cholesky</p></li>
+<li><p>For Cs = 50, the best accuracy score was 0.699263 for cv = 5 across all 4 solvers</p></li>
+<li><p>For Cs = 100, the best accuracy score was 0.697930 for cv = 10 across 3 out of 4 solvers only, which were lbfgs, newton-cg and newton-cholesky</p></li>
 </ul>
 <p>It appeared that for smaller values of Cs, liblinear might be more suitable than the default lbfgs solver. However, for higher values of Cs, e.g.&nbsp;50 and above, liblinear might not always be the best solver. The values of Cs and cv parameters that generated the best mean accuracy score were 50 and 5 respectively. The best mean accuracy score produced was 0.699263 with a standard deviation of 0.043226. Solver-wise, there were actually 3 other solvers, liblinear, newton-cg and newton-cholesky, along with the default lbfgs that generated the same mean accuracy score and standard deviations while using Cs = 50 and cv = 5. In my initial LogisticRegressionCV model, I used a different value of Cs parameter (at 10), but with the same cv and penalty parameters.</p>
 <p>Therefore, for the next ML series 3, the plan was to re-train the LogisticRegression model with the newly-discovered best parameters and re-evaluate the model to see if there would be any particular differences. Although currently I suspected the differences might be small (which probably also echoed other ML work on different datasets that also used LR), since the accuracy scores generated from this grid search and ML series 1 were very similar. However, the goal of this post was to understand how cross-validation could be used for hyper-parameter tuning to find the optimal parameters to avoid overfitting a ML model, and this was likely more applicable in other ML approaches.</p>

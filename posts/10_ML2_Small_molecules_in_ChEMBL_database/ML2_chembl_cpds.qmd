@@ -31,7 +31,7 @@ In *scikit-learn*, an estimator is alluding to the variety of ML approaches (as 
 
 ###### **Machine learning series - overall plan**
 
-The overall plan for the ML series for small molecules in ChEMBL database could be visualised through the following flow chart, which was adapted and modified from the section on [cross-validation in *scikit-learn*](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation). This current post was targeting the ML series 2 subgraph area. 
+The overall plan for the ML series for small molecules in ChEMBL database could be visualised through the following flow chart, which was adapted and modified from the section on [cross-validation in *scikit-learn*](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation). This current post was targeting the ML series 2 subgraph area.
 
 ```{mermaid}
 %%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
@@ -266,11 +266,11 @@ However, by showing this set of parameters used by LogisticRegressionCV classifi
 
 So it appeared that changing cv parameter could affect Cs and l1_ratios values as well. Also from *scikit-learn* documentation on LR, other parameters that could be tuned were:
 
-* ***solvers*** - algorithms used in classifiers
+-   ***solvers*** - algorithms used in classifiers
 
-* ***penalties (or regularisation) *** - aims to reduce model generalisation errors and regulate or prevent overfitting
+-   ***penalties (or regularisation)***  - aims to reduce model generalisation errors and regulate or prevent overfitting
 
-* ***C*** - controls regularisation or penalty strengths (which would be already taken care of in this case if using LogisticRegressionCV classifier).
+-   ***C*** - controls regularisation or penalty strengths (which would be already taken care of in this case if using LogisticRegressionCV classifier).
 
 ![Summary table for different penalties supported by different solvers in logistic regression, adapted from *scikit-learn* - https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression. Note: only certain penalties and solvers work together, OVR = One-vs-Rest.](LR_penalties_solvers.jpg)
 
@@ -351,13 +351,13 @@ for mean, stdv, param in zip(means, std, params):
 
 Trends observed from the grid search above (when penalty = l2):
 
-* For Cs = 1, the best accuracy score was 0.670281 across all 4 different cv parameters (5, 10, 20, 30), and the best solver was liblinear
+-   For Cs = 1, the best accuracy score was 0.670281 across all 4 different cv parameters (5, 10, 20, 30), and the best solver was liblinear
 
-* For Cs = 10, the best accuracy score was 0.699246 for cv = 20 and when solver was set as liblinear
+-   For Cs = 10, the best accuracy score was 0.699246 for cv = 20 and when solver was set as liblinear
 
-* for Cs = 50, the best accuracy score was 0.699263 for cv = 5 across all 4 solvers
+-   For Cs = 50, the best accuracy score was 0.699263 for cv = 5 across all 4 solvers
 
-* for Cs = 100, the best accuracy score was 0.697930 for cv = 10 across 3 out of 4 solvers only, which were lbfgs, newton-cg and newton-cholesky
+-   For Cs = 100, the best accuracy score was 0.697930 for cv = 10 across 3 out of 4 solvers only, which were lbfgs, newton-cg and newton-cholesky
 
 It appeared that for smaller values of Cs, liblinear might be more suitable than the default lbfgs solver. However, for higher values of Cs, e.g. 50 and above, liblinear might not always be the best solver. The values of Cs and cv parameters that generated the best mean accuracy score were 50 and 5 respectively. The best mean accuracy score produced was 0.699263 with a standard deviation of 0.043226. Solver-wise, there were actually 3 other solvers, liblinear, newton-cg and newton-cholesky, along with the default lbfgs that generated the same mean accuracy score and standard deviations while using Cs = 50 and cv = 5. In my initial LogisticRegressionCV model, I used a different value of Cs parameter (at 10), but with the same cv and penalty parameters.
 
