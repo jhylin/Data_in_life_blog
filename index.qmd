@@ -13,39 +13,14 @@ title-block-banner: true
 comments: false
 ---
 
-+-----------------------------------------+---------------------------------+
-| Cheminformatics & data science projects | Output                          |
-+=========================================+=================================+
-| * Machine learning projects             | * Data analytics projects       |  
-| * RDKit                                 | * Rare diseases                 |  
-| * Cheminformatics                       | * Long COVID                    |     
-| * ChEMBL database                       |                                 |
-| * Pills dataset series                  |                                 |
+**🌟Welcome to my portfolio in two main themes with some of the main category tags listed below🌟**
 
-<!-- | Cheminformatics & data science projects | Healthcare data projects |  -->
-<!-- |-----------------------------------------|:-------------------------| -->
-<!-- | - Machine learning projects             | - Data analytics projects|   -->
-<!-- | - RDKit                                 | - Rare diseases          |   -->
-<!-- | - Cheminformatics                       | - Long COVID             |      -->
-<!-- | - ChEMBL database                       |                          | -->
-<!-- | - Pills dataset series                  |                          | -->
-
-: 🌟Welcome to my portfolio🌟
-
-<br>
-
-<!-- ###### **Cheminformatics & data science projects** -->
-
-<!-- - Machine learning projects -->
-<!-- - RDKit -->
-<!-- - Cheminformatics -->
-<!-- - ChEMBL database -->
-<!-- - Pills dataset series -->
-
-<!-- ###### **Healthcare data projects** -->
-
-<!-- - Data analytics projects -->
-<!-- - Rare diseases -->
-<!-- - Long COVID -->
-
-<!-- <br> -->
++---------------------------------------------+---------------------------------+
+| **Cheminformatics & data science projects** | **Healthcare data projects**    |
++---------------------------------------------+---------------------------------+
+| * Machine learning projects                 | * Data analytics projects       |  
+| * RDKit                                     | * Rare diseases                 |  
+| * Cheminformatics                           | * Long COVID                    |     
+| * ChEMBL database                           |                                 |
+| * Pills dataset series                      |                                 |
++---------------------------------------------+---------------------------------+

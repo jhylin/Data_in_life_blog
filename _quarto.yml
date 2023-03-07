@@ -3,7 +3,7 @@ project:
 
 website:
   title: "Home" 
-  page-footer: "Blog made with ❤️ in [Quarto](https://quarto.org/) by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and blog URL link if used"
+  page-footer: "Website made with ❤️ in [Quarto](https://quarto.org/) by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used"
   google-analytics: "G-5CHVP3K63C"
   navbar:
     right:
