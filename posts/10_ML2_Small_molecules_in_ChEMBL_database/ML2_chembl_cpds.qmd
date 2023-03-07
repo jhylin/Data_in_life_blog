@@ -31,17 +31,17 @@ In *scikit-learn*, an estimator is alluding to the variety of ML approaches (as 
 
 ###### **Machine learning series - overall plan**
 
-The overall idea of the ML series for small molecules in ChEMBL database could be visualised through the following flow chart (built through Mermaid). Currently, this post was targeting the ML series 2 area as shown below.
+The overall plan for the ML series for small molecules in ChEMBL database could be visualised through the following flow chart, which was adapted and modified from the section on [cross-validation in *scikit-learn*](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation). This current post was targeting the ML series 2 subgraph area. 
 
 ```{mermaid}
 %%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
 flowchart TB
   subgraph ML series 1
-  A[Wrangled/cleaned dataset] --> B(Train data)
+  A[Cleaned dataset] --> B(Train data)
   A --> C(Test data)
   end
   subgraph ML series 3
-  B --> D(Re-trained model)
+  B --> D(Re-train model)
   C --> E[Final evaluation]
   D --> E
   end
