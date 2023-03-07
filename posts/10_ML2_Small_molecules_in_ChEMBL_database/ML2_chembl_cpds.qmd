@@ -228,7 +228,7 @@ Cross-validation was designed to minimise sample loss if all of our datasets wer
 In general, model training could take place initially on the training set, with the validation set used for first evaluation, which would be followed by a final evaluation on the testing set if the model testing worked as expected. The "cross" part of the cross-validation was the part that described the process of splitting the training data into many smaller number ("*k*") of sets, which was also why cross-validation was also known as "*k*-fold cross-validation". With the use of *k*-fold cross-validation, the training set was essentially equivalent to *k*-1 of the folds of the training data. The trained model would then be validated by using the remaining parts of the training data, which was almost like being used as a testing data to measure the performance of the trained model.
 
 ::: callout-note
-In short, cross-validation was commonly used as an out-of-sample evaluation metric, where each observation was used for both training and testing, leading to more effective use of data.
+In short, cross-validation was commonly used as an out-of-sample evaluation metric, where each observation was used for both training and testing, leading to more effective use of data. It was often used for hyper-parameter tuning to avoid overfitting, where parameters could be optimised via grid search techniques (such as GridSearchCV).
 :::
 
 <br>
