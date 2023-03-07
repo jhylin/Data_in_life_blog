@@ -134,6 +134,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -235,7 +238,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#machine-learning-in-drug-discovery---series-2" id="toc-machine-learning-in-drug-discovery---series-2" class="nav-link active" data-scroll-target="#machine-learning-in-drug-discovery---series-2"><strong><em>Machine learning in drug discovery - series 2</em></strong></a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>Introduction</strong></a>
+  <ul>
+  <li><a href="#machine-learning-series---overall-plan" id="toc-machine-learning-series---overall-plan" class="nav-link" data-scroll-target="#machine-learning-series---overall-plan"><strong>Machine learning series - overall plan</strong></a></li>
+  </ul></li>
   <li><a href="#import-dataframe-from-ml-series-1" id="toc-import-dataframe-from-ml-series-1" class="nav-link" data-scroll-target="#import-dataframe-from-ml-series-1"><strong>Import dataframe from ML series 1</strong></a></li>
   <li><a href="#import-libraries-for-machine-learning" id="toc-import-libraries-for-machine-learning" class="nav-link" data-scroll-target="#import-libraries-for-machine-learning"><strong>Import libraries for machine learning</strong></a></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><strong>Logistic regression</strong></a>
@@ -288,6 +294,40 @@ Note
 </div>
 </div>
 <p><br></p>
+<section id="machine-learning-series---overall-plan" class="level6">
+<h6 class="anchored" data-anchor-id="machine-learning-series---overall-plan"><strong>Machine learning series - overall plan</strong></h6>
+<p>The overall idea of the ML series for small molecules in ChEMBL database could be visualised through the following flow chart (built through Mermaid). Currently, this post was targeting the ML series 2 area as shown below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">%%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
+flowchart TB
+  subgraph ML series 1
+  A[Wrangled/cleaned dataset] --&gt; B(Train data)
+  A --&gt; C(Test data)
+  end
+  subgraph ML series 3
+  B --&gt; D(Re-trained model)
+  C --&gt; E[Final evaluation]
+  D --&gt; E
+  end
+  subgraph ML series 2
+  B --&gt; G([Cross validation &amp; hyper-parameter tuning])
+  G --&gt; H([Best parameters])
+  F([Parameters]) --&gt; G
+  H --&gt; D
+  end
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
 </section>
 <section id="import-dataframe-from-ml-series-1" class="level5">
 <h5 class="anchored" data-anchor-id="import-dataframe-from-ml-series-1"><strong>Import dataframe from ML series 1</strong></h5>
