@@ -322,13 +322,7 @@ log_loss(y_test, y_mp_proba)
 
 #### **Final words**
 
-::: callout-note
-Feel free to skip this part as this is really me speaking my thoughts out loud about my situation lately.
-:::
 
-After encountering several hiccups during my job hunt in data analytics lately (mainly domestic jobs in NZ), I think I need to make up my mind on which field I'm going for (I might be over-qualified for being a general health data analyst... this was the latest impression/feedback I've received). So here it is, I'm going to concentrate on using machine learning (ML) in Python, specifically in drug discovery field for a while. I'll continue improving the data analytics aspect, but I'll be placing more emphasis on ML so that I can somehow create some ML experiences for myself, while trying to find a good match in the research data science job market in the pharmaceutical field. I also have a feeling that I may need to venture out into overseas roles in the near future, as these types of roles involving ML and pharmaceuticals are just too difficult to spot domestically.
-
-I once read a [blog post on learning ML](https://vickiboykis.com/2022/11/10/how-i-learn-machine-learning/) by V. Boykis, who has suggested to go broadly in topics, then go deep in one of them, which I've agreed wholeheartedly as the approach to go about in the tech world, since there is no way on earth that I will be able to learn everything completely (even OpenAI's ChatGPT has limits - being restricted by the amount and types of input data being fed into the GPT). So since I've branched into 3 programming languages so far, I've decided not to expand further into new programming languages for now, to avoid being "half-bucket-full" for everything, I should really narrow down my focus now. To name the 3 programming languages in the order I've learnt them, they are Python, R and Rust. In that, I'm most comfortable with Python as that is my first language, then it's R, followed by Rust, which is almost brand new. I think right now is a good time for me to go deep into an area that has always caught my attentions.
 
 <br>
 
