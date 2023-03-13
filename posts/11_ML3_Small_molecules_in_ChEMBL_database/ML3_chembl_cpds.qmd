@@ -1,8 +1,8 @@
 ---
-title: Machine learning with small molecules in ChEMBL database 
+title: Small molecules in ChEMBL database 
 subtitle: Re-training & final evaluation with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-3-2'
+date: '2023-3-13'
 draft: true
 categories:
   - Machine learning projects
@@ -22,18 +22,19 @@ jupyter: python3
 
 ##### **Review of ML series 2 & introduction of series 3**
 
+Without making this final post for logistic regression ML series for small molecules in ChEMBL database too long, I'll quickly explain what happened in the ML series 1 and 2. Basically, I've trialled a logistic regression model on a small set of ChEMBL database-extracted small molecule data. The whole purpose was for me to go through the ML series flowchart that I've compiled in ML series 2. Currently, this post was ML series 3 focussing on re-training the model by using the newly-found parameters to optimise the original model after running the cross-validation and hyper-parameter tuning in ML series 2.
 
 <br>
 
 ##### **Import dataframe from ML series 1**
 
-Since *scikit-learn* mainly supports Pandas dataframes for ML, I've opted to use Pandas instead of Polars dataframe library this time, to avoid the extra step of converting a Polars dataframe into a Pandas one.
+Using Pandas again to import the same set of data used in ML series 1 and 2.
 
 ```{python}
 import pandas as pd
 ```
 
-I've exported the final dataframe from ML series 1 as a .csv file, so that we could continue on this ML series and work on the LR model further. For this ML series 2, the .csv file was imported as shown below.
+Importing and reading the same df_ml dataset again.
 
 ```{python}
 df_ml = pd.read_csv("df_ml.csv")
@@ -63,7 +64,7 @@ import sklearn
 print(sklearn.__version__)
 ```
 
-Other libraries needed to generate ML model were imported as below.
+Other libraries needed were imported as below.
 
 ```{python}
 # To use NumPy arrays to prepare X & y variables
@@ -84,7 +85,7 @@ import matplotlib.pyplot as plt
 
 ##### **Logistic regression**
 
-To get the LR model ready, we needed to define our X and y variables from the df_ml dataset.
+Here I've defined the X and y variables again and kept them same as the ones used in ML series 1 and 2.
 
 <br>
 
@@ -113,12 +114,6 @@ y[0:5]
 
 ```{python}
 # Split dataset into training & testing sets
-
-# Random number generator - note: this may produce different result each time
-#rng = np.random.RandomState(0) 
-
-# Edited post to use random_state = 250 
-# to show comparison with ML series 1 for reproducible result
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 250)
 print('Training set:', X_train.shape, y_train.shape)
 print('Testing set:', X_test.shape, y_test.shape)
@@ -140,7 +135,7 @@ X[0:5]
 
 ###### **Fitting LR classifier on training set**
 
-One major difference to this LR classifier this time was that cross-validation was included, via using LogisticRegressionCV model, when fitting the training data.
+One thing that would be added or changed this time was that Cs value would be changed to 50, while using cv = 5, which was already set by default (so this would not be explicitly typed into the LogisticRegressionCV classifier). This was because a Cs of 50 and cv of 5, along with a penalty of l2 and solver in lbfgs were found to produce the highest accuracy score last time when doing hyper-parameter tuning and cross-validations.
 
 ```{python}
 # Import logistic regression CV estimator
@@ -148,7 +143,8 @@ from sklearn.linear_model import LogisticRegressionCV
 
 # Change to LogisticRegressionCV() - LR with built-in cross validation
 # Create an instance of logistic regression CV classifier and fit the data
-LogR = LogisticRegressionCV().fit(X_train, y_train)
+# Add in tuned parameters from ML series 2
+LogR = LogisticRegressionCV(Cs = 50).fit(X_train, y_train)
 LogR
 ```
 
@@ -172,7 +168,7 @@ pred = pd.DataFrame(LogR.predict_log_proba(X))
 pred.describe()
 ```
 
-Alternatively, a quicker way to get predicted probabilities was via predict_proba() method in *scikit-learn*.
+To get predicted probabilities, use predict_proba() method in *scikit-learn*.
 
 ```{python}
 y_mp_proba = LogR.predict_proba(X_test)
@@ -195,7 +191,7 @@ y_mp_prob.describe()
 
 <br>
 
-#### **Evaluation of the logistic regression CV model**
+#### **Evaluation of the logistic regression CV model after using optimised parameters**
 
 ###### **Accuracy scores**
 
@@ -204,11 +200,13 @@ from sklearn.metrics import accuracy_score
 accuracy_score(y_mp, y_test)
 ```
 
+There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameter after ML series 2 when compared with the LogR model from ML series 1.
+
 <br>
 
 ###### **Confusion matrix**
 
-Again, to visualise the LR classifer built this time using LogisticRegressionCV estimator in a confusion matrix, the same code was used as previously.
+Again, I've used the same confusion matrix function code again to show the new confusion matrix this time.
 
 ```{python}
 # Import confusion matrix from scikit-learn
@@ -276,13 +274,6 @@ plot_confusion_matrix(matrix,
                      )
 ```
 
-The four different categories in the confusion matrix were:
-
--   True positive - Predicted Max_Phase = 1 & True Max_Phase = 1 ( out of samples)
--   True negative - Predicted Max_Phase = 0 & True Max_Phase = 0 ( out of samples)
--   False positive - Predicted Max_Phase = 1 & True Max_Phase = 0 ( out of samples)
--   False negative - Predicted Max_Phase = 0 & True Max_Phase = 1 ( out of samples)
-
 <br>
 
 ###### **Classification report**
@@ -306,7 +297,7 @@ The precision and recall metrics could also be calculated for class label = 0, w
 
 ###### **Log loss**
 
-Log loss could be used as another gauge to show how good the classifier was at making the outcome predictions. The further the predicted probability was from the true value, the larger the log loss, which was also ranged from 0 to 1. Ideally, the smaller the log loss the better the model would be. Here, we had a log loss of 0.61 for this particular model.
+There was only a slight increase in log loss score, although not really significant.
 
 ```{python}
 # Log loss
@@ -318,11 +309,7 @@ log_loss(y_test, y_mp_proba)
 
 #### **Discussions and conclusion**
 
-<br>
-
-#### **Final words**
-
-
+It was without any surprised that the re-trained model did not provide a huge difference from the initial model, which was already predicted in ML series 2. However, the purpose of tuning the parameters to reach a more optimied model was shown with a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. 
 
 <br>
 
