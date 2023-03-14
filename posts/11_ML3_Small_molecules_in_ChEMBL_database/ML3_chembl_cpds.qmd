@@ -1,8 +1,8 @@
 ---
 title: Small molecules in ChEMBL database 
-subtitle: Re-training & final evaluation with *scikit-learn* 
+subtitle: Re-training & re-evaluation with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-3-13'
+date: '2023-3-15'
 draft: true
 categories:
   - Machine learning projects
@@ -14,9 +14,6 @@ jupyter: python3
 ---
 
 ##### ***Machine learning in drug discovery - series 3***
-
-*Re-training ML model* 
-*Final evaluation of ML model*
 
 <br>
 
@@ -297,7 +294,7 @@ The precision and recall metrics could also be calculated for class label = 0, w
 
 ###### **Log loss**
 
-There was only a slight increase in log loss score, although not really significant. *List old log loss*
+There was only a slight increase in log loss score, with the previous log loss at 0.606602645025058, which only had a very small margin of difference.
 
 ```{python}
 # Log loss
@@ -309,7 +306,7 @@ log_loss(y_test, y_mp_proba)
 
 #### **Discussions and conclusion**
 
-It was without any surprises that the re-trained model did not provide a huge difference from the initial model, which was already predicted in ML series 2. However, the purpose of tuning the parameters to reach a more optimied model was shown with a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. 
+It was without any surprises that the re-trained model did not provide a huge difference from the initial model, which was already predicted in ML series 2. However, the purpose of tuning the parameters to reach a more optimised model was shown with a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. This was quite insignificant, even without doing any statistical evaluations in details. One of other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of "RO5 Violations", QED Weighted scores, CX LogP, CX LogD and number of heavy atoms for small molecules used in ML series 1to 3 might not be the best set of features to be used at all. 
 
 <br>
 
