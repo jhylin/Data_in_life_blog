@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-03-13">
+<meta name="dcterms.date" content="2023-03-15">
 
 <title>Home - Small molecules in ChEMBL database</title>
 <style>
@@ -194,7 +194,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Small molecules in ChEMBL database</h1>
-            <p class="subtitle lead">Re-training &amp; final evaluation with <em>scikit-learn</em></p>
+            <p class="subtitle lead">Re-training &amp; re-evaluation with <em>scikit-learn</em></p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine learning projects</div>
                 <div class="quarto-category">Scikit-learn</div>
@@ -218,7 +218,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 13, 2023</p>
+        <p class="date">March 15, 2023</p>
       </div>
     </div>
     
@@ -246,9 +246,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#fitting-lr-classifier-on-training-set" id="toc-fitting-lr-classifier-on-training-set" class="nav-link" data-scroll-target="#fitting-lr-classifier-on-training-set"><strong>Fitting LR classifier on training set</strong></a></li>
   <li><a href="#applying-lr-classifier-on-testing-set-for-prediction" id="toc-applying-lr-classifier-on-testing-set-for-prediction" class="nav-link" data-scroll-target="#applying-lr-classifier-on-testing-set-for-prediction"><strong>Applying LR classifier on testing set for prediction</strong></a></li>
   <li><a href="#converting-predicted-values-into-a-dataframe" id="toc-converting-predicted-values-into-a-dataframe" class="nav-link" data-scroll-target="#converting-predicted-values-into-a-dataframe"><strong>Converting predicted values into a dataframe</strong></a></li>
-  <li><a href="#converting-predicted-probabilities-into-a-dataframe" id="toc-converting-predicted-probabilities-into-a-dataframe" class="nav-link" data-scroll-target="#converting-predicted-probabilities-into-a-dataframe"><strong>Converting predicted probabilities into a dataframe</strong></a></li>
   </ul></li>
-  <li><a href="#evaluation-of-the-logistic-regression-cv-model-after-using-optimised-parameters" id="toc-evaluation-of-the-logistic-regression-cv-model-after-using-optimised-parameters" class="nav-link" data-scroll-target="#evaluation-of-the-logistic-regression-cv-model-after-using-optimised-parameters"><strong>Evaluation of the logistic regression CV model after using optimised parameters</strong></a>
+  <li><a href="#evaluation-of-the-model-after-using-optimised-parameters" id="toc-evaluation-of-the-model-after-using-optimised-parameters" class="nav-link" data-scroll-target="#evaluation-of-the-model-after-using-optimised-parameters"><strong>Evaluation of the model after using optimised parameters</strong></a>
   <ul>
   <li><a href="#accuracy-scores" id="toc-accuracy-scores" class="nav-link" data-scroll-target="#accuracy-scores"><strong>Accuracy scores</strong></a></li>
   <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix"><strong>Confusion matrix</strong></a></li>
@@ -256,6 +255,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#log-loss" id="toc-log-loss" class="nav-link" data-scroll-target="#log-loss"><strong>Log loss</strong></a></li>
   </ul></li>
   <li><a href="#discussions-and-conclusion" id="toc-discussions-and-conclusion" class="nav-link" data-scroll-target="#discussions-and-conclusion"><strong>Discussions and conclusion</strong></a></li>
+  <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -268,7 +268,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="machine-learning-in-drug-discovery---series-3" class="level5">
 <h5 class="anchored" data-anchor-id="machine-learning-in-drug-discovery---series-3"><strong><em>Machine learning in drug discovery - series 3</em></strong></h5>
-<p><em>Re-training ML model</em> <em>Final evaluation of ML model</em></p>
 <p><br></p>
 </section>
 <section id="review-of-ml-series-2-introduction-of-series-3" class="level5">
@@ -395,7 +394,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="logistic-regression" class="level5">
 <h5 class="anchored" data-anchor-id="logistic-regression"><strong>Logistic regression</strong></h5>
-<p>Here I’ve defined the X and y variables again and kept them same as the ones used in ML series 1 and 2.</p>
+<p>Here I’ve defined the X and y variables again and kept them the same as the ones used in ML series 1 and 2.</p>
 <p><br></p>
 <section id="defining-x-and-y-variables" class="level6">
 <h6 class="anchored" data-anchor-id="defining-x-and-y-variables"><strong>Defining X and y variables</strong></h6>
@@ -460,7 +459,7 @@ Testing set: (379, 5) (379,)</code></pre>
 </section>
 <section id="fitting-lr-classifier-on-training-set" class="level6">
 <h6 class="anchored" data-anchor-id="fitting-lr-classifier-on-training-set"><strong>Fitting LR classifier on training set</strong></h6>
-<p>One thing that would be added or changed this time was that Cs value would be changed to 50, while using cv = 5, which was already set by default (so this would not be explicitly typed into the LogisticRegressionCV classifier). This was because a Cs of 50 and cv of 5, along with a penalty of l2 and solver in lbfgs were found to produce the highest accuracy score last time when doing hyper-parameter tuning and cross-validations.</p>
+<p>One thing that would be changed this time was that Cs value was changed to 50 (from 10 previously), while using cv = 5, which was already set by default (so this wasn’t shown explicitly in the LogisticRegressionCV classifier in the code below). This was because a Cs of 50 and cv of 5, along with a penalty of l2 and solver in lbfgs were found to produce the highest accuracy score last time when we were tuning the hyper-parameters and doing the cross-validations.</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import logistic regression CV estimator</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegressionCV</span>
@@ -569,21 +568,13 @@ Testing set: (379, 5) (379,)</code></pre>
 </div>
 </div>
 </div>
-<p>To get predicted probabilities, use predict_proba() method in <em>scikit-learn</em>.</p>
+<p>To get predicted probabilities, use predict_proba() method in <em>scikit-learn</em>, then the predicted probabilities were converted into a dataframe.</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>y_mp_proba <span class="op">=</span> LogR.predict_proba(X_test)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment below to see the predicted probabilities printed</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#print(y_mp_proba)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-</section>
-<section id="converting-predicted-probabilities-into-a-dataframe" class="level6">
-<h6 class="anchored" data-anchor-id="converting-predicted-probabilities-into-a-dataframe"><strong>Converting predicted probabilities into a dataframe</strong></h6>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use describe() to show distributions</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>y_mp_prob <span class="op">=</span> pd.DataFrame(y_mp_proba)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y_mp_prob.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use describe() to show distributions</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>y_mp_prob <span class="op">=</span> pd.DataFrame(y_mp_proba)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>y_mp_prob.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
 
 <div>
 
@@ -642,105 +633,104 @@ Testing set: (379, 5) (379,)</code></pre>
 </div>
 </div>
 <p><br></p>
-<p><br></p>
 </section>
 </section>
-<section id="evaluation-of-the-logistic-regression-cv-model-after-using-optimised-parameters" class="level4">
-<h4 class="anchored" data-anchor-id="evaluation-of-the-logistic-regression-cv-model-after-using-optimised-parameters"><strong>Evaluation of the logistic regression CV model after using optimised parameters</strong></h4>
+<section id="evaluation-of-the-model-after-using-optimised-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="evaluation-of-the-model-after-using-optimised-parameters"><strong>Evaluation of the model after using optimised parameters</strong></h4>
 <section id="accuracy-scores" class="level6">
 <h6 class="anchored" data-anchor-id="accuracy-scores"><strong>Accuracy scores</strong></h6>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>accuracy_score(y_mp, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>accuracy_score(y_mp, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>0.7018469656992085</code></pre>
 </div>
 </div>
-<p>There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameter after ML series 2 when compared with the LogR model from ML series 1.</p>
+<p>There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameter after ML series 2 when compared with the LogR model from ML series 1, which had a accuracy score of 0.6992084432717678.</p>
 <p><br></p>
 </section>
 <section id="confusion-matrix" class="level6">
 <h6 class="anchored" data-anchor-id="confusion-matrix"><strong>Confusion matrix</strong></h6>
 <p>Again, I’ve used the same confusion matrix function code again to show the new confusion matrix this time.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import confusion matrix from scikit-learn</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import itertools - functions to create iterators for efficient looping</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to print and plot confusion matrix</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_confusion_matrix(<span class="co"># Sets a cm object (cm = confusion matrix)</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          cm, </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Sets classes of '1s' (Successes) &amp; '0s' (Non-successes) for the cm</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                          classes,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># If setting normalize = true, reports in ratios instead of counts</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                          normalize,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                          title <span class="op">=</span> <span class="st">'Confusion matrix'</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Choose colour of the cm (using colourmap recognised by matplotlib)</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                          cmap <span class="op">=</span> plt.cm.Reds):</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> normalize:</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        cm <span class="op">=</span> cm.astype(<span class="st">'float'</span>) <span class="op">/</span> cm.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)[:, np.newaxis]</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Normalized confusion matrix"</span>)</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Confusion matrix, without normalization'</span>)</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(cm)</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the confusion matrix </span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    plt.imshow(cm, interpolation <span class="op">=</span> <span class="st">'nearest'</span>, cmap <span class="op">=</span> cmap)</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    tick_marks <span class="op">=</span> np.arange(<span class="bu">len</span>(classes))</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    plt.xticks(tick_marks, classes, rotation <span class="op">=</span> <span class="dv">45</span>)</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    plt.yticks(tick_marks, classes)</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Floats to be round up to two decimal places if using normalize = True</span></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># or else use integers</span></span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    fmt <span class="op">=</span> <span class="st">'.2f'</span> <span class="cf">if</span> normalize <span class="cf">else</span> <span class="st">'d'</span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sets threshold of 0.5</span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> cm.<span class="bu">max</span>() <span class="op">/</span> <span class="fl">2.</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through the results and differentiate between two text colours </span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by using the threshold as a cut-off</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> itertools.product(<span class="bu">range</span>(cm.shape[<span class="dv">0</span>]), <span class="bu">range</span>(cm.shape[<span class="dv">1</span>])):</span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        plt.text(j, i, <span class="bu">format</span>(cm[i, j], fmt),</span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>                 horizontalalignment <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>                 color <span class="op">=</span> <span class="st">"white"</span> <span class="cf">if</span> cm[i, j] <span class="op">&gt;</span> thresh <span class="cf">else</span> <span class="st">"black"</span>)</span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'True label'</span>)</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Predicted label'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import confusion matrix from scikit-learn</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import itertools - functions to create iterators for efficient looping</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to print and plot confusion matrix</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_confusion_matrix(<span class="co"># Sets a cm object (cm = confusion matrix)</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                          cm, </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Sets classes of '1s' (Successes) &amp; '0s' (Non-successes) for the cm</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                          classes,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># If setting normalize = true, reports in ratios instead of counts</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                          normalize,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                          title <span class="op">=</span> <span class="st">'Confusion matrix'</span>,</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Choose colour of the cm (using colourmap recognised by matplotlib)</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                          cmap <span class="op">=</span> plt.cm.Reds):</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> normalize:</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        cm <span class="op">=</span> cm.astype(<span class="st">'float'</span>) <span class="op">/</span> cm.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">1</span>)[:, np.newaxis]</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Normalized confusion matrix"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Confusion matrix, without normalization'</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(cm)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the confusion matrix </span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    plt.imshow(cm, interpolation <span class="op">=</span> <span class="st">'nearest'</span>, cmap <span class="op">=</span> cmap)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    tick_marks <span class="op">=</span> np.arange(<span class="bu">len</span>(classes))</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    plt.xticks(tick_marks, classes, rotation <span class="op">=</span> <span class="dv">45</span>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    plt.yticks(tick_marks, classes)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Floats to be round up to two decimal places if using normalize = True</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># or else use integers</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    fmt <span class="op">=</span> <span class="st">'.2f'</span> <span class="cf">if</span> normalize <span class="cf">else</span> <span class="st">'d'</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sets threshold of 0.5</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> cm.<span class="bu">max</span>() <span class="op">/</span> <span class="fl">2.</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through the results and differentiate between two text colours </span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by using the threshold as a cut-off</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> itertools.product(<span class="bu">range</span>(cm.shape[<span class="dv">0</span>]), <span class="bu">range</span>(cm.shape[<span class="dv">1</span>])):</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>        plt.text(j, i, <span class="bu">format</span>(cm[i, j], fmt),</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>                 horizontalalignment <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>                 color <span class="op">=</span> <span class="st">"white"</span> <span class="cf">if</span> cm[i, j] <span class="op">&gt;</span> thresh <span class="cf">else</span> <span class="st">"black"</span>)</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'True label'</span>)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Predicted label'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute confusion matrix</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> confusion_matrix(y_test, y_mp, labels <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>])</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot confusion matrix without normalisation</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>plot_confusion_matrix(matrix, </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Define classes of outcomes</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                      classes <span class="op">=</span> [<span class="st">'Max_Phase = 0'</span>,<span class="st">'Max_Phase = 1'</span>], </span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Set normalize = True if wanting ratios instead</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>                      normalize <span class="op">=</span> <span class="va">False</span>, </span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                      title <span class="op">=</span> <span class="st">"Confusion matrix without normalisation"</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute confusion matrix</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> confusion_matrix(y_test, y_mp, labels <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>])</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot confusion matrix without normalisation</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plot_confusion_matrix(matrix, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Define classes of outcomes</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                      classes <span class="op">=</span> [<span class="st">'Max_Phase = 0'</span>,<span class="st">'Max_Phase = 1'</span>], </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Set normalize = True if wanting ratios instead</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                      normalize <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                      title <span class="op">=</span> <span class="st">"Confusion matrix without normalisation"</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion matrix, without normalization
 [[141  61]
  [ 52 125]]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="ML3_chembl_cpds_files/figure-html/cell-19-output-2.png" width="570" height="488"></p>
+<p><img src="ML3_chembl_cpds_files/figure-html/cell-18-output-2.png" width="570" height="488"></p>
 </div>
 </div>
 <p><br></p>
 </section>
 <section id="classification-report" class="level6">
 <h6 class="anchored" data-anchor-id="classification-report"><strong>Classification report</strong></h6>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_mp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_mp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
 
@@ -753,21 +743,16 @@ weighted avg       0.70      0.70      0.70       379
 </code></pre>
 </div>
 </div>
-<p><em>Precision</em> was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:</p>
-<p><em>Recall</em>, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (which = 0.674, for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:</p>
-<p>The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.</p>
-<p><em>f1-score</em>, or also known as balanced F-score or F-measure, denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved. It was defined as:</p>
-<p><em>Support</em>, which some readers might have already worked out how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.</p>
 <p><br></p>
 </section>
 <section id="log-loss" class="level6">
 <h6 class="anchored" data-anchor-id="log-loss"><strong>Log loss</strong></h6>
-<p>There was only a slight increase in log loss score, although not really significant. <em>List old log loss</em></p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log loss</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> log_loss</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>log_loss(y_test, y_mp_proba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<p>There was only a slight increase in log loss score this time, with the previous log loss being at 0.606602645025058, this meant there was only a very small margin of difference, or improvement of the model.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log loss</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> log_loss</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>log_loss(y_test, y_mp_proba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0.608337653347155</code></pre>
 </div>
 </div>
@@ -776,7 +761,13 @@ weighted avg       0.70      0.70      0.70       379
 </section>
 <section id="discussions-and-conclusion" class="level4">
 <h4 class="anchored" data-anchor-id="discussions-and-conclusion"><strong>Discussions and conclusion</strong></h4>
-<p>It was without any surprises that the re-trained model did not provide a huge difference from the initial model, which was already predicted in ML series 2. However, the purpose of tuning the parameters to reach a more optimied model was shown with a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model.</p>
+<p>Without any surprises, the re-trained model did not provide a huge difference from the initial one, which was already expected in ML series 2. However, the purpose of tuning the parameters to reach a more optimised model was still achieved in a very small way, where there was a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. The confusion matrix showed a small improvement, with 114 predictions that were false positive and false negatives in the original model and 113 predictions in the current model. The classification report basically had very minute change, with only the recall value going up from 0.69 in the old model to 0.70 in the current model for class label zero. Overall, this was not significant enough given the goal was to improve the model, but as a learning exercise I think I’ve learnt something along the way, and hopefully I’ll use it to show a much more significant improvement in other future ML scenarios.</p>
+<p>One of the other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of rule-of-5 violations, QED weighted scores, CX LogP, CX LogD and the number of heavy atoms for small molecules used in ML series 1 to 3 might, in fact, not be the best set of features to be used at all. They were mainly randomly chosen, without much thoughts placed into it, however I tried to use QED weighted score as it incorporated several renowned physicochemical factors for small molcules in general, but on the other hand, I could not prove that QED weighted was not biased at all, so some considerations should also be given to this aspect, perhaps more features could be included or changed to see the effect on the model during model evaluation phase. I could also in fact use other ML approaches than logistic regression for building the model, which might serve the purpose of generating a prediction model in a better way.</p>
+<p><br></p>
+</section>
+<section id="final-words" class="level4">
+<h4 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h4>
+<p>Currently, I haven’t thought too much about what my next project would be, as I’m trying to brush up my Python skills further to make sure I understand most of its concepts and usages by practising on LeetCode. There may be a bit of a break before I embark on my next idea. One thing for sure, I’ll try to up my experience in ML either with the same of data in newer version (apparently ChEMBL released a version 32 recently) or a different set of data using a different ML approach.</p>
 <p><br></p>
 </section>
 <section id="references" class="level4">
@@ -785,7 +776,6 @@ weighted avg       0.70      0.70      0.70       379
 <li><a href="https://scikit-learn.org/stable/index.html">scikit-learn documentation</a></li>
 <li><a href="https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html">Scikit-learn: Machine Learning in Python</a>, Pedregosa <em>et al.</em>, JMLR 12, pp.&nbsp;2825-2830, 2011.</li>
 <li>Bruce, P., Bruce, A. &amp; Gedeck P. (2020). Practical statistics for data scientists. O’Reilly.</li>
-<li><a href="https://stackoverflow.com">Stack Overflow</a></li>
 </ul>
 
 

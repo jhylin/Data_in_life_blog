@@ -82,7 +82,7 @@ import matplotlib.pyplot as plt
 
 ##### **Logistic regression**
 
-Here I've defined the X and y variables again and kept them same as the ones used in ML series 1 and 2.
+Here I've defined the X and y variables again and kept them the same as the ones used in ML series 1 and 2.
 
 <br>
 
@@ -132,7 +132,7 @@ X[0:5]
 
 ###### **Fitting LR classifier on training set**
 
-One thing that would be added or changed this time was that Cs value would be changed to 50, while using cv = 5, which was already set by default (so this would not be explicitly typed into the LogisticRegressionCV classifier). This was because a Cs of 50 and cv of 5, along with a penalty of l2 and solver in lbfgs were found to produce the highest accuracy score last time when doing hyper-parameter tuning and cross-validations.
+One thing that would be changed this time was that Cs value was changed to 50 (from 10 previously), while using cv = 5, which was already set by default (so this wasn't  shown explicitly in the LogisticRegressionCV classifier in the code below). This was because a Cs of 50 and cv of 5, along with a penalty of l2 and solver in lbfgs were found to produce the highest accuracy score last time when we were tuning the hyper-parameters and doing the cross-validations.
 
 ```{python}
 # Import logistic regression CV estimator
@@ -165,19 +165,10 @@ pred = pd.DataFrame(LogR.predict_log_proba(X))
 pred.describe()
 ```
 
-To get predicted probabilities, use predict_proba() method in *scikit-learn*.
+To get predicted probabilities, use predict_proba() method in *scikit-learn*, then the predicted probabilities were converted into a dataframe.
 
 ```{python}
 y_mp_proba = LogR.predict_proba(X_test)
-# Uncomment below to see the predicted probabilities printed
-#print(y_mp_proba)
-```
-
-<br>
-
-###### **Converting predicted probabilities into a dataframe**
-
-```{python}
 # Use describe() to show distributions
 y_mp_prob = pd.DataFrame(y_mp_proba)
 y_mp_prob.describe()
@@ -185,10 +176,7 @@ y_mp_prob.describe()
 
 <br>
 
-
-<br>
-
-#### **Evaluation of the logistic regression CV model after using optimised parameters**
+#### **Evaluation of the model after using optimised parameters**
 
 ###### **Accuracy scores**
 
@@ -197,7 +185,7 @@ from sklearn.metrics import accuracy_score
 accuracy_score(y_mp, y_test)
 ```
 
-There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameter after ML series 2 when compared with the LogR model from ML series 1.
+There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameter after ML series 2 when compared with the LogR model from ML series 1, which had a accuracy score of 0.6992084432717678.
 
 <br>
 
@@ -280,21 +268,11 @@ from sklearn.metrics import classification_report
 print(classification_report(y_test, y_mp))
 ```
 
-*Precision* was a measure of the accuracy of a predicted outcome, where a class label had been predicted by the classifier. So in this case, we could see that for class label 1, the precision was 0.72, which corresponded to the true positive result of 128 out of 179 samples (= 0.715). It was defined by:
-
-*Recall*, also known as sensitivity (especially widely used in biostatistics and medical diagnostic fields), was a measure of the strength of the classifier to predict a positive outcome. In simple words, it measured the true positive rate. In this example, there was a total of 128 out of 190 samples (which = 0.674, for True Max_Phase = 1 row) that had a true positive outcome of having a max phase of 1. It was defined by:
-
-The precision and recall metrics could also be calculated for class label = 0, which were shown for the row 0 in the classification report.
-
-*f1-score*, or also known as balanced F-score or F-measure, denoted the harmonic average of both precision and recall metrics. This metric would also give another indication about whether this model performed well on outcome predictions. It normally ranged from 0 (worst precision and recall) to 1 (perfect precision and recall). For this particular classifier, f1-score was at 0.7, which was definitely not at its worst, but also could be further improved. It was defined as:
-
-*Support*, which some readers might have already worked out how the numbers were derived, was the total number of true samples in each class label (read row-wise from the confusion matrix). The main purpose of showing this metric was to help clarifying whether the model or classifier had a reasonably balanced dataset for each class or otherwise.
-
 <br>
 
 ###### **Log loss**
 
-There was only a slight increase in log loss score, with the previous log loss at 0.606602645025058, which only had a very small margin of difference.
+There was only a slight increase in log loss score this time, with the previous log loss being at 0.606602645025058, this meant there was only a very small margin of difference, or improvement of the model.
 
 ```{python}
 # Log loss
@@ -306,7 +284,15 @@ log_loss(y_test, y_mp_proba)
 
 #### **Discussions and conclusion**
 
-It was without any surprises that the re-trained model did not provide a huge difference from the initial model, which was already predicted in ML series 2. However, the purpose of tuning the parameters to reach a more optimised model was shown with a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. This was quite insignificant, even without doing any statistical evaluations in details. One of other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of "RO5 Violations", QED Weighted scores, CX LogP, CX LogD and number of heavy atoms for small molecules used in ML series 1to 3 might not be the best set of features to be used at all. 
+Without any surprises, the re-trained model did not provide a huge difference from the initial one, which was already expected in ML series 2. However, the purpose of tuning the parameters to reach a more optimised model was still achieved in a very small way, where there was a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. The confusion matrix showed a small improvement, with 114 predictions that were false positive and false negatives in the original model and 113 predictions in the current model. The classification report basically had very minute change, with only the recall value going up from 0.69 in the old model to 0.70 in the current model for class label zero. Overall, this was not significant enough given the goal was to improve the model, but as a learning exercise I think I've learnt something along the way, and hopefully I'll use it to show a much more significant improvement in other future ML scenarios. 
+
+One of the other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of rule-of-5 violations, QED weighted scores, CX LogP, CX LogD and the number of heavy atoms for small molecules used in ML series 1 to 3 might, in fact, not be the best set of features to be used at all. They were mainly randomly chosen, without much thoughts placed into it, however I tried to use QED weighted score as it incorporated several renowned physicochemical factors for small molcules in general, but on the other hand, I could not prove that QED weighted was not biased at all, so some considerations should also be given to this aspect, perhaps more features could be included or changed to see the effect on the model during model evaluation phase. I could also in fact use other ML approaches than logistic regression for building the model, which might serve the purpose of generating a prediction model in a better way.
+
+<br>
+
+#### **Final words**
+
+Currently, I haven't thought too much about what my next project would be, as I'm trying to brush up my Python skills further to make sure I understand most of its concepts and usages by practising on LeetCode. There may be a bit of a break before I embark on my next idea. One thing for sure, I'll try to up my experience in ML either with the same set of data in newer version (apparently ChEMBL released a version 32 recently) or a different set of data using a different ML approach.
 
 <br>
 
@@ -315,4 +301,3 @@ It was without any surprises that the re-trained model did not provide a huge di
 -   [scikit-learn documentation](https://scikit-learn.org/stable/index.html)
 -   [Scikit-learn: Machine Learning in Python](https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html), Pedregosa *et al.*, JMLR 12, pp. 2825-2830, 2011.
 -   Bruce, P., Bruce, A. & Gedeck P. (2020). Practical statistics for data scientists. O'Reilly.
--   [Stack Overflow](https://stackoverflow.com)
