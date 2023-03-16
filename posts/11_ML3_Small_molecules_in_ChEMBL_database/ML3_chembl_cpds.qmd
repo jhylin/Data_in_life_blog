@@ -2,7 +2,7 @@
 title: Small molecules in ChEMBL database 
 subtitle: Re-training & re-evaluation with *scikit-learn* 
 author: Jennifer HY Lin
-date: '2023-3-15'
+date: '2023-3-16'
 draft: true
 categories:
   - Machine learning projects
