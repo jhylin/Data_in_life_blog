@@ -10,6 +10,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/jhylin
+      - icon: mastodon
+        href: https://fosstodon.org/@jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
       - text: Portfolio
