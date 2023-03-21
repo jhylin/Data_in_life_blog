@@ -4,9 +4,6 @@ image: profile avatar.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/jenhylin
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/
@@ -21,7 +18,7 @@ comments: false
 
 **About me & this blog**
 
-Personally, I was born in Taiwan but was raised in New Zealand since I was a young kid. So practically I'm more like a Kiwi, although to be more precise, I'm more like half-a-Kiwi and half-a-Taiwanese. There was always an East-meets-West fusion element in me, forever. Professionally, I started my career as a pharmacist in New Zealand, and spent several years working at community and hospital pharmacies, across metropolitan and rural areas. 
+Personally, I was born in Taiwan but was raised in New Zealand since I was a young kid. So practically I'm more like a Kiwi, although to be more precise, I'm more like half-a-Kiwi and half-a-Taiwanese. There was always an East-meets-West fusion element in me, forever. Professionally, I started my career as a pharmacist in New Zealand, and spent several years working at community and hospital pharmacies, across metropolitan and rural areas.
 
 Then somehow life took me on a detour where I went down the path of doing postgraduate studies. The research mainly focussed on drug discovery and design with medicinal and computational chemistry involved, with numerous hours spent in chemistry (wet) and computer (dry) labs doing experiments. The research work happened in Australia, where I've also continued to work as a hospital pharmacist while working on the research projects. Reflecting back, it felt like my brain cells have gone through a major metamorphasis during those years, before I ended up with a MPhil and PhD.
 
