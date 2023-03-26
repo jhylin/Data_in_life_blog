@@ -1,6 +1,3 @@
-# chembl_mols.csv file size actually can be handled with tidyverse 
-# without the need of sparklyr
-
 # import sparklyr package
 library(sparklyr)
 
@@ -15,18 +12,20 @@ library(sparklyr)
 # note: sc variable now contains all connection info needed to interact with the cluster
 sc <- spark_connect(master = "local")
 
-spec_with_chem <- sapply(read.csv("chembl_mols.csv", nrows = 10), class)
-spec_with_chem
-
 # Read in the chembl_mols csv file
-#iris_csv_tbl <- spark_read_csv(sc, "iris_csv", temp_csv)
-chembl_tbl <- spark_read_csv(sc, 
-                             "chembl", 
-                             "chembl_mols.csv", 
-                             columns = spec_with_chem
+chembl_tbl <- spark_read_csv(sc,
+                             "chembl",
+                             "chembl_mols.csv",
+                             # Note: not commas, it's actually semicolons!
+                             delimiter = ";"
                              )
 
 chembl_tbl
+
+# Trial using dyplr to wrangle data!
+# e.g. filter out all small molecules with max phase of 4
+chembl_tbl %>% filter(Max_Phase == 4)
+
 
 
 # Disconnect from Spark

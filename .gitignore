@@ -5,3 +5,4 @@
 .DS_Store
 /.quarto/
 chembl_mols.csv
+derby.log
