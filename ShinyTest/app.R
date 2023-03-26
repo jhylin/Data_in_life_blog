@@ -1,6 +1,6 @@
 library(shiny)
 
-# Define UI for app that draws a histogram ----
+# Define UI for app ----
 ui <- fluidPage(
   
   # App title ----
@@ -31,7 +31,7 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic required to draw a histogram ----
+# Define server logic ----
 server <- function(input, output) {
   
   # Histogram of the Old Faithful Geyser Data ----
@@ -55,6 +55,6 @@ server <- function(input, output) {
   
 }
 
-# Create Shiny app ----
+# Create/run Shiny app ----
 shinyApp(ui = ui, server = server)
 
