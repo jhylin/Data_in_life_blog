@@ -24,8 +24,22 @@ chembl_tbl
 
 # Trial using dyplr to wrangle data!
 # e.g. filter out all small molecules with max phase of 4
-chembl_tbl %>% filter(Max_Phase == 4)
+library(tidyverse)
+chembl_4 <- chembl_tbl %>% 
+  filter(Max_Phase == 4) %>% 
+  select(Molecular_Weight, Rotatable_Bonds)
 
+# Remove NAs
+
+
+chembl_4
+
+
+library(ggplot2)
+ggplot(chembl_4, aes(Molecular_Weight, 
+                     Rotatable_Bonds, 
+                     colour = Rotatable_Bonds)) + 
+  geom_point()
 
 
 # Disconnect from Spark
