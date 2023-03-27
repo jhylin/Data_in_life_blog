@@ -22,24 +22,36 @@ chembl_tbl <- spark_read_csv(sc,
 
 chembl_tbl
 
-# Trial using dyplr to wrangle data!
-# e.g. filter out all small molecules with max phase of 4
+# Data wrangling
+# Import tidyverse
 library(tidyverse)
+# Filter out all small molecules with max phase of 4
 chembl_4 <- chembl_tbl %>% 
-  filter(Max_Phase == 4) %>% 
-  select(Molecular_Weight, Rotatable_Bonds)
+  filter(Max_Phase == 4 & Type == "Small molecule") %>% 
+  # Select physicochemical features to visualise correlations
+  # Number of aromatic rings and targets
+  select(Max_Phase, Type, Aromatic_Rings, Targets, RO5_Violations)
 
 # Remove NAs
 
-
-chembl_4
-
+# View wrangled dataset
+view(chembl_4)
 
 library(ggplot2)
-ggplot(chembl_4, aes(Molecular_Weight, 
-                     Rotatable_Bonds, 
-                     colour = Rotatable_Bonds)) + 
-  geom_point()
+ggplot(chembl_4, aes(Aromatic_Rings, Targets)) + 
+  geom_point(na.rm = TRUE)
+  #coord_flip()
+
+
+chembl_all <- chembl_tbl %>% 
+  filter(Type == "Small molecule") %>% 
+  # Select physicochemical features to visualise correlations
+  select(Max_Phase, Type, Aromatic_Rings, Targets, RO5_Violations)
+
+ggplot(chembl_all, aes(Aromatic_Rings, Targets)) + 
+  geom_point() +
+  facet_grid(rows = vars(Max_Phase))
+#coord_flip()
 
 
 # Disconnect from Spark
