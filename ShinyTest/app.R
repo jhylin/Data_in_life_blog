@@ -12,12 +12,10 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 5,
-                  max = 50,
-                  value = 30)
+      # Input: Radio buttons to choose max phases ----
+      radioButtons("radio", label = h3("Max phase"),
+                   choices = list("phase 0" = 0, "phase 1" = 1, "phase 2" = 2, "phase 3" = 3, "phase 4" = 4), 
+                   selected = 0),
       
     ),
     
@@ -42,16 +40,22 @@ server <- function(input, output) {
   # 1. It is "reactive" and therefore should be automatically
   #    re-executed when inputs (input$bins) change
   # 2. Its output type is a plot
-  output$distPlot <- renderPlot({
-    
-    x    <- faithful$waiting
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    hist(x, breaks = bins, col = "#75AADB", border = "orange",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
-    
-  })
+  
+  # Sample code from widget gallery
+  output$value <- renderPrint({ input$radio })
+  
+  # Sample app code starts here
+  # output$distPlot <- renderPlot({
+  #   
+  #   # Insert dataset below?
+  #   x    <- faithful$waiting
+  #   bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  #   
+  #   hist(x, breaks = bins, col = "#75AADB", border = "orange",
+  #        xlab = "Waiting time to next eruption (in mins)",
+  #        main = "Histogram of waiting times")
+  #   
+  # })
   
 }
 
