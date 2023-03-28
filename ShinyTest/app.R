@@ -4,7 +4,7 @@ library(shiny)
 ui <- fluidPage(
   
   # App title ----
-  titlePanel("Hello World!"),
+  titlePanel("Small molecules in ChEMBL database"),
   
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -23,7 +23,7 @@ ui <- fluidPage(
     mainPanel(
       
       # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
+      plotOutput(outputId = "lolliPlot")
       
     )
   )
@@ -42,7 +42,14 @@ server <- function(input, output) {
   # 2. Its output type is a plot
   
   # Sample code from widget gallery
-  output$value <- renderPrint({ input$radio })
+  output$lolliPlot <- renderPlot({ 
+    
+    #input$radio
+    x
+    
+    lolliPlot(x, )
+    
+    })
   
   # Sample app code starts here
   # output$distPlot <- renderPlot({

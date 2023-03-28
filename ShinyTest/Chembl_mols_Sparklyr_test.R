@@ -23,35 +23,70 @@ chembl_tbl <- spark_read_csv(sc,
 chembl_tbl
 
 # Data wrangling
-# Import tidyverse
+# Import tidyverse & ggplot2
 library(tidyverse)
-# Filter out all small molecules with max phase of 4
-chembl_4 <- chembl_tbl %>% 
-  filter(Max_Phase == 4 & Type == "Small molecule") %>% 
-  # Select physicochemical features to visualise correlations
-  # Number of aromatic rings and targets
-  select(Max_Phase, Type, Aromatic_Rings, Targets, RO5_Violations)
-
-# Remove NAs
-
-# View wrangled dataset
-view(chembl_4)
-
 library(ggplot2)
-ggplot(chembl_4, aes(Aromatic_Rings, Targets)) + 
-  geom_point(na.rm = TRUE)
-  #coord_flip()
 
+# Check column names
+colnames(chembl_tbl)
 
-chembl_all <- chembl_tbl %>% 
+# **Show mean values of physicochemical properties for small molecules 
+# in different max phases**
+
+# Mean QED_weighted scores for each max phase
+chembl_QedW <- chembl_tbl %>% 
   filter(Type == "Small molecule") %>% 
-  # Select physicochemical features to visualise correlations
-  select(Max_Phase, Type, Aromatic_Rings, Targets, RO5_Violations)
+  group_by(Max_Phase) %>% 
+  summarise(QED_Weighted_m = mean(QED_Weighted)) %>% 
+  collect() %>% 
+  ggplot(aes(Max_Phase, QED_Weighted_m)) + 
+  geom_segment(aes(x = Max_Phase, xend = Max_Phase, y = 0, yend = QED_Weighted_m), colour = "dark blue") +
+  geom_point(colour = "dark green") +
+  coord_flip()
+  
+chembl_QedW
 
-ggplot(chembl_all, aes(Aromatic_Rings, Targets)) + 
-  geom_point() +
-  facet_grid(rows = vars(Max_Phase))
-#coord_flip()
+
+# Mean polar surface areas for each max phase
+chembl_PSA <- chembl_tbl %>% 
+  filter(Type == "Small molecule") %>% 
+  group_by(Max_Phase) %>% 
+  summarise(Polar_Surface_Area_m = mean(Polar_Surface_Area)) %>% 
+  collect() %>% 
+  ggplot(aes(Max_Phase, Polar_Surface_Area_m)) + 
+  geom_segment(aes(x = Max_Phase, xend = Max_Phase, y = 0, yend = Polar_Surface_Area_m), colour = "dark blue") +
+  geom_point(colour = "dark green") +
+  coord_flip()
+
+chembl_PSA
+
+
+# Mean MW for each max phase
+chembl_MW <- chembl_tbl %>% 
+  filter(Type == "Small molecule") %>% 
+  group_by(Max_Phase) %>% 
+  summarise(Molecular_Weight_m = mean(Molecular_Weight)) %>% 
+  collect() %>% 
+  ggplot(aes(Max_Phase, Molecular_Weight_m)) + 
+  geom_segment(aes(x = Max_Phase, xend = Max_Phase, y = 0, yend = Molecular_Weight_m), colour = "dark blue") +
+  geom_point(colour = "dark green") +
+  coord_flip()
+
+chembl_MW
+
+
+
+
+# Trialling on whole set of chembl data (longer processing time)
+# chembl_all <- chembl_tbl %>% 
+#   filter(Type == "Small molecule") %>% 
+#   # Select physicochemical features to visualise correlations
+#   select(Max_Phase, Type, Aromatic_Rings, Targets, RO5_Violations)
+# 
+# ggplot(chembl_all, aes(Aromatic_Rings, Targets)) + 
+#   geom_point() +
+#   facet_grid(rows = vars(Max_Phase))
+# #coord_flip()
 
 
 # Disconnect from Spark
