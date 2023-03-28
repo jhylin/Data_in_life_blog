@@ -1,4 +1,6 @@
 library(shiny)
+source("Chembl_mols_Sparklyr_test.R")
+
 
 # Define UI for app ----
 ui <- fluidPage(
@@ -12,17 +14,25 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       
+      # Input: Select box to choose physicochemical features
+      selectInput("Physicochemical properties", label = h3("Select box"), 
+                  choices = list("QED weighted scores" = QED_Weighted, 
+                                 "Polar surface area" = Polar_Surface_Area, 
+                                 "Molecular weight" = Molecular_Weight), 
+                  selected = QED_Weighted),
+      
       # Input: Radio buttons to choose max phases ----
-      radioButtons("radio", label = h3("Max phase"),
-                   choices = list("phase 0" = 0, "phase 1" = 1, "phase 2" = 2, "phase 3" = 3, "phase 4" = 4), 
-                   selected = 0),
+      # radioButtons("radio", label = h3("Max phase"),
+      #              choices = list("phase 0" = 0, "phase 1" = 1, "phase 2" = 2, "phase 3" = 3, "phase 4" = 4), 
+      #              selected = 0),
       
     ),
     
     # Main panel for displaying outputs ----
     mainPanel(
       
-      # Output: Histogram ----
+      # *Output function in ui to place reactive object in Shiny app
+      # Output: Lollipop Plot ----
       plotOutput(outputId = "lolliPlot")
       
     )
@@ -32,22 +42,17 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
-  # Histogram of the Old Faithful Geyser Data ----
-  # with requested number of bins
-  # This expression that generates a histogram is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  #    re-executed when inputs (input$bins) change
-  # 2. Its output type is a plot
+  # render* function in server to tell Shiny how to build objects
+  # Surround R expressions by {} in each render* function
+  # Save render* expressions in the output list, with one entry for 
+  # each reactive object in the app
+  # Create reactivity by including an input value in a render* expression
   
   # Sample code from widget gallery
   output$lolliPlot <- renderPlot({ 
     
     #input$radio
-    x
-    
-    lolliPlot(x, )
+
     
     })
   
