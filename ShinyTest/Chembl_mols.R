@@ -33,6 +33,15 @@ colnames(chembl_tbl)
 # **Show mean values of physicochemical properties for small molecules 
 # in different max phases**
 
+# Example of using stat_summary()
+# ggplot(diamonds) + 
+#   stat_summary(
+#     aes(x = cut, y = depth),
+#     fun.min = min,
+#     fun.max = max,
+#     fun = median
+#   )
+
 # Mean QED_weighted scores for each max phase
 chembl_QedW <- chembl_tbl %>% 
   filter(Type == "Small molecule") %>% 
@@ -43,6 +52,14 @@ chembl_QedW <- chembl_tbl %>%
   geom_segment(aes(x = Max_Phase, xend = Max_Phase, y = 0, yend = QED_Weighted_m), colour = "dark blue") +
   geom_point(colour = "dark green") +
   coord_flip()
+
+ggplot(chembl_QedW) + 
+  stat_summary(
+    aes(x = Max_Phase, y = QED_Weighted),
+    fun.min = min,
+    fun.max = max,
+    fun = median
+  )
   
 chembl_QedW
 
