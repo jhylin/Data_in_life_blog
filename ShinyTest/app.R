@@ -1,5 +1,5 @@
 library(shiny)
-source("Chembl_mols_Sparklyr_test.R")
+#source("Chembl_mols.R")
 
 
 # Define UI for app ----

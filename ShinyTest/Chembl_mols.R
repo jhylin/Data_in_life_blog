@@ -30,39 +30,24 @@ library(ggplot2)
 # Check column names
 colnames(chembl_tbl)
 
+# Check chembl_mols dataset was copied into Spark environment
+src_tbls(sc)
+
 # **Show mean values of physicochemical properties for small molecules 
 # in different max phases**
 
-# Example of using stat_summary()
-# ggplot(diamonds) + 
-#   stat_summary(
-#     aes(x = cut, y = depth),
-#     fun.min = min,
-#     fun.max = max,
-#     fun = median
-#   )
 
 # Mean QED_weighted scores for each max phase
+
 chembl_QedW <- chembl_tbl %>% 
   filter(Type == "Small molecule") %>% 
   group_by(Max_Phase) %>% 
   summarise(QED_Weighted_m = mean(QED_Weighted)) %>% 
   collect() %>% 
   ggplot(aes(Max_Phase, QED_Weighted_m)) + 
-  geom_segment(aes(x = Max_Phase, xend = Max_Phase, y = 0, yend = QED_Weighted_m), colour = "dark blue") +
-  geom_point(colour = "dark green") +
-  coord_flip()
+  geom_point(colour = "dark green") 
 
-ggplot(chembl_QedW) + 
-  stat_summary(
-    aes(x = Max_Phase, y = QED_Weighted),
-    fun.min = min,
-    fun.max = max,
-    fun = median
-  )
-  
 chembl_QedW
-
 
 # Mean polar surface areas for each max phase
 chembl_PSA <- chembl_tbl %>% 
