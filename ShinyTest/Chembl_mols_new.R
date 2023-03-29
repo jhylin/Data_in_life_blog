@@ -1,18 +1,15 @@
 library(tidyverse)
 library(ggplot2)
 
+# Using the condensed or subset of the original chembl_mols.csv dataset
 chembl <- read_csv("chembl_mols_new.csv")
 
 head(chembl)
 
-colnames(chembl)
-
+# Quick look at all columns names, data types & variables
 glimpse(chembl)
 
-spec(chembl)
-
-# Initial code to use a subset of chembl data to plot boxplot 
-# to observe data distributions
+# Initial code using chembl data to plot boxplot to observe data distributions
 df_QED_MP <- chembl %>% 
   select(`Max Phase`, `QED Weighted`) %>% 
   ggplot(aes(x = `Max Phase`, y = `QED Weighted`)) +
@@ -21,8 +18,8 @@ df_QED_MP <- chembl %>%
 df_QED_MP
 
 # Intending to observe different physicochemical features in small molecules
-# in different max phases so to avoid copying-and-pasting code over and over
-# Use a function instead as shown below
+# in different max phases so to avoid copying-and-pasting code over and over,
+# use a function instead:
 
 # Boxplot function to plot Max Phase against other physicochemical properties
 
@@ -54,3 +51,12 @@ chembl %>% dfBoxplot(`QED Weighted`)
 
 # Max phase vs. Polar surface area
 chembl %>% dfBoxplot(`Polar Surface Area`)
+
+# Max phase vs. Aromatic rings
+chembl %>% dfBoxplot(`Aromatic Rings`)
+
+# Max phase vs. #RO5 Violations
+chembl %>% dfBoxplot(`#RO5 Violations`)
+
+# Max phase vs. HBA
+chembl %>% dfBoxplot(HBA)
