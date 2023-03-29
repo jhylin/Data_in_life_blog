@@ -37,20 +37,20 @@ df_QED_MP
 # diamonds |> conditional_bars(cut == "Good", clarity)
 
 dfBoxplot <- function(df, var) {
-  df |>
-    select(`Max Phase`, {{ var }}) |>
+  df %>% 
+    select(`Max Phase`, {{ var }}) %>% 
     ggplot(aes(x = `Max Phase`, y = {{ var }})) +
     geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25)), outlier.alpha = 0.2)
 }
 
 # Max phase vs. MW
-chembl |> dfBoxplot(`Molecular Weight`)
+chembl %>% dfBoxplot(`Molecular Weight`)
 
 # Max phase vs. AlogP
-chembl |> dfBoxplot(AlogP)
+chembl %>% dfBoxplot(AlogP)
 
 # Max phase vs. QED weighted scores
-chembl |> dfBoxplot(`QED Weighted`)
+chembl %>% dfBoxplot(`QED Weighted`)
 
 # Max phase vs. Polar surface area
-chembl |> dfBoxplot(`Polar Surface Area`)
+chembl %>% dfBoxplot(`Polar Surface Area`)
