@@ -1,3 +1,5 @@
+# Sparklyr trial only
+
 # import sparklyr package
 library(sparklyr)
 
