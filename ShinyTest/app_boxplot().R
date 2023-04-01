@@ -50,7 +50,11 @@ server <- function(input, output) {
       boxplot(get(input$variable) ~ chembl$`Max Phase`, data = chembl)
       
       }, res = 96)
-      
+    
+    # *****Change x-axis label to "Max Phases" & y-axis labels (?reactive)*****
+    # *****Add plot title*****  
+    
+  
     }
   
 

@@ -51,6 +51,9 @@ server <- function(input, output) {
     
     }, res = 96)
   
+  # *****Change x-axis label to "Max Phases"*****
+  # *****Add plot title*****
+  
   
 }
 
