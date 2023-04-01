@@ -2,20 +2,20 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 
+chembl <- read_csv("chembl_mols_new.csv")
 
-# Function to plot variables against max phases of small molecules
-dfBoxplot <- function(var) {
-  
-  chembl <- read_csv("chembl_mols_new.csv")
-  #label <- rlang::englue("{{var}} vs. Max Phases of small molecules")
-  
-  chembl %>% 
-    select(`Max Phase`, {{ var }}) %>% 
-    ggplot(aes(x = `Max Phase`, y = {{ var }})) +
-    geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25), 
-                     colour = `Max Phase`), outlier.alpha = 0.2)
-    #labs(title = label)
-}
+# # Function to plot variables against max phases of small molecules
+# dfBoxplot <- function(column) {
+# 
+#   #label <- rlang::englue("{{var}} vs. Max Phases of small molecules")
+# 
+#   #chembl %>%
+#     #select(`Max Phase`, {{ var }}) %>%
+#     ggplot(chembl, aes(x = `Max Phase`, y = {{ column }})) +
+#       geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25),
+#                        colour = `Max Phase`), outlier.alpha = 0.2)
+#   #labs(title = label)
+# }
 
 # Define UI for app ----
 ui <- pageWithSidebar(
@@ -25,14 +25,10 @@ ui <- pageWithSidebar(
   
     # Sidebar layout with input and output definitions ----
     sidebarPanel(
-    
-    
       
       # Input: Select box to choose physicochemical features
-      selectInput("variable", "Variable:", 
-                  c("QED weighted scores" = "QED Weighted", 
-                    "Polar surface area" = "Polar Surface Area",
-                    "Molecular weight" = "Molecular Weight")),
+      #selectInput("dataset", "Choose a dataset", c("ChEMBL database", "chembl")),
+      selectInput("variable", "Choose a variable:", names(chembl)),
     
       # Input: Checkbox for choosing to include outliers or not ----
       #checkboxInput("outliers", "Show outliers", TRUE)
@@ -57,6 +53,8 @@ ui <- pageWithSidebar(
 
 #chemblData$`Max Phase` <- factor(chemblData$`Max Phase`, labels = c("zero", "one", "two", "three", "four"))
 
+
+
 server <- function(input, output) {
   
 
@@ -65,19 +63,20 @@ server <- function(input, output) {
   # Save render* expressions in the output list, with one entry for 
   # each reactive object in the app
   # Create reactivity by including an input value in a render* expression
-  
-  
-  # Change code below ?linking selection input to column names
-  selectData <- reactive({input$variable})
+
+    datacol <- reactive(input$variable)
+
+    output$chemblPlot <- renderPlot({
+      ggplot(chembl, aes(x = `Max Phase`, y = datacol())) +
+        geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25),
+                         colour = `Max Phase`), outlier.alpha = 0.2)
+    })
+    
+    
+    
+  }
   
 
-  # Generate plot for requested variable against max phases
-  output$chemblPlot <- renderPlot({
-    
-    dfBoxplot(selectData())
-    
-  })
-}
 
 # Create/run Shiny app ----
 shinyApp(ui = ui, server = server)
