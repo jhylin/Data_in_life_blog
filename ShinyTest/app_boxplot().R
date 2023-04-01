@@ -1,8 +1,6 @@
-# Producing boxplots via boxplot() - S3 method only 
+# Shiny app producing boxplots via boxplot() (S3 method only)
 
 library(shiny)
-#library(tidyverse)
-#library(ggplot2)
 
 # Define UI for app ----
 ui <- pageWithSidebar(
@@ -51,7 +49,7 @@ server <- function(input, output) {
       
       boxplot(get(input$variable) ~ chembl$`Max Phase`, data = chembl)
       
-      })
+      }, res = 96)
       
     }
   

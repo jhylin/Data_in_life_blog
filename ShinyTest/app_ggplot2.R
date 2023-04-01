@@ -1,4 +1,4 @@
-# Attempt to use ggplot2 geom_boxplot()
+# Shiny app producing boxplots via ggplot2's geom_boxplot()
 
 library(shiny)
 library(tidyverse)
@@ -17,16 +17,8 @@ ui <- fluidPage(
     sidebarPanel(
       
       # Input: Select box to choose physicochemical features
-      selectInput("Physicochemical properties", label = h3("Select box"), 
-                  choices = list("QED weighted scores" = QED_Weighted, 
-                                 "Polar surface area" = Polar_Surface_Area, 
-                                 "Molecular weight" = Molecular_Weight), 
-                  selected = QED_Weighted),
+      selectInput("variable", "Choose a physicochemical property:", choices = setdiff(colnames(chembl), "Max Phase")),
       
-      # Input: Radio buttons to choose max phases ----
-      # radioButtons("radio", label = h3("Max phase"),
-      #              choices = list("phase 0" = 0, "phase 1" = 1, "phase 2" = 2, "phase 3" = 3, "phase 4" = 4), 
-      #              selected = 0),
       
     ),
     
@@ -35,7 +27,7 @@ ui <- fluidPage(
       
       # *Output function in ui to place reactive object in Shiny app
       # Output: Lollipop Plot ----
-      plotOutput(outputId = "lolliPlot")
+      plotOutput(outputId = "BPlot")
       
     )
   )
@@ -51,25 +43,14 @@ server <- function(input, output) {
   # Create reactivity by including an input value in a render* expression
   
   # Sample code from widget gallery
-  output$lolliPlot <- renderPlot({ 
+  output$BPlot <- renderPlot({ 
     
-    #input$radio
-
+    ggplot(chembl, aes(chembl$`Max Phase`, .data[[input$variable]])) +
+      geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25), 
+                       colour = `Max Phase`), outlier.alpha = 0.2)
     
-    })
+    }, res = 96)
   
-  # Sample app code starts here
-  # output$distPlot <- renderPlot({
-  #   
-  #   # Insert dataset below?
-  #   x    <- faithful$waiting
-  #   bins <- seq(min(x), max(x), length.out = input$bins + 1)
-  #   
-  #   hist(x, breaks = bins, col = "#75AADB", border = "orange",
-  #        xlab = "Waiting time to next eruption (in mins)",
-  #        main = "Histogram of waiting times")
-  #   
-  # })
   
 }
 
