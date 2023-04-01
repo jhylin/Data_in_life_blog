@@ -56,7 +56,9 @@ df_full = df_dn.filter(
 df_full
 
 # Drop columns
-df_full = df_full.drop(["Name", 
+df_full = df_full.drop(["ChEMBL ID",
+              "Type",
+              "Name", 
               "Synonyms", 
               "CX Acidic pKa",
               "CX Basic pKa",
@@ -81,4 +83,4 @@ df_full
 print(df_full.glimpse())
 
 # Extract the cleaned/condensed dataframe into working directory
-df_full.write_csv("chembl_mols_new.csv", sep = ",")
+df_full.write_csv("chembl_m.csv", sep = ",")

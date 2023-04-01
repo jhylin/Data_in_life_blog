@@ -2,7 +2,7 @@ library(tidyverse)
 library(ggplot2)
 
 # Using the condensed or subset of the original chembl_mols.csv dataset
-chembl <- read_csv("chembl_mols_new.csv")
+chembl <- read_csv("chembl_m.csv")
 
 head(chembl)
 
