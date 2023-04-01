@@ -4,8 +4,6 @@ library(ggplot2)
 # Using the condensed or subset of the original chembl_mols.csv dataset
 chembl <- read_csv("chembl_mols_new.csv")
 
-chembl[, 0:2]
-
 head(chembl)
 
 # Quick look at all columns names, data types & variables
