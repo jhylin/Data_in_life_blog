@@ -2,6 +2,8 @@
 
 library(shiny)
 
+chembl <- read_csv("chembl_m.csv")
+
 # Define UI for app ----
 ui <- pageWithSidebar(
   

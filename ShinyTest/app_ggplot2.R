@@ -4,6 +4,8 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 
+chembl <- read_csv("chembl_m.csv")
+
 # Define UI for app ----
 ui <- fluidPage(
   
