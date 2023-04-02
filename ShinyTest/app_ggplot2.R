@@ -21,7 +21,6 @@ ui <- fluidPage(
       # Input: Select box to choose physicochemical features
       selectInput("variable", "Choose a physicochemical property:", choices = setdiff(colnames(chembl), "Max Phase")),
       
-      
     ),
     
     # Main panel for displaying outputs ----
@@ -38,27 +37,17 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
-  # render* function in server to tell Shiny how to build objects
-  # Surround R expressions by {} in each render* function
-  # Save render* expressions in the output list, with one entry for 
-  # each reactive object in the app
-  # Create reactivity by including an input value in a render* expression
-  
-  # Sample code from widget gallery
   output$BPlot <- renderPlot({ 
     
-    ggplot(chembl, aes(chembl$`Max Phase`, .data[[input$variable]])) +
+    ggplot(chembl, aes(`Max Phase`, .data[[input$variable]])) +
       geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25), 
-                       colour = `Max Phase`), outlier.alpha = 0.2)
+                       colour = `Max Phase`), outlier.alpha = 0.2) +
+      labs(title = "Distributions of physicochemical properties against max phases",
+           caption = "(based on ChEMBL database version 31)")
     
     }, res = 96)
-  
-  # *****Change x-axis label to "Max Phases"*****
-  # *****Add plot title*****
-  
   
 }
 
 # Create/run Shiny app ----
 shinyApp(ui = ui, server = server)
-
