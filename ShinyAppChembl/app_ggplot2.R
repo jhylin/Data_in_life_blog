@@ -1,9 +1,11 @@
 # Shiny app producing boxplots via ggplot2's geom_boxplot()
 
+# Load libraries
 library(shiny)
 library(tidyverse)
 library(ggplot2)
 
+# Load ChEMBL dataset
 chembl <- read_csv("chembl_m.csv")
 
 # Define UI for app ----
@@ -27,7 +29,7 @@ ui <- fluidPage(
     mainPanel(
       
       # *Output function in ui to place reactive object in Shiny app
-      # Output: Lollipop Plot ----
+      # Output: Boxplot ----
       plotOutput(outputId = "BPlot")
       
     )
@@ -37,6 +39,7 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
+  # Output showing boxplots of different physicochemical properties vs. max phases
   output$BPlot <- renderPlot({ 
     
     ggplot(chembl, aes(`Max Phase`, .data[[input$variable]])) +

@@ -39,14 +39,6 @@ ui <- pageWithSidebar(
 
 server <- function(input, output) {
   
-
-  # render* function in server to tell Shiny how to build objects
-  # Surround R expressions by {} in each render* function
-  # Save render* expressions in the output list, with one entry for 
-  # each reactive object in the app
-  # Create reactivity by including an input value in a render* expression
-
-
     output$chemblPlot <- renderPlot({
       
       boxplot(get(input$variable) ~ chembl$`Max Phase`, data = chembl)
