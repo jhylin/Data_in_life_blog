@@ -2,11 +2,12 @@
 
 # Load libraries
 library(shiny)
+library(vroom)
 library(tidyverse)
 library(ggplot2)
 
 # Load ChEMBL dataset
-chembl <- read_csv("chembl_m.csv")
+chembl <- vroom("~/Data in life blog/ShinyAppChembl/chembl_m.csv")
 
 # Define UI for app ----
 ui <- fluidPage(
@@ -48,7 +49,7 @@ server <- function(input, output) {
       labs(title = "Distributions of physicochemical properties against max phases",
            caption = "(based on ChEMBL database version 31)")
     
-    }, res = 96)
+    }, res = 96) %>% bindCache(chembl$`Max Phase`, input$variable)
   
 }
 
