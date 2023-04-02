@@ -15,6 +15,13 @@ ui <- fluidPage(
   # App title ----
   titlePanel("Small molecules in ChEMBL database"),
   
+  # Produce a markdown file with texts
+  fluidRow(
+    column(4,
+           includeMarkdown("Chembl_intro.md")
+    )
+  ),
+  
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
     
@@ -25,6 +32,7 @@ ui <- fluidPage(
       selectInput("variable", "Choose a physicochemical property:", choices = setdiff(colnames(chembl), "Max Phase")),
       
     ),
+
     
     # Main panel for displaying outputs ----
     mainPanel(
