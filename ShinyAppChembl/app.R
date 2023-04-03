@@ -2,12 +2,11 @@
 
 # Load libraries
 library(shiny)
-library(vroom)
 library(tidyverse)
 library(ggplot2)
 
 # Load ChEMBL dataset
-chembl <- vroom("~/Data in life blog/ShinyAppChembl/chembl_m.csv")
+chembl <- read_csv("chembl_m.csv")
 
 # Define UI for app ----
 ui <- fluidPage(
