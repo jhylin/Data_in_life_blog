@@ -2,6 +2,7 @@
 
 # Load libraries
 library(shiny)
+library(markdown)
 library(tidyverse)
 library(ggplot2)
 
