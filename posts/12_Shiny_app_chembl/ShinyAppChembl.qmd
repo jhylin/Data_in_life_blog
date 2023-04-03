@@ -1,5 +1,5 @@
 ---
-title: Shiny app in action
+title: Shiny app in R
 subtitle: Small molecules in ChEMBL database
 author: Jennifer HY Lin
 date: '2023-4-3'
@@ -13,7 +13,7 @@ categories:
 
 ##### **Back story**
 
-It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for R Ladies on Twitter (when it was more normal and humane) in the final week of October, I remembered I did mention in my introduction profile that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first ever Shiny app in action, combining chemistry and web interactive app, I've got myself and perhaps a few others a very simple interactive web app on small molecules from ChEMBL database. I seem to really love the data inside ChEMBL database, as this will be my 4th post on the same dataset, knowing that I can probably do many more things with it to explore. 
+It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for R Ladies on Twitter in the final week of October, I've remembered that I mentioned in my introduction profile that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, combining chemistry and web interactive app, I've got myself and perhaps a few others a very simple interactive web app on small molecules from ChEMBL database. I seem to really like the data inside ChEMBL database, as this will be my 4th post on the same dataset, knowing that I can probably do many more things with it to explore. 
 
 The URL to reach this app is at: https://jhylin.shinyapps.io/ShinyAppChembl/ - a selected bunch of physicochemical properties of small molecules in different max phases are presented in boxplot formats.
 
@@ -21,4 +21,4 @@ The URL to reach this app is at: https://jhylin.shinyapps.io/ShinyAppChembl/ - a
 
 ##### **The process**
 
-Since I haven't been using R often lately, I'd like to document a bit about how I approach this brand new Shiny app framework (for me), as part of my self-directed learnings. This is also a continuation or extension of my self-directed learning on R programming language, starting from mid-2022. The first place I went to is not Google or Bard or ChatGPT (I'm trying to preempt a scenario that if all of these 3 options are down temporarily, what would I do in order to learn to use a new tool), but actually the actual Shiny website - https://shiny.rstudio.com/. 
+Since I haven't been using R often lately, I'd like to document a bit about how I approach this brand new Shiny app framework, as part of my self-directed learnings. This is really a continuation or extension to my self-directed learning on R programming language, which started from mid-2022. The first place I went to is not Google or Bard or ChatGPT (I'm trying to preempt a scenario that if all of these 3 options are down temporarily, what would I do in order to learn a new tool), but rather I visited the Shiny website - https://shiny.rstudio.com/. I literally started from the "Get Started" section there, and tried to read through the lessons.
