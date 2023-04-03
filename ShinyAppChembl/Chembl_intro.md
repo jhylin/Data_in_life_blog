@@ -1,1 +1,1 @@
-This is a very simple app showing small molecules in different max phases from ChEMBL database.
+By choosing a specific physicochemical property from the drop-down box below, a boxplot should appear on the right showing the distribution of the selected physicochemical property for small molecules in different max phases.

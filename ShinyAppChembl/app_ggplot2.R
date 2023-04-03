@@ -46,7 +46,7 @@ ui <- fluidPage(
 )
 
 # Define server logic ----
-server <- function(input, output) {
+server <- function(input, output, session) {
   
   # Output showing boxplots of different physicochemical properties vs. max phases
   output$BPlot <- renderPlot({ 
