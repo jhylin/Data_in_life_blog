@@ -55,7 +55,8 @@ server <- function(input, output, session) {
       geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25), 
                        colour = `Max Phase`), outlier.alpha = 0.2) +
       labs(title = "Distributions of physicochemical properties against max phases",
-           caption = "(based on ChEMBL database version 31)")
+           caption = "(based on ChEMBL database version 31)") +
+      theme_minimal()
     
     }, res = 96) %>% bindCache(chembl$`Max Phase`, input$variable)
   
