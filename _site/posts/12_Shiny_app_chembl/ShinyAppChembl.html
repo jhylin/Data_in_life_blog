@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -188,19 +251,19 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="back-story" class="level5">
 <h5 class="anchored" data-anchor-id="back-story"><strong>Back story</strong></h5>
-<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter in the final week of October, I remembered that I’ve mentioned in my introduction profile that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, combining pharmaceutical chemistry and web interactive app, I’ve got myself and perhaps a few others a very simple interactive web app on small molecules from ChEMBL database. I seem to really like the data inside ChEMBL database, as this is my 4th post on the same dataset, knowing that I can probably do many more things with it to explore.</p>
+<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I remembered mentioning that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, combining pharmaceutical chemistry (the dataset came from ChEMBL) and web interactive app, I’ve got myself and perhaps a few others a very simple interactive web app on small molecules from ChEMBL database. I seem to really like the data in ChEMBL database, knowing that I can probably do many more with it to explore further.</p>
 <p>The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/, which shows a selected set of physicochemical properties of small molecules in different max phases from the ChEMBL database in a set of boxplots.</p>
 <p><br></p>
 </section>
 <section id="the-process" class="level5">
 <h5 class="anchored" data-anchor-id="the-process"><strong>The process</strong></h5>
-<p>Since I haven’t been using R often lately, I’d like to document a bit about how I approached this Shiny app framework, as part of my self-directed learning of R programming language that started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I’m trying to preempt a scenario where if both of these options are temporarily down, what would I do to learn a new tool, so I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first. I literally started from the “Get Started” section there, and tried to read through the lessons. I gathered a quick overview about the main components within a Shiny app, which were the user interface, server logic and the last part to run or create app.</p>
-<p>I think afterward I ventured into this online book called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” to read more about tweaking the user interface and managing data input through various means, which had kept my interests up all the way. The reactivity section was very useful to understand the concept about interactivity between the app and users. The best and also the hardest thing at the same time was to actually start coding the app in the IDE, while reading all the information. So I started coding while not really completely knowing how to get a Shiny app working.</p>
+<p>Since I haven’t been using a lot of R lately, I’d like to document how I approached this Shiny app framework, which was brand new for me, as part of my self-directed learning of R which started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the main core components within a Shiny app, which were the user interface, server logic and the last part to run or create app, and thought to get started from there.</p>
+<p>One of the most helpful online books called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” had clarified a few coding issues for me, which I would talk a bit more down below. The reactivity section in the book was very useful for me to understand the interactivity concept for the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE. I did get myself started soon after, which was where the fun began.</p>
 <p><br></p>
 </section>
 <section id="trial-and-errors" class="level5">
 <h5 class="anchored" data-anchor-id="trial-and-errors"><strong>Trial-and-errors</strong></h5>
-<p>Just to show two trial-and-error stages where I tried to do what I intended to do, but not quite reaching the final version. The first one was where I’ve noticed from the gallery section from the Shiny website that some of the basic Shiny app had plots in the format of using base R code. So I started with this first with a draft version shown in the screenshot below:</p>
+<p>I’d just like share two trial-and-error stages where I tried to do what I intended to do, but did not quite reach the expected outcome. The first one was where I’ve noticed from the gallery section in the Shiny website that some of the basic Shiny apps had plots in the format of using base R code. So I started with this first with a draft version shown in the screenshot below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_1.jpg" class="img-fluid figure-img"></p>
@@ -208,14 +271,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </figure>
 </div>
 <p><br></p>
-<p>This then got me thinking to use the ggplot2 version, which I’ve personally found to be more elegant and aesthetically more pleasing. However, I kept on hitting at a roadblock at the app outcome shown below:</p>
+<p>This then got me thinking to use the ggplot2 version, which I’ve personally found to be more elegant and aesthetically more pleasing. However, I kept on hitting a roadblock repeatedly at the app outcome shown below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_2.jpg" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption><p></p>
 </figure>
 </div>
-<p>I ended up working through this issue of not being able to display the boxplots over two days at least, trying to figure out how to change the plotting code.</p>
+<p>I ended up working through this issue of not being able to display the boxplots properly over two days at least, trying to figure out how to change the plotting code.</p>
 <p><br></p>
 </section>
 <section id="final-app" class="level5">
@@ -227,7 +290,22 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p></p><figcaption class="figure-caption">Screenshot taken by author</figcaption><p></p>
 </figure>
 </div>
-<p>A great section in the “Mastering Shiny” book for “Tidy evaluation” has thoroughly summarised the problems new users may encounter and also explained how to write the code to make the app working with the intended input data and outcome. I initially wrote a function code to plot the boxplots in a separate R script file to make sure the code works before using this function code in the app.R file for the Shiny app.</p>
+<p>I initially wrote a function code, as shown below, to plot the boxplots in a separate R script file to make sure the code works before using this function code in the app.R file for the Shiny app.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dfBoxplot <span class="ot">&lt;-</span> <span class="cf">function</span>(var) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  label <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">englue</span>(<span class="st">"{{var}} vs. Max Phases of small molecules"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  chembl <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, {{ var }}) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, <span class="at">y =</span> {{ var }})) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(<span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, <span class="fl">0.25</span>), </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colour =</span> <span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">outlier.alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> label)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I then transplanted the function code I wrote earlier into the app.R file, but it didn’t quite work.</p>
+<p>A section in the “Mastering Shiny” book on “Tidy evaluation” had thoroughly summarised the problems new users might encounter and also explained how to write the code to make the app work with the intended input data and outcome.</p>
 <p><br></p>
 </section>
 <section id="app-deployment" class="level5">
