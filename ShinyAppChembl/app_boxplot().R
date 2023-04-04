@@ -1,6 +1,7 @@
 # Shiny app producing boxplots via boxplot() (S3 method only)
 
 library(shiny)
+library(tidyverse)
 
 chembl <- read_csv("chembl_m.csv")
 
@@ -15,10 +16,8 @@ ui <- pageWithSidebar(
       
       # Input: Select box to choose physicochemical features
       # choices = names(chembl)
-      selectInput("variable", "Choose a physicochemical property:", choices = setdiff(colnames(chembl), "Max Phase")),
-    
-      # Input: Checkbox for choosing to include outliers or not ----
-      #checkboxInput("outliers", "Show outliers", TRUE)
+      selectInput("variable", "Variable:", 
+                  choices = setdiff(colnames(chembl), "Max Phase")),
       
     ),
     
@@ -44,9 +43,6 @@ server <- function(input, output) {
       boxplot(get(input$variable) ~ chembl$`Max Phase`, data = chembl)
       
       }, res = 96)
-    
-    # *****Change x-axis label to "Max Phases" & y-axis labels (?reactive)*****
-    # *****Add plot title*****  
     
   
     }
