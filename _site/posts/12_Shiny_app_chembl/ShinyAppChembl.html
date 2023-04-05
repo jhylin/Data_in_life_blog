@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-04-04">
+<meta name="dcterms.date" content="2023-04-05">
 
 <title>Home - Shiny app in R</title>
 <style>
@@ -219,7 +219,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 4, 2023</p>
+        <p class="date">April 5, 2023</p>
       </div>
     </div>
     
@@ -240,6 +240,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#trial-and-errors" id="toc-trial-and-errors" class="nav-link" data-scroll-target="#trial-and-errors"><strong>Trial-and-errors</strong></a></li>
   <li><a href="#final-app" id="toc-final-app" class="nav-link" data-scroll-target="#final-app"><strong>Final app</strong></a></li>
   <li><a href="#app-deployment" id="toc-app-deployment" class="nav-link" data-scroll-target="#app-deployment"><strong>App deployment</strong></a></li>
+  <li><a href="#brief-look-at-the-boxplots" id="toc-brief-look-at-the-boxplots" class="nav-link" data-scroll-target="#brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -251,19 +252,18 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="back-story" class="level5">
 <h5 class="anchored" data-anchor-id="back-story"><strong>Back story</strong></h5>
-<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I remembered mentioning that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, combining pharmaceutical chemistry (the dataset came from ChEMBL) and web interactive app, I’ve got myself and perhaps a few others a very simple interactive web app on small molecules from ChEMBL database. I seem to really like the data in ChEMBL database, knowing that I can probably do many more with it to explore further.</p>
-<p>The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/, which shows a selected set of physicochemical properties of small molecules in different max phases from the ChEMBL database in a set of boxplots.</p>
+<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases from the database in boxplot formats.</p>
 <p><br></p>
 </section>
 <section id="the-process" class="level5">
 <h5 class="anchored" data-anchor-id="the-process"><strong>The process</strong></h5>
-<p>Since I haven’t been using a lot of R lately, I’d like to document how I approached this Shiny app framework, which was brand new for me, as part of my self-directed learning of R which started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the main core components within a Shiny app, which were the user interface, server logic and the last part to run or create app, and thought to get started from there.</p>
-<p>One of the most helpful online books called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” had clarified a few coding issues for me, which I would talk a bit more down below. The reactivity section in the book was very useful for me to understand the interactivity concept for the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE. I did get myself started soon after, which was where the fun began.</p>
+<p>Since I haven’t been using a lot of R lately, I’d just like to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the main core components within a Shiny app, which were the user interface, server logic and the last part to run or create app, and thought to get started from there.</p>
+<p>One of the most helpful online books called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” had clarified a few coding issues for me. The reactivity section in the book was very useful as well to help with understanding the interactivity concept in the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE, which I did soon after.</p>
 <p><br></p>
 </section>
 <section id="trial-and-errors" class="level5">
 <h5 class="anchored" data-anchor-id="trial-and-errors"><strong>Trial-and-errors</strong></h5>
-<p>I’d just like share two trial-and-error stages where I tried to do what I intended to do, but did not quite reach the expected outcome. The first one was where I’ve noticed from the gallery section in the Shiny website that some of the basic Shiny apps had plots in the format of using base R code. So I started with this first with a draft version shown in the screenshot below:</p>
+<p>Initially I’ve noticed from the gallery section from the Shiny website that some of the basic Shiny apps had plots produced from the original stats R code. So I started with this first and ended up with a draft version shown below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_1.jpg" class="img-fluid figure-img"></p>
@@ -271,26 +271,19 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </figure>
 </div>
 <p><br></p>
-<p>This then got me thinking to use the ggplot2 version, which I’ve personally found to be more elegant and aesthetically more pleasing. However, I kept on hitting a roadblock repeatedly at the app outcome shown below:</p>
+<p>This then got me thinking to try the ggplot2 version, which I’ve personally found it to be more elegant and aesthetically more pleasing. However, I kept on hitting a roadblock repeatedly which could be seen in the image below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_2.jpg" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption><p></p>
 </figure>
 </div>
-<p>I ended up working through this issue of not being able to display the boxplots properly over two days at least, trying to figure out how to change the plotting code.</p>
+<p>I ended up working through this issue of not being able to display the boxplots properly over two days at least, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app.</p>
 <p><br></p>
 </section>
 <section id="final-app" class="level5">
 <h5 class="anchored" data-anchor-id="final-app"><strong>Final app</strong></h5>
-<p>I managed to solve my own errors in the code by reading the code examples from the “Mastering Shiny” book, and changed the plotting code in the server section. The final app now looks like this:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Final_app.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot taken by author</figcaption><p></p>
-</figure>
-</div>
-<p>I initially wrote a function code, as shown below, to plot the boxplots in a separate R script file to make sure the code works before using this function code in the app.R file for the Shiny app.</p>
+<p>Before I even started setting up the app.R file, I actually wrote a plot function code, as shown below, to trial plotting the boxplots in a separate R script file ensuring that the code works before using it in the app.R file for the app.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dfBoxplot <span class="ot">&lt;-</span> <span class="cf">function</span>(var) {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  label <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">englue</span>(<span class="st">"{{var}} vs. Max Phases of small molecules"</span>)</span>
@@ -304,13 +297,22 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> label)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>I then transplanted the function code I wrote earlier into the app.R file, but it didn’t quite work.</p>
-<p>A section in the “Mastering Shiny” book on “Tidy evaluation” had thoroughly summarised the problems new users might encounter and also explained how to write the code to make the app work with the intended input data and outcome.</p>
+<p>Once I made sure it worked, then I transplanted the function code I wrote earlier into the server section of the app.R file, however it wasn’t that simple obviously. Then through the process of trial-and-errors which were described above, I managed to figure out the plot output code in the final version. I then read about the section in the “Mastering Shiny” book on “Tidy evaluation”, which had thoroughly summarised the problems I’ve encountered and also explained how to write the code to make the app work with the intended input data and outcome, so I’d highly recommend new users to read this section, which might shorten the time required to figure out the code. So, the final app now looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Final_app.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Screenshot taken by author</figcaption><p></p>
+</figure>
+</div>
 <p><br></p>
 </section>
 <section id="app-deployment" class="level5">
 <h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
-<p>Now having a Shiny app working on my local machine was not a problem when I’ve finally reached how I wanted the app to be, even though it was really a very simple app to make, nothing fancy at this stage. I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> in the Quarto website to see if it’s possible to deploy Shiny app in Quarto. After reading through several other questions and answers about Shiny app and Quarto website, it was obvious that it was still yet not possible to deploy the Shiny app on the Quarto website (but it was mentioned that this was being looked into, so perhaps still a work-in-progress), which meant that at most, there could only be an image of the app on a Quarto document at most. However, I was pleasantly surprised that there was a Shiny in Python version, which had a ShinyLive option where developers might be able to deploy an interactive Shiny app in Python live in GitHub gist etc. I ended up deploying my first Shiny app using the free version from shinyapp.io for now.</p>
+<p>The next stage after I got the app to work was choosing where I would deploy it. At first, I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> in the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the Shiny app in an interactive style on the Quarto website (but it was mentioned in Posit community that this was being looked into, so perhaps this is currently still a work-in-progress). This meant that at most, there could only be an image of the app on a Quarto document at most. However, I was pleasantly surprised that there was a Shiny in Python version, which had a ShinyLive option to deploy Shiny app interactively in GitHub Gist etc. I ended up choosing shinyapp.io to deploy my first Shiny app for now, and I’ll go from there in the future.</p>
+</section>
+<section id="brief-look-at-the-boxplots" class="level5">
+<h5 class="anchored" data-anchor-id="brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></h5>
+<p>Perhaps it might be a bit too elusive not to talk about these boxplots. So I’ll briefly discuss the outcomes I’ve seen from using the app myself.</p>
 
 
 </section>
