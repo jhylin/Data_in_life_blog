@@ -88,7 +88,7 @@ After I got the app working, I looked into where I could deploy the app, since m
 
 ##### **Brief look at the boxplots**
 
-Perhaps it might be a bit too elusive not to talk about these boxplots. So I'll briefly discuss the outcomes I've seen from using the app myself.
+Perhaps it might be a bit too elusive not to talk about these boxplots. So I'll briefly discuss the outcomes I've seen from using the app myself. For QED Weighted variable, which was really the QED weighted scores for the small molecules, it was clearly shown that max phase 4 molecules had higher QED weighted scores than all of the other max phases, especially when comparing the medians between them.
 
 <br>
 
