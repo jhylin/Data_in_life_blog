@@ -2,7 +2,7 @@
 title: Shiny app in R
 subtitle: Small molecules in ChEMBL database
 author: Jennifer HY Lin
-date: '2023-4-5'
+date: '2023-4-6'
 draft: true
 categories:
   - R
@@ -19,31 +19,25 @@ It has been a long while since I've used R in my projects. Last year during the 
 
 ##### **The process**
 
-Since I haven't been using a lot of R lately, I'd just like to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google's Bard or OpenAI's ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the [Shiny website](https://shiny.rstudio.com/) first, and literally started from the "Get Started" section there, then tried to read through the lessons provided. I gathered a quick overview about the main core components within a Shiny app, which were the user interface, server logic and the last part to run or create app, and thought to get started from there.
+Since I haven't been using a lot of R lately, I just wanted to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google's Bard or OpenAI's ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the [Shiny website](https://shiny.rstudio.com/) first, and literally started from the "Get Started" section there, then tried to read through the lessons provided. I gathered a quick overview about the core components within a Shiny app, which were the user interface, server logic and the call to run or create app in the end, and thought to get started from there.
 
 One of the most helpful online books called, "[Mastering Shiny](https://mastering-shiny.org/index.html)" had clarified a few coding issues for me. The reactivity section in the book was very useful as well to help with understanding the interactivity concept in the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE, which I did soon after.
 
 <br>
 
-##### **Trial-and-errors**
+##### **Trials-and-errors**
 
-Initially I've noticed from the gallery section from the Shiny website that some of the basic Shiny apps had plots produced from the original stats R code. So I started with this first and ended up with a draft version shown below:
+Initially, I've noticed in the gallery section from the Shiny website that some of the basic Shiny apps had plots produced with R code using S3 method - the type with class 'formula', such as boxplot(formula e.g. y ~ group, data, and so on). So I started with this first and ended up with a draft version shown below:
 
-![Draft app using base R boxplot format - screenshot taken by author](Draft_app_error_1.jpg)
+![First draft app using S3 method in R code to plot boxplots - screenshot taken by author](Draft_app_error_1.jpg)
 
 <br>
 
-This then got me thinking to try the ggplot2 version, which I've personally found it to be more elegant and aesthetically more pleasing. However, I kept on hitting a roadblock repeatedly which could be seen in the image below:
+I then tried the ggplot2 version, which I preferred to use. However, I kept on hitting a roadblock repeatedly (as shown in the image below):
 
 ![Second draft app using ggplot2 boxplot format - screenshot taken by author](Draft_app_error_2.jpg)
 
-I ended up working through this issue of not being able to display the boxplots properly over two days at least, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app.
-
-<br>
-
-##### **Final app**
-
-Before I even started setting up the app.R file, I actually wrote a plot function code, as shown below, to trial plotting the boxplots in a separate R script file ensuring that the code works before using it in the app.R file for the app.
+I ended up working through this issue of not being able to display the boxplots properly over at least two days, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app. I actually wrote a plot function code (as shown below) before working on the app.R file, in order to trial plotting the boxplots, making sure that the code worked before using it in the app.R file.
 
 ``` {{r}}
 dfBoxplot <- function(var) {
@@ -59,7 +53,28 @@ dfBoxplot <- function(var) {
 }
 ```
 
-Once I made sure it worked, I then transplanted the function code I wrote earlier into the server section of the app.R file, however it wasn't that simple obviously. Through the process of trial-and-errors, I managed to figure out the code for plot output in the final version, which was not how it looked in the usual function code. I then read about the section in "Mastering Shiny" book on "Tidy evaluation", which had thoroughly summarised the problems I've encountered (and I wished I actually read this beforehand, but nevertheless it was still pretty good to see my problems explained clearly in this chapter). So I'd highly recommend new users to read this section and also the rest of the book if Shiny is also new for you. The final app now looks like this:
+Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn't that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not how it looked in the function code above, but more like this as shown below.
+
+```{{r}}
+  output$BPlot <- renderPlot({ 
+    
+    ggplot(chembl, aes(`Max Phase`, .data[[input$variable]])) +
+      geom_boxplot(aes(group = cut_width(`Max Phase`, 0.25), 
+                       colour = `Max Phase`), outlier.alpha = 0.2) +
+      labs(title = "Distributions of physicochemical properties against max phases",
+           caption = "(based on ChEMBL database version 31)") +
+      theme_minimal()
+    
+    }, res = 96) %>% bindCache(chembl$`Max Phase`, input$variable)
+```
+
+I then read about the section on "Tidy evaluation" in the "Mastering Shiny" book, which had thoroughly described the problems I've encountered (which I wished I had actually read this section before and not after hitting the roadblock...). So I'd highly recommend new users to read this section and also the rest of the book if Shiny's also new to you.
+
+<br>
+
+##### **Final app**
+
+The final app now looks like this:
 
 ![Screenshot taken by author](Final_app.jpg)
 
@@ -67,9 +82,16 @@ Once I made sure it worked, I then transplanted the function code I wrote earlie
 
 ##### **App deployment**
 
-After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the [Shiny section](https://quarto.org/docs/interactive/shiny/index.html) on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the Shiny app in an interactive way on Quarto website (but it was mentioned in Posit community that this was being looked into, so I'm looking forward for it to be the case in the future). This meant that currently, there could only be an app image in a Quarto document at most. However, I was pleasantly surprised that there was a Shiny in Python version, which had a Shinylive option to deploy Shiny app interactively in GitHub Gist etc. I ended up choosing shinyapp.io to deploy my first Shiny app for now, and I'll go from there in the future.
+After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the [Shiny section](https://quarto.org/docs/interactive/shiny/index.html) on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the app in an interactive way on Quarto websites (but it was mentioned in Posit community that this was being looked into, so I'm looking forward to the day when we can do exactly that in the future). This means that currently, there will only be an app image showing up in a Quarto document at most. I ended up choosing shinyapp.io to deploy my first Shiny app for now.
 
+<br>
 
 ##### **Brief look at the boxplots**
 
 Perhaps it might be a bit too elusive not to talk about these boxplots. So I'll briefly discuss the outcomes I've seen from using the app myself.
+
+<br>
+
+##### **Final words**
+
+I'm pleasantly surprised that there is a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on... I'll most likely need to read further into this and make this as my next project. This is a nice break from the recent machine learning projects that I've worked on, which I'll try to return to once I've had enough fun with Shiny!

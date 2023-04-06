@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-04-05">
+<meta name="dcterms.date" content="2023-04-06">
 
 <title>Home - Shiny app in R</title>
 <style>
@@ -219,7 +219,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 5, 2023</p>
+        <p class="date">April 6, 2023</p>
       </div>
     </div>
     
@@ -237,10 +237,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <ul>
   <li><a href="#back-story" id="toc-back-story" class="nav-link active" data-scroll-target="#back-story"><strong>Back story</strong></a></li>
   <li><a href="#the-process" id="toc-the-process" class="nav-link" data-scroll-target="#the-process"><strong>The process</strong></a></li>
-  <li><a href="#trial-and-errors" id="toc-trial-and-errors" class="nav-link" data-scroll-target="#trial-and-errors"><strong>Trial-and-errors</strong></a></li>
+  <li><a href="#trials-and-errors" id="toc-trials-and-errors" class="nav-link" data-scroll-target="#trials-and-errors"><strong>Trials-and-errors</strong></a></li>
   <li><a href="#final-app" id="toc-final-app" class="nav-link" data-scroll-target="#final-app"><strong>Final app</strong></a></li>
   <li><a href="#app-deployment" id="toc-app-deployment" class="nav-link" data-scroll-target="#app-deployment"><strong>App deployment</strong></a></li>
   <li><a href="#brief-look-at-the-boxplots" id="toc-brief-look-at-the-boxplots" class="nav-link" data-scroll-target="#brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></a></li>
+  <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -257,33 +258,28 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="the-process" class="level5">
 <h5 class="anchored" data-anchor-id="the-process"><strong>The process</strong></h5>
-<p>Since I haven’t been using a lot of R lately, I’d just like to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the main core components within a Shiny app, which were the user interface, server logic and the last part to run or create app, and thought to get started from there.</p>
+<p>Since I haven’t been using a lot of R lately, I just wanted to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the core components within a Shiny app, which were the user interface, server logic and the call to run or create app in the end, and thought to get started from there.</p>
 <p>One of the most helpful online books called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” had clarified a few coding issues for me. The reactivity section in the book was very useful as well to help with understanding the interactivity concept in the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE, which I did soon after.</p>
 <p><br></p>
 </section>
-<section id="trial-and-errors" class="level5">
-<h5 class="anchored" data-anchor-id="trial-and-errors"><strong>Trial-and-errors</strong></h5>
-<p>Initially I’ve noticed from the gallery section from the Shiny website that some of the basic Shiny apps had plots produced from the original stats R code. So I started with this first and ended up with a draft version shown below:</p>
+<section id="trials-and-errors" class="level5">
+<h5 class="anchored" data-anchor-id="trials-and-errors"><strong>Trials-and-errors</strong></h5>
+<p>Initially, I’ve noticed in the gallery section from the Shiny website that some of the basic Shiny apps had plots produced with R code using S3 method - the type with class ‘formula’, such as boxplot(formula e.g.&nbsp;y ~ group, data, and so on). So I started with this first and ended up with a draft version shown below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_1.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Draft app using base R boxplot format - screenshot taken by author</figcaption><p></p>
+<p></p><figcaption class="figure-caption">First draft app using S3 method in R code to plot boxplots - screenshot taken by author</figcaption><p></p>
 </figure>
 </div>
 <p><br></p>
-<p>This then got me thinking to try the ggplot2 version, which I’ve personally found it to be more elegant and aesthetically more pleasing. However, I kept on hitting a roadblock repeatedly which could be seen in the image below:</p>
+<p>I then tried the ggplot2 version, which I preferred to use. However, I kept on hitting a roadblock repeatedly (as shown in the image below):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Draft_app_error_2.jpg" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption><p></p>
 </figure>
 </div>
-<p>I ended up working through this issue of not being able to display the boxplots properly over two days at least, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app.</p>
-<p><br></p>
-</section>
-<section id="final-app" class="level5">
-<h5 class="anchored" data-anchor-id="final-app"><strong>Final app</strong></h5>
-<p>Before I even started setting up the app.R file, I actually wrote a plot function code, as shown below, to trial plotting the boxplots in a separate R script file ensuring that the code works before using it in the app.R file for the app.</p>
+<p>I ended up working through this issue of not being able to display the boxplots properly over at least two days, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app. I actually wrote a plot function code (as shown below) before working on the app.R file, in order to trial plotting the boxplots, making sure that the code worked before using it in the app.R file.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dfBoxplot <span class="ot">&lt;-</span> <span class="cf">function</span>(var) {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  label <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">englue</span>(<span class="st">"{{var}} vs. Max Phases of small molecules"</span>)</span>
@@ -297,7 +293,25 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> label)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once I made sure it worked, I then transplanted the function code I wrote earlier into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of trial-and-errors, I managed to figure out the code for plot output in the final version, which was not how it looked in the usual function code. I then read about the section in “Mastering Shiny” book on “Tidy evaluation”, which had thoroughly summarised the problems I’ve encountered (and I wished I actually read this beforehand, but nevertheless it was still pretty good to see my problems explained clearly in this chapter). So I’d highly recommend new users to read this section and also the rest of the book if Shiny is also new for you. The final app now looks like this:</p>
+<p>Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not how it looked in the function code above, but more like this as shown below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>BPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(chembl, <span class="fu">aes</span>(<span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, .data[[input<span class="sc">$</span>variable]])) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(<span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, <span class="fl">0.25</span>), </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">colour =</span> <span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>), <span class="at">outlier.alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distributions of physicochemical properties against max phases"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">caption =</span> <span class="st">"(based on ChEMBL database version 31)"</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }, <span class="at">res =</span> <span class="dv">96</span>) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(chembl<span class="sc">$</span><span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, input<span class="sc">$</span>variable)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I then read about the section on “Tidy evaluation” in the “Mastering Shiny” book, which had thoroughly described the problems I’ve encountered (which I wished I had actually read this section before and not after hitting the roadblock…). So I’d highly recommend new users to read this section and also the rest of the book if Shiny’s also new to you.</p>
+<p><br></p>
+</section>
+<section id="final-app" class="level5">
+<h5 class="anchored" data-anchor-id="final-app"><strong>Final app</strong></h5>
+<p>The final app now looks like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Final_app.jpg" class="img-fluid figure-img"></p>
@@ -308,11 +322,17 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="app-deployment" class="level5">
 <h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
-<p>After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the Shiny app in an interactive way on Quarto website (but it was mentioned in Posit community that this was being looked into, so I’m looking forward for it to be the case in the future). This meant that currently, there could only be an app image in a Quarto document at most. However, I was pleasantly surprised that there was a Shiny in Python version, which had a Shinylive option to deploy Shiny app interactively in GitHub Gist etc. I ended up choosing shinyapp.io to deploy my first Shiny app for now, and I’ll go from there in the future.</p>
+<p>After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the app in an interactive way on Quarto websites (but it was mentioned in Posit community that this was being looked into, so I’m looking forward to the day when we can do exactly that in the future). This means that currently, there will only be an app image showing up in a Quarto document at most. I ended up choosing shinyapp.io to deploy my first Shiny app for now.</p>
+<p><br></p>
 </section>
 <section id="brief-look-at-the-boxplots" class="level5">
 <h5 class="anchored" data-anchor-id="brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></h5>
 <p>Perhaps it might be a bit too elusive not to talk about these boxplots. So I’ll briefly discuss the outcomes I’ve seen from using the app myself.</p>
+<p><br></p>
+</section>
+<section id="final-words" class="level5">
+<h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
+<p>I was pleasantly surprised that there is a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist… and I’ll need to read into this and make this as my next project. This is a nice break from machine learning posts that I’ve done recently, which I’ll try to return to that series once I’ve had enough fun with Shiny!</p>
 
 
 </section>
