@@ -2,8 +2,8 @@
 title: Shiny app in R
 subtitle: Small molecules in ChEMBL database
 author: Jennifer HY Lin
-date: '2023-4-6'
-draft: true
+date: '2023-4-7'
+draft: false
 categories:
   - R
   - Shiny
@@ -13,7 +13,7 @@ categories:
 
 ##### **Back story**
 
-It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for @WeAreRLadies on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, [ShinyAppChembl](https://jhylin.shinyapps.io/ShinyAppChembl/), is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases from the database in boxplot formats.
+It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for @WeAreRLadies on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, [ShinyAppChembl](https://jhylin.shinyapps.io/ShinyAppChembl/), is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats.
 
 <br>
 
@@ -53,7 +53,7 @@ dfBoxplot <- function(var) {
 }
 ```
 
-Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn't that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not how it looked in the function code above, but more like this as shown below.
+Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn't that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not the same as the function code above, but more like this.
 
 ```{{r}}
   output$BPlot <- renderPlot({ 
@@ -68,7 +68,7 @@ Once I made sure this code worked, I transplanted the code into the server secti
     }, res = 96) %>% bindCache(chembl$`Max Phase`, input$variable)
 ```
 
-I then read about the section on "Tidy evaluation" in the "Mastering Shiny" book, which had thoroughly described the problems I've encountered (which I wished I had actually read this section before and not after hitting the roadblock...). So I'd highly recommend new users to read this section and also the rest of the book if Shiny's also new to you.
+I then read about the section on "Tidy evaluation" in the "Mastering Shiny" book, which had thoroughly described the problems I've encountered (and which I wished I had actually read this section before and not after hitting the roadblock...). So I'd highly recommend new users to read this section and also the rest of the book if Shiny's also new to you.
 
 <br>
 
@@ -88,10 +88,14 @@ After I got the app working, I looked into where I could deploy the app, since m
 
 ##### **About the boxplots**
 
-Since the main goal of this post is more on the process of producing a simple Shiny app, I'll only briefly describe a few physicochemical features in the boxplots for the ChEMBL small molecules. For the QED Weighted variable, it is really the QED weighted scores for the small molecules, it was clearly shown that max phase 4 molecules had higher QED weighted scores than all of the other max phases, especially when comparing the medians between them.
+Since the main goal of this post is more on the process of producing a simple Shiny app for a new comer, I won't go into the fine details to describe how these boxplots differ between different max phases. Also as a side note, I'm aware that some experts in data visualisations might not really like boxplots in general, but for my case, I've got molecules in different max phases where a boxplot is presented for each max phase lining up next to each other. Therefore, in a way, some relative comparisons or differences could be drawn visually in the first glance, although other graph types such as density plots or heat maps might be better options. 
+
+I'll focus on the "QED Weighted" variable here, as it's a physicochemical property that has combined several molecular features together as a score (please refer to [this post - section: "Some exploratory data analysis"](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html) for details about this QED weighted score). For all the boxplots shown when "QED Weighted" is selected from the drop-down box, max phase 4 molecules obviously have higher QED weighted scores in general than all of the other max phases. This is especially clear when comparing the medians between them, with max phase 4 small molecules having a median QED weighted score of more than 0.5, and the rest of the other max phases had 0.5 or below. The higher the QED weighted scores, the more druglike the molecules will be, and for max phase 4 molecules, they are mostly prescription medicines that have already reached approval and are already being widely prescribed. So this makes sense as this is being reflected in the boxplots for these ChEMBL small molecules.
 
 <br>
 
 ##### **Final words**
 
-I'm pleasantly surprised that there is a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on... I'll most likely need to read further into this and make this as my next project. This is a nice break from the recent machine learning projects that I've worked on, which I'll try to return to once I've had enough fun with Shiny!
+Finally, I'm quite pleasantly surprised that there is also a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on... I'll most likely need to read further into this and make this as my next project. This is also a nice break from my recent machine learning projects, which I'll try to return to once I've had enough fun with Shiny!
+
+Thanks for reading.

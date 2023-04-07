@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-04-06">
+<meta name="dcterms.date" content="2023-04-07">
 
 <title>Home - Shiny app in R</title>
 <style>
@@ -219,7 +219,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 6, 2023</p>
+        <p class="date">April 7, 2023</p>
       </div>
     </div>
     
@@ -240,7 +240,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#trials-and-errors" id="toc-trials-and-errors" class="nav-link" data-scroll-target="#trials-and-errors"><strong>Trials-and-errors</strong></a></li>
   <li><a href="#final-app" id="toc-final-app" class="nav-link" data-scroll-target="#final-app"><strong>Final app</strong></a></li>
   <li><a href="#app-deployment" id="toc-app-deployment" class="nav-link" data-scroll-target="#app-deployment"><strong>App deployment</strong></a></li>
-  <li><a href="#brief-look-at-the-boxplots" id="toc-brief-look-at-the-boxplots" class="nav-link" data-scroll-target="#brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></a></li>
+  <li><a href="#about-the-boxplots" id="toc-about-the-boxplots" class="nav-link" data-scroll-target="#about-the-boxplots"><strong>About the boxplots</strong></a></li>
   <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -253,7 +253,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="back-story" class="level5">
 <h5 class="anchored" data-anchor-id="back-story"><strong>Back story</strong></h5>
-<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first ever Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases from the database in boxplot formats.</p>
+<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats.</p>
 <p><br></p>
 </section>
 <section id="the-process" class="level5">
@@ -293,7 +293,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> label)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not how it looked in the function code above, but more like this as shown below.</p>
+<p>Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not the same as the function code above, but more like this.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>BPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -306,7 +306,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }, <span class="at">res =</span> <span class="dv">96</span>) <span class="sc">%&gt;%</span> <span class="fu">bindCache</span>(chembl<span class="sc">$</span><span class="st">`</span><span class="at">Max Phase</span><span class="st">`</span>, input<span class="sc">$</span>variable)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>I then read about the section on “Tidy evaluation” in the “Mastering Shiny” book, which had thoroughly described the problems I’ve encountered (which I wished I had actually read this section before and not after hitting the roadblock…). So I’d highly recommend new users to read this section and also the rest of the book if Shiny’s also new to you.</p>
+<p>I then read about the section on “Tidy evaluation” in the “Mastering Shiny” book, which had thoroughly described the problems I’ve encountered (and which I wished I had actually read this section before and not after hitting the roadblock…). So I’d highly recommend new users to read this section and also the rest of the book if Shiny’s also new to you.</p>
 <p><br></p>
 </section>
 <section id="final-app" class="level5">
@@ -325,14 +325,16 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the app in an interactive way on Quarto websites (but it was mentioned in Posit community that this was being looked into, so I’m looking forward to the day when we can do exactly that in the future). This means that currently, there will only be an app image showing up in a Quarto document at most. I ended up choosing shinyapp.io to deploy my first Shiny app for now.</p>
 <p><br></p>
 </section>
-<section id="brief-look-at-the-boxplots" class="level5">
-<h5 class="anchored" data-anchor-id="brief-look-at-the-boxplots"><strong>Brief look at the boxplots</strong></h5>
-<p>Perhaps it might be a bit too elusive not to talk about these boxplots. So I’ll briefly discuss the outcomes I’ve seen from using the app myself. For QED Weighted variable, which was really the QED weighted scores for the small molecules, it was clearly shown that max phase 4 molecules had higher QED weighted scores than all of the other max phases, especially when comparing the medians between them.</p>
+<section id="about-the-boxplots" class="level5">
+<h5 class="anchored" data-anchor-id="about-the-boxplots"><strong>About the boxplots</strong></h5>
+<p>Since the main goal of this post is more on the process of producing a simple Shiny app for a new comer, I won’t go into the fine details to describe how these boxplots differ between different max phases. Also as a side note, I’m aware that some experts in data visualisations might not really like boxplots in general, but for my case, I’ve got molecules in different max phases where a boxplot is presented for each max phase lining up next to each other. Therefore, in a way, some relative comparisons or differences could be drawn visually in the first glance, although other graph types such as density plots or heat maps might be better options.</p>
+<p>I’ll focus on the “QED Weighted” variable here, as it’s a physicochemical property that has combined several molecular features together as a score (please refer to <a href="https://jhylin.github.io/Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html">this post - section: “Some exploratory data analysis”</a> for details about this QED weighted score). For all the boxplots shown when “QED Weighted” is selected from the drop-down box, max phase 4 molecules obviously have higher QED weighted scores in general than all of the other max phases. This is especially clear when comparing the medians between them, with max phase 4 small molecules having a median QED weighted score of more than 0.5, and the rest of the other max phases had 0.5 or below. The higher the QED weighted scores, the more druglike the molecules will be, and for max phase 4 molecules, they are mostly prescription medicines that have already reached approval and are already being widely prescribed. So this makes sense as this is being reflected in the boxplots for these ChEMBL small molecules.</p>
 <p><br></p>
 </section>
 <section id="final-words" class="level5">
 <h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
-<p>I’m pleasantly surprised that there is a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on… I’ll most likely need to read further into this and make this as my next project. This is a nice break from the recent machine learning projects that I’ve worked on, which I’ll try to return to once I’ve had enough fun with Shiny!</p>
+<p>Finally, I’m quite pleasantly surprised that there is also a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on… I’ll most likely need to read further into this and make this as my next project. This is also a nice break from my recent machine learning projects, which I’ll try to return to once I’ve had enough fun with Shiny!</p>
+<p>Thanks for reading.</p>
 
 
 </section>
