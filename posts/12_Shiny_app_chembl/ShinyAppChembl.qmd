@@ -86,9 +86,9 @@ After I got the app working, I looked into where I could deploy the app, since m
 
 <br>
 
-##### **Brief look at the boxplots**
+##### **About the boxplots**
 
-Perhaps it might be a bit too elusive not to talk about these boxplots. So I'll briefly discuss the outcomes I've seen from using the app myself. For QED Weighted variable, which was really the QED weighted scores for the small molecules, it was clearly shown that max phase 4 molecules had higher QED weighted scores than all of the other max phases, especially when comparing the medians between them.
+Since the main goal of this post is more on the process of producing a simple Shiny app, I'll only briefly describe a few physicochemical features in the boxplots for the ChEMBL small molecules. For the QED Weighted variable, it is really the QED weighted scores for the small molecules, it was clearly shown that max phase 4 molecules had higher QED weighted scores than all of the other max phases, especially when comparing the medians between them.
 
 <br>
 
