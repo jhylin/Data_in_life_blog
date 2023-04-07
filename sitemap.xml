@@ -2,102 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Portfolio_projects/Portfolio_projects.html</loc>
-    <lastmod>2023-03-21T04:25:58.798Z</lastmod>
+    <lastmod>2023-04-07T09:31:56.875Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/03_Long_COVID_data_in_SQL/Long_COVID_SQL.html</loc>
-    <lastmod>2023-03-21T04:25:59.884Z</lastmod>
+    <lastmod>2023-04-07T09:31:57.903Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/PhD_projects/PhD_projects.html</loc>
-    <lastmod>2023-03-21T04:26:01.000Z</lastmod>
+    <lastmod>2023-04-07T09:31:59.108Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/02_Long_COVID_dashboard/Tableau_dashboard.html</loc>
-    <lastmod>2023-03-21T04:26:02.277Z</lastmod>
+    <lastmod>2023-04-07T09:32:00.792Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/11_ML3_Small_molecules_in_ChEMBL_database/ML3_chembl_cpds.html</loc>
-    <lastmod>2023-03-21T04:26:04.751Z</lastmod>
+    <lastmod>2023-04-07T09:32:03.094Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Data_analytics/Focussing_on_data_analytics.html</loc>
-    <lastmod>2023-03-21T04:26:05.862Z</lastmod>
+    <lastmod>2023-04-07T09:32:04.235Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Social_network/Embracing_social_network.html</loc>
-    <lastmod>2023-03-21T04:26:06.944Z</lastmod>
+    <lastmod>2023-04-07T09:32:05.492Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases.html</loc>
-    <lastmod>2023-03-21T04:26:08.622Z</lastmod>
+    <lastmod>2023-04-07T09:32:07.022Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/SERCA_project/SERCA_project.html</loc>
-    <lastmod>2023-03-21T04:26:09.903Z</lastmod>
+    <lastmod>2023-04-07T09:32:08.012Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Publications/Side_projects.html</loc>
-    <lastmod>2023-03-21T04:26:10.217Z</lastmod>
+    <lastmod>2023-04-07T09:32:08.344Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/01_Drugs_in_rare_diseases/Rare_diseases_drugs.html</loc>
-    <lastmod>2023-03-21T04:26:11.253Z</lastmod>
+    <lastmod>2023-04-07T09:32:09.523Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-DS_journey/Beginning_of_DS_journey.html</loc>
-    <lastmod>2023-03-21T04:26:12.377Z</lastmod>
+    <lastmod>2023-04-07T09:32:10.665Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Blog_move/Blog_move.html</loc>
-    <lastmod>2023-03-21T04:26:13.365Z</lastmod>
+    <lastmod>2023-04-07T09:32:12.835Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/09_Pills/Rust_evcxr_polars_plotly_final.html</loc>
-    <lastmod>2023-03-21T04:26:14.656Z</lastmod>
+    <lastmod>2023-04-07T09:32:14.303Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/09_Pills/Rust_polars_pills_df.html</loc>
-    <lastmod>2023-03-21T04:26:17.030Z</lastmod>
+    <lastmod>2023-04-07T09:32:18.065Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/09_Pills/Rust_polars_pills_ws.html</loc>
-    <lastmod>2023-03-21T04:26:20.515Z</lastmod>
+    <lastmod>2023-04-07T09:32:21.573Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Update/Update_on_portfolio.html</loc>
-    <lastmod>2023-03-21T04:26:21.789Z</lastmod>
+    <lastmod>2023-04-07T09:32:22.803Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/07_Molecular_similarities_in_COVID-19_antivirals/Mol_sim_covid.html</loc>
-    <lastmod>2023-03-21T04:26:24.263Z</lastmod>
+    <lastmod>2023-04-07T09:32:25.117Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/10_ML2_Small_molecules_in_ChEMBL_database/ML2_chembl_cpds.html</loc>
-    <lastmod>2023-03-21T04:26:25.688Z</lastmod>
+    <lastmod>2023-04-07T09:32:26.915Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/04_Natural_history_of_rare_diseases_–_malformation_syndrome/Natural_history_rare_diseases_mal_syn.html</loc>
-    <lastmod>2023-03-21T04:26:26.688Z</lastmod>
+    <lastmod>2023-04-07T09:32:27.949Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/ExtractTableFromPDF.html</loc>
-    <lastmod>2023-03-21T04:26:27.978Z</lastmod>
+    <lastmod>2023-04-07T09:32:29.158Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update.html</loc>
-    <lastmod>2023-03-21T04:26:29.549Z</lastmod>
+    <lastmod>2023-04-07T09:32:30.728Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/ShinyAppChembl.html</loc>
+    <lastmod>2023-04-07T09:32:31.778Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html</loc>
-    <lastmod>2023-03-21T04:26:33.451Z</lastmod>
+    <lastmod>2023-04-07T09:32:35.734Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jhylin.github.io/Data_in_life_blog/ShinyAppChembl/Chembl_intro.html</loc>
+    <lastmod>2023-04-07T09:32:36.710Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/index.html</loc>
-    <lastmod>2023-03-21T04:26:34.118Z</lastmod>
+    <lastmod>2023-04-07T09:32:37.347Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/about.html</loc>
-    <lastmod>2023-03-21T04:26:34.422Z</lastmod>
+    <lastmod>2023-04-07T09:32:37.664Z</lastmod>
   </url>
 </urlset>
