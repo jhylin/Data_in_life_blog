@@ -6,6 +6,7 @@ listing:
   type: default
   fields: [date, title, author, reading-time]
   categories: true
+  feed: true
   sort-ui: false
   filter-ui: false
 page-layout: full
