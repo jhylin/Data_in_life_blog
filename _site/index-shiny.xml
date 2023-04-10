@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Home</title>
+<link>https://jhylin.github.io/Data_in_life_blog/index.html#category=Shiny</link>
+<atom:link href="https://jhylin.github.io/Data_in_life_blog/index-shiny.xml" rel="self" type="application/rss+xml"/>
+<description>A blog website on using data science for pharmaceutical and healthcare data</description>
+<generator>quarto-1.2.280</generator>
+<lastBuildDate>Thu, 06 Apr 2023 12:00:00 GMT</lastBuildDate>
+<item>
+  <title>Shiny app in R</title>
+  <dc:creator>Jennifer HY Lin</dc:creator>
+  <link>https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/ShinyAppChembl.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="back-story" class="level5">
+<h5 class="anchored" data-anchor-id="back-story"><strong>Back story</strong></h5>
+<p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats.</p>
+<p><br></p>
+</section>
+<section id="the-process" class="level5">
+<h5 class="anchored" data-anchor-id="the-process"><strong>The process</strong></h5>
+<p>Since I haven’t been using a lot of R lately, I just wanted to document how I approached this Shiny app framework, as part of my self-directed learning for R that started around mid-2022. The first place I went to was not Google’s Bard or OpenAI’s ChatGPT, as I was trying to preempt a scenario where if both of these options were temporarily down, what would I do to learn a new tool. So I visited the <a href="https://shiny.rstudio.com/">Shiny website</a> first, and literally started from the “Get Started” section there, then tried to read through the lessons provided. I gathered a quick overview about the core components within a Shiny app, which were the user interface, server logic and the call to run or create app in the end, and thought to get started from there.</p>
+<p>One of the most helpful online books called, “<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>” had clarified a few coding issues for me. The reactivity section in the book was very useful as well to help with understanding the interactivity concept in the app. The best and also the hardest thing at this stage after reading some of the information was to actually start coding for the app in RStudio IDE, which I did soon after.</p>
+<p><br></p>
+</section>
+<section id="trials-and-errors" class="level5">
+<h5 class="anchored" data-anchor-id="trials-and-errors"><strong>Trials-and-errors</strong></h5>
+<p>Initially, I’ve noticed in the gallery section from the Shiny website that some of the basic Shiny apps had plots produced with R code using S3 method - the type with class ‘formula’, such as boxplot(formula e.g.&nbsp;y ~ group, data, and so on). So I started with this first and ended up with a draft version shown below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_1.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">First draft app using S3 method in R code to plot boxplots - screenshot taken by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+<p>I then tried the ggplot2 version, which I preferred to use. However, I kept on hitting a roadblock repeatedly (as shown in the image below):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_2.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption><p></p>
+</figure>
+</div>
+<p>I ended up working through this issue of not being able to display the boxplots properly over at least two days, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app. I actually wrote a plot function code (as shown below) before working on the app.R file, in order to trial plotting the boxplots, making sure that the code worked before using it in the app.R file.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="in" style="color: #5E5E5E;">```{r}</span></span>
+<span id="cb1-2">dfBoxplot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(var) {</span>
+<span id="cb1-3">  label <span class="ot" style="color: #003B4F;">&lt;-</span> rlang<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">englue</span>(<span class="st" style="color: #20794D;">"{{var}} vs. Max Phases of small molecules"</span>)</span>
+<span id="cb1-4">  </span>
+<span id="cb1-5">  chembl <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb1-6">    <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, {{ var }}) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb1-7">    <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">y =</span> {{ var }})) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb1-8">    <span class="fu" style="color: #4758AB;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">group =</span> <span class="fu" style="color: #4758AB;">cut_width</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="fl" style="color: #AD0000;">0.25</span>), </span>
+<span id="cb1-9">                     <span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>), </span>
+<span id="cb1-10">                 <span class="at" style="color: #657422;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;">0.2</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb1-11">    <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">title =</span> label)</span>
+<span id="cb1-12">}</span>
+<span id="cb1-13"><span class="in" style="color: #5E5E5E;">```</span></span></code></pre></div>
+<p>Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not the same as the function code above, but more like this.</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><span class="in" style="color: #5E5E5E;">```{r}</span></span>
+<span id="cb2-2">  output<span class="sc" style="color: #5E5E5E;">$</span>BPlot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">renderPlot</span>({ </span>
+<span id="cb2-3">    </span>
+<span id="cb2-4">    <span class="fu" style="color: #4758AB;">ggplot</span>(chembl, <span class="fu" style="color: #4758AB;">aes</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, .data[[input<span class="sc" style="color: #5E5E5E;">$</span>variable]])) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb2-5">      <span class="fu" style="color: #4758AB;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">group =</span> <span class="fu" style="color: #4758AB;">cut_width</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="fl" style="color: #AD0000;">0.25</span>), </span>
+<span id="cb2-6">                       <span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>), <span class="at" style="color: #657422;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;">0.2</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb2-7">      <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">title =</span> <span class="st" style="color: #20794D;">"Distributions of physicochemical properties against max phases"</span>,</span>
+<span id="cb2-8">           <span class="at" style="color: #657422;">caption =</span> <span class="st" style="color: #20794D;">"(based on ChEMBL database version 31)"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb2-9">      <span class="fu" style="color: #4758AB;">theme_minimal</span>()</span>
+<span id="cb2-10">    </span>
+<span id="cb2-11">    }, <span class="at" style="color: #657422;">res =</span> <span class="dv" style="color: #AD0000;">96</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">bindCache</span>(chembl<span class="sc" style="color: #5E5E5E;">$</span><span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, input<span class="sc" style="color: #5E5E5E;">$</span>variable)</span>
+<span id="cb2-12"><span class="in" style="color: #5E5E5E;">```</span></span></code></pre></div>
+<p>I then read about the section on “Tidy evaluation” in the “Mastering Shiny” book, which had thoroughly described the problems I’ve encountered (and which I wished I had actually read this section before and not after hitting the roadblock…). So I’d highly recommend new users to read this section and also the rest of the book if Shiny’s also new to you.</p>
+<p><br></p>
+</section>
+<section id="final-app" class="level5">
+<h5 class="anchored" data-anchor-id="final-app"><strong>Final app</strong></h5>
+<p>The final app now looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Final_app.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Screenshot taken by author</figcaption><p></p>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="app-deployment" class="level5">
+<h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
+<p>After I got the app working, I looked into where I could deploy the app, since my main goal was to learn and share my work. At first, I went to the <a href="https://quarto.org/docs/interactive/shiny/index.html">Shiny section</a> on the Quarto website to see if it was possible to deploy the app in Quarto. However, after reading through several questions and answers in relation to Shiny apps and Quarto website, it was obvious that it was still not possible yet to deploy the app in an interactive way on Quarto websites (but it was mentioned in Posit community that this was being looked into, so I’m looking forward to the day when we can do exactly that in the future). This means that currently, there will only be an app image showing up in a Quarto document at most. I ended up choosing shinyapp.io to deploy my first Shiny app for now.</p>
+<p><br></p>
+</section>
+<section id="about-the-boxplots" class="level5">
+<h5 class="anchored" data-anchor-id="about-the-boxplots"><strong>About the boxplots</strong></h5>
+<p>Since the main goal of this post is more on the process of producing a simple Shiny app for a new comer, I won’t go into the fine details to describe how these boxplots differ between different max phases. Also as a side note, I’m aware that some experts in data visualisations might not really like boxplots in general, but for my case, I’ve got molecules in different max phases where a boxplot is presented for each max phase lining up next to each other. Therefore, in a way, some relative comparisons or differences could be drawn visually in the first glance, although other graph types such as density plots or heat maps might be better options.</p>
+<p>I’ll focus on the “QED Weighted” variable here, as it’s a physicochemical property that has combined several molecular features together as a score (please refer to <a href="https://jhylin.github.io/Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html">this post - section: “Some exploratory data analysis”</a> for details about this QED weighted score). For all the boxplots shown when “QED Weighted” is selected from the drop-down box, max phase 4 molecules obviously have higher QED weighted scores in general than all of the other max phases. This is especially clear when comparing the medians between them, with max phase 4 small molecules having a median QED weighted score of more than 0.5, and the rest of the other max phases had 0.5 or below. The higher the QED weighted scores, the more druglike the molecules will be, and for max phase 4 molecules, they are mostly prescription medicines that have already reached approval and are already being widely prescribed. So this makes sense as this is being reflected in the boxplots for these ChEMBL small molecules.</p>
+<p><br></p>
+</section>
+<section id="final-words" class="level5">
+<h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
+<p>Finally, I’m quite pleasantly surprised that there is also a Shiny in Python version, which has a Shinylive option to deploy Shiny app interactively in GitHub Gist and so on… I’ll most likely need to read further into this and make this as my next project. This is also a nice break from my recent machine learning projects, which I’ll try to return to once I’ve had enough fun with Shiny!</p>
+<p>Thanks for reading.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>Shiny</category>
+  <category>ChEMBL database</category>
+  <category>Cheminformatics</category>
+  <guid>https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/ShinyAppChembl.html</guid>
+  <pubDate>Thu, 06 Apr 2023 12:00:00 GMT</pubDate>
+  <media:content url="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_1.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>
