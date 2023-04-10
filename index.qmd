@@ -7,7 +7,7 @@ listing:
   fields: [date, title, author, reading-time]
   categories: true
   feed: 
-    categories: [R, Shiny]
+    categories: [R, Python]
   sort-ui: false
   filter-ui: false
 page-layout: full
