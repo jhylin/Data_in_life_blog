@@ -2,19 +2,20 @@
 jupyter: python3
 ---
 
-*** This is the data prepared for building a Shiny app in Python ***
-*** Work-in-progress ***
+\*\*\* This is the data prepared for building a Shiny app in Python Work-in-progress \*\*\*
 
+##### Import Polars
 ```{python}
 import polars as pl
 ```
 
+##### Reading csv file
 ```{python}
 # PubChem_compound_text_covid-19 clinicaltrials.csv
 pc = pl.read_csv("pubchem.csv")
 pc.head()
 ```
-
+##### Quick look at dataset
 ```{python}
 # Quick overview of the variables in each column in the dataset
 #print(pc.glimpse())
@@ -23,11 +24,14 @@ pc.head()
 #pc.columns
 ```
 
+##### Check for nulls in dataset
 ```{python}
 # Check nulls
 pc.null_count()
 ```
+##### Change column names as needed
 
+Column names explained as per definitions provided from PubChem.
 ```{python}
 # Change column names
 # Adding column definitions derived from PubChem
@@ -106,12 +110,14 @@ pc_cov = pc.rename(
 pc_cov.head()
 ```
 
+##### Convert data type for selected columns
 ```{python}
 # Convert data type - only for xlogp or Partition_coef
 pc_cov = pc_cov.with_column((pl.col("Partition_coef")).cast(pl.Float64, strict = False))
 pc_cov.head()
 ```
 
+##### Select columns for data visualisation
 ```{python}
 # Drop unused columns in preparation for data visualisations
 pc_cov = pc_cov.drop([
@@ -139,11 +145,13 @@ pc_cov.head()
                      
 ```
 
+##### Quick summary statistics of columns
 ```{python}
 # Overall descriptive statistics of kept columns
 pc_cov.describe()
 ```
 
+##### Useful when-then-otherwise expressions in Polars code
 ```{python}
 # ***Conditional assignments in dataframe - chaining when-then-otherwise expressions***
 # df.with_column(
@@ -161,6 +169,7 @@ pc_cov.describe()
 #part_coef_6_21 = pc_cov.filter(pl.col("Partition_coef") >= 6)
 ```
 
+##### Create different groups of partition coefficients for compounds in dataset
 ```{python}
 pc_cov = pc_cov.with_column(
     pl.when((pl.col("Partition_coef") <= -10))
@@ -174,11 +183,14 @@ pc_cov = pc_cov.with_column(
 pc_cov.head(10)
 ```
 
+##### Import Plotly
 ```{python}
 # Import Plotly
 import plotly.express as px
 ```
 
+##### Data vizzes
+###### Partition coefficients vs. Molecular weights
 ```{python}
 fig = px.scatter(x = pc_cov["Partition_coef"], 
                  y = pc_cov["Molecular_weight"], 
@@ -210,6 +222,7 @@ fig.update_layout(
 fig.show()
 ```
 
+####### Partition coefficients vs. Complexity
 ```{python}
 fig = px.scatter(x = pc_cov["Partition_coef"], 
                  y = pc_cov["Complexity"], 
@@ -241,6 +254,7 @@ fig.update_layout(
 fig.show()
 ```
 
+###### Partition coefficients vs. Polar surface area
 ```{python}
 fig = px.scatter(x = pc_cov["Partition_coef"], 
                  y = pc_cov["Polar_surface_area"], 
@@ -272,6 +286,7 @@ fig.update_layout(
 fig.show()
 ```
 
+###### Molecular weights vs. Complexity
 ```{python}
 fig = px.scatter(x = pc_cov["Molecular_weight"], 
                  y = pc_cov["Complexity"], 
