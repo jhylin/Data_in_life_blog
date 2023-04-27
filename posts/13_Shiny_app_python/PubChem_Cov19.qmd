@@ -183,6 +183,16 @@ pc_cov = pc_cov.with_column(
 pc_cov.head(10)
 ```
 
+##### Export to Pandas dataframe (for Shiny in Python)
+```{python}
+# Convert Polars df into a Pandas df
+pc_cov_pd = pc_cov.to_pandas()
+
+# Convert the Pandas df into a csv file using Pandas code
+pc_cov_pd.to_csv("pc_cov_pd.csv", sep = ",")
+```
+
+
 ##### Import Plotly
 ```{python}
 # Import Plotly
