@@ -5,17 +5,21 @@ jupyter: python3
 \*\*\* This is the data prepared for building a Shiny app in Python Work-in-progress \*\*\*
 
 ##### Import Polars
+
 ```{python}
 import polars as pl
 ```
 
 ##### Reading csv file
+
 ```{python}
 # PubChem_compound_text_covid-19 clinicaltrials.csv
 pc = pl.read_csv("pubchem.csv")
 pc.head()
 ```
+
 ##### Quick look at dataset
+
 ```{python}
 # Quick overview of the variables in each column in the dataset
 #print(pc.glimpse())
@@ -25,85 +29,88 @@ pc.head()
 ```
 
 ##### Check for nulls in dataset
+
 ```{python}
 # Check nulls
 pc.null_count()
 ```
+
 ##### Change column names as needed
 
 Column names explained as per definitions provided from PubChem.
+
 ```{python}
 # Change column names
 # Adding column definitions derived from PubChem
 
 pc_cov = pc.rename(
     {
-        "cmpdname": "Compound_name",
+        "cmpdname": "Compound name",
         "cmpdsynonym": "Synonyms",
         # Molecular mass (daltons)
-        "mw": "Molecular_weight",
-        "mf": "Molecular_formula",
+        "mw": "Molecular weight",
+        "mf": "Molecular formula",
         # Topological polar surface area (angstrom squared)
-        "polararea": "Polar_surface_area",
+        "polararea": "Polar surface area",
         # Complexity rating for compound
         # Based on Bertz/Hendrickson/Ihlenfeldt formula
         # Rough estimation of how complex a compound is structurally
         "complexity": "Complexity",
         # Predicted octanol-water partition coefficient
         # Measure of hydrophilicity or hydrophobicity of a molecule
-        "xlogp": "Partition_coef",
+        "xlogp": "Partition coefficients",
         # Number of heavy atoms e.g. non-H atoms in the compound
-        "heavycnt": "Heavy_atom_count",
+        "heavycnt": "Heavy atom count",
         # Number of hydrogen bond donors in the compound
-        "hbonddonor": "H_bond_donor_count",
+        "hbonddonor": "Hydrogen bond donor count",
         # Number of hydrogen bond acceptors in the compound
-        "hbondacc": "H_bond_acceptor_count",
+        "hbondacc": "Hydrogen bond acceptor count",
         # Defined as any single-order non-ring bond, 
         # where atoms on either side of the bond are in turn bound to
         # non-terminal heavy atoms (e.g. non-H)
         # Rotation around the bond axis will change overall
         # molecule shape & generates conformers which can be 
         # distinguished by standard spectroscopic methods
-        "rotbonds": "Rotatable_bond_count",
+        "rotbonds": "Rotatable bond count",
         # Exact mass of an isotopic species
         # Obtained by summing masses of individual isotopes of the molecule
-        "exactmass": "Exact_mass",
+        "exactmass": "Exact mass",
         # Sum of the masses of atoms in a molecule
         # using unbound, ground-state, rest mass of principal (most abundant) isotope
         # for each element instead of isotopic average mass
-        "monoisotopicmass": "Monoisotopic_mass",
+        "monoisotopicmass": "Monoisotopic mass",
         # The difference between the number of valence electrons of each atom
         # and the number of electrons the atom is associated with
         # Assumes any shared electrons are equally shared between the two bonded atoms
-        "charge": "Formal_charge",
+        "charge": "Formal charge",
         # Covalently-bonded unit count - a group of atoms connected by covalent bonds,
         # ignoring other bond types (or a single atom without covalent bonds)
         # Number of such units in the compound
-        "covalentunitcnt": "Cov-bonded_unit_count",
+        "covalentunitcnt": "Covalently-bonded unit count",
         # Number of isotopes that are not most abundant for the corresponding chemical elements
         # Isotopes = variants of a chemical element that differ in neutron number
-        "isotopeatomcnt": "Isotope_atom_count",
-        "totalatomstereocnt": "Total_atom_stereo_count",
+        "isotopeatomcnt": "Isotope atom count",
+        "totalatomstereocnt": "Total atom stereocenter count",
         # Atom stereocenter = chiral center = an atom that is attached to 4 different types of atoms
         # or groups of atoms in the tetrahedral arrangement
         # It can either be (R)- or (S)- configurations
         # Some of the compounds e.g. racemic mixtures, have undefined atom stereocenter, where (R/S)-config
         # is not specifically defined.
         # This column is the number of atom stereocenters whose configurations are specifically defined
-        "definedatomstereocnt": "Defined_atom_stereo_count",
+        "definedatomstereocnt": "Defined atom stereocenter count",
         # As explained for the Defined_atom_stereo_count, this is the undefined version
-        "undefinedatomstereocnt": "Undefined_atoms_stereo_count",
-        "totalbondstereocnt": "Total_bond_stereo_count",
+        "undefinedatomstereocnt": "Undefined atoms stereocenter count",
+        "totalbondstereocnt": "Total bond stereocenter count",
         # Bond stereocenter = non-rotatable bond around which two atoms can have different arrangement
         # e.g. in cis- & -trans forms of butene around its double bond
         # Some compounds have an undefined bond stereocenter (stereochemistry not specifically defined)
         # Defined bond stereocenter count is the number of bond stereocenters 
         # whose configurations are specifically defined
-        "definedbondstereocnt": "Defined_bond_stereo_count",
+        "definedbondstereocnt": "Defined bond stereocenter count",
         # The undefined version as explained above
-        "undefinedbondstereocnt": "Undefined_bond_stereo_count",
+        "undefinedbondstereocnt": "Undefined bond stereocenter count",
         # Medical subject headings
-        "meshheadings": "MeSH_headings"
+        "meshheadings": "MeSH headings"
     }
 )
 
@@ -111,19 +118,21 @@ pc_cov.head()
 ```
 
 ##### Convert data type for selected columns
+
 ```{python}
 # Convert data type - only for xlogp or Partition_coef
-pc_cov = pc_cov.with_column((pl.col("Partition_coef")).cast(pl.Float64, strict = False))
+pc_cov = pc_cov.with_column((pl.col("Partition coefficients")).cast(pl.Float64, strict = False))
 pc_cov.head()
 ```
 
 ##### Select columns for data visualisation
+
 ```{python}
 # Drop unused columns in preparation for data visualisations
 pc_cov = pc_cov.drop([
     "cid", 
     "Synonyms",
-    "Molecular_formula",
+    "Molecular formula",
     "inchi",
     "isosmiles",
     "canonicalsmiles",
@@ -131,7 +140,7 @@ pc_cov = pc_cov.drop([
     "iupacname",
     "pclidcnt",
     "gpidcnt",
-    "MeSH_headings",
+    "MeSH headings",
     "annothits",
     "annothitcnt",
     "aids",
@@ -146,12 +155,14 @@ pc_cov.head()
 ```
 
 ##### Quick summary statistics of columns
+
 ```{python}
 # Overall descriptive statistics of kept columns
 pc_cov.describe()
 ```
 
 ##### Useful when-then-otherwise expressions in Polars code
+
 ```{python}
 # ***Conditional assignments in dataframe - chaining when-then-otherwise expressions***
 # df.with_column(
@@ -170,11 +181,12 @@ pc_cov.describe()
 ```
 
 ##### Create different groups of partition coefficients for compounds in dataset
+
 ```{python}
 pc_cov = pc_cov.with_column(
-    pl.when((pl.col("Partition_coef") <= -10))
+    pl.when((pl.col("Partition coefficients") <= -10))
     .then("Smaller than -10")
-    .when((pl.col("Partition_coef") >= -11) & (pl.col("Partition_coef") <= 5))
+    .when((pl.col("Partition coefficients") >= -11) & (pl.col("Partition coefficients") <= 5))
     .then("Between -11 and 5")
     .otherwise("Larger than 6")
     .alias("Part_coef_group")
@@ -184,6 +196,7 @@ pc_cov.head(10)
 ```
 
 ##### Export to Pandas dataframe (for Shiny in Python)
+
 ```{python}
 # Convert Polars df into a Pandas df
 pc_cov_pd = pc_cov.to_pandas()
@@ -192,19 +205,21 @@ pc_cov_pd = pc_cov.to_pandas()
 pc_cov_pd.to_csv("pc_cov_pd.csv", sep = ",")
 ```
 
-
 ##### Import Plotly
+
 ```{python}
 # Import Plotly
 import plotly.express as px
 ```
 
 ##### Data vizzes
+
 ###### Partition coefficients vs. Molecular weights
+
 ```{python}
-fig = px.scatter(x = pc_cov["Partition_coef"], 
-                 y = pc_cov["Molecular_weight"], 
-                 hover_name = pc_cov["Compound_name"],
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
+                 y = pc_cov["Molecular weight"], 
+                 hover_name = pc_cov["Compound name"],
                  color = pc_cov["Part_coef_group"],
                  width = 800, 
                  height = 400,
@@ -233,10 +248,11 @@ fig.show()
 ```
 
 ####### Partition coefficients vs. Complexity
+
 ```{python}
-fig = px.scatter(x = pc_cov["Partition_coef"], 
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
                  y = pc_cov["Complexity"], 
-                 hover_name = pc_cov["Compound_name"],
+                 hover_name = pc_cov["Compound name"],
                  color = pc_cov["Part_coef_group"],
                  width = 800, 
                  height = 400,
@@ -265,10 +281,11 @@ fig.show()
 ```
 
 ###### Partition coefficients vs. Polar surface area
+
 ```{python}
-fig = px.scatter(x = pc_cov["Partition_coef"], 
-                 y = pc_cov["Polar_surface_area"], 
-                 hover_name = pc_cov["Compound_name"],
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
+                 y = pc_cov["Polar surface area"], 
+                 hover_name = pc_cov["Compound name"],
                  color = pc_cov["Part_coef_group"],
                  width = 800, 
                  height = 400,
@@ -297,10 +314,11 @@ fig.show()
 ```
 
 ###### Molecular weights vs. Complexity
+
 ```{python}
-fig = px.scatter(x = pc_cov["Molecular_weight"], 
+fig = px.scatter(x = pc_cov["Molecular weight"], 
                  y = pc_cov["Complexity"], 
-                 hover_name = pc_cov["Compound_name"],
+                 hover_name = pc_cov["Compound name"],
                  #color = pc_cov["Part_coef_group"],
                  width = 800, 
                  height = 400,
