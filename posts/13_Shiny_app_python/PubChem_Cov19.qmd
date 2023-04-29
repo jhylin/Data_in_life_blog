@@ -197,8 +197,10 @@ pc_cov.head(10)
 
 ##### Export to Pandas dataframe (for Shiny in Python)
 
+Convert Polars df into Pandas df as per Shiny for Python docs to import dataset in app.
+
 ```{python}
-# Convert Polars df into a Pandas df
+# Convert Polars df into a Pandas df if needed
 pc_cov_pd = pc_cov.to_pandas()
 
 # Convert the Pandas df into a csv file using Pandas code
