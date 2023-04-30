@@ -1,0 +1,414 @@
+---
+title: Shiny app in Python 
+subtitle: Part 1 - Data preparation for compounds used in COVID-19 clinical trials
+author: Jennifer HY Lin
+date: '2023-5-1'
+draft: true
+jupyter: python3
+categories:
+  - Python
+  - Shiny
+  - PubChem
+  - Cheminformatics
+---
+
+##### **Brief introduction**
+
+So for anyone who's actually following this blog, or probably really to my own amusements only, I did announce in my last post that I would dig into Shiny app in Python as I've been having a lot of fun with Shiny app in R (although the final app wasn't anything fancy at this stage, but a good starter experience to build something in R). In this post, I'll mainly talk about the data preparation stage, and to clearly explain what I've done to a certain degree, I think I'll split this work into 2 parts:
+
+* Part 1: Data preparation using Polars for building a Shiny app in Python 
+* Part 2: Coding in VS Code and a small taster in open-source LLMs
+
+Extreme details won't be provided as part of the fun of learning a new tool is to explore and find answers ourselves, so what I'll do is really provide a path-like thought process to produce the final Shiny app in Python as I'm also still learning new things about it as well.
+
+<br>
+
+##### **Source of data**
+
+The dataset used in for building the Shiny app in Python is from PubChem with [link here](https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials). There were a total of 631 compounds at the stage when I was building the app. This may change if more clinical trials or changes in present clinical trials take place in the future. The dataset was downloaded as .csv file.
+
+<br>
+
+##### **Import Polars**
+
+```{python}
+import polars as pl
+```
+
+<br>
+
+##### **Reading .csv file**
+
+```{python}
+pc = pl.read_csv("pubchem.csv")
+pc.head()
+```
+
+<br>
+
+##### **Quick look at dataset**
+
+```{python}
+# Quick overview of the variables in each column in the dataset
+# Uncomment line below if needed to run
+#print(pc.glimpse())
+
+# Quick look at all column names
+# Uncomment line below if needed to run
+#pc.columns
+```
+
+<br>
+
+##### **Check for nulls in dataset**
+
+```{python}
+# Check nulls
+pc.null_count()
+```
+
+<br>
+
+##### **Change column names as needed**
+
+Column names explained as per definitions provided from PubChem.
+
+```{python}
+# Change column names
+# Adding column definitions derived from PubChem
+
+pc_cov = pc.rename(
+    {
+        "cmpdname": "Compound name",
+        "cmpdsynonym": "Synonyms",
+        # Molecular mass (daltons)
+        "mw": "Molecular weight",
+        "mf": "Molecular formula",
+        # Topological polar surface area (angstrom squared)
+        "polararea": "Polar surface area",
+        # Complexity rating for compound
+        # Based on Bertz/Hendrickson/Ihlenfeldt formula
+        # Rough estimation of how complex a compound is structurally
+        "complexity": "Complexity",
+        # Predicted octanol-water partition coefficient
+        # Measure of hydrophilicity or hydrophobicity of a molecule
+        "xlogp": "Partition coefficients",
+        # Number of heavy atoms e.g. non-H atoms in the compound
+        "heavycnt": "Heavy atom count",
+        # Number of hydrogen bond donors in the compound
+        "hbonddonor": "Hydrogen bond donor count",
+        # Number of hydrogen bond acceptors in the compound
+        "hbondacc": "Hydrogen bond acceptor count",
+        # Defined as any single-order non-ring bond, 
+        # where atoms on either side of the bond are in turn bound to
+        # non-terminal heavy atoms (e.g. non-H)
+        # Rotation around the bond axis will change overall
+        # molecule shape & generates conformers which can be 
+        # distinguished by standard spectroscopic methods
+        "rotbonds": "Rotatable bond count",
+        # Exact mass of an isotopic species
+        # Obtained by summing masses of individual isotopes of the molecule
+        "exactmass": "Exact mass",
+        # Sum of the masses of atoms in a molecule
+        # using unbound, ground-state, rest mass of principal (most abundant) isotope
+        # for each element instead of isotopic average mass
+        "monoisotopicmass": "Monoisotopic mass",
+        # The difference between the number of valence electrons of each atom
+        # and the number of electrons the atom is associated with
+        # Assumes any shared electrons are equally shared between the two bonded atoms
+        "charge": "Formal charge",
+        # Covalently-bonded unit count - a group of atoms connected by covalent bonds,
+        # ignoring other bond types (or a single atom without covalent bonds)
+        # Number of such units in the compound
+        "covalentunitcnt": "Covalently-bonded unit count",
+        # Number of isotopes that are not most abundant for the corresponding chemical elements
+        # Isotopes = variants of a chemical element that differ in neutron number
+        "isotopeatomcnt": "Isotope atom count",
+        "totalatomstereocnt": "Total atom stereocenter count",
+        # Atom stereocenter = chiral center = an atom that is attached to 4 different types of atoms
+        # or groups of atoms in the tetrahedral arrangement
+        # It can either be (R)- or (S)- configurations
+        # Some of the compounds e.g. racemic mixtures, have undefined atom stereocenter, where (R/S)-config
+        # is not specifically defined.
+        # This column is the number of atom stereocenters whose configurations are specifically defined
+        "definedatomstereocnt": "Defined atom stereocenter count",
+        # As explained for the Defined_atom_stereo_count, this is the undefined version
+        "undefinedatomstereocnt": "Undefined atoms stereocenter count",
+        "totalbondstereocnt": "Total bond stereocenter count",
+        # Bond stereocenter = non-rotatable bond around which two atoms can have different arrangement
+        # e.g. in cis- & -trans forms of butene around its double bond
+        # Some compounds have an undefined bond stereocenter (stereochemistry not specifically defined)
+        # Defined bond stereocenter count is the number of bond stereocenters 
+        # whose configurations are specifically defined
+        "definedbondstereocnt": "Defined bond stereocenter count",
+        # The undefined version as explained above
+        "undefinedbondstereocnt": "Undefined bond stereocenter count",
+        # Medical subject headings
+        "meshheadings": "MeSH headings"
+    }
+)
+
+pc_cov.head()
+```
+
+<br>
+
+##### **Molecular properties in PubChem data used**
+
+I thought to devote a specific section on all the molecular properties used in the app, in case there might be people outside the Chemistry world reading this, and also this would serve a good reference for people who were already very familiar with them. The definitions of all the column names are shown below as per documentations in PubChem website:
+
+*To be continued*
+
+<br>
+
+##### **Convert data type for selected columns**
+
+There was really just one of the columns that needed to be changed. The rest were alright in their original data types.
+
+```{python}
+# Convert data type - only for xlogp or Partition_coef
+pc_cov = pc_cov.with_column((pl.col("Partition coefficients")).cast(pl.Float64, strict = False))
+pc_cov.head()
+```
+
+<br>
+
+##### **Select columns for data visualisation**
+
+I was really only wanting to keep all the numerical columns. So I've bascially dropped all other columns that involved texts or symbols.
+
+```{python}
+# Drop unused columns in preparation for data visualisations
+pc_cov = pc_cov.drop([
+    "cid", 
+    "Synonyms",
+    "Molecular formula",
+    "inchi",
+    "isosmiles",
+    "canonicalsmiles",
+    "inchikey",
+    "iupacname",
+    "pclidcnt",
+    "gpidcnt",
+    "MeSH headings",
+    "annothits",
+    "annothitcnt",
+    "aids",
+    "cidcdate",
+    "sidsrcname",
+    "depcatg",
+    "annotation"
+])
+
+pc_cov.head()
+                     
+```
+
+<br>
+
+##### **Quick summary statistics of columns**
+
+```{python}
+# Overall descriptive statistics of kept columns
+pc_cov.describe()
+```
+
+<br>
+
+##### **Conditional assignments in Polars dataframe - chaining when-then-otherwise expressions**
+
+The longer I've used Polars the more I'm used to the fact that it has very useful chaining styles in its code formats. This avoids writing loop functions which can be another option in this scenario for conditional assignments, and one of the examples I'd like to show below was chaining "when-then-otherwise" expression. *Acknowledgement to StackOverflow and the author of Polars for this one.*
+
+<br>
+
+###### **Create different groups of partition coefficients**
+
+The idea was to separate all data into 3 different ranges of partition coefficients, so this could be shown visually in plots. One way, or really the long way, to do this might be like the code shown below:
+
+```{{python}}
+part_coef_neg25_neg10 = pc_cov.filter(pl.col("Partition_coef") <= -10)
+part_coef_neg11_5 = pc_cov.filter((pl.col("Partition_coef") >= -11) & (pl.col("Partition_coef") <= 5))
+part_coef_6_21 = pc_cov.filter(pl.col("Partition_coef") >= 6)
+```
+
+A shorter and probably more elegant way is to use the "when-then-otherwise" expression in Polars:
+
+```{python}
+pc_cov = pc_cov.with_column(
+    pl.when((pl.col("Partition coefficients") <= -10))
+    .then("Smaller than -10")
+    .when((pl.col("Partition coefficients") >= -11) & (pl.col("Partition coefficients") <= 5))
+    .then("Between -11 and 5")
+    .otherwise("Larger than 6")
+    .alias("Part_coef_group")
+)
+
+pc_cov.head(10)
+```
+
+<br>
+
+##### **Import Plotly**
+
+Time for some data vizzes.
+
+```{python}
+# Import Plotly
+import plotly.express as px
+```
+
+<br>
+
+##### **Some examples of data vizzes**
+
+###### **Partition coefficients vs. Molecular weights**
+
+```{python}
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
+                 y = pc_cov["Molecular weight"], 
+                 hover_name = pc_cov["Compound name"],
+                 color = pc_cov["Part_coef_group"],
+                 width = 800, 
+                 height = 400,
+                 title = "Partition coefficients vs. molecular weights for compounds used in COVID-19 clinical trials")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Partition coefficients"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Molecular weights"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+<br>
+
+####### **Partition coefficients vs. Complexity**
+
+```{python}
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
+                 y = pc_cov["Complexity"], 
+                 hover_name = pc_cov["Compound name"],
+                 color = pc_cov["Part_coef_group"],
+                 width = 800, 
+                 height = 400,
+                 title = "Partition coefficients vs. complexity for compounds used in COVID-19 clinical trials")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Partition coefficients"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Complexity"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+<br>
+
+###### **Partition coefficients vs. Polar surface area**
+
+```{python}
+fig = px.scatter(x = pc_cov["Partition coefficients"], 
+                 y = pc_cov["Polar surface area"], 
+                 hover_name = pc_cov["Compound name"],
+                 color = pc_cov["Part_coef_group"],
+                 width = 800, 
+                 height = 400,
+                 title = "Partition coefficients vs. polar surface area for compounds used in COVID-19 clinical trials")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Partition coefficients"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Polar surface area"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+<br>
+
+###### **Molecular weights vs. Complexity**
+
+```{python}
+fig = px.scatter(x = pc_cov["Molecular weight"], 
+                 y = pc_cov["Complexity"], 
+                 hover_name = pc_cov["Compound name"],
+                 #color = pc_cov["Part_coef_group"],
+                 width = 800, 
+                 height = 400,
+                 title = "Molecular weights vs. complexity for compounds used in COVID-19 clinical trials")
+
+fig.update_layout(
+    title = dict(
+        font = dict(
+            size = 15)),
+    title_x = 0.5,
+    margin = dict(
+        l = 20, r = 20, t = 40, b = 3),
+    xaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Molecular weights"
+    ),
+    yaxis = dict(
+        tickfont = dict(size = 9), 
+        title = "Complexity"
+    ),
+    legend = dict(
+        font = dict(
+            size = 9)))
+
+fig.show()
+```
+
+<br>
+
+##### **Export to Pandas dataframe (for Shiny in Python)**
+
+Convert Polars df into Pandas df as per Shiny for Python docs to import dataset in app.
+
+```{python}
+# Convert Polars df into a Pandas df if needed
+#pc_cov_pd = pc_cov.to_pandas()
+
+# Convert the Pandas df into a csv file using Pandas code
+#pc_cov_pd.to_csv("pc_cov_pd.csv", sep = ",")
+```
