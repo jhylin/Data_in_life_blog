@@ -13,7 +13,7 @@ categories:
 
 ##### **Back story**
 
-It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for @WeAreRLadies on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, [ShinyAppChembl](https://jhylin.shinyapps.io/ShinyAppChembl/), is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats.
+It has been a long while since I've used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for @WeAreRLadies on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven't forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, [ShinyAppChembl](https://jhylin.shinyapps.io/ShinyAppChembl/), is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats. ***Note: it may take a few minutes to load the plot when first opening the app.***
 
 <br>
 
@@ -27,7 +27,7 @@ One of the most helpful online books called, "[Mastering Shiny](https://masterin
 
 ##### **Trials-and-errors**
 
-Initially, I've noticed in the gallery section from the Shiny website that some of the basic Shiny apps had plots produced with R code using S3 method - the type with class 'formula', such as boxplot(formula e.g. y ~ group, data, and so on). So I started with this first and ended up with a draft version shown below:
+Initially, I've noticed in the gallery section from the Shiny website that some of the basic Shiny apps had plots produced with R code using S3 method - the type with class 'formula', such as boxplot(formula e.g. y \~ group, data, and so on). So I started with this first and ended up with a draft version shown below:
 
 ![First draft app using S3 method in R code to plot boxplots - screenshot taken by author](Draft_app_error_1.jpg)
 
@@ -55,7 +55,7 @@ dfBoxplot <- function(var) {
 
 Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn't that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not the same as the function code above, but more like this.
 
-```{{r}}
+``` {{r}}
   output$BPlot <- renderPlot({ 
     
     ggplot(chembl, aes(`Max Phase`, .data[[input$variable]])) +
@@ -88,7 +88,7 @@ After I got the app working, I looked into where I could deploy the app, since m
 
 ##### **About the boxplots**
 
-Since the main goal of this post is more on the process of producing a simple Shiny app for a new comer, I won't go into the fine details to describe how these boxplots differ between different max phases. Also as a side note, I'm aware that some experts in data visualisations might not really like boxplots in general, but for my case, I've got molecules in different max phases where a boxplot is presented for each max phase lining up next to each other. Therefore, in a way, some relative comparisons or differences could be drawn visually in the first glance, although other graph types such as density plots or heat maps might be better options. 
+Since the main goal of this post is more on the process of producing a simple Shiny app for a new comer, I won't go into the fine details to describe how these boxplots differ between different max phases. Also as a side note, I'm aware that some experts in data visualisations might not really like boxplots in general, but for my case, I've got molecules in different max phases where a boxplot is presented for each max phase lining up next to each other. Therefore, in a way, some relative comparisons or differences could be drawn visually in the first glance, although other graph types such as density plots or heat maps might be better options.
 
 I'll focus on the "QED Weighted" variable here, as it's a physicochemical property that has combined several molecular features together as a score (please refer to [this post - section: "Some exploratory data analysis"](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html) for details about this QED weighted score). For all the boxplots shown when "QED Weighted" is selected from the drop-down box, max phase 4 molecules obviously have higher QED weighted scores in general than all of the other max phases. This is especially clear when comparing the medians between them, with max phase 4 small molecules having a median QED weighted score of more than 0.5, and the rest of the other max phases had 0.5 or below. The higher the QED weighted scores, the more druglike the molecules will be, and for max phase 4 molecules, they are mostly prescription medicines that have already reached approval and are already being widely prescribed. So this makes sense as this is being reflected in the boxplots for these ChEMBL small molecules.
 

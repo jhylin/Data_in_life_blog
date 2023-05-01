@@ -1,1 +1,1 @@
-By choosing a specific physicochemical property from the drop-down box below, a boxplot should appear on the right showing the distribution of the selected physicochemical property for small molecules in different max phases.
+By choosing a specific physicochemical property from the drop-down box below, a boxplot should appear on the right showing the distribution of the selected physicochemical property for small molecules in different max phases. ***Note: it may take a few minutes to load the plot when first opening the app.***

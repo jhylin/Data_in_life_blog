@@ -5,10 +5,10 @@ account: jhylin
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8748156
-bundleId: 7051780
+bundleId: 7157665
 url: https://jhylin.shinyapps.io/ShinyAppChembl/
-when: 1680685290.63993
-lastSyncTime: 1680685290.63995
+when: 1682910601.05572
+lastSyncTime: 1682910601.05574
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: app_boxplot().R|app_draft_error.R|Chembl_mols_plot_function.R|Chembl_mols_Polars.py|Chembl_mols_Sparklyr.R|chembl_mols.csv|derby.log
