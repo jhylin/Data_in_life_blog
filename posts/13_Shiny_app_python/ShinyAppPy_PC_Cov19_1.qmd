@@ -16,8 +16,8 @@ categories:
 
 So for anyone who's actually following this blog, or probably really to my own amusements only, I did announce in my last post that I would dig into Shiny app in Python as I've been having a lot of fun with Shiny app in R (although the final app wasn't anything fancy at this stage, but a good starter experience to build something in R). In this post, I'll mainly talk about the data preparation stage, and to clearly explain what I've done to a certain degree, I think I'll split this work into 2 parts:
 
-* Part 1: Data preparation using Polars for building a Shiny app in Python 
-* Part 2: Coding in VS Code and a small taster in open-source LLMs
+-   Part 1: Data preparation using Polars for building a Shiny app in Python
+-   Part 2: Coding in VS Code and a small taster in open-source LLMs
 
 Extreme details won't be provided as part of the fun of learning a new tool is to explore and find answers ourselves, so what I'll do is really provide a path-like thought process to produce the final Shiny app in Python as I'm also still learning new things about it as well.
 
@@ -153,11 +153,47 @@ pc_cov.head()
 
 <br>
 
-##### **Molecular properties in PubChem data used**
+##### **Definitions of molecular properties in PubChem dataset**
 
-I thought to devote a specific section on all the molecular properties used in the app, in case there might be people outside the Chemistry world reading this, and also this would serve a good reference for people who were already very familiar with them. The definitions of all the column names are shown below as per documentations in PubChem website:
+I thought to devote a specific section on some of the molecular properties listed in the dataset, in case there might be people unfamiliar with this but would still like to read about Shiny app in Python, and this would also serve as a reference for people already know them well. 
 
-*To be continued*
+The definitions of some of the column names were shown below, which were mainly derived and adapted from the documentations in PubChem website:
+
+* Molecular weight - Molecular mass of compounds measured in daltons
+
+* Topological polar surface area - measured in angstrom squared
+
+* Complexity - Complexity rating for compound, based on Bertz/Hendrickson/Ihlenfeldt formula as a rough estimation of how complex a compound is structurally
+
+* Partition coefficients (xlogp) - Predicted octanol-water partition coefficient which is a measure of hydrophilicity or hydrophobicity of a molecule
+
+* Heavy atom count - Number of heavy atoms e.g. non-H atoms in the compound
+
+* Hydrogen bond donor count - Number of hydrogen bond donors in the compound
+        
+* Hydrogen bond acceptor count - Number of hydrogen bond acceptors in the compound
+        
+* Rotatable bond count - Defined as any single-order non-ring bond, where atoms on either side of the bond are in turn bound to non-terminal heavy atoms (e.g. non-H). Rotation around the bond axis will change overall molecule shape & generates conformers which can be distinguished by standard spectroscopic methods
+
+* Exact mass - Exact mass of an isotopic species, obtained by summing masses of individual isotopes of the molecule
+        
+* Monoisotopic mass - Sum of the masses of atoms in a molecule, using unbound, ground-state, rest mass of principal (or most abundant) isotope for each element instead of isotopic average mass
+        
+* Formal charge - The difference between the number of valence electrons of each atom, and the number of electrons the atom is associated with. Assumes any shared electrons are equally shared between the two bonded atoms.
+        
+* Covalently-bonded unit count - A group of atoms connected by covalent bonds, ignoring other bond types (or a single atom without covalent bonds), representing number of such units in the compound
+        
+* Isotope atom count - Number of isotopes that are not most abundant for the corresponding chemical elements. Isotopes = variants of a chemical element that differ in neutron number
+        
+* Defined atom stereocenter count - Atom stereocenter = chiral center = an atom that is attached to 4 different types of atoms or groups of atoms in the tetrahedral arrangement. It can either be (R)- or (S)- configurations. Some of the compounds e.g. racemic mixtures, have undefined atom stereocenter, where (R/S)-config is not specifically defined. This column is the number of atom stereocenters whose configurations are specifically defined
+        
+* Undefined atoms stereocenter count - This is the undefined version of the atoms stereocenter count
+        
+* Defined bond stereocenter count - Bond stereocenter = non-rotatable bond around which two atoms can have different arrangement e.g. in cis- & -trans forms of butene around its double bond. Some compounds have an undefined bond stereocenter (stereochemistry not specifically defined). Defined bond stereocenter count is the number of bond stereocenters whose configurations are specifically defined.
+        
+* Undefined bond stereocenter count - This is the undefined version of the bond stereocenter count
+        
+* MeSH headings - Medical subject headings
 
 <br>
 
@@ -225,7 +261,7 @@ The longer I've used Polars the more I'm used to the fact that it has very usefu
 
 The idea was to separate all data into 3 different ranges of partition coefficients, so this could be shown visually in plots. One way, or really the long way, to do this might be like the code shown below:
 
-```{{python}}
+``` {{python}}
 part_coef_neg25_neg10 = pc_cov.filter(pl.col("Partition_coef") <= -10)
 part_coef_neg11_5 = pc_cov.filter((pl.col("Partition_coef") >= -11) & (pl.col("Partition_coef") <= 5))
 part_coef_6_21 = pc_cov.filter(pl.col("Partition_coef") >= 6)
