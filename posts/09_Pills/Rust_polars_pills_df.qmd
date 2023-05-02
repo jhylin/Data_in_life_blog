@@ -67,7 +67,7 @@ df_viz = df_new.unique(subset = "Drug_strength")
 df_viz
 ```
 
-One way to avoid switching Polars dataframe to a Pandas one, which could be one of the options to plot data from Polars dataframes in Plotly, was to call the x-axis and y-axis data directly from the dataframe as shown in the codes below.
+One way to avoid switching Polars dataframe to a Pandas one, which could be one of the options to plot data from Polars dataframes in Plotly, was to call the x-axis and y-axis data directly from the dataframe as shown in the code below.
 
 ```{python}
 # scatter plot for colours, dosage forms & drug strengths 
@@ -355,4 +355,4 @@ fig.show()
 
 <br>
 
-I've decided to keep the dataframe very simple for part 3 as my original intention was to trial plotting a graph in Evcxr only (nothing fancy at this stage), and also to gain some familiarities with Rust as another new programming language for me. Readers might notice that I've opted for a scatter plot in Plotly (in Python3 kernel) here for this last dataframe, and when we finally got to part 3 (hopefully coming soon as I needed to figure how to publish Rust codes in Quarto...), I might very likely revert this to a bar graph (in Rust kernel), due to some technical issues (slow dependency loading, and somehow with Plotly.rs in Evcxr, the scatter graph looked more like scatter line graph instead... more stories to follow) and being a new Rust-Evcxr user. At the very least, I've kind of tried something I've planned for, although not looking very elegant yet, with rooms for improvements in the future.
+I've decided to keep the dataframe very simple for part 3 as my original intention was to trial plotting a graph in Evcxr only (nothing fancy at this stage), and also to gain some familiarities with Rust as another new programming language for me. Readers might notice that I've opted for a scatter plot in Plotly (in Python3 kernel) here for this last dataframe, and when we finally got to part 3 (hopefully coming soon as I needed to figure how to publish Rust code in Quarto...), I might very likely revert this to a bar graph (in Rust kernel), due to some technical issues (slow dependency loading, and somehow with Plotly.rs in Evcxr, the scatter graph looked more like scatter line graph instead... more stories to follow) and being a new Rust-Evcxr user. At the very least, I've kind of tried something I've planned for, although not looking very elegant yet, with rooms for improvements in the future.

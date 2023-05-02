@@ -22,9 +22,9 @@ The aim of this final part (part 3) for the pills dataset was really for me to s
 
 My very initial idea was to integrate Rust-Polars, Plotly in Rust (Plotly.rs) and Jupyter-Evcxr together, and see if I could get a simple data visualisation out of a small dataset. Although the idea sounded simple enough, I was actually quite stuck at the step of importing one of the columns as x-axis variables in Rust-Polars to Plotly.rs. I figured it might possibly be due to my very lack-of-knowledge and lack-of-familiarities with Rust (I do need to continue reading the Rust programming language book), Polars (I'm better with Python-Polars actually), Plotly.rs and also Evcxr. Another possibility could be that Plotly.rs mainly had ndarray support, and Polars was not mentioned explicitly in Plotly.rs so my guess was that these two might not flow very well together. Also, Polars itself was constantly evolving and growing as well.
 
-So I've decided to leave things as how it would be for now, before I delayed this post any further. If I happened to figure out how to do this in the future, then I'll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I've managed to deconstruct Polars dataframe in Rust in Evcxr. So I'll show a little bit about it below. One slightly good news that came out from all of this, was that I've managed to import the other column as y-axis variables, which contained numbers, without problems. I've also figured out the Rust codes to convert Series/ChunkedArray to vectors in Rust IDEs (e.g. VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could expand further on this later.
+So I've decided to leave things as how it would be for now, before I delayed this post any further. If I happened to figure out how to do this in the future, then I'll come back to update this last part of the project. While I was tackling this little issue mentioned above, somehow I've managed to deconstruct Polars dataframe in Rust in Evcxr. So I'll show a little bit about it below. One slightly good news that came out from all of this, was that I've managed to import the other column as y-axis variables, which contained numbers, without problems. I've also figured out the Rust code to convert Series/ChunkedArray to vectors in Rust IDEs (e.g. VS Code, and quite a few others). So I did learn a few things while completing this post, and hoped I could expand further on this later.
 
-**Note: I've published all Rust codes as print-only in Quarto markdown file, since it's not possible to run them in RStudio IDE (Rust was not supported). So all Rust codes were originally run on Jupyter Lab in MacOS, with code outputs being captured as screenshots, which were shown as photos in this post. Here's the [link](https://github.com/jhylin/Rust_projects/blob/main/Rust_evcxr_polars_plotly_final.ipynb) to the .ipynb file in the GitHub repository for this portfolio website (or alternatively, you could access it from the GitHub icon link at the top of the web page), in case anyone wanted to see the full .ipynb version.**
+**Note: I've published all Rust code as print-only in Quarto markdown file, since it's not possible to run them in RStudio IDE (Rust was not supported). So all Rust code were originally run on Jupyter Lab in MacOS, with code outputs being captured as screenshots, which were shown as photos in this post. Here's the [link](https://github.com/jhylin/Rust_projects/blob/main/Rust_evcxr_polars_plotly_final.ipynb) to the .ipynb file in the GitHub repository for this portfolio website (or alternatively, you could access it from the GitHub icon link at the top of the web page), in case anyone wanted to see the full .ipynb version.**
 
 <br>
 
@@ -180,7 +180,7 @@ println!("{}", &Colours.iter().format("\n"));
 
 ![Photo by author](iterate.jpg){fig-align="left"}
 
-Then, it took me quite a long time to just downcast Series into ChunkedArray, but somehow I've managed to figure out the code myself below. One of the likely reasons was due to my choice of using Evcxr, which required Rust codes in slightly different formats than the ones in Rust IDEs (although almost the same).
+Then, it took me quite a long time to just downcast Series into ChunkedArray, but somehow I've managed to figure out the code myself below. One of the likely reasons was due to my choice of using Evcxr, which required Rust code in slightly different formats than the ones in Rust IDEs (although almost the same).
 
 ``` {{rust}}
 // Somehow worked out how to convert series to chunkedarray by accident!
@@ -189,7 +189,7 @@ println!("{:?}", Colours.utf8().unwrap());
 
 ![Photo by author](chunkedarray.jpg){fig-align="left"}
 
-Then I moved onto trying to figure out how to convert or place a ChunkedArray into a vector, with the closest answer shown below. However, bear in mind that these Rust codes were for Rust IDEs, and not for Evcxr, so this added slightly more complexities to what I was trying to do (perhaps I should just stick with Rust IDEs in the future...).
+Then I moved onto trying to figure out how to convert or place a ChunkedArray into a vector, with the closest answer shown below. However, bear in mind that these Rust code were for Rust IDEs, and not for Evcxr, so this added slightly more complexities to what I was trying to do (perhaps I should just stick with Rust IDEs in the future...).
 
 ``` {{rust}}
 //Adpated from StackOverflow - How to get a Vec from polars Series or ChunkedArray?
