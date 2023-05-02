@@ -1210,7 +1210,7 @@ dttm  (1): Validation date
 <p>Two disorder types stood out the most, with “Disease” type appeared 57,920 times and “Malformation syndrome” at 37,634 times. To understand further what each of these two disorder types were, a direct reference<sup>3</sup> was used. According to the source of the dataset:</p>
 <p>The definition of “Disease” in the rare disorder context was “a disorder with homogeneous therapeutic possibilities and an identified physiopathological mechanism…”, one thing also worth noting was that this type did not include any developmental anomalies.</p>
 <p>For “Malformation syndrome”, this was defined as, “A disorder resulting from a developmental anomaly involving more than one morphogenetic field. Malformative sequences and associations are included.”</p>
-<p>To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following codes were used:</p>
+<p>To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following code were used:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">df1 <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
 <span id="cb11-2">  <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>

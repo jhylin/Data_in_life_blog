@@ -87,7 +87,7 @@ The definition of "Disease" in the rare disorder context was "a disorder with ho
 
 For "Malformation syndrome", this was defined as, "A disorder resulting from a developmental anomaly involving more than one morphogenetic field. Malformative sequences and associations are included."
 
-To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following codes were used:
+To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following code were used:
 
 ```{r percentages of disorder type}
 df1 <- df %>% 
