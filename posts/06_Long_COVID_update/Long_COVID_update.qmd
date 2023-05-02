@@ -28,7 +28,7 @@ The dataset was scraped from a PDF obtained via PubMed (journal paper source as 
 # install.packages("leaflet")
 ```
 
-Loading all the required libraries below. Install libraries needed as shown in codes above.
+Loading all the required libraries below. Install libraries needed as shown in code above.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -263,7 +263,7 @@ Long COVID had shown a very versatile and diverse range of signs and symptoms, o
 
 ##### **Acknowledgement**
 
-I have to thank several online resources when I was trying to build the interactive map. Most notably, I've adapted my codes based on these two useful online resources:
+I have to thank several online resources when I was trying to build the interactive map. Most notably, I've adapted my code based on these two useful online resources:
 
 1.  [R tutorial: Creating Maps and mapping data with ggplot2](https://www.youtube.com/watch?v=AgWgPSZ7Gp0) by Dr Paul Christiansen
 

@@ -243,7 +243,7 @@ mol2_rit_maxw_mol1 = maxweight
 mol2_rit_maxw_mol1
 ```
 
-To further explain and understand the parameter of maximum weight, this paper by Riniker and Landrum have included a full calculation styled as pseudocodes in Python. I have attempted to summarise them in words, along with the codes (adapted from the paper), as below:
+To further explain and understand the parameter of maximum weight, this paper by Riniker and Landrum have included a full calculation styled as pseudocode in Python. I have attempted to summarise them in words, along with the code (adapted from the paper), as below:
 
 ``` {{python}}
 # 1. Calculate the fingerprint for reference molecule
@@ -378,7 +378,7 @@ mol5 = bar
 mols = [mol1, mol2, mol3, mol4, mol5]
 ```
 
-Below was the set of codes used to generate a fingerprint between compounds. I've changed the radius to 2 to align with the similarity map test above.
+Below was the set of code used to generate a fingerprint between compounds. I've changed the radius to 2 to align with the similarity map test above.
 
 ```{python}
 # Create an object fp to generate fingerprint
@@ -424,7 +424,7 @@ tc_mols = [tc_mol1_mol2, tc_mol1_mol3, tc_mol1_mol4, tc_mol1_mol5]
 tc_mols
 ```
 
-I thought to include following codes to ensure I wasn't losing track on which molecule was which by having them displayed as 2D structures with labels.
+I thought to include following code to ensure I wasn't losing track on which molecule was which by having them displayed as 2D structures with labels.
 
 ```{python}
 # Display compounds to help with recognising which antivirals are being compared
@@ -506,7 +506,7 @@ plt.text(len(x) / 2, 0, b, ha = 'left', va = 'bottom')
 
 <br>
 
-One possibility for this difference could be that the maximum weight parameter in the similarity map test was based on Dice similarity (if referring back to the pseudocodes for how to calculate atomic weight), but for the other fingerprint generator test, Tanimoto similarity (also known as Jaccard coefficient) was used instead. These two similarity coefficients were actually calculated differently, with their equivalent equations shown below.
+One possibility for this difference could be that the maximum weight parameter in the similarity map test was based on Dice similarity (if referring back to the pseudocode for how to calculate atomic weight), but for the other fingerprint generator test, Tanimoto similarity (also known as Jaccard coefficient) was used instead. These two similarity coefficients were actually calculated differently, with their equivalent equations shown below.
 
 ###### ***Tanimoto similarity/coefficient***
 
@@ -528,7 +528,7 @@ $$
 
 ##### **Acknowledgement**
 
-The codes used in this post were heavily inspired by and adapted from the following blogs and website shown below. I've learnt a lot from them, and would like to thank the existence of these blogs and website, which are helping readers like me to learn in an open-source manner. I particularly like the clear and concise writing style from P. Walter's Practical Cheminformatics blog which is easy to follow. Iwatobipen's is life worth living? blog has shown a very diverse range of cheminformatics tools available for use, and I'm constantly surprised by how many there are from this blog and also the generous sharing of all the codes.
+The code used in this post were heavily inspired by and adapted from the following blogs and website shown below. I've learnt a lot from them, and would like to thank the existence of these blogs and website, which are helping readers like me to learn in an open-source manner. I particularly like the clear and concise writing style from P. Walter's Practical Cheminformatics blog which is easy to follow. Iwatobipen's is life worth living? blog has shown a very diverse range of cheminformatics tools available for use, and I'm constantly surprised by how many there are from this blog and also the generous sharing of all the code.
 
 -   P. Walter's [blog](https://practicalcheminformatics.blogspot.com)
 -   Iwatobipen's [blog](https://iwatobipen.wordpress.com)

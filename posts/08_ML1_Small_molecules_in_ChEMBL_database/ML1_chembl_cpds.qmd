@@ -564,7 +564,7 @@ LR.score(X_test, y_test)
 
 ###### **Confusion matrix**
 
-Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the codes meant.
+Next, I've built a confusion matrix based on the model in order to visualise the counts of correct and incorrect predictions. The function code used below was adapted from the IBM data science course I've taken around the end of last year. I've added comments to try and explain what each section of the code meant.
 
 ```{python}
 # Import confusion matrix from scikit-learn
