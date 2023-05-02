@@ -282,7 +282,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>As mentioned in my last project, I’ve tried using Evcxr, which provided a way to use Rust interactively in a Jupyter environment. The name, “Evcxr”, was quite hard to remember at first. It was pronounced as “e-vic-ser” according to the author, which I’ve randomly come across in an online tech interview when I was looking into it. I’ve also sort of worked out a way to memorise its spelling by taking specific letters out of “<strong>ev</strong>aluation <strong>c</strong>onte<strong>x</strong>t for <strong>r</strong>ust” (which was what it was called in its <a href="https://github.com/google/evcxr">GitHub repository</a>).</p>
 <p>For users of Jupyter Notebook/Lab and Python, they might be quite used to the working speed of the cell outputs. However, one thing I’ve noticed when I was using Evcxr or Rust kernel in Jupyter Lab was that the speed of cell outputs was noticeably slower (especially at the beginning while loading all the dependencies required). The speed improved when loading external crates and modules, and generally it was faster afterward.</p>
 <p>Due to this reason (note: I did not look into any other optimising strategies for this and this could be restricted to my computer hardware specs, so this might differ for other users), I think Evcxr was not ideal for a very large and complex data science project yet (however if its ecosystem kept developing, it might be improved in the future). One thing of note was that when I was combing through issues in Evcxr’s GitHub repository, someone mentioned the slow compile time of the Rust compiler, which would have likely caused the snail speed, but knowing that the actual program running speed was blazingly fast, some sacrifice at the beginning made sense to me. Overall, Rust was really a systems programming language with memory efficiency (with no garbage collector), type safety and concurrency as some of its notable advantages.</p>
-<p>Because of the dependency loading issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I’ve opted to use Polars-Python again for the data wrangling part of this project. This was also accompanied by the good old Pandas library as well (under the section of “Transform web-scraped data into dataframe” if anyone wants to jump to that part to see the codes). I then went on to trial using Rust via Evcxr for data visualisation based on a small dataframe by using Plotly.rs. This project would be separated into 3 parts:</p>
+<p>Because of the dependency loading issue in the Jupyter environment, and also knowing there was already a dataframe library built from Rust, I’ve opted to use Polars-Python again for the data wrangling part of this project. This was also accompanied by the good old Pandas library as well (under the section of “Transform web-scraped data into dataframe” if anyone wants to jump to that part to see the code). I then went on to trial using Rust via Evcxr for data visualisation based on a small dataframe by using Plotly.rs. This project would be separated into 3 parts:</p>
 <ul>
 <li>Part 1: Initial pillbox dataset loading and web-scraping</li>
 <li>Part 2: Data wrangling and mining for data visualisations</li>
@@ -313,7 +313,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"pillbox.csv"</span>, ignore_errors <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 <style scoped="">
@@ -4947,7 +4947,7 @@ $ Pillbox Value      &lt;Boolean&gt; False, False, True, False, False, False, Fa
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"dosage_form"</span>]</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                  )</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>df_med</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
 <style scoped="">
@@ -5458,7 +5458,7 @@ null
 </section>
 <section id="web-scraping" class="level4">
 <h4 class="anchored" data-anchor-id="web-scraping"><strong>Web scraping</strong></h4>
-<p>This was not planned initially but this might make my life a lot easier if I could scrape the dosage form table found through the Pillbox link, since the dosage form column was full of C-letter codes. These dosage form codes were hard to understand, so once I’ve got the codes along with corresponding dosage forms in texts, the web-scraped information would be converted into a dataframe for further data manipulations.</p>
+<p>This was not planned initially but this might make my life a lot easier if I could scrape the dosage form table found through the Pillbox link, since the dosage form column was full of C-letter code. These dosage form code were hard to understand, so once I’ve got the code along with corresponding dosage forms in texts, the web-scraped information would be converted into a dataframe for further data manipulations.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment lines below to install libraries needed for web-scraping</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install requests</span></span>
@@ -5564,13 +5564,13 @@ null
   &lt;link href="https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms" hreflang="en" rel="alternate"/&gt;
   &lt;link href="https://www.fda.gov/industry/structured-product-labeling-resources/dosage-forms" rel="canonical"/&gt;
   &lt;link href="https://www.fda.gov/node/358928" rel="shortlink"/&gt;
-  &lt;script defer="" src="/files/google_tag/production/google_tag.script.js?rphai9"&gt;
+  &lt;script defer="" src="/files/google_tag/production/google_tag.script.js?rt10fa"&gt;
   &lt;/script&gt;
   &lt;title&gt;
    Dosage Forms | FDA
   &lt;/title&gt;
   &lt;link href="/files/css/css_VQK8mppKquBsweKvwlYQE65XHMoWqDIaAS_w8yNPtaw.css" media="all" rel="stylesheet"/&gt;
-  &lt;link href="/files/css/css_n8jaIwaGAEBwhyOVADYKEvBfI14hjYfW5coDh69qBY0.css" media="all" rel="stylesheet"/&gt;
+  &lt;link href="/files/css/css_wZl-oUwtZViT4j1MoWRni-RbKGdqgfm_QYwF8I2qvkA.css" media="all" rel="stylesheet"/&gt;
   &lt;script async="" src="https://script.crazyegg.com/pages/scripts/0024/3700.js"&gt;
   &lt;/script&gt;
   &lt;script id="_fed_an_ua_tag" language="javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=HHS&amp;amp;subagency=FDA&amp;amp;sdor=fda.gov&amp;amp;dclink=true"&gt;
@@ -5912,7 +5912,7 @@ null
           Structured Product Labeling Resources
          &lt;/a&gt;
          &lt;div class="views-element-container form-group"&gt;
-          &lt;div class="view view-in-this-section view-id-in_this_section view-display-id-block_5 js-view-dom-id-b13c61e6f0cd52a31b0ccbd998f47cc31050537f43a7d78f4599b9e8091c77e0"&gt;
+          &lt;div class="view view-in-this-section view-id-in_this_section view-display-id-block_5 js-view-dom-id-2cf21a564367354ef195b56aa81689e46f10f542498f1817b5f7bef7d0252658"&gt;
            &lt;div&gt;
             &lt;ul class="lcds-section-nav__section-link__active lcds-section-nav__list"&gt;
              &lt;li&gt;
@@ -6165,7 +6165,7 @@ null
           &lt;/div&gt;
          &lt;/div&gt;
          &lt;div class="views-element-container form-group"&gt;
-          &lt;div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_2 js-view-dom-id-150a9e8325156f6482279b2a2d5893625da8fd0de62f3f456cbdaac3b07db443"&gt;
+          &lt;div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_2 js-view-dom-id-335ed711a47462688e70fc5baa76961c56138f181cbddd1216fba45fbfae0dc0"&gt;
           &lt;/div&gt;
          &lt;/div&gt;
         &lt;/li&gt;
@@ -7590,7 +7590,7 @@ null
               Structured Product Labeling Resources
              &lt;/a&gt;
              &lt;div class="views-element-container form-group"&gt;
-              &lt;div class="view view-in-this-section view-id-in_this_section view-display-id-block_4 js-view-dom-id-7052ac552cdf9acaaacaa914f38eb45810207bb0b850a71d83827891898b73a4"&gt;
+              &lt;div class="view view-in-this-section view-id-in_this_section view-display-id-block_4 js-view-dom-id-f4e45e22b3b3ec96fee2374dd154bf5fb59f4016cdd6b6e9afac78399d5bda28"&gt;
                &lt;div class="item-list"&gt;
                 &lt;ul class="lcds-section-nav__active lcds-section-nav__list lcds-section-nav--side__list"&gt;
                  &lt;li&gt;
@@ -7843,7 +7843,7 @@ null
               &lt;/div&gt;
              &lt;/div&gt;
              &lt;div class="views-element-container form-group"&gt;
-              &lt;div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_1 js-view-dom-id-d6b7e60010e3c8b128f9529aafa6118c16146d9d2f9752ab7ab27c9702c81b73"&gt;
+              &lt;div class="view view-in-this-section-sub view-id-in_this_section_sub view-display-id-block_1 js-view-dom-id-d419d9d275f7ccb0e40f34448099063062b85dbbc42f13f719f9b4c058d3b17a"&gt;
               &lt;/div&gt;
              &lt;/div&gt;
             &lt;/li&gt;
@@ -8100,7 +8100,7 @@ null
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the combined dataframe df_new</span></span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>df_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="13">
 
 <div>
 
@@ -8177,7 +8177,7 @@ null
 </section>
 <section id="pandas.from_dict" class="level6">
 <h6 class="anchored" data-anchor-id="pandas.from_dict"><strong>Pandas.from_dict()</strong></h6>
-<p>Second example by using pd.from_dict() method, which might have less lines of codes:</p>
+<p>Second example by using pd.from_dict() method, which might have less lines of code:</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty dictionary</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span> <span class="op">=</span> []</span>
@@ -8205,7 +8205,7 @@ null
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the dataframe df_new</span></span>
 <span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>df_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="14">
 
 <div>
 
@@ -8309,7 +8309,7 @@ null
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert dictionary to dataframe</span></span>
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>new_df <span class="op">=</span> pl.from_dicts(<span class="bu">dict</span>)</span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>new_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="15">
 
 <div>
 <style scoped="">
@@ -8575,10 +8575,10 @@ str
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the two dataframes together</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> df_med.join(new_df, on <span class="op">=</span> <span class="st">"dosage_form"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the column dosage_form which had codes of each dosage form </span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the column dosage_form which had code of each dosage form </span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> df_final.drop(<span class="st">"dosage_form"</span>)</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>df_final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="16">
 
 <div>
 <style scoped="">
