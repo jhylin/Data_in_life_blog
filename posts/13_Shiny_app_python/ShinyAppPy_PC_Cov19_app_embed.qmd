@@ -1,12 +1,55 @@
 ---
-title: Shinylive applications embedded in Quarto documents - trial
+title: Shinylive app in Python
+subtitle: Embedding app in a Quarto document for compounds in COVID-19 clinical trials
+author: Jennifer HY Lin
+date: '2023-5-4'
 format: html
 filters:
   - shinylive
 draft: true
+categories:
+  - Python
+  - Shiny
+  - PubChem
+  - Cheminformatics
 ---
 
-This is a test to embed a Shiny app in Python in a Quarto document.
+##### **Coding for Shiny app in Python**
+
+The entire code for this Shiny app in Python on this particular set of PubChem data was written in VS Code initially. While I was looking for places to deploy the app later, I then migrated the code to RStudio IDE (details explained below).
+
+<br>
+
+###### **Trialling open-source large-language models**
+
+I'm sure readers interested in the field of data science, analytics, business intelligence, artificial intelligence, machine learning and so on might be, by now as I guess, a bit sick of the terms like large-language models (LLMs) or generative pre-trained transformers (GPTs). There are obviously a lot of hypes around them, and I've continued to remain reserved about them in terms of law and ethics surrounding LLMs and GPTs, which I think are still not very mature at the moment. In saying that, I'm not denying the fact that they can be useful for a few known purposes in coding such as requesting for regex code templates or asking for code snippets while programmers are busy with several tasks at the same time.
+
+I thought to trial out the open-source LLMs for now, since they are open and transparent to a larger degree than other "close-source" versions on their data sources and model types etc. So I've tested about 3 different open-source LLMs, which were H2OGPT, HuggingChat and StableLM. They all produced answers somewhat useful but also not completely what I've asked for in the first place (I'm aware that I probably need to spend time on producing prompts to get answers needed...). I decided to only give minimal amount of prompts e.g. 1-3, and see what answers they could each provide. 
+
+As an example from - *to be continued*
+
+<br>
+
+###### **Using Shiny in Python documentations**
+
+After trialling open-source LLMs a bit to help with the coding part (although not really as helpful as I first imagined), I completed the app.py script by using mainly documents from Shiny in Python website. Not denying the usability of LLMs, but I still think thorough documentations of any product is still fundamental and inevitable. 
+
+Several links that I've used:
+*to be continued*
+
+<br>
+
+##### **App deployment**
+
+After building the app in a workable condition, I started looking at where and how to deploy this shiny app written in Python. Initially I used the easiest method as stated from Shiny in Python docs - deploy on Shinylive editor, which was true as documented. One drawback was that the application URL could be extremely long as the URL hash stores the entire app code inside. However, it was indeed one of the simplest ways to share the apps with others.
+
+I then went to try other means where I've spent one afternoon trying to figure out that I had to add an install_certificate.command for my macOS since I installed Python by using Homebrew in the first place (which some clever users might avoid knowing the trouble...), so that I could resolve the SSL certificate issue if I'm trying to connect with Shinyapps.io. 
+
+I also tried to follow another older method that suggested to deploy the app on GitHub Pages, but since then the code was updated to a different version and the old method no longer worked as nicely as mentioned (as Shiny in Python is recently out of alpha phase, a lot of it can be still experimental, and can change drastically). I then stumbled upon another GitHub repository from Posit/RStudio and looked into the possibility and tested it. Eventually, I settled on this method - embedding the app in a Quarto document, which can be clearly accessed with both code and app itself on this very same webpage.
+
+One of the downsides of the following code that I couldn't quite get rid of was the poor file importation style for using a local .csv file. I've added code annotations in comments to explain what I've done. This solution was from [this discussion](https://github.com/quarto-ext/shinylive/issues/7) in the repository (with thanks to that particular user who found this hacky way to do it). However, the plus side was that coding for the rest of the app was not bad at all and worked seamlessly. I'll try to follow up on whether importing csv file for embedding app could become easier in the future, perhaps this could be something the Quarto team is working on at the moment.
+
+The second downside was that shinyswatch package might not be functional yet for the app embedding method (but most likely would work, say for example, if deploying apps to shinyapps.io). This meant there would be no background themes yet for apps embedded in Quarto docs, however, hopefully this would become possible in the future. Overall, I was amazed at how easy it was to build and deploy the apps in Python.
 
 ```{shinylive-python}
 #| standalone: true
