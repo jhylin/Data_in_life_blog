@@ -2,7 +2,7 @@
 title: Shinylive app in Python
 subtitle: Data preparation for compounds in COVID-19 clinical trials
 author: Jennifer HY Lin
-date: '2023-5-4'
+date: '2023-5-6'
 draft: true
 jupyter: python3
 categories:
@@ -434,7 +434,10 @@ fig.show()
 
 ##### **Export to Pandas dataframe (for Shiny in Python)**
 
-Convert Polars df into Pandas df as per Shiny for Python docs to import dataset in app.
+Options: 
+1. Convert Polars df into Pandas df as per Shiny for Python docs to import dataset in app.
+
+2. Save polars dataframe as .csv file, then read this in the app.py script using Pandas df library
 
 ```{python}
 # Convert Polars df into a Pandas df if needed
