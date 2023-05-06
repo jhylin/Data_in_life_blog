@@ -2,7 +2,7 @@
 title: Shinylive app in Python
 subtitle: Embedding app in a Quarto document for compounds in COVID-19 clinical trials
 author: Jennifer HY Lin
-date: '2023-5-4'
+date: '2023-5-6'
 format: html
 filters:
   - shinylive
@@ -14,43 +14,57 @@ categories:
   - Cheminformatics
 ---
 
-##### **Coding for Shiny app in Python**
+##### **Coding for Shinylive app in Python**
 
-The entire code for this Shiny app in Python on this particular set of PubChem data was written in VS Code initially. While I was looking for places to deploy the app later, I then migrated the code to RStudio IDE (details explained below).
+The entire code for this Shiny app in Python on this particular set of PubChem data were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below).
 
 <br>
 
 ###### **Trialling open-source large-language models**
 
-I'm sure readers interested in the field of data science, analytics, business intelligence, artificial intelligence, machine learning and so on might be, by now as I guess, a bit sick of the terms like large-language models (LLMs) or generative pre-trained transformers (GPTs). There are obviously a lot of hypes around them, and I've continued to remain reserved about them in terms of law and ethics surrounding LLMs and GPTs, which I think are still not very mature at the moment. In saying that, I'm not denying the fact that they can be useful for a few known purposes in coding such as requesting for regex code templates or asking for code snippets while programmers are busy with several tasks at the same time.
+There have been a lot of hypes surrounding large-language models (LLMs) or generative pre-trained transformers (GPTs). I'm still somewhat both reserved and excited about them at present. The area I'm most concerned with is where are the relevant laws, regulations and ethics on using these tools in public domains, whether for private or commercial uses, and will they be country-specific or globally streamlined? While I have these questions in mind, I'm not denying the fact that they can be useful for a few well-known purposes in coding, such as requesting for regex code templates for text cleaning or asking for code snippets while programmers are busy with several tasks at the same time.
 
-I thought to trial out the open-source LLMs for now, since they are open and transparent to a larger degree than other "close-source" versions on their data sources and model types etc. So I've tested about 3 different open-source LLMs, which were H2OGPT, HuggingChat and StableLM. They all produced answers somewhat useful but also not completely what I've asked for in the first place (I'm aware that I probably need to spend time on producing prompts to get answers needed...). I decided to only give minimal amount of prompts e.g. 1-3, and see what answers they could each provide. 
+I thought to trial out the open-source LLMs a little bit for this work, since they are the open and transparent versions with many potentials for personal or commercial uses. So I've tested about 3 different open-source LLMs, which were H~2~OGPT, HuggingChat and StableLM. I decided to only give minimal amount of prompts (I've given H~2~OGPT three prompts, and only one prompt each for either HuggingChat and StableLM), and the question was framed around providing a code outline for building a Shiny app using Python and Polars dataframe libary, and see what answers they could each provide. 
 
-As an example from - *to be continued*
+All of them produced answers that were close to what I've asked for, i.e. I could see a code outline for a Shiny app.py file at first but it was more like R code, with one case mixing both Python and R in the code concurrently. However, none of them actually reached exactly how I've asked them to provide, perhaps if I've give more prompts then they might manage to provide answers closer to the request. Also, none of them were able to pick up the more recent Polars dataframe library (which were more prominent from 2021 onwardss) and also Shiny in Python (which was also quite new as well, only out of alpha phase recently). All of them only showed code using Pandas dataframe libray, even though I did mention Polars in all of the question prompts. Once I've used more of these open-source LLMs, which currently are gaining more traction from what I've read online, I might try to write another post on them in the future.
 
 <br>
 
 ###### **Using Shiny in Python documentations**
 
-After trialling open-source LLMs a bit to help with the coding part (although not really as helpful as I first imagined), I completed the app.py script by using mainly documents from Shiny in Python website. Not denying the usability of LLMs, but I still think thorough documentations of any product is still fundamental and inevitable. 
+After trialling open-source LLMs a bit to help with the coding part (although not really as helpful as I first imagined, but still somewhat provided a rough framework on user interface, server and final app calling/running sections), I completed the app.py script in the end by using mainly documents from [Shiny for Python website](https://shiny.rstudio.com/py/). I still think thorough documentations for any products are still fundamental and inevitable even if our worlds are filled with LLMs, because these documentions will be places to provide high-quality data, which means LLMs built from these very data sources will be of higher quality too.
 
-Several links that I've used:
-*to be continued*
+Several links I've used and found to be very informative:
+
+* "[Shiny for Python out of alpha](https://shiny.rstudio.com/blog/shiny-python-general-availability.html)" - quick summary on recent status update and new features such as shinyswatch and shinywidgets on Shiny for Python
+
+* "[Quickstart for R users](https://shiny.rstudio.com/py/docs/r-quickstart.html)" - a very useful link for people who are R users or already familiar with Shiny app in R, and would like to build the Shiny app in Python
+
+* "[Shinylive: Shiny + WebAssembly](https://shiny.rstudio.com/py/docs/shinylive.html#deploying-shinylive-applications)" - great for understanding Shinylive
+
+* "[Shinylive applications embedded in Quarto documents](https://quarto-ext.github.io/shinylive/)" - this is all about embedding shinylive app in Quarto - the webpage link provided here is from this GitHub repository on [Quarto extension for shinylive](https://github.com/quarto-ext/shinylive)
 
 <br>
 
 ##### **App deployment**
 
-After building the app in a workable condition, I started looking at where and how to deploy this shiny app written in Python. Initially I used the easiest method as stated from Shiny in Python docs - deploy on Shinylive editor, which was true as documented. One drawback was that the application URL could be extremely long as the URL hash stores the entire app code inside. However, it was indeed one of the simplest ways to share the apps with others.
+After building the app in a workable condition, I started looking at where and how to deploy this Shiny app written in Python. Initially I used the easiest method as stated from the Shinylive link above, which was to deploy on Shinylive editor. One drawback was that the application URL could be extremely long as the URL hash stored the entire app code inside. However, it was indeed one of the simplest ways to share the apps with others, by simply providing the URL link to access the app.
 
-I then went to try other means where I've spent one afternoon trying to figure out that I had to add an install_certificate.command for my macOS since I installed Python by using Homebrew in the first place (which some clever users might avoid knowing the trouble...), so that I could resolve the SSL certificate issue if I'm trying to connect with Shinyapps.io. 
+I then went on to try another method where I spent one afternoon trying to figure out that I had to add an install_certificate.command for my macOS since I installed Python by using Homebrew in the first place (which some clever users might already know to avoid...), so that I could resolve the SSL certificate issue if I'm trying to connect with Shinyapps.io. 
 
-I also tried to follow another older method that suggested to deploy the app on GitHub Pages, but since then the code was updated to a different version and the old method no longer worked as nicely as mentioned (as Shiny in Python is recently out of alpha phase, a lot of it can be still experimental, and can change drastically). I then stumbled upon another GitHub repository from Posit/RStudio and looked into the possibility and tested it. Eventually, I settled on this method - embedding the app in a Quarto document, which can be clearly accessed with both code and app itself on this very same webpage.
+I also tried to follow another method from an earlier time which suggested to deploy the app on GitHub Pages, but since then the code was changed and updated to a different version and the old method no longer worked as nicely as mentioned (a lot of the code for Shiny in Python can be still experimental, and can change drastically, so check the sources to see the latest updates). I then stumbled upon another GitHub repository from Posit/RStudio and looked into the possibility and tested it. Eventually, I settled on this method - embedding the app in a Quarto document, which provided both code and app itself on this very same webpage.
 
-One of the downsides of the following code that I couldn't quite get rid of was the poor file importation style for using a local .csv file. I've added code annotations in comments to explain what I've done. This solution was from [this discussion](https://github.com/quarto-ext/shinylive/issues/7) in the repository (with thanks to that particular user who found this hacky way to do it). However, the plus side was that coding for the rest of the app was not bad at all and worked seamlessly. I'll try to follow up on whether importing csv file for embedding app could become easier in the future, perhaps this could be something the Quarto team is working on at the moment.
+One of the downsides of the following code that I couldn't quite get rid of yet was the poor file importation style for using a local .csv file. I've added code annotations in comments to explain what I've done. This solution was from [this discussion](https://github.com/quarto-ext/shinylive/issues/7) in the repository (with thanks to that particular user who found this hacky way to do it). However, the plus side was that coding for the rest of the app was not bad at all and worked seamlessly. I'll try to follow up later on whether importing csv file for app embedding could be easier, perhaps this might be something the Quarto team is currently working on at the moment.
 
-The second downside was that shinyswatch package might not be functional yet for the app embedding method (but most likely would work, say for example, if deploying apps to shinyapps.io). This meant there would be no background themes yet for apps embedded in Quarto docs, however, hopefully this would become possible in the future. Overall, I was amazed at how easy it was to build and deploy the apps in Python.
+The second downside was that shinyswatch package might not be functional yet for the app embedding method (but most likely would work if deploying apps to shinyapps.io). This meant there would be no background visual themes yet for apps embedded in Quarto docs, but, hopefully this would become possible in the future. Overall, I was amazed at how easy it was to build and deploy Shiny apps in Python.
 
+*Note: if using Shinylive editor, make sure to include a requirement.txt file if using extra Python packages such as Pandas or Plotly. For embedding apps in Quarto docs, this appears not to be compulsory and only optional when I tried it down below.*
+
+<br>
+
+###### **Shinylive app in action**
+
+:::{.column-screen-inset}
 ```{shinylive-python}
 #| standalone: true
 #| components: [editor, viewer]
@@ -75,7 +89,7 @@ from pathlib import Path
 # User interface---
 # Add inputs & outputs
 app_ui = ui.page_fluid(
-        # Add theme - seems to only work in VS code
+        # Add theme - seems to only work in VS code and shinyapps.io
         #shinyswatch.theme.superhero(),
         # Add heading
         ui.h3("Molecular properties of compounds used in COVID-19 clinical trials"),
@@ -805,11 +819,6 @@ df = pd.read_csv(infile)
 628,Nirmatrelvir,499.5,131.0,964.0,2.2,35,3,8,7,499.241,499.241,0,1,0,6,6,0,0,0,0,Between -11 and 5
 629,"hexasodium;4-[[(2S,4R)-5-ethoxy-4-methyl-5-oxo-1-(4-phenylphenyl)pentan-2-yl]amino]-4-oxobutanoate;hydride;(2S)-3-methyl-2-[pentanoyl-[[4-[2-(1,2,3-triaza-4-azanidacyclopenta-2,5-dien-5-yl)phenyl]phenyl]methyl]amino]butanoate;pentahydrate",1922.0,396.0,1140.0,,135,7,35,40,1921.86,1920.85,-6,21,0,6,6,0,0,0,0,Larger than 6
 630,Nangibotide,1342.5,634.0,2630.0,-8.3,92,20,24,45,1341.53,1341.53,0,1,0,10,10,0,0,0,0,Between -11 and 5
-
-
-## file: requirement.txt
-plotly
-pandas
-
 ```
+:::
 
