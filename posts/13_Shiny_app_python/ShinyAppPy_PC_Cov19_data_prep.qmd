@@ -2,7 +2,7 @@
 title: Shinylive app in Python
 subtitle: Data preparation for compounds in COVID-19 clinical trials
 author: Jennifer HY Lin
-date: '2023-5-6'
+date: '2023-5-7'
 draft: true
 jupyter: python3
 categories:
@@ -14,17 +14,19 @@ categories:
 
 ##### **Brief introduction**
 
-In this post, I'll talk about the data preparation stage for the final dataset used for building a Shinylive app in Python.
+Since I've had a lot of fun building a Shiny app in R last time, I've already planned to build another Shiny app again but using Python instead. So here in this post, I'll talk about the data wrangling process to prepare the final dataset needed to build a Shinylive app in Python. The actual Shinylive app deployment and access will be shown in a separate post after this one.
 
 <br>
 
 ##### **Source of data**
 
-The dataset used in for building the Shiny app in Python is from PubChem with [link here](https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials). There were a total of 631 compounds at the stage when I was building the app. This may change if more clinical trials or changes in present clinical trials take place in the future. The dataset was downloaded as .csv file.
+The dataset used in for building the Shiny app in Python was from PubChem - [link here](https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials). There were a total of 631 compounds at the time when I was building the app. The dataset was simply downloaded as .csv file.
 
 <br>
 
 ##### **Import Polars**
+
+Polars dataframe library was used again this time.
 
 ```{python}
 import polars as pl
@@ -41,7 +43,7 @@ pc.head()
 
 <br>
 
-##### **Quick look at dataset**
+##### **Quick look at the data**
 
 ```{python}
 # Quick overview of the variables in each column in the dataset
@@ -58,7 +60,6 @@ pc.head()
 ##### **Check for nulls in dataset**
 
 ```{python}
-# Check nulls
 pc.null_count()
 ```
 
@@ -70,75 +71,30 @@ Column names explained as per definitions provided from PubChem.
 
 ```{python}
 # Change column names
-# Adding column definitions derived from PubChem
-
 pc_cov = pc.rename(
     {
         "cmpdname": "Compound name",
         "cmpdsynonym": "Synonyms",
-        # Molecular mass (daltons)
         "mw": "Molecular weight",
         "mf": "Molecular formula",
-        # Topological polar surface area (angstrom squared)
         "polararea": "Polar surface area",
-        # Complexity rating for compound
-        # Based on Bertz/Hendrickson/Ihlenfeldt formula
-        # Rough estimation of how complex a compound is structurally
         "complexity": "Complexity",
-        # Predicted octanol-water partition coefficient
-        # Measure of hydrophilicity or hydrophobicity of a molecule
         "xlogp": "Partition coefficients",
-        # Number of heavy atoms e.g. non-H atoms in the compound
         "heavycnt": "Heavy atom count",
-        # Number of hydrogen bond donors in the compound
         "hbonddonor": "Hydrogen bond donor count",
-        # Number of hydrogen bond acceptors in the compound
         "hbondacc": "Hydrogen bond acceptor count",
-        # Defined as any single-order non-ring bond, 
-        # where atoms on either side of the bond are in turn bound to
-        # non-terminal heavy atoms (e.g. non-H)
-        # Rotation around the bond axis will change overall
-        # molecule shape & generates conformers which can be 
-        # distinguished by standard spectroscopic methods
         "rotbonds": "Rotatable bond count",
-        # Exact mass of an isotopic species
-        # Obtained by summing masses of individual isotopes of the molecule
         "exactmass": "Exact mass",
-        # Sum of the masses of atoms in a molecule
-        # using unbound, ground-state, rest mass of principal (most abundant) isotope
-        # for each element instead of isotopic average mass
         "monoisotopicmass": "Monoisotopic mass",
-        # The difference between the number of valence electrons of each atom
-        # and the number of electrons the atom is associated with
-        # Assumes any shared electrons are equally shared between the two bonded atoms
         "charge": "Formal charge",
-        # Covalently-bonded unit count - a group of atoms connected by covalent bonds,
-        # ignoring other bond types (or a single atom without covalent bonds)
-        # Number of such units in the compound
         "covalentunitcnt": "Covalently-bonded unit count",
-        # Number of isotopes that are not most abundant for the corresponding chemical elements
-        # Isotopes = variants of a chemical element that differ in neutron number
         "isotopeatomcnt": "Isotope atom count",
         "totalatomstereocnt": "Total atom stereocenter count",
-        # Atom stereocenter = chiral center = an atom that is attached to 4 different types of atoms
-        # or groups of atoms in the tetrahedral arrangement
-        # It can either be (R)- or (S)- configurations
-        # Some of the compounds e.g. racemic mixtures, have undefined atom stereocenter, where (R/S)-config
-        # is not specifically defined.
-        # This column is the number of atom stereocenters whose configurations are specifically defined
         "definedatomstereocnt": "Defined atom stereocenter count",
-        # As explained for the Defined_atom_stereo_count, this is the undefined version
         "undefinedatomstereocnt": "Undefined atoms stereocenter count",
         "totalbondstereocnt": "Total bond stereocenter count",
-        # Bond stereocenter = non-rotatable bond around which two atoms can have different arrangement
-        # e.g. in cis- & -trans forms of butene around its double bond
-        # Some compounds have an undefined bond stereocenter (stereochemistry not specifically defined)
-        # Defined bond stereocenter count is the number of bond stereocenters 
-        # whose configurations are specifically defined
         "definedbondstereocnt": "Defined bond stereocenter count",
-        # The undefined version as explained above
         "undefinedbondstereocnt": "Undefined bond stereocenter count",
-        # Medical subject headings
         "meshheadings": "MeSH headings"
     }
 )
@@ -148,65 +104,59 @@ pc_cov.head()
 
 <br>
 
-##### **Definitions of molecular properties in PubChem dataset**
+##### **Definitions of molecular properties in this PubChem dataset**
 
-I thought to devote a specific section on some of the molecular properties listed in the dataset, in case there might be people unfamiliar with this but would still like to read about Shiny app in Python, and this would also serve as a reference for people already know them well.
+The definitions for some of the column names were shown below, which were mainly derived and adapted from PubChem:
 
-The definitions of some of the column names were shown below, which were mainly derived and adapted from the documentations in PubChem website:
+-   *Molecular weight* - molecular mass of compounds measured in daltons
 
--   Molecular weight - Molecular mass of compounds measured in daltons
+-   *Topological polar surface area* - measured as an estimate of polar surface area of a molecule (i.e. the surface sum over polar atoms in a molecule), with units in angstrom squared (Å^2^)
 
--   Topological polar surface area - measured in angstrom squared
+-   *Complexity* - complexity rating for compounds, based on Bertz/Hendrickson/Ihlenfeldt formula as a rough estimation of how complex a compound was structurally
 
--   Complexity - Complexity rating for compound, based on Bertz/Hendrickson/Ihlenfeldt formula as a rough estimation of how complex a compound is structurally
+-   *Partition coefficients* (xlogp) - predicted octanol-water partition coefficient as a measure of the hydrophilicity or hydrophobicity of a molecule
 
--   Partition coefficients (xlogp) - Predicted octanol-water partition coefficient which is a measure of hydrophilicity or hydrophobicity of a molecule
+-   *Heavy atom count* - number of heavy atoms e.g. non-hydrogen atoms in the compound
 
--   Heavy atom count - Number of heavy atoms e.g. non-H atoms in the compound
+-   *Hydrogen bond donor count* - number of hydrogen bond donors in the compound
 
--   Hydrogen bond donor count - Number of hydrogen bond donors in the compound
+-   *Hydrogen bond acceptor count* - number of hydrogen bond acceptors in the compound
 
--   Hydrogen bond acceptor count - Number of hydrogen bond acceptors in the compound
+-   *Rotatable bond count* - defined as any single-order non-ring bond, where atoms on either side of the bond were in turn bound to non-terminal heavy atoms (e.g. non-hydrogen). Rotation around the bond axis would change overall molecule shape and generate conformers which could be distinguished by standard spectroscopic methods
 
--   Rotatable bond count - Defined as any single-order non-ring bond, where atoms on either side of the bond are in turn bound to non-terminal heavy atoms (e.g. non-H). Rotation around the bond axis will change overall molecule shape & generates conformers which can be distinguished by standard spectroscopic methods
+-   *Exact mass* - exact mass of an isotopic species, obtained by summing masses of individual isotopes of the molecule
 
--   Exact mass - Exact mass of an isotopic species, obtained by summing masses of individual isotopes of the molecule
+-   *Monoisotopic mass* - sum of the masses of atoms in a molecule, using unbound, ground-state, rest mass of principal (or most abundant) isotope for each element instead of isotopic average mass
 
--   Monoisotopic mass - Sum of the masses of atoms in a molecule, using unbound, ground-state, rest mass of principal (or most abundant) isotope for each element instead of isotopic average mass
+-   *Formal charge* - the difference between the number of valence electrons of each atom, and the number of electrons the atom was associated with, assumed any shared electrons were equally shared between the two bonded atoms
 
--   Formal charge - The difference between the number of valence electrons of each atom, and the number of electrons the atom is associated with. Assumes any shared electrons are equally shared between the two bonded atoms.
+-   *Covalently-bonded unit count* - a group of atoms connected by covalent bonds, ignoring other bond types (or a single atom without covalent bonds), representing number of such units in the compound
 
--   Covalently-bonded unit count - A group of atoms connected by covalent bonds, ignoring other bond types (or a single atom without covalent bonds), representing number of such units in the compound
+-   *Isotope atom count* - number of isotopes that were not most abundant for the corresponding chemical elements. Isotopes were variants of a chemical element that differed in neutron number
 
--   Isotope atom count - Number of isotopes that are not most abundant for the corresponding chemical elements. Isotopes = variants of a chemical element that differ in neutron number
+-   *Defined atom stereocenter count* - atom stereocenter (or chiral center) was where an atom was attached to 4 different types of atoms or groups of atoms in a tetrahedral arrangement. It could either be (R)- or (S)- configurations. Some of the compounds e.g. racemic mixtures, could have undefined atom stereocenter, where (R/S)-config was not specifically defined. Defined atom stereocenter count was the number of atom stereocenters where configurations were specifically defined
 
--   Defined atom stereocenter count - Atom stereocenter = chiral center = an atom that is attached to 4 different types of atoms or groups of atoms in the tetrahedral arrangement. It can either be (R)- or (S)- configurations. Some of the compounds e.g. racemic mixtures, have undefined atom stereocenter, where (R/S)-config is not specifically defined. This column is the number of atom stereocenters whose configurations are specifically defined
+-   *Undefined atoms stereocenter count* - this was the undefined version of the atoms stereocenter count
 
--   Undefined atoms stereocenter count - This is the undefined version of the atoms stereocenter count
+-   *Defined bond stereocenter count* - bond stereocenter (or non-rotatable bond) was where two atoms could have different arrangement e.g. in cis- & -trans forms of butene around its double bond. Some compounds could have an undefined bond stereocenter (stereochemistry not specifically defined). Defined bond stereocenter count was the number of bond stereocenters where configurations were specifically defined.
 
--   Defined bond stereocenter count - Bond stereocenter = non-rotatable bond around which two atoms can have different arrangement e.g. in cis- & -trans forms of butene around its double bond. Some compounds have an undefined bond stereocenter (stereochemistry not specifically defined). Defined bond stereocenter count is the number of bond stereocenters whose configurations are specifically defined.
-
--   Undefined bond stereocenter count - This is the undefined version of the bond stereocenter count
-
--   MeSH headings - Medical subject headings
+-   *Undefined bond stereocenter count* - this was the undefined version of the bond stereocenter count
 
 <br>
 
 ##### **Convert data type for selected columns**
 
-There was really just one of the columns that needed to be changed. The rest were alright in their original data types.
-
 ```{python}
-# Convert data type - only for xlogp or Partition_coef
+# Convert data type - only for partition coefficients column (rest were okay)
 pc_cov = pc_cov.with_column((pl.col("Partition coefficients")).cast(pl.Float64, strict = False))
 pc_cov.head()
 ```
 
 <br>
 
-##### **Select columns for data visualisation**
+##### **Select columns for data visualisations**
 
-I was really only wanting to keep all the numerical columns. So I've bascially dropped all other columns that involved texts or symbols.
+The idea was really only keeping all the numerical columns for the sake of showing some data visualisations. So I've dropped all the other columns in texts or the string types.
 
 ```{python}
 # Drop unused columns in preparation for data visualisations
@@ -246,15 +196,15 @@ pc_cov.describe()
 
 <br>
 
-##### **Conditional assignments in Polars dataframe - chaining when-then-otherwise expressions**
+##### **Conditional assignments in Polars - chaining when-then-otherwise expressions**
 
-The longer I've used Polars the more I'm used to the fact that it has very useful chaining styles in its code formats. This avoids writing loop functions which can be another option in this scenario for conditional assignments, and one of the examples I'd like to show below was chaining "when-then-otherwise" expression. *Acknowledgement to StackOverflow and the author of Polars for this one.*
+The longer I've used Polars, the more I realised that it had some very useful coding styles where we could chain a string of different code functions to manipulate dataframes. This in large would avoid writing repeated loop functions to achieve the same results. In this scenario, I'd like to show an example of chaining "when-then-otherwise" expression using Polars. 
 
 <br>
 
 ###### **Create different groups of partition coefficients**
 
-The idea was to separate all data into 3 different ranges of partition coefficients, so this could be shown visually in plots. One way, or really the long way, to do this might be like the code shown below:
+So I had the idea of separating all data into 3 different ranges of partition coefficients, so that this could be shown visually in plots. One of the possible ways, or really the long way, to do this might be like the code shown below:
 
 ``` {{python}}
 part_coef_neg25_neg10 = pc_cov.filter(pl.col("Partition_coef") <= -10)
@@ -262,7 +212,7 @@ part_coef_neg11_5 = pc_cov.filter((pl.col("Partition_coef") >= -11) & (pl.col("P
 part_coef_6_21 = pc_cov.filter(pl.col("Partition_coef") >= 6)
 ```
 
-A shorter and probably more elegant way is to use the "when-then-otherwise" expression in Polars:
+A shorter and probably more elegant way was to use the "when-then-otherwise" expression in Polars for conditional assignments (the following code snippet was adapted with thanks to the author of Polars, Ritchie Vink and Stack Overflow):
 
 ```{python}
 pc_cov = pc_cov.with_column(
@@ -281,16 +231,15 @@ pc_cov.head(10)
 
 ##### **Import Plotly**
 
-Time for some data vizzes.
+Time for some data vizzes - importing Plotly first.
 
 ```{python}
-# Import Plotly
 import plotly.express as px
 ```
 
 <br>
 
-##### **Some examples of data vizzes**
+##### **Some examples of data visualisations**
 
 ###### **Partition coefficients vs. Molecular weights**
 
@@ -317,41 +266,6 @@ fig.update_layout(
     yaxis = dict(
         tickfont = dict(size = 9), 
         title = "Molecular weights"
-    ),
-    legend = dict(
-        font = dict(
-            size = 9)))
-
-fig.show()
-```
-
-<br>
-
-####### **Partition coefficients vs. Complexity**
-
-```{python}
-fig = px.scatter(x = pc_cov["Partition coefficients"], 
-                 y = pc_cov["Complexity"], 
-                 hover_name = pc_cov["Compound name"],
-                 color = pc_cov["Part_coef_group"],
-                 width = 800, 
-                 height = 400,
-                 title = "Partition coefficients vs. complexity for compounds used in COVID-19 clinical trials")
-
-fig.update_layout(
-    title = dict(
-        font = dict(
-            size = 15)),
-    title_x = 0.5,
-    margin = dict(
-        l = 20, r = 20, t = 40, b = 3),
-    xaxis = dict(
-        tickfont = dict(size = 9), 
-        title = "Partition coefficients"
-    ),
-    yaxis = dict(
-        tickfont = dict(size = 9), 
-        title = "Complexity"
     ),
     legend = dict(
         font = dict(
@@ -432,17 +346,25 @@ fig.show()
 
 <br>
 
-##### **Export to Pandas dataframe (for Shiny in Python)**
+##### **Export dataset**
 
-Options: 
-1. Convert Polars df into Pandas df as per Shiny for Python docs to import dataset in app.
+Two of the possible options to export the dataset for use in a Shiny app could be: 
 
-2. Save polars dataframe as .csv file, then read this in the app.py script using Pandas df library
+1. Convert Polars dataframe into a Pandas dataframe, so that it could be imported into the app for use (Polars not directly supported in Shiny for Python yet, but we could use its to_pandas() function to coerce an object e.g. a dataframe to be converted into a Pandas dataframe).
 
-```{python}
+2. Another option was to save Polars dataframe as .csv file, then read in this file in the app.py script by using Pandas (which was the method I used for this particular app)
+
+```{{python}}
+# --If preferring to use Pandas--
 # Convert Polars df into a Pandas df if needed
-#pc_cov_pd = pc_cov.to_pandas()
+df_name = df_name.to_pandas()
 
-# Convert the Pandas df into a csv file using Pandas code
-#pc_cov_pd.to_csv("pc_cov_pd.csv", sep = ",")
+# Convert the Pandas df into a csv file using Pandas 
+df_name.to_csv("df_name.csv", sep = ",")
+
+# --If preferring to use Polars--
+# Simply write a Polars dataframe into a .csv file
+df.write_csv("csv_file_name.csv", separator = ",")
 ```
+
+Once this was done, visit this post to see details on coding and deploying for the app.
