@@ -18,6 +18,8 @@ categories:
 
 The entire code for this Shiny app in Python on this particular set of PubChem data were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below).
 
+For data preparation stage, please visit this post to see details.
+
 <br>
 
 ###### **Trialling open-source large-language models**
@@ -59,6 +61,8 @@ One of the downsides of the following code that I couldn't quite get rid of yet 
 The second downside was that shinyswatch package might not be functional yet for the app embedding method (but most likely would work if deploying apps to shinyapps.io). This meant there would be no background visual themes yet for apps embedded in Quarto docs, but, hopefully this would become possible in the future. Overall, I was amazed at how easy it was to build and deploy Shiny apps in Python.
 
 *Note: if using Shinylive editor, make sure to include a requirement.txt file if using extra Python packages such as Pandas or Plotly. For embedding apps in Quarto docs, this appears not to be compulsory and only optional when I tried it down below.*
+
+Code for this .qmd document available here: *provide GitHub link*
 
 <br>
 
