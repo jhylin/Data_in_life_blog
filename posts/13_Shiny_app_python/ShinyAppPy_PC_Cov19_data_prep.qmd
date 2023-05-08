@@ -2,8 +2,8 @@
 title: Shinylive app in Python
 subtitle: Data preparation for compounds in COVID-19 clinical trials
 author: Jennifer HY Lin
-date: '2023-5-7'
-draft: true
+date: '2023-5-8'
+draft: false
 jupyter: python3
 categories:
   - Python
@@ -20,7 +20,7 @@ Since I've had a lot of fun building a Shiny app in R last time, I've already pl
 
 ##### **Source of data**
 
-The dataset used in for building the Shiny app in Python was from PubChem - [link here](https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials). There were a total of 631 compounds at the time when I was building the app. The dataset was simply downloaded as .csv file.
+The dataset used for this Shiny app in Python was from PubChem ([link here](https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials)). There were a total of 631 compounds at the time when I downloaded them as .csv file, along with their relevant compound data. I only picked this dataset randomly, as the focus would be more on app building, but it was nice to see an interactive web app being built and used for a domain such as pharmaceutical research.
 
 <br>
 
@@ -45,6 +45,8 @@ pc.head()
 
 ##### **Quick look at the data**
 
+I decided to comment out the code below to keep the post at a reasonable length for reading purpose, but they were very handy for a quick glimpse of the data content.
+
 ```{python}
 # Quick overview of the variables in each column in the dataset
 # Uncomment line below if needed to run
@@ -66,8 +68,6 @@ pc.null_count()
 <br>
 
 ##### **Change column names as needed**
-
-Column names explained as per definitions provided from PubChem.
 
 ```{python}
 # Change column names
@@ -108,6 +108,8 @@ pc_cov.head()
 
 The definitions for some of the column names were shown below, which were mainly derived and adapted from PubChem:
 
+*Note: please refer to PubChem documentations for full definitions*
+
 -   *Molecular weight* - molecular mass of compounds measured in daltons
 
 -   *Topological polar surface area* - measured as an estimate of polar surface area of a molecule (i.e. the surface sum over polar atoms in a molecule), with units in angstrom squared (Å^2^)
@@ -138,7 +140,7 @@ The definitions for some of the column names were shown below, which were mainly
 
 -   *Undefined atoms stereocenter count* - this was the undefined version of the atoms stereocenter count
 
--   *Defined bond stereocenter count* - bond stereocenter (or non-rotatable bond) was where two atoms could have different arrangement e.g. in cis- & -trans forms of butene around its double bond. Some compounds could have an undefined bond stereocenter (stereochemistry not specifically defined). Defined bond stereocenter count was the number of bond stereocenters where configurations were specifically defined.
+-   *Defined bond stereocenter count* - bond stereocenter (or non-rotatable bond) was where two atoms could have different arrangement e.g. in *cis*- & *trans*- forms of butene around its double bond. Some compounds could have an undefined bond stereocenter (stereochemistry not specifically defined). Defined bond stereocenter count was the number of bond stereocenters where configurations were specifically defined.
 
 -   *Undefined bond stereocenter count* - this was the undefined version of the bond stereocenter count
 
@@ -156,7 +158,7 @@ pc_cov.head()
 
 ##### **Select columns for data visualisations**
 
-The idea was really only keeping all the numerical columns for the sake of showing some data visualisations. So I've dropped all the other columns in texts or the string types.
+The idea was really only keeping all the numerical columns for some data visualisations later. So I've dropped all the other columns in texts or of the string types.
 
 ```{python}
 # Drop unused columns in preparation for data visualisations
@@ -196,23 +198,23 @@ pc_cov.describe()
 
 <br>
 
-##### **Conditional assignments in Polars - chaining when-then-otherwise expressions**
+##### **Conditional assignments in Polars**
 
-The longer I've used Polars, the more I realised that it had some very useful coding styles where we could chain a string of different code functions to manipulate dataframes. This in large would avoid writing repeated loop functions to achieve the same results. In this scenario, I'd like to show an example of chaining "when-then-otherwise" expression using Polars. 
+The longer I've used Polars, the more I like its coding styles of chaining a string of different code functions together to manipulate dataframes in one go. This usually might mean that we could avoid writing some repeated loop functions to achieve the same results. In the example below, I'd like to show how to chain "when-then-otherwise" expressions by using Polars.
 
 <br>
 
-###### **Create different groups of partition coefficients**
+###### **Chaining when-then-otherwise expressions - creating groups in data**
 
-So I had the idea of separating all data into 3 different ranges of partition coefficients, so that this could be shown visually in plots. One of the possible ways, or really the long way, to do this might be like the code shown below:
+I had the idea of separating all data into 3 different ranges of partition coefficients, so that this could be shown visually in plots. One of the possible ways (other than writing a loop function), or really the long way, to do this might be like the code shown below:
 
 ``` {{python}}
-part_coef_neg25_neg10 = pc_cov.filter(pl.col("Partition_coef") <= -10)
-part_coef_neg11_5 = pc_cov.filter((pl.col("Partition_coef") >= -11) & (pl.col("Partition_coef") <= 5))
-part_coef_6_21 = pc_cov.filter(pl.col("Partition_coef") >= 6)
+part_coef_1 = pc_cov.filter(pl.col("Partition_coef") <= -10)
+part_coef_2 = pc_cov.filter((pl.col("Partition_coef") >= -11) & (pl.col("Partition_coef") <= 5))
+part_coef_3 = pc_cov.filter(pl.col("Partition_coef") >= 6)
 ```
 
-A shorter and probably more elegant way was to use the "when-then-otherwise" expression in Polars for conditional assignments (the following code snippet was adapted with thanks to the author of Polars, Ritchie Vink and Stack Overflow):
+A shorter and probably more elegant way was to use the "when-then-otherwise" expression in Polars for conditional assignments (the following code snippet was adapted with thanks to the author of Polars, Ritchie Vink and also the good old Stack Overflow):
 
 ```{python}
 pc_cov = pc_cov.with_column(
@@ -225,6 +227,10 @@ pc_cov = pc_cov.with_column(
 )
 
 pc_cov.head(10)
+
+# a new column would be added to the end of the dataframe 
+# with a new column name, "Part_coef_group" 
+# (scroll to the very right to see the added column)
 ```
 
 <br>
@@ -240,6 +246,8 @@ import plotly.express as px
 <br>
 
 ##### **Some examples of data visualisations**
+
+Below were some of the examples of building plots by using Plotly.
 
 ###### **Partition coefficients vs. Molecular weights**
 
@@ -266,41 +274,6 @@ fig.update_layout(
     yaxis = dict(
         tickfont = dict(size = 9), 
         title = "Molecular weights"
-    ),
-    legend = dict(
-        font = dict(
-            size = 9)))
-
-fig.show()
-```
-
-<br>
-
-###### **Partition coefficients vs. Polar surface area**
-
-```{python}
-fig = px.scatter(x = pc_cov["Partition coefficients"], 
-                 y = pc_cov["Polar surface area"], 
-                 hover_name = pc_cov["Compound name"],
-                 color = pc_cov["Part_coef_group"],
-                 width = 800, 
-                 height = 400,
-                 title = "Partition coefficients vs. polar surface area for compounds used in COVID-19 clinical trials")
-
-fig.update_layout(
-    title = dict(
-        font = dict(
-            size = 15)),
-    title_x = 0.5,
-    margin = dict(
-        l = 20, r = 20, t = 40, b = 3),
-    xaxis = dict(
-        tickfont = dict(size = 9), 
-        title = "Partition coefficients"
-    ),
-    yaxis = dict(
-        tickfont = dict(size = 9), 
-        title = "Polar surface area"
     ),
     legend = dict(
         font = dict(
@@ -346,25 +319,23 @@ fig.show()
 
 <br>
 
-##### **Export dataset**
+##### **Export prepared dataset**
 
-Two of the possible options to export the dataset for use in a Shiny app could be: 
+Two of the possible options to export the dataset for use in a Shiny app could be:
 
-1. Convert Polars dataframe into a Pandas dataframe, so that it could be imported into the app for use (Polars not directly supported in Shiny for Python yet, but we could use its to_pandas() function to coerce an object e.g. a dataframe to be converted into a Pandas dataframe).
+1.  Convert Polars dataframe into a Pandas dataframe, so that it could be imported into the app for use (Polars not directly supported in Shiny for Python yet, but we could use its to_pandas() function to coerce an object e.g. a dataframe to be converted into a Pandas dataframe).
 
-2. Another option was to save Polars dataframe as .csv file, then read in this file in the app.py script by using Pandas (which was the method I used for this particular app)
+2.  Another option was to save Polars dataframe as .csv file, then read in this file in the app.py script by using Pandas (which was the method I used for this particular app)
 
-```{{python}}
+``` {{python}}
 # --If preferring to use Pandas--
 # Convert Polars df into a Pandas df if needed
 df_name = df_name.to_pandas()
 
 # Convert the Pandas df into a csv file using Pandas 
-df_name.to_csv("df_name.csv", sep = ",")
+df_name.to_csv("csv_file_name.csv", sep = ",")
 
 # --If preferring to use Polars--
 # Simply write a Polars dataframe into a .csv file
-df.write_csv("csv_file_name.csv", separator = ",")
+df_name.write_csv("csv_file_name.csv", separator = ",")
 ```
-
-Once this was done, visit this post to see details on coding and deploying for the app.
