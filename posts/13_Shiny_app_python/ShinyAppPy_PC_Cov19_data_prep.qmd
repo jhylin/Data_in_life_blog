@@ -8,6 +8,7 @@ jupyter: python3
 categories:
   - Python
   - Shiny
+  - Polars
   - PubChem
   - Cheminformatics
 ---
