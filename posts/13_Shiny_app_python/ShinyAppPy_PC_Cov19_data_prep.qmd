@@ -14,7 +14,7 @@ categories:
 
 ##### **Brief introduction**
 
-Since I've had a lot of fun building a Shiny app in R last time, I've already planned to build another Shiny app again but using Python instead. So here in this post, I'll talk about the data wrangling process to prepare the final dataset needed to build a Shinylive app in Python. The actual Shinylive app deployment and access will be shown in a separate post after this one.
+Since I've had a lot of fun building a Shiny app in R last time, I was on track to build another Shiny app again but using Python instead. So here in this post, I'll talk about the data wrangling process to prepare the final dataset needed to build a Shinylive app in Python. The actual Shinylive app deployment and access will be shown in a separate post after this one.
 
 <br>
 
