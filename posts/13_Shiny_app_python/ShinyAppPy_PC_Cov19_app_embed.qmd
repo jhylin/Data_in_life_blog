@@ -1,6 +1,6 @@
 ---
 title: Shinylive app in Python
-subtitle: Embedding app in a Quarto document for compounds in COVID-19 clinical trials
+subtitle: Embedding app in Quarto document for compounds in COVID-19 clinical trials
 author: Jennifer HY Lin
 date: '2023-5-8'
 format: html
