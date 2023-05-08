@@ -18,7 +18,7 @@ categories:
 
 ##### **Coding for Shinylive app in Python**
 
-The entire code for this Shiny app in Python were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below in the section on "App deployment").
+The entire code for this Shiny app in Python were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (in relation to the section on "App deployment").
 
 For data preparation stage, please visit [this post](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html) for details.
 
@@ -30,7 +30,7 @@ There have been a lot of hypes surrounding large-language models (LLMs) or gener
 
 I thought to trial out the open-source LLMs a little bit when I was working on this app, since they were the open and transparent versions with potentials for personal or commercial uses. So I've tested about 3 different open-source LLMs, which were H~2~OGPT, HuggingChat and StableLM. I decided to only give minimal amount of prompts (I've given H~2~OGPT three prompts, and only one prompt each for either HuggingChat and StableLM), and the question was framed around providing a code outline for building a Shiny app using Python and Polars dataframe libary, and see what answers they could each provide.
 
-All of them produced answers that were close to what I've asked for, i.e. I could see a code outline for a Shiny app.py file at first but it was more like R code, with one case mixing both Python and R in the code concurrently. However, none of them actually reached exactly how I've asked them to provide, perhaps if I've give more prompts then they might manage to provide answers closer to the request. Also, none of them were able to pick up the more recent Polars dataframe library (which were more prominent from 2021 onwardss) and also Shiny in Python (which was also quite new as well, only out of alpha phase recently). All of them only showed code using Pandas dataframe libray, even though I did mention Polars in all of the question prompts. Once I've used more of these open-source LLMs, which currently are gaining more traction from what I've read online, I might try to write another post on them in the future.
+All of them produced answers that were close to what I've asked for, i.e. I could see a code outline for a Shiny app.py file at first but it was more like R code, with one case mixing both Python and R in the code concurrently. However, none of them actually reached exactly how I've asked them to provide, perhaps if I've given more prompts then they might manage to provide answers closer to the request. Also, none of them were able to pick up the more recent Polars dataframe library (which were probably more prominent from 2021 onwards) and also Shiny in Python (which was also quite new as well, only out of alpha phase recently). All of them only showed code using Pandas dataframe libray, even though I did mention Polars in all of the question prompts. Once I get to use more of these open-source LLMs in the future, which currently are gaining more traction from what I've read online, I think I might try to write another post about them later.
 
 <br>
 
