@@ -18,9 +18,9 @@ categories:
 
 ##### **Coding for Shinylive app in Python**
 
-The entire code for this Shiny app in Python on this particular set of PubChem data were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below).
+The entire code for this Shiny app in Python on this particular set of PubChem data were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below in the part on "Shinylive app in action").
 
-For data preparation stage, please visit this post to see details.
+For data preparation stage, please visit [this post](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html) for details.
 
 <br>
 
@@ -64,11 +64,13 @@ The second downside was that shinyswatch package might not be functional yet for
 
 *Note: if using Shinylive editor, make sure to include a requirement.txt file if using extra Python packages such as Pandas or Plotly. For embedding apps in Quarto docs, this appears not to be compulsory and only optional when I tried it down below.*
 
-Code for this .qmd document available here: *provide GitHub link*
+Code for this .qmd document available [here](https://github.com/jhylin/Data_in_life_blog/blob/main/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed.qmd).
 
 <br>
 
 ###### **Shinylive app in action**
+
+***Note: it may take a few minutes to load the app (code provided at the top, with app at the bottom).***
 
 ::: column-screen-inset
 ``` {shinylive-python}
