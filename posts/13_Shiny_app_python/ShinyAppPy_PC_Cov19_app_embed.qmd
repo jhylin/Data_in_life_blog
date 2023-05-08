@@ -18,7 +18,7 @@ categories:
 
 ##### **Coding for Shinylive app in Python**
 
-The entire code for this Shiny app in Python on this particular set of PubChem data were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below in the part on "Shinylive app in action").
+The entire code for this Shiny app in Python were written in VS Code initially. When I was looking for places to deploy the app, I then migrated the code to RStudio IDE (details explained below in the section on "App deployment").
 
 For data preparation stage, please visit [this post](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html) for details.
 
@@ -52,7 +52,7 @@ Several links I've used and found to be very informative:
 
 ##### **App deployment**
 
-After building the app in a workable condition, I started looking at where and how to deploy this Shiny app written in Python. Initially I used the easiest method as stated from the Shinylive link above, which was to deploy on Shinylive editor. One drawback was that the application URL could be extremely long as the URL hash stored the entire app code inside. However, it was indeed one of the simplest ways to share the apps with others, by simply providing the URL link to access the app.
+After building the app in a workable condition, I started looking at where and how to deploy this Shiny app written in Python. Initially I used the easiest method as stated from the Shinylive link above, which was to deploy on Shinylive editor. One drawback for this was that the application URL was extremely long as the URL hash would store the entire app code inside. However, this was indeed one of the simplest ways to share the apps with others quickly, by simply providing the URL link with the intended audience.
 
 I then went on to try another method where I spent one afternoon trying to figure out that I had to add an install_certificate.command for my macOS since I installed Python by using Homebrew in the first place (which some clever users might already know to avoid...), so that I could resolve the SSL certificate issue if I'm trying to connect with Shinyapps.io.
 
