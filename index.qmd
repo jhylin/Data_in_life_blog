@@ -17,7 +17,7 @@ comments: false
 
 **🌟Welcome to my portfolio site🌟**
 
-As my portfolio blog evolves over time, my work somehow revolves around two main themes - cheminformatics or data science and healthcare data projects. I'm an enthusiast in both Python and R currently, with another little ambition to learn Rust further down the line. I've dipped my toes a little bit in Rust very lightly in the "Pills dataset series". My more recent work is on data science in chemistry and pharmaceutical-related topics with a focus on building Shiny applications in R and Python lately.
+As my portfolio blog evolves over time, my work seems to revolve around two main themes - cheminformatics or data science and healthcare data projects. I'm an enthusiast in both Python and R currently, with another little ambition to learn Rust further down the line (this is currently scheduled very far down the line as mastering Python and R is going to take endless time...). My more recent work is on data science in chemistry and pharmaceutical-related topics with the latest focus working and brainstorming on a molecular scaffolds project.
 
 <br>
 
