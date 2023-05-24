@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed_pyodide_http.html",
       "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed.html",
       "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html",
       "/posts/12_Shiny_app_chembl/ShinyAppChembl.html",

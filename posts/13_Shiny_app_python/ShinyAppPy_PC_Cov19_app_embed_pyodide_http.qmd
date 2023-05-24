@@ -1,0 +1,150 @@
+---
+title: Shinylive app in Python
+subtitle: Embedding app in Quarto document & using pyodide.http to import csv files
+author: Jennifer HY Lin
+date: '2023-5-24'
+format: html
+filters:
+  - shinylive
+draft: false
+categories:
+  - Python
+  - Shiny
+  - Pandas
+  - Plotly
+  - PubChem
+  - Cheminformatics
+---
+
+##### **Quick update**
+
+I've changed the way of importing a local text/csv file from manually copying-and-pasting to using pyodide.http.open_url() in the shinylive app, which works great and avoids the clumsy manual file input. I couldn't quite grasp the code back then, but managed to get it this time when I re-visited the problem, while also figured out that I could use the raw content link for the file from my GitHub repository. This method was also inspired by the same user answering the query in this [GitHub discussion](https://github.com/quarto-ext/shinylive/issues/7). So I've basically trialled both ways as suggested, which have all worked.
+
+Note: if importing binary files, use pyodide.http.pyfetch() instead - check out [Pyodide](https://pyodide.org/en/stable/index.html) for details and latest changes.
+
+<br>
+
+###### **Shinylive app in action**
+
+***Note: it may take a few minutes to load the app (code provided at the top, with app at the bottom).***
+
+::: column-screen-inset
+``` {shinylive-python}
+#| standalone: true
+#| components: [editor, viewer]
+#| layout: vertical
+#| viewerHeight: 420
+
+## file: app.py
+# ***Import all libraries or packages needed***
+# Import shiny ui, app
+from shiny import ui, App
+# Import shinywidgets
+from shinywidgets import output_widget, render_widget
+# Import shinyswatch to add themes
+#import shinyswatch
+# Import plotly express
+import plotly.express as px
+# Import pandas
+import pandas as pd
+# Import pyodide http - for importing file via URL
+import pyodide.http
+from pyodide.http import open_url
+
+
+# ***Specify data source***
+# Using pyodide.http.open_url
+df = pd.read_csv(open_url('https://raw.githubusercontent.com/jhylin/Data_in_life_blog/main/posts/13_Shiny_app_python/pc_cov_pd.csv'))
+
+
+# User interface---
+# Add inputs & outputs
+app_ui = ui.page_fluid(
+        # Add theme - seems to only work in VS code and shinyapps.io
+        #shinyswatch.theme.superhero(),
+        # Add heading
+        ui.h3("Molecular properties of compounds used in COVID-19 clinical trials"),
+        # Place selection boxes & texts in same row
+        ui.row(
+            # Divide the row into two columns
+            # Column 1 - selection drop-down boxes x 2
+            ui.column(
+                4, ui.input_select(
+                # Specify x variable input
+                "x", label = "x axis:", 
+                choices = ["Partition coefficients", 
+                           "Complexity",
+                           "Heavy atom count",
+                           "Hydrogen bond donor count",
+                           "Hydrogen bond acceptor count",
+                           "Rotatable bond count",
+                           "Molecular weight",
+                           "Exact mass", 
+                           "Polar surface area", 
+                           "Total atom stereocenter count", 
+                           "Total bond stereocenter count"],
+                ), 
+                ui.input_select(
+                # Specify y variable input
+                "y", label = "y axis:",
+                choices = ["Partition coefficients", 
+                           "Complexity",
+                           "Heavy atom count",
+                           "Hydrogen bond donor count",
+                           "Hydrogen bond acceptor count",
+                           "Rotatable bond count", 
+                           "Molecular weight",
+                           "Exact mass", 
+                           "Polar surface area", 
+                           "Total atom stereocenter count", 
+                           "Total bond stereocenter count"]  
+                )),
+            # Column 2 - add texts regarding plots
+            ui.column(
+            8,
+            ui.p("Select different molecular properties as x and y axes to produce a scatter plot."),
+            ui.tags.ul(
+                ui.tags.li(
+                    """
+                    Part_coef_group means groups of partition coefficient (xlogp) as shown in the legend on the right""" 
+                ), 
+                ui.tags.li(
+                    """
+                    Toggle each partition coefficient category by clicking on the group names"""
+                ), 
+                ui.tags.li(
+                    """
+                    Hover over each data point to see compound name and relevant molecular properties"""
+                )
+            )),
+        # Output as a widget (interactive plot)
+        output_widget("my_widget"), 
+        # Add texts for data source
+        ui.row(
+            ui.p(
+                """
+                Data curated by PubChem, accessed from: https://pubchem.ncbi.nlm.nih.gov/#tab=compound&query=covid-19%20clinicaltrials (last access date: 30th Apr 2023)""" 
+            )         
+        ) 
+    )
+)
+
+
+# Server---
+# Add plotting code within my_widget function within the server function
+def server(input, output, session):
+    @output
+    @render_widget
+    def my_widget():
+        fig = px.scatter(
+            df, x = input.x(), y = input.y(),
+            color = "Part_coef_group", 
+            hover_name = "Compound name"
+        )
+        fig.layout.height = 400
+        return fig
+        
+# Combine UI & server into Shiny app
+app = App(app_ui, server)
+```
+:::
