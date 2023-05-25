@@ -58,7 +58,7 @@ I then went on to try another method where I spent one afternoon trying to figur
 
 I also tried to follow another method from an earlier time which suggested to deploy the app directly on GitHub Pages, but since then the code was changed and updated to a different version and the old method no longer worked as nicely as mentioned (a lot of the code for Shiny in Python can still be experimental, and can change drastically, so check the sources to see the latest updates). I then stumbled upon another GitHub repository from the Quarto team at Posit/RStudio and looked into the possibility and tested it. Eventually, I settled on this method - embedding the app in a Quarto document, which provided both code and app itself on this very same webpage down below.
 
-One of the downsides of the following code that I couldn't quite get rid of yet was the poor file importation style for loading a .csv file locally. I've added code annotations as comments to explain what I've done. The solution to import .csv file into app.py for the embedding version was from [this discussion](https://github.com/quarto-ext/shinylive/issues/7) in the repository (thanks to that particular user who found this hacky way to do it). However, the plus side was that coding for the rest of the app was not bad at all and worked seamlessly. I'll try to follow up later on whether importing .csv file for app embedding could be easier, perhaps this might be something the Quarto team is working right now.
+One of the downsides of the following code that I couldn't quite get rid of yet was the poor file importation style. for loading a .csv file locally. I've added code annotations as comments to explain what I've done. The solution to import .csv file into app.py for the embedding version was from [this discussion](https://github.com/quarto-ext/shinylive/issues/7) in the repository (thanks to that particular user who found this hacky way to do it). However, the plus side was that coding for the rest of the app was not bad at all and worked seamlessly. I'll try to follow up later on whether importing .csv file for app embedding could be easier, perhaps this might be something the Quarto team is working right now.
 
 The second downside was that shinyswatch package might not be functional yet for this embedding method (but most likely would work if deploying apps to shinyapps.io). This meant there would be no background visual themes yet for apps embedded in Quarto docs, but hopefully this would be possible in the future. Overall, I was amazed at how easy it was to build, deploy and embed a Shiny app in Python in a Quarto document.
 
@@ -71,6 +71,8 @@ Code for this post (.qmd document) is available [here](https://github.com/jhylin
 ###### **Shinylive app in action**
 
 ***Note: it may take a few minutes to load the app (code provided at the top, with app at the bottom).***
+
+***Update on 24/5/23: to avoid manual file input, see [this updated post](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed_pyodide_http.html) which uses pyodide.http.open_url() method (code change in editor section).***
 
 ::: column-screen-inset
 ``` {shinylive-python}
