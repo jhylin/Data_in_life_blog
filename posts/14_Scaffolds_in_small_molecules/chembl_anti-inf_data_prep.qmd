@@ -1,0 +1,43 @@
+---
+jupyter: python3
+---
+
+```{python}
+import polars as pl
+import datamol as dm
+```
+
+Using datamol - Python library that works with molecules
+
+```{python}
+df_ai = pl.read_csv("chembl_anti-inf.csv", sep = ";")
+df_ai.head()
+```
+
+```{python}
+#print(df_ai.glimpse())
+```
+
+```{python}
+df_ai_name_sm = df_ai.select(["Name", "Smiles"])
+df_ai_name_sm.head()
+```
+
+```{python}
+#df_ai.write_csv("df_ai.csv", sep = ",")
+```
+
+```{python}
+# Grab all SMILES from df_ai
+df_ai_sm = df_ai["Smiles"]
+# Load a list of molecules in SMILES
+mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
+# Convert the list of molecules into 2D images
+dm.to_image(mol_ls, n_cols = 2, mol_size = (900, 900))
+```
+
+```{python}
+# Extract Murcko scaffolds from mol_ls
+m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
+dm.to_image(m_scaffolds, mol_size = (400, 400))
+```
