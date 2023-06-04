@@ -1,5 +1,6 @@
 ---
 jupyter: python3
+draft: true
 ---
 
 ```{python}
@@ -7,15 +8,13 @@ import polars as pl
 import datamol as dm
 ```
 
-Using datamol - Python library that works with molecules
-
 ```{python}
 df_ai = pl.read_csv("chembl_anti-inf.csv", sep = ";")
 df_ai.head()
 ```
 
 ```{python}
-#print(df_ai.glimpse())
+print(df_ai.glimpse())
 ```
 
 ```{python}
@@ -33,7 +32,7 @@ df_ai_sm = df_ai["Smiles"]
 # Load a list of molecules in SMILES
 mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
 # Convert the list of molecules into 2D images
-dm.to_image(mol_ls, n_cols = 2, mol_size = (900, 900))
+dm.to_image(mol_ls, n_cols = 5, mol_size = (400, 400))
 ```
 
 ```{python}
@@ -41,3 +40,33 @@ dm.to_image(mol_ls, n_cols = 2, mol_size = (900, 900))
 m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
 dm.to_image(m_scaffolds, mol_size = (400, 400))
 ```
+
+```{python}
+# Convert compound 1 to mol from InChI
+cpd1 = dm.from_inchi("InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+")
+cpd1
+```
+
+```{python}
+# Convert compound 2 SMILES to mol
+cpd2 = dm.to_mol("OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O")
+cpd2
+```
+
+```{python}
+# Convert compound 3 SMILES to mol
+cpd3 = dm.to_mol("OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1")
+cpd3
+```
+
+Using datamol - Python library that works with molecules
+
+Key question: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be possible to be a good potential hit, on top of the experimental findings from the paper (which means to compare the R-groups?), or if different, it might lead to a new type of broad-spectrum anti-infective hits
+
+Tasks: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3
+
+-   Align compounds 1-3 with other scaffolds from ChEMBL
+-   Look for MCS (maximum common structure)
+-   Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
+
+Tentative plan: - Once found scaffolds, fragments or MCS, set up random forest (or other types e.g. XGBoost etc.) model for ML learning

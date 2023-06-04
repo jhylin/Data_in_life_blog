@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/14_Scaffolds_in_small_molecules/chembl_anti-inf_data_prep.html",
       "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed_pyodide_http.html",
       "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed.html",
       "/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html",

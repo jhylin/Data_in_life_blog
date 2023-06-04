@@ -213,11 +213,10 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Using datamol - Python library that works with molecules</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_ai <span class="op">=</span> pl.read_csv(<span class="st">"chembl_anti-inf.csv"</span>, sep <span class="op">=</span> <span class="st">";"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ai.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 <style scoped="">
@@ -883,12 +882,46 @@ str
 </div>
 </div>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print(df_ai.glimpse())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_ai.glimpse())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 144
+Columns: 29
+$ Parent Molecule        &lt;Utf8&gt; CHEMBL374975, CHEMBL130, CHEMBL186, CHEMBL222645, CHEMBL2364632, CHEMBL62193, CHEMBL2303613, CHEMBL31, CHEMBL268869, CHEMBL3039597
+$ Name                   &lt;Utf8&gt; FUSIDIC ACID, CHLORAMPHENICOL, CEFEPIME, FLOXACILLIN, SARECYCLINE, SULFADIMETHOXINE, CEFODIZIME, GATIFLOXACIN, SULFAMETHOXYPYRIDAZINE, GENTAMICIN
+$ Synonyms               &lt;Utf8&gt; ANHYDROUS FUSIDIC ACID|CEM-102|FUCIDIN CAVIJECT|FUCITHALMIC|FUSIDATE|FUSIDIC ACID|NSC-56192|RAMYCIN|SQ 16,603|SQ-16603|TAKSTA, 9-HYDROXY-9-PHENYLXANTHENE|9-PHENYL-9H-XANTHEN-9-OL|AMPHICOL|BROCHLOR|BROLENE ANTIBIOTIC|CHLORAMPHENICOL|CHLOROFAIR|CHLOROPTIC|CHLOROPTIC S.O.P.|Chloramex|Chloramphenicol|Chlorbiotic|Chloromycetin|ECONOCHLOR|GOLDEN EYE ANTIBIOTIC|KEMICETINE|KLORAFECT|Kernispray|MYCHEL|Mychel-S|NSC-16331|NSC-3069|OPHTHOCHLOR|OPTOMYCIN|SNO PHENICOL|TUBILUX INFECTED EYES|Tevcocin|XANTHEN-9-OL, 9-PHENYL-, BMY-28142|CEFEPIME|J01DE01|Maxipime|RENAPIME|VNRX-5022, ABBOFLOX|BRL 2039|BRL-2039|CULPEN|FLOXACILLIN|FLOXACILLIN SODIUM|FLOXACILLIN SODIUM ANHYDROUS|FLUCLOMIX-250|FLUCLOMIX-500|FLUCLOXACILLIN|FLUCLOXACILLIN SODIUM|FLUCLOXACILLIN SODIUM ANHYDROUS|FLUCLOXACILLIN SODIUM MONOHYDRATE|FLUCLOXIN|Floxapen|GALFLOXIN|LADROPEN|NSC-277175|RIMAFLOX|STAFOXIL|STAPHLIPEN|STAPHYLEX|ZOXIN 250|ZOXIN 500, P-005672|P005672|SARECYCLINE, Madribon|NSC-683544|NSC-757860|SULFADIMETHOXINE|SULPHADIMETHOXINE, CEFODIZIME|CEFODIZIME DISODIUM|CEFODIZIME DISODIUM SALT|CEFODIZIME SODIUM|Cefodizime|HR 221|HR 221 [AS SODIUM]|HR-221|S 77 1221 B|S 77 1221 B [AS SODIUM]|S 77-1221B|S-77-1221-B|S-77-1221B|THR 221|THR 221 [AS SODIUM]|THR-221|TIMECEF, AM-1155|BMS-206584-01|BMS-20658401|GATIFLO|GATIFLOXACIN|GATIFLOXACIN (SESQUIHYDRATE)|GATIFLOXACIN ANHYDROUS|GATIFLOXACIN HYDRATE|GATIFLOXACIN SESQUIHYDRATE|NSC-758701|PD-135432|Tequin|ZYMAXID|ZYMER|Zymar, CL-13494|DEPOVERNIL|LEDERKYN|Midicel|NSC-757875|RETASULPHINE|SUCCINYLSULFATHI|SULFAMETHOXYPYRIDAZINE|SULFAMETHOXYPYRIDAZINUM|SULFASUXIDINE|SULPHAMETHOXYPYRIDAZINE, GENTAMICIN|GENTAMYCIN|LYRAMYCIN|OKSITSELANIM|SCH-9724|SEPTIGEN|Uromycine
+$ Research Codes         &lt;Utf8&gt; CEM-102|NSC-56192|SQ 16,603|SQ-16603, NSC-16331|NSC-3069, BMY-28142|J01DE01|VNRX-5022, BRL 2039|BRL-2039|NSC-277175, P-005672|P005672, NSC-683544|NSC-757860, HR 221|HR 221 [AS SODIUM]|HR-221|S 77 1221 B|S 77 1221 B [AS SODIUM]|S 77-1221B|S-77-1221-B|S-77-1221B|THR 221|THR 221 [AS SODIUM]|THR-221, AM-1155|BMS-206584-01|BMS-20658401|NSC-758701|PD-135432, CL-13494|NSC-757875, SCH-9724
+$ Phase               &lt;Float64&gt; 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0                        
+$ Drug Applicants        &lt;Utf8&gt; , Ivax Pharmaceuticals Inc Sub Teva Pharmaceuticals Usa|Armenpharm Ltd|Optopics Laboratories Corp|John J Ferrante|Parkedale Pharmaceuticals Inc|Alcon Laboratories Inc|Pharmafair Inc|Parke Davis Pharmaceutical Research Div Warner Lambert Co|Allergan Pharmaceutical|Akorn Operating Co Llc, Samson Medical Technologies Llc|Fosun Pharma Usa Inc|Sagent Pharmaceuticals Inc|Hospira Inc|B Braun Medical Inc|Acs Dobfar Spa|Astral Steritech Pvt Ltd|Qilu Pharmaceutical Co Ltd|Baxter Healthcare Corp, , Almirall Llc, , , Apotex Inc|Bristol Myers Squibb|Sandoz Inc|Allergan|Bristol Myers Squibb Co Pharmaceutical Research Institute|Allergan Inc|Akorn Operating Co Llc|Torrent Pharmaceuticals Ltd|Lupin Ltd|Rising Pharma Holdings Inc, , Schering Corp Sub Schering Plough Corp|Watson Laboratories Inc|Abbott Laboratories Pharmaceutical Products Div|Fougera Pharmaceuticals Inc|Bausch And Lomb Pharmaceuticals Inc|Taro Pharmaceuticals Usa Inc|Novartis Pharmaceuticals Corp|Allergan Pharmaceutical|Akorn Operating Co Llc|Cosette Pharmaceuticals Inc
+$ USAN Stem              &lt;Utf8&gt; , , 'cef-', '-cillin', '-cycline', 'sulfa-', 'cef-', '-oxacin', 'sulfa-', '-micin'
+$ USAN Year              &lt;Utf8&gt; 1967, , 1987, 1972, 2012, , , 1997, , 1963                              
+$ USAN Definition        &lt;Utf8&gt; , , cephalosporins, penicillins, antibiotics (tetracycline derivatives), antimicrobials (sulfonamides derivatives), cephalosporins, antibacterials (quinolone derivatives), antimicrobials (sulfonamides derivatives), antibiotics (Micromonospora strains)
+$ USAN Stem - Substem    &lt;Utf8&gt; , , 'cef-(cef-)', '-cillin(-cillin)', '-cycline(-cycline)', 'sulfa-(sulfa-)', 'cef-(cef-)', '-oxacin(-oxacin)', 'sulfa-(sulfa-)', '-micin(-micin)'
+$ First Approval         &lt;Utf8&gt; , 1950, 1996, , 2018, , , 1999, , 1970                                  
+$ ATC Codes              &lt;Utf8&gt; J01XC01 | S01AA13 | D06AX01 | D09AA02, S01AA01 | S03AA08 | D06AX02 | G01AA05 | S02AA01 | D10AF03 | J01BA01, J01DE01, J01CF05, J01AA14, J01ED01, J01DD09, S01AE06 | J01MA16, J01ED05, S01AA11 | S02AA14 | J01GB03 | S03AA06 | D06AX07
+$ Level 4 ATC Codes      &lt;Utf8&gt; J01XC - Steroid antibacterials | S01AA - Antibiotics | D06AX - Other antibiotics for topical use | D09AA - Medicated dressings with antiinfectives, S01AA - Antibiotics | S03AA - Antiinfectives | D06AX - Other antibiotics for topical use | G01AA - Antibiotics | S02AA - Antiinfectives | D10AF - Antiinfectives for treatment of acne | J01BA - Amphenicols, J01DE - Fourth-generation cephalosporins, J01CF - Beta-lactamase resistant penicillins, J01AA - Tetracyclines, J01ED - Long-acting sulfonamides, J01DD - Third-generation cephalosporins, S01AE - Fluoroquinolones | J01MA - Fluoroquinolones, J01ED - Long-acting sulfonamides, S01AA - Antibiotics | S02AA - Antiinfectives | J01GB - Other aminoglycosides | S03AA - Antiinfectives | D06AX - Other antibiotics for topical use
+$ Level 3 ATC Codes      &lt;Utf8&gt; J01X - OTHER ANTIBACTERIALS | S01A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE | D09A - MEDICATED DRESSINGS, S01A - ANTIINFECTIVES | S03A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE | G01A - ANTIINFECTIVES AND ANTISEPTICS, EXCL. COMBINATIONS WITH CORTICOSTEROIDS | S02A - ANTIINFECTIVES | D10A - ANTI-ACNE PREPARATIONS FOR TOPICAL USE | J01B - AMPHENICOLS, J01D - OTHER BETA-LACTAM ANTIBACTERIALS, J01C - BETA-LACTAM ANTIBACTERIALS, PENICILLINS, J01A - TETRACYCLINES, J01E - SULFONAMIDES AND TRIMETHOPRIM, J01D - OTHER BETA-LACTAM ANTIBACTERIALS, S01A - ANTIINFECTIVES | J01M - QUINOLONE ANTIBACTERIALS, J01E - SULFONAMIDES AND TRIMETHOPRIM, S01A - ANTIINFECTIVES | S02A - ANTIINFECTIVES | J01G - AMINOGLYCOSIDE ANTIBACTERIALS | S03A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE
+$ Level 2 ATC Codes      &lt;Utf8&gt; J01 - ANTIBACTERIALS FOR SYSTEMIC USE | S01 - OPHTHALMOLOGICALS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE | D09 - MEDICATED DRESSINGS, S01 - OPHTHALMOLOGICALS | S03 - OPHTHALMOLOGICAL AND OTOLOGICAL PREPARATIONS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE | G01 - GYNECOLOGICAL ANTIINFECTIVES AND ANTISEPTICS | S02 - OTOLOGICALS | D10 - ANTI-ACNE PREPARATIONS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, S01 - OPHTHALMOLOGICALS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, S01 - OPHTHALMOLOGICALS | S02 - OTOLOGICALS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE | S03 - OPHTHALMOLOGICAL AND OTOLOGICAL PREPARATIONS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE
+$ Level 1 ATC Codes      &lt;Utf8&gt; J - ANTIINFECTIVES FOR SYSTEMIC USE | S - SENSORY ORGANS | D - DERMATOLOGICALS | D - DERMATOLOGICALS, S - SENSORY ORGANS | S - SENSORY ORGANS | D - DERMATOLOGICALS | G - GENITO URINARY SYSTEM AND SEX HORMONES | S - SENSORY ORGANS | D - DERMATOLOGICALS | J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, S - SENSORY ORGANS | J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, S - SENSORY ORGANS | S - SENSORY ORGANS | J - ANTIINFECTIVES FOR SYSTEMIC USE | S - SENSORY ORGANS | D - DERMATOLOGICALS
+$ Indication Class       &lt;Utf8&gt; Antibacterial, Antibacterial; Antirickettsial, Antibacterial, Antibacterial, , , , Antibacterial, , Antibacterial
+$ Patent                 &lt;Utf8&gt; None, None, None, None, US-8318706-B2, None, None, None, None, None     
+$ Drug Type              &lt;Utf8&gt; 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule
+$ Passes Rule of Five   &lt;Int64&gt; 0, 1, 1, 1, 1, 1, 0, 1, 1, 0                                            
+$ First In Class        &lt;Int64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0                                            
+$ Chirality              &lt;Utf8&gt; Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Achiral Molecule, Single Stereoisomer, Racemic Mixture, Achiral Molecule, Unknown
+$ Prodrug               &lt;Int64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0                                            
+$ Oral                  &lt;Int64&gt; 0, 1, 0, 0, 1, 0, 0, 1, 0, 0                                            
+$ Parenteral            &lt;Int64&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1                                            
+$ Topical               &lt;Int64&gt; 0, 1, 0, 0, 0, 0, 0, 1, 0, 1                                            
+$ Black Box             &lt;Int64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1                                            
+$ Availability Type      &lt;Utf8&gt; Unknown, Unknown, Prescription Only, Unknown, Prescription Only, Withdrawn, Unknown, Prescription Only, Withdrawn, Prescription Only
+$ Smiles                 &lt;Utf8&gt; CC(=O)O[C@H]1C[C@@]2(C)[C@@H](C[C@@H](O)[C@H]3[C@@]4(C)CC[C@@H](O)[C@@H](C)[C@@H]4CC[C@@]32C)/C1=C(\CCC=C(C)C)C(=O)O, O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl, CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+]3(C)CCCC3)CS[C@H]12)c1csc(N)n1, Cc1onc(-c2c(F)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)(C)[C@@H]2C(=O)O, CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O)=C(C(N)=O)C(=O)[C@@]3(O)C(O)=C1C2=O, COc1cc(NS(=O)(=O)c2ccc(N)cc2)nc(OC)n1, CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc(C)c(CC(=O)O)s3)CS[C@H]12)c1csc(N)n1, COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC3)c12, COc1ccc(NS(=O)(=O)c2ccc(N)cc2)nn1, CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)[C@@H](O[C@H]3OC[C@](C)(O)[C@H](NC)[C@H]3O)[C@H](N)C[C@@H]2N)O1.CN[C@@H]1[C@@H](O)[C@@H](O[C@@H]2[C@@H](O)[C@H](O[C@H]3O[C@H](C(C)N)CC[C@H]3N)[C@@H](N)C[C@H]2N)OC[C@]1(C)O.CN[C@@H]1[C@@H](O)[C@@H](O[C@@H]2[C@@H](O)[C@H](O[C@H]3O[C@H](CN)CC[C@H]3N)[C@@H](N)C[C@H]2N)OC[C@]1(C)O
+</code></pre>
+</div>
 </div>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm <span class="op">=</span> df_ai.select([<span class="st">"Name"</span>, <span class="st">"Smiles"</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm <span class="op">=</span> df_ai.select([<span class="st">"Name"</span>, <span class="st">"Smiles"</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
 <style scoped="">
@@ -987,27 +1020,60 @@ str
 </div>
 </div>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df_ai.write_csv("df_ai.csv", sep = ",")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df_ai.write_csv("df_ai.csv", sep = ",")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from df_ai</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_ai_sm <span class="op">=</span> df_ai[<span class="st">"Smiles"</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of molecules in SMILES</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_sm]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">2</span>, mol_size <span class="op">=</span> (<span class="dv">900</span>, <span class="dv">900</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from df_ai</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_ai_sm <span class="op">=</span> df_ai[<span class="st">"Smiles"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of molecules in SMILES</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_sm]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-7-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Murcko scaffolds from mol_ls</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Murcko scaffolds from mol_ls</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-8-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 1 to mol from InChI</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cpd1 <span class="op">=</span> dm.from_inchi(<span class="st">"InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cpd1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 2 SMILES to mol</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cpd2 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cpd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 3 SMILES to mol</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cpd3 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cpd3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Using datamol - Python library that works with molecules</p>
+<p>Key question: Will compound 3’s scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be possible to be a good potential hit, on top of the experimental findings from the paper (which means to compare the R-groups?), or if different, it might lead to a new type of broad-spectrum anti-infective hits</p>
+<p>Tasks: - Convert anti-infective compounds &amp; compounds 1-3’s SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3</p>
+<ul>
+<li>Align compounds 1-3 with other scaffolds from ChEMBL</li>
+<li>Look for MCS (maximum common structure)</li>
+<li>Identify any similarities or differences between anti-infectives from ChEMBL and compound 3</li>
+</ul>
+<p>Tentative plan: - Once found scaffolds, fragments or MCS, set up random forest (or other types e.g.&nbsp;XGBoost etc.) model for ML learning</p>
 
 
 
