@@ -1,7 +1,19 @@
 ---
-jupyter: python3
 draft: true
+jupyter: python3
 ---
+
+**Using datamol - Python library that works with molecules**
+
+**Current post**
+
+**Key question**: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be a good hit (with similar bacterial targets? if so this can be backed up with experimental findings from the paper, or if different targets, it might lead to a new type of anti-infective hits)
+
+**Tasks for current post**: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3 (?optional) - Align compounds 1-3 with other scaffolds from ChEMBL - Look for MCS (maximum common structure) - Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
+
+**Features to demonstrate:** - Using Polars dataframe library along with datamol Python library (probably a small degree only, as datamol was written with Pandas in mind only) - Integrating experimental results from paper from PhD work into cheminformatics project (validation always crucial for computational predictions) - Advancing from pure organic chemistry and computational chemistry without code into utilising data science tools and packages by coding in Python to direct project pathway
+
+**Tentative future plan for next post**: - Once found scaffolds, fragments or MCS, set up a ML model as a predictive model prototype foraging for potential small molecules as anti-infective hits (random forest or other types e.g. ?XGBoost and so on)
 
 ```{python}
 import polars as pl
@@ -23,23 +35,40 @@ df_ai_name_sm.head()
 ```
 
 ```{python}
-#df_ai.write_csv("df_ai.csv", sep = ",")
+# Convert polars dataframe into a pandas dataframe
+df_ai_pd = df_ai_name_sm.to_pandas()
+df_ai_pd
+```
+
+```{python}
+# Make a molecule column from the smiles column
+df_ai_pd["mol"] = df_ai_pd["Smiles"].apply(lambda x: dm.to_mol(x))
+df_ai_pd.head()
+```
+
+```{python}
+#selfies = dm.to_selfies(mol)
 ```
 
 ```{python}
 # Grab all SMILES from df_ai
 df_ai_sm = df_ai["Smiles"]
 # Load a list of molecules in SMILES
+# dm.to_mol default set with sanitize = True
 mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
+# Alternative way to convert dataframe into a list of mols (same as mol_ls)
+# mols = dm.from_df(df_ai_pd, smiles_column="Smiles")
 # Convert the list of molecules into 2D images
 dm.to_image(mol_ls, n_cols = 5, mol_size = (400, 400))
 ```
 
 ```{python}
-# Extract Murcko scaffolds from mol_ls
+# Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)
 m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
 dm.to_image(m_scaffolds, mol_size = (400, 400))
 ```
+
+The section below focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993
 
 ```{python}
 # Convert compound 1 to mol from InChI
@@ -59,14 +88,53 @@ cpd3 = dm.to_mol("OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1")
 cpd3
 ```
 
-Using datamol - Python library that works with molecules
+```{python}
+# Save these 3 compounds into a list
+mol_lst = [cpd1, cpd2, cpd3]
+mol_lst
+```
 
-Key question: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be possible to be a good potential hit, on top of the experimental findings from the paper (which means to compare the R-groups?), or if different, it might lead to a new type of broad-spectrum anti-infective hits
+```{python}
+# Convert a list of mols to a dataframe
+df = dm.to_df(mol_lst)
+df
+```
 
-Tasks: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3
+```{python}
+names = ["Compound 1", "Compound 2", "Compound 3"]
+df["names"] = names
+df
+```
 
--   Align compounds 1-3 with other scaffolds from ChEMBL
--   Look for MCS (maximum common structure)
--   Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
+```{python}
 
-Tentative plan: - Once found scaffolds, fragments or MCS, set up random forest (or other types e.g. XGBoost etc.) model for ML learning
+# Pre-process molecules using _preprocess function - adapted with courtesy from datamol.io
+
+smiles_column = "smiles"
+
+dm.disable_rdkit_log()
+
+def _preprocess(row):
+    mol = dm.to_mol(row[smiles_column], ordered=True)
+    mol = dm.fix_mol(mol)
+    mol = dm.sanitize_mol(mol, sanifix=True, charge_neutral=False)
+    mol = dm.standardize_mol(
+        mol,
+        disconnect_metals=False,
+        normalize=True,
+        reionize=True,
+        uncharge=False,
+        stereo=True,
+    )
+
+    row["standard_smiles"] = dm.standardize_smiles(dm.to_smiles(mol))
+    row["selfies"] = dm.to_selfies(mol)
+    row["inchi"] = dm.to_inchi(mol)
+    row["inchikey"] = dm.to_inchikey(mol)
+    return row
+```
+
+```{python}
+data_cleaned = df.apply(_preprocess, axis=1)
+data_cleaned
+```

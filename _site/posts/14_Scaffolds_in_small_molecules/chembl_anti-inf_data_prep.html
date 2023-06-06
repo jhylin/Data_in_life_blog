@@ -209,6 +209,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
+<p><strong>Using datamol - Python library that works with molecules</strong></p>
+<p><strong>Current post</strong></p>
+<p><strong>Key question</strong>: Will compound 3’s scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be a good hit (with similar bacterial targets? if so this can be backed up with experimental findings from the paper, or if different targets, it might lead to a new type of anti-infective hits)</p>
+<p><strong>Tasks for current post</strong>: - Convert anti-infective compounds &amp; compounds 1-3’s SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3 (?optional) - Align compounds 1-3 with other scaffolds from ChEMBL - Look for MCS (maximum common structure) - Identify any similarities or differences between anti-infectives from ChEMBL and compound 3</p>
+<p><strong>Features to demonstrate:</strong> - Using Polars dataframe library along with datamol Python library (probably a small degree only, as datamol was written with Pandas in mind only) - Integrating experimental results from paper from PhD work into cheminformatics project (validation always crucial for computational predictions) - Advancing from pure organic chemistry and computational chemistry without code into utilising data science tools and packages by coding in Python to direct project pathway</p>
+<p><strong>Tentative future plan for next post</strong>: - Once found scaffolds, fragments or MCS, set up a ML model as a predictive model prototype foraging for potential small molecules as anti-infective hits (random forest or other types e.g.&nbsp;?XGBoost and so on)</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -216,7 +222,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_ai <span class="op">=</span> pl.read_csv(<span class="st">"chembl_anti-inf.csv"</span>, sep <span class="op">=</span> <span class="st">";"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ai.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="2">
 
 <div>
 <style scoped="">
@@ -921,7 +927,7 @@ $ Smiles                 &lt;Utf8&gt; CC(=O)O[C@H]1C[C@@]2(C)[C@@H](C[C@@H](O)[C
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm <span class="op">=</span> df_ai.select([<span class="st">"Name"</span>, <span class="st">"Smiles"</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ai_name_sm.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 <style scoped="">
@@ -1020,60 +1026,344 @@ str
 </div>
 </div>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df_ai.write_csv("df_ai.csv", sep = ",")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert polars dataframe into a pandas dataframe</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_ai_pd <span class="op">=</span> df_ai_name_sm.to_pandas()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_ai_pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FUSIDIC ACID</td>
+      <td>CC(=O)O[C@H]1C[C@@]2(C)[C@@H](C[C@@H](O)[C@H]3...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHLORAMPHENICOL</td>
+      <td>O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CEFEPIME</td>
+      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>FLOXACILLIN</td>
+      <td>Cc1onc(-c2c(F)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[C...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SARECYCLINE</td>
+      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>CIPROFLOXACIN</td>
+      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>NORFLOXACIN</td>
+      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>SULFANILAMIDE</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>OFLOXACIN</td>
+      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>AMDINOCILLIN</td>
+      <td>CC1(C)S[C@@H]2[C@H](/N=C/N3CCCCCC3)C(=O)N2[C@H...</td>
+    </tr>
+  </tbody>
+</table>
+<p>144 rows × 2 columns</p>
+</div>
+</div>
 </div>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from df_ai</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_ai_sm <span class="op">=</span> df_ai[<span class="st">"Smiles"</span>]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of molecules in SMILES</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_sm]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-7-output-1.svg" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a molecule column from the smiles column</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_ai_pd[<span class="st">"mol"</span>] <span class="op">=</span> df_ai_pd[<span class="st">"Smiles"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: dm.to_mol(x))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_ai_pd.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Smiles</th>
+      <th>mol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FUSIDIC ACID</td>
+      <td>CC(=O)O[C@H]1C[C@@]2(C)[C@@H](C[C@@H](O)[C@H]3...</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x126d47ed0&gt;</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHLORAMPHENICOL</td>
+      <td>O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C...</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x126de80b0&gt;</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CEFEPIME</td>
+      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x126de8120&gt;</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>FLOXACILLIN</td>
+      <td>Cc1onc(-c2c(F)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[C...</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x126de8190&gt;</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SARECYCLINE</td>
+      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x126de8200&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Murcko scaffolds from mol_ls</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-8-output-1.svg" class="img-fluid"></p>
-</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#selfies = dm.to_selfies(mol)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 1 to mol from InChI</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cpd1 <span class="op">=</span> dm.from_inchi(<span class="st">"InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cpd1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from df_ai</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_ai_sm <span class="op">=</span> df_ai[<span class="st">"Smiles"</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of molecules in SMILES</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dm.to_mol default set with sanitize = True</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_sm]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative way to convert dataframe into a list of mols (same as mol_ls)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mols = dm.from_df(df_ai_pd, smiles_column="Smiles")</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-9-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 2 SMILES to mol</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cpd2 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cpd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-10-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
+<p>The section below focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al.&nbsp;Discovery of 2’,6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993</p>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 3 SMILES to mol</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cpd3 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cpd3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 1 to mol from InChI</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cpd1 <span class="op">=</span> dm.from_inchi(<span class="st">"InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cpd1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
 <p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Using datamol - Python library that works with molecules</p>
-<p>Key question: Will compound 3’s scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be possible to be a good potential hit, on top of the experimental findings from the paper (which means to compare the R-groups?), or if different, it might lead to a new type of broad-spectrum anti-infective hits</p>
-<p>Tasks: - Convert anti-infective compounds &amp; compounds 1-3’s SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Get fragments of these anti-infective compounds + compounds 1-3</p>
-<ul>
-<li>Align compounds 1-3 with other scaffolds from ChEMBL</li>
-<li>Look for MCS (maximum common structure)</li>
-<li>Identify any similarities or differences between anti-infectives from ChEMBL and compound 3</li>
-</ul>
-<p>Tentative plan: - Once found scaffolds, fragments or MCS, set up random forest (or other types e.g.&nbsp;XGBoost etc.) model for ML learning</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 2 SMILES to mol</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cpd2 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cpd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 3 SMILES to mol</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cpd3 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cpd3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<p><img src="chembl_anti-inf_data_prep_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save these 3 compounds into a list</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mol_lst <span class="op">=</span> [cpd1, cpd2, cpd3]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mol_lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>[&lt;rdkit.Chem.rdchem.Mol at 0x127d6dd20&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x127d6dee0&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x127d6e110&gt;]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a list of mols to a dataframe</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dm.to_df(mol_lst)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [<span class="st">"Compound 1"</span>, <span class="st">"Compound 2"</span>, <span class="st">"Compound 3"</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"names"</span>] <span class="op">=</span> names</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>Compound 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>Compound 2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>Compound 3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre-process molecules using _preprocess function - adapted with courtesy from datamol.io</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>smiles_column <span class="op">=</span> <span class="st">"smiles"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dm.disable_rdkit_log()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _preprocess(row):</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.to_mol(row[smiles_column], ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.fix_mol(mol)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.sanitize_mol(mol, sanifix<span class="op">=</span><span class="va">True</span>, charge_neutral<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.standardize_mol(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        mol,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        disconnect_metals<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        normalize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        reionize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        uncharge<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        stereo<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"standard_smiles"</span>] <span class="op">=</span> dm.standardize_smiles(dm.to_smiles(mol))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"selfies"</span>] <span class="op">=</span> dm.to_selfies(mol)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchi"</span>] <span class="op">=</span> dm.to_inchi(mol)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchikey"</span>] <span class="op">=</span> dm.to_inchikey(mol)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data_cleaned <span class="op">=</span> df.<span class="bu">apply</span>(_preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data_cleaned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+      <th>names</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>Compound 1</td>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>[O][=C][Branch1][=C][/C][=C][/C][=C][C][=C][Br...</td>
+      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>QNBFRAOWJNMPAF-ZIQQYUHESA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>Compound 2</td>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>CWVXMBYGWRWONE-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>Compound 3</td>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+      <td>InChI=1S/C22H24O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>KWPXNGBFYRHREW-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
 
 
 
