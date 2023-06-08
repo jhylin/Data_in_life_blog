@@ -15,9 +15,9 @@ title-block-banner: true
 comments: false
 ---
 
-**🌟Welcome to my portfolio site🌟**
+**🌟Welcome🌟**
 
-As my portfolio blog evolves over time, my work seems to revolve around cheminformatics or data science in pharmaceutical themes, with my earlier work more on healthcare data projects. I'm an enthusiast in both Python and R, with another interest to learn Rust in the far future as mastering Python and R takes endless time. I'm currently working and brainstorming on a molecular scaffolds project, which is slowly growing at the moment.
+As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. I'm currently working on a molecular scaffolds project, aiming to familiarise myself with datamol, therefore a new post should hopefully be up soon by end of June or early July.
 
 <br>
 
