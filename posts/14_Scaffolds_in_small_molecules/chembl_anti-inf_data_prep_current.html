@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Home – chembl_anti-inf_data_prep_current</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Jennifer HY Lin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.datascienceportfol.io/jhylin">
+ <span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+<p><strong>Using datamol - Python library that works with molecules</strong></p>
+<p><strong>Current post</strong></p>
+<p><strong>Key question</strong>: Will compound 3’s scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be a good hit (with similar bacterial targets? if so this can be backed up with experimental findings from the paper, or if different targets, it might lead to a new type of anti-infective hits)</p>
+<p><strong>Tasks for current post</strong>: - Convert anti-infective compounds &amp; compounds 1-3’s SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Align scaffolds of compounds 1-3 with other scaffolds from ChEMBL - Look for MCS (maximum common structure) - use RDKit (?as separate post) - Identify any similarities or differences between anti-infectives from ChEMBL and compound 3</p>
+<p><strong>Features to demonstrate:</strong> - Using Polars dataframe library along with datamol Python library (probably a small degree only, as datamol was likely written with Pandas in mind only) - Integrating experimental results from paper from PhD work into cheminformatics project (validation always crucial for computational predictions) - Advancing from pure organic chemistry and computational chemistry without code into utilising data science tools and packages by coding in Python to lead project direction</p>
+<p><strong>Data cleaning for ChEMBL anti-infectives</strong></p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_ai <span class="op">=</span> pl.read_csv(<span class="st">"chembl_anti-inf.csv"</span>, separator <span class="op">=</span> <span class="st">";"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (144, 29)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Parent Molecule</th><th>Name</th><th>Synonyms</th><th>Research Codes</th><th>Phase</th><th>Drug Applicants</th><th>USAN Stem</th><th>USAN Year</th><th>USAN Definition</th><th>USAN Stem - Substem</th><th>First Approval</th><th>ATC Codes</th><th>Level 4 ATC Codes</th><th>Level 3 ATC Codes</th><th>Level 2 ATC Codes</th><th>Level 1 ATC Codes</th><th>Indication Class</th><th>Patent</th><th>Drug Type</th><th>Passes Rule of Five</th><th>First In Class</th><th>Chirality</th><th>Prodrug</th><th>Oral</th><th>Parenteral</th><th>Topical</th><th>Black Box</th><th>Availability Type</th><th>Smiles</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL374975"</td><td>"FUSIDIC ACID"</td><td>"ANHYDROUS FUSI…</td><td>"CEM-102|NSC-56…</td><td>4.0</td><td>""</td><td>""</td><td>"1967"</td><td>""</td><td>""</td><td>""</td><td>"J01XC01 | S01A…</td><td>"J01XC - Steroi…</td><td>"J01X - OTHER A…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"CC(=O)O[C@H]1C…</td></tr><tr><td>"CHEMBL130"</td><td>"CHLORAMPHENICO…</td><td>"9-HYDROXY-9-PH…</td><td>"NSC-16331|NSC-…</td><td>4.0</td><td>"Ivax Pharmaceu…</td><td>""</td><td>""</td><td>""</td><td>""</td><td>"1950"</td><td>"S01AA01 | S03A…</td><td>"S01AA - Antibi…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial;…</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>"Unknown"</td><td>"O=C(N[C@H](CO)…</td></tr><tr><td>"CHEMBL186"</td><td>"CEFEPIME"</td><td>"BMY-28142|CEFE…</td><td>"BMY-28142|J01D…</td><td>4.0</td><td>"Samson Medical…</td><td>"'cef-'"</td><td>"1987"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1996"</td><td>"J01DE01"</td><td>"J01DE - Fourth…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"CHEMBL222645"</td><td>"FLOXACILLIN"</td><td>"ABBOFLOX|BRL 2…</td><td>"BRL 2039|BRL-2…</td><td>4.0</td><td>""</td><td>"'-cillin'"</td><td>"1972"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>""</td><td>"J01CF05"</td><td>"J01CF - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"Cc1onc(-c2c(F)…</td></tr><tr><td>"CHEMBL2364632"</td><td>"SARECYCLINE"</td><td>"P-005672|P0056…</td><td>"P-005672|P0056…</td><td>4.0</td><td>"Almirall Llc"</td><td>"'-cycline'"</td><td>"2012"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2018"</td><td>"J01AA14"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-8318706-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CON(C)Cc1ccc(O…</td></tr><tr><td>"CHEMBL62193"</td><td>"SULFADIMETHOXI…</td><td>"Madribon|NSC-6…</td><td>"NSC-683544|NSC…</td><td>4.0</td><td>""</td><td>"'sulfa-'"</td><td>""</td><td>"antimicrobials…</td><td>"'sulfa-(sulfa-…</td><td>""</td><td>"J01ED01"</td><td>"J01ED - Long-a…</td><td>"J01E - SULFONA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Withdrawn"</td><td>"COc1cc(NS(=O)(…</td></tr><tr><td>"CHEMBL2303613"</td><td>"CEFODIZIME"</td><td>"CEFODIZIME|CEF…</td><td>"HR 221|HR 221 …</td><td>4.0</td><td>""</td><td>"'cef-'"</td><td>""</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>""</td><td>"J01DD09"</td><td>"J01DD - Third-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"CHEMBL31"</td><td>"GATIFLOXACIN"</td><td>"AM-1155|BMS-20…</td><td>"AM-1155|BMS-20…</td><td>4.0</td><td>"Apotex Inc|Bri…</td><td>"'-oxacin'"</td><td>"1997"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1999"</td><td>"S01AE06 | J01M…</td><td>"S01AE - Fluoro…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"COc1c(N2CCNC(C…</td></tr><tr><td>"CHEMBL268869"</td><td>"SULFAMETHOXYPY…</td><td>"CL-13494|DEPOV…</td><td>"CL-13494|NSC-7…</td><td>4.0</td><td>""</td><td>"'sulfa-'"</td><td>""</td><td>"antimicrobials…</td><td>"'sulfa-(sulfa-…</td><td>""</td><td>"J01ED05"</td><td>"J01ED - Long-a…</td><td>"J01E - SULFONA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Withdrawn"</td><td>"COc1ccc(NS(=O)…</td></tr><tr><td>"CHEMBL3039597"</td><td>"GENTAMICIN"</td><td>"GENTAMICIN|GEN…</td><td>"SCH-9724"</td><td>4.0</td><td>"Schering Corp …</td><td>"'-micin'"</td><td>"1963"</td><td>"antibiotics (M…</td><td>"'-micin(-micin…</td><td>"1970"</td><td>"S01AA11 | S02A…</td><td>"S01AA - Antibi…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Unknown"</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CNC(C)[C@@H]1C…</td></tr><tr><td>"CHEMBL3182343"</td><td>"PIVAMPICILLIN"</td><td>"MK-191|PIVAMPI…</td><td>"MK-191"</td><td>4.0</td><td>""</td><td>"'-cillin'"</td><td>"1970"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>""</td><td>"J01CA02"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"CC(C)(C)C(=O)O…</td></tr><tr><td>"CHEMBL2146161"</td><td>"MIKAMYCIN"</td><td>"MIKAMYCIN|PRIS…</td><td>"RP 7293|RP-729…</td><td>4.0</td><td>""</td><td>"'-mycin'"</td><td>""</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>""</td><td>"J01FG01"</td><td>"J01FG - Strept…</td><td>"J01F - MACROLI…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Unknown"</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"CC1=C\[C@@H](O…</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL572"</td><td>"NITROFURANTOIN…</td><td>"BERKFURIN|CEDU…</td><td>"NSC-2107|NSC-4…</td><td>4.0</td><td>"Sun Pharmaceut…</td><td>"'-toin'"</td><td>""</td><td>"antiepileptics…</td><td>"'-toin(-toin)'…</td><td>"1953"</td><td>"J01XE01 | J01X…</td><td>"J01XE - Nitrof…</td><td>"J01X - OTHER A…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"O=C1CN(/N=C/c2…</td></tr><tr><td>"CHEMBL1596"</td><td>"CARBENICILLIN …</td><td>"CARBENICILLIN …</td><td>""</td><td>4.0</td><td>"Pfizer Laborat…</td><td>"'-cillin'"</td><td>"1972"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1972"</td><td>"J01CA05"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Discontinued"</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL44354"</td><td>"CEFTAZIDIME"</td><td>"CEFTAZIDIME|CE…</td><td>"GR 20263|GR-20…</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'cef-'"</td><td>"1980"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1985"</td><td>"J01DD02"</td><td>"J01DD - Third-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-7112592-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC(C)(O/N=C(\C…</td></tr><tr><td>"CHEMBL29"</td><td>"BENZYLPENICILL…</td><td>"BENZYL PENICIL…</td><td>"J01CE01|NSC-19…</td><td>4.0</td><td>"Hq Specialty P…</td><td>"'-cillin'"</td><td>""</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1947"</td><td>"J01CE01 | S01A…</td><td>"J01CE - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL277100"</td><td>"TEMAFLOXACIN"</td><td>"Omniflox|TEMAF…</td><td>""</td><td>4.0</td><td>""</td><td>"'-oxacin'"</td><td>"1988"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1992"</td><td>"J01MA05"</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Withdrawn"</td><td>"CC1CN(c2cc3c(c…</td></tr><tr><td>"CHEMBL1731"</td><td>"MEZLOCILLIN"</td><td>"BAY-F-1353|BAY…</td><td>"BAY-F-1353"</td><td>4.0</td><td>"Bayer Pharmace…</td><td>"'-cillin'"</td><td>"1976"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1981"</td><td>"J01CA10"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Discontinued"</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL2105612"</td><td>"PROPICILLIN"</td><td>"(1-PHENOXYPROP…</td><td>""</td><td>4.0</td><td>""</td><td>"'-cillin'"</td><td>""</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>""</td><td>"J01CE03"</td><td>"J01CE - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>"Unknown"</td><td>"CCC(Oc1ccccc1)…</td></tr><tr><td>"CHEMBL8"</td><td>"CIPROFLOXACIN"</td><td>"BAY O 9867 FRE…</td><td>"BAY O 9867 FRE…</td><td>4.0</td><td>"Inforlife Sa|A…</td><td>"'-oxacin'"</td><td>"1987"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1987"</td><td>"J01MA02 | S03A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-8318817-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"O=C(O)c1cn(C2C…</td></tr><tr><td>"CHEMBL9"</td><td>"NORFLOXACIN"</td><td>"Baccidal|CHIBR…</td><td>"MK-366|NSC-757…</td><td>4.0</td><td>"Merck Research…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1986"</td><td>"J01MA06 | S01A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CCn1cc(C(=O)O)…</td></tr><tr><td>"CHEMBL21"</td><td>"SULFANILAMIDE"</td><td>"ANILINE-P-SULF…</td><td>"NSC-7618"</td><td>4.0</td><td>"Mylan Specialt…</td><td>"'sulfa-'"</td><td>""</td><td>"antimicrobials…</td><td>"'sulfa-(sulfa-…</td><td>"1985"</td><td>"D06BA05 | J01E…</td><td>"D06BA - Sulfon…</td><td>"D06B - CHEMOTH…</td><td>"D06 - ANTIBIOT…</td><td>"D - DERMATOLOG…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"Nc1ccc(S(N)(=O…</td></tr><tr><td>"CHEMBL4"</td><td>"OFLOXACIN"</td><td>"DL-8280|EXOCIN…</td><td>"DL-8280|HOE 28…</td><td>4.0</td><td>"Bausch And Lom…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1990"</td><td>"J01MA01 | S02A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CC1COc2c(N3CCN…</td></tr><tr><td>"CHEMBL530"</td><td>"AMDINOCILLIN"</td><td>"AMDINOCILLIN|C…</td><td>"FL 1060|FL-106…</td><td>4.0</td><td>"Hoffmann La Ro…</td><td>"'-cillin'"</td><td>"1981"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1984"</td><td>"J01CA11"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Discontinued"</td><td>"CC1(C)S[C@@H]2…</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_ai.glimpse())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 144
+Columns: 29
+$ Parent Molecule     &lt;str&gt; CHEMBL374975, CHEMBL130, CHEMBL186, CHEMBL222645, CHEMBL2364632, CHEMBL62193, CHEMBL2303613, CHEMBL31, CHEMBL268869, CHEMBL3039597
+$ Name                &lt;str&gt; FUSIDIC ACID, CHLORAMPHENICOL, CEFEPIME, FLOXACILLIN, SARECYCLINE, SULFADIMETHOXINE, CEFODIZIME, GATIFLOXACIN, SULFAMETHOXYPYRIDAZINE, GENTAMICIN
+$ Synonyms            &lt;str&gt; ANHYDROUS FUSIDIC ACID|CEM-102|FUCIDIN CAVIJECT|FUCITHALMIC|FUSIDATE|FUSIDIC ACID|NSC-56192|RAMYCIN|SQ 16,603|SQ-16603|TAKSTA, 9-HYDROXY-9-PHENYLXANTHENE|9-PHENYL-9H-XANTHEN-9-OL|AMPHICOL|BROCHLOR|BROLENE ANTIBIOTIC|CHLORAMPHENICOL|CHLOROFAIR|CHLOROPTIC|CHLOROPTIC S.O.P.|Chloramex|Chloramphenicol|Chlorbiotic|Chloromycetin|ECONOCHLOR|GOLDEN EYE ANTIBIOTIC|KEMICETINE|KLORAFECT|Kernispray|MYCHEL|Mychel-S|NSC-16331|NSC-3069|OPHTHOCHLOR|OPTOMYCIN|SNO PHENICOL|TUBILUX INFECTED EYES|Tevcocin|XANTHEN-9-OL, 9-PHENYL-, BMY-28142|CEFEPIME|J01DE01|Maxipime|RENAPIME|VNRX-5022, ABBOFLOX|BRL 2039|BRL-2039|CULPEN|FLOXACILLIN|FLOXACILLIN SODIUM|FLOXACILLIN SODIUM ANHYDROUS|FLUCLOMIX-250|FLUCLOMIX-500|FLUCLOXACILLIN|FLUCLOXACILLIN SODIUM|FLUCLOXACILLIN SODIUM ANHYDROUS|FLUCLOXACILLIN SODIUM MONOHYDRATE|FLUCLOXIN|Floxapen|GALFLOXIN|LADROPEN|NSC-277175|RIMAFLOX|STAFOXIL|STAPHLIPEN|STAPHYLEX|ZOXIN 250|ZOXIN 500, P-005672|P005672|SARECYCLINE, Madribon|NSC-683544|NSC-757860|SULFADIMETHOXINE|SULPHADIMETHOXINE, CEFODIZIME|CEFODIZIME DISODIUM|CEFODIZIME DISODIUM SALT|CEFODIZIME SODIUM|Cefodizime|HR 221|HR 221 [AS SODIUM]|HR-221|S 77 1221 B|S 77 1221 B [AS SODIUM]|S 77-1221B|S-77-1221-B|S-77-1221B|THR 221|THR 221 [AS SODIUM]|THR-221|TIMECEF, AM-1155|BMS-206584-01|BMS-20658401|GATIFLO|GATIFLOXACIN|GATIFLOXACIN (SESQUIHYDRATE)|GATIFLOXACIN ANHYDROUS|GATIFLOXACIN HYDRATE|GATIFLOXACIN SESQUIHYDRATE|NSC-758701|PD-135432|Tequin|ZYMAXID|ZYMER|Zymar, CL-13494|DEPOVERNIL|LEDERKYN|Midicel|NSC-757875|RETASULPHINE|SUCCINYLSULFATHI|SULFAMETHOXYPYRIDAZINE|SULFAMETHOXYPYRIDAZINUM|SULFASUXIDINE|SULPHAMETHOXYPYRIDAZINE, GENTAMICIN|GENTAMYCIN|LYRAMYCIN|OKSITSELANIM|SCH-9724|SEPTIGEN|Uromycine
+$ Research Codes      &lt;str&gt; CEM-102|NSC-56192|SQ 16,603|SQ-16603, NSC-16331|NSC-3069, BMY-28142|J01DE01|VNRX-5022, BRL 2039|BRL-2039|NSC-277175, P-005672|P005672, NSC-683544|NSC-757860, HR 221|HR 221 [AS SODIUM]|HR-221|S 77 1221 B|S 77 1221 B [AS SODIUM]|S 77-1221B|S-77-1221-B|S-77-1221B|THR 221|THR 221 [AS SODIUM]|THR-221, AM-1155|BMS-206584-01|BMS-20658401|NSC-758701|PD-135432, CL-13494|NSC-757875, SCH-9724
+$ Phase               &lt;f64&gt; 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0
+$ Drug Applicants     &lt;str&gt; , Ivax Pharmaceuticals Inc Sub Teva Pharmaceuticals Usa|Armenpharm Ltd|Optopics Laboratories Corp|John J Ferrante|Parkedale Pharmaceuticals Inc|Alcon Laboratories Inc|Pharmafair Inc|Parke Davis Pharmaceutical Research Div Warner Lambert Co|Allergan Pharmaceutical|Akorn Operating Co Llc, Samson Medical Technologies Llc|Fosun Pharma Usa Inc|Sagent Pharmaceuticals Inc|Hospira Inc|B Braun Medical Inc|Acs Dobfar Spa|Astral Steritech Pvt Ltd|Qilu Pharmaceutical Co Ltd|Baxter Healthcare Corp, , Almirall Llc, , , Apotex Inc|Bristol Myers Squibb|Sandoz Inc|Allergan|Bristol Myers Squibb Co Pharmaceutical Research Institute|Allergan Inc|Akorn Operating Co Llc|Torrent Pharmaceuticals Ltd|Lupin Ltd|Rising Pharma Holdings Inc, , Schering Corp Sub Schering Plough Corp|Watson Laboratories Inc|Abbott Laboratories Pharmaceutical Products Div|Fougera Pharmaceuticals Inc|Bausch And Lomb Pharmaceuticals Inc|Taro Pharmaceuticals Usa Inc|Novartis Pharmaceuticals Corp|Allergan Pharmaceutical|Akorn Operating Co Llc|Cosette Pharmaceuticals Inc
+$ USAN Stem           &lt;str&gt; , , 'cef-', '-cillin', '-cycline', 'sulfa-', 'cef-', '-oxacin', 'sulfa-', '-micin'
+$ USAN Year           &lt;str&gt; 1967, , 1987, 1972, 2012, , , 1997, , 1963
+$ USAN Definition     &lt;str&gt; , , cephalosporins, penicillins, antibiotics (tetracycline derivatives), antimicrobials (sulfonamides derivatives), cephalosporins, antibacterials (quinolone derivatives), antimicrobials (sulfonamides derivatives), antibiotics (Micromonospora strains)
+$ USAN Stem - Substem &lt;str&gt; , , 'cef-(cef-)', '-cillin(-cillin)', '-cycline(-cycline)', 'sulfa-(sulfa-)', 'cef-(cef-)', '-oxacin(-oxacin)', 'sulfa-(sulfa-)', '-micin(-micin)'
+$ First Approval      &lt;str&gt; , 1950, 1996, , 2018, , , 1999, , 1970
+$ ATC Codes           &lt;str&gt; J01XC01 | S01AA13 | D06AX01 | D09AA02, S01AA01 | S03AA08 | D06AX02 | G01AA05 | S02AA01 | D10AF03 | J01BA01, J01DE01, J01CF05, J01AA14, J01ED01, J01DD09, S01AE06 | J01MA16, J01ED05, S01AA11 | S02AA14 | J01GB03 | S03AA06 | D06AX07
+$ Level 4 ATC Codes   &lt;str&gt; J01XC - Steroid antibacterials | S01AA - Antibiotics | D06AX - Other antibiotics for topical use | D09AA - Medicated dressings with antiinfectives, S01AA - Antibiotics | S03AA - Antiinfectives | D06AX - Other antibiotics for topical use | G01AA - Antibiotics | S02AA - Antiinfectives | D10AF - Antiinfectives for treatment of acne | J01BA - Amphenicols, J01DE - Fourth-generation cephalosporins, J01CF - Beta-lactamase resistant penicillins, J01AA - Tetracyclines, J01ED - Long-acting sulfonamides, J01DD - Third-generation cephalosporins, S01AE - Fluoroquinolones | J01MA - Fluoroquinolones, J01ED - Long-acting sulfonamides, S01AA - Antibiotics | S02AA - Antiinfectives | J01GB - Other aminoglycosides | S03AA - Antiinfectives | D06AX - Other antibiotics for topical use
+$ Level 3 ATC Codes   &lt;str&gt; J01X - OTHER ANTIBACTERIALS | S01A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE | D09A - MEDICATED DRESSINGS, S01A - ANTIINFECTIVES | S03A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE | G01A - ANTIINFECTIVES AND ANTISEPTICS, EXCL. COMBINATIONS WITH CORTICOSTEROIDS | S02A - ANTIINFECTIVES | D10A - ANTI-ACNE PREPARATIONS FOR TOPICAL USE | J01B - AMPHENICOLS, J01D - OTHER BETA-LACTAM ANTIBACTERIALS, J01C - BETA-LACTAM ANTIBACTERIALS, PENICILLINS, J01A - TETRACYCLINES, J01E - SULFONAMIDES AND TRIMETHOPRIM, J01D - OTHER BETA-LACTAM ANTIBACTERIALS, S01A - ANTIINFECTIVES | J01M - QUINOLONE ANTIBACTERIALS, J01E - SULFONAMIDES AND TRIMETHOPRIM, S01A - ANTIINFECTIVES | S02A - ANTIINFECTIVES | J01G - AMINOGLYCOSIDE ANTIBACTERIALS | S03A - ANTIINFECTIVES | D06A - ANTIBIOTICS FOR TOPICAL USE
+$ Level 2 ATC Codes   &lt;str&gt; J01 - ANTIBACTERIALS FOR SYSTEMIC USE | S01 - OPHTHALMOLOGICALS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE | D09 - MEDICATED DRESSINGS, S01 - OPHTHALMOLOGICALS | S03 - OPHTHALMOLOGICAL AND OTOLOGICAL PREPARATIONS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE | G01 - GYNECOLOGICAL ANTIINFECTIVES AND ANTISEPTICS | S02 - OTOLOGICALS | D10 - ANTI-ACNE PREPARATIONS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, S01 - OPHTHALMOLOGICALS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE, J01 - ANTIBACTERIALS FOR SYSTEMIC USE, S01 - OPHTHALMOLOGICALS | S02 - OTOLOGICALS | J01 - ANTIBACTERIALS FOR SYSTEMIC USE | S03 - OPHTHALMOLOGICAL AND OTOLOGICAL PREPARATIONS | D06 - ANTIBIOTICS AND CHEMOTHERAPEUTICS FOR DERMATOLOGICAL USE
+$ Level 1 ATC Codes   &lt;str&gt; J - ANTIINFECTIVES FOR SYSTEMIC USE | S - SENSORY ORGANS | D - DERMATOLOGICALS | D - DERMATOLOGICALS, S - SENSORY ORGANS | S - SENSORY ORGANS | D - DERMATOLOGICALS | G - GENITO URINARY SYSTEM AND SEX HORMONES | S - SENSORY ORGANS | D - DERMATOLOGICALS | J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, S - SENSORY ORGANS | J - ANTIINFECTIVES FOR SYSTEMIC USE, J - ANTIINFECTIVES FOR SYSTEMIC USE, S - SENSORY ORGANS | S - SENSORY ORGANS | J - ANTIINFECTIVES FOR SYSTEMIC USE | S - SENSORY ORGANS | D - DERMATOLOGICALS
+$ Indication Class    &lt;str&gt; Antibacterial, Antibacterial; Antirickettsial, Antibacterial, Antibacterial, , , , Antibacterial, , Antibacterial
+$ Patent              &lt;str&gt; None, None, None, None, US-8318706-B2, None, None, None, None, None
+$ Drug Type           &lt;str&gt; 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule, 1:Synthetic Small Molecule
+$ Passes Rule of Five &lt;i64&gt; 0, 1, 1, 1, 1, 1, 0, 1, 1, 0
+$ First In Class      &lt;i64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+$ Chirality           &lt;str&gt; Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Single Stereoisomer, Achiral Molecule, Single Stereoisomer, Racemic Mixture, Achiral Molecule, Unknown
+$ Prodrug             &lt;i64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+$ Oral                &lt;i64&gt; 0, 1, 0, 0, 1, 0, 0, 1, 0, 0
+$ Parenteral          &lt;i64&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1
+$ Topical             &lt;i64&gt; 0, 1, 0, 0, 0, 0, 0, 1, 0, 1
+$ Black Box           &lt;i64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+$ Availability Type   &lt;str&gt; Unknown, Unknown, Prescription Only, Unknown, Prescription Only, Withdrawn, Unknown, Prescription Only, Withdrawn, Prescription Only
+$ Smiles              &lt;str&gt; CC(=O)O[C@H]1C[C@@]2(C)[C@@H](C[C@@H](O)[C@H]3[C@@]4(C)CC[C@@H](O)[C@@H](C)[C@@H]4CC[C@@]32C)/C1=C(\CCC=C(C)C)C(=O)O, O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl, CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+]3(C)CCCC3)CS[C@H]12)c1csc(N)n1, Cc1onc(-c2c(F)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)(C)[C@@H]2C(=O)O, CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O)=C(C(N)=O)C(=O)[C@@]3(O)C(O)=C1C2=O, COc1cc(NS(=O)(=O)c2ccc(N)cc2)nc(OC)n1, CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc(C)c(CC(=O)O)s3)CS[C@H]12)c1csc(N)n1, COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC3)c12, COc1ccc(NS(=O)(=O)c2ccc(N)cc2)nn1, CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)[C@@H](O[C@H]3OC[C@](C)(O)[C@H](NC)[C@H]3O)[C@H](N)C[C@@H]2N)O1.CN[C@@H]1[C@@H](O)[C@@H](O[C@@H]2[C@@H](O)[C@H](O[C@H]3O[C@H](C(C)N)CC[C@H]3N)[C@@H](N)C[C@H]2N)OC[C@]1(C)O.CN[C@@H]1[C@@H](O)[C@@H](O[C@@H]2[C@@H](O)[C@H](O[C@H]3O[C@H](CN)CC[C@H]3N)[C@@H](N)C[C@H]2N)OC[C@]1(C)O
+
+None</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check availability types</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ai.groupby(<span class="st">"Availability Type"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (4, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Availability Type</th><th>count</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>"Discontinued"</td><td>36</td></tr><tr><td>"Unknown"</td><td>29</td></tr><tr><td>"Withdrawn"</td><td>7</td></tr><tr><td>"Prescription O…</td><td>72</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting only compounds that are prescription-only meds</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai.<span class="bu">filter</span>(pl.col(<span class="st">"Availability Type"</span>) <span class="op">==</span> <span class="st">"Prescription Only"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_ai_rx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (72, 29)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Parent Molecule</th><th>Name</th><th>Synonyms</th><th>Research Codes</th><th>Phase</th><th>Drug Applicants</th><th>USAN Stem</th><th>USAN Year</th><th>USAN Definition</th><th>USAN Stem - Substem</th><th>First Approval</th><th>ATC Codes</th><th>Level 4 ATC Codes</th><th>Level 3 ATC Codes</th><th>Level 2 ATC Codes</th><th>Level 1 ATC Codes</th><th>Indication Class</th><th>Patent</th><th>Drug Type</th><th>Passes Rule of Five</th><th>First In Class</th><th>Chirality</th><th>Prodrug</th><th>Oral</th><th>Parenteral</th><th>Topical</th><th>Black Box</th><th>Availability Type</th><th>Smiles</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL186"</td><td>"CEFEPIME"</td><td>"BMY-28142|CEFE…</td><td>"BMY-28142|J01D…</td><td>4.0</td><td>"Samson Medical…</td><td>"'cef-'"</td><td>"1987"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1996"</td><td>"J01DE01"</td><td>"J01DE - Fourth…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"CHEMBL2364632"</td><td>"SARECYCLINE"</td><td>"P-005672|P0056…</td><td>"P-005672|P0056…</td><td>4.0</td><td>"Almirall Llc"</td><td>"'-cycline'"</td><td>"2012"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2018"</td><td>"J01AA14"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-8318706-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CON(C)Cc1ccc(O…</td></tr><tr><td>"CHEMBL31"</td><td>"GATIFLOXACIN"</td><td>"AM-1155|BMS-20…</td><td>"AM-1155|BMS-20…</td><td>4.0</td><td>"Apotex Inc|Bri…</td><td>"'-oxacin'"</td><td>"1997"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1999"</td><td>"S01AE06 | J01M…</td><td>"S01AE - Fluoro…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"COc1c(N2CCNC(C…</td></tr><tr><td>"CHEMBL3039597"</td><td>"GENTAMICIN"</td><td>"GENTAMICIN|GEN…</td><td>"SCH-9724"</td><td>4.0</td><td>"Schering Corp …</td><td>"'-micin'"</td><td>"1963"</td><td>"antibiotics (M…</td><td>"'-micin(-micin…</td><td>"1970"</td><td>"S01AA11 | S02A…</td><td>"S01AA - Antibi…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Unknown"</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CNC(C)[C@@H]1C…</td></tr><tr><td>"CHEMBL893"</td><td>"DICLOXACILLIN"</td><td>"BRL-1702|DICLO…</td><td>"BRL-1702|R-134…</td><td>4.0</td><td>"Teva Pharmaceu…</td><td>"'-cillin'"</td><td>"1965"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1968"</td><td>"J01CF01"</td><td>"J01CF - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"Cc1onc(-c2c(Cl…</td></tr><tr><td>"CHEMBL1449"</td><td>"TICARCILLIN"</td><td>"TICARCILLIN|Ti…</td><td>""</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'-cillin'"</td><td>"1973"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1976"</td><td>"J01CA13"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL1220"</td><td>"TINIDAZOLE"</td><td>"CP-12,574|CP-1…</td><td>"CP-12,574|CP-1…</td><td>4.0</td><td>"Mission Pharma…</td><td>"'-nidazole'"</td><td>"1970"</td><td>"antiprotozoal …</td><td>"'-nidazole(-ni…</td><td>"2004"</td><td>"P01AB02 | J01X…</td><td>"P01AB - Nitroi…</td><td>"P01A - AGENTS …</td><td>"P01 - ANTIPROT…</td><td>"P - ANTIPARASI…</td><td>"Antiprotozoal"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CCS(=O)(=O)CCn…</td></tr><tr><td>"CHEMBL501122"</td><td>"CEFTAROLINE FO…</td><td>"CEFTAROLINE FO…</td><td>"PPI-0903|TAK 5…</td><td>4.0</td><td>"Apotex Inc|All…</td><td>"'cef-; fos-'"</td><td>"2006"</td><td>"cephalosporins…</td><td>"'cef-(cef-); f…</td><td>"2010"</td><td>"J01DI02"</td><td>"J01DI - Other …</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-6417175-B1"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CCO/N=C(\C(=O)…</td></tr><tr><td>"CHEMBL137"</td><td>"METRONIDAZOLE"</td><td>"ACEA|ANABACT|B…</td><td>"BAY-5360|BAYER…</td><td>4.0</td><td>"Inforlife Sa|L…</td><td>"'-nidazole'"</td><td>"1962"</td><td>"antiprotozoal …</td><td>"'-nidazole(-ni…</td><td>"1963"</td><td>"D06BX01 | P01A…</td><td>"D06BX - Other …</td><td>"D06B - CHEMOTH…</td><td>"D06 - ANTIBIOT…</td><td>"D - DERMATOLOG…</td><td>"Antibacterial,…</td><td>"US-6881726-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"Cc1ncc([N+](=O…</td></tr><tr><td>"CHEMBL376140"</td><td>"TIGECYCLINE"</td><td>"TIGECYCLINE|Ty…</td><td>"WAY-GAR-936"</td><td>4.0</td><td>"Apotex Inc|Fre…</td><td>"'-cycline'"</td><td>"2002"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2005"</td><td>"J01AA12"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-7879828-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CN(C)c1cc(NC(=…</td></tr><tr><td>"CHEMBL1741"</td><td>"CLARITHROMYCIN…</td><td>"6-O-METHYLERYT…</td><td>"A-56268|ABBOTT…</td><td>4.0</td><td>"Sunshine Lake …</td><td>"'-mycin'"</td><td>"1988"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1991"</td><td>"J01FA09"</td><td>"J01FA - Macrol…</td><td>"J01F - MACROLI…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-7977488-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC[C@H]1OC(=O)…</td></tr><tr><td>"CHEMBL1747"</td><td>"TOBRAMYCIN"</td><td>"47663|Aktob|BE…</td><td>"47663|NSC-1805…</td><td>4.0</td><td>"Igi Laboratori…</td><td>"'-mycin'"</td><td>"1972"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1975"</td><td>"J01GB01 | S01A…</td><td>"J01GB - Other …</td><td>"J01G - AMINOGL…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-6987094-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"NC[C@H]1O[C@H]…</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL404"</td><td>"TAZOBACTAM"</td><td>"CL 298,741|CL-…</td><td>"CL 298,741|CL-…</td><td>4.0</td><td>"Wytells Pharma…</td><td>"'-bactam'"</td><td>"1989"</td><td>"beta-lactamase…</td><td>"'-bactam(-bact…</td><td>"1993"</td><td>"J01CG02"</td><td>"J01CG - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Inhibitor (bet…</td><td>"US-6900184-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"C[C@]1(Cn2ccnn…</td></tr><tr><td>"CHEMBL1689772"</td><td>"OMADACYCLINE"</td><td>"AMADACYCLINE|B…</td><td>"BAY 73-6944|PT…</td><td>4.0</td><td>"Paratek Pharma…</td><td>"'-cycline'"</td><td>"2009"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2018"</td><td>"J01AA15"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-7326696-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CN(C)c1cc(CNCC…</td></tr><tr><td>"CHEMBL3989974"</td><td>"CEFIDEROCOL"</td><td>"CEFIDEROCOL|GS…</td><td>"GSK2696266|S-6…</td><td>4.0</td><td>"Shionogi Inc"</td><td>"'cef-'"</td><td>"2017"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"2019"</td><td>"J01DI04"</td><td>"J01DI - Other …</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-9238657-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC(C)(O/N=C(\C…</td></tr><tr><td>"CHEMBL1435"</td><td>"CEFAZOLIN"</td><td>"CEFAZOLIN|CEPH…</td><td>"J01DB04|SK&amp;F-4…</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'cef-'"</td><td>"1972"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1973"</td><td>"J01DB04"</td><td>"J01DB - First-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"Cc1nnc(SCC2=C(…</td></tr><tr><td>"CHEMBL3989751"</td><td>"NEOMYCIN"</td><td>"FRADIOMYCIN|KA…</td><td>""</td><td>4.0</td><td>"Bayer Pharmace…</td><td>"'-mycin'"</td><td>"1966"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1957"</td><td>"R02AB01 | S01A…</td><td>"R02AB - Antibi…</td><td>"R02A - THROAT …</td><td>"R02 - THROAT P…</td><td>"R - RESPIRATOR…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>""</td></tr><tr><td>"CHEMBL572"</td><td>"NITROFURANTOIN…</td><td>"BERKFURIN|CEDU…</td><td>"NSC-2107|NSC-4…</td><td>4.0</td><td>"Sun Pharmaceut…</td><td>"'-toin'"</td><td>""</td><td>"antiepileptics…</td><td>"'-toin(-toin)'…</td><td>"1953"</td><td>"J01XE01 | J01X…</td><td>"J01XE - Nitrof…</td><td>"J01X - OTHER A…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"O=C1CN(/N=C/c2…</td></tr><tr><td>"CHEMBL44354"</td><td>"CEFTAZIDIME"</td><td>"CEFTAZIDIME|CE…</td><td>"GR 20263|GR-20…</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'cef-'"</td><td>"1980"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1985"</td><td>"J01DD02"</td><td>"J01DD - Third-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-7112592-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC(C)(O/N=C(\C…</td></tr><tr><td>"CHEMBL29"</td><td>"BENZYLPENICILL…</td><td>"BENZYL PENICIL…</td><td>"J01CE01|NSC-19…</td><td>4.0</td><td>"Hq Specialty P…</td><td>"'-cillin'"</td><td>""</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1947"</td><td>"J01CE01 | S01A…</td><td>"J01CE - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL8"</td><td>"CIPROFLOXACIN"</td><td>"BAY O 9867 FRE…</td><td>"BAY O 9867 FRE…</td><td>4.0</td><td>"Inforlife Sa|A…</td><td>"'-oxacin'"</td><td>"1987"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1987"</td><td>"J01MA02 | S03A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-8318817-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"O=C(O)c1cn(C2C…</td></tr><tr><td>"CHEMBL9"</td><td>"NORFLOXACIN"</td><td>"Baccidal|CHIBR…</td><td>"MK-366|NSC-757…</td><td>4.0</td><td>"Merck Research…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1986"</td><td>"J01MA06 | S01A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CCn1cc(C(=O)O)…</td></tr><tr><td>"CHEMBL21"</td><td>"SULFANILAMIDE"</td><td>"ANILINE-P-SULF…</td><td>"NSC-7618"</td><td>4.0</td><td>"Mylan Specialt…</td><td>"'sulfa-'"</td><td>""</td><td>"antimicrobials…</td><td>"'sulfa-(sulfa-…</td><td>"1985"</td><td>"D06BA05 | J01E…</td><td>"D06BA - Sulfon…</td><td>"D06B - CHEMOTH…</td><td>"D06 - ANTIBIOT…</td><td>"D - DERMATOLOG…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"Nc1ccc(S(N)(=O…</td></tr><tr><td>"CHEMBL4"</td><td>"OFLOXACIN"</td><td>"DL-8280|EXOCIN…</td><td>"DL-8280|HOE 28…</td><td>4.0</td><td>"Bausch And Lom…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1990"</td><td>"J01MA01 | S02A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CC1COc2c(N3CCN…</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick overview of the statistics summary of the selected dataframe</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (9, 30)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>describe</th><th>Parent Molecule</th><th>Name</th><th>Synonyms</th><th>Research Codes</th><th>Phase</th><th>Drug Applicants</th><th>USAN Stem</th><th>USAN Year</th><th>USAN Definition</th><th>USAN Stem - Substem</th><th>First Approval</th><th>ATC Codes</th><th>Level 4 ATC Codes</th><th>Level 3 ATC Codes</th><th>Level 2 ATC Codes</th><th>Level 1 ATC Codes</th><th>Indication Class</th><th>Patent</th><th>Drug Type</th><th>Passes Rule of Five</th><th>First In Class</th><th>Chirality</th><th>Prodrug</th><th>Oral</th><th>Parenteral</th><th>Topical</th><th>Black Box</th><th>Availability Type</th><th>Smiles</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>f64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"count"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>72.0</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>"72"</td><td>72.0</td><td>72.0</td><td>"72"</td><td>72.0</td><td>72.0</td><td>72.0</td><td>72.0</td><td>72.0</td><td>"72"</td><td>"72"</td></tr><tr><td>"null_count"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>0.0</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>"0"</td><td>0.0</td><td>0.0</td><td>"0"</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"0"</td><td>"0"</td></tr><tr><td>"mean"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>4.0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.583333</td><td>0.0</td><td>null</td><td>0.041667</td><td>0.611111</td><td>0.694444</td><td>0.25</td><td>0.333333</td><td>null</td><td>null</td></tr><tr><td>"std"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.496466</td><td>0.0</td><td>null</td><td>0.201229</td><td>0.490919</td><td>0.463875</td><td>0.436051</td><td>0.474713</td><td>null</td><td>null</td></tr><tr><td>"min"</td><td>"CHEMBL1082"</td><td>"AMIKACIN"</td><td>"47663|Aktob|BE…</td><td>""</td><td>4.0</td><td>"Alkem Laborato…</td><td>""</td><td>""</td><td>""</td><td>""</td><td>"1941"</td><td>"A01AB23 | D10A…</td><td>"A01AB - Antiin…</td><td>"A01A - STOMATO…</td><td>"A01 - STOMATOL…</td><td>"A - ALIMENTARY…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0.0</td><td>0.0</td><td>"Achiral Molecu…</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"Prescription O…</td><td>""</td></tr><tr><td>"max"</td><td>"CHEMBL996"</td><td>"VANCOMYCIN"</td><td>"VANCOMYCIN|Van…</td><td>"WAY-GAR-936"</td><td>4.0</td><td>"Xiromed Pharma…</td><td>"'sulfa-'"</td><td>"2017"</td><td>"vancomycin-rel…</td><td>"'sulfa-(sulfa-…</td><td>"2019"</td><td>"S01AE06 | J01M…</td><td>"S01AE - Fluoro…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Inhibitor (bet…</td><td>"US-9238657-B2"</td><td>"1:Synthetic Sm…</td><td>1.0</td><td>0.0</td><td>"Unknown"</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>"Prescription O…</td><td>"O=C1CN(/N=C/c2…</td></tr><tr><td>"median"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>4.0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>1.0</td><td>0.0</td><td>null</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>null</td><td>null</td></tr><tr><td>"25%"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>4.0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.0</td><td>0.0</td><td>null</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>null</td><td>null</td></tr><tr><td>"75%"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>4.0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>1.0</td><td>0.0</td><td>null</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>null</td><td>null</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Due to the error message when converting SMILES into SELFIES using datamol, </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Attempted to spot the missing/empty SMILES</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_ai_rx.<span class="bu">filter</span>(pl.col(<span class="st">"Smiles"</span>) <span class="op">==</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 29)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Parent Molecule</th><th>Name</th><th>Synonyms</th><th>Research Codes</th><th>Phase</th><th>Drug Applicants</th><th>USAN Stem</th><th>USAN Year</th><th>USAN Definition</th><th>USAN Stem - Substem</th><th>First Approval</th><th>ATC Codes</th><th>Level 4 ATC Codes</th><th>Level 3 ATC Codes</th><th>Level 2 ATC Codes</th><th>Level 1 ATC Codes</th><th>Indication Class</th><th>Patent</th><th>Drug Type</th><th>Passes Rule of Five</th><th>First In Class</th><th>Chirality</th><th>Prodrug</th><th>Oral</th><th>Parenteral</th><th>Topical</th><th>Black Box</th><th>Availability Type</th><th>Smiles</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL3989751"</td><td>"NEOMYCIN"</td><td>"FRADIOMYCIN|KA…</td><td>""</td><td>4.0</td><td>"Bayer Pharmace…</td><td>"'-mycin'"</td><td>"1966"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1957"</td><td>"R02AB01 | S01A…</td><td>"R02AB - Antibi…</td><td>"R02A - THROAT …</td><td>"R02 - THROAT P…</td><td>"R - RESPIRATOR…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>""</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Below example from StackOverflow - https://stackoverflow.com/questions/72292048/idiomatic-replacement-of-empty-string-with-pl-null-null-in-polars</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only_these = ['str1', 'str2']</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df.with_columns([</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     pl.when(pl.col(only_these).str.lengths() == 0)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     .then(None)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     .otherwise(pl.col(only_these))</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     .keep_name()</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Canonical SMILES for neomycin - C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracted from PubChem (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.with_columns([</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">"Smiles"</span>).<span class="bu">str</span>.lengths() <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    .then(<span class="st">"C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    .otherwise(pl.col(<span class="st">"Smiles"</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    .keep_name()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>df_ai_rx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (72, 29)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Parent Molecule</th><th>Name</th><th>Synonyms</th><th>Research Codes</th><th>Phase</th><th>Drug Applicants</th><th>USAN Stem</th><th>USAN Year</th><th>USAN Definition</th><th>USAN Stem - Substem</th><th>First Approval</th><th>ATC Codes</th><th>Level 4 ATC Codes</th><th>Level 3 ATC Codes</th><th>Level 2 ATC Codes</th><th>Level 1 ATC Codes</th><th>Indication Class</th><th>Patent</th><th>Drug Type</th><th>Passes Rule of Five</th><th>First In Class</th><th>Chirality</th><th>Prodrug</th><th>Oral</th><th>Parenteral</th><th>Topical</th><th>Black Box</th><th>Availability Type</th><th>Smiles</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL186"</td><td>"CEFEPIME"</td><td>"BMY-28142|CEFE…</td><td>"BMY-28142|J01D…</td><td>4.0</td><td>"Samson Medical…</td><td>"'cef-'"</td><td>"1987"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1996"</td><td>"J01DE01"</td><td>"J01DE - Fourth…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"CHEMBL2364632"</td><td>"SARECYCLINE"</td><td>"P-005672|P0056…</td><td>"P-005672|P0056…</td><td>4.0</td><td>"Almirall Llc"</td><td>"'-cycline'"</td><td>"2012"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2018"</td><td>"J01AA14"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-8318706-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CON(C)Cc1ccc(O…</td></tr><tr><td>"CHEMBL31"</td><td>"GATIFLOXACIN"</td><td>"AM-1155|BMS-20…</td><td>"AM-1155|BMS-20…</td><td>4.0</td><td>"Apotex Inc|Bri…</td><td>"'-oxacin'"</td><td>"1997"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1999"</td><td>"S01AE06 | J01M…</td><td>"S01AE - Fluoro…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"COc1c(N2CCNC(C…</td></tr><tr><td>"CHEMBL3039597"</td><td>"GENTAMICIN"</td><td>"GENTAMICIN|GEN…</td><td>"SCH-9724"</td><td>4.0</td><td>"Schering Corp …</td><td>"'-micin'"</td><td>"1963"</td><td>"antibiotics (M…</td><td>"'-micin(-micin…</td><td>"1970"</td><td>"S01AA11 | S02A…</td><td>"S01AA - Antibi…</td><td>"S01A - ANTIINF…</td><td>"S01 - OPHTHALM…</td><td>"S - SENSORY OR…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Unknown"</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CNC(C)[C@@H]1C…</td></tr><tr><td>"CHEMBL893"</td><td>"DICLOXACILLIN"</td><td>"BRL-1702|DICLO…</td><td>"BRL-1702|R-134…</td><td>4.0</td><td>"Teva Pharmaceu…</td><td>"'-cillin'"</td><td>"1965"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1968"</td><td>"J01CF01"</td><td>"J01CF - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"Cc1onc(-c2c(Cl…</td></tr><tr><td>"CHEMBL1449"</td><td>"TICARCILLIN"</td><td>"TICARCILLIN|Ti…</td><td>""</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'-cillin'"</td><td>"1973"</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1976"</td><td>"J01CA13"</td><td>"J01CA - Penici…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL1220"</td><td>"TINIDAZOLE"</td><td>"CP-12,574|CP-1…</td><td>"CP-12,574|CP-1…</td><td>4.0</td><td>"Mission Pharma…</td><td>"'-nidazole'"</td><td>"1970"</td><td>"antiprotozoal …</td><td>"'-nidazole(-ni…</td><td>"2004"</td><td>"P01AB02 | J01X…</td><td>"P01AB - Nitroi…</td><td>"P01A - AGENTS …</td><td>"P01 - ANTIPROT…</td><td>"P - ANTIPARASI…</td><td>"Antiprotozoal"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CCS(=O)(=O)CCn…</td></tr><tr><td>"CHEMBL501122"</td><td>"CEFTAROLINE FO…</td><td>"CEFTAROLINE FO…</td><td>"PPI-0903|TAK 5…</td><td>4.0</td><td>"Apotex Inc|All…</td><td>"'cef-; fos-'"</td><td>"2006"</td><td>"cephalosporins…</td><td>"'cef-(cef-); f…</td><td>"2010"</td><td>"J01DI02"</td><td>"J01DI - Other …</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-6417175-B1"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CCO/N=C(\C(=O)…</td></tr><tr><td>"CHEMBL137"</td><td>"METRONIDAZOLE"</td><td>"ACEA|ANABACT|B…</td><td>"BAY-5360|BAYER…</td><td>4.0</td><td>"Inforlife Sa|L…</td><td>"'-nidazole'"</td><td>"1962"</td><td>"antiprotozoal …</td><td>"'-nidazole(-ni…</td><td>"1963"</td><td>"D06BX01 | P01A…</td><td>"D06BX - Other …</td><td>"D06B - CHEMOTH…</td><td>"D06 - ANTIBIOT…</td><td>"D - DERMATOLOG…</td><td>"Antibacterial,…</td><td>"US-6881726-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"Cc1ncc([N+](=O…</td></tr><tr><td>"CHEMBL376140"</td><td>"TIGECYCLINE"</td><td>"TIGECYCLINE|Ty…</td><td>"WAY-GAR-936"</td><td>4.0</td><td>"Apotex Inc|Fre…</td><td>"'-cycline'"</td><td>"2002"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2005"</td><td>"J01AA12"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-7879828-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CN(C)c1cc(NC(=…</td></tr><tr><td>"CHEMBL1741"</td><td>"CLARITHROMYCIN…</td><td>"6-O-METHYLERYT…</td><td>"A-56268|ABBOTT…</td><td>4.0</td><td>"Sunshine Lake …</td><td>"'-mycin'"</td><td>"1988"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1991"</td><td>"J01FA09"</td><td>"J01FA - Macrol…</td><td>"J01F - MACROLI…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-7977488-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC[C@H]1OC(=O)…</td></tr><tr><td>"CHEMBL1747"</td><td>"TOBRAMYCIN"</td><td>"47663|Aktob|BE…</td><td>"47663|NSC-1805…</td><td>4.0</td><td>"Igi Laboratori…</td><td>"'-mycin'"</td><td>"1972"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1975"</td><td>"J01GB01 | S01A…</td><td>"J01GB - Other …</td><td>"J01G - AMINOGL…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-6987094-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"NC[C@H]1O[C@H]…</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL404"</td><td>"TAZOBACTAM"</td><td>"CL 298,741|CL-…</td><td>"CL 298,741|CL-…</td><td>4.0</td><td>"Wytells Pharma…</td><td>"'-bactam'"</td><td>"1989"</td><td>"beta-lactamase…</td><td>"'-bactam(-bact…</td><td>"1993"</td><td>"J01CG02"</td><td>"J01CG - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Inhibitor (bet…</td><td>"US-6900184-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"C[C@]1(Cn2ccnn…</td></tr><tr><td>"CHEMBL1689772"</td><td>"OMADACYCLINE"</td><td>"AMADACYCLINE|B…</td><td>"BAY 73-6944|PT…</td><td>4.0</td><td>"Paratek Pharma…</td><td>"'-cycline'"</td><td>"2009"</td><td>"antibiotics (t…</td><td>"'-cycline(-cyc…</td><td>"2018"</td><td>"J01AA15"</td><td>"J01AA - Tetrac…</td><td>"J01A - TETRACY…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-7326696-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CN(C)c1cc(CNCC…</td></tr><tr><td>"CHEMBL3989974"</td><td>"CEFIDEROCOL"</td><td>"CEFIDEROCOL|GS…</td><td>"GSK2696266|S-6…</td><td>4.0</td><td>"Shionogi Inc"</td><td>"'cef-'"</td><td>"2017"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"2019"</td><td>"J01DI04"</td><td>"J01DI - Other …</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>""</td><td>"US-9238657-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"CC(C)(O/N=C(\C…</td></tr><tr><td>"CHEMBL1435"</td><td>"CEFAZOLIN"</td><td>"CEFAZOLIN|CEPH…</td><td>"J01DB04|SK&amp;F-4…</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'cef-'"</td><td>"1972"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1973"</td><td>"J01DB04"</td><td>"J01DB - First-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"Cc1nnc(SCC2=C(…</td></tr><tr><td>"CHEMBL3989751"</td><td>"NEOMYCIN"</td><td>"FRADIOMYCIN|KA…</td><td>""</td><td>4.0</td><td>"Bayer Pharmace…</td><td>"'-mycin'"</td><td>"1966"</td><td>"antibiotics (S…</td><td>"'-mycin(-mycin…</td><td>"1957"</td><td>"R02AB01 | S01A…</td><td>"R02AB - Antibi…</td><td>"R02A - THROAT …</td><td>"R02 - THROAT P…</td><td>"R - RESPIRATOR…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"C1C(C(C(C(C1N)…</td></tr><tr><td>"CHEMBL572"</td><td>"NITROFURANTOIN…</td><td>"BERKFURIN|CEDU…</td><td>"NSC-2107|NSC-4…</td><td>4.0</td><td>"Sun Pharmaceut…</td><td>"'-toin'"</td><td>""</td><td>"antiepileptics…</td><td>"'-toin(-toin)'…</td><td>"1953"</td><td>"J01XE01 | J01X…</td><td>"J01XE - Nitrof…</td><td>"J01X - OTHER A…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial …</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>"Prescription O…</td><td>"O=C1CN(/N=C/c2…</td></tr><tr><td>"CHEMBL44354"</td><td>"CEFTAZIDIME"</td><td>"CEFTAZIDIME|CE…</td><td>"GR 20263|GR-20…</td><td>4.0</td><td>"Glaxosmithklin…</td><td>"'cef-'"</td><td>"1980"</td><td>"cephalosporins…</td><td>"'cef-(cef-)'"</td><td>"1985"</td><td>"J01DD02"</td><td>"J01DD - Third-…</td><td>"J01D - OTHER B…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-7112592-B2"</td><td>"1:Synthetic Sm…</td><td>0</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC(C)(O/N=C(\C…</td></tr><tr><td>"CHEMBL29"</td><td>"BENZYLPENICILL…</td><td>"BENZYL PENICIL…</td><td>"J01CE01|NSC-19…</td><td>4.0</td><td>"Hq Specialty P…</td><td>"'-cillin'"</td><td>""</td><td>"penicillins"</td><td>"'-cillin(-cill…</td><td>"1947"</td><td>"J01CE01 | S01A…</td><td>"J01CE - Beta-l…</td><td>"J01C - BETA-LA…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Single Stereoi…</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>"Prescription O…</td><td>"CC1(C)S[C@@H]2…</td></tr><tr><td>"CHEMBL8"</td><td>"CIPROFLOXACIN"</td><td>"BAY O 9867 FRE…</td><td>"BAY O 9867 FRE…</td><td>4.0</td><td>"Inforlife Sa|A…</td><td>"'-oxacin'"</td><td>"1987"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1987"</td><td>"J01MA02 | S03A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"US-8318817-B2"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"O=C(O)c1cn(C2C…</td></tr><tr><td>"CHEMBL9"</td><td>"NORFLOXACIN"</td><td>"Baccidal|CHIBR…</td><td>"MK-366|NSC-757…</td><td>4.0</td><td>"Merck Research…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1986"</td><td>"J01MA06 | S01A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CCn1cc(C(=O)O)…</td></tr><tr><td>"CHEMBL21"</td><td>"SULFANILAMIDE"</td><td>"ANILINE-P-SULF…</td><td>"NSC-7618"</td><td>4.0</td><td>"Mylan Specialt…</td><td>"'sulfa-'"</td><td>""</td><td>"antimicrobials…</td><td>"'sulfa-(sulfa-…</td><td>"1985"</td><td>"D06BA05 | J01E…</td><td>"D06BA - Sulfon…</td><td>"D06B - CHEMOTH…</td><td>"D06 - ANTIBIOT…</td><td>"D - DERMATOLOG…</td><td>""</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Achiral Molecu…</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>"Prescription O…</td><td>"Nc1ccc(S(N)(=O…</td></tr><tr><td>"CHEMBL4"</td><td>"OFLOXACIN"</td><td>"DL-8280|EXOCIN…</td><td>"DL-8280|HOE 28…</td><td>4.0</td><td>"Bausch And Lom…</td><td>"'-oxacin'"</td><td>"1984"</td><td>"antibacterials…</td><td>"'-oxacin(-oxac…</td><td>"1990"</td><td>"J01MA01 | S02A…</td><td>"J01MA - Fluoro…</td><td>"J01M - QUINOLO…</td><td>"J01 - ANTIBACT…</td><td>"J - ANTIINFECT…</td><td>"Antibacterial"</td><td>"None"</td><td>"1:Synthetic Sm…</td><td>1</td><td>0</td><td>"Racemic Mixtur…</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>"Prescription O…</td><td>"CC1COc2c(N3CCN…</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping only two columns with information needed for later use</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.select([<span class="st">"Name"</span>, <span class="st">"Smiles"</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (5, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Name</th><th>Smiles</th></tr><tr><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CEFEPIME"</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"SARECYCLINE"</td><td>"CON(C)Cc1ccc(O…</td></tr><tr><td>"GATIFLOXACIN"</td><td>"COc1c(N2CCNC(C…</td></tr><tr><td>"GENTAMICIN"</td><td>"CNC(C)[C@@H]1C…</td></tr><tr><td>"DICLOXACILLIN"</td><td>"Cc1onc(-c2c(Cl…</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change column name of "Smiles" - to ensure the _preprocess function will work</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># as smiles_column = "smiles" with lowercase "s" since will be using this function</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to cater for the 3 FtsZ compounds as well</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.rename({<span class="st">"Smiles"</span>: <span class="st">"smiles"</span>})</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (5, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Name</th><th>smiles</th></tr><tr><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CEFEPIME"</td><td>"CO/N=C(\C(=O)N…</td></tr><tr><td>"SARECYCLINE"</td><td>"CON(C)Cc1ccc(O…</td></tr><tr><td>"GATIFLOXACIN"</td><td>"COc1c(N2CCNC(C…</td></tr><tr><td>"GENTAMICIN"</td><td>"CNC(C)[C@@H]1C…</td></tr><tr><td>"DICLOXACILLIN"</td><td>"Cc1onc(-c2c(Cl…</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert polars dataframe into a pandas dataframe (as datamol was likely only compatible with Pandas for now)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df_ai_pd <span class="op">=</span> df_ai_rx.to_pandas()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df_ai_pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CEFEPIME</td>
+      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SARECYCLINE</td>
+      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>GATIFLOXACIN</td>
+      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GENTAMICIN</td>
+      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DICLOXACILLIN</td>
+      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>BENZYLPENICILLIN</td>
+      <td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>CIPROFLOXACIN</td>
+      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>NORFLOXACIN</td>
+      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>SULFANILAMIDE</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>OFLOXACIN</td>
+      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+    </tr>
+  </tbody>
+</table>
+<p>72 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the dataframe has been converted from Polars to Pandas</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df_ai_pd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>pandas.core.frame.DataFrame</code></pre>
+</div>
+</div>
+<p><strong>Pre-processing and standardising molecules</strong></p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre-process molecules using _preprocess function - adapted with courtesy from datamol.io</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>smiles_column <span class="op">=</span> <span class="st">"smiles"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>dm.disable_rdkit_log()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _preprocess(row):</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.to_mol(row[smiles_column], ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.fix_mol(mol)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.sanitize_mol(mol, sanifix<span class="op">=</span><span class="va">True</span>, charge_neutral<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.standardize_mol(</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        mol,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        disconnect_metals<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        normalize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        reionize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        uncharge<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        stereo<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"standard_smiles"</span>] <span class="op">=</span> dm.standardize_smiles(dm.to_smiles(mol))</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"selfies"</span>] <span class="op">=</span> dm.to_selfies(mol)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchi"</span>] <span class="op">=</span> dm.to_inchi(mol)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchikey"</span>] <span class="op">=</span> dm.to_inchikey(mol)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Issue found with one compound that acutally had no SMILES recorded in the dataframe!</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># **Fixed by adding the missing SMILES for neomycin**</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Two methods to convert SMILES into SELFIES</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Method one - using lambda function:</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># df_ai_pd["selfies"] = df_ai_pd["Smiles"].apply(lambda x: dm.to_selfies(x))</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_ai_pd</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Method two - using _preprocess function:</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>data_mol_clean <span class="op">=</span> df_ai_pd.<span class="bu">apply</span>(_preprocess, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>data_mol_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>smiles</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CEFEPIME</td>
+      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+      <td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
+      <td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
+      <td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SARECYCLINE</td>
+      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+      <td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
+      <td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
+      <td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>GATIFLOXACIN</td>
+      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+      <td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
+      <td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
+      <td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GENTAMICIN</td>
+      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+      <td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
+      <td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
+      <td>NPEFREDMMVQEPL-RWPARATISA-N</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DICLOXACILLIN</td>
+      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+      <td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
+      <td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
+      <td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>BENZYLPENICILLIN</td>
+      <td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
+      <td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
+      <td>[C][C][Branch1][C][C][S][C@@H1][C@H1][Branch1]...</td>
+      <td>InChI=1S/C16H18N2O4S/c1-16(2)12(15(21)22)18-13...</td>
+      <td>JGSARLDLIJGVTE-MBNYWOFBSA-N</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>CIPROFLOXACIN</td>
+      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+      <td>[O][=C][Branch1][C][O][C][=C][N][Branch1][=Bra...</td>
+      <td>InChI=1S/C17H18FN3O3/c18-13-7-11-14(8-15(13)20...</td>
+      <td>MYSWGUAQZAJSOK-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>NORFLOXACIN</td>
+      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+      <td>[C][C][N][C][=C][Branch1][=Branch1][C][=Branch...</td>
+      <td>InChI=1S/C16H18FN3O3/c1-2-19-9-11(16(22)23)15(...</td>
+      <td>OGJPXUAPXNRGGI-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>SULFANILAMIDE</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+      <td>[N][C][=C][C][=C][Branch1][=Branch2][S][Branch...</td>
+      <td>InChI=1S/C6H8N2O2S/c7-5-1-3-6(4-2-5)11(8,9)10/...</td>
+      <td>FDDDEECHVMSUSB-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>OFLOXACIN</td>
+      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+      <td>[C][C][C][O][C][=C][Branch1][N][N][C][C][N][Br...</td>
+      <td>InChI=1S/C18H20FN3O4/c1-10-9-26-17-14-11(16(23...</td>
+      <td>GSDSWSVVBLHKDQ-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+<p>72 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selfies conversion Works for one SMILES</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># selfies = dm.to_selfies("O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl")</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># selfies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Visualise the compounds in 2D</strong></p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from cleaned ChEMBL anti-infective dataset</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_ai_sm <span class="op">=</span> data_mol_clean[<span class="st">"standard_smiles"</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of these molecules in SMILES</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dm.to_mol default set with sanitize = True</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_sm]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative way to convert dataframe into a list of mols (same as mol_ls)</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mols = dm.from_df(df_name, smiles_column="Smiles")</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add compound name for each 2D image of compounds</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>legends <span class="op">=</span> <span class="bu">list</span>(data_mol_clean[<span class="st">"Name"</span>])</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-18-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>Extract scaffolds</strong></p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-19-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>Data cleaning for FtsZ compounds</strong></p>
+<p>The section below focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al.&nbsp;Discovery of 2’,6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 1 to mol from InChI</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cpd1 <span class="op">=</span> dm.from_inchi(<span class="st">"InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cpd1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 2 SMILES to mol</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cpd2 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cpd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert compound 3 SMILES to mol</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cpd3 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>cpd3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save these 3 compounds into a list</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mol_lst <span class="op">=</span> [cpd1, cpd2, cpd3]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>mol_lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>[&lt;rdkit.Chem.rdchem.Mol at 0x12dd2b370&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x12dd2b3e0&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x12dd2b610&gt;]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a list of mols to a dataframe</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dm.to_df(mol_lst)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/jenniferlin/Scaffolds data prep/venv/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [<span class="st">"Compound 1"</span>, <span class="st">"Compound 2"</span>, <span class="st">"Compound 3"</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"names"</span>] <span class="op">=</span> names</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+      <th>names</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>Compound 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>Compound 2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>Compound 3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre-process FtsZ compounds</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data_cleaned <span class="op">=</span> df.<span class="bu">apply</span>(_preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>data_cleaned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>smiles</th>
+      <th>names</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>Compound 1</td>
+      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+      <td>[O][=C][Branch1][=C][/C][=C][/C][=C][C][=C][Br...</td>
+      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>QNBFRAOWJNMPAF-ZIQQYUHESA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>Compound 2</td>
+      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>CWVXMBYGWRWONE-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>Compound 3</td>
+      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+      <td>InChI=1S/C22H24O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+      <td>KWPXNGBFYRHREW-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Place FtsZ compounds in 2D images</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all SMILES from cleaned FtsZ compound dataset</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_ai_ftsz <span class="op">=</span> data_cleaned[<span class="st">"standard_smiles"</span>]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a list of these molecules in SMILES</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>mol_list <span class="op">=</span> [dm.to_mol(smile) <span class="cf">for</span> smile <span class="kw">in</span> df_ai_ftsz]</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add compound name for each 2D image of compounds</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>legends <span class="op">=</span> <span class="bu">list</span>(data_cleaned[<span class="st">"names"</span>])</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_list, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-27-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Murcko scaffolds of FtsZ compounds</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>m_ftsz_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_list]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_ftsz_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-28-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>Aligning scaffolds</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Align scaffolds between ChEMBL Rx anti-infectives and FtsZ compounds</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Aim: - If possible, compare compound 3’s experimental results (target species from paper) with known approved anti-infectives with similar/same target species by using USAN definition and level 4 ATC codes curated by ChEMBL</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
