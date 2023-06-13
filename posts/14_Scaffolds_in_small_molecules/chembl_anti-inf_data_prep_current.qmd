@@ -7,7 +7,7 @@ jupyter: python3
 
 **Current post**
 
-**Key question**: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be a good hit (with similar bacterial targets? if so this can be backed up with experimental findings from the paper, or if different targets, it might lead to a new type of anti-infective hits)
+**Key question**: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar ?implying it might be a good hit with different R-groups (?similar bacterial targets between cpd3 and other Rx anti-infectives, if so this can be backed up with experimental findings from the paper, or if different scaffolds, it might lead to a new type of anti-infective hits - consider comparing target binding site for anti-infective ?good for comparing protein-ligand interaction)
 
 **Tasks for current post**: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Align scaffolds of compounds 1-3 with other scaffolds from ChEMBL - Look for MCS (maximum common structure) - use RDKit (?as separate post) - Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
 
@@ -80,7 +80,7 @@ df_ai_rx
 ```
 
 ```{python}
-# Keeping only two columns with information needed for later use
+# Keeping only selected columns with information needed for later use
 df_ai_rx = df_ai_rx.select(["Smiles", "Name", "USAN Definition", "Level 4 ATC Codes"])
 df_ai_rx.head()
 ```
@@ -261,7 +261,7 @@ dm.to_image(m_ftsz_scaffolds, mol_size = (400, 400), legends = legends)
 
 -   Align scaffolds between ChEMBL Rx anti-infectives and FtsZ compounds
 
--   Separate ChEMBL Rx anti-infective compounds into clusters - aiming to look for common scaffold
+-   (optional) Separate ChEMBL Rx anti-infective compounds into clusters - aiming to look for common scaffold
 
 -   If none, choose a template molecule (? search for most similar compound against FtsZ compounds first) & compare FtsZ compounds with it
 
@@ -323,6 +323,10 @@ mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "m
 
 ```{python}
 # Showing scaffolds of ChEMBL Rx anti-infectives
+
+# **Some scaffolds are repeated e.g. 6 & 8 
+# - consider adding count column into the scaffold dataframe**
+
 mols2grid.display(m_scaffolds)
 ```
 
@@ -332,8 +336,12 @@ mols2grid.display(m_ftsz_scaffolds)
 ```
 
 ```{python}
-# Borrow the scaffold_finder.py script from P. Walters
-# **Import relevant libraries first!**
+# Borrow the scaffold_finder.py script (small Python library for scaffold work) from P. Walters
+from scaffold_finder import generate_fragments, find_scaffolds, get_molecules_with_scaffold, cleanup_fragment
+```
+
+```{python}
+# Try scaffold_finder functions on ChEMBL Rx anti-infectives
 ```
 
 Aim: - If possible, compare compound 3's experimental results (target species from paper) with known approved anti-infectives with similar/same target species by using USAN definition and level 4 ATC codes curated by ChEMBL
