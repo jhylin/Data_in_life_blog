@@ -1,0 +1,339 @@
+---
+draft: true
+jupyter: python3
+---
+
+**Using datamol - Python library that works with molecules**
+
+**Current post**
+
+**Key question**: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar implying it might be a good hit (with similar bacterial targets? if so this can be backed up with experimental findings from the paper, or if different targets, it might lead to a new type of anti-infective hits)
+
+**Tasks for current post**: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models) - Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3 - Align scaffolds of compounds 1-3 with other scaffolds from ChEMBL - Look for MCS (maximum common structure) - use RDKit (?as separate post) - Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
+
+**Features to demonstrate:** - Using Polars dataframe library along with datamol Python library (probably a small degree only, as datamol was likely written with Pandas in mind only) - Integrating experimental results from paper from PhD work into cheminformatics project (validation always crucial for computational predictions) - Advancing from pure organic chemistry and computational chemistry without code into utilising data science tools and packages by coding in Python to lead project direction
+
+**Data cleaning for ChEMBL anti-infectives**
+
+```{python}
+import polars as pl
+import pandas as pd
+import datamol as dm
+import mols2grid
+```
+
+```{python}
+df_ai = pl.read_csv("chembl_anti-inf.csv", sep = ";")
+df_ai
+```
+
+```{python}
+print(df_ai.glimpse())
+```
+
+```{python}
+# Check availability types
+df_ai.groupby("Availability Type").count()
+```
+
+```{python}
+# Selecting only compounds that are prescription-only meds
+df_ai_rx = df_ai.filter(pl.col("Availability Type") == "Prescription Only")
+df_ai_rx
+```
+
+```{python}
+# Quick overview of the statistics summary of the selected dataframe
+df_ai_rx.describe()
+```
+
+```{python}
+# Due to the error message when converting SMILES into SELFIES using datamol, 
+# Attempted to spot the missing/empty SMILES
+df_ai_rx.filter(pl.col("Smiles") == "")
+```
+
+Below example from StackOverflow - https://stackoverflow.com/questions/72292048/idiomatic-replacement-of-empty-string-with-pl-null-null-in-polars
+
+```{python}
+# only_these = ['str1', 'str2']
+# df.with_columns([
+#     pl.when(pl.col(only_these).str.lengths() == 0)
+#     .then(None)
+#     .otherwise(pl.col(only_these))
+#     .keep_name()
+# ])
+```
+
+```{python}
+# Canonical SMILES for neomycin - C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N
+# Extracted from PubChem (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)
+
+df_ai_rx = df_ai_rx.with_columns([
+    pl.when(pl.col("Smiles").str.lengths() == 0)
+    .then("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N")
+    .otherwise(pl.col("Smiles"))
+    .keep_name()
+])
+
+df_ai_rx
+```
+
+```{python}
+# Keeping only two columns with information needed for later use
+df_ai_rx = df_ai_rx.select(["Smiles", "Name", "USAN Definition", "Level 4 ATC Codes"])
+df_ai_rx.head()
+```
+
+```{python}
+# Change column name of "Smiles" - to ensure the _preprocess function will work
+# as smiles_column = "smiles" with lowercase "s" - will be using this function
+# to cater for the 3 FtsZ compounds as well
+df_ai_rx = df_ai_rx.rename({"Smiles": "smiles", "Name": "names"})
+df_ai_rx.head()
+```
+
+```{python}
+# Convert all compounds to lowercases
+df_ai_rx = df_ai_rx.with_columns(pl.col("names").str.to_lowercase())
+df_ai_rx.head()
+```
+
+```{python}
+list(df_ai_rx["USAN Definition"])
+```
+
+```{python}
+# Convert polars dataframe into a pandas dataframe (as datamol likely only compatible with Pandas for now)
+df_ai_pd = df_ai_rx.to_pandas()
+df_ai_pd
+```
+
+```{python}
+# Check the dataframe has been converted from Polars to Pandas
+type(df_ai_pd)
+```
+
+**Pre-processing and standardising molecules**
+
+```{python}
+
+# Pre-process molecules using _preprocess function - adapted with courtesy from datamol.io
+
+smiles_column = "smiles"
+
+dm.disable_rdkit_log()
+
+def _preprocess(row):
+    mol = dm.to_mol(row[smiles_column], ordered=True)
+    mol = dm.fix_mol(mol)
+    mol = dm.sanitize_mol(mol, sanifix=True, charge_neutral=False)
+    mol = dm.standardize_mol(
+        mol,
+        disconnect_metals=False,
+        normalize=True,
+        reionize=True,
+        uncharge=False,
+        stereo=True,
+    )
+
+    row["standard_smiles"] = dm.standardize_smiles(dm.to_smiles(mol))
+    row["selfies"] = dm.to_selfies(mol)
+    row["inchi"] = dm.to_inchi(mol)
+    row["inchikey"] = dm.to_inchikey(mol)
+    return row
+```
+
+```{python}
+# Issue found with one compound that acutally had no SMILES recorded in the dataframe!
+# **Fixed by adding the missing SMILES for neomycin**
+
+# Two methods to convert SMILES into SELFIES
+
+# Method one - using lambda function:
+# df_ai_pd["selfies"] = df_ai_pd["Smiles"].apply(lambda x: dm.to_selfies(x))
+# df_ai_pd
+
+# Method two - using _preprocess function:
+data_mol_clean = df_ai_pd.apply(_preprocess, axis = 1)
+data_mol_clean
+```
+
+```{python}
+# Tested: Selfies conversion Works for one SMILES
+# selfies = dm.to_selfies("O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl")
+# selfies
+```
+
+**Visualise the compounds in 2D**
+
+```{python}
+# Grab all SMILES from cleaned ChEMBL anti-infective dataset
+df_ai_sm = data_mol_clean["standard_smiles"]
+# Load a list of these molecules in SMILES
+# dm.to_mol with sanitize = True set as default
+mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
+# Alternative way to convert dataframe into a list of mols (same as mol_ls)
+# mols = dm.from_df(df_name, smiles_column = "Smiles")
+# Add compound name for each 2D image of compounds
+legends_c = list(data_mol_clean["names"])
+# Convert the list of molecules into 2D images
+dm.to_image(mol_ls, n_cols = 5, mol_size = (400, 400), legends = legends_c)
+```
+
+**Extract scaffolds**
+
+```{python}
+# Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)
+m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
+#dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
+```
+
+```{python}
+type(m_scaffolds)
+```
+
+**Data cleaning for FtsZ compounds**
+
+The section below focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993
+
+```{python}
+# Convert compound 1 to mol from InChI
+cpd1 = dm.from_inchi("InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+")
+cpd1
+```
+
+```{python}
+# Convert compound 2 SMILES to mol
+cpd2 = dm.to_mol("OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O")
+cpd2
+```
+
+```{python}
+# Convert compound 3 SMILES to mol
+cpd3 = dm.to_mol("OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1")
+cpd3
+```
+
+```{python}
+# Save these 3 compounds into a list
+mol_lst = [cpd1, cpd2, cpd3]
+mol_lst
+```
+
+```{python}
+# Convert a list of mols to a dataframe
+df = dm.to_df(mol_lst)
+df
+```
+
+```{python}
+names = ["Compound_1", "Compound_2", "Compound_3"]
+df["names"] = names
+df
+```
+
+```{python}
+# Pre-process FtsZ compounds
+data_cleaned = df.apply(_preprocess, axis=1)
+data_cleaned
+```
+
+```{python}
+# Place FtsZ compounds in 2D images
+# Grab all SMILES from cleaned FtsZ compound dataset
+df_ai_ftsz = data_cleaned["standard_smiles"]
+# Load a list of these molecules in SMILES
+mol_ftsz_list = [dm.to_mol(smile) for smile in df_ai_ftsz]
+# Add compound name for each 2D image of compounds
+legends = list(data_cleaned["names"])
+# Convert the list of molecules into 2D images
+dm.to_image(mol_ftsz_list, n_cols = 5, mol_size = (400, 400), legends = legends)
+```
+
+```{python}
+# Get Murcko scaffolds of FtsZ compounds
+m_ftsz_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ftsz_list]
+dm.to_image(m_ftsz_scaffolds, mol_size = (400, 400), legends = legends)
+```
+
+**Aligning scaffolds**
+
+-   Align scaffolds between ChEMBL Rx anti-infectives and FtsZ compounds
+
+-   Separate ChEMBL Rx anti-infective compounds into clusters - aiming to look for common scaffold
+
+-   If none, choose a template molecule (? search for most similar compound against FtsZ compounds first) & compare FtsZ compounds with it
+
+```{python}
+# Align ChEMBL anti-infective compounds first
+# **Check out auto_align_many() method**
+# "anon-scaffold" is the default partition method
+# "cluster" partition method generated weird-looking compounds 
+# - ?to set cluster cut-off as it was stated it was sensitive to cutoff
+
+
+# aligned_list = dm.align.auto_align_many(mol_ls, partition_method = "anon-scaffold")
+# dm.to_image(aligned_list, mol_size = (400, 400), legends = legends_c)
+```
+
+```{python}
+# Combine dataframes of cleaned ChEMBL anti-infectives & cleaned FtsZ compounds
+combined_lists = [data_mol_clean, data_cleaned]
+full_data = pd.concat(combined_lists, ignore_index = True)
+full_data
+```
+
+```{python}
+df_full = full_data["standard_smiles"]
+df_full
+```
+
+```{python}
+mol_full = [dm.to_mol(smile) for smile in df_full]
+mol_full
+```
+
+```{python}
+aligned_list = dm.align.auto_align_many(mol_full, partition_method = "anon-scaffold")
+dm.to_image(aligned_list, mol_size = (400, 400), max_mols = 50)
+
+# compound structures did re-align in this code
+```
+
+```{python}
+type(aligned_list)
+```
+
+```{python}
+# Using datamol's auto_align_many() to align the scaffolds in mols2grid
+mols2grid.display(aligned_list)
+
+# Unfortunately, compounds did not re-align when combining datamol & mols2grid together
+```
+
+```{python}
+
+# Issue: Max number of compounds to display as 2D images = 50 (we have here a total of 75 compounds)
+
+# Trying mols2grid instead
+# Full dataset of 75 compounds 
+mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "mols2grid-id", "names"])
+```
+
+```{python}
+# Showing scaffolds of ChEMBL Rx anti-infectives
+mols2grid.display(m_scaffolds)
+```
+
+```{python}
+# Showing scaffolds of FtsZ compounds
+mols2grid.display(m_ftsz_scaffolds)
+```
+
+```{python}
+# Borrow the scaffold_finder.py script from P. Walters
+# **Import relevant libraries first!**
+```
+
+Aim: - If possible, compare compound 3's experimental results (target species from paper) with known approved anti-infectives with similar/same target species by using USAN definition and level 4 ATC codes curated by ChEMBL
