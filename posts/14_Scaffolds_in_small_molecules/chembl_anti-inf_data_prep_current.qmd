@@ -125,12 +125,14 @@ df_ai_rx = df_ai_rx.select(["Smiles", "Name", "USAN Definition", "Level 4 ATC Co
 df_ai_rx.head()
 ```
 
-Change column name of "Smiles" - to ensure the _preprocess function will work as smiles_column = "smiles" with lowercase "s" - will be using this function to cater for the 3 FtsZ compounds as well.
+The "Smiles" column name was changed to ensure _preprocess function would work since the parameter smiles_column was "smiles" with lowercase "s". The "Name" column was changed accordingly for similar reason.
 
 ```{python}
 df_ai_rx = df_ai_rx.rename({"Smiles": "smiles", "Name": "names"})
 df_ai_rx.head()
 ```
+
+I also thought to change the capitalised compound names into lowercases, since I'd prefer to read these compounds names in a more friendly way (rather looking like they were shouting at me being all capitalised letters).
 
 ```{python}
 # Convert all compounds to lowercases
@@ -138,12 +140,9 @@ df_ai_rx = df_ai_rx.with_columns(pl.col("names").str.to_lowercase())
 df_ai_rx.head()
 ```
 
-```{python}
-list(df_ai_rx["USAN Definition"])
-```
+As usual, since Datamol was built as a thin layer library on top of RDKit, which was only really compatible with Pandas, I've added this step to convert the dataframe into a Pandas one.
 
 ```{python}
-# Convert polars dataframe into a pandas dataframe (as datamol likely only compatible with Pandas for now)
 df_ai_pd = df_ai_rx.to_pandas()
 df_ai_pd
 ```
@@ -155,7 +154,9 @@ type(df_ai_pd)
 
 <br>
 
-**Pre-processing and standardising molecules using datamol**
+#### **Pre-processing and standardising molecules**
+
+I have basically borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below - to show that it also included a conversion from "mol" (RDKit molecule) to SELFIES (self-referencing embedded strings) as well.
 
 ```{python}
 
@@ -185,13 +186,13 @@ def _preprocess(row):
     return row
 ```
 
+##### **Converting SMILES into SELFIES**
+
+For people who might be interested or new to this type of work, there were two ways to convert multiple SMILES into multiple SELFIES (there might be more, but I've found these two for now):
+
 ```{python}
-# Issue found with one compound that acutally had no SMILES recorded in the dataframe!
-# **Fixed by adding the missing SMILES for neomycin**
-
-# Two methods to convert SMILES into SELFIES
-
 # Method one - using lambda function:
+# Uncomment code below to run
 # df_ai_pd["selfies"] = df_ai_pd["Smiles"].apply(lambda x: dm.to_selfies(x))
 # df_ai_pd
 
@@ -200,11 +201,14 @@ data_mol_clean = df_ai_pd.apply(_preprocess, axis = 1)
 data_mol_clean
 ```
 
-```{python}
-# Tested: Selfies conversion Works for one SMILES
-# selfies = dm.to_selfies("O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl")
-# selfies
+To convert only one SMILES string into a SELFIES, the following code should work with Datamol.
+
+```{{python}}
+selfies = dm.to_selfies("O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl")
+selfies
 ```
+
+<br>
 
 **Visualise the compounds in 2D**
 
@@ -222,6 +226,8 @@ legends_c = list(data_mol_clean["names"])
 dm.to_image(mol_ls, n_cols = 5, mol_size = (400, 400), legends = legends_c)
 ```
 
+<br>
+
 **Extract scaffolds**
 
 ```{python}
@@ -233,6 +239,8 @@ m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
 ```{python}
 type(m_scaffolds)
 ```
+
+<br>
 
 **Data cleaning for FtsZ compounds**
 
