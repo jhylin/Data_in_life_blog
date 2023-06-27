@@ -13,33 +13,35 @@ categories:
 jupyter: python3
 ---
 
-**Features to demonstrate:** - Familiarise with datamol packages and scaffold_finder library (acknowledging Practical Cheminformatics blog by P. Walters) --\> likely mix-and-match own function in there (!)
+#### **Features in this post**
 
--   Using Polars dataframe library for initial data wrangling along with datamol Python library & the later trial of scaffold_finder library (probably a small degree only, as datamol was likely written with Pandas in mind only, and also Pandas was the more commonly applied dataframe library in many cheminformatics packages & libraries)
+This post will discuss about the following:
 
--   Show thought processes of building simple cheminformatics-related functions
+- Pre-process and standardise compounds (e.g. converting SMILES into SELFIES and others)
 
--   Mention experimental results from paper in PhD work into cheminformatics project (validation always crucial for computational predictions)
+- Obtain scaffolds of all of the compounds
 
--   Advancing from pure organic chemistry and computational chemistry without code into utilising data science tools and packages by coding in Python to guide drug discovery project directions
+- Align scaffolds of compounds
 
-**Key question**: Will compound 3's scaffold be similar to the scaffolds of any approved anti-infectives? - if similar ?implying it might be a good hit with different R-groups - or if different scaffolds, it might lead to a new type of anti-infective hits - either way, there were initial experimental findings from the paper to support findings
+- Query target scaffolds against a dataframe of compounds:
 
-**Aim**: - If possible, compare compound 3's experimental results (target species from paper) with known approved anti-infectives with similar/same target species by using USAN definition and level 4 ATC codes curated by ChEMBL
+  - Function for saving multiple SMILES in .smi file
 
-**Sections in post**: - Convert anti-infective compounds & compounds 1-3's SMILES into SELFIES (more robust for ML models)
+  - Function for converting .smi file into a list to query and match scaffolds of interests
 
--   Get scaffolds of the anti-infective compounds from ChEMBL + compounds 1-3
+- Identify any similarities or differences between the target compound of interest against other compounds in a dataframe
 
--   Align scaffolds of compounds 1-3 with other scaffolds from ChEMBL
+<br>
 
--   Query target scaffolds against a dataframe library of compounds
+#### **Key questions to answer**
 
--   Identify any similarities or differences between anti-infectives from ChEMBL and compound 3
+Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved ChEMBL anti-infectives? 
 
 <br>
 
 #### **Import libraries**
+
+The following libraries were used in this post.
 
 ```{python}
 import polars as pl
@@ -51,12 +53,16 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem.rdmolfiles import SmilesWriter, SmilesMolSupplier
 
+# Library adapted with courtesy from Patrick Walters' tutorial on "Identifying Scaffolds" 
+# - links provided in "scaffold_finder library" section
 from scaffold_finder_test import generate_fragments, find_scaffolds, get_molecules_with_scaffold, cleanup_fragment
 ```
 
 <br>
 
-#### **Data cleaning**
+#### **ChEMBL anti-infectives**
+
+##### **Data cleaning**
 
 The dataset used was extracted from ChEMBL database, with a focus on the anti-infectives.
 
@@ -66,7 +72,7 @@ df_ai
 ```
 
 ```{python}
-# Uncomment below if requiring a quick overview on all column names, along with their data and data types.
+# Uncomment below if requiring a quick overview on all column names, first ten variables in each column and each column data type
 #print(df_ai.glimpse())
 ```
 
@@ -153,7 +159,7 @@ type(df_ai_pd)
 
 <br>
 
-#### **Pre-processing and standardising molecules**
+##### **Pre-processing and standardising molecules**
 
 I have basically borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. It also included a conversion from "mol" (RDKit molecule) to SELFIES as well.
 
@@ -213,10 +219,12 @@ selfies
 
 <br>
 
-**Visualise the compounds in 2D**
+##### **Visualise compounds in 2D using Datamol**
+
+The images generated below might be quite small to see or read clearly. I've tried to increase the molecule size (mol_size) and also reduce the column numbers, but it still appeared the same. However, if the code was run in say VS Code, it would appear in much larger sizes when increasing the mol_size.
 
 ```{python}
-# Grab all SMILES from cleaned/pre-processed ChEMBL anti-infective dataset
+# Grab all SMILES of the cleaned/pre-processed ChEMBL anti-infectives
 df_ai_sm = data_mol_clean["standard_smiles"]
 
 # Load a list of these molecules in SMILES
@@ -230,12 +238,12 @@ mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
 legends_c = list(data_mol_clean["names"])
 
 # Convert the list of molecules into 2D images
-dm.to_image(mol_ls, n_cols = 5, mol_size = (500, 500), legends = legends_c)
+dm.to_image(mol_ls, n_cols = 4, mol_size = (400, 400), legends = legends_c)
 ```
 
 <br>
 
-**Extract scaffolds**
+##### **Extract scaffolds**
 
 ```{python}
 # Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)
@@ -243,15 +251,17 @@ m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
 #dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
 ```
 
-```{python}
-type(m_scaffolds)
-```
-
 <br>
 
-**Data cleaning for FtsZ compounds**
+#### **Filamenting temperature-sensitive Z (FtsZ) compounds**
 
-The section below focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993
+##### **Data cleaning**
+
+This section focuses on 3 compounds from this paper - Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993. https://doi.org/10.3390/molecules27206993. Obviously from the authorship shown for the paper, this was from my PhD work, and out of interests, I just wanted to look a bit further into them and compare with known anti-infectives.
+
+Before I started cleaning any data on FtsZ compounds, I found this useful website, [OPSIN: Open Parser for Systematic IUPAC nomenclature](https://opsin.ch.cam.ac.uk/), with [link](https://pubs.acs.org/doi/full/10.1021/ci100384d) to the journal paper as an acknowledgement of the work. I've managed to convert these 3 FtsZ compounds by using their IUPAC names, inputted into OPSIN, and converted them into the corresponding InChI or SMILES strings.
+
+After that, I started by converting the InChI of compound 1 into a RDKit molecule, which could be visualised in 2D below.
 
 ```{python}
 # Convert compound 1 to mol from InChI
@@ -259,11 +269,15 @@ cpd1 = dm.from_inchi("InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-
 cpd1
 ```
 
+I then converted compound 2 using SMILES string instead. 
+
 ```{python}
 # Convert compound 2 SMILES to mol
 cpd2 = dm.to_mol("OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O")
 cpd2
 ```
+
+Same thing followed for compound 3.
 
 ```{python}
 # Convert compound 3 SMILES to mol
@@ -278,10 +292,11 @@ mol_lst
 ```
 
 ```{python}
-# Convert a list of mols to a dataframe
+# Convert a list of mols into a dataframe
 df = dm.to_df(mol_lst)
 df
 ```
+Then the compound numbers were added into the dataframe as well.
 
 ```{python}
 names = ["Compound_1", "Compound_2", "Compound_3"]
@@ -289,23 +304,37 @@ df["names"] = names
 df
 ```
 
+<br>
+
+##### **Pre-processing and standardising molecules**
+
 ```{python}
-# Pre-process FtsZ compounds
+# Pre-processing FtsZ compounds
 data_cleaned = df.apply(_preprocess, axis=1)
 data_cleaned
 ```
 
+<br>
+
+##### **Visualise compounds in 2D using Datamol**
+
 ```{python}
-# Place FtsZ compounds in 2D images
 # Grab all SMILES from cleaned FtsZ compound dataset
 df_ai_ftsz = data_cleaned["standard_smiles"]
+
 # Load a list of these molecules in SMILES
 mol_ftsz_list = [dm.to_mol(smile) for smile in df_ai_ftsz]
-# Add compound name for each 2D image of compounds
+
+# Add compound names for each 2D image of compounds
 legends = list(data_cleaned["names"])
+
 # Convert the list of molecules into 2D images
 dm.to_image(mol_ftsz_list, n_cols = 5, mol_size = (400, 400), legends = legends)
 ```
+
+<br>
+
+##### **Extract scaffolds**
 
 ```{python}
 # Get Murcko scaffolds of FtsZ compounds
@@ -313,68 +342,61 @@ m_ftsz_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ftsz_list]
 dm.to_image(m_ftsz_scaffolds, mol_size = (400, 400), legends = legends)
 ```
 
-**Aligning scaffolds**
+<br>
 
--   Align scaffolds between ChEMBL Rx anti-infectives and FtsZ compounds
+#### **Combining ChEMBL anti-infectives and FtsZ compounds**
 
-```{python}
-# Align ChEMBL anti-infective compounds first
-# **Check out auto_align_many() method**
-# "anon-scaffold" is the default partition method
-# "cluster" partition method generated weird-looking compounds 
-# - ?to set cluster cut-off as it was stated it was sensitive to cutoff
+##### **Combining dataframes**
 
-
-# aligned_list = dm.align.auto_align_many(mol_ls, partition_method = "anon-scaffold")
-# dm.to_image(aligned_list, mol_size = (400, 400), legends = legends_c)
-```
+In this part, I wanted to combine the two dataframes I had from above, since my next step was to compare the scaffolds between ChEMBL prescription-only anti-infectives and FtsZ compounds.
 
 ```{python}
-# Combine dataframes of cleaned ChEMBL anti-infectives & cleaned FtsZ compounds
 combined_lists = [data_mol_clean, data_cleaned]
 full_data = pd.concat(combined_lists, ignore_index = True)
-full_data
+full_data.head()
 ```
 
 ```{python}
+# Specifying only the standard SMILES column
 df_full = full_data["standard_smiles"]
 df_full
 ```
 
 ```{python}
+# Convert the standard SMILES into RDKit molecules
 mol_full = [dm.to_mol(smile) for smile in df_full]
 mol_full
 ```
 
+<br>
+
+##### **Aligning all the scaffolds**
+
+Here, all the scaffolds from both dataframes of compounds were aligned by using Datamol's auto_align_many(). The image of the aligned molecules was generated in the end. The compound structures did re-align, but unfortunately it only showed up to a maximum of 50 compounds only (the default number for the maximum number of molecules was 32 in Datamol; this number was truncated to 50 from the warning message from RDKit when attempting to run the total of 75 compounds using the Datamol library, without looking further into changing any source code at this stage).
+
 ```{python}
 aligned_list = dm.align.auto_align_many(mol_full, partition_method = "anon-scaffold")
 dm.to_image(aligned_list, mol_size = (400, 400), max_mols = 50)
-
-# compound structures did re-align in this code
-# but unfortunately, it only shows up to a maximum of 50 compounds only
 ```
 
 ```{python}
+# Checking the data type of aligned_list
 type(aligned_list)
 ```
 
-```{python}
-# Using datamol's auto_align_many() to align the scaffolds in mols2grid
-mols2grid.display(aligned_list)
+An attempt to combine Datamol's auto_align_many() with mols2grid library. Unfortunately, the compounds did not re-align but all 75 compounds were shown in the grids.
 
-# Issue: Unfortunately, compounds did not re-align when combining datamol & mols2grid together
-# but able to show all 75 compounds in the grids
+```{python}
+mols2grid.display(aligned_list)
 ```
 
+##### **mols2grid library**
+
+Since I've started using mols2grid here, I thought to combine all 75 compounds using the pre-processed standard SMILES in the grids with corresponding compound names. The resulting table provided a clear overview of all the compounds, with useful options to select or filter compounds.
+
 ```{python}
-
-# Issue: Max number of compounds to display as 2D images = 50 (we have here a total of 75 compounds)
-
-# Trying mols2grid instead
 # Full dataset of 75 compounds 
 mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "mols2grid-id", "names"])
-
-# Able to display 2D images of all 75 compounds
 ```
 
 ```{python}
@@ -391,79 +413,80 @@ mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "m
 #mols2grid.display(m_ftsz_scaffolds)
 ```
 
-```{python}
-# Using scaffold_finder library from Practical Cheminformatics blog
-# Borrow the scaffold_finder.py script (small Python library for scaffold work) from P. Walters
+##### **scaffold_finder library**
 
-```
+Rather than only trying out Datamol only, I also thought to try out the scaffold_finder library after reading this [Jupyter notebook](https://colab.research.google.com/github/PatWalters/practical_cheminformatics_tutorials/blob/main/sar_analysis/find_scaffolds.ipynb) by Patrick Walters. The GitHub repository of his other useful cheminformatics tutorials can be found [here](https://github.com/PatWalters/practical_cheminformatics_tutorials). His well-known "Practical Cheminformatics" blog is [here](https://practicalcheminformatics.blogspot.com/). Without surprises, this post was also inspired by his work on "Identifying Scaffolds", and I thought to expand on it a bit more (hopefully I did that here).
 
-```{python}
-full_data
-```
+Step 1: add "mol" column to full_data dataframe (which was needed to use the functions from scaffold_finder library, which was also built based on RDKit)
 
 ```{python}
-# Try scaffold_finder functions on ChEMBL Rx anti-infectives
-
-# 1) add mol column to full_data dataframe (needed to use functions from scaffold_finder library)
 full_data["mol"] = full_data.standard_smiles.apply(Chem.MolFromSmiles)
 ```
 
+Step 2: Change column names of "standard_smiles" to "SMILES" & "names" to "Name" to match with scaffold_finder library functions with set column names (or other way round, by changing the names in the function library)
+
 ```{python}
-# Change column names of "standard_smiles" to "SMILES" & "names" to "Name"
-# To match with scaffold_finder library functions with set column names
-# Note: New column name "SMILES" = standardised SMILES (old column name as "standard_smiles")
+# Note: New column name "SMILES" contains standardised SMILES (old column name as "standard_smiles")
 full_data = full_data.rename(columns = {"standard_smiles": "SMILES", "names": "Name"})
 full_data.head()
 ```
 
+Step 3: Identify scaffolds
+
+The find_scaffolds() function was kindly borrowed from P. Walters' scaffold_finder library as mentioned above. The scaffold_finder_test.py was the modified version, as I've used a different dataset here.
+
 ```{python}
-# 2) Identify scaffolds
 mol_df, scaffold_df = find_scaffolds(full_data)
 ```
 
+Below was a quick overview of the mol_df - showing scaffolds in SMILES, number of atoms, number of R groups, names of compounds and the standardised SMILES of the compounds.
+
 ```{python}
-# Quick overview of the mol_df 
-# showing scaffolds in SMILES, number of atoms, number of R groups, 
-# names of compounds and the standardised SMILES of the compounds
 mol_df
 ```
 
-```{python}
-# Quick look at the scaffolds of all 75 compounds, 
-# along with counts of each scaffold and number of atoms in each scaffold
-scaffold_df
-```
+Again to have a quick look at the scaffolds of all 75 compounds, along with counts of each scaffold and number of atoms in each scaffold.
 
 ```{python}
-# 3) Display all scaffolds with mols2grid
-# Helps to identify the scaffold with the highest frequency (counts) of occurence in the dataset
-# For Rx anti-infectives in ChEMBL & FtsZ compounds
+scaffold_df
+```
+Step 4: Display all scaffolds in mols2grid, which helped to identify the scaffold with the highest frequency (counts) of occurence in the dataset.
+
+```{python}
 mols2grid.display(scaffold_df, smiles_col = "Scaffold", subset = ["img", "Count"])
 ```
 
-```{python}
-count_top1_scaffold = scaffold_df.Scaffold.values[0]
-```
+<br>
+
+#### **Test datasets**
+
+These were my sample datasets for later use in the section on "Reading and querying multiple scaffolds in SMILES strings".
+
+Below was the first test dataset on the top 2 scaffolds with highest frequency of appearance in the full dataframe.
 
 ```{python}
+# Scaffold of anti-infective with highest count
+count_top1_scaffold = scaffold_df.Scaffold.values[0]
+# Scaffold of anti-infective with the second highest count
 count_top2_scaffold = scaffold_df.Scaffold.values[1]
 ```
 
 ```{python}
+# Combine above scaffolds into a list
 count_top_scaffold = list((count_top1_scaffold, count_top2_scaffold))
 count_top_scaffold
 ```
+Then this was the second sample dataset, purely on the scaffolds for the antibiotic called "cefepime".
 
 ```{python}
 cefe_scaffolds = pl.from_pandas(mol_df).filter(pl.col("Name") == "cefepime")
-cefe_scaffolds
+cefe_scaffolds.head()
 ```
+<br>
 
-#### Dealing with FtsZ compound 3
+#### **Focus on FtsZ compound 3**
 
-***Work-in-progress, not final version***
-
-**Convoluted process at the moment**
+Compound 3 was the compound found in the paper to have targeted the FtsZ proteins in Gram positive pathogens such as *Streptococcus pneumonaie*. So this section looks into all of compound 3's scaffolds particularly.
 
 ```{python}
 # For ease of dataframe manipulation, decided to convert Pandas df to Polars df!
@@ -549,11 +572,15 @@ s_smiles_list
 chem_mol_df
 ```
 
+<br>
+
 #### **Reading and querying multiple scaffolds in SMILES strings**
 
-The section below was inspired by the "find_scaffolds.ipynb" from Practical Cheminformatics blog. A small function was written which will read and then query multiple scaffolds of small molecules in SMILES string against a dataframe with information showing scaffolds in SMILES, number of atoms, number of R groups, names of compounds and also the SMILES of the compounds. Reason behind setting up this small function was that the get_molecule_from_scaffold() function from the scaffold_finder library seems to be only taking in one single SMILES at a time (since it was about a target scaffold with highest frequency count, so this was in a different context).
+The section below was inspired by the "find_scaffolds.ipynb" from Practical Cheminformatics blog. A small function was written which will read and then query multiple scaffolds of small molecules in SMILES string against a dataframe with information showing scaffolds in SMILES, number of atoms, number of R groups, names of compounds and also the SMILES of the compounds. 
 
-This type of function was likely not new and most likely other clever works in similar thread would have already been available. However, I thought to play around with it a bit and add on the ability to read multiple SMILES at the same time.
+The reason behind setting up this small function was that the get_molecule_from_scaffold() function from the scaffold_finder library seems to be only taking in one single SMILES at a time (since it was about a target scaffold with highest frequency count, so this was in a different context).
+
+This function was likely not novel and most likely other clever works in similar thread would have already been available. However, I thought to play around with it a bit and add on the ability to read multiple SMILES at the same time - somehow this was my first taste on writing a very simple function with a bit of cheminformatics purpose.
 
 ```{python}
 # Trial feeding all 14 SMILES
@@ -577,11 +604,11 @@ cpd3_scaffolds
 cpd3_mols = cpd3_scaffolds["mol"]
 cpd3_mols
 ```
+How I started then to think more on the tangent of writing a function, was that I found this "SmilesWriter" from RDKit from a few other blogs online. 
 
 ```{python}
 # Write multiple SMILES into a .smi file (SmilesWriter)
 # Read the set of SMILES from a .smi file (SmilesMolSupplier)
-
 ```
 
 ```{python}
@@ -595,7 +622,9 @@ for s in cpd3_mols:
 cpd3.close()
 ```
 
-##### **Function for saving multiple SMILES strings as a .smi file from a Pandas dataframe**
+##### **Function for saving multiple SMILES strings as a .smi file**
+
+The following function works based on a Pandas dataframe, since RDKit was used.
 
 ```{python}
 def save_smiles_strings(df, file_name):
@@ -662,7 +691,9 @@ list
    
 ```
 
-##### **Function to convert SMILES string file (.smi) into a list, then to query via Pandas.query() for matching scaffolds against dataframe of scaffolds of compounds**
+##### **Function for converting .smi file into a list to query and match scaffolds of interests**
+
+I then came up with the next function that would feed multiple scaffolds into a Pandas.query() to match the strings, meaning we could compare the scaffolds with each other in a dataframe.
 
 ```{python}
 def query_scaffolds_via_smiles(filename):
@@ -681,6 +712,8 @@ def query_scaffolds_via_smiles(filename):
     return scaffold_match_df
     #return list
 ```
+
+Below was the test for this query_scaffolds_via_smiles() function.
 
 ```{python}
 # Testing query_scaffolds_via_smiles() function
@@ -736,4 +769,26 @@ match_df
 
 #### **Results**
 
--   There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds.
+There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds. So this might imply that the scaffold from compound 3 could be considered novel when we were looking at Gram positive pathogen-targeting anti-infectives. However, this was also too preliminary to conclude anything substantial, since there were no other *in vivo* tests done to find out the safety and toxicity of compound 3 apart from the *in vitro* ones mentioned in the paper. It probably would provide ideas for scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. 
+
+<br>
+
+#### **Ideas to get across**
+
+The intentions of this post:
+
+- To familiarise myself with Datamol and scaffold_finder libraries
+
+- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind only, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars
+
+- To reveal my thought processes of building simple cheminformatics-related functions (this was not planned, but rather kind of evolved from the second half of the work)
+
+- To mention experimental results from paper in PhD work into cheminformatics project (validation always crucial for computational predictions)
+
+- To show some evidence of my own growth from pure organic chemistry and computational chemistry without code into using data science tools via coding in Python to guide directions of drug discovery project 
+
+<br>
+
+#### **Final words**
+
+I've always wanted to shorten my posts to a more readable length, but... it was proven to be hard again. So this post was much longer than I've expected. Please feel free to click on the page content links on the right if needed. Thanks for reading if anyone is reading this at all.
