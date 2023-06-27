@@ -2,7 +2,7 @@
 title: "Working with scaffolds in small molecules"
 subtitle: "Manipulating SMILES strings"
 author: Jennifer HY Lin
-date: '2023-6-24'
+date: '2023-6-27'
 draft: true
 categories:
   - RDKit
@@ -49,8 +49,6 @@ import mols2grid
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
-#from rdkit.Chem.rdDepictor import Compute2DCoords
-#from rdkit.Chem.rdRGroupDecomposition import RGroupDecompose
 from rdkit.Chem.rdmolfiles import SmilesWriter, SmilesMolSupplier
 
 from scaffold_finder_test import generate_fragments, find_scaffolds, get_molecules_with_scaffold, cleanup_fragment
@@ -67,32 +65,33 @@ df_ai = pl.read_csv("chembl_anti-inf.csv", sep = ";")
 df_ai
 ```
 
-Quick overview on all column names, along with their data and data types.
-
 ```{python}
-print(df_ai.glimpse())
+# Uncomment below if requiring a quick overview on all column names, along with their data and data types.
+#print(df_ai.glimpse())
 ```
 
-Under the "Availability Type" column, there were a few different availability for each anti-bacterial such as, "Discontinued", "Withdrawn", "Unknown" and "Prescription Only".
+Under the "Availability Type" column, there were a few different availabilities for each anti-bacterial such as, "Discontinued", "Withdrawn", "Unknown" and "Prescription Only".
 
 ```{python}
 df_ai.groupby("Availability Type").count()
 ```
 
-Because I'd like to choose only the "Prescription Only" ones, I then added the following filter condition.
+Because I'd like to choose only the "Prescription Only" ones, the following filter condition was added.
 
 ```{python}
 df_ai_rx = df_ai.filter(pl.col("Availability Type") == "Prescription Only")
 df_ai_rx.head()
 ```
 
-In preparation of possible future work on building machine learning models along this line of work, I looked into datamol's pre-processing molecule function (shown in next section), as it involved converting SMILES strings into SELFIES, which were considered more robust than SMILES. However, I kept running into a code error, where the error message showed the SMILES column was empty. This took me a few tries to realise that I've actually forgotten to check whether there were any missing SMILES in the same column. So below I've filtered the SMILES column to look for any missing cells.
+In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecule (shown in the next section), as it involved converting SMILES strings into SELFIES (self-referencing embedded strings), which were considered to be more robust than SMILES. 
+
+However, I kept running into an error, with the error message showing the SMILES column was empty. After a few tries I realised that I've actually forgotten to check whether there were any missing SMILES in the column. So here I've filtered the SMILES column to look for any missing SMILES
 
 ```{python}
 df_ai_rx.filter(pl.col("Smiles") == "")
 ```
 
-Neomycin was found to have no SMILES recorded. To fix this error, I found another useful way to use the previously-mentioned "when-then-otherwise" expression in Polars again to replace empty strings in dataframes. The code example below was kindly adapted from StackOverflow with [link here](https://stackoverflow.com/questions/72292048/idiomatic-replacement-of-empty-string-with-pl-null-null-in-polars).
+Neomycin was the only compound found to have no SMILES recorded. To fix this error, I then used the previously-mentioned "when-then-otherwise" expression in Polars again to replace the empty string in the dataframe. A code example below was kindly adapted from StackOverflow with [this link here](https://stackoverflow.com/questions/72292048/idiomatic-replacement-of-empty-string-with-pl-null-null-in-polars).
 
 ``` {{python}}
 only_these = ['str1', 'str2']
@@ -125,14 +124,14 @@ df_ai_rx = df_ai_rx.select(["Smiles", "Name", "USAN Definition", "Level 4 ATC Co
 df_ai_rx.head()
 ```
 
-The "Smiles" column name was changed to ensure _preprocess function would work since the parameter smiles_column was "smiles" with lowercase "s". The "Name" column was changed accordingly for similar reason.
+The "Smiles" column name was changed below to ensure _preprocess function would work since the parameter "smiles_column" had "smiles" with lowercase "s" (this of course could be the other way round, where we could change the parameter name in the function instead, the column name and parameter name had to match for the function to work was the point). The "Name" column was changed accordingly for similar reason. 
 
 ```{python}
 df_ai_rx = df_ai_rx.rename({"Smiles": "smiles", "Name": "names"})
 df_ai_rx.head()
 ```
 
-I also thought to change the capitalised compound names into lowercases, since I'd prefer to read these compounds names in a more friendly way (rather looking like they were shouting at me being all capitalised letters).
+I also wanted to change the all capitalised compound names into lowercases, since I'd prefer to read them in a more friendly way (rather looking like they were shouting at readers being all capitalised letters).
 
 ```{python}
 # Convert all compounds to lowercases
@@ -140,7 +139,7 @@ df_ai_rx = df_ai_rx.with_columns(pl.col("names").str.to_lowercase())
 df_ai_rx.head()
 ```
 
-As usual, since Datamol was built as a thin layer library on top of RDKit, which was only really compatible with Pandas, I've added this step to convert the dataframe into a Pandas one.
+Since Datamol was built as a thin layer library on top of RDKit, which was only compatible with Pandas, I added the following step to convert the dataframe into a Pandas one.
 
 ```{python}
 df_ai_pd = df_ai_rx.to_pandas()
@@ -156,11 +155,11 @@ type(df_ai_pd)
 
 #### **Pre-processing and standardising molecules**
 
-I have basically borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below - to show that it also included a conversion from "mol" (RDKit molecule) to SELFIES (self-referencing embedded strings) as well.
+I have basically borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. It also included a conversion from "mol" (RDKit molecule) to SELFIES as well.
 
 ```{python}
 
-# Pre-process molecules using _preprocess function - adapted with courtesy from datamol.io
+# Pre-process molecules using _preprocess function - adapted from datamol.io
 
 smiles_column = "smiles"
 
@@ -186,9 +185,11 @@ def _preprocess(row):
     return row
 ```
 
-##### **Converting SMILES into SELFIES**
+<br>
 
-For people who might be interested or new to this type of work, there were two ways to convert multiple SMILES into multiple SELFIES (there might be more, but I've found these two for now):
+##### **Converting multiple SMILES into multiple SELFIES**
+
+There were two ways to convert multiple SMILES into multiple SELFIES (there might be more options, but I've found these two for now):
 
 ```{python}
 # Method one - using lambda function:
@@ -200,6 +201,8 @@ For people who might be interested or new to this type of work, there were two w
 data_mol_clean = df_ai_pd.apply(_preprocess, axis = 1)
 data_mol_clean
 ```
+
+##### **Converting a single SMILES into a SELFIES**
 
 To convert only one SMILES string into a SELFIES, the following code should work with Datamol.
 
@@ -213,17 +216,21 @@ selfies
 **Visualise the compounds in 2D**
 
 ```{python}
-# Grab all SMILES from cleaned ChEMBL anti-infective dataset
+# Grab all SMILES from cleaned/pre-processed ChEMBL anti-infective dataset
 df_ai_sm = data_mol_clean["standard_smiles"]
+
 # Load a list of these molecules in SMILES
-# dm.to_mol with sanitize = True set as default
+# dm.to_mol has sanitize = True set as default
 mol_ls = [dm.to_mol(smile) for smile in df_ai_sm]
+
 # Alternative way to convert dataframe into a list of mols (same as mol_ls)
 # mols = dm.from_df(df_name, smiles_column = "Smiles")
-# Add compound name for each 2D image of compounds
+
+# Add compound name for each 2D image
 legends_c = list(data_mol_clean["names"])
+
 # Convert the list of molecules into 2D images
-dm.to_image(mol_ls, n_cols = 5, mol_size = (400, 400), legends = legends_c)
+dm.to_image(mol_ls, n_cols = 5, mol_size = (500, 500), legends = legends_c)
 ```
 
 <br>
