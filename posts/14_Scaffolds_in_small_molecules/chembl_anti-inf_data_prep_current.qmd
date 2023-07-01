@@ -580,47 +580,52 @@ The section below was inspired by the "find_scaffolds.ipynb" from Practical Chem
 
 The reason behind setting up this small function was that the get_molecule_from_scaffold() function from the scaffold_finder library seems to be only taking in one single SMILES at a time (since it was about a target scaffold with highest frequency count, so this was in a different context).
 
-This function was likely not novel and most likely other clever works in similar thread would have already been available. However, I thought to play around with it a bit and add on the ability to read multiple SMILES at the same time - somehow this was my first taste on writing a very simple function with a bit of cheminformatics purpose.
+This function was likely not novel and most likely other more clever functions would have been already available. However, I thought to play around with it a bit and wanted to add the ability to read multiple SMILES at the same time, and this had turned out to be my first piece of cheminformatics-related function.
+
+I also wanted to show how my thought processes were like from the beginning till the end. At first, I started with reading all 14 scaffolds of compound 3 by using the values index method on cpd3_scaffolds dataframe that included all 14 scaffolds of compound 3, trying to get some ideas about how I would start writing a function with the intended purpose in mind.
 
 ```{python}
 # Trial feeding all 14 SMILES
 scaffold_cpd3_all = cpd3_scaffolds.Scaffold.values[:]
 scaffold_cpd3_all
 ```
-
-```{python}
-cpd3_scaffolds
-```
+Then I thought about how every time if we'd want to convert any molecules from SMILES to RDKit molecules, we really had to have a "mol" column set up, which was what I did below.
 
 ```{python}
 cpd3_scaffolds["mol"] = cpd3_scaffolds.Scaffold.apply(Chem.MolFromSmiles)
 ```
 
+The dataframe would now look like this.
+
 ```{python}
 cpd3_scaffolds
 ```
+
+Then perhaps I would place all of these compound 3 scaffolds into an object.
 
 ```{python}
 cpd3_mols = cpd3_scaffolds["mol"]
 cpd3_mols
 ```
-How I started then to think more on the tangent of writing a function, was that I found this "SmilesWriter" from RDKit from a few other blogs online. 
+At this stage, nothing really clicked at the moment, but then I thought about how datamol was built on top of RDKit and also how a few other cheminformatics posts I've read before utilises the functions in RDKit, it was time to look deeper in RDKit to search for methods with my intended purpose in mind. Then I started to think more on the tangent of writing a function, where I then found the SmilesWriter() method from RDKit after reading a few online references. 
 
-```{python}
-# Write multiple SMILES into a .smi file (SmilesWriter)
-# Read the set of SMILES from a .smi file (SmilesMolSupplier)
-```
+Clearly, I've found out that:
+- To write multiple SMILES into a .smi file, use SmilesWriter()
+- To read a set of SMILES from a .smi file, use SmilesMolSupplier()
+
+Acknowledgement of a useful link I've found online which had helped me figure out how I would go about saving multiple SMILES strings ina .smi file: https://github.com/suneelbvs/rdkit_tutorials/blob/master/1_Reading%20and%20Writing%20Smiles%20using%20rdKit.ipynb
+
 
 ```{python}
 # Randomly figured out how to save multiple SMILES as a text file 
-# (acknowledgement: https://github.com/suneelbvs/rdkit_tutorials/blob/master/1_Reading%20and%20Writing%20Smiles%20using%20rdKit.ipynb)
-
 cpd3 = SmilesWriter('cpd3.smi')
 # Note: saving multiple SMILES strings from RDKit mol objects (cpd3_mols)
 for s in cpd3_mols:
   cpd3.write(s)
 cpd3.close()
 ```
+
+<br>
 
 ##### **Function for saving multiple SMILES strings as a .smi file**
 
