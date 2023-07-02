@@ -2,22 +2,23 @@
 title: "Working with scaffolds in small molecules"
 subtitle: "Manipulating SMILES strings"
 author: Jennifer HY Lin
-date: '2023-6-27'
+date: '2023-7-2'
 draft: true
 categories:
   - RDKit
   - Datamol
   - Python
   - Pandas
+  - Polars
   - Cheminformatics
 jupyter: python3
 ---
 
 #### **Features in this post**
 
-This post will discuss about the following:
+This post will talk about the following:
 
-- Pre-process and standardise compounds (e.g. converting SMILES into SELFIES and others)
+- Pre-process and standardise compounds (e.g. converting SMILES into SELFIES and other forms)
 
 - Obtain scaffolds of all of the compounds
 
@@ -33,7 +34,13 @@ This post will discuss about the following:
 
 <br>
 
-#### **Key questions to answer**
+#### **Quick words**
+
+I've always wanted to shorten my posts to a more readable length, but it was proven to be hard again. So this post was much longer than I've expected. Please feel free to click on the page content links on the right if needed. Thanks for reading and looking forward to comments if there are any.
+
+<br>
+
+#### **Key question to answer**
 
 Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved ChEMBL anti-infectives? 
 
@@ -248,7 +255,7 @@ dm.to_image(mol_ls, n_cols = 4, mol_size = (400, 400), legends = legends_c)
 ```{python}
 # Extract Murcko scaffolds from mol_ls (ChEMBL anti-infectives)
 m_scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_ls]
-#dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
+dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
 ```
 
 <br>
@@ -365,7 +372,6 @@ df_full
 ```{python}
 # Convert the standard SMILES into RDKit molecules
 mol_full = [dm.to_mol(smile) for smile in df_full]
-mol_full
 ```
 
 <br>
@@ -617,7 +623,7 @@ Acknowledgement of a useful link I've found online which had helped me figure ou
 
 
 ```{python}
-# Randomly figured out how to save multiple SMILES as a text file 
+# Figured out how to save multiple SMILES as a text file 
 cpd3 = SmilesWriter('cpd3.smi')
 # Note: saving multiple SMILES strings from RDKit mol objects (cpd3_mols)
 for s in cpd3_mols:
@@ -627,9 +633,9 @@ cpd3.close()
 
 <br>
 
-##### **Function for saving multiple SMILES strings as a .smi file**
+##### **Function for saving multiple SMILES strings as a file**
 
-The following function works based on a Pandas dataframe, since RDKit was used.
+So based on the ideas in the previous section, I came up with the following simple function to save multiple SMILES strings as a .smi file.
 
 ```{python}
 def save_smiles_strings(df, file_name):
@@ -650,17 +656,40 @@ def save_smiles_strings(df, file_name):
   smiles.close()
 ```
 
+###### **Testing on the function**
+
+Here I used one of the dataframes I've saved earlier, cefe_scaffolds, to test this function on saving multiple SMILES into a file. Since cefe_scaffolds dataframe was a Polars dataframe from earlier, it needed to be converted into a Pandas dataframe in order to be compatible with RDKit, which was used in the function.
+
 ```{python}
-# cefe_scaffolds df was a Polars df from earlier, therefore need to convert it to Pandas
+# Convert Polars dataframe into a Pandas one
 cefe_scaffolds = cefe_scaffolds.to_pandas()
-#cefe_scaffolds.head()
+
+# Running function on cefe_scaffolds dataframe
+# First parameter specifies dataframe to be used
+# Second parameter specifies file name for the SMILES strings saved
+save_smiles_strings(cefe_scaffolds, "cefe")
+```
+
+A .smi file with the name "cefe.smi" should appear in the working directory after running the function.
+
+Now, the next stage would be to parse these SMILES strings and save them as a list. I actually worked backwards here where I looked into the Pandas.query() method first, and looked into options I could have on reading and checking for matches in multiple strings. To be able to read multiple strings in one go, a list would be suitable to carry out the matching queries (note: in the scaffold_finder library, this dataframe query method was also used in its "find_scaffolds" and "get_molecules_with_scaffold" functions).
+
+An example of Pandas.query() tests:
+
+```{python}
+# Saving top two scaffolds with most frequency of occurrences 
+#in ChEMBL-curated anti-bacterial dataset as a list
+count_top_scaffold
 ```
 
 ```{python}
-# Test on cefe_scaffolds dataframe
-# A .smi file with the name "cefe.smi" should appear in working directory
-save_smiles_strings(cefe_scaffolds, "cefe")
+# To demonstrate that querying the two top scaffolds 
+# will bring back all the anti-bacterials with the same scaffold
+match_df = mol_df.query("Scaffold in @count_top_scaffold")
+match_df
 ```
+
+As an aside from what I wanted to do, I also learnt a small trick from online references about how to get the number of atoms in the file with multiple SMILES strings.
 
 ```{python}
 # Sample use of SmilesMolSupplier & GetNumAtoms()
@@ -674,15 +703,18 @@ for i in range(nMols):
   print(a)
 ```
 
+Now, back to where I was meant to continue working, I wanted to convert these SMILES strings into RDKit molecules first.
+
 ```{python}
 # Reading cpd3.smi SMILES strings in text file as RDKit mol objects
 suppl = SmilesMolSupplier("cpd3.smi")
 suppl
 ```
 
-```{python}
-# Then convert mol objects into SMILES strings
+This was followed by converting the "mol" objects into SMILES strings, so that we could save each SMILES string into a list.
 
+```{python}
+# Initialise an empty list
 list = []
 
 for mol in suppl:
@@ -692,8 +724,6 @@ for mol in suppl:
    list.append(m)
 
 list
-   
-   
 ```
 
 ##### **Function for converting .smi file into a list to query and match scaffolds of interests**
@@ -718,17 +748,27 @@ def query_scaffolds_via_smiles(filename):
     #return list
 ```
 
-Below was the test for this query_scaffolds_via_smiles() function.
+###### **Testing on the function**
+
+Below was a test for this query_scaffolds_via_smiles() function using the previously made "cpd3.smi" file.
+
+To show that compound 3 scaffolds literally only exist in compound 3 and not in any other Rx anti-bacterials based on the ChEMBL-extracted anti-infectives dataset only (other sources not checked at this stage).
 
 ```{python}
 # Testing query_scaffolds_via_smiles() function
 query_scaffolds_via_smiles("cpd3.smi")
 ```
 
+Then I also tested on "cefe.smi" created before.
+
 ```{python}
 # Test on cefe.smi
 query_scaffolds_via_smiles("cefe.smi")
 ```
+
+<br>
+
+**Following sections likely not needed - to be checked**
 
 ```{python}
 cpd3 = cpd3_scaffolds["Scaffold"]
@@ -753,47 +793,29 @@ type(cpd3)
 ```
 
 ```{python}
-# To show that compound 3 scaffolds literally only exist in compound 3 
-# and not in any other Rx anti-bacterials
+# Using simple Pandas.query() method
 match_df_ftsz = mol_df.query("Scaffold in @cpd3")
 match_df_ftsz
 ```
 
-```{python}
-# Saving top two scaffolds with most frequency of occurrences 
-#in ChEMBL-curated anti-bacterial dataset as a list
-count_top_scaffold
-```
+<br>
 
-```{python}
-# To demonstrate that querying the two top scaffolds 
-# will bring back all the anti-bacterials with the same scaffold
-match_df = mol_df.query("Scaffold in @count_top_scaffold")
-match_df
-```
+#### **Results and answers**
 
-#### **Results**
-
-There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds. So this might imply that the scaffold from compound 3 could be considered novel when we were looking at Gram positive pathogen-targeting anti-infectives. However, this was also too preliminary to conclude anything substantial, since there were no other *in vivo* tests done to find out the safety and toxicity of compound 3 apart from the *in vitro* ones mentioned in the paper. It probably would provide ideas for scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. 
+There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds. However, this was only limited to the dataset obtained from ChEMBL at this stage, with indications of the molecules limited to anti-infectives. So this might imply that the scaffold from compound 3 could be considered novel for targeting Gram positive pathogens. However, this was also too preliminary to confirm anything substantial, since there were no other *in vivo* tests done to find out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* ones mentioned in the paper. It probably would provide some ideas for trials of scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. However, it was an interesting to have a re-visit on this work with a more cheminformatics focus this time. 
 
 <br>
 
 #### **Ideas to get across**
 
-The intentions of this post:
+My original intentions for this post were:
 
 - To familiarise myself with Datamol and scaffold_finder libraries
 
-- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind only, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars
+- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind only, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars (some people may prefer to stick with Pandas a the way, which I agree, but I'd just wanted to use Polars for the initial data cleaning only)
 
-- To reveal my thought processes of building simple cheminformatics-related functions (this was not planned, but rather kind of evolved from the second half of the work)
+- To reveal my thought processes of building simple cheminformatics-related functions (this was not planned, but rather kind of evolved while working on this post)
 
 - To mention experimental results from paper in PhD work into cheminformatics project (validation always crucial for computational predictions)
 
 - To show some evidence of my own growth from pure organic chemistry and computational chemistry without code into using data science tools via coding in Python to guide directions of drug discovery project 
-
-<br>
-
-#### **Final words**
-
-I've always wanted to shorten my posts to a more readable length, but... it was proven to be hard again. So this post was much longer than I've expected. Please feel free to click on the page content links on the right if needed. Thanks for reading if anyone is reading this at all.
