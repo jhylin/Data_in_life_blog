@@ -20,7 +20,7 @@ This post will talk about the following:
 
 - Pre-process and standardise compounds (e.g. converting SMILES into SELFIES and other forms)
 
-- Obtain scaffolds of all of the compounds
+- Obtain scaffolds for compounds
 
 - Align scaffolds of compounds
 
@@ -30,13 +30,13 @@ This post will talk about the following:
 
   - Function for converting .smi file into a list to query and match scaffolds of interests
 
-- Identify any similarities or differences between the target compound of interest against other compounds in a dataframe
+  - Identify any similarities or differences between the target compound of interest against other compounds in a dataframe
 
 <br>
 
 #### **Quick words**
 
-I've always wanted to shorten my posts to a more readable length, but it was proven to be hard again. So this post was much longer than I've expected. Please feel free to click on the page content links on the right if needed. Thanks for reading and looking forward to comments if there are any.
+I've always wanted to shorten my posts to a more readable length, but it was proven to be hard again. So this post was again much longer than expected. Page content links are available on the right-hand side if needing to jump to sections for a quick read. 
 
 <br>
 
@@ -61,7 +61,8 @@ from rdkit.Chem import AllChem
 from rdkit.Chem.rdmolfiles import SmilesWriter, SmilesMolSupplier
 
 # Library adapted with courtesy from Patrick Walters' tutorial on "Identifying Scaffolds" 
-# - links provided in "scaffold_finder library" section
+# - links provided in "scaffold_finder library" section within
+# the section for "Combining ChEMBL anti-infectives and FtsZ compounds"
 from scaffold_finder_test import generate_fragments, find_scaffolds, get_molecules_with_scaffold, cleanup_fragment
 ```
 
@@ -168,7 +169,7 @@ type(df_ai_pd)
 
 ##### **Pre-processing and standardising molecules**
 
-I have basically borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. It also included a conversion from "mol" (RDKit molecule) to SELFIES as well.
+I have borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. One of the convenient features in this function was that it also included a conversion from "mol" (RDKit molecule) to SELFIES amongst several other common molecular representations such as InChI and SMILES.
 
 ```{python}
 
@@ -405,19 +406,7 @@ Since I've started using mols2grid here, I thought to combine all 75 compounds u
 mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "mols2grid-id", "names"])
 ```
 
-```{python}
-# Showing scaffolds of ChEMBL Rx anti-infectives
-
-# **Some scaffolds are repeated e.g. 6 & 8 
-# - consider adding count column into the scaffold dataframe**
-
-#mols2grid.display(m_scaffolds)
-```
-
-```{python}
-# Showing scaffolds of FtsZ compounds
-#mols2grid.display(m_ftsz_scaffolds)
-```
+<br>
 
 ##### **scaffold_finder library**
 
@@ -509,58 +498,18 @@ cpd3_scaffolds = cpd3_scaffolds.to_pandas()
 mols2grid.display(cpd3_scaffolds, smiles_col = "Scaffold")
 ```
 
-```{python}
-# Show the full 14 SMILES of compound 3 scaffolds
-cpd3_all = cpd3_scaffolds["Scaffold"]
-```
+##### **Testing compound 3 scaffolds using scaffold_finder library**
+
+Compare scaffolds of compound 3 against the rest of Rx anti-infectives - specifically, compare anti-bacterials with same Gram +ve pathogenic targets (Strep. pneumoniae) as compound 3
+
+Use "get_molecules_with_scaffold" function from scaffold_finder library
+- refer to find_scaffolds.ipynb blog post -> tried but not exactly what was intended 
+- trial editing function initially - need to tailor function to target use
+
+**Goal of function**: Compare all 14 compound 3 scaffolds against all 75 molecules including ChEMBL-curated Rx anti-bacterials 
 
 ```{python}
-type(cpd3_all)
-```
-
-```{python}
-# Compare scaffolds of compound 3 against the rest of Rx anti-infectives
-# - specifically, compare anti-bacterials with same Gram +ve pathogenic targets (Strep. pneumoniae) 
-# as compound 3
-
-# Use "get_molecules_with_scaffold" function from scaffold_finder library
-# - refer to find_scaffolds.ipynb blog post -> tried but not exactly what was intended
-# trial editing function initially - need to tailor function to target use
-
-# Goal of function: Compare all 14 compound 3 scaffolds against all 75 molecules including
-# ChEMBL-curated Rx anti-bacterials 
-# ***At the moment, figuring out best code for iterating over the 14 cpd3 scaffolds***
-# ***Only single scaffold query worked as Pandas' query() method only takes in single string***
-```
-
-```{python}
-# Reference function from scaffold_finder.py
-
-# According to author, there are two main results from this function
-# * A list of scaffolds with R-group substitution points labeled --> ***Not required at the moment***
-# * A dataframe with molecules containing that scaffold 
-
-# def get_molecules_with_scaffold(scaffold, mol_df, activity_df):
-#     """
-#     Associate molecules with scaffolds
-#     :param scaffold: scaffold SMILES
-#     :param mol_df: dataframe with molecules and scaffolds, returned by find_scaffolds()
-#     :param activity_df: dataframe with [SMILES, Name, pIC50] columns
-#     :return: list of core(s) with R-groups labeled, dataframe with [SMILES, Name, pIC50]
-#     """
-#     match_df = mol_df.query("Scaffold == @scaffold")
-#     merge_df = match_df.merge(activity_df, on=["SMILES", "Name"])
-#     scaffold_mol = Chem.MolFromSmiles(scaffold)
-#     rgroup_match, rgroup_miss = RGroupDecompose(scaffold_mol, merge_df.mol, asSmiles=True)
-#     if len(rgroup_match):
-#         rgroup_df = pd.DataFrame(rgroup_match)
-#         return rgroup_df.Core.unique(), merge_df[["SMILES", "Name", "pIC50"]]
-#     else:
-#         return [], merge_df[["SMILES", "Name", "pIC50"]]
-```
-
-```{python}
-# Test 1: Trial single scaffold first
+# Trial single scaffold first
 scaffold_test = cpd3_scaffolds.Scaffold.values[0]
 scaffold_test
 ```
@@ -613,10 +562,12 @@ Then perhaps I would place all of these compound 3 scaffolds into an object.
 cpd3_mols = cpd3_scaffolds["mol"]
 cpd3_mols
 ```
-At this stage, nothing really clicked at the moment, but then I thought about how datamol was built on top of RDKit and also how a few other cheminformatics posts I've read before utilises the functions in RDKit, it was time to look deeper in RDKit to search for methods with my intended purpose in mind. Then I started to think more on the tangent of writing a function, where I then found the SmilesWriter() method from RDKit after reading a few online references. 
+At this stage, nothing really clicked at the moment, but then I thought about how Datamol was built on top of RDKit and also how a few other cheminformatics posts I've read before utilises the functions in RDKit, it was time to look deeper in RDKit to search for methods with my intended purpose in mind. Then I started to think more on the tangent of writing a function, where I then found the SmilesWriter() method from RDKit after reading a few online references. 
 
 Clearly, I've found out that:
+
 - To write multiple SMILES into a .smi file, use SmilesWriter()
+
 - To read a set of SMILES from a .smi file, use SmilesMolSupplier()
 
 Acknowledgement of a useful link I've found online which had helped me figure out how I would go about saving multiple SMILES strings ina .smi file: https://github.com/suneelbvs/rdkit_tutorials/blob/master/1_Reading%20and%20Writing%20Smiles%20using%20rdKit.ipynb
@@ -655,6 +606,8 @@ def save_smiles_strings(df, file_name):
     smiles.write(s)
   smiles.close()
 ```
+
+<br>
 
 ###### **Testing on the function**
 
@@ -726,6 +679,8 @@ for mol in suppl:
 list
 ```
 
+<br>
+
 ##### **Function for converting .smi file into a list to query and match scaffolds of interests**
 
 I then came up with the next function that would feed multiple scaffolds into a Pandas.query() to match the strings, meaning we could compare the scaffolds with each other in a dataframe.
@@ -748,6 +703,8 @@ def query_scaffolds_via_smiles(filename):
     #return list
 ```
 
+<br>
+
 ###### **Testing on the function**
 
 Below was a test for this query_scaffolds_via_smiles() function using the previously made "cpd3.smi" file.
@@ -768,41 +725,9 @@ query_scaffolds_via_smiles("cefe.smi")
 
 <br>
 
-**Following sections likely not needed - to be checked**
-
-```{python}
-cpd3 = cpd3_scaffolds["Scaffold"]
-cpd3
-```
-
-```{python}
-# Check object type
-type(cpd3)
-```
-
-```{python}
-# Compound 3 scaffolds
-# Convert series to list
-cpd3 = cpd3.astype(str).tolist()
-cpd3
-```
-
-```{python}
-# Check object type
-type(cpd3)
-```
-
-```{python}
-# Using simple Pandas.query() method
-match_df_ftsz = mol_df.query("Scaffold in @cpd3")
-match_df_ftsz
-```
-
-<br>
-
 #### **Results and answers**
 
-There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds. However, this was only limited to the dataset obtained from ChEMBL at this stage, with indications of the molecules limited to anti-infectives. So this might imply that the scaffold from compound 3 could be considered novel for targeting Gram positive pathogens. However, this was also too preliminary to confirm anything substantial, since there were no other *in vivo* tests done to find out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* ones mentioned in the paper. It probably would provide some ideas for trials of scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. However, it was an interesting to have a re-visit on this work with a more cheminformatics focus this time. 
+There were no other Rx anti-bacterials with the same scaffold as compound 3 by using SMILES strings to compare their scaffolds. However, this was only limited to the dataset obtained from ChEMBL at this stage, with indications of the molecules limited to anti-infectives. So this might imply that the scaffold from compound 3 could be considered novel for targeting Gram positive pathogens. However, this was also too preliminary to confirm anything substantial, since there were no other *in vivo* tests done to find out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* ones mentioned in the paper. It probably would provide some ideas for trials of scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. However, it was interesting to have a re-visit on this work using a more cheminformatics approach this time. 
 
 <br>
 
@@ -818,4 +743,6 @@ My original intentions for this post were:
 
 - To mention experimental results from paper in PhD work into cheminformatics project (validation always crucial for computational predictions)
 
-- To show some evidence of my own growth from pure organic chemistry and computational chemistry without code into using data science tools via coding in Python to guide directions of drug discovery project 
+- To show some evidence of my own growth from pure organic chemistry and computational chemistry without code into using data science tools via coding in Python to guide directions of drug discovery project
+
+Thanks for reading and looking forward to comments if there are any.
