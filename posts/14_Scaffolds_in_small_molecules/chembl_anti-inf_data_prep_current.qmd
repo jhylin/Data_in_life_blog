@@ -2,7 +2,7 @@
 title: "Working with scaffolds in small molecules"
 subtitle: "Manipulating SMILES strings"
 author: Jennifer HY Lin
-date: '2023-7-4'
+date: '2023-7-5'
 draft: true
 categories:
   - RDKit
@@ -14,11 +14,11 @@ categories:
 jupyter: python3
 ---
 
-#### **Features in this post**
+#### **Features in post**
 
-This post will talk about the following:
+This post will mainly be about the following:
 
-- Pre-process and standardise compounds (e.g. converting SMILES into SELFIES and other forms)
+- Pre-process and standardise compounds (e.g. converting SMILES[^1] into SELFIES[^2] and other forms)
 
 - Obtain scaffolds for compounds
 
@@ -31,6 +31,9 @@ This post will talk about the following:
   - Function for converting .smi file into a list to query and match scaffolds of interests
 
   - Identify any similarities or differences between target compound of interest against other compounds in a dataframe
+
+[^1]: Simplified Molecular Input Line Entry Systems
+[^2]: SELF-referencIng Embedded Strings
 
 <br>
 
@@ -91,14 +94,14 @@ Under the "Availability Type" column, there were a few different availabilities 
 ```{python}
 df_ai.groupby("Availability Type").count()
 ```
-Because I only wanted to choose the "Prescription Only" ones, the following filter condition was applied.
+I only wanted to choose the "Prescription Only" ones, so the following filter condition was applied to the dataframe.
 
 ```{python}
 df_ai_rx = df_ai.filter(pl.col("Availability Type") == "Prescription Only")
 df_ai_rx.head()
 ```
 
-In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecule (shown in the next section), as it involved converting SMILES strings into SELFIES (self-referencing embedded strings), which were considered to be more robust than SMILES. 
+In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecule (shown in the next section), as it involved converting SMILES strings into SELFIES, which were considered to be more robust than SMILES. 
 
 However, I kept running into an error, with the error message showing the SMILES column was empty. After a few tries I realised that I've actually forgotten to check whether there were any missing SMILES in the column. So here I've filtered the SMILES column to look for any missing SMILES
 
@@ -171,7 +174,9 @@ type(df_ai_pd)
 
 ##### **Pre-processing and standardising molecules**
 
-I have borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. One of the convenient features in this function was that it also included a conversion from "mol" (RDKit molecule) to SELFIES amongst several other common molecular representations such as InChI and SMILES.
+I have borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. One of the convenient features in this function was that it also included a conversion from "mol" (RDKit molecule) to SELFIES amongst several other common molecular representations such as InChI[^3] and SMILES.
+
+[^3]: International Chemical Identifier
 
 ```{python}
 
@@ -267,7 +272,7 @@ dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
 
 ##### **Data cleaning**
 
-This section focuses on 3 compounds from this paper: [Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993.](https://doi.org/10.3390/molecules27206993). Obviously from the authorship shown for the paper, this was from my PhD work, and out of interests, I just wanted to look a bit further into them and compare with known anti-infectives.
+This section focuses on 3 compounds from this paper: [Lin, H.-Y.J.; Battaje, R.R.; Tan, J.; Doddareddy, M.; Dhaked, H.P.S.; Srivastava, S.; Hawkins, B.A.; Al-Shdifat, L.M.H.; Hibbs, D.E.; Panda, D.; et al. Discovery of 2',6-Bis(4-hydroxybenzyl)-2-acetylcyclohexanone, a Novel FtsZ Inhibitor. Molecules 2022, 27, 6993](https://doi.org/10.3390/molecules27206993). Obviously from the authorship shown, this was from my PhD work and out of interests, I just wanted to look a bit further into them and compare with known anti-infectives.
 
 Before I started cleaning any data on FtsZ compounds, I found this useful website, [OPSIN: Open Parser for Systematic IUPAC nomenclature](https://opsin.ch.cam.ac.uk/), with this [link](https://pubs.acs.org/doi/full/10.1021/ci100384d) to the journal paper as an acknowledgement of the work. I've managed to convert these 3 FtsZ compounds by using their IUPAC names, which were inputted into OPSIN, and converted into the corresponding InChI or SMILES strings.
 
@@ -427,7 +432,7 @@ full_data.head()
 
 Step 3: Identify scaffolds
 
-The find_scaffolds() function was kindly borrowed from P. Walters' scaffold_finder library as mentioned above. The scaffold_finder_test.py was the modified version, as I've used a different dataset here.
+The find_scaffolds() function was kindly borrowed from the scaffold_finder library as mentioned above. The scaffold_finder_test.py was the modified version, as I've used a different dataset here.
 
 ```{python}
 mol_df, scaffold_df = find_scaffolds(full_data)
@@ -470,7 +475,7 @@ count_top2_scaffold = scaffold_df.Scaffold.values[1]
 count_top_scaffold = list((count_top1_scaffold, count_top2_scaffold))
 count_top_scaffold
 ```
-Then this was the second sample dataset, purely on the scaffolds for the antibiotic called "cefepime".
+Then this was the second sample dataset, purely on the scaffolds for the antibiotic called, "cefepime".
 
 ```{python}
 cefe_scaffolds = pl.from_pandas(mol_df).filter(pl.col("Name") == "cefepime")
@@ -480,7 +485,7 @@ cefe_scaffolds.head()
 
 #### **Focus on FtsZ compound 3**
 
-Compound 3 was the compound found in the paper to have targeted the FtsZ proteins in Gram positive pathogens such as *Streptococcus pneumoniae*. So this section looks into all of compound 3's scaffolds particularly.
+Compound 3 was the compound found in the paper to have targeted the FtsZ proteins in Gram positive pathogens such as *Streptococcus pneumoniae* with more pronounced activities than its predecessor e.g. compound 1. So this section aimed to look into all of compound 3's scaffolds.
 
 ```{python}
 # For ease of dataframe manipulation, decided to convert Pandas df into a Polars one (just my personal preference as I've used Polars more lately)
@@ -693,9 +698,10 @@ def query_scaffolds_via_smiles(filename):
         m = Chem.MolToSmiles(mol)
         # Add each SMILES read from filename.smi into the empty list
         list.append(m)
+        # Compare the SMILES with the scaffold column in dataframe
         scaffold_match_df = mol_df.query("Scaffold in @list")
+        
     return scaffold_match_df
-    #return list
 ```
 
 <br>
@@ -718,26 +724,28 @@ Then I also tested on "cefe.smi" created before.
 query_scaffolds_via_smiles("cefe.smi")
 ```
 
+Only cephalosporins were brought up as the result from the scaffold query, which matched with the antibiotic class of cefepime.
+
 <br>
 
 #### **Some answers**
 
-There were no other prescription-only anti-bacterials from ChEMBL with the same scaffold as compound 3 by comparing SMILES strings between the selected scaffolds only. This was only limited to the dataset obtained from ChEMBL at this stage, with compound indications limited to anti-infectives for now. This might imply that the scaffold of compound 3 could be considered novel, without looking in other *in vivo* testing for now. Obviously, this was too preliminary to confirm anything substantial, since there were no *in vivo* tests on finding out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* tests mentioned in the paper. It probably would provide some ideas for scaffold hopping, or functional group (R-group) comparisons when looking for new compounds for synthesis. Overall, it was interesting to have a re-visit on this work using a more cheminformatics approach this time. 
+There were no other prescription-only anti-bacterials from ChEMBL database with the same scaffold as compound 3 after comparing the SMILES strings between these selected scaffolds only. This was only limited to the dataset obtained from ChEMBL at this stage, with compound indications limited to anti-infectives for now. This might imply that the scaffold of compound 3 could be considered novel when comparing with molecules with similar indications. Obviously, this was too preliminary to confirm anything substantial, since there were no *in vivo* tests on finding out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* experimental results mentioned in the paper. It probably would provide some ideas for scaffold hopping in hit compounds, or functional group (R-group) comparisons when looking for new compounds for synthesis. Overall, it was interesting to have a re-visit on this work using a more cheminformatics approach. 
 
 <br>
 
 #### **Afterthoughts**
 
-My original intentions for this post were:
+What I wanted to achieve in this post were:
 
 - To familiarise myself with Datamol and scaffold_finder libraries
 
-- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind only, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars (some people may prefer to stick with Pandas a the way, which I agree, but I'd just wanted to use Polars for the initial data cleaning only)
+- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind mostly, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars. Some people may prefer to stick with Pandas all the way, which I agree, but I'd just wanted to use Polars for the initial data cleaning only as I've been using it more lately
 
-- To reveal my thought processes of building simple cheminformatics-related functions (this was not planned, but rather kind of evolved while working on this post)
+- To reveal my thought processes of building simple cheminformatics-related functions (this was unplanned, but kind of evolved while working on this post)
 
-- To show some evidence of my own growth from medicinal chemistry and computational chemistry with no code into using data science tools via coding in Python to guide directions of drug discovery project
+- To show some evidence of my own growth from computational and medicinal chemistry with no code at all, to using data science tools via coding in Python to guide possible drug discovery project
 
-- To mention that experimental validations will always be crucial for computational predictions
+- To mention that experimental validations will always be crucial for computational predictions, and I sort of had a bit of experimental results from the paper, and thought to accompany it with some computational findings here
 
-I hope I've at least achieved a few of these points in this post at least. Thanks for reading and looking forward to comments if there are any.
+I hope I've at least achieved a few of these points in this post if not all. Thanks for reading and looking forward to comments if there are any.
