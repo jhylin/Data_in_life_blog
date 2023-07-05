@@ -2,7 +2,7 @@
 title: "Working with scaffolds in small molecules"
 subtitle: "Manipulating SMILES strings"
 author: Jennifer HY Lin
-date: '2023-7-5'
+date: '2023-7-6'
 draft: true
 categories:
   - RDKit
@@ -30,7 +30,7 @@ This post will mainly be about the following:
 
   - Function for converting .smi file into a list to query and match scaffolds of interests
 
-  - Identify any similarities or differences between target compound of interest against other compounds in a dataframe
+  - Identify any similarities or differences in target compound of interest against other compounds in a dataframe
 
 [^1]: Simplified Molecular Input Line Entry Systems
 [^2]: SELF-referencIng Embedded Strings
@@ -45,7 +45,7 @@ I've always wanted to shorten my posts to a more readable length, but it was pro
 
 #### **Key question to answer**
 
-Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved ChEMBL anti-infectives? 
+Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved anti-infectives in ChEMBL database? 
 
 <br>
 
@@ -63,10 +63,10 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem.rdmolfiles import SmilesWriter, SmilesMolSupplier
 
-# Library modified & adapted from Patrick Walters' tutorial 
-# on "Identifying Scaffolds" 
+# Following library was modified & adapted from  
+# Patrick Walters' tutorial on "Identifying Scaffolds" 
 # - links provided in "scaffold_finder library" section under
-# the section for "Combining ChEMBL anti-infectives and FtsZ compounds"
+# the subheading of "Combining ChEMBL anti-infectives and FtsZ compounds"
 from scaffold_finder_test import find_scaffolds, get_molecules_with_scaffold
 ```
 
@@ -101,7 +101,7 @@ df_ai_rx = df_ai.filter(pl.col("Availability Type") == "Prescription Only")
 df_ai_rx.head()
 ```
 
-In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecule (shown in the next section), as it involved converting SMILES strings into SELFIES, which were considered to be more robust than SMILES. 
+In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecules (shown in the next section), as it involved converting SMILES strings into SELFIES, which were considered to be more robust than SMILES. 
 
 However, I kept running into an error, with the error message showing the SMILES column was empty. After a few tries I realised that I've actually forgotten to check whether there were any missing SMILES in the column. So here I've filtered the SMILES column to look for any missing SMILES
 
@@ -268,7 +268,7 @@ dm.to_image(m_scaffolds, mol_size = (400, 400), legends = legends_c)
 
 <br>
 
-#### **Filamenting temperature-sensitive Z (FtsZ) compounds**
+#### **Filamenting temperature-sensitive mutant Z (FtsZ) compounds**
 
 ##### **Data cleaning**
 
@@ -386,7 +386,7 @@ mol_full = [dm.to_mol(smile) for smile in df_full]
 
 ##### **Aligning all the scaffolds**
 
-Here, all the scaffolds from both dataframes of compounds were aligned by using Datamol's auto_align_many(). The images of all the aligned molecules were generated in the end. The compound structures did re-align, but unfortunately it only showed up to a maximum of 50 compounds only (the default number for the maximum number of molecules to be shown was 32 in Datamol; this number was truncated to 50 in the warning message from RDKit when attempting to run the total of 75 compounds using the Datamol library, without looking further into other ways to alter this at this stage).
+Here, all the scaffolds from both dataframes of compounds were aligned by using Datamol's auto_align_many(). The images of all the aligned molecules were generated in the end. The compound structures did re-align, but unfortunately it only showed up to a maximum of 50 compounds only (the maximum number of molecules to be shown in Datamol was set to 32 as default; this number was pushed up to and truncated at 50 in the warning message from RDKit when attempting to run a total of 75 compounds using the Datamol library, without looking further into other ways to alter this for now).
 
 ```{python}
 aligned_list = dm.align.auto_align_many(mol_full, partition_method = "anon-scaffold")
@@ -401,7 +401,7 @@ mols2grid.display(aligned_list)
 
 ##### **mols2grid library**
 
-Since I've started using mols2grid here, I thought to combine all 75 compounds using the pre-processed standard SMILES in the grids with corresponding compound names. The resulting table provided a clear overview of all the compounds, with useful options to select or filter compounds.
+Since I've started using mols2grid here, I thought to show an example of this library by combining all 75 compounds using the pre-processed standard SMILES in the grids with corresponding compound names. The resulting table provided a clear overview of all the compounds, with useful options to select or filter compounds. Obviously, other molecular properties or experimental results could be added into the table for other uses.
 
 ```{python}
 # Full dataset of 75 compounds 
@@ -412,11 +412,11 @@ mols2grid.display(full_data, smiles_col = "standard_smiles", subset = ["img", "m
 
 ##### **scaffold_finder library**
 
-Rather than only trying out Datamol only, I also thought to try out the scaffold_finder library after reading this [Jupyter notebook](https://colab.research.google.com/github/PatWalters/practical_cheminformatics_tutorials/blob/main/sar_analysis/find_scaffolds.ipynb) by Patrick Walters. The GitHub repository of his other useful cheminformatics tutorials can be found [here](https://github.com/PatWalters/practical_cheminformatics_tutorials). His well-known "Practical Cheminformatics" blog is [here](https://practicalcheminformatics.blogspot.com/). Without surprises, this post was also inspired by his work on "Identifying Scaffolds", and I thought to expand on it a bit more (hopefully I did that here).
+Rather than only trying out Datamol only, I also thought to try out the scaffold_finder library after reading this [Jupyter notebook](https://colab.research.google.com/github/PatWalters/practical_cheminformatics_tutorials/blob/main/sar_analysis/find_scaffolds.ipynb) by Patrick Walters. The GitHub repository of his other useful cheminformatics tutorials can be found [here](https://github.com/PatWalters/practical_cheminformatics_tutorials). His blog is [here](https://practicalcheminformatics.blogspot.com/). Without surprises, this post was also inspired by this Jupyter notebook on "Identifying scaffolds in a set of molecules", with some hope to expand on it a bit more.
 
 Below were my notes on how to use this particular library.
 
-Step 1: add "mol" column to full_data dataframe (this was needed in order to use the functions from scaffold_finder library, which was also built based on RDKit)
+Step 1: Add "mol" column to full_data dataframe (this was needed in order to use the functions from scaffold_finder library, which was also built based on RDKit)
 
 ```{python}
 full_data["mol"] = full_data.standard_smiles.apply(Chem.MolFromSmiles)
@@ -548,7 +548,7 @@ Then I thought about how every time if we'd want to convert any molecules from S
 cpd3_scaffolds["mol"] = cpd3_scaffolds.Scaffold.apply(Chem.MolFromSmiles)
 ```
 
-The dataframe would now look like this.
+The dataframe would look like this now.
 
 ```{python}
 cpd3_scaffolds
@@ -724,7 +724,7 @@ Then I also tested on "cefe.smi" created before.
 query_scaffolds_via_smiles("cefe.smi")
 ```
 
-Only cephalosporins were brought up as the result from the scaffold query, which matched with the antibiotic class of cefepime.
+Only cephalosporins were brought up as the result from this scaffold query, which matched with the antibiotic class of cefepime.
 
 <br>
 
@@ -740,12 +740,14 @@ What I wanted to achieve in this post were:
 
 - To familiarise myself with Datamol and scaffold_finder libraries
 
-- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be more likely to be a small degree only, as Datamol was likely written with Pandas in mind mostly, and also Pandas was the more commonly used in many cheminformatics packages & libraries since it was around longer than Polars. Some people may prefer to stick with Pandas all the way, which I agree, but I'd just wanted to use Polars for the initial data cleaning only as I've been using it more lately
+- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be a small degree only, as Datamol was likely written with Pandas in mind mostly (based on RDKit), while Pandas was also the more commonly used dataframe libray in many cheminformatics packages. Some people might prefer to stick with Pandas all the way, which I agree, but I'd just wanted to use Polars for the initial data wrangling only as I've been using it more lately
 
-- To reveal my thought processes of building simple cheminformatics-related functions (this was unplanned, but kind of evolved while working on this post)
+- To reveal my thought process on building simple cheminformatics-related functions (this was unplanned, but kind of evolved while working on this post)
 
-- To show some evidence of my own growth from computational and medicinal chemistry with no code at all, to using data science tools via coding in Python to guide possible drug discovery project
+- To show some evidence of my own growth from computational and medicinal chemistry with no code, to using data science tools with Python code to help guiding drug discovery projects
 
-- To mention that experimental validations will always be crucial for computational predictions, and I sort of had a bit of experimental results from the paper, and thought to accompany it with some computational findings here
+- To mention that experimental validations will always be crucial for computational predictions, and since I had some experimental results from the paper, I thought to accompany it with some computational findings here
 
-I hope I've at least achieved a few of these points in this post if not all. Thanks for reading and looking forward to comments if there are any.
+I hope I've at least achieved some these points in this post if not all. 
+
+Thanks for reading and looking forward to comments if any.
