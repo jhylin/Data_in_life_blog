@@ -3,7 +3,7 @@ title: "Working with scaffolds in small molecules"
 subtitle: "Manipulating SMILES strings"
 author: Jennifer HY Lin
 date: '2023-7-6'
-draft: true
+draft: false
 categories:
   - RDKit
   - Datamol
