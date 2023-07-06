@@ -18,34 +18,35 @@ jupyter: python3
 
 This post will mainly be about the following:
 
-- Pre-process and standardise compounds (e.g. converting SMILES[^1] into SELFIES[^2] and other forms)
+-   Pre-process and standardise compounds (e.g. converting SMILES[^1] into SELFIES[^2] and other forms)
 
-- Obtain scaffolds for compounds
+-   Obtain scaffolds for compounds
 
-- Align scaffolds of compounds
+-   Align scaffolds of compounds
 
-- Query target scaffolds against a dataframe of compounds:
+-   Query target scaffolds against a dataframe of compounds:
 
-  - Function for saving multiple SMILES in .smi file
+    -   Function for saving multiple SMILES in .smi file
 
-  - Function for converting .smi file into a list to query and match scaffolds of interests
+    -   Function for converting .smi file into a list to query and match scaffolds of interests
 
-  - Identify any similarities or differences in target compound of interest against other compounds in a dataframe
+    -   Identify any similarities or differences in target compound of interest against other compounds in a dataframe
 
 [^1]: Simplified Molecular Input Line Entry Systems
+
 [^2]: SELF-referencIng Embedded Strings
 
 <br>
 
 #### **Quick words**
 
-I've always wanted to shorten my posts to a more readable length, but it was proven to be hard again, as this post was much longer than expected. Page content links are available on the right-hand side if needing to jump to sections for quick reads. 
+I've always wanted to shorten my posts to a more readable length, but it was proven to be hard again, as this post was much longer than expected. Page content links are available on the right-hand side if needing to jump to sections for quick reads.
 
 <br>
 
 #### **Key question to answer**
 
-Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved anti-infectives in ChEMBL database? 
+Will the scaffold of compound 3 (compound of interest) be similar to the scaffolds of any approved anti-infectives in ChEMBL database?
 
 <br>
 
@@ -94,6 +95,7 @@ Under the "Availability Type" column, there were a few different availabilities 
 ```{python}
 df_ai.groupby("Availability Type").count()
 ```
+
 I only wanted to choose the "Prescription Only" ones, so the following filter condition was applied to the dataframe.
 
 ```{python}
@@ -101,7 +103,7 @@ df_ai_rx = df_ai.filter(pl.col("Availability Type") == "Prescription Only")
 df_ai_rx.head()
 ```
 
-In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecules (shown in the next section), as it involved converting SMILES strings into SELFIES, which were considered to be more robust than SMILES. 
+In preparation for possible future work on building machine learning models on this line of work, I looked into Datamol's function on pre-processing molecules (shown in the next section), as it involved converting SMILES strings into SELFIES, which were considered to be more robust than SMILES.
 
 However, I kept running into an error, with the error message showing the SMILES column was empty. After a few tries I realised that I've actually forgotten to check whether there were any missing SMILES in the column. So here I've filtered the SMILES column to look for any missing SMILES
 
@@ -143,7 +145,7 @@ df_ai_rx = df_ai_rx.select(["Smiles", "Name", "USAN Definition", "Level 4 ATC Co
 df_ai_rx.head()
 ```
 
-The "Smiles" column name was changed below to ensure _preprocess function would work since the parameter "smiles_column" in _preprocess function had "smiles" with lowercase "s" (this of course could be the other way round, where we could change the parameter name in the function instead - the column name and parameter name had to match for the function to work). The "Name" column was changed accordingly for similar reason. 
+The "Smiles" column name was changed below to ensure \_preprocess function would work since the parameter "smiles_column" in \_preprocess function had "smiles" with lowercase "s" (this of course could be the other way round, where we could change the parameter name in the function instead - the column name and parameter name had to match for the function to work). The "Name" column was changed accordingly for similar reason.
 
 ```{python}
 df_ai_rx = df_ai_rx.rename({"Smiles": "smiles", "Name": "names"})
@@ -158,7 +160,7 @@ df_ai_rx = df_ai_rx.with_columns(pl.col("names").str.to_lowercase())
 df_ai_rx.head()
 ```
 
-Since Datamol was built as a thin layer library on top of RDKit, which was really only compatible with Pandas, I added the following step to convert the dataframe into a Pandas one. 
+Since Datamol was built as a thin layer library on top of RDKit, which was really only compatible with Pandas, I added the following step to convert the dataframe into a Pandas one.
 
 ```{python}
 df_ai_pd = df_ai_rx.to_pandas()
@@ -174,7 +176,7 @@ type(df_ai_pd)
 
 ##### **Pre-processing and standardising molecules**
 
-I have borrowed and adapted the _preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. One of the convenient features in this function was that it also included a conversion from "mol" (RDKit molecule) to SELFIES amongst several other common molecular representations such as InChI[^3] and SMILES.
+I have borrowed and adapted the \_preprocess function from Datamol ([link here](https://docs.datamol.io/stable/tutorials/Preprocessing.html)), as shown below. One of the convenient features in this function was that it also included a conversion from "mol" (RDKit molecule) to SELFIES amongst several other common molecular representations such as InChI[^3] and SMILES.
 
 [^3]: International Chemical Identifier
 
@@ -227,7 +229,7 @@ data_mol_clean
 
 To convert only one SMILES string into a SELFIES, the following code example should work with Datamol.
 
-```{{python}}
+``` {{python}}
 selfies = dm.to_selfies("O=C(N[C@H](CO)[C@H](O)c1ccc([N+](=O)[O-])cc1)C(Cl)Cl")
 selfies
 ```
@@ -284,7 +286,7 @@ cpd1 = dm.from_inchi("InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-
 cpd1
 ```
 
-I then converted compound 2 using SMILES string instead. 
+I then converted compound 2 using SMILES string instead.
 
 ```{python}
 # Convert compound 2 SMILES to mol
@@ -311,6 +313,7 @@ mol_lst
 df = dm.to_df(mol_lst)
 df
 ```
+
 Then the compound numbers were added into the dataframe as well.
 
 ```{python}
@@ -449,6 +452,7 @@ Again to have a quick look at the scaffolds of all 75 compounds, along with coun
 ```{python}
 scaffold_df
 ```
+
 Step 4: Display all scaffolds in mols2grid, which helped to identify the scaffold with the highest frequency (counts) of occurence in the dataset.
 
 ```{python}
@@ -475,12 +479,14 @@ count_top2_scaffold = scaffold_df.Scaffold.values[1]
 count_top_scaffold = list((count_top1_scaffold, count_top2_scaffold))
 count_top_scaffold
 ```
+
 Then this was the second sample dataset, purely on the scaffolds for the antibiotic called, "cefepime".
 
 ```{python}
 cefe_scaffolds = pl.from_pandas(mol_df).filter(pl.col("Name") == "cefepime")
 cefe_scaffolds.head()
 ```
+
 <br>
 
 #### **Focus on FtsZ compound 3**
@@ -542,6 +548,7 @@ At first, I started with reading all 14 scaffolds of compound 3 by using the val
 scaffold_cpd3_all = cpd3_scaffolds.Scaffold.values[:]
 scaffold_cpd3_all
 ```
+
 Then I thought about how every time if we'd want to convert any molecules from SMILES to RDKit molecules, we really had to have a "mol" column set up, so that was what I did below.
 
 ```{python}
@@ -560,16 +567,16 @@ Then perhaps I would place all of these compound 3 scaffolds into an object.
 cpd3_mols = cpd3_scaffolds["mol"]
 cpd3_mols
 ```
-At this stage, nothing really clicked at the moment, but then I thought about how Datamol was built on top of RDKit and also how a few other cheminformatics posts I've read before utilised the functions in RDKit, so it was time to look deeper in RDKit to search for methods with the intended purpose in mind. I then found the SmilesWriter() method from RDKit after reading a few online references. 
+
+At this stage, nothing really clicked at the moment, but then I thought about how Datamol was built on top of RDKit and also how a few other cheminformatics posts I've read before utilised the functions in RDKit, so it was time to look deeper in RDKit to search for methods with the intended purpose in mind. I then found the SmilesWriter() method from RDKit after reading a few online references.
 
 I've found out that:
 
-- To write multiple SMILES into a .smi file, use SmilesWriter()
+-   To write multiple SMILES into a .smi file, use SmilesWriter()
 
-- To read a set of SMILES from a .smi file, use SmilesMolSupplier()
+-   To read a set of SMILES from a .smi file, use SmilesMolSupplier()
 
 Acknowledgement of a useful [link](https://github.com/suneelbvs/rdkit_tutorials/blob/master/1_Reading%20and%20Writing%20Smiles%20using%20rdKit.ipynb) I've found online which had helped me to figure out how to save multiple SMILES strings in a .smi file.
-
 
 ```{python}
 # Figured out how to save multiple SMILES as a text file 
@@ -730,7 +737,7 @@ Only cephalosporins were brought up as the result from this scaffold query, whic
 
 #### **Some answers**
 
-There were no other prescription-only anti-bacterials from ChEMBL database with the same scaffold as compound 3 after comparing the SMILES strings between these selected scaffolds only. This was only limited to the dataset obtained from ChEMBL at this stage, with compound indications limited to anti-infectives for now. This might imply that the scaffold of compound 3 could be considered novel when comparing with molecules with similar indications. Obviously, this was too preliminary to confirm anything substantial, since there were no *in vivo* tests on finding out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* experimental results mentioned in the paper. It probably would provide some ideas for scaffold hopping in hit compounds, or functional group (R-group) comparisons when looking for new compounds for synthesis. Overall, it was interesting to have a re-visit on this work using a more cheminformatics approach. 
+There were no other prescription-only anti-bacterials from ChEMBL database with the same scaffold as compound 3 after comparing the SMILES strings between these selected scaffolds only. This was only limited to the dataset obtained from ChEMBL at this stage, with compound indications limited to anti-infectives for now. This might imply that the scaffold of compound 3 could be considered novel when comparing with molecules with similar indications. Obviously, this was too preliminary to confirm anything substantial, since there were no *in vivo* tests on finding out the efficacy, safety and toxicity of compound 3 apart from the *in vitro* experimental results mentioned in the paper. It probably would provide some ideas for scaffold hopping in hit compounds, or functional group (R-group) comparisons when looking for new compounds for synthesis. Overall, it was interesting to have a re-visit on this work using a more cheminformatics approach.
 
 <br>
 
@@ -738,16 +745,16 @@ There were no other prescription-only anti-bacterials from ChEMBL database with 
 
 What I wanted to achieve in this post were:
 
-- To familiarise myself with Datamol and scaffold_finder libraries
+-   To familiarise myself with Datamol and scaffold_finder libraries
 
-- To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be a small degree only, as Datamol was likely written with Pandas in mind mostly (based on RDKit), while Pandas was also the more commonly used dataframe libray in many cheminformatics packages. Some people might prefer to stick with Pandas all the way, which I agree, but I'd just wanted to use Polars for the initial data wrangling only as I've been using it more lately
+-   To use Polars dataframe library for initial data wrangling along with Datamol Python library, and the later trial of scaffold_finder library. Using Polars would be a small degree only, as Datamol was likely written with Pandas in mind mostly (based on RDKit), while Pandas was also the more commonly used dataframe libray in many cheminformatics packages. Some people might prefer to stick with Pandas all the way, which I agree, but I'd just wanted to use Polars for the initial data wrangling only as I've been using it more lately
 
-- To reveal my thought process on building simple cheminformatics-related functions (this was unplanned, but kind of evolved while working on this post)
+-   To reveal my thought process on building simple cheminformatics-related functions (this was unplanned, but kind of evolved while working on this post)
 
-- To show some evidence of my own growth from computational and medicinal chemistry with no code, to using data science tools with Python code to help guiding drug discovery projects
+-   To show some evidence of my own growth from computational and medicinal chemistry with no code, to using data science tools with Python code to help guiding drug discovery projects
 
-- To mention that experimental validations will always be crucial for computational predictions, and since I had some experimental results from the paper, I thought to accompany it with some computational findings here
+-   To mention that experimental validations will always be crucial for computational predictions, and since I had some experimental results from the paper, I thought to accompany it with some computational findings here
 
-I hope I've at least achieved some these points in this post if not all. 
+I hope I've at least achieved some these points in this post if not all.
 
 Thanks for reading and looking forward to comments if any.
