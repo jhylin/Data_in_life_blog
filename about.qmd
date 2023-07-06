@@ -1,5 +1,5 @@
 ---
-title: "Jennifer HY Lin"
+title: "About Jennifer HY Lin"
 image: profile avatar.jpg
 about:
   template: jolla
@@ -15,8 +15,6 @@ about:
       href: mailto:jennyhylin@gmail.com
 comments: false
 ---
-
-**About this blog**
 
 Personally, I was born in Taiwan but was raised in New Zealand since I was a young kid. Professionally, I started my career as a pharmacist in New Zealand, and spent several years working at community and hospital pharmacies, across metropolitan and rural areas. Somehow life took me on a detour afterward where I went down the path of doing postgraduate research studies in Australia. The research mainly focused on drug discovery and design with medicinal and computational chemistry used, and also the inevitable countless hours spent in chemistry and computer labs doing experiments. I've also continued to work as a hospital pharmacist while working on these research projects. I've definitely kept myself very busy during those years.
 
