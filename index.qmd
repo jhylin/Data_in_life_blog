@@ -17,7 +17,7 @@ comments: false
 
 **🌟Welcome🌟**
 
-As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. I'm currently working on a molecular scaffolds project, aiming to familiarise myself with datamol, therefore a new post should hopefully be up soon by end of June or early July.
+As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. I'm currently brainstorming for the next project...
 
 <br>
 
