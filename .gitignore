@@ -6,3 +6,4 @@
 /.quarto/
 chembl_mols.csv
 derby.log
+venv

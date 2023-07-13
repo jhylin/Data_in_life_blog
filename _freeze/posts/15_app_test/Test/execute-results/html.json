@@ -1,0 +1,11 @@
+{
+  "hash": "b3007aa49147a96a41aab8932beed85a",
+  "result": {
+    "markdown": "---\ntitle: Test\nauthor: Jennifer HY Lin\ndate: 2023-7-13\nformat: html\nfilters:\n  - shinylive\ndraft: true\ncategories:\n  - Python\n  - Shiny\n  - Pandas\n---\n\n::: column-screen-inset\n``` {shinylive-python}\n#| standalone: true\n#| components: [editor, viewer]\n#| layout: vertical\n#| viewerHeight: 420\nfrom pathlib import Path\nimport pyodide.http\nfrom pyodide.http import open_url\nimport pandas as pd\n\n# import polars as pl\n# from rdkit import Chem\n# from rdkit.Chem import Draw\n# import datamol as dm\n\nfrom shiny import App, render, ui\n\napp_ui = ui.page_fluid(\n    ui.output_table(\"table\"),\n)\n\n\ndef server(input, output, session):\n    @output\n    @render.table\n    def table():\n        #infile = Path(__file__).parent / \"test.csv\"\n        df = pd.read_csv(open_url('https://raw.githubusercontent.com/jhylin/Data_in_life_blog/main/posts/15_app_test/df_ai.csv'))\n        #df = df.to_pandas()\n        #df[\"mol\"] = df[\"Smiles\"].apply(lambda x: dm.to_mol(x))\n        return df\n\n\napp = App(app_ui, server)\n\n## file: requirements.txt\n# polars\n# rdkit\n# datamol\n```\n:::\n\n",
+    "supporting": [
+      "Test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
