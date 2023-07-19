@@ -49,6 +49,9 @@ def server(input, output, session):
 
 app = App(app_ui, server)
 
+
+# **Check on how to add additional packages/libraries**
+# **Current way doesn't work**
 ## file: requirements.txt
 # polars
 # rdkit

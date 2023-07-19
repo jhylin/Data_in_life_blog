@@ -1,0 +1,158 @@
+---
+title: "Molecular visualisation (Molviz) web application"
+subtitle: "Using itables and Shiny in Python application framework"
+author: Jennifer HY Lin
+date: '2023-7-19'
+format: html
+filters:
+  - shinylive
+draft: true
+categories:
+  - Python
+  - Datamol
+  - Shiny
+  - Pandas
+  - Polars
+  - itables
+jupyter: python3
+---
+
+*Final plan is likely using the jupyter HTML table only. PyShiny app embedding did not seem to work*
+
+```{python}
+# Import dataframe libraries
+import pandas as pd
+import polars as pl
+
+# Import Datamol
+import datamol as dm
+
+# Import itables
+from itables import init_notebook_mode, show
+init_notebook_mode(all_interactive=True)
+```
+
+```{python}
+# Option 1: Reading df_ai.csv as a pandas dataframe
+#df = pd.read_csv("df_ai.csv")
+#df.head
+```
+
+```{python}
+# Option 2: Reading df_ai.csv as a polars dataframe
+df = pl.read_csv("df_ai.csv")
+#df.head()
+```
+
+```{python}
+# Below was the code I used in my last post to fix the missing SMILES for neomycin
+
+# Canonical SMILES for neomycin was extracted from PubChem 
+# (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)
+
+df = df.with_columns([
+    pl.when(pl.col("Smiles").str.lengths() == 0)
+    .then("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N")
+    .otherwise(pl.col("Smiles"))
+    .keep_name()
+])
+
+#df.head()
+```
+
+Polars dataframe library was designed without the index concept (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe that required an index column (to also clarify, all other Polars dataframes should work perfectly with itables without the index column!). However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in jupyter environment as usual. A small code example was shown below.
+
+```{{python}}
+# for Polars dataframes only to include row counts in dataframe
+df = df.with_row_count()
+```
+
+There here I've converted the Polars dataframe into a Pandas one.
+
+```{python}
+df = df.to_pandas()
+```
+
+Then I added Datamol's _preprocess function to convert SMILES into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES, InChI, InChI keys - just to provide extra information for further uses if needed.
+
+```{python}
+# Pre-process molecules using _preprocess function - adapted from datamol.io
+
+smiles_column = "Smiles"
+
+dm.disable_rdkit_log()
+
+def _preprocess(row):
+    mol = dm.to_mol(row[smiles_column], ordered=True)
+    mol = dm.fix_mol(mol)
+    mol = dm.sanitize_mol(mol, sanifix=True, charge_neutral=False)
+    mol = dm.standardize_mol(
+        mol,
+        disconnect_metals=False,
+        normalize=True,
+        reionize=True,
+        uncharge=False,
+        stereo=True,
+    )
+
+    row["standard_smiles"] = dm.standardize_smiles(dm.to_smiles(mol))
+    row["selfies"] = dm.to_selfies(mol)
+    row["inchi"] = dm.to_inchi(mol)
+    row["inchikey"] = dm.to_inchikey(mol)
+    return row
+```
+
+Apply the _preprocess function to the prepared dataframe.
+
+```{python}
+df = df.apply(_preprocess, axis = 1)
+#df.head()
+```
+
+The next step was to keep the index column of the Pandas dataframe as an actual column, so that I could use this to link to my next web application to visualise small molecules in 2D images.
+
+```{python}
+# Convert index of Pandas df into a column
+df = df.reset_index()
+#df.head()
+```
+
+An interactive table of all the prescription-only antibiotics from ChEMBL will be shown below. Scroll the table from left to right (may take a bit of time) to see the SMILES, standardised SMILES, SELFIEs, InChI, InChI keys for each compound. Use the search box to enter keywords to find antibiotics and other interactive functions to access different pages of the table.
+
+```{python}
+df
+```
+
+<br>
+
+Test only - Shinylive app-embed method for the interactive table doesn't seem to work for now. Likely only work if being deployed as a separate web app.
+
+```{{shinylive-python}}
+# # App reading and showing dataframe as an interactive table
+# # for viewing and searching data by using keywords
+# 
+# # Import libraries---
+# import pandas as pd
+# import polars as pl
+# from rdkit import Chem
+# from rdkit.Chem import Draw
+# import datamol as dm
+# from shiny import App, render, ui
+# from itables.shiny import DT
+# 
+# 
+# # Data source---
+# df = pd.read_csv("df_ai.csv")
+# # Keeping index column
+# df = df.reset_index()
+# 
+# 
+# # Input---
+# app_ui = ui.page_fluid(
+#     ui.page_fluid(ui.HTML(DT(df)))
+# )
+# 
+# 
+# # Server not required so set it to none
+# app = App(app_ui, server = None)
+```
