@@ -1,8 +1,8 @@
 ---
 title: "Molecular visualisation (Molviz) web application"
-subtitle: "Using itables and Shiny in Python application framework"
+subtitle: "Using itables and Shiny for Python application framework"
 author: Jennifer HY Lin
-date: '2023-7-19'
+date: '2023-7-20'
 format: html
 filters:
   - shinylive
@@ -19,7 +19,26 @@ jupyter: python3
 
 *Final plan is likely using the jupyter HTML table only. PyShiny app embedding did not seem to work*
 
+##### **Introduction**
+
+Plans for app was to provide:
+
+1) An interactive dataframe-like table for compound searches to access different molecular representations for each compound 
+
+2) A sightly more challenging part to show the 2D image representations of each compound via input selections in Shiny for Python app framework
+
+<br>
+
+##### **Code and explanations to build an interactive table**
+
+It was actually surprisingly simple for this first part. I came across this randomly on LinkedIn actually for a post on itables being integrated with Shiny for Python and Quarto. It came at the right timing when I was trying to build this app, so here it is, with code and some explanations on building an interactive table for dataframes in Pandas and Polars.
+
+To install itables, visit [here](https://mwouts.github.io/itables/quick_start.html) for instructions and also other useful information on its supported notebook editors.
+
 ```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Import dataframe libraries
 import pandas as pd
 import polars as pl
@@ -30,23 +49,18 @@ import datamol as dm
 # Import itables
 from itables import init_notebook_mode, show
 init_notebook_mode(all_interactive=True)
-```
 
-```{python}
+
 # Option 1: Reading df_ai.csv as a pandas dataframe
 #df = pd.read_csv("df_ai.csv")
 #df.head
-```
 
-```{python}
 # Option 2: Reading df_ai.csv as a polars dataframe
 df = pl.read_csv("df_ai.csv")
 #df.head()
-```
 
-```{python}
+
 # Below was the code I used in my last post to fix the missing SMILES for neomycin
-
 # Canonical SMILES for neomycin was extracted from PubChem 
 # (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)
 
@@ -60,22 +74,31 @@ df = df.with_columns([
 #df.head()
 ```
 
-Polars dataframe library was designed without the index concept (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe that required an index column (to also clarify, all other Polars dataframes should work perfectly with itables without the index column!). However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in jupyter environment as usual. A small code example was shown below.
-
-```{{python}}
-# for Polars dataframes only to include row counts in dataframe
-df = df.with_row_count()
-```
-
-There here I've converted the Polars dataframe into a Pandas one.
+Polars dataframe library was designed without the index concept (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe that required an index column (to also clarify, all other Polars dataframes should work perfectly with itables without the index column!). However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in jupyter environment as usual. A small code example would be like this below.
 
 ```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Uncomment below to run
+#df = df.with_row_count()
+```
+
+Then here I've converted the Polars dataframe into a Pandas one.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
 df = df.to_pandas()
 ```
 
 Then I added Datamol's _preprocess function to convert SMILES into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES, InChI, InChI keys - just to provide extra information for further uses if needed.
 
 ```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Pre-process molecules using _preprocess function - adapted from datamol.io
 
 smiles_column = "Smiles"
@@ -100,11 +123,8 @@ def _preprocess(row):
     row["inchi"] = dm.to_inchi(mol)
     row["inchikey"] = dm.to_inchikey(mol)
     return row
-```
 
-Apply the _preprocess function to the prepared dataframe.
-
-```{python}
+#Apply the \_preprocess function to the prepared dataframe.
 df = df.apply(_preprocess, axis = 1)
 #df.head()
 ```
@@ -112,47 +132,31 @@ df = df.apply(_preprocess, axis = 1)
 The next step was to keep the index column of the Pandas dataframe as an actual column, so that I could use this to link to my next web application to visualise small molecules in 2D images.
 
 ```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Convert index of Pandas df into a column
 df = df.reset_index()
 #df.head()
 ```
 
-An interactive table of all the prescription-only antibiotics from ChEMBL will be shown below. Scroll the table from left to right (may take a bit of time) to see the SMILES, standardised SMILES, SELFIEs, InChI, InChI keys for each compound. Use the search box to enter keywords to find antibiotics and other interactive functions to access different pages of the table.
+<br>
+
+##### **Interactive table of anti-bacterial small molecules**
+
+- An interactive table of all the prescription-only antibiotics from ChEMBL is shown below
+
+- Scroll the table from left to right to see the SMILES, standardised SMILES, SELFIEs, InChI, InChI keys for each compound
+
+- Use the search box to enter compound names to search for antibiotics and move between different pages when needed
 
 ```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
 df
 ```
 
 <br>
 
-Test only - Shinylive app-embed method for the interactive table doesn't seem to work for now. Likely only work if being deployed as a separate web app.
 
-```{{shinylive-python}}
-# # App reading and showing dataframe as an interactive table
-# # for viewing and searching data by using keywords
-# 
-# # Import libraries---
-# import pandas as pd
-# import polars as pl
-# from rdkit import Chem
-# from rdkit.Chem import Draw
-# import datamol as dm
-# from shiny import App, render, ui
-# from itables.shiny import DT
-# 
-# 
-# # Data source---
-# df = pd.read_csv("df_ai.csv")
-# # Keeping index column
-# df = df.reset_index()
-# 
-# 
-# # Input---
-# app_ui = ui.page_fluid(
-#     ui.page_fluid(ui.HTML(DT(df)))
-# )
-# 
-# 
-# # Server not required so set it to none
-# app = App(app_ui, server = None)
-```
