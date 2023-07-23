@@ -1,15 +1,16 @@
-# Data in life blog
+#### Data in life blog
 
-###### **Intro**
+##### **Introduction**
 
-This website serves as my data portfolio in a blog style on data projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical or healthcare themes due to my background. 
-Each project will be showcased in a blog post format, published by using Quarto in RStudio IDE. Currently, I'm aiming to post one new project each month if possible, due to the current arrangement of being a one-person team, I always go through brainstorming, then execution, and then the final writing and publishing phase in the end. 
-Most of the projects are done via using Python and/or R. I also do have a little interest in Rust, but this will be more challenging for me at this stage, as I've decided to focus more on Python and R first, before getting too distracted in Rust. Hopefully, I'll spend a bit more time on it in the future.
+This website serves as my portfolio in a blog style on data science or cheminformatics projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical (current) or healthcare (earlier) themes due to my background. Each project will be showcased in a blog post format, published by using Quarto in RStudio IDE. Currently, I'm aiming to post one new project each month if possible. Most of the projects are done in Python with a smaller proportion of posts in R, and also an even smaller proportion in Rust as experiments only.
 
+##### **Code**
 
-###### **Site deployment**
+All the code used in each post are available in the [posts](https://github.com/jhylin/Data_in_life_blog/tree/main/posts) folder, which contains every blog post I've worked on in chronological order with folder names in ordered sequence with titles reflecting the posts in the website.
 
-This portfolio blog is currently deployed to two different sites, with GitHub pages being the main one:
+##### **Site deployment**
+
+This blog is currently deployed to two different sites, with GitHub pages being the main one:
 
 -   [GitHub Pages](https://jhylin.github.io/Data-analytics-and-research-blog/)
 
