@@ -2,7 +2,7 @@
 title: "Molecular visualisation (Molviz) web application"
 subtitle: "Using itables and Shiny for Python application framework"
 author: Jennifer HY Lin
-date: '2023-7-20'
+date: '2023-7-24'
 format: html
 filters:
   - shinylive
@@ -158,5 +158,170 @@ df
 ```
 
 <br>
+
+```{python}
+# Saving cleaned df_ai.csv as a new .csv file (for app_image.py)
+# df = pl.from_pandas(df)
+# df.write_csv("df_ai_cleaned.csv", sep = ",")
+```
+
+<br>
+
+Tested deploying the shinylive app on Quarto, didn't work because RDKit was not written in pure Python (it was also written in C++) so there wasn't a pure Python wheel file available in file download from PyPi. Therefore, the only likely option to deploy this app will be in Shinyapps.io.
+
+<!-- ::: column-screen-inset -->
+<!-- ``` {shinylive-python} -->
+<!-- #| standalone: true -->
+<!-- #| components: [editor, viewer] -->
+<!-- #| layout: vertical -->
+<!-- #| viewerHeight: 420 -->
+
+<!-- ## file: app.py -->
+<!-- # ***Import all libraries or packages needed*** -->
+<!-- import pandas as pd -->
+<!-- #import polars as pl -->
+<!-- from rdkit import Chem -->
+<!-- from rdkit.Chem import Draw -->
+<!-- from rdkit.Chem.Draw import rdMolDraw2D -->
+
+<!-- import datamol as dm -->
+
+<!-- from pathlib import Path -->
+<!-- from PIL import Image -->
+
+<!-- from shiny import App, Inputs, Outputs, Session, render, ui, reactive -->
+<!-- from shiny.types import ImgData -->
+
+<!-- # Import pyodide http - for importing file via URL -->
+<!-- import pyodide.http -->
+<!-- from pyodide.http import open_url -->
+
+
+<!-- # ***Specify data source*** -->
+<!-- # Using pyodide.http.open_url -->
+<!-- # df = pd.read_csv(open_url('https://raw.githubusercontent.com/jhylin/Data_in_life_blog/main/posts/13_Shiny_app_python/pc_cov_pd.csv')) -->
+<!-- df = pd.read_csv("df_ai_cleaned.csv") -->
+<!-- #df = df.to_pandas() -->
+<!-- # Avoid any changes to original dataset object by using .copy() -->
+<!-- df = df.copy() -->
+<!-- df["mol"] = df["standard_smiles"].apply(lambda x: dm.to_mol(x)) -->
+<!-- mols = df["mol"] -->
+<!-- mols = list(mols) -->
+
+
+<!-- # User interface--- -->
+<!-- # Add inputs -->
+<!-- app_ui = ui.page_fluid( -->
+<!--     ui.h4("Compound input selections"), -->
+<!--     ui.row( -->
+<!--         ui.column(3, ui.input_numeric("mol", "Index number of compound:", 0, min=0, max=143)), -->
+<!--         ui.column(3, ui.input_text("filename", "File name for compound:")), -->
+<!--         ), -->
+<!--         ui.input_action_button("btn", "Confirm", class_="btn-success"), -->
+<!--         ui.output_image("image"), -->
+<!--     ui.row( -->
+<!--         ui.column(3, ui.input_numeric("mol1", "Specify index number of compound:", 0, min=0, max=143)), -->
+<!--         ui.column(3, ui.input_text("filename1", "File name for compound:")), -->
+<!--         ), -->
+<!--         ui.input_action_button("btn1", "Confirm", class_="btn-success"), -->
+<!--         ui.output_image("image1"), -->
+<!--     ui.row( -->
+<!--         ui.column(3, ui.input_text("merge_filename", "File name for merged images:")), -->
+<!--         ), -->
+<!--         ui.input_action_button("btn_merge", "Confirm", class_="btn"), -->
+<!--         ui.output_image("merge_image") -->
+<!-- ) -->
+
+<!-- # Add outputs -->
+<!-- def server(input, output, session): -->
+<!--     @output -->
+<!--     @render.image -->
+<!--     def image(): -->
+<!--         # Place action button here to take a reactive dependency -->
+<!--         input.btn() -->
+
+<!--         # Using MolToFile() - only saving a single compound as PNG file (via index position) -->
+
+<!--         # Use reactive.isolate to not take a reactive dependency, -->
+<!--         # but only when entering/specifying compound & name of PNG file saved -->
+<!--         # then execute the generating & saving of PNG file for the specified compound -->
+<!--         # after pressing "Confirm" action button -->
+<!--         with reactive.isolate(): -->
+<!--             Draw.MolToFile(mols[input.mol()], f"{input.filename()}.png") -->
+
+
+<!--         # --Testing MolToFile - 4 PNG files -->
+<!--         # Draw.MolToFile(mols[0], "af1.png") -->
+<!--         # Draw.MolToFile(mols[1], "af2.png") -->
+<!--         # Draw.MolToFile(mols[2], "af3.png") -->
+<!--         # Draw.MolToFile(mols[3], "af4.png") -->
+
+<!--         # Show image of saved PNG file of specified compound from input -->
+<!--         dir = Path(__file__).resolve().parent -->
+<!--         img: ImgData = {"src": str(dir / f"{input.filename()}.png")} -->
+<!--         return img -->
+
+<!--     @output -->
+<!--     @render.image -->
+<!--     def image1(): -->
+<!--         # Action button -->
+<!--         input.btn1() -->
+
+<!--         # Use reactive.isolate() to action the MolToFile() code -->
+<!--         with reactive.isolate(): -->
+<!--             Draw.MolToFile(mols[input.mol1()], f"{input.filename1()}.png") -->
+
+<!--         # Show image of saved PNG file of specified compound from input -->
+<!--         dir = Path(__file__).resolve().parent -->
+<!--         img1: ImgData = {"src": str(dir / f"{input.filename1()}.png")} -->
+<!--         return img1 -->
+
+<!--     @output -->
+<!--     @render.image -->
+<!--     # Function to paste PNG files into a table (side-by-side for 2 images) -->
+<!--     def merge_image(): -->
+
+<!--         input.btn_merge() -->
+
+<!--         with reactive.isolate(): -->
+<!--             img = Image.open(f"{input.filename()}.png") -->
+<!--             img1 = Image.open(f"{input.filename1()}.png") -->
+
+<!--             blank_image = Image.new("RGB", (600, 300)) -->
+
+<!--             blank_image.paste(img, (0, 0)) -->
+<!--             blank_image.paste(img1, (300, 0)) -->
+
+<!--             blank_image.save(f"{input.merge_filename()}.png") -->
+
+<!--         # Show image of saved PNG file of the merged image -->
+<!--         dir = Path(__file__).resolve().parent -->
+<!--         img_merge: ImgData = {"src": str(dir / f"{input.merge_filename()}.png")} -->
+<!--         return img_merge -->
+
+
+<!--     #     # --Using PIL/Pillow to manipulate images -->
+<!--     #     # img1 = Image.open("af1.png") -->
+<!--     #     # img2 = Image.open("af2.png") -->
+<!--     #     # img3 = Image.open("af3.png") -->
+<!--     #     # img4 = Image.open("af4.png") -->
+
+<!--     #     # Create a blank image template - (width, height) -->
+<!--     #     blank_image = Image.new("RGB", (600, 600)) -->
+
+<!--     #     # Paste img1 to img4 together in a grid (top left, right & bottom left, right) -->
+<!--     #     # blank_image.paste(img1, (0, 0)) -->
+<!--     #     # blank_image.paste(img2, (300, 0)) -->
+<!--     #     # blank_image.paste(img3, (0, 300)) -->
+<!--     #     # blank_image.paste(img4, (300, 300)) -->
+
+<!--     #     # Save combined img1 & img2 as a new PNG file -->
+<!--     #     #blank_image.save("merged.png") -->
+
+
+<!-- # Combine UI & server into Shiny app -->
+<!-- app = App(app_ui, server) -->
+<!-- ``` -->
+<!-- ::: -->
 
 
