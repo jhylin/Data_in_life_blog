@@ -2,7 +2,7 @@
 title: "Molecular visualisation (Molviz) web application"
 subtitle: "Using itables and Shiny for Python application framework"
 author: Jennifer HY Lin
-date: '2023-7-24'
+date: '2023-8-4'
 format: html
 filters:
   - shinylive
@@ -17,7 +17,8 @@ categories:
 jupyter: python3
 ---
 
-*Final plan is likely using the jupyter HTML table only. PyShiny app embedding did not seem to work*
+*Final deployed web app URL* - https://jhylin.shinyapps.io/molviz_app/
+
 
 ##### **Introduction**
 
