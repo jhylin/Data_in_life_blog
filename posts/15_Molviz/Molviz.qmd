@@ -1,6 +1,6 @@
 ---
 title: "Molecular visualisation (Molviz) web application"
-subtitle: "Using itables and Shiny for Python application framework"
+subtitle: "Using Shiny for Python application framework"
 author: Jennifer HY Lin
 date: '2023-8-6'
 format: html
@@ -20,24 +20,23 @@ jupyter: python3
 *Final deployed web app URL* - https://jhylin.shinyapps.io/molviz_app/
 
 
-##### **Introduction**
-
-#### **Background**
+#### **Background - how the app started**
 
 Originally I had an idea of incorporating mols2grid library within Shiny for Python web app framework (after seeing an example of a similar app in Streamlit previously), so I worked on a few ideas, but obviously mols2grid was designed to work inside Jupyter Notebook/Lab and Shiny for Python was only out of alpha at that stage so things were still being developed, and unfortunately mols2grid wasn't directly compatible with the Shiny for Python at that time. I then went away to work on another project on molecular scaffolds and left this mini project aside. However, recently I had another idea of trying to build a Shiny for Python app from the scratch (my first ever app relating to cheminformatics or chemical information), so that users in relevant fields can view and save 2D images of small molecules in a web browser environment instead of only inside a Jupyter Notebook/Lab.
 
 Note: I'm sure this is not the first ever app for this type of use as there are many great apps out there already, but I thought to try out the Shiny for Python framework - to put it to test and show that it should work in the chemistry field.
 
+*Also because of reading a comment from an old RDKit blog post from someone commenting on how to save the compound image as a PNG file.
 
+<br>
+
+#### **Plans**
 
 Plans for app was to provide:
 
 1) An interactive dataframe-like table for compound searches to access different molecular representations for each compound 
 
 2) A sightly more challenging part to show the 2D image representations of each compound via input selections in Shiny for Python app framework
-
-
-#### **Plan**
 
 - Shiny for Python web application for viewing & searching dataframe along with 2D images of small molecules of interests available for viewing & saving
 - Available functions: viewing, saving and substructure highlighting of target molecules
@@ -46,299 +45,60 @@ Plans for app was to provide:
 
 <br>
 
-##### **Code and explanations to build an interactive table**
+#### **About each version of app_x.py scripts**
 
-It was actually surprisingly simple for this first part. I came across this randomly on LinkedIn actually for a post on itables being integrated with Shiny for Python and Quarto. It came at the right timing when I was trying to build this app, so here it is, with code and some explanations on building an interactive table for dataframes in Pandas and Polars.
+I'll try to explain what each version of the app_x.py script entails, as there are currently several different versions of them inside the repository. The final version is the one called "app.py", named this way so that it'll be recognised by rsconnect/Shinyapps.io when deploying the app. 
 
-To install itables, visit [here](https://mwouts.github.io/itables/quick_start.html) for instructions and also other useful information on its supported notebook editors.
+##### **app_x.py**
 
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
+Explanations/features
 
-# Import dataframe libraries
-import pandas as pd
-import polars as pl
+##### **app_x.py**
 
-# Import Datamol
-import datamol as dm
-
-# Import itables
-from itables import init_notebook_mode, show
-init_notebook_mode(all_interactive=True)
-
-
-# Option 1: Reading df_ai.csv as a pandas dataframe
-#df = pd.read_csv("df_ai.csv")
-#df.head
-
-# Option 2: Reading df_ai.csv as a polars dataframe
-df = pl.read_csv("df_ai.csv")
-#df.head()
-
-
-# Below was the code I used in my last post to fix the missing SMILES for neomycin
-# Canonical SMILES for neomycin was extracted from PubChem 
-# (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)
-
-df = df.with_columns([
-    pl.when(pl.col("Smiles").str.lengths() == 0)
-    .then("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N")
-    .otherwise(pl.col("Smiles"))
-    .keep_name()
-])
-
-#df.head()
-```
-
-Polars dataframe library was designed without the index concept (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe that required an index column (to also clarify, all other Polars dataframes should work perfectly with itables without the index column!). However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in jupyter environment as usual. A small code example would be like this below.
-
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
-
-# Uncomment below to run
-#df = df.with_row_count()
-```
-
-Then here I've converted the Polars dataframe into a Pandas one.
-
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
-
-df = df.to_pandas()
-```
-
-Then I added Datamol's _preprocess function to convert SMILES into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES, InChI, InChI keys - just to provide extra information for further uses if needed.
-
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
-
-# Pre-process molecules using _preprocess function - adapted from datamol.io
-
-smiles_column = "Smiles"
-
-dm.disable_rdkit_log()
-
-def _preprocess(row):
-    mol = dm.to_mol(row[smiles_column], ordered=True)
-    mol = dm.fix_mol(mol)
-    mol = dm.sanitize_mol(mol, sanifix=True, charge_neutral=False)
-    mol = dm.standardize_mol(
-        mol,
-        disconnect_metals=False,
-        normalize=True,
-        reionize=True,
-        uncharge=False,
-        stereo=True,
-    )
-
-    row["standard_smiles"] = dm.standardize_smiles(dm.to_smiles(mol))
-    row["selfies"] = dm.to_selfies(mol)
-    row["inchi"] = dm.to_inchi(mol)
-    row["inchikey"] = dm.to_inchikey(mol)
-    return row
-
-#Apply the \_preprocess function to the prepared dataframe.
-df = df.apply(_preprocess, axis = 1)
-#df.head()
-```
-
-The next step was to keep the index column of the Pandas dataframe as an actual column, so that I could use this to link to my next web application to visualise small molecules in 2D images.
-
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
-
-# Convert index of Pandas df into a column
-df = df.reset_index()
-#df.head()
-```
+Explanations/features
 
 <br>
 
-##### **Interactive table of anti-bacterial small molecules**
+#### **Other files**
 
-- An interactive table of all the prescription-only antibiotics from ChEMBL is shown below
+##### **code_test.py**
 
-- Scroll the table from left to right to see the SMILES, standardised SMILES, SELFIEs, InChI, InChI keys for each compound
-
-- Use the search box to enter compound names to search for antibiotics and move between different pages when needed
-
-```{python}
-#| code-fold: true
-#| code-summary: "Code"
-
-df
-```
+I'm not sure exactly how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I use the "code_tests.py" to test a lot of different code. If you go into this file, then you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I get to see the results right away when running the code, and learning new code functions that way. If the end result is not the one I've intended, I go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots along the way actually), it'll mainly be chosen intuitively as I search online, but I can for this particular project, a lot of it was past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving a particular issue.
 
 <br>
 
-```{python}
-# Saving cleaned df_ai.csv as a new .csv file (for app_image.py)
-# df = pl.from_pandas(df)
-# df.write_csv("df_ai_cleaned.csv", sep = ",")
-```
+##### **app_table.py and app_itables.py**
+
+These two as the file names have suggested were trials for incorporating dataframe inside a web app. The difference was that app_table.py was purely a data table being presented inside the app, without any other particular features, while app_itables.py utilised a different package itables that provided an interactive feature to search for data in rows. The previous post on data source used for this app or interactive data table was embedded inside a Quarto document, the same principle would also apply to the table being present inside a Jupyter notebook environment (?Lab as well).
 
 <br>
 
-Tested deploying the shinylive app on Quarto, didn't work because RDKit was not written in pure Python (it was also written in C++) so there wasn't a pure Python wheel file available in file download from PyPi. Therefore, the only likely option to deploy this app will be in Shinyapps.io.
+#### **Features of the app**
 
-<!-- ::: column-screen-inset -->
-<!-- ``` {shinylive-python} -->
-<!-- #| standalone: true -->
-<!-- #| components: [editor, viewer] -->
-<!-- #| layout: vertical -->
-<!-- #| viewerHeight: 420 -->
+Comments from scripts available - check.
 
-<!-- ## file: app.py -->
-<!-- # ***Import all libraries or packages needed*** -->
-<!-- import pandas as pd -->
-<!-- #import polars as pl -->
-<!-- from rdkit import Chem -->
-<!-- from rdkit.Chem import Draw -->
-<!-- from rdkit.Chem.Draw import rdMolDraw2D -->
+<br>
 
-<!-- import datamol as dm -->
+#### **App deployment**
 
-<!-- from pathlib import Path -->
-<!-- from PIL import Image -->
+Two places I've tried so far - HuggingFace and Shinyapps.io. 
 
-<!-- from shiny import App, Inputs, Outputs, Session, render, ui, reactive -->
-<!-- from shiny.types import ImgData -->
+Issue with cairosvg code when deploying in HuggingFace.
 
-<!-- # Import pyodide http - for importing file via URL -->
-<!-- import pyodide.http -->
-<!-- from pyodide.http import open_url -->
+Deploying to Shinyapps.io wasn't a smooth ride as well - some problems initially - explain the steps.
 
+<br>
 
-<!-- # ***Specify data source*** -->
-<!-- # Using pyodide.http.open_url -->
-<!-- # df = pd.read_csv(open_url('https://raw.githubusercontent.com/jhylin/Data_in_life_blog/main/posts/13_Shiny_app_python/pc_cov_pd.csv')) -->
-<!-- df = pd.read_csv("df_ai_cleaned.csv") -->
-<!-- #df = df.to_pandas() -->
-<!-- # Avoid any changes to original dataset object by using .copy() -->
-<!-- df = df.copy() -->
-<!-- df["mol"] = df["standard_smiles"].apply(lambda x: dm.to_mol(x)) -->
-<!-- mols = df["mol"] -->
-<!-- mols = list(mols) -->
+#### **Further improvements of the app**
 
+May be useful to add a download option for real-world use case, but for demonstration purpose, I'm leaving it as a "View" only for now, unless I get comments from readers that they'd like to try this. For localhost version, the saving image function should work and the files will be saved to the working directory.
 
-<!-- # User interface--- -->
-<!-- # Add inputs -->
-<!-- app_ui = ui.page_fluid( -->
-<!--     ui.h4("Compound input selections"), -->
-<!--     ui.row( -->
-<!--         ui.column(3, ui.input_numeric("mol", "Index number of compound:", 0, min=0, max=143)), -->
-<!--         ui.column(3, ui.input_text("filename", "File name for compound:")), -->
-<!--         ), -->
-<!--         ui.input_action_button("btn", "Confirm", class_="btn-success"), -->
-<!--         ui.output_image("image"), -->
-<!--     ui.row( -->
-<!--         ui.column(3, ui.input_numeric("mol1", "Specify index number of compound:", 0, min=0, max=143)), -->
-<!--         ui.column(3, ui.input_text("filename1", "File name for compound:")), -->
-<!--         ), -->
-<!--         ui.input_action_button("btn1", "Confirm", class_="btn-success"), -->
-<!--         ui.output_image("image1"), -->
-<!--     ui.row( -->
-<!--         ui.column(3, ui.input_text("merge_filename", "File name for merged images:")), -->
-<!--         ), -->
-<!--         ui.input_action_button("btn_merge", "Confirm", class_="btn"), -->
-<!--         ui.output_image("merge_image") -->
-<!-- ) -->
+It may be even better to use SMARTS or SMILES for highlighting compound substructures actually. I'm using atom indices as I'm using a specific code in RDKit, but perhaps more experienced people with RDKit will know how to add other alternative options.
 
-<!-- # Add outputs -->
-<!-- def server(input, output, session): -->
-<!--     @output -->
-<!--     @render.image -->
-<!--     def image(): -->
-<!--         # Place action button here to take a reactive dependency -->
-<!--         input.btn() -->
+The app layout may be further optimised e.g. interactive data table could be placed at a different location.
 
-<!--         # Using MolToFile() - only saving a single compound as PNG file (via index position) -->
+<br>
 
-<!--         # Use reactive.isolate to not take a reactive dependency, -->
-<!--         # but only when entering/specifying compound & name of PNG file saved -->
-<!--         # then execute the generating & saving of PNG file for the specified compound -->
-<!--         # after pressing "Confirm" action button -->
-<!--         with reactive.isolate(): -->
-<!--             Draw.MolToFile(mols[input.mol()], f"{input.filename()}.png") -->
+#### **Final words**
 
-
-<!--         # --Testing MolToFile - 4 PNG files -->
-<!--         # Draw.MolToFile(mols[0], "af1.png") -->
-<!--         # Draw.MolToFile(mols[1], "af2.png") -->
-<!--         # Draw.MolToFile(mols[2], "af3.png") -->
-<!--         # Draw.MolToFile(mols[3], "af4.png") -->
-
-<!--         # Show image of saved PNG file of specified compound from input -->
-<!--         dir = Path(__file__).resolve().parent -->
-<!--         img: ImgData = {"src": str(dir / f"{input.filename()}.png")} -->
-<!--         return img -->
-
-<!--     @output -->
-<!--     @render.image -->
-<!--     def image1(): -->
-<!--         # Action button -->
-<!--         input.btn1() -->
-
-<!--         # Use reactive.isolate() to action the MolToFile() code -->
-<!--         with reactive.isolate(): -->
-<!--             Draw.MolToFile(mols[input.mol1()], f"{input.filename1()}.png") -->
-
-<!--         # Show image of saved PNG file of specified compound from input -->
-<!--         dir = Path(__file__).resolve().parent -->
-<!--         img1: ImgData = {"src": str(dir / f"{input.filename1()}.png")} -->
-<!--         return img1 -->
-
-<!--     @output -->
-<!--     @render.image -->
-<!--     # Function to paste PNG files into a table (side-by-side for 2 images) -->
-<!--     def merge_image(): -->
-
-<!--         input.btn_merge() -->
-
-<!--         with reactive.isolate(): -->
-<!--             img = Image.open(f"{input.filename()}.png") -->
-<!--             img1 = Image.open(f"{input.filename1()}.png") -->
-
-<!--             blank_image = Image.new("RGB", (600, 300)) -->
-
-<!--             blank_image.paste(img, (0, 0)) -->
-<!--             blank_image.paste(img1, (300, 0)) -->
-
-<!--             blank_image.save(f"{input.merge_filename()}.png") -->
-
-<!--         # Show image of saved PNG file of the merged image -->
-<!--         dir = Path(__file__).resolve().parent -->
-<!--         img_merge: ImgData = {"src": str(dir / f"{input.merge_filename()}.png")} -->
-<!--         return img_merge -->
-
-
-<!--     #     # --Using PIL/Pillow to manipulate images -->
-<!--     #     # img1 = Image.open("af1.png") -->
-<!--     #     # img2 = Image.open("af2.png") -->
-<!--     #     # img3 = Image.open("af3.png") -->
-<!--     #     # img4 = Image.open("af4.png") -->
-
-<!--     #     # Create a blank image template - (width, height) -->
-<!--     #     blank_image = Image.new("RGB", (600, 600)) -->
-
-<!--     #     # Paste img1 to img4 together in a grid (top left, right & bottom left, right) -->
-<!--     #     # blank_image.paste(img1, (0, 0)) -->
-<!--     #     # blank_image.paste(img2, (300, 0)) -->
-<!--     #     # blank_image.paste(img3, (0, 300)) -->
-<!--     #     # blank_image.paste(img4, (300, 300)) -->
-
-<!--     #     # Save combined img1 & img2 as a new PNG file -->
-<!--     #     #blank_image.save("merged.png") -->
-
-
-<!-- # Combine UI & server into Shiny app -->
-<!-- app = App(app_ui, server) -->
-<!-- ``` -->
-<!-- ::: -->
-
-
+The whole idea behind this mini side project was to show that interested users could use this web app framework to build an interactive app using their own data. Other useful web app frameworks are also available and definitely not limited to the one I'm using here (I'm simply trying to test it out since it's relatively new comparing to others). In a drug discovery and development setting, this could be useful to make non-coding parties understand where the computer side is trying to do, and to help them during their lab experimental workflows, hoping to add some convenience at least.
