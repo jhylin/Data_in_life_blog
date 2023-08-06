@@ -1,0 +1,157 @@
+---
+title: "Molecular visualisation (Molviz) web application"
+subtitle: "Using itables"
+author: Jennifer HY Lin
+date: '2023-8-6'
+draft: true
+categories:
+  - Python
+  - Datamol
+  - Shiny
+  - Pandas
+  - Polars
+  - itables
+jupyter: python3
+---
+
+##### **Code and explanations to build an interactive table**
+
+It was actually surprisingly simple for this first part. I came across this randomly on LinkedIn actually for a post on itables being integrated with Shiny for Python and Quarto. It came at the right timing when I was trying to build this app, so here it is, with code and some explanations on building an interactive table for dataframes in Pandas and Polars.
+
+To install itables, visit [here](https://mwouts.github.io/itables/quick_start.html) for instructions and also other useful information on its supported notebook editors.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Import dataframe libraries
+import pandas as pd
+import polars as pl
+
+# Import Datamol
+import datamol as dm
+
+# Import itables
+from itables import init_notebook_mode, show
+init_notebook_mode(all_interactive=True)
+
+
+# Option 1: Reading df_ai.csv as a pandas dataframe
+#df = pd.read_csv("df_ai.csv")
+#df.head
+
+# Option 2: Reading df_ai.csv as a polars dataframe
+df = pl.read_csv("df_ai.csv")
+#df.head()
+
+
+# Below was the code I used in my last post to fix the missing SMILES for neomycin
+# Canonical SMILES for neomycin was extracted from PubChem 
+# (https://pubchem.ncbi.nlm.nih.gov/compound/Neomycin)
+
+df = df.with_columns([
+    pl.when(pl.col("Smiles").str.lengths() == 0)
+    .then("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N")
+    .otherwise(pl.col("Smiles"))
+    .keep_name()
+])
+
+#df.head()
+```
+
+Polars dataframe library was designed without the index concept (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe that required an index column (to also clarify, all other Polars dataframes should work perfectly with itables without the index column!). However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in jupyter environment as usual. A small code example would be like this below.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Uncomment below to run
+#df = df.with_row_count()
+```
+
+Then here I've converted the Polars dataframe into a Pandas one.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+df = df.to_pandas()
+```
+
+Then I added Datamol's \_preprocess function to convert SMILES into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES, InChI, InChI keys - just to provide extra information for further uses if needed.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Pre-process molecules using _preprocess function - adapted from datamol.io
+
+smiles_column = "Smiles"
+
+dm.disable_rdkit_log()
+
+def _preprocess(row):
+    mol = dm.to_mol(row[smiles_column], ordered=True)
+    mol = dm.fix_mol(mol)
+    mol = dm.sanitize_mol(mol, sanifix=True, charge_neutral=False)
+    mol = dm.standardize_mol(
+        mol,
+        disconnect_metals=False,
+        normalize=True,
+        reionize=True,
+        uncharge=False,
+        stereo=True,
+    )
+
+    row["standard_smiles"] = dm.standardize_smiles(dm.to_smiles(mol))
+    row["selfies"] = dm.to_selfies(mol)
+    row["inchi"] = dm.to_inchi(mol)
+    row["inchikey"] = dm.to_inchikey(mol)
+    return row
+
+#Apply the \_preprocess function to the prepared dataframe.
+df = df.apply(_preprocess, axis = 1)
+#df.head()
+```
+
+The next step was to keep the index column of the Pandas dataframe as an actual column, so that I could use this to link to my next web application to visualise small molecules in 2D images.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Convert index of Pandas df into a column
+df = df.reset_index()
+#df.head()
+```
+
+<br>
+
+##### **Interactive table of anti-bacterial small molecules**
+
+-   An interactive table of all the prescription-only antibiotics from ChEMBL is shown below
+
+-   Scroll the table from left to right to see the SMILES, standardised SMILES, SELFIEs, InChI, InChI keys for each compound
+
+-   Use the search box to enter compound names to search for antibiotics and move between different pages when needed
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code"
+
+df
+```
+
+<br>
+
+```{python}
+# Saving cleaned df_ai.csv as a new .csv file (for app_image.py)
+# df = pl.from_pandas(df)
+# df.write_csv("df_ai_cleaned.csv", sep = ",")
+```
+
+<br>
+
+Tested deploying the shinylive app on Quarto, didn't work because RDKit was not written in pure Python (it was also written in C++) so there wasn't a pure Python wheel file available in file download from PyPi. Therefore, the only likely option to deploy this app will be in Shinyapps.io.
+
+
