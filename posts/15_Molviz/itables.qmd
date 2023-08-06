@@ -1,22 +1,29 @@
 ---
 title: "Molecular visualisation (Molviz) web application"
-subtitle: "Using itables"
+subtitle: "Interactive data table - part 1"
 author: Jennifer HY Lin
 date: '2023-8-6'
 draft: true
 categories:
   - Python
   - Datamol
-  - Shiny
   - Pandas
   - Polars
   - itables
 jupyter: python3
 ---
 
-##### **Code and explanations to build an interactive table**
+##### **Bit of background**
 
-It was actually surprisingly simple for this first part. I came across this randomly on LinkedIn actually for a post on itables being integrated with Shiny for Python and Quarto. It came at the right timing when I was trying to build this app, so here it is, with code and some explanations on building an interactive table for dataframes in Pandas and Polars.
+Data source for me is always important no matter what I'm building. This time I'm trying to build a web application in the hope to mend the gap or minimise the silo between the computer and lab groups in the chemistry world, especially the drug discovery field. This has been what I read a lot these days, or really in years. There always seem to be gaps existing between the computer team and also the lab crew. This app is aimed at lab chemists who do not usually use any computer code in their work, but would like to quickly visualise compounds on computers in the lab while working, and also would like to highlight compound substructures during discussions or purely for idea brainstorming for compound synthesis. Importantly, this app can exist outside a Jupyter notebook or any similar notebook environments, with internet required of course. 
+
+Back to data source, as I've just swayed away from my other main point, source to anything is always as important as what the end means will be. If the source has impurities in it, I think it's important for anyone to remove them before using it, so that is why we always have the process of data cleaning before we do anything fancy or meaningful. Data quality is extremely important and potentially will influence the end results and decision making in basically any field or industry.
+
+<br>
+
+##### **Code and explanations**
+
+It was actually surprisingly simple for this first part - I mean the interactive table part. I came across this randomly on LinkedIn actually for a post on itables being integrated with Shiny for Python and Quarto. It came at the right timing when I was trying to build this app, so here it is, with code and some explanations on building an interactive table for dataframes in Pandas and Polars.
 
 To install itables, visit [here](https://mwouts.github.io/itables/quick_start.html) for instructions and also other useful information on its supported notebook editors.
 
@@ -51,7 +58,7 @@ df = pl.read_csv("df_ai.csv")
 
 df = df.with_columns([
     pl.when(pl.col("Smiles").str.lengths() == 0)
-    .then("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N")
+    .then(pl.lit("C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)N)OC3C(C(C(O3)CO)OC4C(C(C(C(O4)CN)O)O)N)O)O)N"))
     .otherwise(pl.col("Smiles"))
     .keep_name()
 ])
@@ -127,7 +134,7 @@ df = df.reset_index()
 
 <br>
 
-##### **Interactive table of anti-bacterial small molecules**
+##### **Interactive data table**
 
 -   An interactive table of all the prescription-only antibiotics from ChEMBL is shown below
 
@@ -145,13 +152,25 @@ df
 <br>
 
 ```{python}
-# Saving cleaned df_ai.csv as a new .csv file (for app_image.py)
+# Saving cleaned df_ai.csv as a new .csv file (for app_image.py - script to build the web app)
 # df = pl.from_pandas(df)
 # df.write_csv("df_ai_cleaned.csv", sep = ",")
 ```
 
 <br>
 
-Tested deploying the shinylive app on Quarto, didn't work because RDKit was not written in pure Python (it was also written in C++) so there wasn't a pure Python wheel file available in file download from PyPi. Therefore, the only likely option to deploy this app will be in Shinyapps.io.
+##### **Options for app deployment**
 
+Since I had a lot of fun deploying my previous app in Shinylive in the last post, I thought I should try the same this time - deploying the Molviz app as a shinylive app in Quarto. However, it didn't work as expected, with reason being that RDKit wasn't written in pure Python (it was also written in C++), so there wasn't a pure Python wheel file available in PyPi (in other words, all packages used in a Shiny for Python app will need to be pure Python based in order to be deployed as an embedded Shinylive app). So, the most likely option to deploy this app would be in Shinyapps.io or HuggingFace as I read recently.
 
+<br>
+
+##### **Next post**
+
+Code and explanations for the actual Molviz app will be detailed in the next post. To access full code and files used or have a quick look first, please visit this [link](https://github.com/jhylin/Molviz_app).
+
+<br>
+
+##### **Acknowledgements**
+
+As always, I'd like to thank authors of RDKit, Datamol, itables and also for Pandas and Polars as well, so that I could use all of these packages/libraries to produce this web application for this purpose.
