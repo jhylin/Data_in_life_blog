@@ -33,19 +33,60 @@ Another reason that have triggered this side project was that I came across a co
 
 I'll try to explain what each version of the app_x.py script entails, as there are currently several different versions of them inside the repository. The final version is the one called "app.py", named this way so that it'll be recognised by rsconnect/Shinyapps.io when deploying the app. By providing some explanations below should also show that it was quite a process to arrive at the final "app.py", it wasn't built within a day for sure (at least for me).
 
-###### **app_x.py**
+<br>
 
-Explanations/features
+###### **app_molviz_v1.py**
 
-###### **app_x.py**
-
-Explanations/features
-
-###### **app_x.py**
-
-Explanations/features
+This was the first version that purely provided the ability to show 2D images of the molecules via selecting their corresponding index numbers. The libraries used appeared less aligned and a few tests were run below (some of them commented out during trials). This was the one that I've figured out how to make the image appeared in the app.
 
 <br>
+
+###### **app_molviz_v2.py**
+
+For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package's [MolToImage()](https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile) module, which normally returns a PIL[^4] image object, and also supports atom and bond highlighting. Another useful module that I've tried was MolToFile() within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.
+
+I then took a bit more time to familiarise myself with some basic PIL image manipulations, and used online resources to formulate code to merge separate PNG images into one table grid-like image - potentially may be useful for substructural or R-group comparisons. 
+
+I have also added the interactive data table at the end to see how it would fit in with the rest of the app.
+
+[^4]: Python image library
+
+<br>
+
+###### **app_molviz_v3.py**
+
+The third version mainly dealt with how to segregate and differentiate between highlighting or non-highlighting and also with or without index numbers showing for the compounds in the images. I've tried to use a different code for atom labelling this time with thanks to this [link](https://stackoverflow.com/questions/53321453/rdkit-how-to-show-moleculars-atoms-number/66732268#66732268). However, there was always an issue of not being able to flip back from with index to without index, since the atom labelling code itself somehow overflows its effect to the rest after labelling the atom indices (presumably this atom labelling code would work great in a Jupyter notebook scenario).
+
+<br>
+
+###### **app_molviz_v4.py & app_molviz_v5.py**
+
+Both version four and five were where I've tested using "atomNote" (numbers appear beside atoms) instead of "atomLabel" (numbers replaces atoms directly in structures) to label atoms in molecular structures.
+
+An example of the atom labelling code would look like this (replace 'atomNote' with 'atomLabe' to get different labelling effect):
+
+```{{python}}
+for atom in mols[input.mol()].GetAtoms():
+                    atom.SetProp('atomNote', str(atom.GetIdx()))
+```
+
+I've also started adding introductory texts for the app and edited the layout a bit more.
+
+<br>
+
+###### **app_molviz_v6_hf.py**
+
+This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace. The main difference I was testing was how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, a newer problem actually appeared in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.
+
+<br>
+
+###### **app_molviz_v6.py or app.py**
+
+This was the last version and was the version used to deploy the app on Shinyapps.io. I had to rename the file as mentioned previously to "app.py" so that the Shinyapps.io servers would recognise this Python script as the script to run the app (otherwise it wouldn't be deployed successfully, this took me a few tries and to read the log file to figure this out). So it was saved as a separate file, and for any latest text changes in the app I would refer to app.py as the most current app file.
+
+The biggest code change was that I ended up not using the MolToImage() or MolToFile() modules, but rather I used rdMolDraw2D module from rdkit.Chem.Draw package. The reason being I've noticed the image resolutions weren't great for the previously used modules (Jupyter notebook environments should not have this problem, as you could simply switch on this line of code by setting it to true like this, IPythonConsole.ipython_useSVG = True). So I resorted to other means and came across this useful [link](https://stackoverflow.com/questions/61659643/rdkit-how-to-draw-high-resolution-chemical-structure?rq=3) to generate images with better resolutions, and introduced the cairosvg library.
+
+So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I've found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed much less of a problem. This was also why I had to have these PNG images blown up this large in the app, so the cater for the image resolution aspect.
 
 ##### **Other files**
 
@@ -58,6 +99,18 @@ I'm not sure exactly how other data scientists/developers work, but for me since
 ###### **app_table.py & app_itables.py**
 
 These two as the file names have suggested were trials for incorporating dataframe inside a web app. The difference was that app_table.py was purely a data table being presented inside the app, without any other particular features, while app_itables.py utilised a different package itables that provided an interactive feature to search for data in rows. The previous post on data source used for this app or interactive data table was embedded inside a Quarto document, the same principle would also apply to the table being present inside a Jupyter notebook environment (?Lab as well).
+
+<br>
+
+###### **app_sample.py**
+
+This file was provided by Posit (formerly known as RStudio) from their Python for Shiny app template in HuggingFace as an example script for an app.
+
+<br>
+
+###### **requirements.txt**
+
+
 
 <br>
 
