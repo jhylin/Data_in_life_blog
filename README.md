@@ -6,7 +6,7 @@ This website serves as my portfolio in a blog style on data science or cheminfor
 
 #### **Code**
 
-All the code used in each post are available in the [posts](https://github.com/jhylin/Data_in_life_blog/tree/main/posts) folder, which contains every blog post I've worked on in chronological order with folder names in ordered sequence with titles reflecting the posts in the website.
+All the code used in each post are available in the [posts](https://github.com/jhylin/Data_in_life_blog/tree/main/posts) folder, which contains every blog post I've worked on in chronological order with folder names in ordered sequence and titles reflecting the posts in the website.
 
 #### **Site deployment**
 
