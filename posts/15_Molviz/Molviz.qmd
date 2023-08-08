@@ -1,8 +1,8 @@
 ---
 title: "Molecular visualisation (Molviz) web application"
-subtitle: "Using Shiny for Python application framework"
+subtitle: "Using Shiny for Python application framework - part 2"
 author: Jennifer HY Lin
-date: '2023-8-6'
+date: '2023-8-8'
 format: html
 filters:
   - shinylive
