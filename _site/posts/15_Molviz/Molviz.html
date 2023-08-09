@@ -201,7 +201,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Molecular visualisation (Molviz) web application</h1>
-            <p class="subtitle lead">Using Shiny for Python application framework - part 2</p>
+            <p class="subtitle lead">Using Shiny for Python web application framework - part 2</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Python</div>
                 <div class="quarto-category">Datamol</div>
@@ -262,6 +262,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#app-deployment" id="toc-app-deployment" class="nav-link" data-scroll-target="#app-deployment"><strong>App deployment</strong></a></li>
   <li><a href="#further-improvements-of-the-app" id="toc-further-improvements-of-the-app" class="nav-link" data-scroll-target="#further-improvements-of-the-app"><strong>Further improvements of the app</strong></a></li>
   <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -271,12 +272,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
-<p><em>The final deployed app is now on Shinyapps.io with <a href="https://jhylin.shinyapps.io/molviz_app/">link here</a> or visit https://jhylin.shinyapps.io/molviz_app/</em></p>
-<p><em>Full code <a href="https://github.com/jhylin/Molviz_app">link here</a> or visit https://github.com/jhylin/Molviz_app</em></p>
+<p><em>The final deployed app is on Shinyapps.io with <a href="https://jhylin.shinyapps.io/molviz_app/">link here</a> or please visit https://jhylin.shinyapps.io/molviz_app/</em></p>
+<p><em>Full code: <a href="https://github.com/jhylin/Molviz_app">here</a> or please visit https://github.com/jhylin/Molviz_app</em></p>
 <p><br></p>
 <section id="background---how-the-app-started" class="level5">
 <h5 class="anchored" data-anchor-id="background---how-the-app-started"><strong>Background - how the app started</strong></h5>
-<p>Originally I had an idea of incorporating mols2grid library within Shiny for Python web app framework (after seeing an example of a similar app in Streamlit previously). So I worked on a few ideas, but obviously mols2grid was designed to work inside Jupyter Notebook/Lab and Shiny for Python was only out of alpha at that stage so things were still being developed. After a few trials, unfortunately mols2grid wasn’t directly compatible with the Shiny for Python framework at that time (I even wrote a small story about it - link).</p>
+<p>Originally I had an idea of incorporating mols2grid library within Shiny for Python web app framework (after seeing an example of a similar app in Streamlit previously). So I worked on a few ideas, but obviously mols2grid was designed to work inside Jupyter Notebook/Lab and Shiny for Python was only out of alpha at that stage so things were still being developed. After a few trials, unfortunately mols2grid wasn’t directly compatible with the Shiny for Python framework at that time (I even wrote a small story about it as a <a href="https://github.com/rstudio/py-shinywidgets/issues/55">comment</a> to an issue).</p>
 <p>I then went away to work on another project on molecular scaffolds and left this mini project aside. However, recently I had another idea of trying to build a Shiny for Python app from the scratch (with a focus on cheminformatics or chemical information), so that users in relevant fields can view and save 2D images of small molecules in a web browser environment instead of only inside a Jupyter Notebook/Lab. I also thought to place the Shiny for Python framework to test if it was being used in a more intensive area such as chemistry and drug discovery.</p>
 <p>Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG file, since SVG version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all…), so here we are.</p>
 <p><br></p>
@@ -315,7 +316,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="app_molviz_v6_hf.py" class="level6">
 <h6 class="anchored" data-anchor-id="app_molviz_v6_hf.py"><strong>app_molviz_v6_hf.py</strong></h6>
-<p>This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace. The main difference I was testing was how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, a newer problem actually appeared in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.</p>
+<p>This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace. The main difference I was testing was on how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, there was actually another problem in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.</p>
 <p><br></p>
 </section>
 <section id="app_molviz_v6.py-or-app.py" class="level6">
@@ -347,28 +348,69 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="features-of-the-app" class="level5">
 <h5 class="anchored" data-anchor-id="features-of-the-app"><strong>Features of the app</strong></h5>
-<p>Comments from scripts available - check.</p>
-<p>Mainly for viewing, saving and substructure highlighting of target molecules.</p>
+<p>There are three main features for this app which allows viewing, saving<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and highlighting substructures of target molecules as PNG image files. I’m contemplating about adding a download feature for image file saving on the deployed app version but because I’m currently using the free version of Shinyapps.io with limited amount of data space available, so this may be unlikely (since the app is more of a demonstration with the current data used as an example only).</p>
 <p><br></p>
 </section>
 <section id="app-deployment" class="level5">
 <h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
-<p>Two places I’ve tried so far - HuggingFace and Shinyapps.io.</p>
-<p>Issue with cairosvg code when deploying on HuggingFace.</p>
-<p>Deploying to Shinyapps.io wasn’t a smooth ride as well - some problems initially. Explain the steps.</p>
-<p>requirements.txt</p>
+<p>There were two places I’ve tried so far, which were HuggingFace and Shinyapps.io. As mentioned briefly earlier under the subsection of “app_molviz_v6_hf.py”, it turned out cairosvg code didn’t quite play out as expected. I have so far not returned to fix this yet on HuggingFace, since I’ve managed to deploy the app on Shinyapps.io. I had a feeling I might need to revert back to the older code version with poorer image resolutions, so that was also another reason why I haven’t fixed it yet as I’d prefer to keep the better resolution one (unless someone has better ideas out there).</p>
+<p>However, deploying the app to Shinyapps.io also wasn’t a smooth ride as well, there were some problems initially. The very first problem I got was being told by the error message that rsconnect-python was only compatible with Python version 3.7, 3.8, 3.9 and 3.10 only. I did some information digging in the Posit community forum, and I think several people mentioned using 3.9 without any problems to deploy their apps. Python version 3.11 definitely did not work at all so please avoid for now if anyone would like to try using Shiny for Python app.</p>
+<p>So I think the ideal app building workflow should start like this:</p>
+<p><em>Note: all code examples below are to be run in the command line interface</em></p>
+<ol type="1">
+<li><p>Refer to this <a href="https://shiny.rstudio.com/py/docs/install.html">link</a> provided by Shiny for Python, which details about how to set up the working directory, download the Shiny package and create a virtual environment</p></li>
+<li><p>When creating the virtual environment, use venv which was already built-in within Python (and also as suggested by the Shiny for Python link) and set it to a compatible Python version.</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a venv with a specific Python version e.g. Python 3.9</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>python3<span class="fl">.9</span> <span class="op">-</span>m venv my_venv_name</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the created venv</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>source my_venv_name<span class="op">/</span><span class="bu">bin</span><span class="op">/</span>activate</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>If you’ve accidentally set it to Python 3.11 (like what I did), just deactivate the old venv and re-create another one by using the code above. The code below can be run in the CLI to deactivate the venv set up in the first place.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Deactivate the old venv</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>deactivate</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>If you had to set up a new venv with a new Python version, and did not want to re-add/install all the packages or libraries used in the older version, save all the pip packages like this code below as a requirements.txt file.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pip freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Once the requirements.txt was saved and after the new venv was set up and activated, install all the saved packages used to run the app by using this code.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pip freeze <span class="op">-</span>r requirements.txt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li><p>Start coding for your app and have fun. Don’t forget to save and push the files to your repository.</p></li>
+<li><p>To deploy to Shinyapps.io, follow this <a href="https://shiny.rstudio.com/py/docs/deploy-cloud.html">link</a>, which explains all the steps. One thing I would like to remind here again is to make sure the app script with the data source, user interface and server was saved as “app.py” (and not as other file names) so that the rsconnect-python server will recognise it and be able to deploy it to the Shinyapps.io cloud environment.</p></li>
+</ol>
 <p><br></p>
 </section>
 <section id="further-improvements-of-the-app" class="level5">
 <h5 class="anchored" data-anchor-id="further-improvements-of-the-app"><strong>Further improvements of the app</strong></h5>
-<p>May be useful to add a download option for real-world use case, but for demonstration purpose, I’m leaving it as a “View” only for now, unless I get comments from readers that they’d like to try this. For localhost version (e.g.&nbsp;if operating from an IDE such as VS Code), the saving image function should work and the files will be saved into the working directory.</p>
-<p>It may be even better to use SMARTS or SMILES for highlighting compound substructures actually. I’m using atom indices as I’m using a specific code in RDKit, but perhaps more experienced people with RDKit will know how to add other alternative options.</p>
-<p>The app layout may be further optimised e.g.&nbsp;interactive data table could be placed at a different location.</p>
+<p>There are of course a few things I think could be done to make the app better.</p>
+<ul>
+<li><p>It may be useful to add a download option as mentioned previously, but for demonstration purpose, I’m leaving it as a “View” only for now, unless I get comments from readers that they’d like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.</p></li>
+<li><p>It may be even better to use SMARTS or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried my own app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
+<li><p>The app layout could be further optimised for aesthetics sake e.g.&nbsp;interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.</p></li>
+</ul>
 <p><br></p>
 </section>
 <section id="final-words" class="level5">
 <h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
-<p>The whole idea behind this mini side project was to show that interested users could use this web app framework to build an interactive app using their own data. Other useful web app frameworks are also available and definitely not limited to the one I’m using here (I’m simply trying to test it out since it’s relatively new comparing to others). In a drug discovery and development setting, this could be useful to make non-coding parties understand where the computer side is trying to do, and to help them during their lab experimental workflows, hoping to add some convenience at least.</p>
+<p>The whole idea behind this side project was to show that interested users could use this web app framework to build an interactive app by using their own data. Other useful web app frameworks are also available out there and could potentially be more or equally useful as this one (I’m simply trying to test Python for Shiny out since it’s relatively new when comparing to others). In a drug discovery and development setting, this could be useful to make non-coding members to understand where the computer side was trying to do, and to possibly assist them during their lab workflows, hoping to add some convenience at least.</p>
+<p><br></p>
+</section>
+<section id="acknowledgements" class="level5">
+<h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
+<p>As always, I’d like to thank all of the authors of RDKit, Datamol, Shiny, itables, Pandas and Polars, without them, I don’t think I can build this app out of the blue.</p>
 
 
 </section>
@@ -378,6 +420,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <ol>
 <li id="fn1"><p>Python image library<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -15,7 +15,7 @@ jupyter: python3
 
 ##### **Introduction**
 
-This time I'm trying to build a web application in the hope to contribute my two cents towards minimising the gap between computational and laboratory sides in a drug discovery (or chemistry-related work) setting. There are definitely many other useful web applications available out there for similar uses, but I guess each one has its own uniqueness and special features. 
+This time I'm trying to build a web application in the hope to contribute my two cents towards minimising the gap between computational and laboratory sides in a drug discovery (or chemistry-related work) setting. There are definitely many other useful web applications available out there for similar uses, but I guess each one has its own uniqueness and special features.
 
 For this app, it is mostly aimed at lab chemists who do not use any computer programming code at all in their work, and would like to quickly view compounds in the lab while working, and also to be able to highlight compound substructures during discussions or brainstorming for ideas during compound synthesis. Importantly, this app can exist outside a Jupyter notebook environment with only internet required at this stage.
 
@@ -69,7 +69,7 @@ df = df.with_columns([
 #df.head()
 ```
 
-Polars dataframe library was designed without the index in mind (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe which required an index column to show (note: all other Polars dataframes should work fine with itables without the index column!). 
+Polars dataframe library was designed without the index in mind (which is different to Pandas), therefore the itables library did not work on my specific polars dataframe which required an index column to show (note: all other Polars dataframes should work fine with itables without the index column!).
 
 However to show row counts in Polars dataframes, we could use with_row_count() that starts the index from 0, and this would show up in a Jupyter environment as usual. A small code example would be like this below.
 
@@ -90,10 +90,12 @@ Then I converted the Polars dataframe into a Pandas one (this could be completel
 df = df.to_pandas()
 ```
 
-Then I added Datamol's "_preprocess" function to convert SMILES[^1] into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES[^2], InChI[^3], InChI keys - just to provide extra information for further uses if needed. The standardised SMILES generated here would then be used for generating the molecule images later (in part 2).
+Then I added Datamol's "\_preprocess" function to convert SMILES[^1] into other molecular representations such as standardised SMILES (pre-processed and cleaned SMILES), SELFIES[^2], InChI[^3], InChI keys - just to provide extra information for further uses if needed. The standardised SMILES generated here would then be used for generating the molecule images later (in part 2).
 
 [^1]: Simplified Molecular Input Line Entry Systems
+
 [^2]: SELF-referencIng Embedded Strings
+
 [^3]: International Chemical Identifier
 
 ```{python}
@@ -177,9 +179,3 @@ Since I had a lot of fun deploying my previous app in Shinylive last time, I tho
 ##### **Next post**
 
 Code and explanations for the actual Molviz app will be detailed in the next post. To access full code and files used for now, please visit this [repository link](https://github.com/jhylin/Molviz_app).
-
-<br>
-
-##### **Acknowledgements**
-
-As always, I'd like to thank all of the authors of RDKit, Datamol, itables, Pandas and Polars, without them, I don't think I can build this app out of the blue.
