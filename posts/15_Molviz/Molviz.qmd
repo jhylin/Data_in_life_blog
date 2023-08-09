@@ -2,7 +2,7 @@
 title: "Molecular visualisation (Molviz) web application"
 subtitle: "Using Shiny for Python application framework - part 2"
 author: Jennifer HY Lin
-date: '2023-8-8'
+date: '2023-8-9'
 draft: true
 categories:
   - Python
@@ -14,10 +14,11 @@ categories:
 jupyter: python3
 ---
 
-##### **Molviz app**
+*The final deployed app is now on Shinyapps.io with [link here](https://jhylin.shinyapps.io/molviz_app/) or visit https://jhylin.shinyapps.io/molviz_app/*
 
-The final deployed Molviz app is now on Shinyapps.io with its URL as: https://jhylin.shinyapps.io/molviz_app/
+*Full code [link here](https://github.com/jhylin/Molviz_app) or visit https://github.com/jhylin/Molviz_app*
 
+<br>
 
 ##### **Background - how the app started**
 
@@ -67,7 +68,7 @@ An example of the atom labelling code would look like this (replace 'atomNote' w
 
 ```{{python}}
 for atom in mols[input.mol()].GetAtoms():
-                    atom.SetProp('atomNote', str(atom.GetIdx()))
+  atom.SetProp('atomNote', str(atom.GetIdx()))
 ```
 
 I've also started adding introductory texts for the app and edited the layout a bit more.
@@ -86,31 +87,29 @@ This was the last version and was the version used to deploy the app on Shinyapp
 
 The biggest code change was that I ended up not using the MolToImage() or MolToFile() modules, but rather I used rdMolDraw2D module from rdkit.Chem.Draw package. The reason being I've noticed the image resolutions weren't great for the previously used modules (Jupyter notebook environments should not have this problem, as you could simply switch on this line of code by setting it to true like this, IPythonConsole.ipython_useSVG = True). So I resorted to other means and came across this useful [link](https://stackoverflow.com/questions/61659643/rdkit-how-to-draw-high-resolution-chemical-structure?rq=3) to generate images with better resolutions, and introduced the cairosvg library.
 
-So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I've found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed much less of a problem. This was also why I had to have these PNG images blown up this large in the app, so the cater for the image resolution aspect.
+So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I've found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed much less of a problem. This was also why I had to have these PNG images blown up this large in the app, so to cater for the image resolution aspect.
+
+<br>
 
 ##### **Other files**
 
 ###### **code_test.py**
 
-I'm not sure exactly how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I use the "code_tests.py" to test a lot of different code. If you go into this file, then you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I get to see the results right away when running the code, and learning new code functions that way. If the end result is not the one I've intended, I go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots along the way actually), it'll mainly be chosen intuitively as I search online, but I can for this particular project, a lot of it was past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving a particular issue.
+I'm not sure exactly sure how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I use the "code_tests.py" to test a lot of different code. 
+
+If you go into this file, you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I get to see the results right away when running the code, and learning new code functions that way. If the end result is not the one I've intended, I go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots actually), it'll mainly be chosen intuitively as I search online, but for this particular project, a lot of it was past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving a particular issue.
 
 <br>
 
 ###### **app_table.py & app_itables.py**
 
-These two as the file names have suggested were trials for incorporating dataframe inside a web app. The difference was that app_table.py was purely a data table being presented inside the app, without any other particular features, while app_itables.py utilised a different package itables that provided an interactive feature to search for data in rows. The previous post on data source used for this app or interactive data table was embedded inside a Quarto document, the same principle would also apply to the table being present inside a Jupyter notebook environment (?Lab as well).
+These two as the file names have suggested were trials for incorporating dataframe inside a web app. The difference was that app_table.py was purely a data table being presented inside the app, without any other particular features, while app_itables.py utilised a different package called itables, which provided an interactive feature to search for data in rows. The previous post on data source used for this app was presented as an interactive data table embedded inside a Quarto document, the same principle would also apply to the table being present inside a Jupyter notebook environment.
 
 <br>
 
 ###### **app_sample.py**
 
 This file was provided by Posit (formerly known as RStudio) from their Python for Shiny app template in HuggingFace as an example script for an app.
-
-<br>
-
-###### **requirements.txt**
-
-
 
 <br>
 
@@ -129,6 +128,8 @@ Two places I've tried so far - HuggingFace and Shinyapps.io.
 Issue with cairosvg code when deploying on HuggingFace.
 
 Deploying to Shinyapps.io wasn't a smooth ride as well - some problems initially. Explain the steps.
+
+requirements.txt
 
 <br>
 
