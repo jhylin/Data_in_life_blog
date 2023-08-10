@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-08-10">
+
+<title>Home - Molecular visualisation (Molviz) web application</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About Jennifer HY Lin</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.datascienceportfol.io/jhylin">
+ <span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Molecular visualisation (Molviz) web application</h1>
+            <p class="subtitle lead">Using Shiny for Python web application framework - part 2</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Datamol</div>
+                <div class="quarto-category">Shiny</div>
+                <div class="quarto-category">Pandas</div>
+                <div class="quarto-category">Polars</div>
+                <div class="quarto-category">itables</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 10, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background---how-the-app-started" id="toc-background---how-the-app-started" class="nav-link active" data-scroll-target="#background---how-the-app-started"><strong>Background - how the app started</strong></a></li>
+  <li><a href="#about-each-version-of-the-app" id="toc-about-each-version-of-the-app" class="nav-link" data-scroll-target="#about-each-version-of-the-app"><strong>About each version of the app</strong></a>
+  <ul>
+  <li><a href="#app_molviz_v1.py" id="toc-app_molviz_v1.py" class="nav-link" data-scroll-target="#app_molviz_v1.py"><strong>app_molviz_v1.py</strong></a></li>
+  <li><a href="#app_molviz_v2.py" id="toc-app_molviz_v2.py" class="nav-link" data-scroll-target="#app_molviz_v2.py"><strong>app_molviz_v2.py</strong></a></li>
+  <li><a href="#app_molviz_v3.py" id="toc-app_molviz_v3.py" class="nav-link" data-scroll-target="#app_molviz_v3.py"><strong>app_molviz_v3.py</strong></a></li>
+  <li><a href="#app_molviz_v4.py-app_molviz_v5.py" id="toc-app_molviz_v4.py-app_molviz_v5.py" class="nav-link" data-scroll-target="#app_molviz_v4.py-app_molviz_v5.py"><strong>app_molviz_v4.py &amp; app_molviz_v5.py</strong></a></li>
+  <li><a href="#app_molviz_v6_hf.py" id="toc-app_molviz_v6_hf.py" class="nav-link" data-scroll-target="#app_molviz_v6_hf.py"><strong>app_molviz_v6_hf.py</strong></a></li>
+  <li><a href="#app_molviz_v6.py-or-app.py" id="toc-app_molviz_v6.py-or-app.py" class="nav-link" data-scroll-target="#app_molviz_v6.py-or-app.py"><strong>app_molviz_v6.py or app.py</strong></a></li>
+  </ul></li>
+  <li><a href="#other-files" id="toc-other-files" class="nav-link" data-scroll-target="#other-files"><strong>Other files</strong></a>
+  <ul>
+  <li><a href="#code_test.py" id="toc-code_test.py" class="nav-link" data-scroll-target="#code_test.py"><strong>code_test.py</strong></a></li>
+  <li><a href="#app_table.py-app_itables.py" id="toc-app_table.py-app_itables.py" class="nav-link" data-scroll-target="#app_table.py-app_itables.py"><strong>app_table.py &amp; app_itables.py</strong></a></li>
+  <li><a href="#app_sample.py" id="toc-app_sample.py" class="nav-link" data-scroll-target="#app_sample.py"><strong>app_sample.py</strong></a></li>
+  </ul></li>
+  <li><a href="#features-of-the-app" id="toc-features-of-the-app" class="nav-link" data-scroll-target="#features-of-the-app"><strong>Features of the app</strong></a></li>
+  <li><a href="#app-deployment" id="toc-app-deployment" class="nav-link" data-scroll-target="#app-deployment"><strong>App deployment</strong></a></li>
+  <li><a href="#further-improvements-of-the-app" id="toc-further-improvements-of-the-app" class="nav-link" data-scroll-target="#further-improvements-of-the-app"><strong>Further improvements of the app</strong></a></li>
+  <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><strong><em>The final deployed app is on Shinyapps.io</em></strong>:</p>
+<ul>
+<li><p>Link: <a href="https://jhylin.shinyapps.io/molviz_app/">here</a> or please visit https://jhylin.shinyapps.io/molviz_app/</p></li>
+<li><p>Code: <a href="https://github.com/jhylin/Molviz_app">here</a> or please visit https://github.com/jhylin/Molviz_app</p></li>
+</ul>
+<p><br></p>
+<section id="background---how-the-app-started" class="level5">
+<h5 class="anchored" data-anchor-id="background---how-the-app-started"><strong>Background - how the app started</strong></h5>
+<p>Originally I had an idea of incorporating mols2grid library within Shiny for Python web app framework (after seeing an example of a similar app in Streamlit previously). So I worked on a few ideas, but obviously mols2grid was designed to work inside Jupyter Notebook/Lab and Shiny for Python was only out of alpha at that stage so things were still being developed. After a few trials, unfortunately mols2grid wasn’t directly compatible with the Shiny for Python framework at that time (I even wrote a small story about it as a <a href="https://github.com/rstudio/py-shinywidgets/issues/55">comment</a> to an issue).</p>
+<p>I then went away to work on another project on molecular scaffolds and left this mini project aside. However, recently I had another idea of trying to build a Shiny for Python app from the scratch (with a focus on cheminformatics or chemical information), so that users in relevant fields can view and save 2D images of small molecules in a web browser environment instead of only inside a Jupyter Notebook/Lab. I also thought to place the Shiny for Python framework to test if it was being used in a more intensive area such as chemistry and drug discovery.</p>
+<p>Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> file, since SVG<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all…), so here we are.</p>
+<p><br></p>
+</section>
+<section id="about-each-version-of-the-app" class="level5">
+<h5 class="anchored" data-anchor-id="about-each-version-of-the-app"><strong>About each version of the app</strong></h5>
+<p>I’ll try to explain what each version of the app_x.py script entails, as there are currently several different versions of them inside the repository. The final version is the one called “app.py”, named this way so that it’ll be recognised by rsconnect/Shinyapps.io when deploying the app. By providing some explanations below should also show that it was quite a process to arrive at the final “app.py”, it wasn’t built within a day for sure (at least for me).</p>
+<p><br></p>
+<section id="app_molviz_v1.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v1.py"><strong>app_molviz_v1.py</strong></h6>
+<p>This was the first version that purely provided the ability to show 2D images of the molecules via selecting their corresponding index numbers. The libraries used appeared less aligned and a few tests were run below (some of them commented out during trials). This was the one that I’ve figured out how to make the image appeared in the app.</p>
+<p><br></p>
+</section>
+<section id="app_molviz_v2.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v2.py"><strong>app_molviz_v2.py</strong></h6>
+<p>For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package’s <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile">MolToImage()</a> module, which normally returns a PIL<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> image object, and also supports atom and bond highlighting. Another useful module that I’ve tried was <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile">MolToFile()</a> within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.</p>
+<p>I then took a bit more time to familiarise myself with some basic PIL image manipulations, and used online resources to formulate code to merge separate PNG images into one table grid-like image - potentially may be useful for substructural or R-group comparisons.</p>
+<p>I have also added the interactive data table at the end to see how it would fit in with the rest of the app.</p>
+<p><br></p>
+</section>
+<section id="app_molviz_v3.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v3.py"><strong>app_molviz_v3.py</strong></h6>
+<p>The third version mainly dealt with how to segregate and differentiate between highlighting or non-highlighting and also with or without index numbers showing for the compounds in the images. I’ve tried to use a different code for atom labelling this time with thanks to this <a href="https://stackoverflow.com/questions/53321453/rdkit-how-to-show-moleculars-atoms-number/66732268#66732268">link</a>. However, there was always an issue of not being able to flip back from with index to without index, since the atom labelling code itself somehow overflows its effect to the rest after labelling the atom indices (presumably this atom labelling code would work great in a Jupyter notebook scenario).</p>
+<p><br></p>
+</section>
+<section id="app_molviz_v4.py-app_molviz_v5.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v4.py-app_molviz_v5.py"><strong>app_molviz_v4.py &amp; app_molviz_v5.py</strong></h6>
+<p>Both version 4 and 5 were where I’ve tested using “atomNote” (numbers appear beside atoms) instead of “atomLabel” (numbers replaces atoms directly in structures) to label atoms in molecular structures.</p>
+<p>An example of the atom labelling code would look like this (replace ‘atomNote’ with ‘atomLabel’ to get different labelling effect):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> atom <span class="kw">in</span> mols[<span class="bu">input</span>.mol()].GetAtoms():</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  atom.SetProp(<span class="st">'atomNote'</span>, <span class="bu">str</span>(atom.GetIdx()))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I’ve also started adding introductory texts for the app and edited the layout a bit more.</p>
+<p><br></p>
+</section>
+<section id="app_molviz_v6_hf.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v6_hf.py"><strong>app_molviz_v6_hf.py</strong></h6>
+<p>This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace. The main difference I was testing was on how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, there was actually another problem in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.</p>
+<p><br></p>
+</section>
+<section id="app_molviz_v6.py-or-app.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_molviz_v6.py-or-app.py"><strong>app_molviz_v6.py or app.py</strong></h6>
+<p>This was the last version and was the version used to deploy the app on Shinyapps.io. I had to rename the file as mentioned previously to “app.py” so that the Shinyapps.io servers would recognise this Python script as the script to run the app (otherwise it wouldn’t be deployed successfully, this took me a few tries and to read the log file to figure this out). So it was saved as a separate file, and for any latest text changes in the app I would refer to app.py as the most current app file.</p>
+<p>The biggest code change was that I ended up not using the MolToImage() or MolToFile() modules, but rather I used rdMolDraw2D module from rdkit.Chem.Draw package. The reason being I’ve noticed the image resolutions weren’t great for the previously used modules (Jupyter notebook environments should not have this problem, as you could simply switch on this line of code by setting it to true like this, IPythonConsole.ipython_useSVG = True). So I resorted to other means and came across this useful <a href="https://stackoverflow.com/questions/61659643/rdkit-how-to-draw-high-resolution-chemical-structure?rq=3">link</a> to generate images with better resolutions, and introduced the cairosvg library.</p>
+<p>So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I’ve found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed to be much less of a problem. This was also why I had to have these PNG images blown up this large in the app, to cater for the image resolution aspect.</p>
+<p><br></p>
+</section>
+</section>
+<section id="other-files" class="level5">
+<h5 class="anchored" data-anchor-id="other-files"><strong>Other files</strong></h5>
+<section id="code_test.py" class="level6">
+<h6 class="anchored" data-anchor-id="code_test.py"><strong>code_test.py</strong></h6>
+<p>I’m not exactly sure how other data scientists/developers work, but for me since I came from a completely different background and training, I’m used to plan, set up and do experiments to test things I’d like to try, and see where the results will lead me to. So for this in a virtual computer setting, I used the “code_tests.py” to test a lot of different code.</p>
+<p>If you go into this file, you’ll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I got to see results straight away when running the code, and learn new code and functions that way. If the end result was not the one I’ve intended, I would go on short journeys to look for answers (surprisingly I didn’t use any generative AI chatbots actually), it would be chosen intuitively as I searched online, but for this particular project, a lot of it was from past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving issues I came across.</p>
+<p><br></p>
+</section>
+<section id="app_table.py-app_itables.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_table.py-app_itables.py"><strong>app_table.py &amp; app_itables.py</strong></h6>
+<p>These two files were trials for incorporating dataframe inside a web app. The difference was that app_table.py was just a data table sitting inside the app, without any other particular features, while app_itables.py utilised a different package called itables, which provided an interactive feature to search for data in the table. The previous post on data source used for this app was presented as an interactive data table embedded inside a Quarto document, the same principle would also apply for a table inside a Jupyter notebook environment.</p>
+<p><br></p>
+</section>
+<section id="app_sample.py" class="level6">
+<h6 class="anchored" data-anchor-id="app_sample.py"><strong>app_sample.py</strong></h6>
+<p>This file was provided by Posit (formerly known as RStudio) from their Python for Shiny app template in HuggingFace as an example script for an app.</p>
+<p><br></p>
+</section>
+</section>
+<section id="features-of-the-app" class="level5">
+<h5 class="anchored" data-anchor-id="features-of-the-app"><strong>Features of the app</strong></h5>
+<p>There are three main features for this app which allows viewing, saving<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and highlighting substructures of target molecules as PNG image files. I’m contemplating about adding a download feature for image file saving on the deployed app version but because I’m currently using the free version of Shinyapps.io with limited amount of data available, this may be unlikely (also because the app is more of a demonstration really as the focus is not to provide particular data/image downloads).</p>
+<p><br></p>
+</section>
+<section id="app-deployment" class="level5">
+<h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
+<p>There were two places I’ve tried so far, which were HuggingFace and Shinyapps.io. As mentioned briefly earlier under the subsection of “app_molviz_v6_hf.py”, it turned out cairosvg code didn’t quite play out as expected. I have so far not returned to fix this yet on HuggingFace, since I’ve managed to deploy the app on Shinyapps.io. I had a feeling I might need to revert back to the older code version with poorer image resolutions, so that was also another reason why I haven’t fixed it yet as I’d prefer to keep the better resolution one (unless someone has better ideas out there).</p>
+<p>However, deploying the app to Shinyapps.io also wasn’t a smooth ride as well, there were some problems initially. The very first problem I got was being told by the error message that rsconnect-python was only compatible with Python version 3.7, 3.8, 3.9 and 3.10 only. I did some information digging in the Posit community forum, and I think several people mentioned using 3.9 without any problems to deploy their apps. Python version 3.11 definitely did not work at all so please avoid for now if anyone would like to try using Shiny for Python app (unless updated by rsconnect-Python in the future).</p>
+<p>So I think the ideal app building workflow might be like this:</p>
+<p><em>Note: all code examples below are to be run in the command line interface</em></p>
+<ol type="1">
+<li><p>Refer to this <a href="https://shiny.rstudio.com/py/docs/install.html">link</a> provided by Shiny for Python, which details about how to set up the working directory, download the Shiny package and create a virtual environment</p></li>
+<li><p>When creating the virtual environment, use venv which was already built-in within Python (and also as suggested by the Shiny for Python link) and set it to a compatible Python version.</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a venv with a specific Python version e.g. Python 3.9</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>python3<span class="fl">.9</span> <span class="op">-</span>m venv my_venv_name</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the created venv</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>source my_venv_name<span class="op">/</span><span class="bu">bin</span><span class="op">/</span>activate</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>If you’ve accidentally set it to Python 3.11 (like what I did), just deactivate the old venv and re-create another one by using the code above. The code below can be used to deactivate the venv set up in the first place.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Deactivate the old venv</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>deactivate</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>If you had to set up a new venv with a new Python version, and did not want to re-add/install all the packages or libraries used in the older version, save all the pip packages like this code below as a requirements.txt file.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pip freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Once the requirements.txt was saved and after the new venv was set up and activated, install all the saved packages used to run the app by using this code.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pip freeze <span class="op">-</span>r requirements.txt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li><p>Start coding for your app and have fun - don’t forget to save and push the files to your repository.</p></li>
+<li><p>To deploy to Shinyapps.io, follow this <a href="https://shiny.rstudio.com/py/docs/deploy-cloud.html">link</a>, which explains all the steps. One thing I would like to remind again here is to make sure the app script (i.e.&nbsp;the one with data source, user interface and server code) was saved as “app.py”, so that the rsconnect-python server will recognise it and be able to deploy it to the cloud environment.</p></li>
+</ol>
+<p><br></p>
+</section>
+<section id="further-improvements-of-the-app" class="level5">
+<h5 class="anchored" data-anchor-id="further-improvements-of-the-app"><strong>Further improvements of the app</strong></h5>
+<p>There are of course a few things I think could be done to make the app better.</p>
+<ol type="1">
+<li><p>It may be useful to add a download option as mentioned previously, but for demonstration purpose, I’m leaving it as a “View” only for now, unless I get comments from readers that they’d like to try this. For localhost version, the saving image function should work with files saved to the working directory.</p></li>
+<li><p>It may be even better to use SMARTS<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried the app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
+<li><p>The app layout could be further optimised for aesthetics e.g.&nbsp;interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.</p></li>
+</ol>
+<p><br></p>
+</section>
+<section id="final-words" class="level5">
+<h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
+<p>The whole idea behind this side project was to show that interested users could use this web app framework to build an interactive app by using their own data. Other useful web app frameworks are also available out there and could potentially be more or equally useful as this one (I’m simply testing out Python for Shiny here since it’s relatively new). In a drug discovery and development setting, this could be useful to make non-coding members understand where the computer side was trying to do, and to possibly assist them during their lab workflows, hoping to add some convenience at least.</p>
+<p><br></p>
+</section>
+<section id="acknowledgements" class="level5">
+<h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
+<p>As always, I’d like to thank all of the authors of <a href="https://www.rdkit.org/docs/index.html">RDKit</a>, <a href="https://datamol.io/">Datamol</a>, <a href="https://shiny.rstudio.com/py/">Shiny for Python</a>, <a href="https://mwouts.github.io/itables/quick_start.html">itables</a>, <a href="https://pandas.pydata.org/docs/index.html">Pandas</a> and <a href="https://pola-rs.github.io/polars/py-polars/html/index.html">Polars</a>, without them, I don’t think I can build this app out of the blue.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Portable network graphic (image file)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Scalable vector graphic (image file)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Python image library<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>SMILES arbitrary target specification<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
