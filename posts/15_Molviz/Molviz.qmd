@@ -3,7 +3,7 @@ title: "Molecular visualisation (Molviz) web application"
 subtitle: "Using Shiny for Python web application framework - part 2"
 author: Jennifer HY Lin
 date: '2023-8-10'
-draft: true
+draft: false
 categories:
   - Python
   - Datamol
@@ -14,9 +14,11 @@ categories:
 jupyter: python3
 ---
 
-*The final deployed app is on Shinyapps.io with [link here](https://jhylin.shinyapps.io/molviz_app/) or please visit https://jhylin.shinyapps.io/molviz_app/*
+***The final deployed app is on Shinyapps.io***:
 
-*Full code: [here](https://github.com/jhylin/Molviz_app) or please visit https://github.com/jhylin/Molviz_app*
+- Link: [here](https://jhylin.shinyapps.io/molviz_app/) or please visit https://jhylin.shinyapps.io/molviz_app/
+
+- Code: [here](https://github.com/jhylin/Molviz_app) or please visit https://github.com/jhylin/Molviz_app
 
 <br>
 
@@ -90,7 +92,7 @@ This was the last version and was the version used to deploy the app on Shinyapp
 
 The biggest code change was that I ended up not using the MolToImage() or MolToFile() modules, but rather I used rdMolDraw2D module from rdkit.Chem.Draw package. The reason being I've noticed the image resolutions weren't great for the previously used modules (Jupyter notebook environments should not have this problem, as you could simply switch on this line of code by setting it to true like this, IPythonConsole.ipython_useSVG = True). So I resorted to other means and came across this useful [link](https://stackoverflow.com/questions/61659643/rdkit-how-to-draw-high-resolution-chemical-structure?rq=3) to generate images with better resolutions, and introduced the cairosvg library.
 
-So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I've found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed much less of a problem. This was also why I had to have these PNG images blown up this large in the app, so to cater for the image resolution aspect.
+So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and add on addAtomIndices from drawOptions() and also DrawMolecule() to highlight substructures. The SVG generated would then be converted to PNG via cairosvg library. The end result produced slightly better image resolutions. Although I've found for more structurally complexed molecules, the image size would really need to be quite large to be in the high resolution zone. For compounds with simpler structures, this seemed to be much less of a problem. This was also why I had to have these PNG images blown up this large in the app, to cater for the image resolution aspect.
 
 <br>
 
@@ -100,13 +102,13 @@ So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and a
 
 I'm not exactly sure how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I used the "code_tests.py" to test a lot of different code. 
 
-If you go into this file, you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I got to see the results right away when running the code, and learn new code functions that way. If the end result was not the one I've intended, I would go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots actually), it would be chosen intuitively as I searched online, but for this particular project, a lot of it was from past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving issues I came across.
+If you go into this file, you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I got to see results straight away when running the code, and learn new code and functions that way. If the end result was not the one I've intended, I would go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots actually), it would be chosen intuitively as I searched online, but for this particular project, a lot of it was from past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving issues I came across.
 
 <br>
 
 ###### **app_table.py & app_itables.py**
 
-These two as the file names have suggested were trials for incorporating dataframe inside a web app. The difference was that app_table.py was purely a data table being presented inside the app, without any other particular features, while app_itables.py utilised a different package called itables, which provided an interactive feature to search for data in rows. The previous post on data source used for this app was presented as an interactive data table embedded inside a Quarto document, the same principle would also apply to the table being present inside a Jupyter notebook environment.
+These two files were trials for incorporating dataframe inside a web app. The difference was that app_table.py was just a data table sitting inside the app, without any other particular features, while app_itables.py utilised a different package called itables, which provided an interactive feature to search for data in the table. The previous post on data source used for this app was presented as an interactive data table embedded inside a Quarto document, the same principle would also apply for a table inside a Jupyter notebook environment.
 
 <br>
 
@@ -118,7 +120,7 @@ This file was provided by Posit (formerly known as RStudio) from their Python fo
 
 ##### **Features of the app**
 
-There are three main features for this app which allows viewing, saving[^4] and highlighting substructures of target molecules as PNG image files. I'm contemplating about adding a download feature for image file saving on the deployed app version but because I'm currently using the free version of Shinyapps.io with limited amount of data available, so this may be unlikely (also because the app is more of a demonstration with the current data used as an example only).
+There are three main features for this app which allows viewing, saving[^4] and highlighting substructures of target molecules as PNG image files. I'm contemplating about adding a download feature for image file saving on the deployed app version but because I'm currently using the free version of Shinyapps.io with limited amount of data available, this may be unlikely (also because the app is more of a demonstration really as the focus is not to provide particular data/image downloads).
 
 [^4]: This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only. 
 
@@ -175,11 +177,11 @@ pip freeze -r requirements.txt
 
 There are of course a few things I think could be done to make the app better. 
 
-- It may be useful to add a download option as mentioned previously, but for demonstration purpose, I'm leaving it as a "View" only for now, unless I get comments from readers that they'd like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.
+1. It may be useful to add a download option as mentioned previously, but for demonstration purpose, I'm leaving it as a "View" only for now, unless I get comments from readers that they'd like to try this. For localhost version, the saving image function should work with files saved to the working directory.
 
-- It may be even better to use SMARTS[^5] or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried the app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
+2. It may be even better to use SMARTS[^5] or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried the app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
 
-- The app layout could be further optimised for aesthetics e.g. interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.
+3. The app layout could be further optimised for aesthetics e.g. interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.
 
 [^5]: SMILES arbitrary target specification
 
@@ -193,4 +195,4 @@ The whole idea behind this side project was to show that interested users could 
 
 ##### **Acknowledgements**
 
-As always, I'd like to thank all of the authors of RDKit, Datamol, Shiny, itables, Pandas and Polars, without them, I don't think I can build this app out of the blue.
+As always, I'd like to thank all of the authors of [RDKit](https://www.rdkit.org/docs/index.html), [Datamol](https://datamol.io/), [Shiny for Python](https://shiny.rstudio.com/py/), [itables](https://mwouts.github.io/itables/quick_start.html), [Pandas](https://pandas.pydata.org/docs/index.html) and [Polars](https://pola-rs.github.io/polars/py-polars/html/index.html), without them, I don't think I can build this app out of the blue.
