@@ -2,7 +2,7 @@
 title: "Molecular visualisation (Molviz) web application"
 subtitle: "Using Shiny for Python web application framework - part 2"
 author: Jennifer HY Lin
-date: '2023-8-9'
+date: '2023-8-10'
 draft: true
 categories:
   - Python
@@ -174,9 +174,11 @@ There are of course a few things I think could be done to make the app better.
 
 - It may be useful to add a download option as mentioned previously, but for demonstration purpose, I'm leaving it as a "View" only for now, unless I get comments from readers that they'd like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.
 
-- It may be even better to use SMARTS or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried my own app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
+- It may be even better to use SMARTS[^6] or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried my own app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
 
 - The app layout could be further optimised for aesthetics sake e.g. interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.
+
+[^6]: SMiles ARbitrary Target Specification
 
 <br>
 

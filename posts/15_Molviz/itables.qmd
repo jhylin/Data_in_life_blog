@@ -2,7 +2,7 @@
 title: "Molecular visualisation (Molviz) web application"
 subtitle: "Interactive data table - part 1"
 author: Jennifer HY Lin
-date: '2023-8-8'
+date: '2023-8-10'
 draft: true
 categories:
   - Python

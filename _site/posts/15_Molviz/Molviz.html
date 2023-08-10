@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-08-09">
+<meta name="dcterms.date" content="2023-08-10">
 
 <title>Home - Molecular visualisation (Molviz) web application</title>
 <style>
@@ -226,7 +226,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 9, 2023</p>
+        <p class="date">August 10, 2023</p>
       </div>
     </div>
     
@@ -398,7 +398,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>There are of course a few things I think could be done to make the app better.</p>
 <ul>
 <li><p>It may be useful to add a download option as mentioned previously, but for demonstration purpose, I’m leaving it as a “View” only for now, unless I get comments from readers that they’d like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.</p></li>
-<li><p>It may be even better to use SMARTS or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried my own app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
+<li><p>It may be even better to use SMARTS<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried my own app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
 <li><p>The app layout could be further optimised for aesthetics sake e.g.&nbsp;interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.</p></li>
 </ul>
 <p><br></p>
@@ -421,6 +421,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <ol>
 <li id="fn1"><p>Python image library<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>SMiles ARbitrary Target Specification<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
