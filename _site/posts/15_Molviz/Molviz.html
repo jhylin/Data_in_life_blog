@@ -279,7 +279,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="background---how-the-app-started"><strong>Background - how the app started</strong></h5>
 <p>Originally I had an idea of incorporating mols2grid library within Shiny for Python web app framework (after seeing an example of a similar app in Streamlit previously). So I worked on a few ideas, but obviously mols2grid was designed to work inside Jupyter Notebook/Lab and Shiny for Python was only out of alpha at that stage so things were still being developed. After a few trials, unfortunately mols2grid wasn’t directly compatible with the Shiny for Python framework at that time (I even wrote a small story about it as a <a href="https://github.com/rstudio/py-shinywidgets/issues/55">comment</a> to an issue).</p>
 <p>I then went away to work on another project on molecular scaffolds and left this mini project aside. However, recently I had another idea of trying to build a Shiny for Python app from the scratch (with a focus on cheminformatics or chemical information), so that users in relevant fields can view and save 2D images of small molecules in a web browser environment instead of only inside a Jupyter Notebook/Lab. I also thought to place the Shiny for Python framework to test if it was being used in a more intensive area such as chemistry and drug discovery.</p>
-<p>Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG file, since SVG version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all…), so here we are.</p>
+<p>Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> file, since SVG<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all…), so here we are.</p>
 <p><br></p>
 </section>
 <section id="about-each-version-of-the-app" class="level5">
@@ -293,7 +293,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="app_molviz_v2.py" class="level6">
 <h6 class="anchored" data-anchor-id="app_molviz_v2.py"><strong>app_molviz_v2.py</strong></h6>
-<p>For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package’s <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile">MolToImage()</a> module, which normally returns a PIL<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> image object, and also supports atom and bond highlighting. Another useful module that I’ve tried was MolToFile() within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.</p>
+<p>For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package’s <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile">MolToImage()</a> module, which normally returns a PIL<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> image object, and also supports atom and bond highlighting. Another useful module that I’ve tried was <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile">MolToFile()</a> within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.</p>
 <p>I then took a bit more time to familiarise myself with some basic PIL image manipulations, and used online resources to formulate code to merge separate PNG images into one table grid-like image - potentially may be useful for substructural or R-group comparisons.</p>
 <p>I have also added the interactive data table at the end to see how it would fit in with the rest of the app.</p>
 <p><br></p>
@@ -348,7 +348,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="features-of-the-app" class="level5">
 <h5 class="anchored" data-anchor-id="features-of-the-app"><strong>Features of the app</strong></h5>
-<p>There are three main features for this app which allows viewing, saving<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and highlighting substructures of target molecules as PNG image files. I’m contemplating about adding a download feature for image file saving on the deployed app version but because I’m currently using the free version of Shinyapps.io with limited amount of data space available, so this may be unlikely (since the app is more of a demonstration with the current data used as an example only).</p>
+<p>There are three main features for this app which allows viewing, saving<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and highlighting substructures of target molecules as PNG image files. I’m contemplating about adding a download feature for image file saving on the deployed app version but because I’m currently using the free version of Shinyapps.io with limited amount of data space available, so this may be unlikely (since the app is more of a demonstration with the current data used as an example only).</p>
 <p><br></p>
 </section>
 <section id="app-deployment" class="level5">
@@ -398,7 +398,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>There are of course a few things I think could be done to make the app better.</p>
 <ul>
 <li><p>It may be useful to add a download option as mentioned previously, but for demonstration purpose, I’m leaving it as a “View” only for now, unless I get comments from readers that they’d like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.</p></li>
-<li><p>It may be even better to use SMARTS<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried my own app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
+<li><p>It may be even better to use SMARTS<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I’ve tried my own app myself, and it might not be as straight forward). I’m using atom indices here since I’m using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.</p></li>
 <li><p>The app layout could be further optimised for aesthetics sake e.g.&nbsp;interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.</p></li>
 </ul>
 <p><br></p>
@@ -419,9 +419,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Python image library<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>SMiles ARbitrary Target Specification<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Portable network graphic (image file)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Scalable vector graphic (image file)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Python image library<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>SMiles ARbitrary Target Specification<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

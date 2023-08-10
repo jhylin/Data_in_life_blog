@@ -26,7 +26,10 @@ Originally I had an idea of incorporating mols2grid library within Shiny for Pyt
 
 I then went away to work on another project on molecular scaffolds and left this mini project aside. However, recently I had another idea of trying to build a Shiny for Python app from the scratch (with a focus on cheminformatics or chemical information), so that users in relevant fields can view and save 2D images of small molecules in a web browser environment instead of only inside a Jupyter Notebook/Lab. I also thought to place the Shiny for Python framework to test if it was being used in a more intensive area such as chemistry and drug discovery.
 
-Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG file, since SVG version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all...), so here we are.
+Another reason that have triggered this side project was that I came across a comment from an old RDKit blog post from someone asking about how to save compound image as a PNG[^1] file, since SVG[^2] version was hard to convert etc. (or something along that line). I thought it should be possible, and this should not be only limited to Jupyter environments only (thinking of people not doing coding at all...), so here we are.
+
+[^1]: Portable network graphic (image file)
+[^2]: Scalable vector graphic (image file)
 
 <br>
 
@@ -44,13 +47,13 @@ This was the first version that purely provided the ability to show 2D images of
 
 ###### **app_molviz_v2.py**
 
-For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package's [MolToImage()](https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile) module, which normally returns a PIL[^4] image object, and also supports atom and bond highlighting. Another useful module that I've tried was MolToFile() within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.
+For the second version, I started thinking about how I would present the app in a simple layout for the end users. The backbone code to support image generations was by using rdkit.Chem.Draw package's [MolToImage()](https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile) module, which normally returns a PIL[^3] image object, and also supports atom and bond highlighting. Another useful module that I've tried was [MolToFile()](https://www.rdkit.org/docs/source/rdkit.Chem.Draw.html?highlight=moltofile) within the same package, which would generate and save a PNG file for a specified molecule from the dataframe.
 
 I then took a bit more time to familiarise myself with some basic PIL image manipulations, and used online resources to formulate code to merge separate PNG images into one table grid-like image - potentially may be useful for substructural or R-group comparisons. 
 
 I have also added the interactive data table at the end to see how it would fit in with the rest of the app.
 
-[^4]: Python image library
+[^3]: Python image library
 
 <br>
 
@@ -62,9 +65,9 @@ The third version mainly dealt with how to segregate and differentiate between h
 
 ###### **app_molviz_v4.py & app_molviz_v5.py**
 
-Both version four and five were where I've tested using "atomNote" (numbers appear beside atoms) instead of "atomLabel" (numbers replaces atoms directly in structures) to label atoms in molecular structures.
+Both version 4 and 5 were where I've tested using "atomNote" (numbers appear beside atoms) instead of "atomLabel" (numbers replaces atoms directly in structures) to label atoms in molecular structures.
 
-An example of the atom labelling code would look like this (replace 'atomNote' with 'atomLabe' to get different labelling effect):
+An example of the atom labelling code would look like this (replace 'atomNote' with 'atomLabel' to get different labelling effect):
 
 ```{{python}}
 for atom in mols[input.mol()].GetAtoms():
@@ -95,9 +98,9 @@ So the code was changed and would now use rdMolDraw2D.MolDraw2DSVG() first and a
 
 ###### **code_test.py**
 
-I'm not sure exactly sure how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I use the "code_tests.py" to test a lot of different code. 
+I'm not exactly sure how other data scientists/developers work, but for me since I came from a completely different background and training, I'm used to plan, set up and do experiments to test things I'd like to try, and see where the results will lead me to. So for this in a virtual computer setting, I used the "code_tests.py" to test a lot of different code. 
 
-If you go into this file, you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I get to see the results right away when running the code, and learning new code functions that way. If the end result is not the one I've intended, I go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots actually), it'll mainly be chosen intuitively as I search online, but for this particular project, a lot of it was past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving a particular issue.
+If you go into this file, you'll likely see a lot of RDKit code trials, and I have had a lot of fun doing this since I got to see the results right away when running the code, and learn new code functions that way. If the end result was not the one I've intended, I would go on short journeys to look for answers (surprisingly I didn't use any generative AI chatbots actually), it would be chosen intuitively as I searched online, but for this particular project, a lot of it was from past RDKit blogs, StackOverflow and random snippets I came across that have given me ideas about solving issues I came across.
 
 <br>
 
@@ -115,9 +118,9 @@ This file was provided by Posit (formerly known as RStudio) from their Python fo
 
 ##### **Features of the app**
 
-There are three main features for this app which allows viewing, saving[^5] and highlighting substructures of target molecules as PNG image files. I'm contemplating about adding a download feature for image file saving on the deployed app version but because I'm currently using the free version of Shinyapps.io with limited amount of data space available, so this may be unlikely (since the app is more of a demonstration with the current data used as an example only).
+There are three main features for this app which allows viewing, saving[^4] and highlighting substructures of target molecules as PNG image files. I'm contemplating about adding a download feature for image file saving on the deployed app version but because I'm currently using the free version of Shinyapps.io with limited amount of data available, so this may be unlikely (also because the app is more of a demonstration with the current data used as an example only).
 
-[^5]: This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only. 
+[^4]: This is currently limited to localhost version if running the app.py in IDE such as VS Code, where the saved files can be located in the working directory. The deployed version on Shinyapps.io currently only allow image viewing and structure highlighting only. 
 
 <br>
 
@@ -125,9 +128,9 @@ There are three main features for this app which allows viewing, saving[^5] and 
 
 There were two places I've tried so far, which were HuggingFace and Shinyapps.io. As mentioned briefly earlier under the subsection of "app_molviz_v6_hf.py", it turned out cairosvg code didn't quite play out as expected. I have so far not returned to fix this yet on HuggingFace, since I've managed to deploy the app on Shinyapps.io. I had a feeling I might need to revert back to the older code version with poorer image resolutions, so that was also another reason why I haven't fixed it yet as I'd prefer to keep the better resolution one (unless someone has better ideas out there).
 
-However, deploying the app to Shinyapps.io also wasn't a smooth ride as well, there were some problems initially. The very first problem I got was being told by the error message that rsconnect-python was only compatible with Python version 3.7, 3.8, 3.9 and 3.10 only. I did some information digging in the Posit community forum, and I think several people mentioned using 3.9 without any problems to deploy their apps. Python version 3.11 definitely did not work at all so please avoid for now if anyone would like to try using Shiny for Python app.
+However, deploying the app to Shinyapps.io also wasn't a smooth ride as well, there were some problems initially. The very first problem I got was being told by the error message that rsconnect-python was only compatible with Python version 3.7, 3.8, 3.9 and 3.10 only. I did some information digging in the Posit community forum, and I think several people mentioned using 3.9 without any problems to deploy their apps. Python version 3.11 definitely did not work at all so please avoid for now if anyone would like to try using Shiny for Python app (unless updated by rsconnect-Python in the future).
 
-So I think the ideal app building workflow should start like this:
+So I think the ideal app building workflow might be like this:
 
 *Note: all code examples below are to be run in the command line interface*
 
@@ -143,7 +146,7 @@ python3.9 -m venv my_venv_name
 source my_venv_name/bin/activate
 ```
 
-3. If you've accidentally set it to Python 3.11 (like what I did), just deactivate the old venv and re-create another one by using the code above. The code below can be run in the CLI to deactivate the venv set up in the first place.
+3. If you've accidentally set it to Python 3.11 (like what I did), just deactivate the old venv and re-create another one by using the code above. The code below can be used to deactivate the venv set up in the first place.
 
 ```{{python}}
 # Deactivate the old venv
@@ -162,9 +165,9 @@ pip freeze > requirements.txt
 pip freeze -r requirements.txt
 ```
 
-6. Start coding for your app and have fun. Don't forget to save and push the files to your repository.
+6. Start coding for your app and have fun - don't forget to save and push the files to your repository.
 
-7. To deploy to Shinyapps.io, follow this [link](https://shiny.rstudio.com/py/docs/deploy-cloud.html), which explains all the steps. One thing I would like to remind here again is to make sure the app script with the data source, user interface and server was saved as "app.py" (and not as other file names) so that the rsconnect-python server will recognise it and be able to deploy it to the Shinyapps.io cloud environment.
+7. To deploy to Shinyapps.io, follow this [link](https://shiny.rstudio.com/py/docs/deploy-cloud.html), which explains all the steps. One thing I would like to remind again here is to make sure the app script (i.e. the one with data source, user interface and server code) was saved as "app.py", so that the rsconnect-python server will recognise it and be able to deploy it to the cloud environment.
 
 <br>
 
@@ -174,17 +177,17 @@ There are of course a few things I think could be done to make the app better.
 
 - It may be useful to add a download option as mentioned previously, but for demonstration purpose, I'm leaving it as a "View" only for now, unless I get comments from readers that they'd like to try this. For localhost version, the saving image function should work and the files will be saved into the working directory.
 
-- It may be even better to use SMARTS[^6] or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried my own app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
+- It may be even better to use SMARTS[^5] or SMILES for highlighting compound substructures actually (atom and bond numbering can be a bit tricky, I've tried the app myself, and it might not be as straight forward). I'm using atom indices here since I'm using a specific code in RDKit, but perhaps more experienced users for RDKit will know how to make code alterations etc.
 
-- The app layout could be further optimised for aesthetics sake e.g. interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.
+- The app layout could be further optimised for aesthetics e.g. interactive data table could be placed at a different location, and potentially the data table could contain other data such as compound bioassay results to really fit in the structure-activity relationship exploring task.
 
-[^6]: SMiles ARbitrary Target Specification
+[^5]: SMILES arbitrary target specification
 
 <br>
 
 ##### **Final words**
 
-The whole idea behind this side project was to show that interested users could use this web app framework to build an interactive app by using their own data. Other useful web app frameworks are also available out there and could potentially be more or equally useful as this one (I'm simply trying to test Python for Shiny out since it's relatively new when comparing to others). In a drug discovery and development setting, this could be useful to make non-coding members to understand where the computer side was trying to do, and to possibly assist them during their lab workflows, hoping to add some convenience at least.
+The whole idea behind this side project was to show that interested users could use this web app framework to build an interactive app by using their own data. Other useful web app frameworks are also available out there and could potentially be more or equally useful as this one (I'm simply testing out Python for Shiny here since it's relatively new). In a drug discovery and development setting, this could be useful to make non-coding members understand where the computer side was trying to do, and to possibly assist them during their lab workflows, hoping to add some convenience at least.
 
 <br>
 

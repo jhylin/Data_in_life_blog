@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-08-08">
+<meta name="dcterms.date" content="2023-08-10">
 
 <title>Home - Molecular visualisation (Molviz) web application</title>
 <style>
@@ -228,7 +228,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 8, 2023</p>
+        <p class="date">August 10, 2023</p>
       </div>
     </div>
     
@@ -249,7 +249,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#interactive-data-table" id="toc-interactive-data-table" class="nav-link" data-scroll-target="#interactive-data-table"><strong>Interactive data table</strong></a></li>
   <li><a href="#options-for-app-deployment" id="toc-options-for-app-deployment" class="nav-link" data-scroll-target="#options-for-app-deployment"><strong>Options for app deployment</strong></a></li>
   <li><a href="#next-post" id="toc-next-post" class="nav-link" data-scroll-target="#next-post"><strong>Next post</strong></a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -262,8 +261,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="introduction" class="level5">
 <h5 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h5>
 <p>This time I’m trying to build a web application in the hope to contribute my two cents towards minimising the gap between computational and laboratory sides in a drug discovery (or chemistry-related work) setting. There are definitely many other useful web applications available out there for similar uses, but I guess each one has its own uniqueness and special features.</p>
-<p>For this app, it is mostly aimed at lab chemists who do not use any computer programming code at all in their work, and would like to quickly view compounds in the lab while working, and also to be able to highlight compound substructures during discussions or brainstorming for ideas during compound synthesis. Importantly, this app can exist outside a Jupyter notebook environment with only internet required at this stage.</p>
-<p>This is also the first part prior to the next post which will showcase the actual app. This part mainly involves some data cleaning but not as a major focus of this post - this is not to say that data cleaning is not important, but instead they are fundamental to any work involving data to ensure reasonable data quality, which potentially can influence decisions and results. I have also collapsed the code sections below to make the post easier to read, please click on the “Code” links to see code details.</p>
+<p>For this app, it is mostly aimed at lab chemists who do not use any computer programming code at all in their work, and would like to quickly view compounds in the lab while working, and also to be able to highlight compound substructures during discussions or brainstorming for ideas during compound synthesis. Importantly, this app can exist outside a Jupyter notebook environment with internet required to access the app.</p>
+<p>This is also the first part prior to the next post which will showcase the actual app. This part mainly involves some data cleaning but not as a major focus for this post. This is not to say that data cleaning is not important, but instead they are fundamental to any work involving data in order to ensure reasonable data quality, which can then potentially influence decisions or results. I have also collapsed the code sections below to make the post easier to read, to access code used for each section, click on the “Code” links.</p>
 <p><br></p>
 </section>
 <section id="code-and-explanations" class="level5">
@@ -414,7 +413,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="20">
 
 <style>.itables table td {
     text-overflow: ellipsis;
@@ -439,7 +438,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 }
 </style>
 <div class="itables">
-<table id="3b80a1e3-d919-4ca6-9fed-de75cc446707" class="display nowrap" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom"><thead>
+<table id="ac9217cb-f925-4c38-bfb3-b72972ffef48" class="display nowrap" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom"><thead>
     <tr style="text-align: right;">
       
       <th>index</th>
@@ -465,7 +464,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
                 dt_args["data"] = data;
 
                 
-                $('#3b80a1e3-d919-4ca6-9fed-de75cc446707').DataTable(dt_args);
+                $('#ac9217cb-f925-4c38-bfb3-b72972ffef48').DataTable(dt_args);
             });
         })
     }
@@ -489,11 +488,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="next-post" class="level5">
 <h5 class="anchored" data-anchor-id="next-post"><strong>Next post</strong></h5>
 <p>Code and explanations for the actual Molviz app will be detailed in the next post. To access full code and files used for now, please visit this <a href="https://github.com/jhylin/Molviz_app">repository link</a>.</p>
-<p><br></p>
-</section>
-<section id="acknowledgements" class="level5">
-<h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
-<p>As always, I’d like to thank all of the authors of RDKit, Datamol, itables, Pandas and Polars, without them, I don’t think I can build this app out of the blue.</p>
 
 
 </section>
