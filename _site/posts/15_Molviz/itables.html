@@ -262,13 +262,13 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h5>
 <p>This time I’m trying to build a web application in the hope to contribute my two cents towards minimising the gap between computational and laboratory sides in a drug discovery (or chemistry-related work) setting. There are definitely many other useful web applications available out there for similar uses, but I guess each one has its own uniqueness and special features.</p>
 <p>For this app, it is mostly aimed at lab chemists who do not use any computer programming code at all in their work, and would like to quickly view compounds in the lab while working, and also to be able to highlight compound substructures during discussions or brainstorming for ideas during compound synthesis. Importantly, this app can exist outside a Jupyter notebook environment with internet required to access the app.</p>
-<p>This is also the first part prior to the next post which will showcase the actual app. This part mainly involves some data cleaning but not as a major focus for this post. This is not to say that data cleaning is not important, but instead they are fundamental to any work involving data in order to ensure reasonable data quality, which can then potentially influence decisions or results. I have also collapsed the code sections below to make the post easier to read, to access code used for each section, click on the “Code” links.</p>
+<p>This is also the first part prior to the next post which will showcase the actual app. This part mainly involves some data cleaning but not as a major focus for this post. This is not to say that data cleaning is not important, but instead they are fundamental to any work involving data in order to ensure reasonable data quality, which can then potentially influence decisions or results. I have also collapsed the code sections below to make the post easier to read (to access code used for each section, click on the “Code” links).</p>
 <p><br></p>
 </section>
 <section id="code-and-explanations" class="level5">
 <h5 class="anchored" data-anchor-id="code-and-explanations"><strong>Code and explanations</strong></h5>
-<p>It was actually surprisingly simple for this first part when I did it - building the interactive table. I came across this on LinkedIn on a random day for a post about itables being integrated with Shiny for Python plus Quarto. It came at the right timing because I was actually trying to build this app. I quickly thought about integrating it with the rest of the app so that users could refer back to the data quickly while visualising compound images. The code and explanations on building an interactive table for dataframes in Pandas and Polars were provided below.</p>
-<p>To install itables, visit <a href="https://mwouts.github.io/itables/quick_start.html">here</a> for instructions and also other useful information about its supported notebook editors.</p>
+<p>It was actually surprisingly simple for this first part when I did it - building the interactive table. I came across this on LinkedIn on a random day for a post about itables being integrated with Shiny for Python plus Quarto. It came at the right time because I was actually trying to build this app. I quickly thought about incorporating it with the rest of the app so that users could refer back to the data quickly while visualising compound images. The code and explanations on building an interactive table for dataframes in Pandas and Polars were provided below.</p>
+<p>To install itables, visit <a href="https://mwouts.github.io/itables/quick_start.html">here</a> for instructions and also for other information about supported notebook editors.</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -413,7 +413,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>.itables table td {
     text-overflow: ellipsis;
@@ -438,7 +438,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 }
 </style>
 <div class="itables">
-<table id="ac9217cb-f925-4c38-bfb3-b72972ffef48" class="display nowrap" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom"><thead>
+<table id="77609d0b-7679-4660-94fb-d6a776c22a13" class="display nowrap" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom"><thead>
     <tr style="text-align: right;">
       
       <th>index</th>
@@ -464,7 +464,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
                 dt_args["data"] = data;
 
                 
-                $('#ac9217cb-f925-4c38-bfb3-b72972ffef48').DataTable(dt_args);
+                $('#77609d0b-7679-4660-94fb-d6a776c22a13').DataTable(dt_args);
             });
         })
     }
