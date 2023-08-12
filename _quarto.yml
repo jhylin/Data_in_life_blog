@@ -10,16 +10,14 @@ website:
   navbar:
     right:
       - about.qmd
-      - text: Portfolio
-        href: https://www.datascienceportfol.io/jhylin
-      - text: CV
-        href: https://jhylin.github.io/CV_resume_quarto/
       - icon: github
         href: https://github.com/jhylin
       - icon: mastodon
         href: https://fosstodon.org/@jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
+      - text: CV
+        href: https://jhylin.github.io/CV_resume_quarto/
       - icon: rss
         href: index.xml
   repo-url: https://github.com/jhylin/Data_in_life_blog

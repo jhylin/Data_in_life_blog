@@ -17,7 +17,7 @@ comments: false
 
 **🌟Welcome🌟**
 
-As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. I'm currently working on an interactive molecular visualisation web application, built using RDKit, Datamol and Shiny for Python - hopefully more to follow in August at the latest.
+As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. Currently, I'm on a break and brainstorming at the same time...
 
 <br>
 
