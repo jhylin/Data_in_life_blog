@@ -85,8 +85,10 @@ Now, since this dataset was downloaded as a .csv file, this meant it was likely 
 
 ```{python}
 # By referring to Polars documentation, 
-# use "sep" to set the delimiter of the file
+# *use "sep" to set the delimiter of the file
 # which was semicolons in this case
+# *please note this has been updated to "separator" 
+# due to updates in Polars since the published date of this post
 df = pl.read_csv("chembl_mols.csv", separator = ";")
 # Show the first 10 rows of data
 #df.head(10)
