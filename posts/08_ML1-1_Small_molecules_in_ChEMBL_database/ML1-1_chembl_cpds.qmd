@@ -153,7 +153,10 @@ From the df.glimpse() method previously, there were a lot of columns with the da
 # so needed to use [] in code to allow more than two
 
 # Multiple columns all at once - with_columns()
-# Single column - with_column()
+# *Single column - with_column() 
+# *this only worked at the time of writing the post (around published date), 
+# this is not going to work currently as Polars has been updated, 
+# please use with_columns() for single or multiple columns instead*
 
 # Use alias if wanting to keep original data type in column, 
 # as it adds a new column under an alias name to dataframe
