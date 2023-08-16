@@ -1,6 +1,6 @@
 ---
 title: Small molecules in ChEMBL database
-subtitle: Polars dataframe library and machine learning in *scikit-learn*
+subtitle: Series 1.1 - Polars dataframe library and machine learning in *scikit-learn*
 author: Jennifer HY Lin
 date: '2023-1-4'
 draft: false
@@ -15,7 +15,11 @@ categories:
 jupyter: python3
 ---
 
-##### ***Machine learning in drug discovery - series 1-1***
+##### ***Machine learning in drug discovery - series 1.1***
+
+*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions*
+
+*Some of the code involving Polars dataframe library has been updated on 16th August 2023 due to updates to the package - please always refer to Polars API reference documentations for most up-to-date code*
 
 <br>
 

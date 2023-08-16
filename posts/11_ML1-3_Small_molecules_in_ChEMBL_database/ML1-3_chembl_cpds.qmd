@@ -1,6 +1,6 @@
 ---
 title: Small molecules in ChEMBL database 
-subtitle: Re-training & re-evaluation with *scikit-learn* 
+subtitle: Series 1.3 - Re-training & re-evaluation with *scikit-learn*
 author: Jennifer HY Lin
 date: '2023-3-17'
 draft: false
@@ -13,19 +13,21 @@ categories:
 jupyter: python3
 ---
 
-##### ***Machine learning in drug discovery - series 3***
+##### ***Machine learning in drug discovery - series 1.3***
+
+*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions*
 
 <br>
 
-##### **Review of ML series 2 & introduction of series 3**
+##### **Review of ML series 1.2 & introduction of series 1.3**
 
-Without making this final post for logistic regression ML series for small molecules in ChEMBL database too long, I'll quickly explain what happened in the ML series 1 and 2. Basically, I've trialled a logistic regression model on a small set of ChEMBL database-extracted small molecule data. The whole purpose was for me to go through the ML series flowchart that I've compiled in ML series 2. Currently, this post was ML series 3 focusing on re-training the model by using the newly-found parameters to optimise the original model after running the cross-validation and hyper-parameter tuning in ML series 2.
+Without making this final post for logistic regression ML series for small molecules in ChEMBL database too long, I'll quickly explain what happened in the ML series 1.1 and 1.2. Basically, I've trialled a logistic regression model on a small set of ChEMBL database-extracted small molecule data. The whole purpose was for me to go through the ML series flowchart that I've compiled in ML series 1.2. Currently, this post was ML series 1.3 focusing on re-training the model by using the newly-found parameters to optimise the original model after running the cross-validation and hyper-parameter tuning in ML series 1.2.
 
 <br>
 
-##### **Import dataframe from ML series 1**
+##### **Import dataframe from ML series 1.1**
 
-Using Pandas again to import the same set of data used in ML series 1 and 2.
+Using Pandas again to import the same set of data used in ML series 1.1 and 1.2.
 
 ```{python}
 import pandas as pd
@@ -82,7 +84,7 @@ import matplotlib.pyplot as plt
 
 ##### **Logistic regression**
 
-Here I've defined the X and y variables again and kept them the same as the ones used in ML series 1 and 2.
+Here I've defined the X and y variables again and kept them the same as the ones used in ML series 1.1 and 1.2.
 
 <br>
 
@@ -140,7 +142,7 @@ from sklearn.linear_model import LogisticRegressionCV
 
 # Change to LogisticRegressionCV() - LR with built-in cross validation
 # Create an instance of logistic regression CV classifier and fit the data
-# Add in tuned parameters from ML series 2
+# Add in tuned parameters from ML series 1.2
 LogR = LogisticRegressionCV(Cs = 50).fit(X_train, y_train)
 LogR
 ```
@@ -185,7 +187,7 @@ from sklearn.metrics import accuracy_score
 accuracy_score(y_mp, y_test)
 ```
 
-There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameters from ML series 2, when compared with the LogR model made initially in ML series 1, which had an accuracy score of 0.6992084432717678.
+There were about 0.26% increase in accuracy score when using the LogR model with the tuned parameters from ML series 1.2, when compared with the LogR model made initially in ML series 1.1, which had an accuracy score of 0.6992084432717678.
 
 <br>
 
@@ -284,9 +286,9 @@ log_loss(y_test, y_mp_proba)
 
 #### **Discussions and conclusion**
 
-Without any surprises, the re-trained model did not provide a huge difference from the initial one, which was already expected in ML series 2. However, the purpose of tuning the parameters to reach a more optimised model was still achieved in a very small way, where there was a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. The confusion matrix showed a small improvement, with 114 predictions that were false positive and false negatives in the original model and 113 predictions for the same categories in the current model. The classification report basically had very minute change, with only the recall value going up from 0.69 in the old model to 0.70 in the current model in class label zero. Overall, this was not significant enough, given the goal was to improve the model. However, as a learning exercise I think I've learnt something along the way, and hopefully I'll use it to show a much more significant improvement in other future ML scenarios.
+Without any surprises, the re-trained model did not provide a huge difference from the initial one, which was already expected in ML series 1.2. However, the purpose of tuning the parameters to reach a more optimised model was still achieved in a very small way, where there was a less than 1% increase in accuracy score and an even smaller increase in log loss value for the re-trained model. The confusion matrix showed a small improvement, with 114 predictions that were false positive and false negatives in the original model and 113 predictions for the same categories in the current model. The classification report basically had very minute change, with only the recall value going up from 0.69 in the old model to 0.70 in the current model in class label zero. Overall, this was not significant enough, given the goal was to improve the model. However, as a learning exercise I think I've learnt something along the way, and hopefully I'll use it to show a much more significant improvement in other future ML scenarios.
 
-One of the other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of rule-of-5 violations, QED weighted scores, CX LogP, CX LogD and the number of heavy atoms for small molecules used in ML series 1 to 3 might, in fact, not be the best set of features to be used at all. They were mainly randomly chosen, without much thoughts placed into it, however I tried to use QED weighted score as it incorporated several renowned physicochemical factors for small molcules in general, but on the other hand, I could not prove that QED weighted was not biased at all, so some considerations should also be given to this aspect, perhaps more features could be included or changed to see the effect on the model during model evaluation phase. I could also use other types of ML approaches to build the model, which might produce a better prediction model to predict the max phases of small molecules.
+One of the other things I could try next, if I were to use the same set of dataset, was to change the features used to train the model. Max phase, number of rule-of-5 violations, QED weighted scores, CX LogP, CX LogD and the number of heavy atoms for small molecules used in ML series 1.1 to 1.3 might, in fact, not be the best set of features to be used at all. They were mainly randomly chosen, without much thoughts placed into it, however I tried to use QED weighted score as it incorporated several renowned physicochemical factors for small molcules in general, but on the other hand, I could not prove that QED weighted was not biased at all, so some considerations should also be given to this aspect, perhaps more features could be included or changed to see the effect on the model during model evaluation phase. I could also use other types of ML approaches to build the model, which might produce a better prediction model to predict the max phases of small molecules.
 
 <br>
 
