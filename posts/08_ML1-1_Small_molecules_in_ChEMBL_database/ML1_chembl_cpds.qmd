@@ -15,7 +15,7 @@ categories:
 jupyter: python3
 ---
 
-##### ***Machine learning in drug discovery - series 1***
+##### ***Machine learning in drug discovery - series 1-1***
 
 <br>
 
@@ -83,7 +83,7 @@ Now, since this dataset was downloaded as a .csv file, this meant it was likely 
 # By referring to Polars documentation, 
 # use "sep" to set the delimiter of the file
 # which was semicolons in this case
-df = pl.read_csv("chembl_mols.csv", sep = ";")
+df = pl.read_csv("chembl_mols.csv", separator = ";")
 # Show the first 10 rows of data
 #df.head(10)
 # or full dataset
@@ -304,14 +304,14 @@ df_4_f
 Then I changed the data type of "Max_Phase" from float to integer, so that the two different dataframes could be concatenated (which would only work if both were of same data types).
 
 ```{python}
-df_4_f = df_4_f.with_column((pl.col("Max_Phase")).cast(pl.Int64, strict = False))
+df_4_f = df_4_f.with_columns((pl.col("Max_Phase")).cast(pl.Int64, strict = False))
 df_4_f
 ```
 
 Also I've created a new column with the same name of "Max_Phase" for Max phase 0 small molecules, so that the two dataframes could be combined (also needed to have exactly the same column names for it to work).
 
 ```{python}
-df_s_0_f = df_s_0.with_column((pl.col("Max Phase")).alias("Max_Phase"))
+df_s_0_f = df_s_0.with_columns((pl.col("Max Phase")).alias("Max_Phase"))
 df_s_0_f
 ```
 

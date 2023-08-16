@@ -268,7 +268,7 @@ So it appeared that changing cv parameter could affect Cs and l1_ratios values a
 
 -   ***solvers*** - algorithms used in classifiers
 
--   ***penalties (or regularisation)***  - aims to reduce model generalisation errors and regulate or prevent overfitting
+-   ***penalties (or regularisation)*** - aims to reduce model generalisation errors and regulate or prevent overfitting
 
 -   ***C*** - controls regularisation or penalty strengths (which would be already taken care of in this case if using LogisticRegressionCV classifier).
 
