@@ -369,7 +369,7 @@ df_ml.dtypes
 ```
 
 ``` {{python}}
-# Note: exported df_ml dataframe as csv file for ML series 2.
+# Note: exported df_ml dataframe as csv file for ML series 1.2.
 df_ml.write_csv("df_ml.csv", sep = ",")
 ```
 
@@ -464,7 +464,7 @@ y[0:5]
 # Random number generator
 #rng = np.random.RandomState(0) - note: this may produce different result each time
 
-# Edited post to use random_state = 250 to show comparison with ML series 2
+# Edited post to use random_state = 250 to show comparison with ML series 1.2
 # for reproducible result
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 250)
 print('Training set:', X_train.shape, y_train.shape)
