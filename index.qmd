@@ -17,7 +17,7 @@ comments: false
 
 **🌟Welcome🌟**
 
-As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. Currently, I'm on a break and brainstorming at the same time...
+As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics or data science projects in drug discovery themes as my interests grow more and more in this area. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed afterward. I'm still on a semi-break this week, and I think the next project will be a machine learning one, which is series 2 (took me a while to re-number my previous ML posts...). This may be a bigger one so hopefully in September or October.
 
 <br>
 
