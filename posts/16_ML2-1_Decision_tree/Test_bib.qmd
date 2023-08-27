@@ -1,0 +1,5 @@
+---
+bibliography: references.bib
+---
+
+This is a test only - inserting a citation [@vantilborg2022].
