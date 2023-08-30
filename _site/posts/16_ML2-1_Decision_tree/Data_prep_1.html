@@ -83,6 +83,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -198,8 +217,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Tree models in ChEMBL data</h1>
-            <p class="subtitle lead">ML series 2.1 - Decision tree - Data pre-processing 1 of 2</p>
-                      </div>
+            <p class="subtitle lead">ML series 2.1 - decision tree - data pre-processing (part 1)</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Pandas</div>
+                <div class="quarto-category">ChEMBL database</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -245,13 +268,13 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="introduction" class="level4">
 <h4 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h4>
 <p>I’ve now come to a stage to do some more in-depth machine learning work after reading some peer-reviewed papers about it in relation to drug discovery and cheminformatics. Previously, I’ve only lightly touched on a commonly used classifier algorithm, logistic regression, as the first series in the machine learning realm. Reflecting back, I think I could’ve done a more thorough job during the data preparation stage. So this would be attempted this time.</p>
-<p>From a few of the papers I’ve read so far, dated in the recent years of 2021 and 2022, it seemed that traditional machine learning (ML) methods were still indispensible performance-wise, and when used in combination with deep learning neural networks, they tend to increase prediction accuracy more. I haven’t ventured into the practicality and usefulness of large language models in drug discovery yet. However, from the comments from experienced seniors in this area, they were still very much novel and hence not as useful yet, and from what I could imagine, molecular representations in texts or strings probably had already created many headaches e.g.&nbsp;molecular standardisations regarding to whether to use canonical SMILES and/or SELFIES or not, and other areas such as chiralities and aromaticities and so on. Because of this, I’d be sticking with learning to walk first in the conventional ML area before trying to run in other more in-depth areas (more likely to happen in the future).</p>
-<p>The data preparation used here was carried out with strong reference to the materials and methods section in this paper: van Tilborg, D. <em>et al</em>. J. Chem. Inf. Model. 2022, 62, 5938-5951. There were probably other methods out there, but this was the paper I’ve read recently that had made sense and relatively easy to follow.</p>
+<p>From a few of the papers I’ve read so far, dated in the recent years of 2021 and 2022, it seemed that traditional machine learning (ML) methods were still indispensible performance-wise, and when used in combination with deep learning neural networks, they tend to increase prediction accuracy more in the drug discovery field. I haven’t ventured into the practicality and usefulness of large language models in drug discovery yet. However, comments from experienced seniors in this area did mention that they were still very much novel and hence not as useful yet, and from what I could imagine, molecular representations in texts or strings probably had already created many headaches e.g.&nbsp;molecular standardisations in regard to whether to use canonical SMILES and SELFIES or not, and other areas such as chiralities and aromaticities etc. Because of this, I’m sticking with learning to walk first in the conventional ML area before trying to run in the more in-depth areas such as deep learning (coming up in the future).</p>
+<p>The data preparation used here was carried out with strong reference to the materials and methods section in this paper <span class="citation" data-cites="vantilborg2022">(<a href="#ref-vantilborg2022" role="doc-biblioref">Tilborg, Alenicheva, and Grisoni 2022</a>)</span>. There were probably other methods out there, but this was the paper I’ve read recently that had made sense and relatively easy to follow.</p>
 <p><br></p>
 </section>
 <section id="data-retrieval" class="level4">
 <h4 class="anchored" data-anchor-id="data-retrieval"><strong>Data retrieval</strong></h4>
-<p>This time I’ve decided to try something new which was to use the ChEMBL webresource client to collect data (i.e.&nbsp;not from direct file downloads from the ChEMBL website). I found this great online resource about fetching data this way from the TeachOpenCADD talktorial on <a href="https://projects.volkamerlab.org/teachopencadd/talktorials/T001_query_chembl.html">compound data acquisition</a>. The data retrieval workflow used below was mainly adapted from this talktorial, with a few changes or additions to suit the dataset used for this post.</p>
+<p>This time I decided to try something new which was to use the ChEMBL webresource client to collect data (i.e.&nbsp;not from direct file downloads from the ChEMBL website). I found this great online resource about fetching data this way from the TeachOpenCADD talktorial on <a href="https://projects.volkamerlab.org/teachopencadd/talktorials/T001_query_chembl.html">compound data acquisition</a>. The data retrieval workflow used below was mainly adapted from this talktorial, with a few changes or additions to suit the dataset used for this post.</p>
 <p>The webresource client was supported by the ChEMBL group and was based on a Django QuerySet interface. Their <a href="https://github.com/chembl/chembl_webresource_client">GitHub repository</a> might explain a bit more about it, particularly the Jupyter notebook link provided within the repository would help a lot regarding how to write code to search for specific data.</p>
 <p>To do this, a few libraries needed to be loaded first.</p>
 <div class="cell" data-execution_count="1">
@@ -259,15 +282,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch data through ChEMBL webresource client</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> chembl_webresource_client.new_client <span class="im">import</span> new_client</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RDKit modules</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#from rdkit.Chem import PandasTools</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe library</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe library</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#import numpy as np</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Progress bar</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Progress bar</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To see what types of data were provided by ChEMBL webresource client, run the following code and refer to ChEMBL documentations to find out what data were embedded inside different data categories. Sometimes, it might not be that straight forward and some digging would be required (I went back to this step below to find the “data_validity_comment” when I was trying to do some compound sanitisations actually).</p>
 <div class="cell" data-execution_count="2">
@@ -291,14 +310,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>Checked object type for one of these API objects (e.g.&nbsp;bioactivity API object).</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(bioact_api)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="130">
 <pre><code>chembl_webresource_client.query_set.QuerySet</code></pre>
 </div>
 </div>
 <p><br></p>
 <section id="fetching-target-data" class="level5">
 <h5 class="anchored" data-anchor-id="fetching-target-data"><strong>Fetching target data</strong></h5>
-<p>Selected a protein target e.g.&nbsp;acetylcholinesterase (this was randomly chosen).</p>
+<p>A protein target e.g.&nbsp;acetylcholinesterase was randomly chosen by using <a href="https://www.uniprot.org/">UniProt</a> to look up the protein UniProt ID.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify Uniprot ID for acetylcholinesterase</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>uniprot_id <span class="op">=</span> <span class="st">"P22303"</span></span>
@@ -312,12 +331,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target_type"</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The query results were stored in a “targets” object, which was a QuerySet with lazy data evaluation only, meaning it would only react when there was a request for the data.</p>
+<p>The query results were stored in a “targets” object, which was a QuerySet with lazy data evaluation only, meaning it would only react when there was a request for the data. Therefore, to see the results, the “targets” object was then read through Pandas DataFrame.</p>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read "targets" with Pandas</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> pd.DataFrame.from_records(targets)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>targets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="132">
 
 <div>
 
@@ -358,12 +377,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Select protein target from this dataframe - choosing the first one.</p>
+<p>Selected the first protein target from this dataframe.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the first protein in the dataframe</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>select_target <span class="op">=</span> targets.iloc[<span class="dv">0</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>select_target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="133">
 <pre><code>organism                    Homo sapiens
 pref_name           Acetylcholinesterase
 target_chembl_id               CHEMBL220
@@ -371,7 +390,7 @@ target_type               SINGLE PROTEIN
 Name: 0, dtype: object</code></pre>
 </div>
 </div>
-<p>Save the selected ChEMBL ID first (to be used later).</p>
+<p>Then saved the selected ChEMBL ID for the first protein (to be used later).</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>chembl_id <span class="op">=</span> select_target.target_chembl_id</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check it's saved</span></span>
@@ -423,7 +442,7 @@ Name: 0, dtype: object</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>14 &lt;class 'dict'&gt;</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="136">
 <pre><code>{'activity_id': 33969,
  'assay_chembl_id': 'CHEMBL643384',
  'assay_description': 'Inhibitory concentration against acetylcholinesterase',
@@ -445,7 +464,7 @@ Name: 0, dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> pd.DataFrame.from_dict(bioact)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="137">
 
 <div>
 
@@ -560,20 +579,20 @@ Name: 0, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<p>Check total rows and columns in the bioactivities dataframe.</p>
+<p>Checked total rows and columns in the bioactivities dataframe.</p>
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="138">
 <pre><code>(6129, 14)</code></pre>
 </div>
 </div>
 <p><br></p>
 <section id="pre-process-bioactivity-data" class="level6">
 <h6 class="anchored" data-anchor-id="pre-process-bioactivity-data"><strong>Pre-process bioactivity data</strong></h6>
-<p>To see a variety of units being recorded in the ChEMBL database - would need to be converted to nM.</p>
+<p>To see a variety of units being recorded in the ChEMBL database, which meant they would need to be converted to nanomolar (nM).</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="139">
 <pre><code>array(['uM', 'mM', 'nM', 'M', 'ug ml-1', 'pM', "10'-5M", "10'-3M",
        "10'-2M", "10'-4M", "10'-7M", "10'-9M", "10'-6M", "10'-8M",
        "10'-3microM", "10'-4microM", 'uM/L', "10'-10M", 'umol', 'umol/L',
@@ -581,12 +600,12 @@ Name: 0, dtype: object</code></pre>
        '10^-3microM', '10^-4microM', 'mg/ml', 'µM'], dtype=object)</code></pre>
 </div>
 </div>
-<p>The simplest thing to do was to drop the “units” and “value” columns, which were in micromolar (<em>m</em>M), and to avoid unit conversion to nanomolar (nM), we could use columns such as “standard_units” and “standard_value” which were recorded with nM already.</p>
+<p>The simplest thing to do was to drop the “units” and “value” columns, which were in micromolar (μM), and to avoid unit conversion to nM, we could use columns such as “standard_units” and “standard_value” which were recorded with nM already.</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bioact_df.drop([<span class="st">"units"</span>, <span class="st">"value"</span>], axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-check df</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="140">
 
 <div>
 
@@ -691,7 +710,7 @@ Name: 0, dtype: object</code></pre>
 </div>
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>bioact_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="141">
 <pre><code>activity_id               int64
 assay_chembl_id          object
 assay_description        object
@@ -707,19 +726,13 @@ type                     object
 dtype: object</code></pre>
 </div>
 </div>
+<p>At this stage, I did a little detour test to see how this dataframe would be read in Polars dataframe library, particularly to see if the data types for each column might be more accurate than how it was in Pandas. After converting this Pandas dataframe into a Polars one, I realised that even Polars was reading in the “standard_value” column as “str”, which meant it would still need another conversion into “float64” anyway. Therefore, I decided to stick with Pandas all the way since there were not so much differences between the two dataframe libraries.</p>
+<p>The column of “standard_value” was converted from “object” to “float64” - so we could use this half maximal inhibitory concentration (IC50) values for calculations later.</p>
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small detour test</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Tried with Polars - standard_value casted as "str", so would still need to convert to floats</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import polars as pl</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ba_df = pl.from_pandas(bioact_df)</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ba_df.head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Convert the column of “standard_value” from object to floats - so we could use this half maximal inhibitory concentration (IC50) values for calculations later.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df.astype({<span class="st">"standard_value"</span>: <span class="st">"float64"</span>})</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check column data types again</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>bioact_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df.astype({<span class="st">"standard_value"</span>: <span class="st">"float64"</span>})</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check column data types again</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>bioact_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="142">
 <pre><code>activity_id                int64
 assay_chembl_id           object
 assay_description         object
@@ -735,67 +748,67 @@ type                      object
 dtype: object</code></pre>
 </div>
 </div>
-<p>Taking care of any missing entries by removing them in the first place. I excluded “data_validity_comment” column in this exercise as this was required to check if there were any activity data of the compounds that were deemed to be not as valid e.g.&nbsp;excessively high IC50 value and so on. A lot of the compounds in this column probably had “None”, which ensured that there were no particular alarm bells to the curated bioactivity data.</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bioact_df.dropna(subset <span class="op">=</span> [<span class="st">"activity_id"</span>, <span class="st">"assay_chembl_id"</span>, <span class="st">"assay_description"</span>, <span class="st">"assay_type"</span>, <span class="st">"molecule_chembl_id"</span>, <span class="st">"relation"</span>, <span class="st">"standard_units"</span>, <span class="st">"standard_value"</span>, <span class="st">"target_chembl_id"</span>, <span class="st">"target_organism"</span>, <span class="st">"type"</span>], axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check number of rows and columns again (in this case, there appeared to be no change)</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<p>Then the next step was taking care of any missing entries by removing them in the first place. I excluded “data_validity_comment” column here as this was required to check if there were any activity data that were deemed to be not as valid e.g.&nbsp;excessively high IC50 value and so on. A lot of the compounds in this column probably had “None”, which ensured that there were no particular alarm bells to the curated bioactivity data.</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bioact_df.dropna(subset <span class="op">=</span> [<span class="st">"activity_id"</span>, <span class="st">"assay_chembl_id"</span>, <span class="st">"assay_description"</span>, <span class="st">"assay_type"</span>, <span class="st">"molecule_chembl_id"</span>, <span class="st">"relation"</span>, <span class="st">"standard_units"</span>, <span class="st">"standard_value"</span>, <span class="st">"target_chembl_id"</span>, <span class="st">"target_organism"</span>, <span class="st">"type"</span>], axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check number of rows and columns again (in this case, there appeared to be no change for rows)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="143">
 <pre><code>(6129, 12)</code></pre>
 </div>
 </div>
 <p>Since all unique units inside the “units” and “values” columns were checked previously, I’d done the same for the “standard_units” column to see the ones recorded in it.</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="144">
 <pre><code>array(['nM', 'ug.mL-1', "10'3pM", "10'6pM", "10'5pM", '10^-4microM', 'µM'],
       dtype=object)</code></pre>
 </div>
 </div>
-<p>There were a mixture of nM, mM and also picomolars (pM)!</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for number of non-nM units</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">!=</span> <span class="st">"nM"</span>].shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<p>There were a mixture of nM, μM and also picomolars (pM)!</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for number of non-nM units</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">!=</span> <span class="st">"nM"</span>].shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="145">
 <pre><code>30</code></pre>
 </div>
 </div>
 <p>There appeared to be 30 non-nM values inside the fetched bioactivity data.</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">==</span> <span class="st">"nM"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">==</span> <span class="st">"nM"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then narrow the results to only “nM” and check the dataframe again to see what units were left now.</p>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check there were only nM</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<p>I then narrowed the results to only “nM” and checked the dataframe again to see what units were left now.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check there were only nM</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="147">
 <pre><code>array(['nM'], dtype=object)</code></pre>
 </div>
 </div>
-<p>So the filtering worked and currently the number of rows and columns had been reduced.</p>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df rows &amp; columns</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<p>So the filtering worked and the number of rows and columns were reduced.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df rows &amp; columns</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="148">
 <pre><code>(6099, 12)</code></pre>
 </div>
 </div>
-<p>Next part would be to remove all duplicates in the dataframe, especially when there were duplicate tests for the same compound.</p>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>bioact_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next part would be to remove all the duplicates in the dataframe, especially when there were duplicate tests for the same compound.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>bioact_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Renamed the “standard_value” and “standard_units” columns to be “IC50” and “units” respectively.</p>
-<div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>bioact_df.rename(</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> {</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_value"</span>: <span class="st">"IC50"</span>,</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_units"</span>: <span class="st">"units"</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    }, inplace <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df to ensure name change</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<p>Renamed the “standard_value” and “standard_units” columns to “IC50” and “units” respectively.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>bioact_df.rename(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_value"</span>: <span class="st">"IC50"</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_units"</span>: <span class="st">"units"</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    }, inplace <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df to ensure name change</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="150">
 
 <div>
 
@@ -899,10 +912,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Lastly, the index of the dataframe was reset.</p>
-<div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bioact_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>bioact_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="151">
 
 <div>
 
@@ -1006,9 +1019,9 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>One final check on the number of columns and rows after pre-processing the bioactivity dataframe.</p>
-<div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="152">
 <pre><code>(5041, 12)</code></pre>
 </div>
 </div>
@@ -1020,29 +1033,35 @@ dtype: object</code></pre>
 <h5 class="anchored" data-anchor-id="fetching-compound-data"><strong>Fetching compound data</strong></h5>
 <p>While having identified the protein target and obtained the bioactivity data, this step was to link the bioactivity data to the compounds.</p>
 <p>This could be done by having the ChEMBL IDs available for the compounds involved in the bioactivity dataset.</p>
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cpds <span class="op">=</span> cpd_api.<span class="bu">filter</span>(</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    molecule_chembl_id__in <span class="op">=</span> <span class="bu">list</span>(bioact_df[<span class="st">"molecule_chembl_id"</span>])</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>).only(</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_chembl_id"</span>,</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_structures"</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>cpds <span class="op">=</span> cpd_api.<span class="bu">filter</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    molecule_chembl_id__in <span class="op">=</span> <span class="bu">list</span>(bioact_df[<span class="st">"molecule_chembl_id"</span>])</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>).only(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_chembl_id"</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_structures"</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, the same step was applied where the compound QuerySet object was converted into a Pandas dataframe. However, the dataset extracted this time could take longer than the time taken to fetch the bioactivity data. This was then monitored using a progress bar (tqdm package).</p>
-<div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compds = list(tqdm(cpds))</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>compds <span class="op">=</span> <span class="bu">list</span>(cpds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment line below to use progress bar</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># when running in ipynb or qmd files</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#compds = list(tqdm(cpds))</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Code below was the same as above, </span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># except without the progress bar</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - for published version (images of progress bar taking too much space)</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>compds <span class="op">=</span> <span class="bu">list</span>(cpds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Converting retrieved compound QuerySet into a Pandas DataFrame.</p>
-<div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cpds_df <span class="op">=</span> pd.DataFrame.from_records(compds)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cpds_df <span class="op">=</span> pd.DataFrame.from_records(compds)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5041, 2)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="155">
 
 <div>
 
@@ -1089,54 +1108,54 @@ dtype: object</code></pre>
 <section id="pre-process-compound-data" class="level6">
 <h6 class="anchored" data-anchor-id="pre-process-compound-data"><strong>Pre-process compound data</strong></h6>
 <p>Removing any missing entries in the compound data.</p>
-<div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows in df</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows in df</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="156">
 <pre><code>(5040, 2)</code></pre>
 </div>
 </div>
 <p>Removing any duplicates in the compound data.</p>
-<div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows again</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows again</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="157">
 <pre><code>(5040, 2)</code></pre>
 </div>
 </div>
 <p>Ideally, only the compounds with canonical SMILES would be kept. Checking for the types of molecular representations used in the “molecule_structures” column of the compound dataset.</p>
-<div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly choosing the 2nd entry</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>cpds_df.iloc[<span class="dv">1</span>].molecule_structures.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly choosing the 2nd entry</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>cpds_df.iloc[<span class="dv">1</span>].molecule_structures.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="158">
 <pre><code>dict_keys(['canonical_smiles', 'molfile', 'standard_inchi', 'standard_inchi_key'])</code></pre>
 </div>
 </div>
 <p>There were 4 types as: “canonical_smiles”, “molfile”, “standard_inchi” and “standard_inchi_key”.</p>
-<div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list to store the canonical smiles</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>can_smiles <span class="op">=</span> []</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a for loop to loop over each row of data, </span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co"># searching for only canonical_smiles to append to the created list</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, cpd <span class="kw">in</span> cpds_df.iterrows():</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(cpd[<span class="st">"molecule_structures"</span>][<span class="st">"canonical_smiles"</span>])</span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(<span class="va">None</span>)</span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new df column with name as "smiles", </span></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co"># which will store all the canonical smiles collected from the list above</span></span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>cpds_df[<span class="st">"smiles"</span>] <span class="op">=</span> can_smiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list to store the canonical smiles</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>can_smiles <span class="op">=</span> []</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a for loop to loop over each row of data, </span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># searching for only canonical_smiles to append to the created list</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, cpd <span class="kw">in</span> cpds_df.iterrows():</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(cpd[<span class="st">"molecule_structures"</span>][<span class="st">"canonical_smiles"</span>])</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(<span class="va">None</span>)</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new df column with name as "smiles", </span></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="co"># which will store all the canonical smiles collected from the list above</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>cpds_df[<span class="st">"smiles"</span>] <span class="op">=</span> can_smiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check the compound dataframe quickly to see if a new column for SMILES has been created.</p>
-<div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="160">
 
 <div>
 
@@ -1186,22 +1205,22 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Once confirmed, the old “molecule_structures” column was then removed.</p>
-<div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop(<span class="st">"molecule_structures"</span>, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop(<span class="st">"molecule_structures"</span>, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, adding another step to ensure all missing entries or entries without canonical SMILES strings were removed from the compound dataset.</p>
-<div class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5040, 2)</code></pre>
 </div>
 </div>
 <p>Final look at the compound dataset, which should only include compounds ChEMBL IDs and SMILES columns.</p>
-<div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="163">
 
 <div>
 
@@ -1251,33 +1270,33 @@ dtype: object</code></pre>
 <h5 class="anchored" data-anchor-id="combining-bioactivity-and-compound-data"><strong>Combining bioactivity and compound data</strong></h5>
 <p>To combine both datasets, the key was to look for common column (similar to a SQL “join” query) between the two datasets.</p>
 <p>Listing all the column names for both datasets would show the common column.</p>
-<div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>bioact_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>bioact_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="164">
 <pre><code>Index(['activity_id', 'assay_chembl_id', 'assay_description', 'assay_type',
        'data_validity_comment', 'molecule_chembl_id', 'relation', 'units',
        'IC50', 'target_chembl_id', 'target_organism', 'type'],
       dtype='object')</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>cpds_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>cpds_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="165">
 <pre><code>Index(['molecule_chembl_id', 'smiles'], dtype='object')</code></pre>
 </div>
 </div>
 <p>Clearly, the one column that existed in both dataframes was the “molecule_chembl_id” column.</p>
 <p>The next step was to combine or merge both datasets.</p>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a final dataframe that will contain both bioactivity and compound data</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.merge(</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    bioact_df[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"IC50"</span>, <span class="st">"units"</span>, <span class="st">"data_validity_comment"</span>]],</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    cpds_df,</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> <span class="st">"molecule_chembl_id"</span>,</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a final dataframe that will contain both bioactivity and compound data</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.merge(</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    bioact_df[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"IC50"</span>, <span class="st">"units"</span>, <span class="st">"data_validity_comment"</span>]],</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    cpds_df,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> <span class="st">"molecule_chembl_id"</span>,</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="166">
 
 <div>
 
@@ -1339,25 +1358,30 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Row indices were reset and shape of the final dataframe was checked.</p>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>dtree_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dtree_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5040, 5)</code></pre>
 </div>
 </div>
 <p>Saving a copy of the merged dataframe for now (to avoid re-running the previous code repeatedly).</p>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>dtree_df.to_csv(<span class="st">"ache_chembl.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>dtree_df.to_csv(<span class="st">"ache_chembl.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The second-half of data pre-processing will carry on in the next post.</p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-vantilborg2022" class="csl-entry" role="doc-biblioentry">
+Tilborg, Derek van, Alisa Alenicheva, and Francesca Grisoni. 2022. <span>“Exposing the Limitations of Molecular Machine Learning with Activity Cliffs.”</span> <em>Journal of Chemical Information and Modeling</em> 62 (23): 5938–51. <a href="https://doi.org/10.1021/acs.jcim.2c01073">https://doi.org/10.1021/acs.jcim.2c01073</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

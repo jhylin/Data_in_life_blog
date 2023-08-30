@@ -1,6 +1,6 @@
 ---
 title: "Tree models in ChEMBL data"
-subtitle: "ML series 2.1 - Decision tree - Data pre-processing 2 of 2"
+subtitle: "ML series 2.1 - decision tree - data pre-processing (part 2)"
 draft: true
 jupyter: python3
 format: html
