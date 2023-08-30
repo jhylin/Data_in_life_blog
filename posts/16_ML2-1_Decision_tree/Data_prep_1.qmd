@@ -1,6 +1,8 @@
 ---
 title: "Tree models in ChEMBL data"
 subtitle: "ML series 2.1 - decision tree - data pre-processing (part 1)"
+author: Jennifer HY Lin
+date: '2023-8-30'
 draft: false
 categories: 
     - Pandas
