@@ -1,0 +1,2602 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Home - Tree models in ChEMBL data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About Jennifer HY Lin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Tree models in ChEMBL data</h1>
+            <p class="subtitle lead">ML series 2.1 - Decision tree - data pre-processing and preparation</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
+  <li><a href="#data-retrieval" id="toc-data-retrieval" class="nav-link" data-scroll-target="#data-retrieval"><strong>Data retrieval</strong></a>
+  <ul>
+  <li><a href="#fetching-target-data" id="toc-fetching-target-data" class="nav-link" data-scroll-target="#fetching-target-data"><strong>Fetching target data</strong></a></li>
+  <li><a href="#fetching-bioactivity-data" id="toc-fetching-bioactivity-data" class="nav-link" data-scroll-target="#fetching-bioactivity-data"><strong>Fetching bioactivity data</strong></a>
+  <ul>
+  <li><a href="#pre-process-bioactivity-data" id="toc-pre-process-bioactivity-data" class="nav-link" data-scroll-target="#pre-process-bioactivity-data"><strong>Pre-process bioactivity data</strong></a></li>
+  </ul></li>
+  <li><a href="#fetching-compound-data" id="toc-fetching-compound-data" class="nav-link" data-scroll-target="#fetching-compound-data"><strong>Fetching compound data</strong></a>
+  <ul>
+  <li><a href="#pre-process-compound-data" id="toc-pre-process-compound-data" class="nav-link" data-scroll-target="#pre-process-compound-data"><strong>Pre-process compound data</strong></a></li>
+  </ul></li>
+  <li><a href="#combining-bioactivity-and-compound-data" id="toc-combining-bioactivity-and-compound-data" class="nav-link" data-scroll-target="#combining-bioactivity-and-compound-data"><strong>Combining bioactivity and compound data</strong></a></li>
+  <li><a href="#re-import-saved-dataframe" id="toc-re-import-saved-dataframe" class="nav-link" data-scroll-target="#re-import-saved-dataframe"><strong>Re-import saved dataframe</strong></a></li>
+  </ul></li>
+  <li><a href="#compound-sanitisation" id="toc-compound-sanitisation" class="nav-link" data-scroll-target="#compound-sanitisation"><strong>Compound sanitisation</strong></a></li>
+  <li><a href="#detect-outliers" id="toc-detect-outliers" class="nav-link" data-scroll-target="#detect-outliers"><strong>Detect outliers</strong></a></li>
+  <li><a href="#molecular-descriptors" id="toc-molecular-descriptors" class="nav-link" data-scroll-target="#molecular-descriptors"><strong>Molecular descriptors</strong></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level4">
+<h4 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h4>
+<p>I’ve now come to a stage to do some more in-depth machine learning work after reading some peer-reviewed papers about it in relation to drug discovery and cheminformatics. Previously, I’ve only lightly touched on a commonly used classifier algorithm, logistic regression, as the first series in the machine learning realm. Reflecting back, I think I could’ve done a more thorough job during data preparation stage. So this would be attempted this time.</p>
+<p>From a few of the papers I’ve read so far, dated in the recent years of 2021 and 2022, it seemed that traditional machine learning (ML) methods were still indispensible performance-wise, and along with deep learning neural networks, they tend to increase prediction accuracy a bit more. I haven’t ventured into the practicality and usefulness of large language models in drug discovery yet. From what I could gather from experienced seniors in this area, they were still very much too novel to be useful, and from what I could imagine, molecular representations in texts or strings probably had already created numerous headaches e.g.&nbsp;standardisations regarding to whether to use canonical SMILES and/or SELFIES or not, and probably compound chiralities and so on. Because of this, I’d be sticking with learning to walk first in the conventional ML area before trying to jog and run actually (plans to work on deep learning in the future).</p>
+<p>The data preparation was carried out with strong reference to the materials and methods section in this paper: van Tilborg, D. <em>et al</em>. J. Chem. Inf.Model. 2022, 62, 5938-5951. There were probably other methods out there, but this was the paper I’ve read recently that had made sense and relatively easy to follow.</p>
+<p><br></p>
+</section>
+<section id="data-retrieval" class="level4">
+<h4 class="anchored" data-anchor-id="data-retrieval"><strong>Data retrieval</strong></h4>
+<p>This time I’ve decided to try something new which was to use the ChEMBL webresource client to get data from the scratch (i.e.&nbsp;not from direct file downloads from the ChEMBL website). I found this great online resource about fetching data this way here - reference: TeachOpenCADD talktorial on [compound data acquisition(https://projects.volkamerlab.org/teachopencadd/talktorials/T001_query_chembl.html)]. The data retrieval workflow used below was mainly adapted from this cited talktorial.</p>
+<p>The webresource client was supported by ChEMBL group and based on a Django QuerySet interface - their <a href="https://github.com/chembl/chembl_webresource_client">GitHub repository</a> might explain a bit more about it, particularly the Jupyter notebook provided in the repository would help a lot for how to write code to search for specific data.</p>
+<p>To do this, a few libraries were needed first.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>upgrade pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: pip in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (23.2.1)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install chembl_webresource_client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: chembl_webresource_client in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (0.10.8)
+Requirement already satisfied: urllib3 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from chembl_webresource_client) (1.26.13)
+Requirement already satisfied: requests&gt;=2.18.4 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from chembl_webresource_client) (2.28.1)
+Requirement already satisfied: requests-cache~=0.7.0 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from chembl_webresource_client) (0.7.5)
+Requirement already satisfied: easydict in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from chembl_webresource_client) (1.10)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests&gt;=2.18.4-&gt;chembl_webresource_client) (2.1.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests&gt;=2.18.4-&gt;chembl_webresource_client) (3.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests&gt;=2.18.4-&gt;chembl_webresource_client) (2022.12.7)
+Requirement already satisfied: attrs&lt;22.0,&gt;=21.2 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests-cache~=0.7.0-&gt;chembl_webresource_client) (21.4.0)
+Requirement already satisfied: itsdangerous&gt;=2.0.1 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests-cache~=0.7.0-&gt;chembl_webresource_client) (2.1.2)
+Requirement already satisfied: pyyaml&gt;=5.4 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests-cache~=0.7.0-&gt;chembl_webresource_client) (6.0.1)
+Requirement already satisfied: url-normalize&lt;2.0,&gt;=1.4 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from requests-cache~=0.7.0-&gt;chembl_webresource_client) (1.4.3)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: six in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from url-normalize&lt;2.0,&gt;=1.4-&gt;requests-cache~=0.7.0-&gt;chembl_webresource_client) (1.16.0)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch data through ChEMBL webresource client</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> chembl_webresource_client.new_client <span class="im">import</span> new_client</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RDKit modules</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#from rdkit.Chem import PandasTools</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe library</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#import numpy as np</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Progress bar</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To see what types of data were provided by ChEMBL webresource client, run the following code and refer to ChEMBL documentations to find out what data were embedded inside which data categories. Sometimes, it might not be that straight forward and some digging would be required (I went back to this step to find the “data_validity_comment” when I got to the compound sanitisation step actually).</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>available_resources <span class="op">=</span> [resource <span class="cf">for</span> resource <span class="kw">in</span> <span class="bu">dir</span>(new_client) <span class="cf">if</span> <span class="kw">not</span> resource.startswith(<span class="st">'_'</span>)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(available_resources)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['activity', 'activity_supplementary_data_by_activity', 'assay', 'assay_class', 'atc_class', 'binding_site', 'biotherapeutic', 'cell_line', 'chembl_id_lookup', 'compound_record', 'compound_structural_alert', 'description', 'document', 'document_similarity', 'drug', 'drug_indication', 'drug_warning', 'go_slim', 'image', 'mechanism', 'metabolism', 'molecule', 'molecule_form', 'official', 'organism', 'protein_classification', 'similarity', 'source', 'substructure', 'target', 'target_component', 'target_relation', 'tissue', 'xref_source']</code></pre>
+</div>
+</div>
+<p>Create resource objects to enable API access as suggested.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for targets (proteins)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>targets_api <span class="op">=</span> new_client.target</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for bioactivities</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>bioact_api <span class="op">=</span> new_client.activity</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for compounds</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>cpd_api <span class="op">=</span> new_client.molecule</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check object type for one of these API objects (e.g.&nbsp;bioactivity API object).</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(bioact_api)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>chembl_webresource_client.query_set.QuerySet</code></pre>
+</div>
+</div>
+<p><br></p>
+<section id="fetching-target-data" class="level5">
+<h5 class="anchored" data-anchor-id="fetching-target-data"><strong>Fetching target data</strong></h5>
+<p>Select a protein target e.g.&nbsp;acetylcholinesterase (this was randomly chosen).</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify Uniprot ID for acetylcholinesterase</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>uniprot_id <span class="op">=</span> <span class="st">"P22303"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get info from ChEMBL about this protein target, </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with selected features only</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> targets_api.get(target_components__accession <span class="op">=</span> uniprot_id).only(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target_chembl_id"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"organism"</span>, </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pref_name"</span>, </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target_type"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The query results were stored in a “targets” object, which was a QuerySet with lazy data evaluation only, meaning it would only react when there was a request for the data.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read "targets" with Pandas</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> pd.DataFrame.from_records(targets)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>targets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>organism</th>
+      <th>pref_name</th>
+      <th>target_chembl_id</th>
+      <th>target_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Homo sapiens</td>
+      <td>Acetylcholinesterase</td>
+      <td>CHEMBL220</td>
+      <td>SINGLE PROTEIN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Homo sapiens</td>
+      <td>Acetylcholinesterase</td>
+      <td>CHEMBL220</td>
+      <td>SINGLE PROTEIN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Homo sapiens</td>
+      <td>Cholinesterases; ACHE &amp; BCHE</td>
+      <td>CHEMBL2095233</td>
+      <td>SELECTIVITY GROUP</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Select protein target from this dataframe - choosing the first one.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the first protein in the dataframe</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>select_target <span class="op">=</span> targets.iloc[<span class="dv">0</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>select_target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>organism                    Homo sapiens
+pref_name           Acetylcholinesterase
+target_chembl_id               CHEMBL220
+target_type               SINGLE PROTEIN
+Name: 0, dtype: object</code></pre>
+</div>
+</div>
+<p>Save the selected ChEMBL ID first (to be used later).</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>chembl_id <span class="op">=</span> select_target.target_chembl_id</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check it's saved</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(chembl_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CHEMBL220</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="fetching-bioactivity-data" class="level5">
+<h5 class="anchored" data-anchor-id="fetching-bioactivity-data"><strong>Fetching bioactivity data</strong></h5>
+<p>Obtaining bioactivity data for the selected target.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bioact <span class="op">=</span> bioact_api.<span class="bu">filter</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the previously saved target ChEMBL ID</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    target_chembl_id <span class="op">=</span> chembl_id, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bioactivity type</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span> <span class="op">=</span> <span class="st">"IC50"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Requesting exact measurements</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    relation <span class="op">=</span> <span class="st">"="</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Binding data as "B"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    assay_type <span class="op">=</span> <span class="st">"B"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>).only(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"activity_id"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data_validity_comment"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"assay_chembl_id"</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"assay_description"</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"assay_type"</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_chembl_id"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"type"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"standard_units"</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"relation"</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"standard_value"</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target_chembl_id"</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target_organism"</span>,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the length and type of bioactivities object</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(bioact), <span class="bu">type</span>(bioact))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>6129 &lt;class 'chembl_webresource_client.query_set.QuerySet'&gt;</code></pre>
+</div>
+</div>
+<p>To have a quick look at the data being held inside each entry of the bioact dataset, e.g.&nbsp;for first entry.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(bioact[<span class="dv">0</span>]), <span class="bu">type</span>(bioact[<span class="dv">0</span>]))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>bioact[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>14 &lt;class 'dict'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>{'activity_id': 33969,
+ 'assay_chembl_id': 'CHEMBL643384',
+ 'assay_description': 'Inhibitory concentration against acetylcholinesterase',
+ 'assay_type': 'B',
+ 'data_validity_comment': None,
+ 'molecule_chembl_id': 'CHEMBL133897',
+ 'relation': '=',
+ 'standard_units': 'nM',
+ 'standard_value': '750.0',
+ 'target_chembl_id': 'CHEMBL220',
+ 'target_organism': 'Homo sapiens',
+ 'type': 'IC50',
+ 'units': 'uM',
+ 'value': '0.75'}</code></pre>
+</div>
+</div>
+<p>The next step might take a few minutes - downloading the QuerySet as a Pandas DataFrame.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> pd.DataFrame.from_dict(bioact)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>activity_id</th>
+      <th>assay_chembl_id</th>
+      <th>assay_description</th>
+      <th>assay_type</th>
+      <th>data_validity_comment</th>
+      <th>molecule_chembl_id</th>
+      <th>relation</th>
+      <th>standard_units</th>
+      <th>standard_value</th>
+      <th>target_chembl_id</th>
+      <th>target_organism</th>
+      <th>type</th>
+      <th>units</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>33969</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL133897</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>750.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+      <td>uM</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>37563</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL336398</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>100.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+      <td>uM</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>38902</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130628</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>300.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+      <td>uM</td>
+      <td>0.3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>41170</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130478</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>800.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+      <td>uM</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>42363</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130112</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>2400.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+      <td>uM</td>
+      <td>2.4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Check total rows and columns in the bioactivities dataframe.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>(6129, 14)</code></pre>
+</div>
+</div>
+<p><br></p>
+<section id="pre-process-bioactivity-data" class="level6">
+<h6 class="anchored" data-anchor-id="pre-process-bioactivity-data"><strong>Pre-process bioactivity data</strong></h6>
+<p>To see a variety of units being recorded in the ChEMBL database - would need to be converted to nM.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>array(['uM', 'mM', 'nM', 'M', 'ug ml-1', 'pM', "10'-5M", "10'-3M",
+       "10'-2M", "10'-4M", "10'-7M", "10'-9M", "10'-6M", "10'-8M",
+       "10'-3microM", "10'-4microM", 'uM/L', "10'-10M", 'umol', 'umol/L',
+       "10'3pM", "10'6pM", "10'5pM", "10'2pM", "10'-12M", "10'-2microM",
+       '10^-3microM', '10^-4microM', 'mg/ml', 'µM'], dtype=object)</code></pre>
+</div>
+</div>
+<p>The simplest thing to do was to drop the “units” and “value” columns, which were in micromolar (<em>m</em>M), and to avoid unit conversion to nanomolar (nM), we could use columns such as “standard_units” and “standard_value” which were recorded with nM already.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bioact_df.drop([<span class="st">"units"</span>, <span class="st">"value"</span>], axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-check df</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>activity_id</th>
+      <th>assay_chembl_id</th>
+      <th>assay_description</th>
+      <th>assay_type</th>
+      <th>data_validity_comment</th>
+      <th>molecule_chembl_id</th>
+      <th>relation</th>
+      <th>standard_units</th>
+      <th>standard_value</th>
+      <th>target_chembl_id</th>
+      <th>target_organism</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>33969</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL133897</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>750.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>37563</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL336398</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>100.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>38902</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130628</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>300.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>41170</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130478</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>800.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>42363</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130112</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>2400.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bioact_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>activity_id               int64
+assay_chembl_id          object
+assay_description        object
+assay_type               object
+data_validity_comment    object
+molecule_chembl_id       object
+relation                 object
+standard_units           object
+standard_value           object
+target_chembl_id         object
+target_organism          object
+type                     object
+dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small detour test</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Tried with Polars - standard_value casted as "str", so would still need to convert to floats</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import polars as pl</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ba_df = pl.from_pandas(bioact_df)</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ba_df.head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Convert the column of “standard_value” from object to floats - so we could use this half maximal inhibitory concentration (IC50) values for calculations later.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df.astype({<span class="st">"standard_value"</span>: <span class="st">"float64"</span>})</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check column data types again</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>bioact_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>activity_id                int64
+assay_chembl_id           object
+assay_description         object
+assay_type                object
+data_validity_comment     object
+molecule_chembl_id        object
+relation                  object
+standard_units            object
+standard_value           float64
+target_chembl_id          object
+target_organism           object
+type                      object
+dtype: object</code></pre>
+</div>
+</div>
+<p>Taking care of any missing entries by removing them in the first place. I excluded “data_validity_comment” column in this exercise as this was required to check if there were any activity data of the compounds that were deemed to be not as valid e.g.&nbsp;excessively high IC50 value and so on. A lot of the compounds in this column probably had “None”, which ensured that there were no particular alarm bells to the curated bioactivity data.</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>bioact_df.dropna(subset <span class="op">=</span> [<span class="st">"activity_id"</span>, <span class="st">"assay_chembl_id"</span>, <span class="st">"assay_description"</span>, <span class="st">"assay_type"</span>, <span class="st">"molecule_chembl_id"</span>, <span class="st">"relation"</span>, <span class="st">"standard_units"</span>, <span class="st">"standard_value"</span>, <span class="st">"target_chembl_id"</span>, <span class="st">"target_organism"</span>, <span class="st">"type"</span>], axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check number of rows and columns again (in this case, there appeared to be no change)</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>(6129, 12)</code></pre>
+</div>
+</div>
+<p>Since all unique units inside the “units” and “values” columns were checked previously, I’d done the same for the “standard_units” column to see the ones recorded in it.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>array(['nM', 'ug.mL-1', "10'3pM", "10'6pM", "10'5pM", '10^-4microM', 'µM'],
+      dtype=object)</code></pre>
+</div>
+</div>
+<p>There were a mixture of nM, mM and also picomolars (pM)!</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for number of non-nM units</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">!=</span> <span class="st">"nM"</span>].shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>30</code></pre>
+</div>
+</div>
+<p>There appeared to be 30 non-nM values inside the fetched bioactivity data.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bioact_df <span class="op">=</span> bioact_df[bioact_df[<span class="st">"standard_units"</span>] <span class="op">==</span> <span class="st">"nM"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then narrow the results to only “nM” and check the dataframe again to see what units were left now.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check there were only nM</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>bioact_df[<span class="st">"standard_units"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>array(['nM'], dtype=object)</code></pre>
+</div>
+</div>
+<p>So the filtering worked and currently the number of rows and columns had been reduced.</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df rows &amp; columns</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>(6099, 12)</code></pre>
+</div>
+</div>
+<p>Next part would be to remove all duplicates in the dataframe, especially when there were duplicate tests for the same compound.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>bioact_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Renamed the “standard_value” and “standard_units” columns to be “IC50” and “units” respectively.</p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>bioact_df.rename(</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> {</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_value"</span>: <span class="st">"IC50"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"standard_units"</span>: <span class="st">"units"</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    }, inplace <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check df to ensure name change</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>activity_id</th>
+      <th>assay_chembl_id</th>
+      <th>assay_description</th>
+      <th>assay_type</th>
+      <th>data_validity_comment</th>
+      <th>molecule_chembl_id</th>
+      <th>relation</th>
+      <th>units</th>
+      <th>IC50</th>
+      <th>target_chembl_id</th>
+      <th>target_organism</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>33969</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL133897</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>750.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>37563</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL336398</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>100.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>38902</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130628</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>300.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>41170</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130478</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>800.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>42363</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130112</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>2400.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Lastly, the index of the dataframe was reset.</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>bioact_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>bioact_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>activity_id</th>
+      <th>assay_chembl_id</th>
+      <th>assay_description</th>
+      <th>assay_type</th>
+      <th>data_validity_comment</th>
+      <th>molecule_chembl_id</th>
+      <th>relation</th>
+      <th>units</th>
+      <th>IC50</th>
+      <th>target_chembl_id</th>
+      <th>target_organism</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>33969</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL133897</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>750.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>37563</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL336398</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>100.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>38902</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130628</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>300.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>41170</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130478</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>800.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>42363</td>
+      <td>CHEMBL643384</td>
+      <td>Inhibitory concentration against acetylcholine...</td>
+      <td>B</td>
+      <td>None</td>
+      <td>CHEMBL130112</td>
+      <td>=</td>
+      <td>nM</td>
+      <td>2400.0</td>
+      <td>CHEMBL220</td>
+      <td>Homo sapiens</td>
+      <td>IC50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>One final check on the number of columns and rows after pre-processing the bioactivity dataframe.</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bioact_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>(5041, 12)</code></pre>
+</div>
+</div>
+<p>There were a total of 11 columns with 5,041 rows of data left in the bioactivity dataframe.</p>
+<p><br></p>
+</section>
+</section>
+<section id="fetching-compound-data" class="level5">
+<h5 class="anchored" data-anchor-id="fetching-compound-data"><strong>Fetching compound data</strong></h5>
+<p>While having identified the protein target and obtained the bioactivity data, this step was to link the bioactivity data to the compounds.</p>
+<p>This could be done by having the ChEMBL IDs available for the compounds involved in the bioactivity dataset.</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cpds <span class="op">=</span> cpd_api.<span class="bu">filter</span>(</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    molecule_chembl_id__in <span class="op">=</span> <span class="bu">list</span>(bioact_df[<span class="st">"molecule_chembl_id"</span>])</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>).only(</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_chembl_id"</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"molecule_structures"</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, the same step was applied where the compound QuerySet object was converted into a Pandas dataframe. However, the dataset extracted this time could take longer than the time taken to fetch the bioactivity data. This was then monitored using a progress bar (tqdm package).</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>compds <span class="op">=</span> <span class="bu">list</span>(tqdm(cpds))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/5041 [00:00&lt;?, ?it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  6%|▌         | 281/5041 [00:00&lt;00:01, 2581.21it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 11%|█         | 540/5041 [00:00&lt;00:01, 2363.48it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 15%|█▌        | 777/5041 [00:00&lt;00:01, 2214.36it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 20%|█▉        | 999/5041 [00:00&lt;00:01, 2132.60it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 24%|██▍       | 1213/5041 [00:00&lt;00:01, 2111.42it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 28%|██▊       | 1425/5041 [00:00&lt;00:01, 2056.73it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 33%|███▎      | 1641/5041 [00:00&lt;00:01, 2040.92it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 37%|███▋      | 1846/5041 [00:00&lt;00:01, 1999.89it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 41%|████      | 2061/5041 [00:00&lt;00:01, 2026.07it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 45%|████▍     | 2264/5041 [00:01&lt;00:01, 2025.11it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 50%|█████     | 2521/5041 [00:01&lt;00:01, 2147.95it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 55%|█████▌    | 2781/5041 [00:01&lt;00:00, 2274.07it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 60%|█████▉    | 3009/5041 [00:01&lt;00:00, 2266.79it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 64%|██████▍   | 3236/5041 [00:01&lt;00:00, 2264.18it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 69%|██████▊   | 3463/5041 [00:01&lt;00:00, 2235.08it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 73%|███████▎  | 3687/5041 [00:01&lt;00:00, 2188.45it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 78%|███████▊  | 3907/5041 [00:01&lt;00:00, 2136.69it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 82%|████████▏ | 4121/5041 [00:01&lt;00:00, 2053.05it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 86%|████████▌ | 4341/5041 [00:02&lt;00:00, 2074.41it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 90%|█████████ | 4561/5041 [00:02&lt;00:00, 2057.47it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code> 95%|█████████▌| 4801/5041 [00:02&lt;00:00, 2124.59it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>100%|█████████▉| 5021/5041 [00:02&lt;00:00, 2138.49it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>100%|██████████| 5041/5041 [00:02&lt;00:00, 2140.16it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+</div>
+<p>Converting retrieved compound QuerySet into a Pandas DataFrame.</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>cpds_df <span class="op">=</span> pd.DataFrame.from_records(compds)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(5041, 2)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>molecule_structures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL411</td>
+      <td>{'canonical_smiles': 'CC/C(=C(/CC)c1ccc(O)cc1)...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL416</td>
+      <td>{'canonical_smiles': 'COc1c2occc2cc2ccc(=O)oc1...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL21</td>
+      <td>{'canonical_smiles': 'Nc1ccc(S(N)(=O)=O)cc1', ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL424</td>
+      <td>{'canonical_smiles': 'O=C(O)c1ccccc1O', 'molfi...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL7002</td>
+      <td>{'canonical_smiles': 'CC1(COc2ccc(CC3SC(=O)NC3...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+<section id="pre-process-compound-data" class="level6">
+<h6 class="anchored" data-anchor-id="pre-process-compound-data"><strong>Pre-process compound data</strong></h6>
+<p>Removing any missing entries in the compound data.</p>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows in df</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>(5040, 2)</code></pre>
+</div>
+</div>
+<p>Removing any duplicates in the compound data.</p>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop_duplicates(<span class="st">"molecule_chembl_id"</span>, keep <span class="op">=</span> <span class="st">"first"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check columns &amp; rows again</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>cpds_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>(5040, 2)</code></pre>
+</div>
+</div>
+<p>Ideally, only the compounds with canonical SMILES would be kept. Checking for the types of molecular representations used in the “molecule_structures” column of the compound dataset.</p>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly choosing the 2nd entry</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>cpds_df.iloc[<span class="dv">1</span>].molecule_structures.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>dict_keys(['canonical_smiles', 'molfile', 'standard_inchi', 'standard_inchi_key'])</code></pre>
+</div>
+</div>
+<p>There were 4 types as: “canonical_smiles”, “molfile”, “standard_inchi” and “standard_inchi_key”.</p>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list to store the canonical smiles</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>can_smiles <span class="op">=</span> []</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a for loop to loop over each row of data, </span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="co"># searching for only canonical_smiles to append to the created list</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, cpd <span class="kw">in</span> cpds_df.iterrows():</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(cpd[<span class="st">"molecule_structures"</span>][<span class="st">"canonical_smiles"</span>])</span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>        can_smiles.append(<span class="va">None</span>)</span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new df column with name as "smiles", </span></span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a><span class="co"># which will store all the canonical smiles collected from the list above</span></span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a>cpds_df[<span class="st">"smiles"</span>] <span class="op">=</span> can_smiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check the compound dataframe quickly to see if a new column for SMILES has been created.</p>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>molecule_structures</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL411</td>
+      <td>{'canonical_smiles': 'CC/C(=C(/CC)c1ccc(O)cc1)...</td>
+      <td>CC/C(=C(/CC)c1ccc(O)cc1)c1ccc(O)cc1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL416</td>
+      <td>{'canonical_smiles': 'COc1c2occc2cc2ccc(=O)oc1...</td>
+      <td>COc1c2occc2cc2ccc(=O)oc12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL21</td>
+      <td>{'canonical_smiles': 'Nc1ccc(S(N)(=O)=O)cc1', ...</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL424</td>
+      <td>{'canonical_smiles': 'O=C(O)c1ccccc1O', 'molfi...</td>
+      <td>O=C(O)c1ccccc1O</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL7002</td>
+      <td>{'canonical_smiles': 'CC1(COc2ccc(CC3SC(=O)NC3...</td>
+      <td>CC1(COc2ccc(CC3SC(=O)NC3=O)cc2)CCCCC1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Once confirmed, the old “molecule_structures” column was then removed.</p>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>cpds_df.drop(<span class="st">"molecule_structures"</span>, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, adding another step to ensure all missing entries or entries without canonical SMILES strings were removed from the compound dataset.</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>cpds_df.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">"any"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cpds_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(5040, 2)</code></pre>
+</div>
+</div>
+<p>Final look at the compound dataset, which should only include compounds ChEMBL IDs and SMILES columns.</p>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>cpds_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL411</td>
+      <td>CC/C(=C(/CC)c1ccc(O)cc1)c1ccc(O)cc1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL416</td>
+      <td>COc1c2occc2cc2ccc(=O)oc12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL21</td>
+      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL424</td>
+      <td>O=C(O)c1ccccc1O</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL7002</td>
+      <td>CC1(COc2ccc(CC3SC(=O)NC3=O)cc2)CCCCC1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="combining-bioactivity-and-compound-data" class="level5">
+<h5 class="anchored" data-anchor-id="combining-bioactivity-and-compound-data"><strong>Combining bioactivity and compound data</strong></h5>
+<p>To combine both datasets, the key was to look for common column (similar to a SQL “join” query) between the two datasets.</p>
+<p>Listing all the column names for both datasets would show the common column.</p>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>bioact_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>Index(['activity_id', 'assay_chembl_id', 'assay_description', 'assay_type',
+       'data_validity_comment', 'molecule_chembl_id', 'relation', 'units',
+       'IC50', 'target_chembl_id', 'target_organism', 'type'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>cpds_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>Index(['molecule_chembl_id', 'smiles'], dtype='object')</code></pre>
+</div>
+</div>
+<p>Clearly, the one column that existed in both dataframes was the “molecule_chembl_id” column.</p>
+<p>The next step was to combine or merge both datasets.</p>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a final dataframe that will contain both bioactivity and compound data</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.merge(</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>    bioact_df[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"IC50"</span>, <span class="st">"units"</span>, <span class="st">"data_validity_comment"</span>]],</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>    cpds_df,</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> <span class="st">"molecule_chembl_id"</span>,</span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>None</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>None</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>None</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>None</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>None</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Row indices were reset and shape of the final dataframe was checked.</p>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>dtree_df.reset_index(drop <span class="op">=</span> <span class="va">True</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(5040, 5)</code></pre>
+</div>
+</div>
+<p>Saving a copy of the merged dataframe for now (to avoid re-running the previous code repeatedly).</p>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>dtree_df.to_csv(<span class="st">"ache_chembl.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</section>
+<section id="re-import-saved-dataframe" class="level5">
+<h5 class="anchored" data-anchor-id="re-import-saved-dataframe"><strong>Re-import saved dataframe</strong></h5>
+<p>Re-import partly pre-processed dtree_df.</p>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.read_csv(<span class="st">"ache_chembl.csv"</span>)</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Noticed there was an extra index column, likely inherited from how the .csv file was saved, which was subsequently removed.</p>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.drop(<span class="st">"Unnamed: 0"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The merged dataframe was found to have IC50 with zero nM, which meant the function to convert IC50 to pIC50 would not proceed (due to natural log of zero normally means undefined answer!). So a good practice to clean data like this was probably best to run a statistical summary such as the code below first, then look for minimum and maximum values and also others to see if there were anything to be tidied up first.</p>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>dtree_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>IC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5.040000e+03</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>8.070638e+04</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>9.511451e+05</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.000000e+02</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.200000e+03</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>9.700000e+03</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4.960000e+07</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Limiting the IC50 values to be above zero only.</p>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select IC50 values above zero</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df[dtree_df[<span class="st">"IC50"</span>] <span class="op">&gt;</span> <span class="fl">0.0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Re-checked the minimum value of IC50 column, which should be above zero.</p>
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"IC50"</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>5e-06</code></pre>
+</div>
+</div>
+<p>Now we could convert the IC50 values to pIC50 values (the negative log of IC50 in molar units).</p>
+<p>The key to understand pIC50 here was to treat pIC50 similarly to how we understand pH for our acids and bases. pIC50 was a dimensionless value (so no units actually!) - <em>useful link</em>. The formula to convert IC50 to pIC50 for nM units was (<strong>use LaTex for formula</strong>):</p>
+<p>pIC50 = 9 - log10(IC50)</p>
+<p>Import the math library first and set up a small function to do the conversion.</p>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_pIC50(IC50):</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>    pIC50_value <span class="op">=</span> <span class="dv">9</span> <span class="op">-</span> math.log10(IC50)</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pIC50_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Applying the calc_pIC50 function to convert all rows of the compound dataset for the IC50 column.</p>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column for pIC50</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply calc_pIC50 function to the data in IC50 column</span></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"pIC50"</span>] <span class="op">=</span> dtree_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: calc_pIC50(x.IC50), axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dataframe would now look like this, with a new pIC50 column ready for use.</p>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pIC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>6.124939</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>6.522879</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>6.096910</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>NaN</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>5.619789</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>However, for a decision tree model, a few more molecular descriptors were probably needed rather than only IC50 or pIC50 and SMILES… One way to do this could be through computations based on canonical SMILES of compounds by using RDKit to add some molecular descriptors.</p>
+<p>Before doing this, a compound sanitisation step would probably be the best before starting any calculations, as this might rule out some compounds with questionable chemical validities. This could also be done via RDKit or I guess Datamol (a Python wrapper library built based on RDKit) might also help as well.</p>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df['column'].astype('string') </span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.astype({<span class="st">"smiles"</span>: <span class="st">"string"</span>, <span class="st">"data_validity_comment"</span>: <span class="st">"string"</span>})</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>dtree_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre><code>molecule_chembl_id        object
+IC50                     float64
+units                     object
+data_validity_comment     string
+smiles                    string
+pIC50                    float64
+dtype: object</code></pre>
+</div>
+</div>
+<p>Before I jumped straight to compound sanitisation, I thought I should check out if there were any variations in the “data_validity_comment” column.</p>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<pre><code>&lt;StringArray&gt;
+[&lt;NA&gt;, 'Outside typical range', 'Potential transcription error']
+Length: 3, dtype: string</code></pre>
+</div>
+</div>
+<p>Interestingly, there were 3 different types of data validity comments found, which were “NaN”, “Outside typical range” and “Potential transcirption error”. So, this meant we would need to address compounds with comments in the latter two.</p>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "outside typical range" as data validity comment</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Outside typical range"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pIC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19</th>
+      <td>CHEMBL46151</td>
+      <td>260000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CCN(CC)CCS/C(=N\O)C(=O)c1ccc(OC)cc1</td>
+      <td>3.585027</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>CHEMBL544022</td>
+      <td>520000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CCN(CC)CCS/C(=N\O)C(=O)c1ccc(Cl)cc1.Cl</td>
+      <td>3.283997</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>CHEMBL33051</td>
+      <td>460000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>NC(=O)c1cc[n+](COC[n+]2ccccc2/C=N/O)cc1.[Cl-]....</td>
+      <td>3.337242</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>CHEMBL543546</td>
+      <td>330000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CC(C)N(CCS/C(=N\O)C(=O)c1ccc(Cl)cc1)C(C)C.Cl</td>
+      <td>3.481486</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>CHEMBL1420</td>
+      <td>340000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>C[n+]1ccccc1C=NO</td>
+      <td>3.468521</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4947</th>
+      <td>CHEMBL5190179</td>
+      <td>785000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>OCCCCCCCCc1ccc(CN2CCCCCC2)c(O)c1</td>
+      <td>3.105130</td>
+    </tr>
+    <tr>
+      <th>4995</th>
+      <td>CHEMBL1668934</td>
+      <td>115000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CC(=O)N1CCC(NC(=O)Nc2ccc(OC(F)(F)F)cc2)CC1</td>
+      <td>3.939302</td>
+    </tr>
+    <tr>
+      <th>5025</th>
+      <td>CHEMBL5219232</td>
+      <td>1000000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>C#CCN[C@@H]1CCc2ccc(OC(=O)N(C)CC)cc21.C#CCN[C@...</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>5027</th>
+      <td>CHEMBL1193656</td>
+      <td>150000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>C#CCNC1CCc2c(OC(=O)N(C)CC)cccc21</td>
+      <td>3.823909</td>
+    </tr>
+    <tr>
+      <th>5029</th>
+      <td>CHEMBL1193856</td>
+      <td>730000.0</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>C#CCN(C)C1CCc2cccc(OC(=O)N(C)C)c21</td>
+      <td>3.136677</td>
+    </tr>
+  </tbody>
+</table>
+<p>328 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>There were a total of 328 compounds with IC50 outside typical range!</p>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "potential transcription error" as data validity comment</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Potential transcription error"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pIC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>753</th>
+      <td>CHEMBL189957</td>
+      <td>320.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(=O)c4ccccc...</td>
+      <td>6.494850</td>
+    </tr>
+    <tr>
+      <th>755</th>
+      <td>CHEMBL190060</td>
+      <td>6860.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCOc2ccc3c(c2)O/C(=C\c2cc...</td>
+      <td>5.163676</td>
+    </tr>
+    <tr>
+      <th>756</th>
+      <td>CHEMBL191386</td>
+      <td>3410.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCOc2ccc3c(c2)O/C(=C\c2cc...</td>
+      <td>5.467246</td>
+    </tr>
+    <tr>
+      <th>761</th>
+      <td>CHEMBL370961</td>
+      <td>1950.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
+      <td>5.709965</td>
+    </tr>
+    <tr>
+      <th>762</th>
+      <td>CHEMBL372710</td>
+      <td>8000.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
+      <td>5.096910</td>
+    </tr>
+    <tr>
+      <th>763</th>
+      <td>CHEMBL364678</td>
+      <td>44600.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
+      <td>4.350665</td>
+    </tr>
+    <tr>
+      <th>764</th>
+      <td>CHEMBL191461</td>
+      <td>1800.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)C/C(=C\...</td>
+      <td>5.744727</td>
+    </tr>
+    <tr>
+      <th>1030</th>
+      <td>CHEMBL239046</td>
+      <td>7160.0</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>CCN(Cc1ccccc1)Cc1ccc(-c2cc3cc(OCCNC(=O)/C=C/c4...</td>
+      <td>5.145087</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>There were 8 compounds with potential transcription errors for their respective IC50 values!</p>
+<p>This meant it would be best to remove above compounds with questionable IC50 values (could be potential sources of errors for ML models later on). One of the ways I thought of doing was to fill the empty cells under “data_validity_comment” column, so this would be easier to filter.</p>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill "NaN" entries with an actual name e.g. zero</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.fillna(<span class="st">"zero"</span>)</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>dtree_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pIC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>6.124939</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>6.522879</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>6.096910</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>5.619789</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CHEMBL130098</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(Cl)cc2)nn1C(=O)N(C)C</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CHEMBL336538</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>COc1ccc(-c2nc(SC)n(C(=O)N(C)C)n2)cc1</td>
+      <td>6.096910</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CHEMBL335033</td>
+      <td>50.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc3ccccc3c2)nn1C(=O)N(C)C</td>
+      <td>7.301030</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CHEMBL338720</td>
+      <td>560.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(-c3ccccc3)cc2)nn1C(=O)N(C)C</td>
+      <td>6.251812</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CHEMBL131536</td>
+      <td>1400.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(Cl)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>5.853872</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Filtered out only the compounds with nil data validity comments.</p>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_df["data_validity_comment"].unique()</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"zero"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Checking the dtree_df dataframe again and also whether if only the compounds with “zero” labelled for “data_validity_comment” column were kept (and other two types were removed).</p>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df.shape)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(4703, 6)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<pre><code>&lt;StringArray&gt;
+['zero']
+Length: 1, dtype: string</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="compound-sanitisation" class="level4">
+<h4 class="anchored" data-anchor-id="compound-sanitisation"><strong>Compound sanitisation</strong></h4>
+<p>I’ve found the <a href="https://docs.datamol.io/stable/tutorials/Preprocessing.html">pre-processing molecules tutorial</a> and its reference links provided provided by Datamol at the bottom of the webpage to be very informative. Each steps of fix_mol(), sanitize_mol() and standardize_mol() were explained to a certain degree in the link provided above. I guess the key was to select preprocessing options required to fit the purpose of the ML model being built later on, and experiences would also help to improve the compound preprocessing step.</p>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="co"># _preprocess function to sanitise compounds - adapted from datamol.io</span></span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>smiles_column <span class="op">=</span> <span class="st">"smiles"</span></span>
+<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-7"><a href="#cb121-7" aria-hidden="true" tabindex="-1"></a>dm.disable_rdkit_log()</span>
+<span id="cb121-8"><a href="#cb121-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _preprocess(row):</span>
+<span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert each compound to a RDKit molecule in the smiles column</span></span>
+<span id="cb121-11"><a href="#cb121-11" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.to_mol(row[smiles_column], ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb121-12"><a href="#cb121-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fix common errors in the molecules</span></span>
+<span id="cb121-13"><a href="#cb121-13" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.fix_mol(mol)</span>
+<span id="cb121-14"><a href="#cb121-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sanitise the molecules </span></span>
+<span id="cb121-15"><a href="#cb121-15" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.sanitize_mol(mol, sanifix<span class="op">=</span><span class="va">True</span>, charge_neutral<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb121-16"><a href="#cb121-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Standardise the molecules</span></span>
+<span id="cb121-17"><a href="#cb121-17" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.standardize_mol(</span>
+<span id="cb121-18"><a href="#cb121-18" aria-hidden="true" tabindex="-1"></a>        mol,</span>
+<span id="cb121-19"><a href="#cb121-19" aria-hidden="true" tabindex="-1"></a>        disconnect_metals<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb121-20"><a href="#cb121-20" aria-hidden="true" tabindex="-1"></a>        normalize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb121-21"><a href="#cb121-21" aria-hidden="true" tabindex="-1"></a>        reionize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb121-22"><a href="#cb121-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Decided to switch on "uncharge" to neutralise charges - the only change</span></span>
+<span id="cb121-23"><a href="#cb121-23" aria-hidden="true" tabindex="-1"></a>        uncharge<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb121-24"><a href="#cb121-24" aria-hidden="true" tabindex="-1"></a>        stereo<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb121-25"><a href="#cb121-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb121-26"><a href="#cb121-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-27"><a href="#cb121-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Added a new column below for RDKit molecules</span></span>
+<span id="cb121-28"><a href="#cb121-28" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"rdkit_mol"</span>] <span class="op">=</span> dm.to_mol(mol)</span>
+<span id="cb121-29"><a href="#cb121-29" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"standard_smiles"</span>] <span class="op">=</span> dm.standardize_smiles(dm.to_smiles(mol))</span>
+<span id="cb121-30"><a href="#cb121-30" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"selfies"</span>] <span class="op">=</span> dm.to_selfies(mol)</span>
+<span id="cb121-31"><a href="#cb121-31" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchi"</span>] <span class="op">=</span> dm.to_inchi(mol)</span>
+<span id="cb121-32"><a href="#cb121-32" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchikey"</span>] <span class="op">=</span> dm.to_inchikey(mol)</span>
+<span id="cb121-33"><a href="#cb121-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then the compound sanitisation function was applied to the dtree_df.</p>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_df.<span class="bu">apply</span>(_preprocess, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>dtree_san_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>IC50</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pIC50</th>
+      <th>rdkit_mol</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL133897</td>
+      <td>750.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>6.124939</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12a44b680&gt;</td>
+      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>[C][C][O][C][=N][N][Branch2][Ring1][Branch1][C...</td>
+      <td>InChI=1S/C17H16N2O4/c1-2-21-16-18-19(17(20)23-...</td>
+      <td>GUZKBNUSIOHJIR-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL336398</td>
+      <td>100.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>7.000000</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12a44be60&gt;</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
+      <td>InChI=1S/C18H21ClN4OS/c19-15-8-6-14(7-9-15)16-...</td>
+      <td>XWIIHZHUZCWNLW-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL130628</td>
+      <td>300.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>6.522879</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12a44b5a0&gt;</td>
+      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
+      <td>InChI=1S/C16H16ClF3N4OS/c17-12-6-4-11(5-7-12)1...</td>
+      <td>GTBUYLWBDILEPY-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL130478</td>
+      <td>800.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>6.096910</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12a44b840&gt;</td>
+      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>[C][S][C][=N][C][Branch2][Ring1][Ring2][C][=C]...</td>
+      <td>InChI=1S/C13H13F3N4O2S/c1-19(2)12(21)20-11(23-...</td>
+      <td>FBOHEFQKBNWFPO-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL130112</td>
+      <td>2400.0</td>
+      <td>nM</td>
+      <td>zero</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>5.619789</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12a44b8b0&gt;</td>
+      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>[C][S][C][=N][C][Branch1][N][C][=C][C][=C][Bra...</td>
+      <td>InChI=1S/C18H18N4OS/c1-13-9-11-14(12-10-13)16-...</td>
+      <td>AAXQEELWFXEVAH-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Please note if the dataset required for sanitisation is large, Datamol has suggested using their example code to add parallelisation as shown below.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Code adapted from: https://docs.datamol.io/stable/tutorials/Preprocessing.html#references</span></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>data_clean <span class="op">=</span> dm.parallelized(</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>    _preprocess, </span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>    data.iterrows(), </span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>    arg_type<span class="op">=</span><span class="st">"args"</span>, </span>
+<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a>    progress<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a>    total<span class="op">=</span><span class="bu">len</span>(data)</span>
+<span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a>data_clean <span class="op">=</span> pd.DataFrame(data_clean)</span>
+<span id="cb123-11"><a href="#cb123-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<pre><code>(4703, 11)</code></pre>
+</div>
+</div>
+<p>In this case, I tried using the preprocessing function without adding the parallelisation, the whole sanitisation process wasn’t overly long, and was done within a minute or so (the dtree_df dataframe had 4,703 rows or compounds only).</p>
+<p><br></p>
+</section>
+<section id="detect-outliers" class="level4">
+<h4 class="anchored" data-anchor-id="detect-outliers"><strong>Detect outliers</strong></h4>
+<p>Plotting a histogram to see the distribution of pIC50 values first.</p>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.hist(column <span class="op">=</span> <span class="st">"pIC50"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>array([[&lt;AxesSubplot: title={'center': 'pIC50'}&gt;]], dtype=object)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Data_prep_files/figure-html/cell-65-output-2.png" width="583" height="431"></p>
+</div>
+</div>
+<p>I read a bit about Dixon’s Q test and realised that there were a few required assumptions prior to using this test, and the current dataset being used here (dtree_san_df) might not fit the requirements, which were:</p>
+<ul>
+<li>normally distributed data</li>
+<li>a small sample size i.e.&nbsp;e.g.&nbsp;between 3 and 10 (as originally stated in the paper published by R. B. Dean and W. J. Dixon (1951) Simplified Statistics for Small Numbers of Observations”. Anal. Chem., 1951, 23 (4), 636–638).</li>
+</ul>
+<p>So I’ve decided that rather than showing Python code for Dixon’s Q test myself, I’d attach a few examples from others instead, <a href="https://plotly.com/python/v3/outlier-test/">Q test from Plotly</a> and also <a href="https://sebastianraschka.com/Articles/2014_dixon_test.html">Dixon’s Q test for outlier identification – a questionable practice</a>, since this dataset here wasn’t quite normally distributed as shown from the histogram plotted above.</p>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.boxplot(column <span class="op">=</span> <span class="st">"pIC50"</span>)</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxplot version below shows a blank background</span></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than above version with horizontal grid lines</span></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_san_df.plot.box(column = "pIC50")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Data_prep_files/figure-html/cell-66-output-2.png" width="566" height="411"></p>
+</div>
+</div>
+<p>So I used Pandas’ built-in boxplot in addition to the histogram to show the likely outliers within the pIC50 values. Clearly, the possible outliers for pIC50 values appeared to be close to 10 and above. I’ve then decided not to completely remove these outliers due to the dataset itself not in a Gaussian distribution (as they might not be true outliers).</p>
+<p><br></p>
+</section>
+<section id="molecular-descriptors" class="level4">
+<h4 class="anchored" data-anchor-id="molecular-descriptors"><strong>Molecular descriptors</strong></h4>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
