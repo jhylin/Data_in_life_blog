@@ -83,6 +83,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -198,7 +217,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Tree models in ChEMBL data</h1>
-            <p class="subtitle lead">ML series 2.1 - Decision tree - Data pre-processing 2 of 2</p>
+            <p class="subtitle lead">ML series 2.1 - decision tree - data pre-processing (part 2)</p>
                       </div>
   </div>
     
@@ -457,7 +476,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply calc_pIC50 function to the data in IC50 column</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"pIC50"</span>] <span class="op">=</span> dtree_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: calc_pIC50(x.IC50), axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The dataframe would now look like this, with a new pIC50 column ready for use.</p>
+<p>The dataframe would now look like this, with a new pIC50 column ready for use. Now, one question regarding to IC50 was whether it was a good idea to use IC50 values like this from public database like ChEMBL. This paper by <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> may provide further things to consider.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -985,7 +1004,7 @@ Length: 1, dtype: string</code></pre>
       <td>zero</td>
       <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
       <td>6.124939</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x123eab5a0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f5a0&gt;</td>
       <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
       <td>[C][C][O][C][=N][N][Branch2][Ring1][Branch1][C...</td>
       <td>InChI=1S/C17H16N2O4/c1-2-21-16-18-19(17(20)23-...</td>
@@ -999,7 +1018,7 @@ Length: 1, dtype: string</code></pre>
       <td>zero</td>
       <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
       <td>7.000000</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x123eab450&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f450&gt;</td>
       <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
       <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
       <td>InChI=1S/C18H21ClN4OS/c19-15-8-6-14(7-9-15)16-...</td>
@@ -1013,7 +1032,7 @@ Length: 1, dtype: string</code></pre>
       <td>zero</td>
       <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
       <td>6.522879</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x123eab4c0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f4c0&gt;</td>
       <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
       <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
       <td>InChI=1S/C16H16ClF3N4OS/c17-12-6-4-11(5-7-12)1...</td>
@@ -1027,7 +1046,7 @@ Length: 1, dtype: string</code></pre>
       <td>zero</td>
       <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
       <td>6.096910</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x123eaae30&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448ee30&gt;</td>
       <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
       <td>[C][S][C][=N][C][Branch2][Ring1][Ring2][C][=C]...</td>
       <td>InChI=1S/C13H13F3N4O2S/c1-19(2)12(21)20-11(23-...</td>
@@ -1041,7 +1060,7 @@ Length: 1, dtype: string</code></pre>
       <td>zero</td>
       <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
       <td>5.619789</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x123eaaea0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448eea0&gt;</td>
       <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
       <td>[C][S][C][=N][C][Branch1][N][C][=C][C][=C][Bra...</td>
       <td>InChI=1S/C18H18N4OS/c1-13-9-11-14(12-10-13)16-...</td>
@@ -1108,12 +1127,17 @@ Length: 1, dtype: string</code></pre>
 <p><br></p>
 </section>
 <section id="molecular-descriptors" class="level4">
-<h4 class="anchored" data-anchor-id="molecular-descriptors"><strong>Molecular descriptors</strong></h4>
+
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Molecular descriptors</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Kalliokoski2013a" class="csl-entry" role="doc-biblioentry">
+Kalliokoski, Tuomo, Christian Kramer, Anna Vulpetti, and Peter Gedeck. 2013. <span>“Comparability of Mixed IC50 Data <span></span> A Statistical Analysis.”</span> Edited by Andrea Cavalli. <em>PLoS ONE</em> 8 (4): e61007. <a href="https://doi.org/10.1371/journal.pone.0061007">https://doi.org/10.1371/journal.pone.0061007</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
