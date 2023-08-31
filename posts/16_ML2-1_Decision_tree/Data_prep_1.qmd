@@ -122,12 +122,14 @@ Obtaining bioactivity data for the selected target.
 bioact = bioact_api.filter(
     # Use the previously saved target ChEMBL ID
     target_chembl_id = chembl_id, 
-    # Bioactivity type
+    # Bioactivity type - choosing IC50
     type = "IC50",
+    # ?Added Ki
+    #standard_type = "Ki",
     # Requesting exact measurements
     relation = "=",
     # Binding data as "B"
-    assay_type = "B"
+    assay_type = "B",
 ).only(
     "activity_id",
     "data_validity_comment"
@@ -137,6 +139,7 @@ bioact = bioact_api.filter(
     "molecule_chembl_id",
     "type",
     "standard_units",
+    "standard_type",
     "relation",
     "standard_value",
     "target_chembl_id",
