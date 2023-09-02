@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-09-02">
 
 <title>Home - Tree models in ChEMBL data</title>
 <style>
@@ -155,6 +157,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -218,13 +221,30 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <div class="quarto-title column-body">
       <h1 class="title">Tree models in ChEMBL data</h1>
             <p class="subtitle lead">ML series 2.1 - decision tree - data pre-processing (part 2)</p>
-                      </div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine learning projects</div>
+                <div class="quarto-category">Pandas</div>
+                <div class="quarto-category">ChEMBL database</div>
+              </div>
+                  </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 2, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -238,7 +258,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#re-import-saved-dataframe" id="toc-re-import-saved-dataframe" class="nav-link active" data-scroll-target="#re-import-saved-dataframe"><strong>Re-import saved dataframe</strong></a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link active" data-scroll-target="#data-source"><strong>Data source</strong></a></li>
+  <li><a href="#re-importing-saved-dataframe" id="toc-re-importing-saved-dataframe" class="nav-link" data-scroll-target="#re-importing-saved-dataframe"><strong>Re-importing saved dataframe</strong></a></li>
   <li><a href="#compound-sanitisation" id="toc-compound-sanitisation" class="nav-link" data-scroll-target="#compound-sanitisation"><strong>Compound sanitisation</strong></a></li>
   <li><a href="#detect-outliers" id="toc-detect-outliers" class="nav-link" data-scroll-target="#detect-outliers"><strong>Detect outliers</strong></a></li>
   <li><a href="#molecular-descriptors" id="toc-molecular-descriptors" class="nav-link" data-scroll-target="#molecular-descriptors"><strong>Molecular descriptors</strong></a></li>
@@ -251,6 +272,9 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
+<section id="data-source" class="level5">
+<h5 class="anchored" data-anchor-id="data-source"><strong>Data source</strong></h5>
+<p><strong>To explain source of dataframe</strong></p>
 <p>Since data preparation and cleaning was a well-known process that would take up a lot of time, I’ve decided to split this part into two posts to ensure the reading time for each post was reasonable.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import all libraries used</span></span>
@@ -259,13 +283,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<section id="re-import-saved-dataframe" class="level5">
-<h5 class="anchored" data-anchor-id="re-import-saved-dataframe"><strong>Re-import saved dataframe</strong></h5>
+</section>
+<section id="re-importing-saved-dataframe" class="level5">
+<h5 class="anchored" data-anchor-id="re-importing-saved-dataframe"><strong>Re-importing saved dataframe</strong></h5>
 <p>Re-imported the partly pre-processed dtree_df from the earlier post.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.read_csv(<span class="st">"ache_chembl.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="22">
 
 <div>
 
@@ -275,7 +300,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <th></th>
       <th>Unnamed: 0</th>
       <th>molecule_chembl_id</th>
-      <th>IC50</th>
+      <th>Ki</th>
       <th>units</th>
       <th>data_validity_comment</th>
       <th>smiles</th>
@@ -285,47 +310,47 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>CHEMBL133897</td>
-      <td>750.0</td>
+      <td>CHEMBL11805</td>
+      <td>0.104</td>
       <td>nM</td>
-      <td>NaN</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>Potential transcription error</td>
+      <td>COc1ccccc1CN(C)CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>CHEMBL336398</td>
-      <td>100.0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>CHEMBL130628</td>
-      <td>300.0</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>CHEMBL130478</td>
-      <td>800.0</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
-      <td>CHEMBL130112</td>
-      <td>2400.0</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
     </tr>
   </tbody>
 </table>
@@ -336,7 +361,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.drop(<span class="st">"Unnamed: 0"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="23">
 
 <div>
 
@@ -345,7 +370,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <tr>
       <th></th>
       <th>molecule_chembl_id</th>
-      <th>IC50</th>
+      <th>Ki</th>
       <th>units</th>
       <th>data_validity_comment</th>
       <th>smiles</th>
@@ -354,53 +379,53 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <tbody>
     <tr>
       <th>0</th>
-      <td>CHEMBL133897</td>
-      <td>750.0</td>
+      <td>CHEMBL11805</td>
+      <td>0.104</td>
       <td>nM</td>
-      <td>NaN</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
+      <td>Potential transcription error</td>
+      <td>COc1ccccc1CN(C)CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>CHEMBL336398</td>
-      <td>100.0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>CHEMBL130628</td>
-      <td>300.0</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>CHEMBL130478</td>
-      <td>800.0</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>CHEMBL130112</td>
-      <td>2400.0</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>The merged dataframe was found to have IC50 with zero nM, which meant the function to convert IC50 to pIC50 would not proceed (due to natural log of zero normally means undefined answer!). So a good practice to clean data like this was probably best to run a statistical summary such as the code below first, then look for minimum and maximum values and also others to see if there were anything to be tidied up first.</p>
+<p>The merged dataframe was found to have Ki with zero nM, which meant the function to convert Ki to pKi would not proceed (due to natural log of zero normally means undefined answer!). So a good practice to clean data like this was probably best to run a statistical summary such as the code below first, then look for minimum and maximum values and also others to see if there were anything to be tidied up first.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dtree_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="24">
 
 <div>
 
@@ -408,78 +433,74 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <thead>
     <tr>
       <th></th>
-      <th>IC50</th>
+      <th>Ki</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>5.040000e+03</td>
+      <td>5.400000e+02</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>8.070638e+04</td>
+      <td>2.544039e+05</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>9.511451e+05</td>
+      <td>4.103437e+06</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.000000e+00</td>
+      <td>1.700000e-03</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>1.000000e+02</td>
+      <td>2.437500e+01</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>1.200000e+03</td>
+      <td>1.995000e+02</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>9.700000e+03</td>
+      <td>3.100000e+03</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>4.960000e+07</td>
+      <td>9.496300e+07</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>Limiting the IC50 values to be above zero only.</p>
+<p>From the above quick statistical summary and also the code below to find out the minimum Ki value, it confirmed that there were no zero Ki values recorded.</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select IC50 values above zero</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df[dtree_df[<span class="st">"IC50"</span>] <span class="op">&gt;</span> <span class="fl">0.0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Re-checked the minimum value of IC50 column, which should be above zero.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"IC50"</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>5e-06</code></pre>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"Ki"</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>0.0017</code></pre>
 </div>
 </div>
-<p>Now we could convert the IC50 values to pIC50 values (the negative log of IC50 in molar units).</p>
-<p>The key to understand pIC50 here was to treat pIC50 similarly to how we understand pH for our acids and bases. pIC50 was a dimensionless value (so no units actually!) - <em>useful link</em>. The formula to convert IC50 to pIC50 for nM units was (<strong>use LaTex for formula</strong>):</p>
-<p>pIC50 = 9 - log10(IC50)</p>
+<p>Now we could convert the Ki values to pKi values, which were the negative logs of Ki in molar units (a <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/213088">PubChem example</a> might help to explain it a little further). The key to understand pKi here was to treat pKi similarly to how we would normally understand pH for our acids and bases. The formula to convert Ki to pKi for nM units was:</p>
+<p><span class="math display">\[
+\text{pKi} = 9 - log _{10}(Ki)
+\]</span></p>
 <p>Set up a small function to do the conversion.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_pKi(Ki):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    pKi_value <span class="op">=</span> <span class="dv">9</span> <span class="op">-</span> math.log10(Ki)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pKi_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Applying the calc_pKi function to convert all rows of the compound dataset for the “Ki” column.</p>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_pIC50(IC50):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    pIC50_value <span class="op">=</span> <span class="dv">9</span> <span class="op">-</span> math.log10(IC50)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pIC50_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column for pKi</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply calc_pKi function to the data in Ki column</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"pKi"</span>] <span class="op">=</span> dtree_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: calc_pKi(x.Ki), axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Applying the calc_pIC50 function to convert all rows of the compound dataset for the IC50 column.</p>
+<p>The dataframe would now look like this, with a new pKi column ready for use. Now, one question regarding to Ki was whether it was a good idea to use Ki values like this from public database like ChEMBL. This paper <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> may provide further things to consider.</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column for pIC50</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply calc_pIC50 function to the data in IC50 column</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"pIC50"</span>] <span class="op">=</span> dtree_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: calc_pIC50(x.IC50), axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The dataframe would now look like this, with a new pIC50 column ready for use. Now, one question regarding to IC50 was whether it was a good idea to use IC50 values like this from public database like ChEMBL. This paper by <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> may provide further things to consider.</p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
 
 <div>
 
@@ -488,221 +509,102 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <tr>
       <th></th>
       <th>molecule_chembl_id</th>
-      <th>IC50</th>
+      <th>Ki</th>
       <th>units</th>
       <th>data_validity_comment</th>
       <th>smiles</th>
-      <th>pIC50</th>
+      <th>pKi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>CHEMBL133897</td>
-      <td>750.0</td>
+      <td>CHEMBL11805</td>
+      <td>0.104</td>
       <td>nM</td>
-      <td>NaN</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
-      <td>6.124939</td>
+      <td>Potential transcription error</td>
+      <td>COc1ccccc1CN(C)CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)...</td>
+      <td>9.982967</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>CHEMBL336398</td>
-      <td>100.0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
-      <td>7.000000</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>10.585027</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>CHEMBL130628</td>
-      <td>300.0</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
-      <td>6.522879</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>8.787812</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>CHEMBL130478</td>
-      <td>800.0</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
-      <td>6.096910</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>6.821023</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>CHEMBL130112</td>
-      <td>2400.0</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
       <td>nM</td>
       <td>NaN</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
-      <td>5.619789</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>7.913640</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>However, for a decision tree model, a few more molecular descriptors were probably needed rather than only IC50 or pIC50 and SMILES… One way to do this could be through computations based on canonical SMILES of compounds by using RDKit to add some molecular descriptors.</p>
-<p>Before doing this, a compound sanitisation step would probably be the best before starting any calculations, as this might rule out some compounds with questionable chemical validities. This could also be done via RDKit or I guess Datamol (a Python wrapper library built based on RDKit) might also help as well.</p>
+<p>However, for a decision tree model, a few more molecular descriptors were probably needed rather than only Ki or pKi and SMILES… One way to do this could be through computations based on canonical SMILES of compounds by using RDKit to add some molecular descriptors.</p>
+<p>Before doing this, a compound sanitisation step would probably be the best before starting any calculations, as this might rule out some compounds with questionable chemical validities. This could also be done via RDKit or Datamol (a Python wrapper library built based on RDKit).</p>
 <p>I thought to convert the data types of the “smiles” and “data_validity_comment” columns to string first (in case of running into problems later).</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df['column'].astype('string') </span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.astype({<span class="st">"smiles"</span>: <span class="st">"string"</span>, <span class="st">"data_validity_comment"</span>: <span class="st">"string"</span>})</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dtree_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>molecule_chembl_id        object
-IC50                     float64
-units                     object
-data_validity_comment     string
-smiles                    string
-pIC50                    float64
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.astype({<span class="st">"smiles"</span>: <span class="st">"string"</span>, <span class="st">"data_validity_comment"</span>: <span class="st">"string"</span>})</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dtree_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>molecule_chembl_id               object
+Ki                              float64
+units                            object
+data_validity_comment    string[python]
+smiles                   string[python]
+pKi                             float64
 dtype: object</code></pre>
 </div>
 </div>
-<p>Also, before I jumped straight to compound sanitisation, I thought I should check out if there were any comments in the “data_validity_comment” column.</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<p>Also, before jumping straight to compound sanitisation, I thought I should check out if there were any comments in the “data_validity_comment” column.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>&lt;StringArray&gt;
-[&lt;NA&gt;, 'Outside typical range', 'Potential transcription error']
+['Potential transcription error', &lt;NA&gt;, 'Outside typical range']
 Length: 3, dtype: string</code></pre>
 </div>
 </div>
-<p>Interestingly, there were 3 different types of data validity comments found, which were “NaN”, “Outside typical range” and “Potential transcirption error”. So, this meant we would need to address compounds with comments in the latter two.</p>
+<p>Interestingly, there were 3 different types of data validity comments found, which were “NaN”, “Outside typical range” and “Potential transcirption error”. So, this meant compounds with comments would need to be addressed first.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "outside typical range" as data validity comment</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Outside typical range"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>(58, 6)</code></pre>
+</div>
+</div>
+<p>There were a total of 58 compounds with Ki outside typical range.</p>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "outside typical range" as data validity comment</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Outside typical range"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-
-<div>
-
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>molecule_chembl_id</th>
-      <th>IC50</th>
-      <th>units</th>
-      <th>data_validity_comment</th>
-      <th>smiles</th>
-      <th>pIC50</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>19</th>
-      <td>CHEMBL46151</td>
-      <td>260000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>CCN(CC)CCS/C(=N\O)C(=O)c1ccc(OC)cc1</td>
-      <td>3.585027</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>CHEMBL544022</td>
-      <td>520000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>CCN(CC)CCS/C(=N\O)C(=O)c1ccc(Cl)cc1.Cl</td>
-      <td>3.283997</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>CHEMBL33051</td>
-      <td>460000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>NC(=O)c1cc[n+](COC[n+]2ccccc2/C=N/O)cc1.[Cl-]....</td>
-      <td>3.337242</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>CHEMBL543546</td>
-      <td>330000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>CC(C)N(CCS/C(=N\O)C(=O)c1ccc(Cl)cc1)C(C)C.Cl</td>
-      <td>3.481486</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>CHEMBL1420</td>
-      <td>340000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>C[n+]1ccccc1C=NO</td>
-      <td>3.468521</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>4947</th>
-      <td>CHEMBL5190179</td>
-      <td>785000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>OCCCCCCCCc1ccc(CN2CCCCCC2)c(O)c1</td>
-      <td>3.105130</td>
-    </tr>
-    <tr>
-      <th>4995</th>
-      <td>CHEMBL1668934</td>
-      <td>115000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>CC(=O)N1CCC(NC(=O)Nc2ccc(OC(F)(F)F)cc2)CC1</td>
-      <td>3.939302</td>
-    </tr>
-    <tr>
-      <th>5025</th>
-      <td>CHEMBL5219232</td>
-      <td>1000000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>C#CCN[C@@H]1CCc2ccc(OC(=O)N(C)CC)cc21.C#CCN[C@...</td>
-      <td>3.000000</td>
-    </tr>
-    <tr>
-      <th>5027</th>
-      <td>CHEMBL1193656</td>
-      <td>150000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>C#CCNC1CCc2c(OC(=O)N(C)CC)cccc21</td>
-      <td>3.823909</td>
-    </tr>
-    <tr>
-      <th>5029</th>
-      <td>CHEMBL1193856</td>
-      <td>730000.0</td>
-      <td>nM</td>
-      <td>Outside typical range</td>
-      <td>C#CCN(C)C1CCc2cccc(OC(=O)N(C)C)c21</td>
-      <td>3.136677</td>
-    </tr>
-  </tbody>
-</table>
-<p>328 rows × 6 columns</p>
-</div>
-</div>
-</div>
-<p>There were a total of 328 compounds with IC50 outside typical range!</p>
-<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "potential transcription error" as data validity comment</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Potential transcription error"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="32">
 
 <div>
 
@@ -711,203 +613,140 @@ Length: 3, dtype: string</code></pre>
     <tr>
       <th></th>
       <th>molecule_chembl_id</th>
-      <th>IC50</th>
+      <th>Ki</th>
       <th>units</th>
       <th>data_validity_comment</th>
       <th>smiles</th>
-      <th>pIC50</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>753</th>
-      <td>CHEMBL189957</td>
-      <td>320.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(=O)c4ccccc...</td>
-      <td>6.494850</td>
-    </tr>
-    <tr>
-      <th>755</th>
-      <td>CHEMBL190060</td>
-      <td>6860.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCOc2ccc3c(c2)O/C(=C\c2cc...</td>
-      <td>5.163676</td>
-    </tr>
-    <tr>
-      <th>756</th>
-      <td>CHEMBL191386</td>
-      <td>3410.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCOc2ccc3c(c2)O/C(=C\c2cc...</td>
-      <td>5.467246</td>
-    </tr>
-    <tr>
-      <th>761</th>
-      <td>CHEMBL370961</td>
-      <td>1950.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
-      <td>5.709965</td>
-    </tr>
-    <tr>
-      <th>762</th>
-      <td>CHEMBL372710</td>
-      <td>8000.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
-      <td>5.096910</td>
-    </tr>
-    <tr>
-      <th>763</th>
-      <td>CHEMBL364678</td>
-      <td>44600.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)O/C(=C\...</td>
-      <td>4.350665</td>
-    </tr>
-    <tr>
-      <th>764</th>
-      <td>CHEMBL191461</td>
-      <td>1800.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CNC(=O)Oc1cccc(CN(C)CCCCCCCOc2ccc3c(c2)C/C(=C\...</td>
-      <td>5.744727</td>
-    </tr>
-    <tr>
-      <th>1030</th>
-      <td>CHEMBL239046</td>
-      <td>7160.0</td>
-      <td>nM</td>
-      <td>Potential transcription error</td>
-      <td>CCN(Cc1ccccc1)Cc1ccc(-c2cc3cc(OCCNC(=O)/C=C/c4...</td>
-      <td>5.145087</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<p>There were 8 compounds with potential transcription errors for their respective IC50 values!</p>
-<p>This meant it would be best to remove above compounds with questionable IC50 values (could be potential sources of errors for ML models later on). One of the ways I thought of doing was to fill the empty cells under “data_validity_comment” column, so this would be easier to filter.</p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill "NaN" entries with an actual name e.g. zero</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.fillna(<span class="st">"zero"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dtree_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-
-<div>
-
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>molecule_chembl_id</th>
-      <th>IC50</th>
-      <th>units</th>
-      <th>data_validity_comment</th>
-      <th>smiles</th>
-      <th>pIC50</th>
+      <th>pKi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>CHEMBL133897</td>
-      <td>750.0</td>
+      <td>CHEMBL11805</td>
+      <td>0.104</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
-      <td>6.124939</td>
+      <td>Potential transcription error</td>
+      <td>COc1ccccc1CN(C)CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)...</td>
+      <td>9.982967</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>There were 1 compound with potential transcription errors for the Ki value.</p>
+<p>This meant it would be best to remove these compounds with questionable Ki values, as they could be potential sources of errors for ML models later on. One of the ways I thought of doing was to fill the empty cells under “data_validity_comment” column first, so they would be easier to be filtered and kept for further use.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill "NaN" entries with an actual name e.g. zero</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.fillna(<span class="st">"none"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dtree_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>Ki</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pKi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL11805</td>
+      <td>0.104</td>
+      <td>nM</td>
+      <td>Potential transcription error</td>
+      <td>COc1ccccc1CN(C)CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)...</td>
+      <td>9.982967</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>CHEMBL336398</td>
-      <td>100.0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
-      <td>7.000000</td>
+      <td>none</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>10.585027</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>CHEMBL130628</td>
-      <td>300.0</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
-      <td>6.522879</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>8.787812</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>CHEMBL130478</td>
-      <td>800.0</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
-      <td>6.096910</td>
+      <td>none</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>6.821023</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>CHEMBL130112</td>
-      <td>2400.0</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
-      <td>5.619789</td>
+      <td>none</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>7.913640</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>CHEMBL130098</td>
-      <td>100.0</td>
+      <td>CHEMBL1128</td>
+      <td>200.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(Cl)cc2)nn1C(=O)N(C)C</td>
-      <td>7.000000</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>6.698970</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>CHEMBL336538</td>
-      <td>800.0</td>
+      <td>CHEMBL102226</td>
+      <td>20000.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>COc1ccc(-c2nc(SC)n(C(=O)N(C)C)n2)cc1</td>
-      <td>6.096910</td>
+      <td>none</td>
+      <td>CCCCCCCSC(=O)OCC[N+](C)(C)C.[Cl-]</td>
+      <td>4.698970</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>CHEMBL335033</td>
-      <td>50.0</td>
+      <td>CHEMBL103873</td>
+      <td>2000.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc3ccccc3c2)nn1C(=O)N(C)C</td>
-      <td>7.301030</td>
+      <td>none</td>
+      <td>CCCCCSC(=O)OCC[N+](C)(C)C.[Cl-]</td>
+      <td>5.698970</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>CHEMBL338720</td>
-      <td>560.0</td>
+      <td>CHEMBL640</td>
+      <td>1000.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(-c3ccccc3)cc2)nn1C(=O)N(C)C</td>
-      <td>6.251812</td>
+      <td>none</td>
+      <td>CCN(CC)CCNC(=O)c1ccc(N)cc1</td>
+      <td>6.000000</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>CHEMBL131536</td>
-      <td>1400.0</td>
+      <td>CHEMBL75121</td>
+      <td>21.700</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(Cl)cc2)nn1C(=O)N(C)c1ccccc1</td>
-      <td>5.853872</td>
+      <td>none</td>
+      <td>COc1cc2cc(-c3ccc(CN(C)Cc4ccccc4)cc3)c(=O)oc2cc1OC</td>
+      <td>7.663540</td>
     </tr>
   </tbody>
 </table>
@@ -915,20 +754,20 @@ Length: 3, dtype: string</code></pre>
 </div>
 </div>
 <p>Filtered out only the compounds with nil data validity comments.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_df["data_validity_comment"].unique()</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"zero"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"none"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Checking the dtree_df dataframe again and also whether if only the compounds with “zero” labelled for “data_validity_comment” column were kept (and other two types were removed).</p>
-<div class="cell" data-execution_count="16">
+<p>Checking the dtree_df dataframe again and also whether if only the compounds with “none” labelled for “data_validity_comment” column were kept (and other two types were removed).</p>
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df.shape)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(4703, 6)</code></pre>
+<pre><code>(481, 6)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>&lt;StringArray&gt;
-['zero']
+['none']
 Length: 1, dtype: string</code></pre>
 </div>
 </div>
@@ -937,7 +776,7 @@ Length: 1, dtype: string</code></pre>
 <section id="compound-sanitisation" class="level4">
 <h4 class="anchored" data-anchor-id="compound-sanitisation"><strong>Compound sanitisation</strong></h4>
 <p>I’ve found the <a href="https://docs.datamol.io/stable/tutorials/Preprocessing.html">pre-processing molecules tutorial</a> and its reference links provided by Datamol at the bottom of the webpage to be very informative. Each steps of fix_mol(), sanitize_mol() and standardize_mol() were explained to a certain degree in the link provided above. I guess the key was to select pre-processing options required to fit the purpose of the ML models being built later on, and more experiences in doing this would also help to improve the compound pre-processing step.</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># _preprocess function to sanitise compounds - adapted from datamol.io</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>smiles_column <span class="op">=</span> <span class="st">"smiles"</span></span>
@@ -971,10 +810,10 @@ Length: 1, dtype: string</code></pre>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then the compound sanitisation function was applied to the dtree_df.</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_df.<span class="bu">apply</span>(_preprocess, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>dtree_san_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="37">
 
 <div>
 
@@ -983,11 +822,11 @@ Length: 1, dtype: string</code></pre>
     <tr>
       <th></th>
       <th>molecule_chembl_id</th>
-      <th>IC50</th>
+      <th>Ki</th>
       <th>units</th>
       <th>data_validity_comment</th>
       <th>smiles</th>
-      <th>pIC50</th>
+      <th>pKi</th>
       <th>rdkit_mol</th>
       <th>standard_smiles</th>
       <th>selfies</th>
@@ -997,74 +836,74 @@ Length: 1, dtype: string</code></pre>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>CHEMBL133897</td>
-      <td>750.0</td>
-      <td>nM</td>
-      <td>zero</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
-      <td>6.124939</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f5a0&gt;</td>
-      <td>CCOc1nn(-c2cccc(OCc3ccccc3)c2)c(=O)o1</td>
-      <td>[C][C][O][C][=N][N][Branch2][Ring1][Branch1][C...</td>
-      <td>InChI=1S/C17H16N2O4/c1-2-21-16-18-19(17(20)23-...</td>
-      <td>GUZKBNUSIOHJIR-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
       <th>1</th>
-      <td>CHEMBL336398</td>
-      <td>100.0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
-      <td>7.000000</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f450&gt;</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC1CC1</td>
-      <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
-      <td>InChI=1S/C18H21ClN4OS/c19-15-8-6-14(7-9-15)16-...</td>
-      <td>XWIIHZHUZCWNLW-UHFFFAOYSA-N</td>
+      <td>none</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>10.585027</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e69e0&gt;</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>[C][C][C][=C][C][C][C][=N][C][=C][C][Branch1][...</td>
+      <td>InChI=1S/C18H19ClN2/c1-2-10-5-11-7-12(6-10)17-...</td>
+      <td>QTPHSDHUHXUYFE-KIYNQFGBSA-N</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>CHEMBL130628</td>
-      <td>300.0</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
-      <td>6.522879</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448f4c0&gt;</td>
-      <td>O=C(N1CCCCC1)n1nc(-c2ccc(Cl)cc2)nc1SCC(F)(F)F</td>
-      <td>[O][=C][Branch1][=Branch2][N][C][C][C][C][C][R...</td>
-      <td>InChI=1S/C16H16ClF3N4OS/c17-12-6-4-11(5-7-12)1...</td>
-      <td>GTBUYLWBDILEPY-UHFFFAOYSA-N</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>8.787812</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e67b0&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.BrH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>CAEPIUXAUPYIIJ-UHFFFAOYSA-N</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>CHEMBL130478</td>
-      <td>800.0</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
-      <td>6.096910</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448ee30&gt;</td>
-      <td>CSc1nc(-c2ccc(OC(F)(F)F)cc2)nn1C(=O)N(C)C</td>
-      <td>[C][S][C][=N][C][Branch2][Ring1][Ring2][C][=C]...</td>
-      <td>InChI=1S/C13H13F3N4O2S/c1-19(2)12(21)20-11(23-...</td>
-      <td>FBOHEFQKBNWFPO-UHFFFAOYSA-N</td>
+      <td>none</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>6.821023</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e6900&gt;</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>[N][C][=C][C][=Branch1][N][=N][C][=C][C][=C][C...</td>
+      <td>InChI=1S/C13H14N2/c14-13-9-5-1-3-7-11(9)15-12-...</td>
+      <td>YLJREFDVOIBQDA-UHFFFAOYSA-N</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>CHEMBL130112</td>
-      <td>2400.0</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
       <td>nM</td>
-      <td>zero</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
-      <td>5.619789</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12448eea0&gt;</td>
-      <td>CSc1nc(-c2ccc(C)cc2)nn1C(=O)N(C)c1ccccc1</td>
-      <td>[C][S][C][=N][C][Branch1][N][C][=C][C][=C][Bra...</td>
-      <td>InChI=1S/C18H18N4OS/c1-13-9-11-14(12-10-13)16-...</td>
-      <td>AAXQEELWFXEVAH-UHFFFAOYSA-N</td>
+      <td>none</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>7.913640</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e66d0&gt;</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>[C][C][N][Branch2][Branch1][Ring1][C][C][C][C]...</td>
+      <td>InChI=1S/C42H70N4O4/c1-7-45(35-37-25-17-19-27-...</td>
+      <td>VJXLWYGKZGTXAF-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CHEMBL1128</td>
+      <td>200.000</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>6.698970</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e6660&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.ClH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>BXKDSDJJOVIHMX-UHFFFAOYSA-N</td>
     </tr>
   </tbody>
 </table>
@@ -1083,25 +922,25 @@ Length: 1, dtype: string</code></pre>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>data_clean <span class="op">=</span> pd.DataFrame(data_clean)</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>(4703, 11)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>(481, 11)</code></pre>
 </div>
 </div>
-<p>In this case, I tried using the preprocessing function without adding the parallelisation, the whole sanitisation process wasn’t overly long, and was done within a minute or so (the dtree_df dataframe had 4,703 rows or compounds only).</p>
+<p>In this case, I tried using the preprocessing function without adding the parallelisation, the whole sanitisation process wasn’t very long (since I had a small dataset), and was done within a minute or so.</p>
 <p><br></p>
 </section>
 <section id="detect-outliers" class="level4">
 <h4 class="anchored" data-anchor-id="detect-outliers"><strong>Detect outliers</strong></h4>
-<p>Plotting a histogram to see the distribution of pIC50 values first.</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.hist(column <span class="op">=</span> <span class="st">"pIC50"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<pre><code>array([[&lt;AxesSubplot: title={'center': 'pIC50'}&gt;]], dtype=object)</code></pre>
+<p>Plotting a histogram to see the distribution of pKi values first.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.hist(column <span class="op">=</span> <span class="st">"pKi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>array([[&lt;Axes: title={'center': 'pKi'}&gt;]], dtype=object)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Data_prep_2_files/figure-html/cell-21-output-2.png" width="583" height="431"></p>
+<p><img src="Data_prep_2_files/figure-html/cell-20-output-2.png" width="575" height="431"></p>
 </div>
 </div>
 <p>I read a bit about Dixon’s Q test and realised that there were a few required assumptions prior to using this test, and the current dataset being used here (dtree_san_df) might not fit the requirements, which were:</p>
@@ -1110,30 +949,31 @@ Length: 1, dtype: string</code></pre>
 <li>a small sample size e.g.&nbsp;between 3 and 10 (as originally stated in the paper published by R. B. Dean and W. J. Dixon (1951) Simplified Statistics for Small Numbers of Observations”. Anal. Chem., 1951, 23 (4), 636–638).</li>
 </ul>
 <p>So I’ve decided that rather than showing Python code for Dixon’s Q test myself, I’d attach a few examples from others instead, <a href="https://plotly.com/python/v3/outlier-test/">Q test from Plotly</a> and also <a href="https://sebastianraschka.com/Articles/2014_dixon_test.html">Dixon’s Q test for outlier identification – a questionable practice</a>, since this dataset here wasn’t quite normally distributed as shown from the histogram plotted above.</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.boxplot(column <span class="op">=</span> <span class="st">"pIC50"</span>)</span>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.boxplot(column <span class="op">=</span> <span class="st">"pKi"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxplot version below shows a blank background</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than above version with horizontal grid lines</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_san_df.plot.box(column = "pIC50")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_san_df.plot.box(column = "pKi")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>&lt;Axes: &gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Data_prep_2_files/figure-html/cell-22-output-2.png" width="566" height="411"></p>
+<p><img src="Data_prep_2_files/figure-html/cell-21-output-2.png" width="566" height="411"></p>
 </div>
 </div>
-<p>So I used Pandas’ built-in boxplot in addition to the histogram to show the likely outliers within the pIC50 values. Clearly, the possible outliers for pIC50 values appeared to be close to 10 and above. I’ve then decided not to completely remove these outliers due to the dataset itself being not in a Gaussian distribution (which meant they might not be true outliers).</p>
+<p>So I used Pandas’ built-in boxplot in addition to the histogram to show the likely outliers within the pKi values. Clearly, the possible outliers for pKi values appeared to be above 10. I’ve then decided not to completely remove these outliers due to the dataset itself being not in a Gaussian distribution (which meant they might not be true outliers).</p>
 <p><br></p>
 </section>
 <section id="molecular-descriptors" class="level4">
-
+<h4 class="anchored" data-anchor-id="molecular-descriptors"><strong>Molecular descriptors</strong></h4>
+<p>To be continued.</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Molecular descriptors</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Kalliokoski2013a" class="csl-entry" role="doc-biblioentry">
 Kalliokoski, Tuomo, Christian Kramer, Anna Vulpetti, and Peter Gedeck. 2013. <span>“Comparability of Mixed IC50 Data <span></span> A Statistical Analysis.”</span> Edited by Andrea Cavalli. <em>PLoS ONE</em> 8 (4): e61007. <a href="https://doi.org/10.1371/journal.pone.0061007">https://doi.org/10.1371/journal.pone.0061007</a>.
 </div>
