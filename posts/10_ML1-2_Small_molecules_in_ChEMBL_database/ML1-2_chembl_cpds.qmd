@@ -63,7 +63,7 @@ flowchart TB
 
 The dataframe used below was based on a .csv file extracted and saved via a direct .csv file download from the homepage of [ChEMBL website](https://www.ebi.ac.uk/chembl/) (via selecting the option of "Distinct compounds" containing 2,331,700 compounds at the time for ChEMBL version 31). Data pre-processing and wrangling were done on the same dataframe containing these 2,331,700 compounds (rows of data) via Polars dataframe library. The details of data extraction and wrangling were shown in [ML series 1.1](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1-1_Small_molecules_in_ChEMBL_database/ML1-1_chembl_cpds.html).
 
-<b>
+<br>
 
 ##### **Import dataframe from ML series 1.1**
 
