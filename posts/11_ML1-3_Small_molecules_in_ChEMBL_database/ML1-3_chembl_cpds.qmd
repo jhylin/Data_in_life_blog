@@ -15,13 +15,21 @@ jupyter: python3
 
 ##### ***Machine learning in drug discovery - series 1.3***
 
-*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions*
+*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions.*
+
+*This post has been updated on 2/9/2023 with a section on "Data source" to improve the completeness and reproducibility of this post.*
 
 <br>
 
 ##### **Review of ML series 1.2 & introduction of series 1.3**
 
 Without making this final post for logistic regression ML series for small molecules in ChEMBL database too long, I'll quickly explain what happened in the ML series 1.1 and 1.2. Basically, I've trialled a logistic regression model on a small set of ChEMBL database-extracted small molecule data. The whole purpose was for me to go through the ML series flowchart that I've compiled in ML series 1.2. Currently, this post was ML series 1.3 focusing on re-training the model by using the newly-found parameters to optimise the original model after running the cross-validation and hyper-parameter tuning in ML series 1.2.
+
+<br>
+
+##### **Data source**
+
+The dataframe used below was based on a .csv file extracted and saved via a direct .csv file download from the homepage of [ChEMBL website](https://www.ebi.ac.uk/chembl/) (via selecting the option of "Distinct compounds" containing 2,331,700 compounds at the time for ChEMBL version 31). Data pre-processing and wrangling were done on the same dataframe containing these 2,331,700 compounds (rows of data) via Polars dataframe library. The details of data extraction and wrangling were shown in [ML series 1.1](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1-1_Small_molecules_in_ChEMBL_database/ML1-1_chembl_cpds.html).
 
 <br>
 

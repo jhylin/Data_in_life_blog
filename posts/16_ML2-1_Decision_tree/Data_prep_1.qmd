@@ -2,8 +2,8 @@
 title: "Tree models in ChEMBL data"
 subtitle: "ML series 2.1 - decision tree - data pre-processing (part 1)"
 author: Jennifer HY Lin
-date: '2023-8-30'
-draft: false
+date: '2023-9-1'
+draft: true
 categories: 
     - Pandas
     - ChEMBL database
@@ -122,10 +122,8 @@ Obtaining bioactivity data for the selected target.
 bioact = bioact_api.filter(
     # Use the previously saved target ChEMBL ID
     target_chembl_id = chembl_id, 
-    # Bioactivity type - choosing IC50
-    type = "IC50",
-    # ?Added Ki
-    #standard_type = "Ki",
+    # Selecting for Ki
+    standard_type = "Ki",
     # Requesting exact measurements
     relation = "=",
     # Binding data as "B"
@@ -137,7 +135,6 @@ bioact = bioact_api.filter(
     "assay_description",
     "assay_type",
     "molecule_chembl_id",
-    "type",
     "standard_units",
     "standard_type",
     "relation",
@@ -157,7 +154,7 @@ print(len(bioact[0]), type(bioact[0]))
 bioact[0]
 ```
 
-The next step might take a few minutes - downloading the QuerySet as a Pandas DataFrame.
+The next step might take a few minutes (if using a different protein target) - downloading the QuerySet as a Pandas DataFrame.
 
 ```{python}
 bioact_df = pd.DataFrame.from_dict(bioact)
@@ -175,16 +172,28 @@ bioact_df.shape
 
 ###### **Pre-process bioactivity data**
 
-To see a variety of units being recorded in the ChEMBL database, which meant they would need to be converted to nanomolar (nM).
+When I reached the second half of data pre-processing, an alarm bell went off regarding using half maximal inhibitory concentration (IC50) values in ChEMBL. I remembered that I've read recent blog posts by Greg Landrum about using [IC50](https://greglandrum.github.io/rdkit-blog/posts/2023-06-12-overlapping-ic50-assays1.html) and inhibition constant [(Ki)](https://greglandrum.github.io/rdkit-blog/posts/2023-06-17-overlapping-Ki-assays1.html) values from ChEMBL. A useful paper [@Kalliokoski] from 2013 also looked into this issue about using mixed IC50 data in ChEMBL, and provided a thorough overview about how to deal with situations like this.
+
+So to summarise both the paper and blog posts mentioned above, if anyone would like to combine IC50 values for the same protein target from ChEMBL, they would need to check the details of assays used for the compounds to make sure they were aligned and not extremely heterogeneous, as IC50 values were very assay-specific, mixing without knowing was definitely not a good idea. The slightly better news was that it was more likely to be better to combine Ki values for the same protein target from ChEMBL as they were found to be adding less noise to the data (similar data caution should also apply ideally). However, it was possible to mix Ki values with IC50 values, but the data would need to be corrected via using a conversion factor of 2.0 to convert Ki values to IC50 values (note: I also wondered if this needed to be re-looked again in a study since this paper was 10 years ago, and I suspected ChEMBL database might change during these years?)
+
+Because of this, I decided to stick with Ki values for this project. Firstly, I checked for all types of units being used in bioact_df. There were numerous different units and formats, which meant they would need to be converted to nanomolar (nM).
 
 ```{python}
 bioact_df["units"].unique()
 ```
 
-The simplest thing to do was to drop the "units" and "value" columns, which were in micromolar (μM), and to avoid unit conversion to nM, we could use columns such as "standard_units" and "standard_value" which were recorded with nM already.
+Checking again that I've fetched Ki values only.
 
 ```{python}
-bioact_df.drop(["units", "value"], axis = 1, inplace = True)
+bioact_df["standard_type"].unique()
+```
+
+It looked like there were duplicates of columns on units and values - removing "units" and "value" columns and keeping "standard_units" and "standard_value" columns instead. Also, "type" column was dropped as there were already a "standard_type" column. 
+
+*Differences between "type" and "standard_type" columns were mentioned by this ChEMBL [blog post](https://chembl.blogspot.com/2013/02/latest-activities-on-activities-table.html).*
+
+```{python}
+bioact_df.drop(["units", "value", "type"], axis = 1, inplace = True)
 # Re-check df
 bioact_df.head()
 ```
@@ -193,9 +202,7 @@ bioact_df.head()
 bioact_df.dtypes
 ```
 
-At this stage, I did a little detour test to see how this dataframe would be read in Polars dataframe library, particularly to see if the data types for each column might be more accurate than how it was in Pandas. After converting this Pandas dataframe into a Polars one, I realised that even Polars was reading in the "standard_value" column as "str", which meant it would still need another conversion into "float64" anyway. Therefore, I decided to stick with Pandas all the way since there were not so much differences between the two dataframe libraries.
-
-The column of "standard_value" was converted from "object" to "float64" - so we could use this half maximal inhibitory concentration (IC50) values for calculations later.
+The column of "standard_value" was converted from "object" to "float64" so we could use the Ki values for calculations later.
 
 ```{python}
 bioact_df = bioact_df.astype({"standard_value": "float64"})
@@ -206,7 +213,7 @@ bioact_df.dtypes
 Then the next step was taking care of any missing entries by removing them in the first place. I excluded "data_validity_comment" column here as this was required to check if there were any activity data that were deemed to be not as valid e.g. excessively high IC50 value and so on. A lot of the compounds in this column probably had "None", which ensured that there were no particular alarm bells to the curated bioactivity data.
 
 ```{python}
-bioact_df.dropna(subset = ["activity_id", "assay_chembl_id", "assay_description", "assay_type", "molecule_chembl_id", "relation", "standard_units", "standard_value", "target_chembl_id", "target_organism", "type"], axis = 0, how = "any", inplace = True)
+bioact_df.dropna(subset = ["activity_id", "assay_chembl_id", "assay_description", "assay_type", "molecule_chembl_id", "relation",  "standard_type", "standard_units", "standard_value", "target_chembl_id", "target_organism"], axis = 0, how = "any", inplace = True)
 # Check number of rows and columns again (in this case, there appeared to be no change for rows)
 bioact_df.shape
 ```
@@ -217,14 +224,14 @@ Since all unique units inside the "units" and "values" columns were checked prev
 bioact_df["standard_units"].unique()
 ```
 
-There were a mixture of nM, μM and also picomolars (pM)!
+There were a mixture of different units.
 
 ```{python}
 # Check for number of non-nM units
 bioact_df[bioact_df["standard_units"] != "nM"].shape[0]
 ```
 
-There appeared to be 30 non-nM values inside the fetched bioactivity data.
+There appeared to be 61 non-nM values inside the fetched bioactivity data.
 
 ```{python}
 bioact_df = bioact_df[bioact_df["standard_units"] == "nM"]
@@ -250,12 +257,12 @@ Next part would be to remove all the duplicates in the dataframe, especially whe
 bioact_df.drop_duplicates("molecule_chembl_id", keep = "first", inplace = True)
 ```
 
-Renamed the "standard_value" and "standard_units" columns to "IC50" and "units" respectively.
+Renamed the "standard_value" and "standard_units" columns to "Ki" and "units" respectively.
 
 ```{python}
 bioact_df.rename(
     columns = {
-        "standard_value": "IC50",
+        "standard_value": "Ki",
         "standard_units": "units"
     }, inplace = True
 )
@@ -301,12 +308,12 @@ Here, the same step was applied where the compound QuerySet object was converted
 ```{python}
 # Uncomment line below to use progress bar
 # when running in ipynb or qmd files
-#compds = list(tqdm(cpds))
+compds = list(tqdm(cpds))
 
 # Code below was the same as above, 
 # except without the progress bar
 # - for published version (images of progress bar taking too much space)
-compds = list(cpds)
+#compds = list(cpds)
 ```
 
 Converting retrieved compound QuerySet into a Pandas DataFrame.
@@ -415,7 +422,7 @@ The next step was to combine or merge both datasets.
 ```{python}
 # Create a final dataframe that will contain both bioactivity and compound data
 dtree_df = pd.merge(
-    bioact_df[["molecule_chembl_id", "IC50", "units", "data_validity_comment"]],
+    bioact_df[["molecule_chembl_id", "Ki", "units", "data_validity_comment"]],
     cpds_df,
     on = "molecule_chembl_id",
 )
@@ -431,7 +438,7 @@ dtree_df.reset_index(drop = True, inplace = True)
 print(dtree_df.shape)
 ```
 
-Saving a copy of the merged dataframe for now (to avoid re-running the previous code repeatedly).
+Saving a copy of the merged dataframe for now (to avoid re-running the previous code repeatedly, and be ready for second-half of the work).
 
 ```{python}
 dtree_df.to_csv("ache_chembl.csv")
