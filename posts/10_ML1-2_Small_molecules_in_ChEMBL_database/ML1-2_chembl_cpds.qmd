@@ -15,7 +15,9 @@ jupyter: python3
 
 ##### ***Machine learning in drug discovery - series 1.2***
 
-*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions*
+*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions.*
+
+*This post has been updated on 2/9/2023 with a section on "Data source" to improve the completeness and reproducibility of this post.*
 
 <br>
 
@@ -31,7 +33,7 @@ In *scikit-learn*, an estimator is alluding to the variety of ML approaches (as 
 
 <br>
 
-###### **Machine learning series - overall plan**
+###### **Machine learning series 1 - overall plan**
 
 The overall plan for the ML series for small molecules in ChEMBL database could be visualised through the following flow chart, which was adapted and modified from the section on [cross-validation in *scikit-learn*](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation). This current post was targeting the ML series 1.2 subgraph area.
 
@@ -56,6 +58,12 @@ flowchart TB
 ```
 
 <br>
+
+##### **Data source**
+
+The dataframe used below was based on a .csv file extracted and saved via a direct .csv file download from the homepage of [ChEMBL website](https://www.ebi.ac.uk/chembl/) (via selecting the option of "Distinct compounds" containing 2,331,700 compounds at the time for ChEMBL version 31). Data pre-processing and wrangling were done on the same dataframe containing these 2,331,700 compounds (rows of data) via Polars dataframe library. The details of data extraction and wrangling were shown in [ML series 1.1](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1-1_Small_molecules_in_ChEMBL_database/ML1-1_chembl_cpds.html).
+
+<b>
 
 ##### **Import dataframe from ML series 1.1**
 
