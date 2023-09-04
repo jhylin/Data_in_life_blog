@@ -624,8 +624,8 @@ Name: 0, dtype: object</code></pre>
 <p><br></p>
 <section id="pre-process-bioactivity-data" class="level6">
 <h6 class="anchored" data-anchor-id="pre-process-bioactivity-data"><strong>Pre-process bioactivity data</strong></h6>
-<p>When I reached the second half of data pre-processing, an alarm bell went off regarding using half maximal inhibitory concentration (IC50) values in ChEMBL. I remembered reading recent blog posts by Greg Landrum about using <a href="https://greglandrum.github.io/rdkit-blog/posts/2023-06-12-overlapping-ic50-assays1.html">IC50</a> and inhibition constant (<a href="https://greglandrum.github.io/rdkit-blog/posts/2023-06-17-overlapping-Ki-assays1.html">Ki</a>) values from ChEMBL. A useful paper <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> from 2013 also looked into this issue about using mixed IC50 data in ChEMBL, and provided a thorough overview about how to deal with situations like this. There was also another paper on mixed Ki data from the same author group.</p>
-<p>To summarise both the paper and blog posts mentioned above:</p>
+<p>When I reached the second half of data pre-processing, an alarm bell went off regarding using half maximal inhibitory concentration (IC50) values in ChEMBL. I remembered reading recent blog posts by Greg Landrum about using <a href="https://greglandrum.github.io/rdkit-blog/posts/2023-06-12-overlapping-ic50-assays1.html">IC50</a> and inhibition constant (<a href="https://greglandrum.github.io/rdkit-blog/posts/2023-06-17-overlapping-Ki-assays1.html">Ki</a>) values from ChEMBL. A useful open-access paper <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> from 2013 also looked into this issue about using mixed IC50 data in ChEMBL, and provided a thorough overview about how to deal with situations like this. There was also another paper <span class="citation" data-cites="Kramer2012">(<a href="#ref-Kramer2012" role="doc-biblioref">Kramer et al. 2012</a>)</span> on mixed Ki data from the same author group in 2012 that touched on similar issues (unfortunately this wasn’t an open-access paper so I only looked at the abstract).</p>
+<p>To summarise both the paper about IC50 and blog posts mentioned above:</p>
 <ul>
 <li><p>it would be the best to check the details of assays used to test the compounds to ensure they were aligned and not extremely heterogeneous, since IC50 values were very assay-specific, and knowing that these values were extracted from different papers from different labs all over the world, mixing them without knowing was definitely not a good idea</p></li>
 <li><p>the slightly better news was that it was more likely okay to combine Ki values for the same protein target from ChEMBL as they were found to be adding less noise to the data (however ideally similar data caution should also apply)</p></li>
@@ -1116,10 +1116,10 @@ dtype: object</code></pre>
 <pre><code>  0%|          | 0/540 [00:00&lt;?, ?it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 96%|█████████▋| 521/540 [00:00&lt;00:00, 5117.07it/s]</code></pre>
+<pre><code> 96%|█████████▋| 521/540 [00:00&lt;00:00, 5064.25it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>100%|██████████| 540/540 [00:00&lt;00:00, 5263.41it/s]</code></pre>
+<pre><code>100%|██████████| 540/540 [00:00&lt;00:00, 5198.75it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
@@ -1452,6 +1452,9 @@ dtype: object</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Kalliokoski2013a" class="csl-entry" role="doc-biblioentry">
 Kalliokoski, Tuomo, Christian Kramer, Anna Vulpetti, and Peter Gedeck. 2013. <span>“Comparability of Mixed IC50 Data <span></span> A Statistical Analysis.”</span> Edited by Andrea Cavalli. <em>PLoS ONE</em> 8 (4): e61007. <a href="https://doi.org/10.1371/journal.pone.0061007">https://doi.org/10.1371/journal.pone.0061007</a>.
+</div>
+<div id="ref-Kramer2012" class="csl-entry" role="doc-biblioentry">
+Kramer, Christian, Tuomo Kalliokoski, Peter Gedeck, and Anna Vulpetti. 2012. <span>“The Experimental Uncertainty of Heterogeneous Public <span><em>K</em></span><span><sub>i</sub></span> Data.”</span> <em>Journal of Medicinal Chemistry</em> 55 (11): 5165–73. <a href="https://doi.org/10.1021/jm300131x">https://doi.org/10.1021/jm300131x</a>.
 </div>
 <div id="ref-vantilborg2022" class="csl-entry" role="doc-biblioentry">
 Tilborg, Derek van, Alisa Alenicheva, and Francesca Grisoni. 2022. <span>“Exposing the Limitations of Molecular Machine Learning with Activity Cliffs.”</span> <em>Journal of Chemical Information and Modeling</em> 62 (23): 5938–51. <a href="https://doi.org/10.1021/acs.jcim.2c01073">https://doi.org/10.1021/acs.jcim.2c01073</a>.

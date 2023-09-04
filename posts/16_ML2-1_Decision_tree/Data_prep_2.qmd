@@ -56,8 +56,7 @@ From the above quick statistical summary and also the code below to find out the
 dtree_df["Ki"].min()
 ```
 
-Now we could convert the Ki values to pKi values, which were the negative logs of Ki in molar units (a [PubChem example](https://pubchem.ncbi.nlm.nih.gov/bioassay/213088) might help to explain it a little further). The key to understand pKi here was to treat pKi similarly to how we would normally understand pH for our acids and bases. The formula to convert Ki to pKi for nM units was:
-$$
+Now we could convert the Ki values to pKi values, which were the negative logs of Ki in molar units (a [PubChem example](https://pubchem.ncbi.nlm.nih.gov/bioassay/213088) might help to explain it a little further). The key to understand pKi here was to treat pKi similarly to how we would normally understand pH for our acids and bases. The formula to convert Ki to pKi for nM units was: $$
 \text{pKi} = 9 - log _{10}(Ki)
 $$
 
@@ -218,7 +217,7 @@ dtree_san_df.hist(column = "pKi")
 I read a bit about Dixon's Q test and realised that there were a few required assumptions prior to using this test, and the current dataset being used here (dtree_san_df) might not fit the requirements, which were:
 
 -   normally distributed data
--   a small sample size e.g. between 3 and 10 (as originally stated in the paper published by R. B. Dean and W. J. Dixon (1951) Simplified Statistics for Small Numbers of Observations". Anal. Chem., 1951, 23 (4), 636--638).
+-   a small sample size e.g. between 3 and 10 (as originally stated in this paper[@dean1951] published by R. B. Dean and W. J. Dixon (1951) Simplified Statistics for Small Numbers of Observations". Anal. Chem., 1951, 23 (4), 636--638).
 
 So I've decided that rather than showing Python code for Dixon's Q test myself, I'd attach a few examples from others instead, [Q test from Plotly](https://plotly.com/python/v3/outlier-test/) and also [Dixon's Q test for outlier identification -- a questionable practice](https://sebastianraschka.com/Articles/2014_dixon_test.html), since this dataset here wasn't quite normally distributed as shown from the histogram plotted above.
 
