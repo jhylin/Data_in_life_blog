@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-09-02">
+<meta name="dcterms.date" content="2023-09-07">
 
-<title>Home - Tree models in ChEMBL data</title>
+<title>Home - Decision tree</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -219,8 +219,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tree models in ChEMBL data</h1>
-            <p class="subtitle lead">ML series 2.1 - decision tree - data pre-processing (part 2)</p>
+      <h1 class="title">Decision tree</h1>
+            <p class="subtitle lead">ML series 2.1 - data pre-processing (part 2)</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine learning projects</div>
                 <div class="quarto-category">Pandas</div>
@@ -242,7 +242,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 2, 2023</p>
+        <p class="date">September 7, 2023</p>
       </div>
     </div>
     
@@ -259,10 +259,18 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#data-source" id="toc-data-source" class="nav-link active" data-scroll-target="#data-source"><strong>Data source</strong></a></li>
-  <li><a href="#re-importing-saved-dataframe" id="toc-re-importing-saved-dataframe" class="nav-link" data-scroll-target="#re-importing-saved-dataframe"><strong>Re-importing saved dataframe</strong></a></li>
-  <li><a href="#compound-sanitisation" id="toc-compound-sanitisation" class="nav-link" data-scroll-target="#compound-sanitisation"><strong>Compound sanitisation</strong></a></li>
+  <li><a href="#re-import-saved-data" id="toc-re-import-saved-data" class="nav-link" data-scroll-target="#re-import-saved-data"><strong>Re-import saved data</strong></a></li>
+  <li><a href="#calculate-pki" id="toc-calculate-pki" class="nav-link" data-scroll-target="#calculate-pki"><strong>Calculate pKi</strong></a></li>
+  <li><a href="#plan-other-data-pre-processing-steps" id="toc-plan-other-data-pre-processing-steps" class="nav-link" data-scroll-target="#plan-other-data-pre-processing-steps"><strong>Plan other data pre-processing steps</strong></a></li>
+  <li><a href="#check-data-validity" id="toc-check-data-validity" class="nav-link" data-scroll-target="#check-data-validity"><strong>Check data validity</strong></a></li>
+  <li><a href="#sanitise-compounds" id="toc-sanitise-compounds" class="nav-link" data-scroll-target="#sanitise-compounds"><strong>Sanitise compounds</strong></a></li>
   <li><a href="#detect-outliers" id="toc-detect-outliers" class="nav-link" data-scroll-target="#detect-outliers"><strong>Detect outliers</strong></a></li>
-  <li><a href="#molecular-descriptors" id="toc-molecular-descriptors" class="nav-link" data-scroll-target="#molecular-descriptors"><strong>Molecular descriptors</strong></a></li>
+  <li><a href="#calculate-molecular-descriptors" id="toc-calculate-molecular-descriptors" class="nav-link" data-scroll-target="#calculate-molecular-descriptors"><strong>Calculate molecular descriptors</strong></a>
+  <ul>
+  <li><a href="#rdkit-code" id="toc-rdkit-code" class="nav-link" data-scroll-target="#rdkit-code"><strong>RDKit code</strong></a></li>
+  <li><a href="#datamol-code" id="toc-datamol-code" class="nav-link" data-scroll-target="#datamol-code"><strong>Datamol code</strong></a></li>
+  <li><a href="#combine-dataframes" id="toc-combine-dataframes" class="nav-link" data-scroll-target="#combine-dataframes"><strong>Combine dataframes</strong></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -274,23 +282,25 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="data-source" class="level5">
 <h5 class="anchored" data-anchor-id="data-source"><strong>Data source</strong></h5>
-<p><strong>To explain source of dataframe</strong></p>
-<p>Since data preparation and cleaning was a well-known process that would take up a lot of time, I’ve decided to split this part into two posts to ensure the reading time for each post was reasonable.</p>
+<p>The data used in part 2 of data pre-processing was extracted from ChEMBL database by using ChEMBL webresource client in Python. The details of all the steps taken to reach the final .csv file could be seen in this earlier <em>post</em>. Since data preparation and cleaning was a well-known process that would take up a lot of time before doing anything significant on the data, I’ve splitted this process into two posts to ensure reasonable reading time for each.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import all libraries used</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rdkit.Chem <span class="im">import</span> Descriptors</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datamol <span class="im">as</span> dm</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tqdm library used in datamol's batch descriptor code</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </section>
-<section id="re-importing-saved-dataframe" class="level5">
-<h5 class="anchored" data-anchor-id="re-importing-saved-dataframe"><strong>Re-importing saved dataframe</strong></h5>
-<p>Re-imported the partly pre-processed dtree_df from the earlier post.</p>
+<section id="re-import-saved-data" class="level5">
+<h5 class="anchored" data-anchor-id="re-import-saved-data"><strong>Re-import saved data</strong></h5>
+<p>Re-imported the partly pre-processed data from the earlier post.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> pd.read_csv(<span class="st">"ache_chembl.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="2">
 
 <div>
 
@@ -357,11 +367,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Noticed there was an extra index column, likely inherited from how the .csv file was saved, which was subsequently removed.</p>
+<p>Noticed there was an extra index column (named “Unnamed: 0”), likely inherited from how the .csv file was saved, dropping this column for now.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.drop(<span class="st">"Unnamed: 0"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="3">
 
 <div>
 
@@ -422,10 +432,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>The merged dataframe was found to have Ki with zero nM, which meant the function to convert Ki to pKi would not proceed (due to natural log of zero normally means undefined answer!). So a good practice to clean data like this was probably best to run a statistical summary such as the code below first, then look for minimum and maximum values and also others to see if there were anything to be tidied up first.</p>
+<p><br></p>
+</section>
+<section id="calculate-pki" class="level5">
+<h5 class="anchored" data-anchor-id="calculate-pki"><strong>Calculate pKi</strong></h5>
+<p>The distribution of Ki values were shown below via a simple statistical summary.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dtree_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 
@@ -474,14 +488,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>From the above quick statistical summary and also the code below to find out the minimum Ki value, it confirmed that there were no zero Ki values recorded.</p>
+<p>From the above quick statistical summary and also the code below to find the minimum Ki value, it confirmed that there were no zero Ki values recorded.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"Ki"</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>0.0017</code></pre>
 </div>
 </div>
-<p>Now we could convert the Ki values to pKi values, which were the negative logs of Ki in molar units (a <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/213088">PubChem example</a> might help to explain it a little further). The key to understand pKi here was to treat pKi similarly to how we would normally understand pH for our acids and bases. The formula to convert Ki to pKi for nM units was:</p>
+<p>Now we could convert the Ki values to pKi values, which were the negative logs of Ki in molar units (a <a href="https://pubchem.ncbi.nlm.nih.gov/bioassay/213088">PubChem example</a> might help to explain it a little further). The key to understand pKi here was to treat pKi similarly to how we would normally understand pH for our acids and bases. The formula to convert Ki to pKi for nanomolar (nM) units was:</p>
 <p><span class="math display">\[
 \text{pKi} = 9 - log _{10}(Ki)
 \]</span></p>
@@ -491,16 +505,16 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    pKi_value <span class="op">=</span> <span class="dv">9</span> <span class="op">-</span> math.log10(Ki)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pKi_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Applying the calc_pKi function to convert all rows of the compound dataset for the “Ki” column.</p>
+<p>Applying the calc_pKi function to convert all rows of the compound dataset for the “Ki” column (please scroll to the very right to see it).</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column for pKi</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply calc_pKi function to the data in Ki column</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"pKi"</span>] <span class="op">=</span> dtree_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: calc_pKi(x.Ki), axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The dataframe would now look like this, with a new pKi column ready for use. Now, one question regarding to Ki was whether it was a good idea to use Ki values like this from public database like ChEMBL. This paper <span class="citation" data-cites="Kalliokoski2013a">(<a href="#ref-Kalliokoski2013a" role="doc-biblioref">Kalliokoski et al. 2013</a>)</span> may provide further things to consider.</p>
+<p>The dataframe would now look like this, with a new pKi column.</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="8">
 
 <div>
 
@@ -567,44 +581,120 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>However, for a decision tree model, a few more molecular descriptors were probably needed rather than only Ki or pKi and SMILES… One way to do this could be through computations based on canonical SMILES of compounds by using RDKit to add some molecular descriptors.</p>
-<p>Before doing this, a compound sanitisation step would probably be the best before starting any calculations, as this might rule out some compounds with questionable chemical validities. This could also be done via RDKit or Datamol (a Python wrapper library built based on RDKit).</p>
-<p>I thought to convert the data types of the “smiles” and “data_validity_comment” columns to string first (in case of running into problems later).</p>
+<p><br></p>
+</section>
+<section id="plan-other-data-pre-processing-steps" class="level5">
+<h5 class="anchored" data-anchor-id="plan-other-data-pre-processing-steps"><strong>Plan other data pre-processing steps</strong></h5>
+<p>However, for a decision tree model, a few more molecular descriptors were most likely needed rather than only Ki or pKi and SMILES. One way to do this could be through computations based on canonical SMILES of compounds by using RDKit to add some molecular descriptors.</p>
+<p>However, before doing this, a compound sanitisation step should be applied before starting any calculations to rule out compounds with questionable chemical validities. RDKit or Datamol (a Python wrapper library built based on RDKit) was also capable of doing this.</p>
+<p>I’ve added a quick step here to convert the data types of “smiles” and “data_validity_comment” columns to string (in case of running into problems later).</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.astype({<span class="st">"smiles"</span>: <span class="st">"string"</span>, <span class="st">"data_validity_comment"</span>: <span class="st">"string"</span>})</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dtree_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
-<pre><code>molecule_chembl_id               object
-Ki                              float64
-units                            object
-data_validity_comment    string[python]
-smiles                   string[python]
-pKi                             float64
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>molecule_chembl_id        object
+Ki                       float64
+units                     object
+data_validity_comment     string
+smiles                    string
+pKi                      float64
 dtype: object</code></pre>
 </div>
 </div>
-<p>Also, before jumping straight to compound sanitisation, I thought I should check out if there were any comments in the “data_validity_comment” column.</p>
+<p><br></p>
+</section>
+<section id="check-data-validity" class="level5">
+<h5 class="anchored" data-anchor-id="check-data-validity"><strong>Check data validity</strong></h5>
+<p>Also, before jumping straight to compound sanitisation, I remembered that I needed to check the “data_validity_comment” column.</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dtree_df[<span class="st">"data_validity_comment"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>&lt;StringArray&gt;
 ['Potential transcription error', &lt;NA&gt;, 'Outside typical range']
 Length: 3, dtype: string</code></pre>
 </div>
 </div>
-<p>Interestingly, there were 3 different types of data validity comments found, which were “NaN”, “Outside typical range” and “Potential transcirption error”. So, this meant compounds with comments would need to be addressed first.</p>
+<p>There were 3 different types of data validity comments found, which were “NaN”, “Outside typical range” and “Potential transcirption error”. So, this meant compounds with comments other than “NaN” would need to be addressed first.</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "outside typical range" as data validity comment</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Outside typical range"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dtree_df_err <span class="op">=</span> dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Outside typical range"</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_df_err.shape)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>dtree_df_err.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>(58, 6)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>Ki</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pKi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>111</th>
+      <td>CHEMBL225198</td>
+      <td>0.0090</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>O=C(CCc1c[nH]c2ccccc12)NCCCCCCCNc1c2c(nc3cc(Cl...</td>
+      <td>11.045757</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>CHEMBL225021</td>
+      <td>0.0017</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>O=C(CCCc1c[nH]c2ccccc12)NCCCCCNc1c2c(nc3cc(Cl)...</td>
+      <td>11.769551</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>CHEMBL402976</td>
+      <td>313700.0000</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CN(C)CCOC(=O)Nc1ccncc1</td>
+      <td>3.503485</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>CHEMBL537454</td>
+      <td>140200.0000</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CN(C)CCOC(=O)Nc1cc(Cl)nc(Cl)c1.Cl</td>
+      <td>3.853252</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>CHEMBL3216883</td>
+      <td>316400.0000</td>
+      <td>nM</td>
+      <td>Outside typical range</td>
+      <td>CN(C)CCOC(=O)Nc1ccncc1Br.Cl.Cl</td>
+      <td>3.499764</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 </div>
 <p>There were a total of 58 compounds with Ki outside typical range.</p>
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out number of compounds with "potential transcription error" as data validity comment</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dtree_df[dtree_df[<span class="st">"data_validity_comment"</span>] <span class="op">==</span> <span class="st">"Potential transcription error"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="12">
 
 <div>
 
@@ -635,13 +725,13 @@ Length: 3, dtype: string</code></pre>
 </div>
 </div>
 </div>
-<p>There were 1 compound with potential transcription errors for the Ki value.</p>
-<p>This meant it would be best to remove these compounds with questionable Ki values, as they could be potential sources of errors for ML models later on. One of the ways I thought of doing was to fill the empty cells under “data_validity_comment” column first, so they would be easier to be filtered and kept for further use.</p>
+<p>There was one compound with potential transcription errors for Ki value.</p>
+<p>These compounds with questionable Ki values were removed, as they could be potential sources of errors for ML models later on (error trickling effect). One of the ways I thought of doing was to fill the empty cells within the “data_validity_comment” column first, so it would be easier to filter them out.</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill "NaN" entries with an actual name e.g. zero</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dtree_df <span class="op">=</span> dtree_df.fillna(<span class="st">"none"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dtree_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dtree_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
 
 <div>
 
@@ -702,51 +792,6 @@ Length: 3, dtype: string</code></pre>
       <td>none</td>
       <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
       <td>7.913640</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CHEMBL1128</td>
-      <td>200.000</td>
-      <td>nM</td>
-      <td>none</td>
-      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
-      <td>6.698970</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>CHEMBL102226</td>
-      <td>20000.000</td>
-      <td>nM</td>
-      <td>none</td>
-      <td>CCCCCCCSC(=O)OCC[N+](C)(C)C.[Cl-]</td>
-      <td>4.698970</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>CHEMBL103873</td>
-      <td>2000.000</td>
-      <td>nM</td>
-      <td>none</td>
-      <td>CCCCCSC(=O)OCC[N+](C)(C)C.[Cl-]</td>
-      <td>5.698970</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CHEMBL640</td>
-      <td>1000.000</td>
-      <td>nM</td>
-      <td>none</td>
-      <td>CCN(CC)CCNC(=O)c1ccc(N)cc1</td>
-      <td>6.000000</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CHEMBL75121</td>
-      <td>21.700</td>
-      <td>nM</td>
-      <td>none</td>
-      <td>COc1cc2cc(-c3ccc(CN(C)Cc4ccccc4)cc3)c(=O)oc2cc1OC</td>
-      <td>7.663540</td>
     </tr>
   </tbody>
 </table>
@@ -765,7 +810,7 @@ Length: 3, dtype: string</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>(481, 6)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>&lt;StringArray&gt;
 ['none']
 Length: 1, dtype: string</code></pre>
@@ -773,9 +818,9 @@ Length: 1, dtype: string</code></pre>
 </div>
 <p><br></p>
 </section>
-<section id="compound-sanitisation" class="level4">
-<h4 class="anchored" data-anchor-id="compound-sanitisation"><strong>Compound sanitisation</strong></h4>
-<p>I’ve found the <a href="https://docs.datamol.io/stable/tutorials/Preprocessing.html">pre-processing molecules tutorial</a> and its reference links provided by Datamol at the bottom of the webpage to be very informative. Each steps of fix_mol(), sanitize_mol() and standardize_mol() were explained to a certain degree in the link provided above. I guess the key was to select pre-processing options required to fit the purpose of the ML models being built later on, and more experiences in doing this would also help to improve the compound pre-processing step.</p>
+<section id="sanitise-compounds" class="level4">
+<h4 class="anchored" data-anchor-id="sanitise-compounds"><strong>Sanitise compounds</strong></h4>
+<p>I’ve found the <a href="https://docs.datamol.io/stable/tutorials/Preprocessing.html">pre-processing molecules tutorial</a> and its reference links provided by Datamol to be very informative. Each steps of fix_mol(), sanitize_mol() and standardize_mol() were explained in the link provided above. I guess the key was to select pre-processing options required to fit the purpose of the ML models being built later on, and more experiences in doing so would hopefully help with improving the compound pre-processing step.</p>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># _preprocess function to sanitise compounds - adapted from datamol.io</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -793,27 +838,29 @@ Length: 1, dtype: string</code></pre>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Standardise the molecules</span></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    mol <span class="op">=</span> dm.standardize_mol(</span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        mol,</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        disconnect_metals<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        normalize<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        reionize<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Decided to switch on "uncharge" to neutralise charges - the only change</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        uncharge<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        stereo<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Added a new column below for RDKit molecules</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"rdkit_mol"</span>] <span class="op">=</span> dm.to_mol(mol)</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"standard_smiles"</span>] <span class="op">=</span> dm.standardize_smiles(dm.to_smiles(mol))</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"selfies"</span>] <span class="op">=</span> dm.to_selfies(mol)</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchi"</span>] <span class="op">=</span> dm.to_inchi(mol)</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchikey"</span>] <span class="op">=</span> dm.to_inchikey(mol)</span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Switch on to disconnect metal ions</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        disconnect_metals<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        normalize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        reionize<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Switch on "uncharge" to neutralise charges</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        uncharge<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Taking care of stereochemistries of compounds</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        stereo<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Added a new column below for RDKit molecules</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"rdkit_mol"</span>] <span class="op">=</span> dm.to_mol(mol)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"standard_smiles"</span>] <span class="op">=</span> dm.standardize_smiles(dm.to_smiles(mol))</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"selfies"</span>] <span class="op">=</span> dm.to_selfies(mol)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchi"</span>] <span class="op">=</span> dm.to_inchi(mol)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    row[<span class="st">"inchikey"</span>] <span class="op">=</span> dm.to_inchikey(mol)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then the compound sanitisation function was applied to the dtree_df.</p>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_df.<span class="bu">apply</span>(_preprocess, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>dtree_san_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="17">
 
 <div>
 
@@ -843,7 +890,7 @@ Length: 1, dtype: string</code></pre>
       <td>none</td>
       <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
       <td>10.585027</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e69e0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf4c0&gt;</td>
       <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
       <td>[C][C][C][=C][C][C][C][=N][C][=C][C][Branch1][...</td>
       <td>InChI=1S/C18H19ClN2/c1-2-10-5-11-7-12(6-10)17-...</td>
@@ -857,7 +904,7 @@ Length: 1, dtype: string</code></pre>
       <td>none</td>
       <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
       <td>8.787812</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e67b0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf840&gt;</td>
       <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
       <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
       <td>InChI=1S/C10H15NO.BrH/c1-4-11(2,3)9-6-5-7-10(1...</td>
@@ -871,7 +918,7 @@ Length: 1, dtype: string</code></pre>
       <td>none</td>
       <td>Nc1c2c(nc3ccccc13)CCCC2</td>
       <td>6.821023</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e6900&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddeff0&gt;</td>
       <td>Nc1c2c(nc3ccccc13)CCCC2</td>
       <td>[N][C][=C][C][=Branch1][N][=N][C][=C][C][=C][C...</td>
       <td>InChI=1S/C13H14N2/c14-13-9-5-1-3-7-11(9)15-12-...</td>
@@ -885,7 +932,7 @@ Length: 1, dtype: string</code></pre>
       <td>none</td>
       <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
       <td>7.913640</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e66d0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf060&gt;</td>
       <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
       <td>[C][C][N][Branch2][Branch1][Ring1][C][C][C][C]...</td>
       <td>InChI=1S/C42H70N4O4/c1-7-45(35-37-25-17-19-27-...</td>
@@ -899,7 +946,7 @@ Length: 1, dtype: string</code></pre>
       <td>none</td>
       <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
       <td>6.698970</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12b1e6660&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf760&gt;</td>
       <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
       <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
       <td>InChI=1S/C10H15NO.ClH/c1-4-11(2,3)9-6-5-7-10(1...</td>
@@ -924,7 +971,7 @@ Length: 1, dtype: string</code></pre>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>(481, 11)</code></pre>
 </div>
 </div>
@@ -936,17 +983,17 @@ Length: 1, dtype: string</code></pre>
 <p>Plotting a histogram to see the distribution of pKi values first.</p>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df.hist(column <span class="op">=</span> <span class="st">"pKi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
-<pre><code>array([[&lt;Axes: title={'center': 'pKi'}&gt;]], dtype=object)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>array([[&lt;AxesSubplot: title={'center': 'pKi'}&gt;]], dtype=object)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Data_prep_2_files/figure-html/cell-20-output-2.png" width="575" height="431"></p>
 </div>
 </div>
-<p>I read a bit about Dixon’s Q test and realised that there were a few required assumptions prior to using this test, and the current dataset being used here (dtree_san_df) might not fit the requirements, which were:</p>
+<p>I read a bit about Dixon’s Q test and realised that there were a few required assumptions prior to using this test, and the current dataset used here (dtree_san_df) might not fit the requirements, which were:</p>
 <ul>
 <li>normally distributed data</li>
-<li>a small sample size e.g.&nbsp;between 3 and 10 (as originally stated in the paper published by R. B. Dean and W. J. Dixon (1951) Simplified Statistics for Small Numbers of Observations”. Anal. Chem., 1951, 23 (4), 636–638).</li>
+<li>a small sample size e.g.&nbsp;between 3 and 10, which was originally stated in this paper <span class="citation" data-cites="dean1951">(<a href="#ref-dean1951" role="doc-biblioref">Dean and Dixon 1951</a>)</span>.</li>
 </ul>
 <p>So I’ve decided that rather than showing Python code for Dixon’s Q test myself, I’d attach a few examples from others instead, <a href="https://plotly.com/python/v3/outlier-test/">Q test from Plotly</a> and also <a href="https://sebastianraschka.com/Articles/2014_dixon_test.html">Dixon’s Q test for outlier identification – a questionable practice</a>, since this dataset here wasn’t quite normally distributed as shown from the histogram plotted above.</p>
 <div class="cell" data-execution_count="20">
@@ -955,27 +1002,1221 @@ Length: 1, dtype: string</code></pre>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxplot version below shows a blank background</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than above version with horizontal grid lines</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#dtree_san_df.plot.box(column = "pKi")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="40">
-<pre><code>&lt;Axes: &gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Data_prep_2_files/figure-html/cell-21-output-2.png" width="566" height="411"></p>
 </div>
 </div>
-<p>So I used Pandas’ built-in boxplot in addition to the histogram to show the likely outliers within the pKi values. Clearly, the possible outliers for pKi values appeared to be above 10. I’ve then decided not to completely remove these outliers due to the dataset itself being not in a Gaussian distribution (which meant they might not be true outliers).</p>
+<p>I also used Pandas’ built-in boxplot in addition to the histogram to show the possible outliers within the pKi values. Clearly, the outliers for pKi values appeared to be above 10. I’ve also decided not to completely remove these outliers due to the dataset itself being not in a Gaussian distribution (which meant they might not be true outliers).</p>
 <p><br></p>
 </section>
-<section id="molecular-descriptors" class="level4">
-<h4 class="anchored" data-anchor-id="molecular-descriptors"><strong>Molecular descriptors</strong></h4>
-<p>To be continued.</p>
+<section id="calculate-molecular-descriptors" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-molecular-descriptors"><strong>Calculate molecular descriptors</strong></h4>
+<p>I’ve explored a few different ways to compute molecular descriptors, essentially RDKit was used as the main library to do this. A <a href="https://drzinph.com/rdkit_2d-descriptors-in-python-part-4/">blog post</a> I’ve come across on calculating RDKit 2D molecular descriptors has explained it well, it gave details about how to bundle the functions together in a class (the idea of building a small library yourself to use in projects, which were quite handy). I’ve also read into RDKit’s documentations and also the ones from Datamol. Rather than re-inventing the wheels as there were already several really well-explained blog posts about this, I’d probably opt for Datamol since it was relatively new to me.</p>
+<p>With the lastest format of the dtree_san_df, it already included a RDKit molecule column (named “rdkit_mol”), so this meant I could go ahead with the calculations. Without jumping into Datamol directly, I just wanted to try out RDKit’s code first. There was also a useful <a href="https://greglandrum.github.io/rdkit-blog/posts/2022-12-23-descriptor-tutorial.html">descriptor calculation tutorial</a> written by Greg Landrum about this.</p>
+<section id="rdkit-code" class="level6">
+<h6 class="anchored" data-anchor-id="rdkit-code"><strong>RDKit code</strong></h6>
+<p>This was just one of the code examples in RDKit as there could be more variations of this depending on needs.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving the RDKit mol column as an object</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mols_rdkit <span class="op">=</span> dtree_san_df[<span class="st">"rdkit_mol"</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mols_rdkit</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run descriptor calculations on mols object</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># and save as a new list</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>mol_ls <span class="op">=</span> [Descriptors.CalcMolDescriptors(mol) <span class="cf">for</span> mol <span class="kw">in</span> mols_rdkit]</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list into a dataframe</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>df_rdkit_2d <span class="op">=</span> pd.DataFrame(mol_ls)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_rdkit_2d.shape)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>df_rdkit_2d.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 209)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>MaxAbsEStateIndex</th>
+      <th>MaxEStateIndex</th>
+      <th>MinAbsEStateIndex</th>
+      <th>MinEStateIndex</th>
+      <th>qed</th>
+      <th>MolWt</th>
+      <th>HeavyAtomMolWt</th>
+      <th>ExactMolWt</th>
+      <th>NumValenceElectrons</th>
+      <th>NumRadicalElectrons</th>
+      <th>...</th>
+      <th>fr_sulfide</th>
+      <th>fr_sulfonamd</th>
+      <th>fr_sulfone</th>
+      <th>fr_term_acetylene</th>
+      <th>fr_tetrazole</th>
+      <th>fr_thiazole</th>
+      <th>fr_thiocyan</th>
+      <th>fr_thiophene</th>
+      <th>fr_unbrch_alkane</th>
+      <th>fr_urea</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.509708</td>
+      <td>6.509708</td>
+      <td>0.547480</td>
+      <td>0.547480</td>
+      <td>0.763869</td>
+      <td>298.817</td>
+      <td>279.665</td>
+      <td>298.123676</td>
+      <td>108</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9.261910</td>
+      <td>9.261910</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.662462</td>
+      <td>246.148</td>
+      <td>230.020</td>
+      <td>245.041526</td>
+      <td>74</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.199769</td>
+      <td>6.199769</td>
+      <td>0.953981</td>
+      <td>0.953981</td>
+      <td>0.706488</td>
+      <td>198.269</td>
+      <td>184.157</td>
+      <td>198.115698</td>
+      <td>76</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12.614796</td>
+      <td>12.614796</td>
+      <td>0.269546</td>
+      <td>0.269546</td>
+      <td>0.079730</td>
+      <td>695.046</td>
+      <td>624.486</td>
+      <td>694.539707</td>
+      <td>282</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9.261910</td>
+      <td>9.261910</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.608112</td>
+      <td>201.697</td>
+      <td>185.569</td>
+      <td>201.092042</td>
+      <td>74</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 209 columns</p>
+</div>
+</div>
+</div>
+<p>In total, it generated 209 descriptors.</p>
+<p><br></p>
+</section>
+<section id="datamol-code" class="level6">
+<h6 class="anchored" data-anchor-id="datamol-code"><strong>Datamol code</strong></h6>
+<p>Then I tested Datamol’s code on this as shown below.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert RDKit molecule column into list</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mols_dm <span class="op">=</span> dtree_san_df[<span class="st">"rdkit_mol"</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Datamol's batch descriptor code for a list of compounds</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>dtree_san_df_dm <span class="op">=</span> dm.descriptors.batch_compute_many_descriptors(mols_dm)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_san_df_dm.shape)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>dtree_san_df_dm.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 22)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>n_rotatable_bonds</th>
+      <th>n_radical_electrons</th>
+      <th>tpsa</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>1</td>
+      <td>0</td>
+      <td>38.91</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>20.23</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>38.91</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>29</td>
+      <td>0</td>
+      <td>65.56</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>20.23</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div>
+</div>
+</div>
+<p>There were a total of 22 molecular descriptors generated, which seemed more like what I might use for the decision tree model. The types of descriptors were shown below.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df_dm.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>Index(['mw', 'fsp3', 'n_lipinski_hba', 'n_lipinski_hbd', 'n_rings',
+       'n_hetero_atoms', 'n_heavy_atoms', 'n_rotatable_bonds',
+       'n_radical_electrons', 'tpsa', 'qed', 'clogp', 'sas',
+       'n_aliphatic_carbocycles', 'n_aliphatic_heterocyles',
+       'n_aliphatic_rings', 'n_aromatic_carbocycles', 'n_aromatic_heterocyles',
+       'n_aromatic_rings', 'n_saturated_carbocycles',
+       'n_saturated_heterocyles', 'n_saturated_rings'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="combine-dataframes" class="level5">
+<h5 class="anchored" data-anchor-id="combine-dataframes"><strong>Combine dataframes</strong></h5>
+<p>The trickier part for this second-half of data pre-processing actually lied here - merging/joining/concatenating dataframes of the pre-processed dataframe (dtree_san_df) and Datamol’s descriptor code (dtree_san_df_dm).</p>
+<p>Initially, I tried using all of Pandas’ code of merge/join/concat dataframes. They all failed to create the correct final combined dataframe since there were too many rows, with one run actually created 540 rows (maximum should be 481 rows). One of the possible reasons for this could be that some of the descriptors had zeros generated as results for some of the compounds, and when combining using Pandas code like the ones mentioned here, they might cause unexpected results (as suggested by Pandas, they were not exactly equivalent to SQL joins). So I looked into different ways, and while there were no other common columns for both dataframes, the index column seemed to be the only one that correlated both.</p>
+<p>I also found out after going back to the previous steps that when I applied the compound pre-processing function from Datamol, the index of the resultant dataframe was changed to start from 1 (rather than zero). Because of this, I tried re-setting the index of dtree_san_df first, then dropped the index column, followed by re-setting the index again to ensure it started at zero, and this worked. So now the dtree_san_df would have exactly the same index as the one for dtree_san_df_dm.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1st index re-set</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_san_df.reset_index()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the index column</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_san_df.drop([<span class="st">"index"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>dtree_san_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>Ki</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pKi</th>
+      <th>rdkit_mol</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>10.585027</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf4c0&gt;</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>[C][C][C][=C][C][C][C][=N][C][=C][C][Branch1][...</td>
+      <td>InChI=1S/C18H19ClN2/c1-2-10-5-11-7-12(6-10)17-...</td>
+      <td>QTPHSDHUHXUYFE-KIYNQFGBSA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>8.787812</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf840&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.BrH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>CAEPIUXAUPYIIJ-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>6.821023</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddeff0&gt;</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>[N][C][=C][C][=Branch1][N][=N][C][=C][C][=C][C...</td>
+      <td>InChI=1S/C13H14N2/c14-13-9-5-1-3-7-11(9)15-12-...</td>
+      <td>YLJREFDVOIBQDA-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>7.913640</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf060&gt;</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>[C][C][N][Branch2][Branch1][Ring1][C][C][C][C]...</td>
+      <td>InChI=1S/C42H70N4O4/c1-7-45(35-37-25-17-19-27-...</td>
+      <td>VJXLWYGKZGTXAF-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL1128</td>
+      <td>200.000</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>6.698970</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf760&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.ClH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>BXKDSDJJOVIHMX-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd index re-set</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dtree_san_df <span class="op">=</span> dtree_san_df.reset_index()</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_san_df.shape)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>dtree_san_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 12)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index</th>
+      <th>molecule_chembl_id</th>
+      <th>Ki</th>
+      <th>units</th>
+      <th>data_validity_comment</th>
+      <th>smiles</th>
+      <th>pKi</th>
+      <th>rdkit_mol</th>
+      <th>standard_smiles</th>
+      <th>selfies</th>
+      <th>inchi</th>
+      <th>inchikey</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>CHEMBL208599</td>
+      <td>0.026</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>10.585027</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf4c0&gt;</td>
+      <td>CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2</td>
+      <td>[C][C][C][=C][C][C][C][=N][C][=C][C][Branch1][...</td>
+      <td>InChI=1S/C18H19ClN2/c1-2-10-5-11-7-12(6-10)17-...</td>
+      <td>QTPHSDHUHXUYFE-KIYNQFGBSA-N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>CHEMBL60745</td>
+      <td>1.630</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>8.787812</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf840&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Br-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.BrH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>CAEPIUXAUPYIIJ-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>CHEMBL95</td>
+      <td>151.000</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>6.821023</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddeff0&gt;</td>
+      <td>Nc1c2c(nc3ccccc13)CCCC2</td>
+      <td>[N][C][=C][C][=Branch1][N][=N][C][=C][C][=C][C...</td>
+      <td>InChI=1S/C13H14N2/c14-13-9-5-1-3-7-11(9)15-12-...</td>
+      <td>YLJREFDVOIBQDA-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>CHEMBL173309</td>
+      <td>12.200</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>7.913640</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf060&gt;</td>
+      <td>CCN(CCCCCC(=O)N(C)CCCCCCCCN(C)C(=O)CCCCCN(CC)C...</td>
+      <td>[C][C][N][Branch2][Branch1][Ring1][C][C][C][C]...</td>
+      <td>InChI=1S/C42H70N4O4/c1-7-45(35-37-25-17-19-27-...</td>
+      <td>VJXLWYGKZGTXAF-UHFFFAOYSA-N</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>CHEMBL1128</td>
+      <td>200.000</td>
+      <td>nM</td>
+      <td>none</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>6.698970</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x120ddf760&gt;</td>
+      <td>CC[N+](C)(C)c1cccc(O)c1.[Cl-]</td>
+      <td>[C][C][N+1][Branch1][C][C][Branch1][C][C][C][=...</td>
+      <td>InChI=1S/C10H15NO.ClH/c1-4-11(2,3)9-6-5-7-10(1...</td>
+      <td>BXKDSDJJOVIHMX-UHFFFAOYSA-N</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Also re-setting the index of the dtree_san_df_dm.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dtree_san_df_dm <span class="op">=</span> dtree_san_df_dm.reset_index()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_san_df_dm.shape)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>dtree_san_df_dm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 23)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>n_rotatable_bonds</th>
+      <th>n_radical_electrons</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>29</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>476</th>
+      <td>476</td>
+      <td>377.231456</td>
+      <td>0.600000</td>
+      <td>7</td>
+      <td>3</td>
+      <td>2</td>
+      <td>7</td>
+      <td>27</td>
+      <td>6</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2.079621</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>477</th>
+      <td>477</td>
+      <td>391.247107</td>
+      <td>0.619048</td>
+      <td>7</td>
+      <td>3</td>
+      <td>2</td>
+      <td>7</td>
+      <td>28</td>
+      <td>6</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2.651646</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>478</th>
+      <td>478</td>
+      <td>311.152144</td>
+      <td>0.315789</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>23</td>
+      <td>4</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2.423278</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>479</th>
+      <td>479</td>
+      <td>368.096076</td>
+      <td>0.923077</td>
+      <td>4</td>
+      <td>0</td>
+      <td>2</td>
+      <td>5</td>
+      <td>18</td>
+      <td>3</td>
+      <td>0</td>
+      <td>...</td>
+      <td>4.476639</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>480</th>
+      <td>480</td>
+      <td>246.136828</td>
+      <td>0.500000</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>18</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>3.223652</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>481 rows × 23 columns</p>
+</div>
+</div>
+</div>
+<p>Merged both dataframes of dtree_san_df and dtree_san_df_dm based on both of their indices.</p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge dtree_san_df &amp; dtree_san_df_dm</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dtree_f_df <span class="op">=</span> pd.merge(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    dtree_san_df[[<span class="st">"index"</span>, <span class="st">"molecule_chembl_id"</span>, <span class="st">"pKi"</span>]],</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    dtree_san_df_dm,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    left_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    right_index<span class="op">=</span><span class="va">True</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check final dataframe to make sure there were 481 rows and increased columns (combined numbers of columns from both dataframes). So this finally seemed to work.</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_f_df.shape)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>dtree_f_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 26)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index_x</th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>index_y</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>CHEMBL208599</td>
+      <td>10.585027</td>
+      <td>0</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>CHEMBL60745</td>
+      <td>8.787812</td>
+      <td>1</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>CHEMBL95</td>
+      <td>6.821023</td>
+      <td>2</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>CHEMBL173309</td>
+      <td>7.913640</td>
+      <td>3</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>CHEMBL1128</td>
+      <td>6.698970</td>
+      <td>4</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>CHEMBL102226</td>
+      <td>4.698970</td>
+      <td>5</td>
+      <td>297.152928</td>
+      <td>0.923077</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>...</td>
+      <td>2.965170</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>CHEMBL103873</td>
+      <td>5.698970</td>
+      <td>6</td>
+      <td>269.121628</td>
+      <td>0.909091</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>...</td>
+      <td>3.097106</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>CHEMBL640</td>
+      <td>6.000000</td>
+      <td>7</td>
+      <td>235.168462</td>
+      <td>0.461538</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
+      <td>...</td>
+      <td>1.791687</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>CHEMBL75121</td>
+      <td>7.663540</td>
+      <td>8</td>
+      <td>415.178358</td>
+      <td>0.192308</td>
+      <td>5</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+      <td>...</td>
+      <td>2.117241</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>CHEMBL502</td>
+      <td>7.688246</td>
+      <td>9</td>
+      <td>379.214744</td>
+      <td>0.458333</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>...</td>
+      <td>2.677222</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 26 columns</p>
+</div>
+</div>
+</div>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Kalliokoski2013a" class="csl-entry" role="doc-biblioentry">
-Kalliokoski, Tuomo, Christian Kramer, Anna Vulpetti, and Peter Gedeck. 2013. <span>“Comparability of Mixed IC50 Data <span></span> A Statistical Analysis.”</span> Edited by Andrea Cavalli. <em>PLoS ONE</em> 8 (4): e61007. <a href="https://doi.org/10.1371/journal.pone.0061007">https://doi.org/10.1371/journal.pone.0061007</a>.
+<div id="ref-dean1951" class="csl-entry" role="doc-biblioentry">
+Dean, R. B., and W. J. Dixon. 1951. <span>“Simplified Statistics for Small Numbers of Observations.”</span> <em>Analytical Chemistry</em> 23 (4): 636–38. <a href="https://doi.org/10.1021/ac60052a025">https://doi.org/10.1021/ac60052a025</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
