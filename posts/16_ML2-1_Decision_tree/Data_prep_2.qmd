@@ -1,11 +1,12 @@
 ---
 title: "Decision tree"
-subtitle: "ML series 2.1 - data pre-processing (part 2)"
+subtitle: "Series 2.1 - data pre-processing and transformation (part 2)"
 author: Jennifer HY Lin
-date: '2023-9-10'
+date: '2023-9-15'
 draft: true
 categories: 
     - Machine learning projects
+    - Data preprocessing
     - Tree models
     - Pandas
     - ChEMBL database
@@ -90,7 +91,7 @@ dtree_df.head(3)
 The distribution of Ki values were shown below via a simple statistical summary.
 
 ```{python}
-dtree_df.describe()
+dtree_df["Ki"].describe()
 ```
 
 From the above quick statistical summary and also the code below to find the minimum Ki value, it confirmed there were no zero Ki values recorded.
@@ -152,7 +153,7 @@ Also, before jumping straight to compound sanitisation, I needed to check the "d
 dtree_df["data_validity_comment"].unique()
 ```
 
-There were 2 different types of data validity comments here, which were "NaN"  and "Outside typical range" (Note: the only compound that had "Potential transcirption error" as its data validity comment was already filtered out in part 1). So, this meant compounds with comment as "Outside typical range" should be addressed first.
+There were 3 different types of data validity comments here, which were "Potential transcription error", "NaN"  and "Outside typical range". So, this meant compounds with comments as "Potential transcription error" and "Outside typical range" should be addressed first.
 
 ```{python}
 # Find out number of compounds with "outside typical range" as data validity comment
@@ -161,11 +162,20 @@ print(dtree_df_err.shape)
 dtree_df_err.head()
 ```
 
-There were a total of 51 compounds with Ki outside typical range. These compounds with questionable Ki values were removed, as they could be potential sources of errors in ML models later on (error trickling effect). One of the ways to filter out data was to fill the empty cells within the "data_validity_comment" column first, so those ones to be kept could be selected.
+There were a total of 51 compounds with Ki outside typical range. 
+
+```{python}
+dtree_df_err2 = dtree_df[dtree_df["data_validity_comment"] == "Potential transcription error"]
+dtree_df_err2
+```
+
+With the other comment for potential transciption error, there seemed to be only one compound here.
+
+These compounds with questionable Ki values were removed, as they could be potential sources of errors in ML models later on (error trickling effect). One of the ways to filter out data was to fill the empty cells within the "data_validity_comment" column first, so those ones to be kept could be selected.
 
 ```{python}
 # Fill "NaN" entries with an actual name e.g. none
-dtree_df = dtree_df.fillna("none")
+dtree_df["data_validity_comment"].fillna("none", inplace=True)
 dtree_df.head()
 ```
 
@@ -252,7 +262,7 @@ dtree_san_df.shape
 
 In this case, I tried using the preprocessing function without adding parallelisation, the whole process wasn't very long (since I had a small dataset), and was done within a minute or so.
 
-Also, as a sanity check on the sanitised compounds in dtree_san_df, I just wanted to see if I could display all compounds in this dataframe as 2D images.
+Also, as a sanity check on the sanitised compounds in dtree_san_df, I just wanted to see if I could display all compounds in this dataframe as 2D images. I also had a look through each page just to see if there were any odd bonds or anything strange in general.
 
 ```{python}
 # Create a list to store all cpds in dtree_san_df
@@ -290,7 +300,7 @@ dtree_san_df.boxplot(column = "pKi")
 #dtree_san_df.plot.box(column = "pKi")
 ```
 
-I also used Pandas' built-in boxplot in addition to the histogram to show the possible outliers within the pKi values. Clearly, the outliers for pKi values appeared to be above 10.5. I also didn't remove these outliers completely due to the dataset itself wasn't quite in a Gaussian distribution (possibly not true outliers).
+I also used Pandas' built-in boxplot in addition to the histogram to show the possible outliers within the pKi values. Clearly, the outliers for pKi values appeared to be above 10. I also didn't remove these outliers completely due to the dataset itself wasn't quite in a Gaussian distribution (possibly not true outliers).
 
 <br>
 
@@ -377,7 +387,7 @@ Merged both dataframes of dtree_san_df and dtree_san_df_dm based on both of thei
 ```{python}
 # merge dtree_san_df & dtree_san_df_dm
 dtree_f_df = pd.merge(
-    dtree_san_df[["index", "molecule_chembl_id", "pKi"]],
+    dtree_san_df[["index", "molecule_chembl_id", "pKi", "max_phase"]],
     dtree_san_df_dm,
     left_index=True,
     right_index=True
@@ -397,6 +407,12 @@ The two index columns ("index_x" and "index_y") were removed, which brought forw
 # Remove index_x & index_y
 dtree_f_df.drop(["index_x", "index_y"], axis = 1, inplace = True)
 dtree_f_df.head()
+```
+
+I then saved this pre-processed dataframe as another file in my working directory, so that it could be used for estimating experimental error and model building in the next post.
+
+```{python}
+dtree_f_df.to_csv("ache_2d_chembl.csv")
 ```
 
 <br>
