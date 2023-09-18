@@ -15,6 +15,12 @@ format: html
 bibliography: references.bib
 ---
 
+##### **Data source**
+
+The data used here was extracted from ChEMBL database by using ChEMBL webresource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier **posts** (yes, it took me a while to clean the data, so it was splitted into two posts). The .final csv file used to train the model was named, "ache_2d_chembl.csv", and the earlier version without any 2D RDKit descriptors was named, "ache_chembl.csv" - both files should be in a GitHub repository called, "[ML2-1_decision_tree](https://github.com/jhylin/ML2-1_decision_tree)" or in my [blog repository](https://github.com/jhylin/Data_in_life_blog), under "posts" folder.
+
+<br>
+
 ##### **Estimate experimental errors**
 
 This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset used and preprocessed from the previous two posts. 
