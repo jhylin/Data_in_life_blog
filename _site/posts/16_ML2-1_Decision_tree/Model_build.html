@@ -219,7 +219,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Decision tree</h1>
-            <p class="subtitle lead">Series 2.1 - model building</p>
+            <p class="subtitle lead">Series 2.1 - model building and estimating experimental errors</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine learning projects</div>
                 <div class="quarto-category">Tree models</div>
@@ -270,6 +270,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#discussions" id="toc-discussions" class="nav-link" data-scroll-target="#discussions"><strong>Discussions</strong></a></li>
   <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -281,13 +282,18 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="data-source" class="level5">
 <h5 class="anchored" data-anchor-id="data-source"><strong>Data source</strong></h5>
-<p>The data used here was extracted from ChEMBL database by using ChEMBL webresource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier <strong>posts</strong> (yes, it took me a while to clean the data, so it was splitted into two posts). The .final csv file used to train the model was named, “ache_2d_chembl.csv”, and the earlier version without any 2D RDKit descriptors was named, “ache_chembl.csv” - both files should be in a GitHub repository called, “<a href="https://github.com/jhylin/ML2-1_decision_tree">ML2-1_decision_tree</a>” or in my <a href="https://github.com/jhylin/Data_in_life_blog">blog repository</a>, under “posts” folder.</p>
+<p>The data used here was extracted from ChEMBL database by using ChEMBL webresource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier <strong>posts</strong> (yes, it took quite a while to clean the data, so it was splitted into two posts).</p>
+<ul>
+<li><p>The final .csv file used to train the model was named, “ache_2d_chembl.csv”</p></li>
+<li><p>The earlier version without any RDKit 2D descriptors calculated was named, “ache_chembl.csv”</p></li>
+<li><p>Both files should be in a GitHub repository called, “<a href="https://github.com/jhylin/ML2-1_decision_tree">ML2-1_decision_tree</a>” or in my <a href="https://github.com/jhylin/Data_in_life_blog">blog repository</a>, under “posts” folder (look for “16_ML2-1_Decision_tree” folder)</p></li>
+</ul>
 <p><br></p>
 </section>
 <section id="estimate-experimental-errors" class="level5">
 <h5 class="anchored" data-anchor-id="estimate-experimental-errors"><strong>Estimate experimental errors</strong></h5>
-<p>This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset used and preprocessed from the previous two posts.</p>
-<p>This subsection was highly inspired by Pat Walters’ posts, which have discussed about estimating errors for experimental data with code links available in these posts:</p>
+<p>This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset prepared from the previous two posts. I supposed it made more sense if this was done prior to building the ML model, so this wouldn’t be forgotten or missed, as we knew that real-life was full of many imperfections.</p>
+<p>This subsection was inspired by Pat Walters’ posts, which have discussed about estimating errors for experimental data with code links available in these posts:</p>
 <ul>
 <li><p><a href="http://practicalcheminformatics.blogspot.com/2019/07/how-good-could-should-my-models-be.html">How Good Could (Should) My Models Be?</a> - a reference paper <span class="citation" data-cites="Brown2009">(<a href="#ref-Brown2009" role="doc-biblioref">Brown, Muchmore, and Hajduk 2009</a>)</span> was mentioned as the simulation basis for estimating the impact of experimental errors on the correlation from a predictive ML model</p></li>
 <li><p><a href="http://practicalcheminformatics.blogspot.com/2023/06/getting-real-with-molecular-property.html">Getting Real with Molecular Property Prediction</a> (under subsection of “How Well Should We Be Able to Model the Data?”)</p></li>
@@ -298,8 +304,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#from matplotlib import pyplot as plt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Imported the preprocessed data from previous posts.</p>
 <div class="cell" data-execution_count="2">
@@ -307,7 +312,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dtree <span class="op">=</span> pd.read_csv(<span class="st">"ache_2d_chembl.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dtree.drop(columns <span class="op">=</span> [<span class="st">"Unnamed: 0"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="194">
 
 <div>
 
@@ -492,7 +497,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(481, 4)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="195">
 
 <div>
 
@@ -510,37 +515,37 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <tr>
       <th>0</th>
       <td>8.787812</td>
-      <td>9.551177</td>
-      <td>8.422000</td>
-      <td>6.981857</td>
+      <td>8.844110</td>
+      <td>7.543652</td>
+      <td>9.116783</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.585027</td>
-      <td>10.922219</td>
-      <td>10.503858</td>
-      <td>11.978505</td>
+      <td>11.143103</td>
+      <td>12.012801</td>
+      <td>10.129246</td>
     </tr>
     <tr>
       <th>2</th>
       <td>6.821023</td>
-      <td>6.842121</td>
-      <td>7.313446</td>
-      <td>4.895730</td>
+      <td>6.535840</td>
+      <td>6.641630</td>
+      <td>6.616952</td>
     </tr>
     <tr>
       <th>3</th>
       <td>7.913640</td>
-      <td>8.125376</td>
-      <td>7.890918</td>
-      <td>6.446047</td>
+      <td>8.044619</td>
+      <td>7.692519</td>
+      <td>7.467910</td>
     </tr>
     <tr>
       <th>4</th>
       <td>6.698970</td>
-      <td>6.373910</td>
-      <td>6.533972</td>
-      <td>5.840974</td>
+      <td>6.583034</td>
+      <td>7.475073</td>
+      <td>7.996469</td>
     </tr>
   </tbody>
 </table>
@@ -557,7 +562,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(1443, 3)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="196">
 
 <div>
 
@@ -575,31 +580,31 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <th>0</th>
       <td>8.787812</td>
       <td>3-fold</td>
-      <td>9.551177</td>
+      <td>8.844110</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.585027</td>
       <td>3-fold</td>
-      <td>10.922219</td>
+      <td>11.143103</td>
     </tr>
     <tr>
       <th>2</th>
       <td>6.821023</td>
       <td>3-fold</td>
-      <td>6.842121</td>
+      <td>6.535840</td>
     </tr>
     <tr>
       <th>3</th>
       <td>7.913640</td>
       <td>3-fold</td>
-      <td>8.125376</td>
+      <td>8.044619</td>
     </tr>
     <tr>
       <th>4</th>
       <td>6.698970</td>
       <td>3-fold</td>
-      <td>6.373910</td>
+      <td>6.583034</td>
     </tr>
   </tbody>
 </table>
@@ -650,7 +655,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert cor_ls into dataframe</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>err_df <span class="op">=</span> pd.DataFrame(cor_ls, columns <span class="op">=</span> [<span class="st">"r2"</span>, <span class="st">"fold_error"</span>])</span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>err_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="198">
 
 <div>
 
@@ -665,27 +670,27 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.892203</td>
+      <td>0.897867</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.883239</td>
+      <td>0.900474</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.900757</td>
+      <td>0.911758</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.893578</td>
+      <td>0.886347</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.886225</td>
+      <td>0.883926</td>
       <td>3-fold</td>
     </tr>
   </tbody>
@@ -698,44 +703,69 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(rc <span class="op">=</span> {<span class="st">"figure.figsize"</span>: (<span class="dv">9</span>, <span class="dv">8</span>)}, font_scale <span class="op">=</span> <span class="fl">1.5</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>vplot <span class="op">=</span> sns.violinplot(x <span class="op">=</span> <span class="st">"fold_error"</span>, y <span class="op">=</span> <span class="st">"r2"</span>, data <span class="op">=</span> err_df)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vplot.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Fold error"</span>, ylabel <span class="op">=</span> <span class="st">"R$^2$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="199">
 <pre><code>[Text(0.5, 0, 'Fold error'), Text(0, 0.5, 'R$^2$')]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Model_build_files/figure-html/cell-8-output-2.png" width="761" height="671"></p>
 </div>
 </div>
-<p>This definitely helped a lot with visualising the estimated errors for the experimental Ki values curated in ChEMBL for this specific protein target (CHEMBL220, acetylcholinesterase). The larger the error-fold, the lower the R<sup>2</sup>, and once the experimental error reached 10-fold, we could see an estimated R<sup>2</sup> (maximum correlation) with its median sitting below 0.55, indicating a likely poor predictive ML model if it was built based on these data with the estimated experimental errors.</p>
+<p>This definitely helped a lot with visualising the estimated errors for the experimental Ki values curated in ChEMBL for this specific protein target (CHEMBL220, acetylcholinesterase (AChE)). The larger the error-fold, the lower the R<sup>2</sup>, and once the experimental error reached 10-fold, we could see an estimated R<sup>2</sup> (maximum correlation) with its median sitting below 0.55, indicating a likely poor predictive ML model if it was built based on these data with the estimated 10-fold experimental errors.</p>
 <p><br></p>
 </section>
 <section id="check-max-phase-distribution" class="level5">
 <h5 class="anchored" data-anchor-id="check-max-phase-distribution"><strong>Check max phase distribution</strong></h5>
-<p>At this stage, I’ve planned to do model training on compounds with max phase 4 (i.e.&nbsp;prescription medicines used in real-life), so this would somewhat be an attempt to mirror the more realistic scenario for the ML prediction model.</p>
-<p>Max phases were assigned to each ChEMBL-curated compound according to this <a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/drug-and-compound-questions">ChEMBL FAQ link</a> (under the question of “What is max phase?”). As quoted from ChEMBL FAQ link, a max phase 4 compound means:</p>
+<p>At this stage, I’ve planned to do model training on compounds with max phase 4 (i.e.&nbsp;prescription medicines), so this would somewhat be an attempt to mirror real-life scenarios for the ML prediction model.</p>
+<p>Max phases were assigned to each ChEMBL-curated compound according to this <a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/drug-and-compound-questions">ChEMBL FAQ link</a> (under the question of “What is max phase?”). As quoted from this ChEMBL FAQ link, a max phase 4 compound means:</p>
 <blockquote class="blockquote">
 <p>“Approved (4): A marketed drug e.g.&nbsp;AMINOPHYLLINE (CHEMBL1370561) is an FDA approved drug for treatment of asthma.”</p>
 </blockquote>
-<p>As shown below, the distribution of max phase assignments for all compounds in this dataset was checked.</p>
+<p>Checking out the actual counts of each max phase group in the dataset.</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dtree[<span class="st">"max_phase"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>count    15.000000
-mean      3.000000
-std       1.772811
-min      -1.000000
-25%       2.500000
-50%       4.000000
-75%       4.000000
-max       4.000000
-Name: max_phase, dtype: float64</code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dtree[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"max_phase"</span>]].groupby(<span class="st">"max_phase"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="200">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+    </tr>
+    <tr>
+      <th>max_phase</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-1.0</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2.0</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3.0</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
-<p>Only a very small number of compounds had a max phase 4 assigned (total count of 10, which was also unsurprising as there weren’t many acetylcholinesterase inhibitors used as prescription medications for dementia - some of the well-known examples were donepezil, galantamine and rivastigmine).</p>
-<p>Filling in actual “null” labels for all “NaN” rows in the “max_phase” columns.</p>
+</div>
+<p>There was only a very small number of compounds with max phase 4 assigned (a total count of 10, which was also unsurprising since there weren’t many AChE inhibitors used as prescription medications for dementia - some of the well-known examples were donepezil, galantamine and rivastigmine).</p>
+<p>Filling in actual “null” labels for all “NaN” rows in the “max_phase” columns to help with filtering out these compounds later on.</p>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dtree[<span class="st">"max_phase"</span>].fillna(<span class="st">"null"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dtree[<span class="st">"max_phase"</span>].fillna(<span class="st">"null"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="201">
 
 <div>
 
@@ -893,64 +923,19 @@ Name: max_phase, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Checking out the actual counts of each max phase category.</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dtree[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"max_phase"</span>]].groupby(<span class="st">"max_phase"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-
-<div>
-
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>molecule_chembl_id</th>
-    </tr>
-    <tr>
-      <th>max_phase</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>-1.0</th>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2.0</th>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3.0</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4.0</th>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>null</th>
-      <td>466</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<p>Because of the small data, this might hint at using an ensemble approach in the future (planned as future posts), where model averaging would be derived from a bunch of tree models than using a single tree model, which was what I was doing here.</p>
 <p><br></p>
 </section>
 <section id="sanity-check-on-the-dataframe" class="level5">
 <h5 class="anchored" data-anchor-id="sanity-check-on-the-dataframe"><strong>Sanity check on the dataframe</strong></h5>
-<p>This was just another sanity check for myself on the dtree dataframe - making sure there weren’t any “NaN” cells in it (so dropping any “NaN” again, even though I might have already done that as one of the steps during preprocessing).</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dtree.dropna()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree.shape)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This was just another sanity check for myself on the dtree dataframe - making sure there weren’t any “NaN” cells in it (so dropping any “NaN” again, even though I might have already done this as one of the steps during data preprocessing).</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dtree.dropna()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree.shape)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(481, 25)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="202">
 
 <div>
 
@@ -1115,11 +1100,11 @@ Name: max_phase, dtype: float64</code></pre>
 <section id="training-data-based-on-max-phase-4-compounds" class="level6">
 <h6 class="anchored" data-anchor-id="training-data-based-on-max-phase-4-compounds"><strong>Training data based on max phase 4 compounds</strong></h6>
 <p>So here I wanted to separate the collected data by splitting the compounds into two groups based on their assigned max phases. Compounds with max phase 4 were chosen as the training data, and the rest of the compounds with max phases of “null” would be the testing data.</p>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a df for compounds with max phase 4</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4 <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dtree_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a df for compounds with max phase 4 only</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4 <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dtree_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="203">
 
 <div>
 
@@ -1397,25 +1382,25 @@ Name: max_phase, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>Making sure donepezil and galantamine were in this dtree_mp4 dataframe, so the model training would be based on these medicines and also other max phase 4 acetylcholinesterase inhibitors.</p>
-<p>The screenshots of both medicines were shown below taken from ChEMBL webiste.</p>
+<p>Making sure donepezil and galantamine were in this dtree_mp4 dataframe, so the model training would be based on these medicines and also other max phase 4 AChE inhibitors.</p>
+<p>The screenshots of both medicines were taken from ChEMBL website:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="donepezil_chembl.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot of donepezil with its molecule ChEMBL ID</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Screenshot of donepezil (parent drug form) with its molecule ChEMBL ID</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="galantamine_chembl.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot of galantamine with its molecule ChEMBL ID</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Screenshot of galantamine (parent drug form) with its molecule ChEMBL ID</figcaption><p></p>
 </figure>
 </div>
-<p>The following regex string check also confirmed that these two compounds were in the dtree_mp4 dataframe - row indices 9 and 171 contained these two drugs.</p>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>list_ache_inh <span class="op">=</span> [<span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL659"</span>]</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4[<span class="st">"molecule_chembl_id"</span>].<span class="bu">str</span>.contains(<span class="vs">r"|"</span>.join(list_ache_inh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<p>The following regex string check confirmed that these two compounds were in the dtree_mp4 dataframe - row indices 9 and 171 contained these two drugs.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>list_ache_inh <span class="op">=</span> [<span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL659"</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4[<span class="st">"molecule_chembl_id"</span>].<span class="bu">str</span>.contains(<span class="vs">r"|"</span>.join(list_ache_inh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="204">
 <pre><code>2      False
 4      False
 6      False
@@ -1429,15 +1414,15 @@ Name: max_phase, dtype: float64</code></pre>
 Name: molecule_chembl_id, dtype: bool</code></pre>
 </div>
 </div>
-<p>Setting up the features of the training set.</p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set X (features) for max phase 4 compounds</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>X_mp4_df <span class="op">=</span> dtree_mp4[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp4 to numpy array</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>X_mp4 <span class="op">=</span> X_mp4_df.to_numpy()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>X_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<p>Setting up the features for the training set.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set X (features) for max phase 4 compounds</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>X_mp4_df <span class="op">=</span> dtree_mp4[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp4_df to numpy array</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_mp4 <span class="op">=</span> X_mp4_df.to_numpy()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>X_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="205">
 <pre><code>array([[ 1.98115698e+02,  3.07692308e-01,  2.00000000e+00,
          2.00000000e+00,  3.00000000e+00,  2.00000000e+00,
          1.50000000e+01,  0.00000000e+00,  0.00000000e+00,
@@ -1521,105 +1506,105 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 </div>
 </div>
 <p>Setting up the target for the training set.</p>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set y (target) for max phase 4 compounds</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y_mp4_df <span class="op">=</span> dtree_mp4[<span class="st">"pKi"</span>]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert y_mp4 to numpy array</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>y_mp4 <span class="op">=</span> y_mp4_df.to_numpy()</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>y_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set y (target) for max phase 4 compounds</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y_mp4_df <span class="op">=</span> dtree_mp4[<span class="st">"pKi"</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert y_mp4_df to numpy array</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>y_mp4 <span class="op">=</span> y_mp4_df.to_numpy()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>y_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="206">
 <pre><code>array([6.82102305, 6.69897   , 6.        , 7.68824614, 7.29670862,
        4.43179828, 5.22184875, 6.52287875, 4.60730305, 6.99567863])</code></pre>
 </div>
 </div>
-<p>The DecisionTreeRegressor() was fitted on the compounds with max phase 4 as shown below, keeping tree depth at 3 for now to avoid complicating the overall tree graph (the deeper the tree, the more branches and potentially might overfit and create noises for the model).</p>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> tree.DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp4, y_mp4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The DecisionTreeRegressor() was fitted on the compounds with max phase 4 as shown below, keeping tree depth at 3 for now to avoid complicating the overall tree graph (the deeper the tree, the more branches - potentially might overfit and create noises for the model).</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> tree.DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp4, y_mp4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A simple decision tree plot based on <em>scikit-learn’s</em> plot_tree() was shown below.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="208">
 <pre><code>[Text(0.5909090909090909, 0.875, 'clogp &lt;= 4.901\nsquared_error = 1.144\nsamples = 10\nvalue = 6.228'),
  Text(0.36363636363636365, 0.625, 'n_aromatic_rings &lt;= 1.5\nsquared_error = 0.516\nsamples = 8\nvalue = 6.656'),
- Text(0.18181818181818182, 0.375, 'n_aromatic_carbocycles &lt;= 0.5\nsquared_error = 0.33\nsamples = 4\nvalue = 6.111'),
+ Text(0.18181818181818182, 0.375, 'n_rings &lt;= 0.5\nsquared_error = 0.33\nsamples = 4\nvalue = 6.111'),
  Text(0.09090909090909091, 0.125, 'squared_error = 0.0\nsamples = 1\nvalue = 5.222'),
  Text(0.2727272727272727, 0.125, 'squared_error = 0.088\nsamples = 3\nvalue = 6.407'),
- Text(0.5454545454545454, 0.375, 'clogp &lt;= 3.604\nsquared_error = 0.108\nsamples = 4\nvalue = 7.2'),
+ Text(0.5454545454545454, 0.375, 'n_rotatable_bonds &lt;= 2.0\nsquared_error = 0.108\nsamples = 4\nvalue = 7.2'),
  Text(0.45454545454545453, 0.125, 'squared_error = 0.008\nsamples = 2\nvalue = 6.908'),
  Text(0.6363636363636364, 0.125, 'squared_error = 0.038\nsamples = 2\nvalue = 7.492'),
- Text(0.8181818181818182, 0.625, 'n_rings &lt;= 2.0\nsquared_error = 0.008\nsamples = 2\nvalue = 4.52'),
+ Text(0.8181818181818182, 0.625, 'n_aliphatic_rings &lt;= 0.5\nsquared_error = 0.008\nsamples = 2\nvalue = 4.52'),
  Text(0.7272727272727273, 0.375, 'squared_error = 0.0\nsamples = 1\nvalue = 4.432'),
  Text(0.9090909090909091, 0.375, 'squared_error = -0.0\nsamples = 1\nvalue = 4.607')]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Model_build_files/figure-html/cell-18-output-2.png" width="689" height="611"></p>
+<p><img src="Model_build_files/figure-html/cell-17-output-2.png" width="689" height="611"></p>
 </div>
 </div>
 <p>It could also be in the text form.</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_text</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> export_text(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_text</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> export_text(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>|--- clogp &lt;= 4.90
 |   |--- n_aromatic_rings &lt;= 1.50
-|   |   |--- n_aromatic_carbocycles &lt;= 0.50
+|   |   |--- n_rings &lt;= 0.50
 |   |   |   |--- value: [5.22]
-|   |   |--- n_aromatic_carbocycles &gt;  0.50
+|   |   |--- n_rings &gt;  0.50
 |   |   |   |--- value: [6.41]
 |   |--- n_aromatic_rings &gt;  1.50
-|   |   |--- clogp &lt;= 3.60
+|   |   |--- n_rotatable_bonds &lt;= 2.00
 |   |   |   |--- value: [6.91]
-|   |   |--- clogp &gt;  3.60
+|   |   |--- n_rotatable_bonds &gt;  2.00
 |   |   |   |--- value: [7.49]
 |--- clogp &gt;  4.90
-|   |--- n_rings &lt;= 2.00
+|   |--- n_aliphatic_rings &lt;= 0.50
 |   |   |--- value: [4.43]
-|   |--- n_rings &gt;  2.00
+|   |--- n_aliphatic_rings &gt;  0.50
 |   |   |--- value: [4.61]
 </code></pre>
 </div>
 </div>
 <p>The graphviz version, which showed a small variation in graph presentation, seemed to be much larger in size and easier to view.</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="Model_build_files/figure-html/cell-20-output-1.svg" class="img-fluid"></p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="210">
+<p><img src="Model_build_files/figure-html/cell-19-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
-<p>The following was a dtreeviz version of the decision tree, which actually included the actual regression plots of different molecular features e.g.&nbsp;clogp, n_aromatic rings and n_aliphatic_rings versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs for the feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed <a href="https://github.com/parrt/dtreeviz">here</a>.</p>
+<p>The following was a dtreeviz version of the decision tree, which actually included the regression plots of different molecular features e.g.&nbsp;clogp, n_aromatic rings and n_aliphatic_rings versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs would be for each feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed <a href="https://github.com/parrt/dtreeviz">here</a>.</p>
 <p><em>Note: it might be smaller in size and not as clear as the graphviz version in the published version of the post, but if the code was run in any IDE, it should be larger to view, and potentailly could be saved as a PDF file</em></p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dtreeviz </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> dtreeviz.model(ache_tree_mp4, X_train<span class="op">=</span>X_mp4, y_train<span class="op">=</span>y_mp4, target_name<span class="op">=</span><span class="st">"pKi"</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>viz.view()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="Model_build_files/figure-html/cell-21-output-1.svg" class="img-fluid"></p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dtreeviz </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> dtreeviz.model(ache_tree_mp4, X_train<span class="op">=</span>X_mp4, y_train<span class="op">=</span>y_mp4, target_name<span class="op">=</span><span class="st">"pKi"</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>viz.view()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="211">
+<p><img src="Model_build_files/figure-html/cell-20-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p><br></p>
 </section>
 <section id="testing-and-predicting-data-based-on-max-phase-of-null-compounds" class="level6">
 <h6 class="anchored" data-anchor-id="testing-and-predicting-data-based-on-max-phase-of-null-compounds"><strong>Testing and predicting data based on max phase of null compounds</strong></h6>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compounds with max phase as "null"</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>dtree_mp_null <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="st">"null"</span>]</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_mp_null.shape)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>dtree_mp_null.head() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compounds with max phase as "null"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dtree_mp_null <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="st">"null"</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_mp_null.shape)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>dtree_mp_null.head() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(466, 25)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="212">
 
 <div>
 
@@ -1782,13 +1767,13 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <p>“Preclinical (NULL): preclinical compounds with bioactivity data e.g.&nbsp;is a preclinical compound with bioactivity data that has been extracted from scientific literature. However, the sources of drug and clinical candidate drug information in ChEMBL do not show that this compound has reached clinical trials and therefore the max_phase is set to null.”</p>
 </blockquote>
 <p>Again, setting up the features for the testing dataset.</p>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>X_mp_test_df <span class="op">=</span> dtree_mp_null[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp_test_df to numpy array</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>X_mp_test <span class="op">=</span> X_mp_test_df.to_numpy()</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>X_mp_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>X_mp_test_df <span class="op">=</span> dtree_mp_null[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp_test_df to numpy array</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>X_mp_test <span class="op">=</span> X_mp_test_df.to_numpy()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>X_mp_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="213">
 <pre><code>array([[2.45041526e+02, 4.00000000e-01, 2.00000000e+00, ...,
         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
        [2.98123676e+02, 3.88888889e-01, 2.00000000e+00, ...,
@@ -1805,21 +1790,21 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 </div>
 </div>
 <p>Then setting up the target for the testing set.</p>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> ache_tree_mp4.predict(X_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> ache_tree_mp4.predict(X_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The trained model, ache_tree_mp4, was used to predict on the testing dataset (max phase of null compounds).</p>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the graphviz graph version to show the decision tree on the testing set, as the prediction result.</p>
-<div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp_test_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<p><img src="Model_build_files/figure-html/cell-26-output-1.svg" class="img-fluid"></p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp_test_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="216">
+<p><img src="Model_build_files/figure-html/cell-25-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p><br></p>
@@ -1827,16 +1812,25 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 </section>
 <section id="discussions" class="level5">
 <h5 class="anchored" data-anchor-id="discussions"><strong>Discussions</strong></h5>
-<p>Note: the lower the Ki, the more potent the inhibitor (compound) - Cheng-Prusoff equation</p>
-<p>The</p>
-<p>As described in the subsection of “Estimate experimental errors”, there were experimental errors of 3-fold, 5-fold and 10-fold estimated based on the provided pKi data. With the prediction model used in this last part, this would need to be taken into consideration.</p>
-<p>One of the ways to check would be to re-run the dataframe again on compounds with max phase as null using the molecular feature names to find out the compounds at specified threshold cut-off value to see if their pKi values would fall in the predicted ranges. The other possible way was to actually calculate the prediction interval of the prediction model (?use Jackknife+ in MAPIE package - check this could be apply to tree models?).</p>
-<p>The best way would be to test these compounds in the same experimental set-ups, through same experimental steps, and in the same laboratory to find out their respective pKi values. However, this was most likely not very feasible due to various real-life restrictions. The likely final decision would be to choose compound candidates with the highest possibilities to proceed forward in the drug discovery pipeline.</p>
+<p>Because of the small amount of training data, this might hint at using an ensemble approach in the future (which was actually planned as my future posts), where model averaging would be derived from a bunch of tree models rather than using a single tree model, which was what I did here. The reason I started with one tree was because it was no point in building a multiple-tree model if one had no clue about how one tree was built. To learn as much as possible, I had to dissect the multiple-tree version first to focus on one tree at a time.</p>
+<p>One thing I’d like to mention was that rivastigmine was not included in the training dataset because it was actually not a pure AChE inhibitor (as it was also a butyrylcholinesterase (BChE) inhibitor), since my focus was purely on AChE at this time, this particular drug was unfortunately excluded. However, I did make sure the other two drugs mentioned previously (donepezil and galantamine) were included in the training dataset. One possible thing to do in the future if I want to improve this was to add BChE as another protein target and perhaps add this as an additional dataset towards the model.</p>
+<p>As described in the subsection of “Estimate experimental errors”, there were experimental errors of 3-fold, 5-fold and 10-fold estimated based on the provided pKi data. With the prediction model used in this post, the estimated experimental errors would need to be taken into consideration, particularly at the time when the model was being investigated during the model evaluation and validation step (however due to the length of series 2.1 posts, I decided not to add this step yet, but would try to look at this later in the multiple tree model series if this applies).</p>
+<p>A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important features also included the number of aromatic rings, number of heavy atoms and molecular weights.</p>
+<p>Since the type of AChE inhibitors was not the focus of this series, I won’t go into details about which value of pKi or Ki would lead to the ideal AChE inhibitor (the well-known Cheng-Prusoff equation <span class="citation" data-cites="Cheng1973">(<a href="#ref-Cheng1973" role="doc-biblioref">Cheng and Prusoff 1973</a>)</span> might also lead to many discussions about Ki and IC50 values). This is because there are at least two types of AChE inhibitors available - reversible and irreversible <span class="citation" data-cites="Colovic2013">(<a href="#ref-Colovic2013" role="doc-biblioref">Colovic et al. 2013</a>)</span>. Donepezil, galantamine and rivastigmine mentioned previously are the commonly known reversible AChE inhibitors. The irreversible type, as the name suggested, is usually used as insecticides or nerve agents. Another reason is that I didn’t go into details checking all of the identities for the 10 max phase 4 compounds used in the training set, as I only really made sure that donepezil and galantamine were included in the 10 molecules. If I were to re-model again purely on reversible AChE inhibitors targeting dementia or Alzheirmer’s disease, I think I had to be quite sure of what I was training the model with, i.e.&nbsp;excluding irreversible AChE inhibitors from the training set.</p>
+<p>However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a small value during the model evaluation phase.</p>
+<p>The best way would be to test all of these compounds in the same experimental set-ups, through same experimental steps, and in the same laboratory to find out their respective Ki (or pKi) values. However, this was most likely not very feasible due to various real-life restrictions (the availability of financial and staffing resources). The most likely outcome might be to choose a selected group of compound candidates with the highest possibilities to proceed in the drug discovery pipeline based on past experimental, ML and clinical experiences, and then test them in the ways mentioned here.</p>
+<p>I also came across a <a href="https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/">blog post</a> about calculating the prediction intervals of ML prediction models (which mentioned the <a href="https://github.com/scikit-learn-contrib/MAPIE">MAPIE package</a>), but I didn’t quite get time yet to look into this package yet, but from I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models during the model evaluation step.</p>
 <p><br></p>
 </section>
 <section id="final-words" class="level5">
 <h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
-<p>I didn’t think a definite conclusion could be drawn here, as this was only purely the outcome from one single decision tree. So I have named this last part as final words, as I felt if I didn’t stop here, this post could go on forever or as long as I’d want to (which could be unnecessarily convoluted to me and any readers of this series). The main thing here for me was to fully understand how one single decision tree was constructed based on hopefully reasonable-ish data (still not the best I reckon), and then to view the tree visually in different styles of plots, and understand how this was a white-box ML approach with clear descriptions about how the tree would branch off to which nodes to reach different outcomes or targets. The more important thing was that this was like a preamble before the multiple-tree models e.g.&nbsp;random forest, and boosted trees further down the line (I did plan to do a series of posts on tree models, now that might take a while…).</p>
+<p>I didn’t think a definite conclusion could be drawn here, as this was only purely from one single decision tree, so I have named this last part as “final words”, as I felt if I didn’t stop here, this post or series 2.1 could go on forever or as long it could go. The main thing here was to fully understand how one single decision tree was constructed based on hopefully reasonable-ish data (still not the best I reckon as I could not rule out all the noises from the data), and then to view the tree visually in different styles of plots, and understand how this was a white-box ML approach with clear features or descriptions shown to trace where the tree would branch off to which nodes to reach different final outcomes or targets.</p>
+<p>The most important thing was that this series was really a preamble before the multiple-tree models e.g.&nbsp;random forest and boosted trees, as I have bravely planned to do a series of posts on tree models, so that might take a while, slowly but hopefully surely.</p>
+<p><br></p>
+</section>
+<section id="acknowledgements" class="level5">
+<h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
+<p>I’d like to thank all the authors of the open-source packages used in this series 2.1 posts. I’d also like to thank all the authors of all the blog posts mentioned in this series as well as I’ve learnt a lot from them too.</p>
 
 
 
@@ -1845,6 +1839,12 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Brown2009" class="csl-entry" role="doc-biblioentry">
 Brown, Scott P., Steven W. Muchmore, and Philip J. Hajduk. 2009. <span>“Healthy Skepticism: Assessing Realistic Model Performance.”</span> <em>Drug Discovery Today</em> 14 (7-8): 420–27. <a href="https://doi.org/10.1016/j.drudis.2009.01.012">https://doi.org/10.1016/j.drudis.2009.01.012</a>.
+</div>
+<div id="ref-Cheng1973" class="csl-entry" role="doc-biblioentry">
+Cheng, Yung-Chi, and William H. Prusoff. 1973. <span>“Relationship Between the Inhibition Constant (KI) and the Concentration of Inhibitor Which Causes 50 Per Cent Inhibition (I50) of an Enzymatic Reaction.”</span> <em>Biochemical Pharmacology</em> 22 (23): 3099–3108. <a href="https://doi.org/10.1016/0006-2952(73)90196-2">https://doi.org/10.1016/0006-2952(73)90196-2</a>.
+</div>
+<div id="ref-Colovic2013" class="csl-entry" role="doc-biblioentry">
+Colovic, Mirjana B., Danijela Z. Krstic, Tamara D. Lazarevic-Pasti, Aleksandra M. Bondzic, and Vesna M. Vasic. 2013. <span>“Acetylcholinesterase Inhibitors: Pharmacology and Toxicology.”</span> <em>Current Neuropharmacology</em> 11 (3): 315–35. <a href="https://doi.org/10.2174/1570159x11311030006">https://doi.org/10.2174/1570159x11311030006</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
