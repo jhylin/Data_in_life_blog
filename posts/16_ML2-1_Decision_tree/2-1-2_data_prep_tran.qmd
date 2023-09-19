@@ -10,6 +10,7 @@ categories:
     - Data preprocessing
     - Pandas
     - ChEMBL database
+    - Python
 jupyter: python3
 format: html
 bibliography: references.bib
