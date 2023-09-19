@@ -2,7 +2,7 @@
 title: "Decision tree"
 subtitle: "Series 2.1 - model building and estimating experimental errors"
 author: Jennifer HY Lin
-date: '2023-9-18'
+date: '2023-9-19'
 draft: true
 categories: 
     - Machine learning projects
