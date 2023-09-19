@@ -20,9 +20,9 @@ bibliography: references.bib
 
 * Post 1 (this post) - data collection from ChEMBL database using web resource client in Python, with initial data preprocessing
 
-* Post 2 (link) - more data preprocessing and transformation to reach the final dataset prior to model building
+* [Post 2](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/2_data_prep_tran.html) - more data preprocessing and transformation to reach the final dataset prior to model building
 
-* Post 3 (link) - estimating experimental errors and building decision tree model using *scikit-learn*
+* [Post 3](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/3_model_build.html) - estimating experimental errors and building decision tree model using *scikit-learn*
 
 <br>
 

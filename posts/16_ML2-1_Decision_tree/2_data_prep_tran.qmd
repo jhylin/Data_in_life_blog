@@ -18,7 +18,7 @@ bibliography: references.bib
 
 ##### **Data source**
 
-The data used in this post 2 for data preprocessing was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in **post 1**. 
+The data used in this post 2 for data preprocessing was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in [post 1](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html). 
 
 <br>
 

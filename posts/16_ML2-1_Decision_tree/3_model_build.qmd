@@ -18,7 +18,7 @@ bibliography: references.bib
 
 ##### **Data source**
 
-The data used here was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier **posts** (yes, it took quite a while to clean the data, so it was splitted into two posts).
+The data used here was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier posts - [post 1](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html) and [post 2](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/2_data_prep_tran.html) (yes, it took quite a while to clean the data, so it was splitted into two posts).
 
 -   The final .csv file used to train the model was named, "ache_2d_chembl.csv"
 
