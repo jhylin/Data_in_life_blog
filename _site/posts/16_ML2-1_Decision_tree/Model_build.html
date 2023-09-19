@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2023-09-18">
+<meta name="dcterms.date" content="2023-09-19">
 
 <title>Home - Decision tree</title>
 <style>
@@ -243,7 +243,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 18, 2023</p>
+        <p class="date">September 19, 2023</p>
       </div>
     </div>
     
@@ -282,7 +282,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="data-source" class="level5">
 <h5 class="anchored" data-anchor-id="data-source"><strong>Data source</strong></h5>
-<p>The data used here was extracted from ChEMBL database by using ChEMBL webresource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier <strong>posts</strong> (yes, it took quite a while to clean the data, so it was splitted into two posts).</p>
+<p>The data used here was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier <strong>posts</strong> (yes, it took quite a while to clean the data, so it was splitted into two posts).</p>
 <ul>
 <li><p>The final .csv file used to train the model was named, “ache_2d_chembl.csv”</p></li>
 <li><p>The earlier version without any RDKit 2D descriptors calculated was named, “ache_chembl.csv”</p></li>
@@ -292,7 +292,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="estimate-experimental-errors" class="level5">
 <h5 class="anchored" data-anchor-id="estimate-experimental-errors"><strong>Estimate experimental errors</strong></h5>
-<p>This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset prepared from the previous two posts. I supposed it made more sense if this was done prior to building the ML model, so this wouldn’t be forgotten or missed, as we knew that real-life was full of many imperfections.</p>
+<p>This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset prepared from the previous two posts. I supposed it made more sense if this was done prior to building the ML model, so this wouldn’t be forgotten or missed, as we know that real-life is full of many imperfections.</p>
 <p>This subsection was inspired by Pat Walters’ posts, which have discussed about estimating errors for experimental data with code links available in these posts:</p>
 <ul>
 <li><p><a href="http://practicalcheminformatics.blogspot.com/2019/07/how-good-could-should-my-models-be.html">How Good Could (Should) My Models Be?</a> - a reference paper <span class="citation" data-cites="Brown2009">(<a href="#ref-Brown2009" role="doc-biblioref">Brown, Muchmore, and Hajduk 2009</a>)</span> was mentioned as the simulation basis for estimating the impact of experimental errors on the correlation from a predictive ML model</p></li>
@@ -312,7 +312,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dtree <span class="op">=</span> pd.read_csv(<span class="st">"ache_2d_chembl.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dtree.drop(columns <span class="op">=</span> [<span class="st">"Unnamed: 0"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="194">
+<div class="cell-output cell-output-display" data-execution_count="26">
 
 <div>
 
@@ -497,7 +497,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(481, 4)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="195">
+<div class="cell-output cell-output-display" data-execution_count="27">
 
 <div>
 
@@ -515,37 +515,37 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <tr>
       <th>0</th>
       <td>8.787812</td>
-      <td>8.844110</td>
-      <td>7.543652</td>
-      <td>9.116783</td>
+      <td>9.302868</td>
+      <td>8.243846</td>
+      <td>7.406252</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.585027</td>
-      <td>11.143103</td>
-      <td>12.012801</td>
-      <td>10.129246</td>
+      <td>11.152776</td>
+      <td>9.959758</td>
+      <td>9.861436</td>
     </tr>
     <tr>
       <th>2</th>
       <td>6.821023</td>
-      <td>6.535840</td>
-      <td>6.641630</td>
-      <td>6.616952</td>
+      <td>7.460300</td>
+      <td>7.252301</td>
+      <td>6.366593</td>
     </tr>
     <tr>
       <th>3</th>
       <td>7.913640</td>
-      <td>8.044619</td>
-      <td>7.692519</td>
-      <td>7.467910</td>
+      <td>7.660428</td>
+      <td>7.798395</td>
+      <td>9.471725</td>
     </tr>
     <tr>
       <th>4</th>
       <td>6.698970</td>
-      <td>6.583034</td>
-      <td>7.475073</td>
-      <td>7.996469</td>
+      <td>7.015055</td>
+      <td>5.657821</td>
+      <td>6.133710</td>
     </tr>
   </tbody>
 </table>
@@ -562,7 +562,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(1443, 3)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="196">
+<div class="cell-output cell-output-display" data-execution_count="28">
 
 <div>
 
@@ -580,31 +580,31 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <th>0</th>
       <td>8.787812</td>
       <td>3-fold</td>
-      <td>8.844110</td>
+      <td>9.302868</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.585027</td>
       <td>3-fold</td>
-      <td>11.143103</td>
+      <td>11.152776</td>
     </tr>
     <tr>
       <th>2</th>
       <td>6.821023</td>
       <td>3-fold</td>
-      <td>6.535840</td>
+      <td>7.460300</td>
     </tr>
     <tr>
       <th>3</th>
       <td>7.913640</td>
       <td>3-fold</td>
-      <td>8.044619</td>
+      <td>7.660428</td>
     </tr>
     <tr>
       <th>4</th>
       <td>6.698970</td>
       <td>3-fold</td>
-      <td>6.583034</td>
+      <td>7.015055</td>
     </tr>
   </tbody>
 </table>
@@ -655,7 +655,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert cor_ls into dataframe</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>err_df <span class="op">=</span> pd.DataFrame(cor_ls, columns <span class="op">=</span> [<span class="st">"r2"</span>, <span class="st">"fold_error"</span>])</span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>err_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="198">
+<div class="cell-output cell-output-display" data-execution_count="30">
 
 <div>
 
@@ -670,27 +670,27 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.897867</td>
+      <td>0.879455</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.900474</td>
+      <td>0.884351</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.911758</td>
+      <td>0.900368</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.886347</td>
+      <td>0.886813</td>
       <td>3-fold</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.883926</td>
+      <td>0.893482</td>
       <td>3-fold</td>
     </tr>
   </tbody>
@@ -703,7 +703,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(rc <span class="op">=</span> {<span class="st">"figure.figsize"</span>: (<span class="dv">9</span>, <span class="dv">8</span>)}, font_scale <span class="op">=</span> <span class="fl">1.5</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>vplot <span class="op">=</span> sns.violinplot(x <span class="op">=</span> <span class="st">"fold_error"</span>, y <span class="op">=</span> <span class="st">"r2"</span>, data <span class="op">=</span> err_df)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vplot.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Fold error"</span>, ylabel <span class="op">=</span> <span class="st">"R$^2$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="199">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>[Text(0.5, 0, 'Fold error'), Text(0, 0.5, 'R$^2$')]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -723,7 +723,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p>Checking out the actual counts of each max phase group in the dataset.</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dtree[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"max_phase"</span>]].groupby(<span class="st">"max_phase"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="200">
+<div class="cell-output cell-output-display" data-execution_count="32">
 
 <div>
 
@@ -765,7 +765,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dtree[<span class="st">"max_phase"</span>].fillna(<span class="st">"null"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="201">
+<div class="cell-output cell-output-display" data-execution_count="33">
 
 <div>
 
@@ -935,7 +935,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(481, 25)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="202">
+<div class="cell-output cell-output-display" data-execution_count="34">
 
 <div>
 
@@ -1104,7 +1104,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a df for compounds with max phase 4 only</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4 <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dtree_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="203">
+<div class="cell-output cell-output-display" data-execution_count="35">
 
 <div>
 
@@ -1400,7 +1400,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>list_ache_inh <span class="op">=</span> [<span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL659"</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4[<span class="st">"molecule_chembl_id"</span>].<span class="bu">str</span>.contains(<span class="vs">r"|"</span>.join(list_ache_inh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="204">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>2      False
 4      False
 6      False
@@ -1422,7 +1422,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp4_df to numpy array</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_mp4 <span class="op">=</span> X_mp4_df.to_numpy()</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>X_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="205">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>array([[ 1.98115698e+02,  3.07692308e-01,  2.00000000e+00,
          2.00000000e+00,  3.00000000e+00,  2.00000000e+00,
          1.50000000e+01,  0.00000000e+00,  0.00000000e+00,
@@ -1513,7 +1513,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert y_mp4_df to numpy array</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>y_mp4 <span class="op">=</span> y_mp4_df.to_numpy()</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>y_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="206">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>array([6.82102305, 6.69897   , 6.        , 7.68824614, 7.29670862,
        4.43179828, 5.22184875, 6.52287875, 4.60730305, 6.99567863])</code></pre>
 </div>
@@ -1526,16 +1526,16 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <p>A simple decision tree plot based on <em>scikit-learn’s</em> plot_tree() was shown below.</p>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="208">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>[Text(0.5909090909090909, 0.875, 'clogp &lt;= 4.901\nsquared_error = 1.144\nsamples = 10\nvalue = 6.228'),
  Text(0.36363636363636365, 0.625, 'n_aromatic_rings &lt;= 1.5\nsquared_error = 0.516\nsamples = 8\nvalue = 6.656'),
- Text(0.18181818181818182, 0.375, 'n_rings &lt;= 0.5\nsquared_error = 0.33\nsamples = 4\nvalue = 6.111'),
+ Text(0.18181818181818182, 0.375, 'n_aromatic_carbocycles &lt;= 0.5\nsquared_error = 0.33\nsamples = 4\nvalue = 6.111'),
  Text(0.09090909090909091, 0.125, 'squared_error = 0.0\nsamples = 1\nvalue = 5.222'),
  Text(0.2727272727272727, 0.125, 'squared_error = 0.088\nsamples = 3\nvalue = 6.407'),
- Text(0.5454545454545454, 0.375, 'n_rotatable_bonds &lt;= 2.0\nsquared_error = 0.108\nsamples = 4\nvalue = 7.2'),
+ Text(0.5454545454545454, 0.375, 'n_lipinski_hba &lt;= 3.0\nsquared_error = 0.108\nsamples = 4\nvalue = 7.2'),
  Text(0.45454545454545453, 0.125, 'squared_error = 0.008\nsamples = 2\nvalue = 6.908'),
  Text(0.6363636363636364, 0.125, 'squared_error = 0.038\nsamples = 2\nvalue = 7.492'),
- Text(0.8181818181818182, 0.625, 'n_aliphatic_rings &lt;= 0.5\nsquared_error = 0.008\nsamples = 2\nvalue = 4.52'),
+ Text(0.8181818181818182, 0.625, 'sas &lt;= 3.741\nsquared_error = 0.008\nsamples = 2\nvalue = 4.52'),
  Text(0.7272727272727273, 0.375, 'squared_error = 0.0\nsamples = 1\nvalue = 4.432'),
  Text(0.9090909090909091, 0.375, 'squared_error = -0.0\nsamples = 1\nvalue = 4.607')]</code></pre>
 </div>
@@ -1552,19 +1552,19 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>|--- clogp &lt;= 4.90
 |   |--- n_aromatic_rings &lt;= 1.50
-|   |   |--- n_rings &lt;= 0.50
+|   |   |--- n_aromatic_carbocycles &lt;= 0.50
 |   |   |   |--- value: [5.22]
-|   |   |--- n_rings &gt;  0.50
+|   |   |--- n_aromatic_carbocycles &gt;  0.50
 |   |   |   |--- value: [6.41]
 |   |--- n_aromatic_rings &gt;  1.50
-|   |   |--- n_rotatable_bonds &lt;= 2.00
+|   |   |--- n_lipinski_hba &lt;= 3.00
 |   |   |   |--- value: [6.91]
-|   |   |--- n_rotatable_bonds &gt;  2.00
+|   |   |--- n_lipinski_hba &gt;  3.00
 |   |   |   |--- value: [7.49]
 |--- clogp &gt;  4.90
-|   |--- n_aliphatic_rings &lt;= 0.50
+|   |--- sas &lt;= 3.74
 |   |   |--- value: [4.43]
-|   |--- n_aliphatic_rings &gt;  0.50
+|   |--- sas &gt;  3.74
 |   |   |--- value: [4.61]
 </code></pre>
 </div>
@@ -1577,7 +1577,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="210">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <p><img src="Model_build_files/figure-html/cell-19-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
@@ -1588,7 +1588,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> dtreeviz.model(ache_tree_mp4, X_train<span class="op">=</span>X_mp4, y_train<span class="op">=</span>y_mp4, target_name<span class="op">=</span><span class="st">"pKi"</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>viz.view()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="211">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <p><img src="Model_build_files/figure-html/cell-20-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
@@ -1604,7 +1604,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>(466, 25)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="212">
+<div class="cell-output cell-output-display" data-execution_count="44">
 
 <div>
 
@@ -1773,7 +1773,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp_test_df to numpy array</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>X_mp_test <span class="op">=</span> X_mp_test_df.to_numpy()</span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>X_mp_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="213">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>array([[2.45041526e+02, 4.00000000e-01, 2.00000000e+00, ...,
         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
        [2.98123676e+02, 3.88888889e-01, 2.00000000e+00, ...,
@@ -1803,7 +1803,7 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="216">
+<div class="cell-output cell-output-display" data-execution_count="48">
 <p><img src="Model_build_files/figure-html/cell-25-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
@@ -1815,11 +1815,11 @@ Name: molecule_chembl_id, dtype: bool</code></pre>
 <p>Because of the small amount of training data, this might hint at using an ensemble approach in the future (which was actually planned as my future posts), where model averaging would be derived from a bunch of tree models rather than using a single tree model, which was what I did here. The reason I started with one tree was because it was no point in building a multiple-tree model if one had no clue about how one tree was built. To learn as much as possible, I had to dissect the multiple-tree version first to focus on one tree at a time.</p>
 <p>One thing I’d like to mention was that rivastigmine was not included in the training dataset because it was actually not a pure AChE inhibitor (as it was also a butyrylcholinesterase (BChE) inhibitor), since my focus was purely on AChE at this time, this particular drug was unfortunately excluded. However, I did make sure the other two drugs mentioned previously (donepezil and galantamine) were included in the training dataset. One possible thing to do in the future if I want to improve this was to add BChE as another protein target and perhaps add this as an additional dataset towards the model.</p>
 <p>As described in the subsection of “Estimate experimental errors”, there were experimental errors of 3-fold, 5-fold and 10-fold estimated based on the provided pKi data. With the prediction model used in this post, the estimated experimental errors would need to be taken into consideration, particularly at the time when the model was being investigated during the model evaluation and validation step (however due to the length of series 2.1 posts, I decided not to add this step yet, but would try to look at this later in the multiple tree model series if this applies).</p>
-<p>A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important features also included the number of aromatic rings, number of heavy atoms and molecular weights.</p>
-<p>Since the type of AChE inhibitors was not the focus of this series, I won’t go into details about which value of pKi or Ki would lead to the ideal AChE inhibitor (the well-known Cheng-Prusoff equation <span class="citation" data-cites="Cheng1973">(<a href="#ref-Cheng1973" role="doc-biblioref">Cheng and Prusoff 1973</a>)</span> might also lead to many discussions about Ki and IC50 values). This is because there are at least two types of AChE inhibitors available - reversible and irreversible <span class="citation" data-cites="Colovic2013">(<a href="#ref-Colovic2013" role="doc-biblioref">Colovic et al. 2013</a>)</span>. Donepezil, galantamine and rivastigmine mentioned previously are the commonly known reversible AChE inhibitors. The irreversible type, as the name suggested, is usually used as insecticides or nerve agents. Another reason is that I didn’t go into details checking all of the identities for the 10 max phase 4 compounds used in the training set, as I only really made sure that donepezil and galantamine were included in the 10 molecules. If I were to re-model again purely on reversible AChE inhibitors targeting dementia or Alzheirmer’s disease, I think I had to be quite sure of what I was training the model with, i.e.&nbsp;excluding irreversible AChE inhibitors from the training set.</p>
-<p>However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a small value during the model evaluation phase.</p>
+<p>A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important features also included the number of aromatic rings, solvent accessible surface area, number of heterogeneous atoms and so on.</p>
+<p>Since the type of AChE inhibitors was not the focus of this series, I won’t go into details about which value of pKi or Ki would lead to the ideal AChE inhibitor (the well-known Cheng-Prusoff equation <span class="citation" data-cites="Cheng1973">(<a href="#ref-Cheng1973" role="doc-biblioref">Cheng and Prusoff 1973</a>)</span> might also lead to many discussions about Ki and IC50 values). This is because there are at least two types of AChE inhibitors available - reversible and irreversible <span class="citation" data-cites="Colovic2013">(<a href="#ref-Colovic2013" role="doc-biblioref">Colovic et al. 2013</a>)</span>. Donepezil, galantamine and rivastigmine mentioned previously are the commonly known reversible AChE inhibitors. The irreversible type, as the name suggested, is usually used as insecticides or nerve agents. Another reason is that I didn’t go into details checking all of the identities for the 10 max phase 4 compounds used in the training set, as I only really made sure that donepezil and galantamine were included in the 10 molecules. If I were to re-model again purely on reversible AChE inhibitors targeting dementia or Alzheimer’s disease, I think I had to be quite sure of what I was training the model with, i.e.&nbsp;excluding irreversible AChE inhibitors from the training set.</p>
+<p>However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values (note: even these preclinical compounds had Ki values extracted from literature sources etc.) would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a very small value during the model evaluation phase.</p>
 <p>The best way would be to test all of these compounds in the same experimental set-ups, through same experimental steps, and in the same laboratory to find out their respective Ki (or pKi) values. However, this was most likely not very feasible due to various real-life restrictions (the availability of financial and staffing resources). The most likely outcome might be to choose a selected group of compound candidates with the highest possibilities to proceed in the drug discovery pipeline based on past experimental, ML and clinical experiences, and then test them in the ways mentioned here.</p>
-<p>I also came across a <a href="https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/">blog post</a> about calculating the prediction intervals of ML prediction models (which mentioned the <a href="https://github.com/scikit-learn-contrib/MAPIE">MAPIE package</a>), but I didn’t quite get time yet to look into this package yet, but from I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models during the model evaluation step.</p>
+<p>I also came across a <a href="https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/">blog post</a> about calculating the prediction intervals of ML prediction models (which mentioned the <a href="https://github.com/scikit-learn-contrib/MAPIE">MAPIE package</a>), but I didn’t quite get time to look into this package yet, but from what I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models during the model evaluation step.</p>
 <p><br></p>
 </section>
 <section id="final-words" class="level5">
