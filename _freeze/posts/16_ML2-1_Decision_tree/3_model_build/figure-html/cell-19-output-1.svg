@@ -38,7 +38,7 @@
 <g id="node9" class="node">
 <title>8</title>
 <path fill="#fefbf9" stroke="black" d="M649.5,-261C649.5,-261 522.5,-261 522.5,-261 516.5,-261 510.5,-255 510.5,-249 510.5,-249 510.5,-205 510.5,-205 510.5,-199 516.5,-193 522.5,-193 522.5,-193 649.5,-193 649.5,-193 655.5,-193 661.5,-199 661.5,-205 661.5,-205 661.5,-249 661.5,-249 661.5,-255 655.5,-261 649.5,-261"/>
-<text text-anchor="middle" x="586" y="-245.8" font-family="Helvetica,sans-Serif" font-size="14.00">n_lipinski_hba &lt;= 4.0</text>
+<text text-anchor="middle" x="586" y="-245.8" font-family="Helvetica,sans-Serif" font-size="14.00">mw &lt;= 429.302</text>
 <text text-anchor="middle" x="586" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00">squared_error = 0.008</text>
 <text text-anchor="middle" x="586" y="-215.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 2</text>
 <text text-anchor="middle" x="586" y="-200.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = 4.52</text>

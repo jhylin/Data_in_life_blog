@@ -243,15 +243,21 @@ y_mp4
 The DecisionTreeRegressor() was fitted on the compounds with max phase 4 as shown below, keeping tree depth at 3 for now to avoid complicating the overall tree graph (the deeper the tree, the more branches - potentially might overfit and create noises for the model).
 
 ```{python}
-ache_tree_mp4 = tree.DecisionTreeRegressor(max_depth=3)
+ache_tree_mp4 = tree.DecisionTreeRegressor(max_depth=3, random_state=1)
 ache_tree_mp4 = ache_tree_mp4.fit(X_mp4, y_mp4)
 ```
+
+<br>
+
+###### ***scikit-learn* tree plot**
 
 A simple decision tree plot based on *scikit-learn's* plot_tree() was shown below.
 
 ```{python}
 tree.plot_tree(ache_tree_mp4, feature_names=list(X_mp4_df.columns), filled=True, rounded=True)
 ```
+
+###### ***scikit-learn* tree plot in texts**
 
 It could also be in the text form.
 
@@ -261,6 +267,10 @@ from sklearn.tree import export_text
 text = export_text(ache_tree_mp4, feature_names=list(X_mp4_df.columns))
 print(text)
 ```
+
+<br>
+
+###### ***graphviz* tree plot**
 
 The graphviz version, which showed a small variation in graph presentation, seemed to be much larger in size and easier to view.
 
@@ -273,7 +283,12 @@ graph = graphviz.Source(dot_data)
 graph
 ```
 
-The following was a dtreeviz version of the decision tree, which actually included the regression plots of different molecular features e.g. clogp, n_aromatic rings and n_aliphatic_rings versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs would be for each feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed [here](https://github.com/parrt/dtreeviz).
+
+<br>
+
+###### ***dtreeviz* tree plot**
+
+The following was a dtreeviz version of the decision tree, which actually included the regression plots of different molecular features e.g. clogp versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs would be for each feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed [here](https://github.com/parrt/dtreeviz).
 
 *Note: it might be smaller in size and not as clear as the graphviz version in the published version of the post, but if the code was run in any IDE, it should be larger to view, and potentailly could be saved as a PDF file*
 
@@ -334,32 +349,30 @@ graph
 
 ##### **Discussions**
 
-Because of the small amount of training data, this might hint at using an ensemble approach in the future (which was actually planned as my future posts), where model averaging would be derived from a bunch of tree models rather than using a single tree model, which was what I did here. The reason I started with one tree was because it was no point in building a multiple-tree model if one had no clue about how one tree was built. To learn as much as possible, I had to dissect the multiple-tree version first to focus on one tree at a time.
+Because of the small amount of training data, this might hint at using an ensemble approach in the future, where model averaging would be derived from a bunch of tree models rather than using a single tree model, which was what I did here. The reason I started with one tree was because it was no point in building a multiple-tree model if one had no clue about how one tree was built. To learn as much as possible, I had to dissect the multiple-tree version first to focus on one tree at a time.
 
-One thing I'd like to mention was that rivastigmine was not included in the training dataset because it was actually not a pure AChE inhibitor (as it was also a butyrylcholinesterase (BChE) inhibitor), since my focus was purely on AChE at this time, this particular drug was unfortunately excluded. However, I did make sure the other two drugs mentioned previously (donepezil and galantamine) were included in the training dataset. One possible thing to do in the future if I want to improve this was to add BChE as another protein target and perhaps add this as an additional dataset towards the model.
+One thing I'd like to mention was that rivastigmine was not included in the training dataset because it was actually not a pure AChE inhibitor (as it was also a butyrylcholinesterase (BChE) inhibitor), since my focus was purely on AChE at this time, this particular drug was unfortunately excluded. However, I did make sure the other two drugs (donepezil and galantamine) were included in the training dataset. One possible thing to do in the future if I want to improve this was to add BChE as another protein target and perhaps add this as an additional dataset towards the model.
 
 As described in the subsection of "Estimate experimental errors", there were experimental errors of 3-fold, 5-fold and 10-fold estimated based on the provided pKi data. With the prediction model used in this post, the estimated experimental errors would need to be taken into consideration, particularly at the time when the model was being investigated during the model evaluation and validation step (however due to the length of series 2.1 posts, I decided not to add this step yet, but would try to look at this later in the multiple tree model series if this applies).
 
-A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important features also included the number of aromatic rings, solvent accessible surface area, number of heteroatoms and so on.
+A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important molecular features also included the number of aromatic rings, molecular weights, solvent accessible surface area and others (I've set the random state to 1 for now, so hopefully the result will be reproducible as I realised my old code without it always generated different tree plots, then all of the sudden I remembered that I forgot to set the random state of the estimator, so this was added).
 
 Since the type of AChE inhibitors was not the focus of this series, I won't go into details about which value of pKi or Ki would lead to the ideal AChE inhibitor (the well-known Cheng-Prusoff equation [@Cheng1973] might also lead to many discussions about Ki and IC50 values). This is because there are at least two types of AChE inhibitors available - reversible and irreversible [@Colovic2013]. Donepezil, galantamine and rivastigmine mentioned previously are the commonly known reversible AChE inhibitors. The irreversible type, as the name suggested, is usually used as insecticides or nerve agents. Another reason is that I didn't go into details checking all of the identities for the 10 max phase 4 compounds used in the training set, as I only really made sure that donepezil and galantamine were included in the 10 molecules. If I were to re-model again purely on reversible AChE inhibitors targeting dementia or Alzheimer's disease, I think I had to be quite sure of what I was training the model with, i.e. excluding irreversible AChE inhibitors from the training set.
 
-However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values (note: even these preclinical compounds had Ki values extracted from literature sources etc.) would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a very small value during the model evaluation phase.
+However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values (note: these preclinical compounds had Ki values extracted from literature sources etc.) would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a very small value during the model evaluation phase.
 
 The best way would be to test all of these compounds in the same experimental set-ups, through same experimental steps, and in the same laboratory to find out their respective Ki (or pKi) values. However, this was most likely not very feasible due to various real-life restrictions (the availability of financial and staffing resources). The most likely outcome might be to choose a selected group of compound candidates with the highest possibilities to proceed in the drug discovery pipeline based on past experimental, ML and clinical experiences, and then test them in the ways mentioned here.
 
-I also came across a [blog post](https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/) about calculating the prediction intervals of ML prediction models (which mentioned the [MAPIE package](https://github.com/scikit-learn-contrib/MAPIE)), but I didn't quite get time to look into this package yet, but from what I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models during the model evaluation step.
+I also came across a [blog post](https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/) about calculating the prediction intervals of ML prediction models (which mentioned the [MAPIE package](https://github.com/scikit-learn-contrib/MAPIE)), but I didn't quite get time to look into this package yet, and from what I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models.
 
 <br>
 
 ##### **Final words**
 
-I didn't think a definite conclusion could be drawn here, as this was only purely from one single decision tree, so I have named this last part as "final words", as I felt if I didn't stop here, this post or series 2.1 could go on forever or as long it could go. The main thing here was to fully understand how one single decision tree was constructed based on hopefully reasonable-ish data (still not the best I reckon as I could not rule out all the noises from the data), and then to view the tree visually in different styles of plots, and understand how this was a white-box ML approach with clear features or descriptions shown to trace where the tree would branch off to which nodes to reach different final outcomes or targets.
-
-The most important thing was that this series was really a preamble before the multiple-tree models e.g. random forest and boosted trees, as I have bravely planned to do a series of posts on tree models, so that might take a while, slowly but hopefully surely.
+I didn't think a definite conclusion could be drawn here, as this was only purely from one very simple and single decision tree, so I have named this last part as "final words", as I felt if I didn't stop here, this post or series of posts could go on forever or as long it could. The main thing here was to fully understand how one single decision tree was constructed based on hopefully reasonable-ish data (still not the best as I could not rule out all the noises from the data), and then to view the tree visually in different styles of plots. It was also important to understand how this was a white-box ML approach with clear features or descriptions shown to trace where the tree would branch off to reach different final outcomes or targets. This series was really a preamble for the multiple-tree models e.g. random forest and boosted trees, as I have bravely planned to do a series of posts on tree models due to my interests in them, so that might take a while, slowly but hopefully surely.
 
 <br>
 
 ##### **Acknowledgements**
 
-I'd like to thank all the authors of all the open-source packages used in this series 2.1 posts. I'd also like to thank all the authors of all the blog posts mentioned in this series as well since I've learnt a lot from them too.
+I'd like to thank all the authors for all the open-source packages used in the series 2.1 posts. I'd also like to thank all the authors of all the blog posts mentioned in this series as well since I've learnt a lot from them too.
