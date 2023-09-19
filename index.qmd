@@ -15,9 +15,12 @@ title-block-banner: true
 comments: false
 ---
 
-**🌟Welcome🌟**
+**🌟Blog status🌟**
 
-As my portfolio site evolves over time, there is an accentuated trend of more cheminformatics projects in drug discovery themes as my interests grow more and more in this area. My earlier work was more on healthcare data projects since I came from a pharmacy-heavy background, but experimental research soon followed. Next project in the pipeline: ML series 2.1 - decision tree. Hopefully this will be ready in September or October as I'm trying to incorporate as much as I can from the beginning till the end.
+Welcome to my blog/personal website on selected cheminformatics and data science projects in drug discovery.
+
+* Latest project: ML series 2.1 - decision tree.
+* Next project in the pipeline: ML series 2.2 - random forest (no ETA yet as only literally just finished series 2.1!).
 
 <br>
 
