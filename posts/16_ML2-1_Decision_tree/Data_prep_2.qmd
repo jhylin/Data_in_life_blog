@@ -1,6 +1,6 @@
 ---
 title: "Decision tree"
-subtitle: "Series 2.1 - data preprocessing and transformation"
+subtitle: "Series 2.1.2 - data preprocessing and transformation"
 author: Jennifer HY Lin
 date: '2023-9-19'
 draft: false

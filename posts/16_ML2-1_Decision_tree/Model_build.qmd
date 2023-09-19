@@ -1,6 +1,6 @@
 ---
 title: "Decision tree"
-subtitle: "Series 2.1 - model building and estimating experimental errors"
+subtitle: "Series 2.1.3 - model building and estimating experimental errors"
 author: Jennifer HY Lin
 date: '2023-9-19'
 draft: false
