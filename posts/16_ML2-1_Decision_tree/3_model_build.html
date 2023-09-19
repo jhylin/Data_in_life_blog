@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-09-19">
+
+<title>Home - Decision tree</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About Jennifer HY Lin</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Decision tree</h1>
+            <p class="subtitle lead">Series 2.1.3 - model building and estimating experimental errors</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine learning projects</div>
+                <div class="quarto-category">Tree models</div>
+                <div class="quarto-category">Pandas</div>
+                <div class="quarto-category">Scikit-learn</div>
+                <div class="quarto-category">ChEMBL database</div>
+                <div class="quarto-category">Python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 19, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link active" data-scroll-target="#data-source"><strong>Data source</strong></a></li>
+  <li><a href="#estimate-experimental-errors" id="toc-estimate-experimental-errors" class="nav-link" data-scroll-target="#estimate-experimental-errors"><strong>Estimate experimental errors</strong></a></li>
+  <li><a href="#check-max-phase-distribution" id="toc-check-max-phase-distribution" class="nav-link" data-scroll-target="#check-max-phase-distribution"><strong>Check max phase distribution</strong></a></li>
+  <li><a href="#sanity-check-on-the-dataframe" id="toc-sanity-check-on-the-dataframe" class="nav-link" data-scroll-target="#sanity-check-on-the-dataframe"><strong>Sanity check on the dataframe</strong></a></li>
+  <li><a href="#model-building" id="toc-model-building" class="nav-link" data-scroll-target="#model-building"><strong>Model building</strong></a>
+  <ul>
+  <li><a href="#training-data-based-on-max-phase-4-compounds" id="toc-training-data-based-on-max-phase-4-compounds" class="nav-link" data-scroll-target="#training-data-based-on-max-phase-4-compounds"><strong>Training data based on max phase 4 compounds</strong></a></li>
+  <li><a href="#testing-and-predicting-data-based-on-max-phase-of-null-compounds" id="toc-testing-and-predicting-data-based-on-max-phase-of-null-compounds" class="nav-link" data-scroll-target="#testing-and-predicting-data-based-on-max-phase-of-null-compounds"><strong>Testing and predicting data based on max phase of null compounds</strong></a></li>
+  </ul></li>
+  <li><a href="#discussions" id="toc-discussions" class="nav-link" data-scroll-target="#discussions"><strong>Discussions</strong></a></li>
+  <li><a href="#final-words" id="toc-final-words" class="nav-link" data-scroll-target="#final-words"><strong>Final words</strong></a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="data-source" class="level5">
+<h5 class="anchored" data-anchor-id="data-source"><strong>Data source</strong></h5>
+<p>The data used here was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier <strong>posts</strong> (yes, it took quite a while to clean the data, so it was splitted into two posts).</p>
+<ul>
+<li><p>The final .csv file used to train the model was named, “ache_2d_chembl.csv”</p></li>
+<li><p>The earlier version without any RDKit 2D descriptors calculated was named, “ache_chembl.csv”</p></li>
+<li><p>Both files should be in a GitHub repository called, “<a href="https://github.com/jhylin/ML2-1_decision_tree">ML2-1_decision_tree</a>” or in my <a href="https://github.com/jhylin/Data_in_life_blog">blog repository</a>, under “posts” folder (look for “16_ML2-1_Decision_tree” folder)</p></li>
+</ul>
+<p><br></p>
+</section>
+<section id="estimate-experimental-errors" class="level5">
+<h5 class="anchored" data-anchor-id="estimate-experimental-errors"><strong>Estimate experimental errors</strong></h5>
+<p>This part was about estimating the impact of experimental errors (pKi values) on the predictive machine learning (ML) models. It was also needed to estimate the maximum possible correlation that could be drawn from the dataset prepared from the previous two posts. I supposed it made more sense if this was done prior to building the ML model, so this wouldn’t be forgotten or missed, as we know that real-life is full of many imperfections.</p>
+<p>This subsection was inspired by Pat Walters’ posts, which have discussed about estimating errors for experimental data with code links available in these posts:</p>
+<ul>
+<li><p><a href="http://practicalcheminformatics.blogspot.com/2019/07/how-good-could-should-my-models-be.html">How Good Could (Should) My Models Be?</a> - a reference paper <span class="citation" data-cites="Brown2009">(<a href="#ref-Brown2009" role="doc-biblioref">Brown, Muchmore, and Hajduk 2009</a>)</span> was mentioned as the simulation basis for estimating the impact of experimental errors on the correlation from a predictive ML model</p></li>
+<li><p><a href="http://practicalcheminformatics.blogspot.com/2023/06/getting-real-with-molecular-property.html">Getting Real with Molecular Property Prediction</a> (under subsection of “How Well Should We Be Able to Model the Data?”)</p></li>
+</ul>
+<p>To get started, all the required libraries were loaded as below.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Imported the preprocessed data from previous posts.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dtree <span class="op">=</span> pd.read_csv(<span class="st">"ache_2d_chembl.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dtree.drop(columns <span class="op">=</span> [<span class="st">"Unnamed: 0"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>max_phase</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL60745</td>
+      <td>8.787812</td>
+      <td>NaN</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL208599</td>
+      <td>10.585027</td>
+      <td>NaN</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL95</td>
+      <td>6.821023</td>
+      <td>4.0</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL173309</td>
+      <td>7.913640</td>
+      <td>NaN</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL1128</td>
+      <td>6.698970</td>
+      <td>4.0</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<p>The pKi column was used in the code below as it contained the experimental values (calculated from measured Ki values, usually derived from countless lab experiments) collected from different scientific literatures or other sources as stated in ChEMBL. The aim was to simulate pKi values with experimental errors added to them.</p>
+<p><em>Code used for the rest of the subsection were adapted with thanks from Pat Walters’ “<a href="https://github.com/PatWalters/maximum_correlation/blob/master/maximum_correlation.ipynb">maximum_correlation.ipynb</a>” with my own added comments for further explanations</em></p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save exp data (pKi) as an object</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dtree[<span class="st">"pKi"</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the object as a list</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data_ls <span class="op">=</span> [data]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Trial 3-, 5- &amp; 10-fold errors</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fold <span class="kw">in</span> (<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Retrieve error samples randomly from a normal distribution</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bewteen 0 and log10 of number-fold </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for the length of provided data only</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    error <span class="op">=</span> np.random.normal(<span class="dv">0</span>, np.log10(fold), <span class="bu">len</span>(data))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    data_ls.append(error <span class="op">+</span> data)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data_ls to dataframe</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>dtree_err <span class="op">=</span> pd.DataFrame(data_ls)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-align dataframe (switch column header &amp; index)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>dtree_err <span class="op">=</span> dtree_err.transpose()</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>dtree_err.columns <span class="op">=</span> [<span class="st">"pKi"</span>, <span class="st">"3-fold"</span>, <span class="st">"5-fold"</span>, <span class="st">"10-fold"</span>]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_err.shape)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>dtree_err.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 4)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>pKi</th>
+      <th>3-fold</th>
+      <th>5-fold</th>
+      <th>10-fold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.787812</td>
+      <td>8.495737</td>
+      <td>7.907406</td>
+      <td>7.546521</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.585027</td>
+      <td>10.116988</td>
+      <td>10.386479</td>
+      <td>11.000249</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.821023</td>
+      <td>6.472534</td>
+      <td>6.665933</td>
+      <td>7.017162</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.913640</td>
+      <td>7.118795</td>
+      <td>7.351644</td>
+      <td>8.041733</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.698970</td>
+      <td>6.115930</td>
+      <td>7.498732</td>
+      <td>6.349185</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Melting the created dtree_err so it could be plotted later (noticed there should be an increased number of rows after re-stacking the data).</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Melt the dtree_err dataframe </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to make error values in one column (for plotting)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dtree_err_melt <span class="op">=</span> dtree_err.melt(id_vars <span class="op">=</span> <span class="st">"pKi"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_err_melt.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>dtree_err_melt.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1443, 3)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>pKi</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.787812</td>
+      <td>3-fold</td>
+      <td>8.495737</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.585027</td>
+      <td>3-fold</td>
+      <td>10.116988</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.821023</td>
+      <td>3-fold</td>
+      <td>6.472534</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.913640</td>
+      <td>3-fold</td>
+      <td>7.118795</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.698970</td>
+      <td>3-fold</td>
+      <td>6.115930</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Presenting this in regression plots.</p>
+<p><em>Note: There was a matplotlib bug which would always show a tight_layout user warning for FacetGrid plots in seaborn (the lmplot used below). Seaborn was built based on matplotlib so unsurprisingly this occurred (this <a href="https://github.com/matplotlib/matplotlib/issues/26290">GitHub issue link</a> might explain it). I have therefore temporarily silenced this user warning for the sake of post publication.</em></p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To silence the tight-layout user warning</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># variable = error-fold e.g. 3-fold</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># value = pKi value plus error</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>sns.set_theme(font_scale <span class="op">=</span> <span class="fl">1.5</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> sns.lmplot(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">"pKi"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">"value"</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> <span class="st">"variable"</span>, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> dtree_err_melt, </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># alpha = mark’s opacity (low - more transparent)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># s = mark size (increase with higher number)</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    scatter_kws <span class="op">=</span> <span class="bu">dict</span>(alpha <span class="op">=</span> <span class="fl">0.5</span>, s <span class="op">=</span> <span class="dv">15</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>title_list <span class="op">=</span> [<span class="st">"3-fold"</span>, <span class="st">"5-fold"</span>, <span class="st">"10-fold"</span>]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">3</span>):</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    plot.axes[<span class="dv">0</span>, i].set_ylabel(<span class="st">"pKi + error"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    plot.axes[<span class="dv">0</span>, i].set_title(title_list[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="3_model_build_files/figure-html/cell-6-output-1.png" width="1407" height="446"></p>
+</div>
+</div>
+<p>Simulating the impact of error on the correlation between experimental pKi and also pKi with errors (3-fold, 5-fold and 10-fold). R<sup>2</sup> calculated using <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#r2-score"><em>scikit-learn</em></a> was introduced in the code below.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating r2 score (coefficient of determination) </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># based on 1000 trials for each fold</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># note: data = dtree["pKi"]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list for correlation</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cor_ls <span class="op">=</span> []</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fold <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>]:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up 1000 trials</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">1000</span>):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        error <span class="op">=</span> np.random.normal(<span class="dv">0</span>, np.log10(fold), <span class="bu">len</span>(data))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        cor_ls.append([r2_score(data, data <span class="op">+</span> error), <span class="ss">f"</span><span class="sc">{</span>fold<span class="sc">}</span><span class="ss">-fold"</span>])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert cor_ls into dataframe</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>err_df <span class="op">=</span> pd.DataFrame(cor_ls, columns <span class="op">=</span> [<span class="st">"r2"</span>, <span class="st">"fold_error"</span>])</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>err_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>r2</th>
+      <th>fold_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.884150</td>
+      <td>3-fold</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.890976</td>
+      <td>3-fold</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.888083</td>
+      <td>3-fold</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.892700</td>
+      <td>3-fold</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.893241</td>
+      <td>3-fold</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Plotting the R<sup>2</sup> and fold-errors as violin plots.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.set_theme(rc <span class="op">=</span> {<span class="st">"figure.figsize"</span>: (<span class="dv">9</span>, <span class="dv">8</span>)}, font_scale <span class="op">=</span> <span class="fl">1.5</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>vplot <span class="op">=</span> sns.violinplot(x <span class="op">=</span> <span class="st">"fold_error"</span>, y <span class="op">=</span> <span class="st">"r2"</span>, data <span class="op">=</span> err_df)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vplot.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Fold error"</span>, ylabel <span class="op">=</span> <span class="st">"R$^2$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[Text(0.5, 0, 'Fold error'), Text(0, 0.5, 'R$^2$')]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="3_model_build_files/figure-html/cell-8-output-2.png" width="761" height="671"></p>
+</div>
+</div>
+<p>This definitely helped a lot with visualising the estimated errors for the experimental Ki values curated in ChEMBL for this specific protein target (CHEMBL220, acetylcholinesterase (AChE)). The larger the error-fold, the lower the R<sup>2</sup>, and once the experimental error reached 10-fold, we could see an estimated R<sup>2</sup> (maximum correlation) with its median sitting below 0.55, indicating a likely poor predictive ML model if it was built based on these data with the estimated 10-fold experimental errors.</p>
+<p><br></p>
+</section>
+<section id="check-max-phase-distribution" class="level5">
+<h5 class="anchored" data-anchor-id="check-max-phase-distribution"><strong>Check max phase distribution</strong></h5>
+<p>At this stage, I’ve planned to do model training on compounds with max phase 4 (i.e.&nbsp;prescription medicines), so this would somewhat be an attempt to mirror real-life scenarios for the ML prediction model.</p>
+<p>Max phases were assigned to each ChEMBL-curated compound according to this <a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/drug-and-compound-questions">ChEMBL FAQ link</a> (under the question of “What is max phase?”). As quoted from this ChEMBL FAQ link, a max phase 4 compound means:</p>
+<blockquote class="blockquote">
+<p>“Approved (4): A marketed drug e.g.&nbsp;AMINOPHYLLINE (CHEMBL1370561) is an FDA approved drug for treatment of asthma.”</p>
+</blockquote>
+<p>Checking out the actual counts of each max phase group in the dataset.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dtree[[<span class="st">"molecule_chembl_id"</span>, <span class="st">"max_phase"</span>]].groupby(<span class="st">"max_phase"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+    </tr>
+    <tr>
+      <th>max_phase</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-1.0</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2.0</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3.0</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>There was only a very small number of compounds with max phase 4 assigned (a total count of 10, which was also unsurprising since there weren’t many AChE inhibitors used as prescription medications for dementia - some of the well-known examples were donepezil, galantamine and rivastigmine).</p>
+<p>Filling in actual “null” labels for all “NaN” rows in the “max_phase” columns to help with filtering out these compounds later on.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dtree[<span class="st">"max_phase"</span>].fillna(<span class="st">"null"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>max_phase</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL60745</td>
+      <td>8.787812</td>
+      <td>null</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL208599</td>
+      <td>10.585027</td>
+      <td>null</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL95</td>
+      <td>6.821023</td>
+      <td>4.0</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL173309</td>
+      <td>7.913640</td>
+      <td>null</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL1128</td>
+      <td>6.698970</td>
+      <td>4.0</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="sanity-check-on-the-dataframe" class="level5">
+<h5 class="anchored" data-anchor-id="sanity-check-on-the-dataframe"><strong>Sanity check on the dataframe</strong></h5>
+<p>This was just another sanity check for myself on the dtree dataframe - making sure there weren’t any “NaN” cells in it (so dropping any “NaN” again, even though I might have already done this as one of the steps during data preprocessing).</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dtree.dropna()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree.shape)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dtree.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(481, 25)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>max_phase</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL60745</td>
+      <td>8.787812</td>
+      <td>null</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL208599</td>
+      <td>10.585027</td>
+      <td>null</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL95</td>
+      <td>6.821023</td>
+      <td>4.0</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL173309</td>
+      <td>7.913640</td>
+      <td>null</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL1128</td>
+      <td>6.698970</td>
+      <td>4.0</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="model-building" class="level5">
+<h5 class="anchored" data-anchor-id="model-building"><strong>Model building</strong></h5>
+<section id="training-data-based-on-max-phase-4-compounds" class="level6">
+<h6 class="anchored" data-anchor-id="training-data-based-on-max-phase-4-compounds"><strong>Training data based on max phase 4 compounds</strong></h6>
+<p>So here I wanted to separate the collected data by splitting the compounds into two groups based on their assigned max phases. Compounds with max phase 4 were chosen as the training data, and the rest of the compounds with max phases of “null” would be the testing data.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a df for compounds with max phase 4 only</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4 <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dtree_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>max_phase</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>CHEMBL95</td>
+      <td>6.821023</td>
+      <td>4.0</td>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>15</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CHEMBL1128</td>
+      <td>6.698970</td>
+      <td>4.0</td>
+      <td>201.092042</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CHEMBL640</td>
+      <td>6.000000</td>
+      <td>4.0</td>
+      <td>235.168462</td>
+      <td>0.461538</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
+      <td>17</td>
+      <td>...</td>
+      <td>1.791687</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CHEMBL502</td>
+      <td>7.688246</td>
+      <td>4.0</td>
+      <td>379.214744</td>
+      <td>0.458333</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>28</td>
+      <td>...</td>
+      <td>2.677222</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>CHEMBL481</td>
+      <td>7.296709</td>
+      <td>4.0</td>
+      <td>586.279135</td>
+      <td>0.515152</td>
+      <td>10</td>
+      <td>1</td>
+      <td>7</td>
+      <td>10</td>
+      <td>43</td>
+      <td>...</td>
+      <td>3.632560</td>
+      <td>0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>CHEMBL360055</td>
+      <td>4.431798</td>
+      <td>4.0</td>
+      <td>510.461822</td>
+      <td>0.800000</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6</td>
+      <td>36</td>
+      <td>...</td>
+      <td>3.257653</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>CHEMBL1025</td>
+      <td>5.221849</td>
+      <td>4.0</td>
+      <td>184.066459</td>
+      <td>1.000000</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>11</td>
+      <td>...</td>
+      <td>3.345144</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>171</th>
+      <td>CHEMBL659</td>
+      <td>6.522879</td>
+      <td>4.0</td>
+      <td>287.152144</td>
+      <td>0.529412</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>21</td>
+      <td>...</td>
+      <td>4.226843</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>CHEMBL1200970</td>
+      <td>4.607303</td>
+      <td>4.0</td>
+      <td>348.142697</td>
+      <td>0.368421</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+      <td>23</td>
+      <td>...</td>
+      <td>4.223591</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>CHEMBL1677</td>
+      <td>6.995679</td>
+      <td>4.0</td>
+      <td>234.092376</td>
+      <td>0.307692</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>16</td>
+      <td>...</td>
+      <td>3.218715</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<p>Making sure donepezil and galantamine were in this dtree_mp4 dataframe, so the model training would be based on these medicines and also other max phase 4 AChE inhibitors.</p>
+<p>The screenshots of both medicines were taken from ChEMBL website:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="donepezil_chembl.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Screenshot of donepezil (parent drug form) with its molecule ChEMBL ID</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="galantamine_chembl.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Screenshot of galantamine (parent drug form) with its molecule ChEMBL ID</figcaption><p></p>
+</figure>
+</div>
+<p>The following regex string check confirmed that these two compounds were in the dtree_mp4 dataframe - row indices 9 and 171 contained these two drugs.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>list_ache_inh <span class="op">=</span> [<span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL659"</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dtree_mp4[<span class="st">"molecule_chembl_id"</span>].<span class="bu">str</span>.contains(<span class="vs">r"|"</span>.join(list_ache_inh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>2      False
+4      False
+6      False
+9       True
+131    False
+133    False
+160    False
+171     True
+180    False
+195    False
+Name: molecule_chembl_id, dtype: bool</code></pre>
+</div>
+</div>
+<p>Setting up the features for the training set.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set X (features) for max phase 4 compounds</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>X_mp4_df <span class="op">=</span> dtree_mp4[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp4_df to numpy array</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_mp4 <span class="op">=</span> X_mp4_df.to_numpy()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>X_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>array([[ 1.98115698e+02,  3.07692308e-01,  2.00000000e+00,
+         2.00000000e+00,  3.00000000e+00,  2.00000000e+00,
+         1.50000000e+01,  0.00000000e+00,  0.00000000e+00,
+         3.89100000e+01,  7.06488238e-01,  2.69580000e+00,
+         2.01471913e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  1.00000000e+00,  1.00000000e+00,
+         2.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 2.01092042e+02,  4.00000000e-01,  2.00000000e+00,
+         1.00000000e+00,  1.00000000e+00,  3.00000000e+00,
+         1.30000000e+01,  2.00000000e+00,  0.00000000e+00,
+         2.02300000e+01,  6.08112327e-01, -1.01700000e+00,
+         3.18586632e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 2.35168462e+02,  4.61538462e-01,  4.00000000e+00,
+         3.00000000e+00,  1.00000000e+00,  4.00000000e+00,
+         1.70000000e+01,  6.00000000e+00,  0.00000000e+00,
+         5.83600000e+01,  7.31539693e-01,  1.34040000e+00,
+         1.79168720e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 3.79214744e+02,  4.58333333e-01,  4.00000000e+00,
+         0.00000000e+00,  4.00000000e+00,  4.00000000e+00,
+         2.80000000e+01,  6.00000000e+00,  0.00000000e+00,
+         3.87700000e+01,  7.47461492e-01,  4.36110000e+00,
+         2.67722173e+00,  1.00000000e+00,  1.00000000e+00,
+         2.00000000e+00,  2.00000000e+00,  0.00000000e+00,
+         2.00000000e+00,  0.00000000e+00,  1.00000000e+00,
+         1.00000000e+00],
+       [ 5.86279135e+02,  5.15151515e-01,  1.00000000e+01,
+         1.00000000e+00,  7.00000000e+00,  1.00000000e+01,
+         4.30000000e+01,  4.00000000e+00,  0.00000000e+00,
+         1.14200000e+02,  3.55955569e-01,  4.09110000e+00,
+         3.63256044e+00,  0.00000000e+00,  4.00000000e+00,
+         4.00000000e+00,  1.00000000e+00,  2.00000000e+00,
+         3.00000000e+00,  0.00000000e+00,  2.00000000e+00,
+         2.00000000e+00],
+       [ 5.10461822e+02,  8.00000000e-01,  6.00000000e+00,
+         0.00000000e+00,  1.00000000e+00,  6.00000000e+00,
+         3.60000000e+01,  2.10000000e+01,  0.00000000e+00,
+         2.76900000e+01,  2.05822189e-01,  5.45250000e+00,
+         3.25765349e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 1.84066459e+02,  1.00000000e+00,  3.00000000e+00,
+         0.00000000e+00,  0.00000000e+00,  5.00000000e+00,
+         1.10000000e+01,  4.00000000e+00,  0.00000000e+00,
+         3.55300000e+01,  6.29869319e-01,  2.91400000e+00,
+         3.34514393e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 2.87152144e+02,  5.29411765e-01,  4.00000000e+00,
+         1.00000000e+00,  4.00000000e+00,  4.00000000e+00,
+         2.10000000e+01,  1.00000000e+00,  0.00000000e+00,
+         4.19300000e+01,  8.00524269e-01,  1.85030000e+00,
+         4.22684283e+00,  1.00000000e+00,  2.00000000e+00,
+         3.00000000e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 3.48142697e+02,  3.68421053e-01,  2.00000000e+00,
+         0.00000000e+00,  3.00000000e+00,  4.00000000e+00,
+         2.30000000e+01,  5.00000000e+00,  0.00000000e+00,
+         6.48000000e+00,  7.09785317e-01,  5.44140000e+00,
+         4.22359068e+00,  0.00000000e+00,  1.00000000e+00,
+         1.00000000e+00,  2.00000000e+00,  0.00000000e+00,
+         2.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 2.34092376e+02,  3.07692308e-01,  2.00000000e+00,
+         2.00000000e+00,  3.00000000e+00,  3.00000000e+00,
+         1.60000000e+01,  0.00000000e+00,  0.00000000e+00,
+         3.89100000e+01,  7.60853221e-01,  3.11760000e+00,
+         3.21871482e+00,  1.00000000e+00,  0.00000000e+00,
+         1.00000000e+00,  1.00000000e+00,  1.00000000e+00,
+         2.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00]])</code></pre>
+</div>
+</div>
+<p>Setting up the target for the training set.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set y (target) for max phase 4 compounds</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y_mp4_df <span class="op">=</span> dtree_mp4[<span class="st">"pKi"</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert y_mp4_df to numpy array</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>y_mp4 <span class="op">=</span> y_mp4_df.to_numpy()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>y_mp4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>array([6.82102305, 6.69897   , 6.        , 7.68824614, 7.29670862,
+       4.43179828, 5.22184875, 6.52287875, 4.60730305, 6.99567863])</code></pre>
+</div>
+</div>
+<p>The DecisionTreeRegressor() was fitted on the compounds with max phase 4 as shown below, keeping tree depth at 3 for now to avoid complicating the overall tree graph (the deeper the tree, the more branches - potentially might overfit and create noises for the model).</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> tree.DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp4, y_mp4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A simple decision tree plot based on <em>scikit-learn’s</em> plot_tree() was shown below.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>[Text(0.5909090909090909, 0.875, 'clogp &lt;= 4.901\nsquared_error = 1.144\nsamples = 10\nvalue = 6.228'),
+ Text(0.36363636363636365, 0.625, 'n_aromatic_rings &lt;= 1.5\nsquared_error = 0.516\nsamples = 8\nvalue = 6.656'),
+ Text(0.18181818181818182, 0.375, 'n_aromatic_carbocycles &lt;= 0.5\nsquared_error = 0.33\nsamples = 4\nvalue = 6.111'),
+ Text(0.09090909090909091, 0.125, 'squared_error = 0.0\nsamples = 1\nvalue = 5.222'),
+ Text(0.2727272727272727, 0.125, 'squared_error = 0.088\nsamples = 3\nvalue = 6.407'),
+ Text(0.5454545454545454, 0.375, 'clogp &lt;= 3.604\nsquared_error = 0.108\nsamples = 4\nvalue = 7.2'),
+ Text(0.45454545454545453, 0.125, 'squared_error = 0.008\nsamples = 2\nvalue = 6.908'),
+ Text(0.6363636363636364, 0.125, 'squared_error = 0.038\nsamples = 2\nvalue = 7.492'),
+ Text(0.8181818181818182, 0.625, 'n_aromatic_carbocycles &lt;= 1.5\nsquared_error = 0.008\nsamples = 2\nvalue = 4.52'),
+ Text(0.7272727272727273, 0.375, 'squared_error = 0.0\nsamples = 1\nvalue = 4.432'),
+ Text(0.9090909090909091, 0.375, 'squared_error = -0.0\nsamples = 1\nvalue = 4.607')]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="3_model_build_files/figure-html/cell-17-output-2.png" width="689" height="611"></p>
+</div>
+</div>
+<p>It could also be in the text form.</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_text</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> export_text(ache_tree_mp4, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>|--- clogp &lt;= 4.90
+|   |--- n_aromatic_rings &lt;= 1.50
+|   |   |--- n_aromatic_carbocycles &lt;= 0.50
+|   |   |   |--- value: [5.22]
+|   |   |--- n_aromatic_carbocycles &gt;  0.50
+|   |   |   |--- value: [6.41]
+|   |--- n_aromatic_rings &gt;  1.50
+|   |   |--- clogp &lt;= 3.60
+|   |   |   |--- value: [6.91]
+|   |   |--- clogp &gt;  3.60
+|   |   |   |--- value: [7.49]
+|--- clogp &gt;  4.90
+|   |--- n_aromatic_carbocycles &lt;= 1.50
+|   |   |--- value: [4.43]
+|   |--- n_aromatic_carbocycles &gt;  1.50
+|   |   |--- value: [4.61]
+</code></pre>
+</div>
+</div>
+<p>The graphviz version, which showed a small variation in graph presentation, seemed to be much larger in size and easier to view.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<p><img src="3_model_build_files/figure-html/cell-19-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>The following was a dtreeviz version of the decision tree, which actually included the regression plots of different molecular features e.g.&nbsp;clogp, n_aromatic rings and n_aliphatic_rings versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs would be for each feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed <a href="https://github.com/parrt/dtreeviz">here</a>.</p>
+<p><em>Note: it might be smaller in size and not as clear as the graphviz version in the published version of the post, but if the code was run in any IDE, it should be larger to view, and potentailly could be saved as a PDF file</em></p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dtreeviz </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> dtreeviz.model(ache_tree_mp4, X_train<span class="op">=</span>X_mp4, y_train<span class="op">=</span>y_mp4, target_name<span class="op">=</span><span class="st">"pKi"</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp4_df.columns))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>viz.view()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<p><img src="3_model_build_files/figure-html/cell-20-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="testing-and-predicting-data-based-on-max-phase-of-null-compounds" class="level6">
+<h6 class="anchored" data-anchor-id="testing-and-predicting-data-based-on-max-phase-of-null-compounds"><strong>Testing and predicting data based on max phase of null compounds</strong></h6>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compounds with max phase as "null"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dtree_mp_null <span class="op">=</span> dtree[dtree[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="st">"null"</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dtree_mp_null.shape)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>dtree_mp_null.head() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(466, 25)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>molecule_chembl_id</th>
+      <th>pKi</th>
+      <th>max_phase</th>
+      <th>mw</th>
+      <th>fsp3</th>
+      <th>n_lipinski_hba</th>
+      <th>n_lipinski_hbd</th>
+      <th>n_rings</th>
+      <th>n_hetero_atoms</th>
+      <th>n_heavy_atoms</th>
+      <th>...</th>
+      <th>sas</th>
+      <th>n_aliphatic_carbocycles</th>
+      <th>n_aliphatic_heterocyles</th>
+      <th>n_aliphatic_rings</th>
+      <th>n_aromatic_carbocycles</th>
+      <th>n_aromatic_heterocyles</th>
+      <th>n_aromatic_rings</th>
+      <th>n_saturated_carbocycles</th>
+      <th>n_saturated_heterocyles</th>
+      <th>n_saturated_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CHEMBL60745</td>
+      <td>8.787812</td>
+      <td>null</td>
+      <td>245.041526</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>13</td>
+      <td>...</td>
+      <td>3.185866</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CHEMBL208599</td>
+      <td>10.585027</td>
+      <td>null</td>
+      <td>298.123676</td>
+      <td>0.388889</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>21</td>
+      <td>...</td>
+      <td>4.331775</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CHEMBL173309</td>
+      <td>7.913640</td>
+      <td>null</td>
+      <td>694.539707</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>50</td>
+      <td>...</td>
+      <td>2.803680</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CHEMBL102226</td>
+      <td>4.698970</td>
+      <td>null</td>
+      <td>297.152928</td>
+      <td>0.923077</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>18</td>
+      <td>...</td>
+      <td>2.965170</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CHEMBL103873</td>
+      <td>5.698970</td>
+      <td>null</td>
+      <td>269.121628</td>
+      <td>0.909091</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>16</td>
+      <td>...</td>
+      <td>3.097106</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<p>There were 466 compounds with max phase as “null”, meaning they were pre-clinical compounds. This was confirmed through the answer from ChEMBL FAQ link, a max phase of “null” compound means:</p>
+<blockquote class="blockquote">
+<p>“Preclinical (NULL): preclinical compounds with bioactivity data e.g.&nbsp;is a preclinical compound with bioactivity data that has been extracted from scientific literature. However, the sources of drug and clinical candidate drug information in ChEMBL do not show that this compound has reached clinical trials and therefore the max_phase is set to null.”</p>
+</blockquote>
+<p>Again, setting up the features for the testing dataset.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>X_mp_test_df <span class="op">=</span> dtree_mp_null[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X_mp_test_df to numpy array</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>X_mp_test <span class="op">=</span> X_mp_test_df.to_numpy()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>X_mp_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>array([[2.45041526e+02, 4.00000000e-01, 2.00000000e+00, ...,
+        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+       [2.98123676e+02, 3.88888889e-01, 2.00000000e+00, ...,
+        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+       [6.94539707e+02, 6.66666667e-01, 8.00000000e+00, ...,
+        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+       ...,
+       [3.11152144e+02, 3.15789474e-01, 4.00000000e+00, ...,
+        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+       [3.68096076e+02, 9.23076923e-01, 4.00000000e+00, ...,
+        0.00000000e+00, 2.00000000e+00, 2.00000000e+00],
+       [2.46136828e+02, 5.00000000e-01, 4.00000000e+00, ...,
+        0.00000000e+00, 3.00000000e+00, 3.00000000e+00]])</code></pre>
+</div>
+</div>
+<p>Then setting up the target for the testing set.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> ache_tree_mp4.predict(X_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The trained model, ache_tree_mp4, was used to predict on the testing dataset (max phase of null compounds).</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ache_tree_mp4 <span class="op">=</span> ache_tree_mp4.fit(X_mp_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the graphviz graph version to show the decision tree on the testing set, as the prediction result.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> tree.export_graphviz(ache_tree_mp4, out_file<span class="op">=</span><span class="va">None</span>, feature_names<span class="op">=</span><span class="bu">list</span>(X_mp_test_df.columns), filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>, special_characters<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> graphviz.Source(dot_data)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<p><img src="3_model_build_files/figure-html/cell-25-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="discussions" class="level5">
+<h5 class="anchored" data-anchor-id="discussions"><strong>Discussions</strong></h5>
+<p>Because of the small amount of training data, this might hint at using an ensemble approach in the future (which was actually planned as my future posts), where model averaging would be derived from a bunch of tree models rather than using a single tree model, which was what I did here. The reason I started with one tree was because it was no point in building a multiple-tree model if one had no clue about how one tree was built. To learn as much as possible, I had to dissect the multiple-tree version first to focus on one tree at a time.</p>
+<p>One thing I’d like to mention was that rivastigmine was not included in the training dataset because it was actually not a pure AChE inhibitor (as it was also a butyrylcholinesterase (BChE) inhibitor), since my focus was purely on AChE at this time, this particular drug was unfortunately excluded. However, I did make sure the other two drugs mentioned previously (donepezil and galantamine) were included in the training dataset. One possible thing to do in the future if I want to improve this was to add BChE as another protein target and perhaps add this as an additional dataset towards the model.</p>
+<p>As described in the subsection of “Estimate experimental errors”, there were experimental errors of 3-fold, 5-fold and 10-fold estimated based on the provided pKi data. With the prediction model used in this post, the estimated experimental errors would need to be taken into consideration, particularly at the time when the model was being investigated during the model evaluation and validation step (however due to the length of series 2.1 posts, I decided not to add this step yet, but would try to look at this later in the multiple tree model series if this applies).</p>
+<p>A bit about the last decision tree plot, tentatively clogp (calculated partition coefficient) might be the crucial molecular feature in deciding whether a molecule might be closer to being an AChE inhibitor. Other important features also included the number of aromatic rings, solvent accessible surface area, number of heterogeneous atoms and so on.</p>
+<p>Since the type of AChE inhibitors was not the focus of this series, I won’t go into details about which value of pKi or Ki would lead to the ideal AChE inhibitor (the well-known Cheng-Prusoff equation <span class="citation" data-cites="Cheng1973">(<a href="#ref-Cheng1973" role="doc-biblioref">Cheng and Prusoff 1973</a>)</span> might also lead to many discussions about Ki and IC50 values). This is because there are at least two types of AChE inhibitors available - reversible and irreversible <span class="citation" data-cites="Colovic2013">(<a href="#ref-Colovic2013" role="doc-biblioref">Colovic et al. 2013</a>)</span>. Donepezil, galantamine and rivastigmine mentioned previously are the commonly known reversible AChE inhibitors. The irreversible type, as the name suggested, is usually used as insecticides or nerve agents. Another reason is that I didn’t go into details checking all of the identities for the 10 max phase 4 compounds used in the training set, as I only really made sure that donepezil and galantamine were included in the 10 molecules. If I were to re-model again purely on reversible AChE inhibitors targeting dementia or Alzheimer’s disease, I think I had to be quite sure of what I was training the model with, i.e.&nbsp;excluding irreversible AChE inhibitors from the training set.</p>
+<p>However, if our aim was to only find novel AChE inhibitors in a general manner, one of the ways to check post-model building would be to re-run the dataframe again on compounds with max phase as null, including the molecular feature names to find out which compounds were at the predicted threshold cut-off values to see if their corresponding pKi values (note: even these preclinical compounds had Ki values extracted from literature sources etc.) would match the predicted ones. One caveat of this method was that there might be pre-existing experimental errors in all the obtained and recorded Ki values, so this might not confirm that the model was truly a good reflection of the real-life scenario. Therefore, at most, this would probably add a very small value during the model evaluation phase.</p>
+<p>The best way would be to test all of these compounds in the same experimental set-ups, through same experimental steps, and in the same laboratory to find out their respective Ki (or pKi) values. However, this was most likely not very feasible due to various real-life restrictions (the availability of financial and staffing resources). The most likely outcome might be to choose a selected group of compound candidates with the highest possibilities to proceed in the drug discovery pipeline based on past experimental, ML and clinical experiences, and then test them in the ways mentioned here.</p>
+<p>I also came across a <a href="https://www.valencekjell.com/posts/2022-09-14-prediction-intervals/">blog post</a> about calculating the prediction intervals of ML prediction models (which mentioned the <a href="https://github.com/scikit-learn-contrib/MAPIE">MAPIE package</a>), but I didn’t quite get time to look into this package yet, but from what I have read in its repository link, it potentially could be quite useful for classification, regression and time-series models during the model evaluation step.</p>
+<p><br></p>
+</section>
+<section id="final-words" class="level5">
+<h5 class="anchored" data-anchor-id="final-words"><strong>Final words</strong></h5>
+<p>I didn’t think a definite conclusion could be drawn here, as this was only purely from one single decision tree, so I have named this last part as “final words”, as I felt if I didn’t stop here, this post or series 2.1 could go on forever or as long it could go. The main thing here was to fully understand how one single decision tree was constructed based on hopefully reasonable-ish data (still not the best I reckon as I could not rule out all the noises from the data), and then to view the tree visually in different styles of plots, and understand how this was a white-box ML approach with clear features or descriptions shown to trace where the tree would branch off to which nodes to reach different final outcomes or targets.</p>
+<p>The most important thing was that this series was really a preamble before the multiple-tree models e.g.&nbsp;random forest and boosted trees, as I have bravely planned to do a series of posts on tree models, so that might take a while, slowly but hopefully surely.</p>
+<p><br></p>
+</section>
+<section id="acknowledgements" class="level5">
+<h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
+<p>I’d like to thank all the authors of all the open-source packages used in this series 2.1 posts. I’d also like to thank all the authors of all the blog posts mentioned in this series as well since I’ve learnt a lot from them too.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Brown2009" class="csl-entry" role="doc-biblioentry">
+Brown, Scott P., Steven W. Muchmore, and Philip J. Hajduk. 2009. <span>“Healthy Skepticism: Assessing Realistic Model Performance.”</span> <em>Drug Discovery Today</em> 14 (7-8): 420–27. <a href="https://doi.org/10.1016/j.drudis.2009.01.012">https://doi.org/10.1016/j.drudis.2009.01.012</a>.
+</div>
+<div id="ref-Cheng1973" class="csl-entry" role="doc-biblioentry">
+Cheng, Yung-Chi, and William H. Prusoff. 1973. <span>“Relationship Between the Inhibition Constant (KI) and the Concentration of Inhibitor Which Causes 50 Per Cent Inhibition (I50) of an Enzymatic Reaction.”</span> <em>Biochemical Pharmacology</em> 22 (23): 3099–3108. <a href="https://doi.org/10.1016/0006-2952(73)90196-2">https://doi.org/10.1016/0006-2952(73)90196-2</a>.
+</div>
+<div id="ref-Colovic2013" class="csl-entry" role="doc-biblioentry">
+Colovic, Mirjana B., Danijela Z. Krstic, Tamara D. Lazarevic-Pasti, Aleksandra M. Bondzic, and Vesna M. Vasic. 2013. <span>“Acetylcholinesterase Inhibitors: Pharmacology and Toxicology.”</span> <em>Current Neuropharmacology</em> 11 (3): 315–35. <a href="https://doi.org/10.2174/1570159x11311030006">https://doi.org/10.2174/1570159x11311030006</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with ❤️ in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
