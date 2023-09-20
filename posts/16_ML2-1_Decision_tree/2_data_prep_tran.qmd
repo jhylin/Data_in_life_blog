@@ -8,10 +8,10 @@ categories:
     - Machine learning projects
     - Tree models
     - Data preprocessing
+    - ChEMBL database
     - Pandas
     - RDKit
     - Datamol
-    - ChEMBL database
     - Python
 jupyter: python3
 format: html
