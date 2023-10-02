@@ -20,7 +20,7 @@ comments: false
 Welcome to my blog on selected cheminformatics and data science projects in drug discovery.
 
 * Latest project: ML series 2.1 - decision tree
-* Next project in the pipeline: ML series 2.2 - random forest (aiming for October or November)
+* Next project in the pipeline: ML series 2.2 - random forest (aiming for November or December)
 
 <br>
 
