@@ -20,7 +20,7 @@ bibliography: references.bib
 
 * Introduction to random forest
 * Random forest methods or classes in *scikit-learn*
-* Random forest regressor model in *scikit-learn
+* Random forest regressor model in *scikit-learn*
 * Training and testing data splits
     - ChEMBL-assigned max phase splits
     - Imbalanced learning regression and max phase splits
@@ -164,7 +164,7 @@ X_mp_test
 
 <br>
 
-##### **Training/testing splits using ImbalancedLearningRegression and max phase splits**
+###### **Training/testing splits using ImbalancedLearningRegression and max phase splits**
 
 I didn't really pay a lot of attentions when I was doing data splits in the last series on decision tree, as my main focus was on building a single tree in order to fully understand and see what could be derived from just one tree. Now, when I reached this series on random forest, I realised I forgot to mention in the last series that data splitting was actually very crucial and impactful on model performance and also outcome predictions. It could also become quite complicated as more approaches were available to split the data, and the way the data was splitted could produce different outcomes. After I've splitted the same dataset based on compounds' max phase assignments and also fitted the training data on the random forest regressor, I went back and had another look, then noticed that, the training and testing data were very imbalanced, and perhaps I should do something to the data before fitting them onto the estimator. 
 

@@ -219,7 +219,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Random forest</h1>
-            <p class="subtitle lead">Series 2.2 - model building, feature importances &amp; model evaluations</p>
+            <p class="subtitle lead">Series 2.2 - model building, feature importances &amp; hyperparameter tuning</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine learning projects</div>
                 <div class="quarto-category">Tree models</div>
@@ -260,7 +260,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-a-random-forest" id="toc-what-is-a-random-forest" class="nav-link active" data-scroll-target="#what-is-a-random-forest"><strong>What is a random forest?</strong></a></li>
+  <li><a href="#quick-overview-of-this-post" id="toc-quick-overview-of-this-post" class="nav-link active" data-scroll-target="#quick-overview-of-this-post"><strong>Quick overview of this post</strong></a></li>
+  <li><a href="#what-is-a-random-forest" id="toc-what-is-a-random-forest" class="nav-link" data-scroll-target="#what-is-a-random-forest"><strong>What is a random forest?</strong></a></li>
   <li><a href="#random-forest-in-scikit-learn" id="toc-random-forest-in-scikit-learn" class="nav-link" data-scroll-target="#random-forest-in-scikit-learn"><strong>Random forest in <em>scikit-learn</em></strong></a></li>
   <li><a href="#building-a-random-forest-regressor-model-using-scikit-learn" id="toc-building-a-random-forest-regressor-model-using-scikit-learn" class="nav-link" data-scroll-target="#building-a-random-forest-regressor-model-using-scikit-learn"><strong>Building a random forest regressor model using <em>scikit-learn</em></strong></a></li>
   <li><a href="#trainingtesting-splits" id="toc-trainingtesting-splits" class="nav-link" data-scroll-target="#trainingtesting-splits"><strong>Training/testing splits</strong></a>
@@ -289,6 +290,30 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
+<section id="quick-overview-of-this-post" class="level5">
+<h5 class="anchored" data-anchor-id="quick-overview-of-this-post"><strong>Quick overview of this post</strong></h5>
+<ul>
+<li>Introduction to random forest</li>
+<li>Random forest methods or classes in <em>scikit-learn</em></li>
+<li>Random forest regressor model in *scikit-learn</li>
+<li>Training and testing data splits
+<ul>
+<li>ChEMBL-assigned max phase splits</li>
+<li>Imbalanced learning regression and max phase splits</li>
+</ul></li>
+<li>Scoring metrics of trained models</li>
+<li>Feature importances in dataset
+<ul>
+<li>feature_importances_attribute in <em>scikit-learn</em></li>
+<li>permutation_importance function in <em>scikit-learn</em></li>
+</ul></li>
+<li>Hyperparameter tuning
+<ul>
+<li>number of trees</li>
+</ul></li>
+</ul>
+<p><br></p>
+</section>
 <section id="what-is-a-random-forest" class="level5">
 <h5 class="anchored" data-anchor-id="what-is-a-random-forest"><strong>What is a random forest?</strong></h5>
 <p>The <a href="https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/3_model_build.html">decision tree model built last time</a> was purely based on one model on its own, which often might not be as accurate or reflective in real-life. To improve the model, we would then think about using the average of multiple models <span class="citation" data-cites="breiman1998">(<a href="#ref-breiman1998" role="doc-biblioref">Breiman 1998</a>)</span> to see if this average output would provide a more realistic outcome. This model averaging approach was, in fact, constantly used in our lives - using majority votes in elections or decision-making processes.</p>
@@ -326,7 +351,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"max_phase"</span>].fillna(<span class="st">"null"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_8235/6693926.py:5: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value 'null' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_8802/6693926.py:5: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value 'null' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
   data["max_phase"].fillna("null", inplace=True)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -1352,22 +1377,25 @@ Name: pKi, dtype: float64</code></pre>
 <pre><code>synth_matrix:   0%|          | 0/58 [00:00&lt;?, ?it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix:  17%|#7        | 10/58 [00:00&lt;00:00, 91.75it/s]</code></pre>
+<pre><code>synth_matrix:  17%|#7        | 10/58 [00:00&lt;00:00, 91.35it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix:  34%|###4      | 20/58 [00:00&lt;00:00, 93.91it/s]</code></pre>
+<pre><code>synth_matrix:  34%|###4      | 20/58 [00:00&lt;00:00, 86.73it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix:  52%|#####1    | 30/58 [00:00&lt;00:00, 95.00it/s]</code></pre>
+<pre><code>synth_matrix:  50%|#####     | 29/58 [00:00&lt;00:00, 85.41it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix:  69%|######8   | 40/58 [00:00&lt;00:00, 94.80it/s]</code></pre>
+<pre><code>synth_matrix:  67%|######7   | 39/58 [00:00&lt;00:00, 87.89it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix:  86%|########6 | 50/58 [00:00&lt;00:00, 94.53it/s]</code></pre>
+<pre><code>synth_matrix:  83%|########2 | 48/58 [00:00&lt;00:00, 85.05it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>synth_matrix: 100%|##########| 58/58 [00:00&lt;00:00, 94.69it/s]</code></pre>
+<pre><code>synth_matrix:  98%|#########8| 57/58 [00:00&lt;00:00, 86.42it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>synth_matrix: 100%|##########| 58/58 [00:00&lt;00:00, 86.55it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
@@ -1376,7 +1404,7 @@ Name: pKi, dtype: float64</code></pre>
 <pre><code>r_index:   0%|          | 0/8 [00:00&lt;?, ?it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>r_index: 100%|##########| 8/8 [00:00&lt;00:00, 293.32it/s]</code></pre>
+<pre><code>r_index: 100%|##########| 8/8 [00:00&lt;00:00, 290.01it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(480, 25)</code></pre>
@@ -1386,58 +1414,58 @@ Name: pKi, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gaussian Noise</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Followed by max phase split, where 4 = training</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>data_gn_mp4 <span class="op">=</span> data_gn[data_gn[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>data_gn_mp4</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_gn_mp4.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gaussian Noise</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Followed by max phase split, where 4 = training</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>data_gn_mp4 <span class="op">=</span> data_gn[data_gn[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="dv">4</span>]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>data_gn_mp4</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_gn_mp4.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(4, 25)</code></pre>
 </div>
 </div>
-<p>Random over-sampling keeps all 10 max phase 4 compounds.</p>
 <div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random over-sampling</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Followed by max phase split, where 4 = training</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp4 = data_ro[data_ro["max_phase"] == 4]</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp4</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print(data_ro_mp4.shape)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random over-sampling</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Followed by max phase split, where 4 = training</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp4 = data_ro[data_ro["max_phase"] == 4]</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp4</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print(data_ro_mp4.shape)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gaussian Noise</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Also splitted max phase null compounds = testing</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>data_gn_mp_null <span class="op">=</span> data_gn[data_gn[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="st">"null"</span>]</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>data_gn_mp_null</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show shape of df for max phase null compounds</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_gn_mp_null.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gaussian Noise</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Also splitted max phase null compounds = testing</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>data_gn_mp_null <span class="op">=</span> data_gn[data_gn[<span class="st">"max_phase"</span>] <span class="op">==</span> <span class="st">"null"</span>]</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>data_gn_mp_null</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show shape of df for max phase null compounds</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_gn_mp_null.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(470, 25)</code></pre>
+<pre><code>(468, 25)</code></pre>
 </div>
 </div>
-<p>Random over-sampling is actually oversampling the max phase null compounds (so number increased).</p>
 <div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random over-sampling</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Also splitted max phase null compounds = testing</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp_null = data_ro[data_ro["max_phase"] == "null"]</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp_null</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># # Show shape of df for max phase null compounds</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print(data_ro_mp_null.shape)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random over-sampling</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Also splitted max phase null compounds = testing</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp_null = data_ro[data_ro["max_phase"] == "null"]</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data_ro_mp_null</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># # Show shape of df for max phase null compounds</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print(data_ro_mp_null.shape)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Random over-sampling keeps all 10 max phase 4 compounds.</p>
+<p>Random over-sampling is actually oversampling the max phase null compounds (so number increased).</p>
 <p>Tested over-sampling - essentially it increased the sample size of all max phase null compounds with all 10 max phase 4 compounds kept.</p>
 <p>Tested under-sampling - removed all of the max phase 4 compounds (therefore not ideal), with max phase null compounds also reduced in size too.</p>
 <p>Decided to stick with Gauissian Noise version as it reduced both max phase 4 compounds slightly, and increased the max phase null compounds slightly as well. It appeared to be the most balanced adjustments for both max phase null and 4 compounds.</p>
 <div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick look at how the pKi values differed </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># after applying iblr to dataset</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot target variable distributions</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data[<span class="st">"pKi"</span>], label <span class="op">=</span> <span class="st">"Original"</span>)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data_gn[<span class="st">"pKi"</span>], label <span class="op">=</span> <span class="st">"Modified"</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>plt.legend(labels <span class="op">=</span> [<span class="st">"Original"</span>, <span class="st">"Modified"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick look at how the pKi values differed </span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># after applying iblr to dataset</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot target variable distributions</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data[<span class="st">"pKi"</span>], label <span class="op">=</span> <span class="st">"Original"</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data_gn[<span class="st">"pKi"</span>], label <span class="op">=</span> <span class="st">"Modified"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>plt.legend(labels <span class="op">=</span> [<span class="st">"Original"</span>, <span class="st">"Modified"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>&lt;matplotlib.legend.Legend at 0x13369eb00&gt;</code></pre>
+<pre><code>&lt;matplotlib.legend.Legend at 0x131bc6a70&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="1_random_forest_files/figure-html/cell-19-output-2.png" width="597" height="429"></p>
@@ -1445,16 +1473,16 @@ Name: pKi, dtype: float64</code></pre>
 </div>
 <p>Range of pKi values for max phase 4 compounds was between 4 and 8.</p>
 <div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking pKi value range for max phase 4 compounds</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#data_mp4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking pKi value range for max phase 4 compounds</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#data_mp4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Preparing training data.</p>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select molecular features for X variable</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>X_mp4_gn_df <span class="op">=</span> data_gn_mp4[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_mp4_gn_df.shape)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>X_mp4_gn_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select molecular features for X variable</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>X_mp4_gn_df <span class="op">=</span> data_gn_mp4[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_mp4_gn_df.shape)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>X_mp4_gn_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(4, 22)</code></pre>
 </div>
@@ -1491,55 +1519,7 @@ Name: pKi, dtype: float64</code></pre>
   </thead>
   <tbody>
     <tr>
-      <th>285</th>
-      <td>198.115698</td>
-      <td>0.307692</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>15.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>38.91</td>
-      <td>...</td>
-      <td>2.014719</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>286</th>
-      <td>348.142697</td>
-      <td>0.368421</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>4.0</td>
-      <td>23.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>6.48</td>
-      <td>...</td>
-      <td>4.223591</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>2.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>287</th>
+      <th>252</th>
       <td>586.279135</td>
       <td>0.515152</td>
       <td>10.0</td>
@@ -1563,7 +1543,7 @@ Name: pKi, dtype: float64</code></pre>
       <td>2.0</td>
     </tr>
     <tr>
-      <th>337</th>
+      <th>361</th>
       <td>201.092042</td>
       <td>0.400000</td>
       <td>2.0</td>
@@ -1586,6 +1566,54 @@ Name: pKi, dtype: float64</code></pre>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
+    <tr>
+      <th>414</th>
+      <td>198.115698</td>
+      <td>0.307692</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>15.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>38.91</td>
+      <td>...</td>
+      <td>2.014719</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>457</th>
+      <td>510.461822</td>
+      <td>0.800000</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>36.0</td>
+      <td>21.0</td>
+      <td>0</td>
+      <td>27.69</td>
+      <td>...</td>
+      <td>3.257653</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
   </tbody>
 </table>
 <p>4 rows × 22 columns</p>
@@ -1593,37 +1621,37 @@ Name: pKi, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>X_mp4_gn <span class="op">=</span> X_mp4_gn_df.to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>X_mp4_gn <span class="op">=</span> X_mp4_gn_df.to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y variable (target outcome - pKi)</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y_mp4_gn_df <span class="op">=</span> data_gn_mp4[<span class="st">"pKi"</span>]</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>y_mp4_gn <span class="op">=</span> y_mp4_gn_df.to_numpy()</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>y_mp4_gn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y variable (target outcome - pKi)</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y_mp4_gn_df <span class="op">=</span> data_gn_mp4[<span class="st">"pKi"</span>]</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>y_mp4_gn <span class="op">=</span> y_mp4_gn_df.to_numpy()</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>y_mp4_gn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>array([6.82102305, 4.60730305, 7.29670862, 6.69897   ])</code></pre>
+<pre><code>array([7.29670862, 6.69897   , 6.82102305, 4.43179828])</code></pre>
 </div>
 </div>
 <p>Fitting iblr-Gaussian noise training data onto another random forest regressor model.</p>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n_estimators = 100 by default</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note: if wanting to use whole dataset - switch off "bootstrap" parameter by using "False"</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>rfreg_gn <span class="op">=</span> RandomForestRegressor(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>rfreg_gn.fit(X_mp4_gn, y_mp4_gn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n_estimators = 100 by default</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note: if wanting to use whole dataset - switch off "bootstrap" parameter by using "False"</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>rfreg_gn <span class="op">=</span> RandomForestRegressor(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>rfreg_gn.fit(X_mp4_gn, y_mp4_gn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(max_depth=3, random_state=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor(max_depth=3, random_state=1)</pre></div></div></div></div></div>
 </div>
 </div>
 <p>Preparing testing data.</p>
 <div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up X test variable with the same molecular features</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test_df <span class="op">=</span> data_gn_mp_null[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X test variables from df to arrays</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test <span class="op">=</span> X_mp_gn_test_df.to_numpy()</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up X test variable with the same molecular features</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test_df <span class="op">=</span> data_gn_mp_null[[<span class="st">'mw'</span>, <span class="st">'fsp3'</span>, <span class="st">'n_lipinski_hba'</span>, <span class="st">'n_lipinski_hbd'</span>, <span class="st">'n_rings'</span>, <span class="st">'n_hetero_atoms'</span>, <span class="st">'n_heavy_atoms'</span>, <span class="st">'n_rotatable_bonds'</span>, <span class="st">'n_radical_electrons'</span>, <span class="st">'tpsa'</span>, <span class="st">'qed'</span>, <span class="st">'clogp'</span>, <span class="st">'sas'</span>, <span class="st">'n_aliphatic_carbocycles'</span>, <span class="st">'n_aliphatic_heterocyles'</span>, <span class="st">'n_aliphatic_rings'</span>, <span class="st">'n_aromatic_carbocycles'</span>, <span class="st">'n_aromatic_heterocyles'</span>, <span class="st">'n_aromatic_rings'</span>, <span class="st">'n_saturated_carbocycles'</span>, <span class="st">'n_saturated_heterocyles'</span>, <span class="st">'n_saturated_rings'</span>]]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X test variables from df to arrays</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test <span class="op">=</span> X_mp_gn_test_df.to_numpy()</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>X_mp_gn_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>array([[5.80224119e+02, 2.64705882e-01, 7.00000000e+00, ...,
         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
@@ -1632,12 +1660,12 @@ Name: pKi, dtype: float64</code></pre>
        [5.24297368e+02, 4.54545455e-01, 4.00000000e+00, ...,
         0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
        ...,
-       [2.88072177e+02, 2.50000000e-01, 5.00000000e+00, ...,
-        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [3.67214744e+02, 4.34782609e-01, 4.00000000e+00, ...,
-        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [3.51169525e+02, 3.68421053e-01, 7.00000000e+00, ...,
-        0.00000000e+00, 0.00000000e+00, 0.00000000e+00]])</code></pre>
+       [4.71299811e+02, 4.48275862e-01, 6.00000000e+00, ...,
+        0.00000000e+00, 1.00000000e+00, 1.00000000e+00],
+       [4.22199571e+02, 6.36363636e-01, 6.00000000e+00, ...,
+        0.00000000e+00, 1.00000000e+00, 1.00000000e+00],
+       [3.97188923e+02, 4.34782609e-01, 6.00000000e+00, ...,
+        0.00000000e+00, 1.00000000e+00, 1.00000000e+00]])</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -1645,17 +1673,17 @@ Name: pKi, dtype: float64</code></pre>
 <h6 class="anchored" data-anchor-id="using-trained-model-for-prediction-on-testing-data"><strong>Using trained model for prediction on testing data</strong></h6>
 <p>Predicting max phase-splitted data only.</p>
 <div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict pKi values for the compounds with "null" max phase</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using the training model rfreg </span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment code below to print prediction result</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(rfreg.predict(X_mp_test))</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or use:</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>y_mp_test <span class="op">=</span> rfreg.predict(X_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict pKi values for the compounds with "null" max phase</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using the training model rfreg </span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment code below to print prediction result</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(rfreg.predict(X_mp_test))</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or use:</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>y_mp_test <span class="op">=</span> rfreg.predict(X_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Predicting iblr-gn data with max phase splits.</p>
 <div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>y_mp_gn_test <span class="op">=</span> rfreg_gn.predict(X_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>y_mp_gn_test <span class="op">=</span> rfreg_gn.predict(X_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </section>
@@ -1663,11 +1691,11 @@ Name: pKi, dtype: float64</code></pre>
 <h6 class="anchored" data-anchor-id="accuracyscoring-metrics-of-trained-models"><strong>Accuracy/scoring metrics of trained models</strong></h6>
 <p>Checking model accuracy for both training and testing datasets was actually recommended to occur before moving onto finding out the feature importances. A <em>scikit-learn</em> explanation for this could be found in the section on <a href="https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance">“Permutation feature importance”</a>.</p>
 <div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set accuracy</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor training accuracy: </span><span class="sc">{</span>rfreg<span class="sc">.</span>score(X_mp4, y_mp4)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set accuracy</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor testing accuracy: </span><span class="sc">{</span>rfreg<span class="sc">.</span>score(X_mp_test, y_mp_test)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set accuracy</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor training accuracy: </span><span class="sc">{</span>rfreg<span class="sc">.</span>score(X_mp4, y_mp4)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set accuracy</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor testing accuracy: </span><span class="sc">{</span>rfreg<span class="sc">.</span>score(X_mp_test, y_mp_test)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Random forest regressor training accuracy: 0.82
 Random forest regressor testing accuracy: 1.00</code></pre>
@@ -1675,19 +1703,19 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 <p>So it looked like both the training and testing accuracies for the random forest regressor model (rfreg) were quite high, meaning that the model was able to remember the molecular features well from the training set (the tiny sample of 10 compounds), and the model was able to apply them to the testing set (which should contain about 400s of compounds) as well, in order to make predictions on the target value of pKi. So this has confirmed that the model was indeed making predictions (rather than not making any at all, which meant there might be no point in finding out which features were important in the data, so it was a good checking point during the random forest model building exercise), therefore, we could proceed to the next step of generating some feature importances, which were useful information to fill in the bigger story i.e.&nbsp;which features were pivotal for influencing the pKi values of prescription drugs targeting AChE?</p>
 <div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iblr-Gaussian noise &amp; max phase splitted data</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set accuracy</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor training accuracy: </span><span class="sc">{</span>rfreg_gn<span class="sc">.</span>score(X_mp4_gn, y_mp4_gn)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set accuracy</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor testing accuracy: </span><span class="sc">{</span>rfreg_gn<span class="sc">.</span>score(X_mp_gn_test, y_mp_gn_test)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iblr-Gaussian noise &amp; max phase splitted data</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set accuracy</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor training accuracy: </span><span class="sc">{</span>rfreg_gn<span class="sc">.</span>score(X_mp4_gn, y_mp4_gn)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set accuracy</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Random forest regressor testing accuracy: </span><span class="sc">{</span>rfreg_gn<span class="sc">.</span>score(X_mp_gn_test, y_mp_gn_test)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Random forest regressor training accuracy: 0.80
+<pre><code>Random forest regressor training accuracy: 0.78
 Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>data_mp_null.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data_mp_null.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 
 <div>
@@ -1847,13 +1875,13 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data_mp_null = data_mp_null[data_mp_null["max_phase"] == "null"]</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> data_mp_null[<span class="st">"pKi"</span>]</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> y_true.to_numpy(copy<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data_mp_null = data_mp_null[data_mp_null["max_phase"] == "null"]</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> data_mp_null[<span class="st">"pKi"</span>]</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> y_true.to_numpy(copy<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_true)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>y_true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_true)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>y_true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>array([ 8.7878124 , 10.58502665,  7.91364017,  4.69897   ,  5.69897   ,
         7.66354027,  5.14630179,  8.82681373,  6.04866248,  5.63827216,
@@ -1952,7 +1980,7 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>numpy.ndarray</code></pre>
 </div>
@@ -1960,38 +1988,38 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 <p>Mean squared error between y_true (max phase null compounds’ pKi values) and y_pred</p>
 <p>MSE - closer to zero, the better the model is (less errors present)</p>
 <div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_true, y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_true, y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>2.330350086602576</code></pre>
 </div>
 </div>
 <p>R2 - closer to 1, the better the model is (negative likely model was not performing as well as expected or as quoted from scikit-learn “arbitrarily worse”)</p>
 <div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>r2_score(y_true, y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>r2_score(y_true, y_mp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>-0.12911187644281164</code></pre>
 </div>
 </div>
 <p>Because the data was re-sampled in a iblr-gn way, the size of array would be different from the original dataset, so grabbing the iblr-gn modified data.</p>
 <div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>y_true_gn <span class="op">=</span> data_gn_mp_null[<span class="st">"pKi"</span>]</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>y_true_gn <span class="op">=</span> y_true_gn.to_numpy(copy<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>y_true_gn <span class="op">=</span> data_gn_mp_null[<span class="st">"pKi"</span>]</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>y_true_gn <span class="op">=</span> y_true_gn.to_numpy(copy<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R squared for iblr-gn data</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co">#type(y_true_gn)</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>r2_score(y_true_gn, y_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R squared for iblr-gn data</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co">#type(y_true_gn)</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>r2_score(y_true_gn, y_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
-<pre><code>-0.9094246996499529</code></pre>
+<pre><code>-0.9001076121259868</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MSE for iblr-gn data</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_true_gn, y_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MSE for iblr-gn data</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_true_gn, y_mp_gn_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-<pre><code>6.26404309531457</code></pre>
+<pre><code>6.066092552982045</code></pre>
 </div>
 </div>
 <p>Well, it appeared iblr-gn data might not offer much advantage to the original max phase split method, even the max phase split method wasn’t that great either.</p>
@@ -2006,12 +2034,12 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 <h6 class="anchored" data-anchor-id="feature_importances_-attribute-from-scikit-learn"><strong>feature_importances_ attribute from <em>scikit-learn</em></strong></h6>
 <p>The impurity-based feature importances (also known as Gini importance).</p>
 <div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute feature importances on rfreg training model</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>feature_imp <span class="op">=</span> rfreg.feature_importances_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute feature importances on rfreg training model</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>feature_imp <span class="op">=</span> rfreg.feature_importances_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what feature_imp looks like (an array)</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>feature_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what feature_imp looks like (an array)</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>feature_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>array([0.01845843, 0.0833086 , 0.00414526, 0.17344377, 0.02473391,
        0.03119123, 0.03215709, 0.01706784, 0.        , 0.21772693,
@@ -2021,29 +2049,29 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the feature_imp array into dataframe</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>feature_imp_df <span class="op">=</span> pd.DataFrame(feature_imp)</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co">#feature_imp_df</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain feature names via column names of dataframe</span></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the index as "features"</span></span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>feature <span class="op">=</span> X_mp4_df.columns.rename(<span class="st">"features"</span>)</span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the index to dataframe</span></span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>feature_name_df <span class="op">=</span> feature.to_frame(index <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate feature_imp_df &amp; feature_name_df</span></span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> pd.concat([feature_imp_df, feature_name_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the column for feature importances</span></span>
-<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> feature_df.rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"feature_importances"</span>})</span>
-<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort values of feature importances in descending order</span></span>
-<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> feature_df.sort_values(<span class="st">"feature_importances"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the feature_imp array into dataframe</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>feature_imp_df <span class="op">=</span> pd.DataFrame(feature_imp)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co">#feature_imp_df</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain feature names via column names of dataframe</span></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the index as "features"</span></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>feature <span class="op">=</span> X_mp4_df.columns.rename(<span class="st">"features"</span>)</span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the index to dataframe</span></span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>feature_name_df <span class="op">=</span> feature.to_frame(index <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate feature_imp_df &amp; feature_name_df</span></span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> pd.concat([feature_imp_df, feature_name_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-15"><a href="#cb78-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the column for feature importances</span></span>
+<span id="cb78-16"><a href="#cb78-16" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> feature_df.rename(columns <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"feature_importances"</span>})</span>
+<span id="cb78-17"><a href="#cb78-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-18"><a href="#cb78-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort values of feature importances in descending order</span></span>
+<span id="cb78-19"><a href="#cb78-19" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> feature_df.sort_values(<span class="st">"feature_importances"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seaborn bar plot</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(feature_df, x <span class="op">=</span> <span class="st">"feature_importances"</span>, y <span class="op">=</span> <span class="st">"features"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seaborn bar plot</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(feature_df, x <span class="op">=</span> <span class="st">"feature_importances"</span>, y <span class="op">=</span> <span class="st">"features"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>&lt;Axes: xlabel='feature_importances', ylabel='features'&gt;</code></pre>
 </div>
@@ -2053,9 +2081,9 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </div>
 <p>An alternative way to plot was via Matplotlib directly (note: Seaborn also uses Matplotlib as well, so the plots are pretty similar). The code below were probably a bit more straightforward but without axes named and values were not sorted.</p>
 <div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib plot</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>plt.barh(X_mp4_df.columns, rfreg.feature_importances_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib plot</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>plt.barh(X_mp4_df.columns, rfreg.feature_importances_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>&lt;BarContainer object of 22 artists&gt;</code></pre>
 </div>
@@ -2073,21 +2101,21 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 </blockquote>
 <p>So here I’ve tried to use the model-agnostic permutation_importance function.</p>
 <div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>perm_result <span class="op">=</span> permutation_importance(rfreg, X_mp_test, y_mp_test, n_repeats<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">1</span>, n_jobs<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>perm_result <span class="op">=</span> permutation_importance(rfreg, X_mp_test, y_mp_test, n_repeats<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">1</span>, n_jobs<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>sorted_perm_result <span class="op">=</span> perm_result.importances_mean.argsort()</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># An array</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>sorted_perm_result </span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert array into df</span></span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>perm_result_df <span class="op">=</span> pd.DataFrame(sorted_perm_result)</span>
-<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>perm_result_df</span>
-<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Write a function to convert array to df leading to plots - for use in feature_importances_ &amp; permutation_importance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>sorted_perm_result <span class="op">=</span> perm_result.importances_mean.argsort()</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="co"># An array</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>sorted_perm_result </span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert array into df</span></span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>perm_result_df <span class="op">=</span> pd.DataFrame(sorted_perm_result)</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>perm_result_df</span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Write a function to convert array to df leading to plots - for use in feature_importances_ &amp; permutation_importance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 
 <div>
@@ -2199,10 +2227,10 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 <section id="hyperparameter-tuning" class="level5">
 <h5 class="anchored" data-anchor-id="hyperparameter-tuning"><strong>Hyperparameter tuning</strong></h5>
 <div class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import additional ibraries</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> mean, std</span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold</span></span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, RepeatedKFold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import additional ibraries</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> mean, std</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, RepeatedKFold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Cross validations &amp; hyperparameter tuning</li>
@@ -2211,68 +2239,68 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 <li>number of trees (n_estimators)</li>
 </ol>
 <div class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---Evaluate a list of models with different number of trees---</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define dataset by using the same training dataset as above---</span></span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> X_mp4, y_mp4</span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to generate a list of models with different no. of trees---</span></span>
-<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> models():</span>
-<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create empty dictionary (key, value pairs) for models</span></span>
-<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test different number of trees to evaluate</span></span>
-<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a>    no_trees <span class="op">=</span> [<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>]</span>
-<span id="cb85-12"><a href="#cb85-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> no_trees:</span>
-<span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>        models[<span class="bu">str</span>(n)] <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span>n)</span>
-<span id="cb85-14"><a href="#cb85-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> models</span>
-<span id="cb85-15"><a href="#cb85-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-16"><a href="#cb85-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-17"><a href="#cb85-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to evaluate a single model using cross-validation---</span></span>
-<span id="cb85-18"><a href="#cb85-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(model, X, y):</span>
-<span id="cb85-19"><a href="#cb85-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define evaluation process</span></span>
-<span id="cb85-20"><a href="#cb85-20" aria-hidden="true" tabindex="-1"></a>    cross_val <span class="op">=</span> RepeatedKFold(n_splits<span class="op">=</span><span class="dv">10</span>, n_repeats<span class="op">=</span><span class="dv">15</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb85-21"><a href="#cb85-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run evaluation process &amp; collect cv scores</span></span>
-<span id="cb85-22"><a href="#cb85-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Since estimator/model was based on DecisionTreeRegressor, using neg_mean_squared_error metric</span></span>
-<span id="cb85-23"><a href="#cb85-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n_jobs = -1 meaning using all processors to run jobs in parallel</span></span>
-<span id="cb85-24"><a href="#cb85-24" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_val_score(model, X, y, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>, cv<span class="op">=</span>cross_val, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb85-25"><a href="#cb85-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span>
-<span id="cb85-26"><a href="#cb85-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-27"><a href="#cb85-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-28"><a href="#cb85-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate results---</span></span>
-<span id="cb85-29"><a href="#cb85-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models with different RepeatedKFold &amp; different no. of tress</span></span>
-<span id="cb85-30"><a href="#cb85-30" aria-hidden="true" tabindex="-1"></a><span class="co"># with results shown as diff. trees with calculated mean cv scores &amp; std</span></span>
-<span id="cb85-31"><a href="#cb85-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-32"><a href="#cb85-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain diff. models with diff. trees via models function</span></span>
-<span id="cb85-33"><a href="#cb85-33" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> models()</span>
-<span id="cb85-34"><a href="#cb85-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-35"><a href="#cb85-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty lists for results &amp; names</span></span>
-<span id="cb85-36"><a href="#cb85-36" aria-hidden="true" tabindex="-1"></a>results, names <span class="op">=</span> <span class="bu">list</span>(), <span class="bu">list</span>()</span>
-<span id="cb85-37"><a href="#cb85-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-38"><a href="#cb85-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a for loop to iterate through the list of diff. models</span></span>
-<span id="cb85-39"><a href="#cb85-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
-<span id="cb85-40"><a href="#cb85-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run the cross validation scores via evaluate function</span></span>
-<span id="cb85-41"><a href="#cb85-41" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> evaluate(model, X, y)</span>
-<span id="cb85-42"><a href="#cb85-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Collect results</span></span>
-<span id="cb85-43"><a href="#cb85-43" aria-hidden="true" tabindex="-1"></a>    results.append(scores)</span>
-<span id="cb85-44"><a href="#cb85-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Collect names (different no. of trees)</span></span>
-<span id="cb85-45"><a href="#cb85-45" aria-hidden="true" tabindex="-1"></a>    names.append(name)</span>
-<span id="cb85-46"><a href="#cb85-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Show the average mean squared errors and corresponding standard deviations </span></span>
-<span id="cb85-47"><a href="#cb85-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for each model with diff. no. of trees</span></span>
-<span id="cb85-48"><a href="#cb85-48" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>((name, mean(scores), std(scores)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---Evaluate a list of models with different number of trees---</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define dataset by using the same training dataset as above---</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> X_mp4, y_mp4</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to generate a list of models with different no. of trees---</span></span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> models():</span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create empty dictionary (key, value pairs) for models</span></span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test different number of trees to evaluate</span></span>
+<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>    no_trees <span class="op">=</span> [<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>]</span>
+<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> no_trees:</span>
+<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a>        models[<span class="bu">str</span>(n)] <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span>n)</span>
+<span id="cb86-14"><a href="#cb86-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> models</span>
+<span id="cb86-15"><a href="#cb86-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-16"><a href="#cb86-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-17"><a href="#cb86-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to evaluate a single model using cross-validation---</span></span>
+<span id="cb86-18"><a href="#cb86-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(model, X, y):</span>
+<span id="cb86-19"><a href="#cb86-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define evaluation process</span></span>
+<span id="cb86-20"><a href="#cb86-20" aria-hidden="true" tabindex="-1"></a>    cross_val <span class="op">=</span> RepeatedKFold(n_splits<span class="op">=</span><span class="dv">10</span>, n_repeats<span class="op">=</span><span class="dv">15</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb86-21"><a href="#cb86-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run evaluation process &amp; collect cv scores</span></span>
+<span id="cb86-22"><a href="#cb86-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Since estimator/model was based on DecisionTreeRegressor, using neg_mean_squared_error metric</span></span>
+<span id="cb86-23"><a href="#cb86-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n_jobs = -1 meaning using all processors to run jobs in parallel</span></span>
+<span id="cb86-24"><a href="#cb86-24" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_val_score(model, X, y, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>, cv<span class="op">=</span>cross_val, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb86-25"><a href="#cb86-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span>
+<span id="cb86-26"><a href="#cb86-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-27"><a href="#cb86-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-28"><a href="#cb86-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate results---</span></span>
+<span id="cb86-29"><a href="#cb86-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models with different RepeatedKFold &amp; different no. of tress</span></span>
+<span id="cb86-30"><a href="#cb86-30" aria-hidden="true" tabindex="-1"></a><span class="co"># with results shown as diff. trees with calculated mean cv scores &amp; std</span></span>
+<span id="cb86-31"><a href="#cb86-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-32"><a href="#cb86-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain diff. models with diff. trees via models function</span></span>
+<span id="cb86-33"><a href="#cb86-33" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> models()</span>
+<span id="cb86-34"><a href="#cb86-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-35"><a href="#cb86-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty lists for results &amp; names</span></span>
+<span id="cb86-36"><a href="#cb86-36" aria-hidden="true" tabindex="-1"></a>results, names <span class="op">=</span> <span class="bu">list</span>(), <span class="bu">list</span>()</span>
+<span id="cb86-37"><a href="#cb86-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-38"><a href="#cb86-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a for loop to iterate through the list of diff. models</span></span>
+<span id="cb86-39"><a href="#cb86-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb86-40"><a href="#cb86-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run the cross validation scores via evaluate function</span></span>
+<span id="cb86-41"><a href="#cb86-41" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> evaluate(model, X, y)</span>
+<span id="cb86-42"><a href="#cb86-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Collect results</span></span>
+<span id="cb86-43"><a href="#cb86-43" aria-hidden="true" tabindex="-1"></a>    results.append(scores)</span>
+<span id="cb86-44"><a href="#cb86-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Collect names (different no. of trees)</span></span>
+<span id="cb86-45"><a href="#cb86-45" aria-hidden="true" tabindex="-1"></a>    names.append(name)</span>
+<span id="cb86-46"><a href="#cb86-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Show the average mean squared errors and corresponding standard deviations </span></span>
+<span id="cb86-47"><a href="#cb86-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for each model with diff. no. of trees</span></span>
+<span id="cb86-48"><a href="#cb86-48" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>((name, mean(scores), std(scores)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>('50', -1.648674793829449, 1.6658803361885683)</code></pre>
+<pre><code>('50', -1.699376813564957, 1.6707090030445981)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>('100', -1.6854413484624389, 1.6418670624539684)</code></pre>
+<pre><code>('100', -1.6743107759193174, 1.6654034242800726)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>('250', -1.652859976152396, 1.6277707822684215)</code></pre>
+<pre><code>('250', -1.66196719216786, 1.6142783436886805)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>('500', -1.6536872099732232, 1.6094571583353725)</code></pre>
+<pre><code>('500', -1.6464150680026006, 1.603615035187603)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>('1000', -1.6439992782991453, 1.59991822419288)</code></pre>
+<pre><code>('1000', -1.6510757906631304, 1.6235064496201523)</code></pre>
 </div>
 </div>
 <p>Best model performance would be the one with the most negative value for average mean squared error (note: the random forest algorithm was stochastic in nature, so every time it was run, it would provide different results due to random bootstrap sampling, so there wouldn’t be a fixed answer). The negated version of the same value was due to how the scoring parameter source code was written in scikit-learn, which was written this way to take into account of both <em>scoring</em> functions and <em>loss</em> functions (please see provided links below). When the number of trees went past 500 and reaching 1000, we could see an increase in the average mean squared error (the value being less negative), meaning the error increased.</p>
@@ -2284,19 +2312,19 @@ Random forest regressor testing accuracy: 1.00</code></pre>
 <li><p>StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated</p></li>
 </ol>
 <div class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib boxplots for each no. of tree model with average mean squared errors shown</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(results, labels<span class="op">=</span>names, showmeans<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib boxplots for each no. of tree model with average mean squared errors shown</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(results, labels<span class="op">=</span>names, showmeans<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="1_random_forest_files/figure-html/cell-48-output-1.png" width="569" height="411"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try Seaborn version too</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try Seaborn version too</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all scoring metrics - URL link: https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn.metrics.get_scorer_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all scoring metrics - URL link: https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn.metrics.get_scorer_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>*Not coding for the ones below (due to length of post), but they should be looked into if doing full-scale, comprehensive ML models using random forest:</p>
 <ul>
