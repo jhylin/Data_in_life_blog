@@ -172,13 +172,14 @@ I didn't really pay a lot of attentions when I was doing data splits in the deci
 
 After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that, the training and testing data were very imbalanced, and I probably should do something about it before fitting them onto another model. 
 
-Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few other studies that looked into this type of problem. One of them that I've looked into was SMOTER, which was based on SMOTE, and subsequently this led me to use ImbalancedLearningRegression on my very imbalanced dataset.
-
-The GitHub reposiotry for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html) *cite paper
+Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few other studies that looked into this type of problem, which seemed very interesting. One of them that I've looked into was SMOTER, which was based on synthetic
+minority over-sampling technique (SMOTE), and was named this way because it was basically a SMOTE for regression (hence SMOTER), and subsequently this led me further down the line to use ImbalancedLearningRegression on my very imbalanced dataset, which was shown in the section below.
 
 A simplified flow diagram showing evolution of the method dealing with imbalanced datasets in regression:
 
 SMOTE -> SMOTER -> SMOGN -> ImbalancedLearningRegression
+
+The GitHub reposiotry for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html) *cite paper
 
 Also, another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
 
@@ -187,6 +188,8 @@ Also, another really useful open-source resource for treating imbalanced dataset
 print(data.shape)
 data.head()
 ```
+
+So my little test on using ImbalancedLearningRegression package started from here.
 
 ```{python}
 # Trial using ImbalancedLearningRegression
