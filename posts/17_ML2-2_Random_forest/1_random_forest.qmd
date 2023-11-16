@@ -172,14 +172,18 @@ I didn't really pay a lot of attentions when I was doing data splits in the deci
 
 After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that, the training and testing data were very imbalanced, and I probably should do something about it before fitting them onto another model. 
 
-Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few other studies that looked into this type of problem. 
+Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few other studies that looked into this type of problem. One of them that I've looked into was SMOTER, which was based on SMOTE, and subsequently this led me to use ImbalancedLearningRegression on my very imbalanced dataset.
 
-Try ImbalancedLearningRegression (https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html)
+The GitHub reposiotry for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html) *cite paper
+
+A simplified flow diagram showing evolution of the method dealing with imbalanced datasets in regression:
 
 SMOTE -> SMOTER -> SMOGN -> ImbalancedLearningRegression
 
+Also, another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
+
 ```{python}
-# Original dataset
+# Original dataset - checking shape again
 print(data.shape)
 data.head()
 ```
