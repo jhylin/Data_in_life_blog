@@ -2,7 +2,7 @@
 title: "Random forest"
 subtitle: "Series 2.2 - model building, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
-date: '2023-11-15'
+date: '2023-11-17'
 draft: true
 categories: 
     - Machine learning projects
@@ -174,9 +174,9 @@ I didn't really pay a lot of attentions when I was doing data splits in the deci
 
 After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that the training and testing data were very imbalanced and I probably should do something about it before fitting them onto another model.
 
-Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few studies that looked into this type of problem, which seemed very interesting. One of them that I've looked into was SMOTER, which was based on synthetic minority over-sampling technique (SMOTE)[@chawla2002], and was named this way because it was basically a SMOTE for regression (hence SMOTER)[@torgo2013]. Synthetic Minority Over-Sampling Technique for Regression with Gaussian Noise (SMOGN)[@smogn] was another technique that was built upon SMOTER, with Gaussian noises added. This has subsequently led me to ImbalancedLearningRegression library [@wu2022imbalancedlearningregression], which was built based on SMOGN and was the one I've used on my imbalanced dataset, shown in the section below.
+At this stage, I went further to look into whether imbalanced datasets should be addressed in regression tasks, and did a surface search online. So based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, recent ML research looked into the issue of imbalanced datasets in regression. This [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few studies that looked into this type of problem, and I thought they were very interesting and worth a mention at least. One of them that I've looked into was SMOTER, which was based on synthetic minority over-sampling technique (SMOTE)[@chawla2002], and was named this way because it was basically a SMOTE for regression (hence SMOTER)[@torgo2013]. Synthetic minority over-sampling technique for regression with Gaussian noise (SMOGN)[@smogn] was another technique that was built upon SMOTER, but with Gaussian noises added. This has subsequently led me to ImbalancedLearningRegression library [@wu2022imbalancedlearningregression], which was a variation of SMOGN. This was the one used on my imbalanced dataset, shown in the section below.
 
-A simplified flow diagram showing evolution of the method dealing with imbalanced datasets in classification and regression:
+A simple flow diagram was drawn below showing the evolution of different techniques when dealing with imbalanced datasets in classification (SMOTE) and regression (SMOTER, SMOGN and ImbalancedLearningRegression):
 
 ```{mermaid}
 flowchart LR
@@ -185,9 +185,11 @@ flowchart LR
   C --> D(ImbalancedLearningRegression)
 ```
 
-GitHub repository for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html)
+GitHub repository for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html).
 
-Also, another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
+Also, I just wanted to mention that these were not the only techniques available for treating imbalanced datasets in regression, as I'm aware there were other ones in the literature, but I only had time to cover these a bit here for now.
+
+Another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
 
 ```{python}
 # Original dataset - checking shape again
@@ -195,7 +197,7 @@ print(data.shape)
 data.head()
 ```
 
-So my little test on using ImbalancedLearningRegression package started from here.
+So my little test on using ImbalancedLearningRegression package started from down below.
 
 ```{python}
 # Trial using ImbalancedLearningRegression
