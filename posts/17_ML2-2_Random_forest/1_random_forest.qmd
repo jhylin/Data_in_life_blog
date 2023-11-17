@@ -18,18 +18,18 @@ bibliography: references.bib
 
 ##### **Quick overview of this post**
 
-* Introduction to random forest
-* Random forest methods or classes in *scikit-learn*
-* Random forest regressor model in *scikit-learn*
-* Training and testing data splits
-    - ChEMBL-assigned max phase splits
-    - Imbalanced learning regression and max phase splits
-* Scoring metrics of trained models
-* Feature importances in dataset
-    - feature_importances_attribute in *scikit-learn*
-    - permutation_importance function in *scikit-learn*
-    - SHAP approach
-* Hyperparameter tuning
+-   Introduction to random forest
+-   Random forest methods or classes in *scikit-learn*
+-   Random forest regressor model in *scikit-learn*
+-   Training and testing data splits
+    -   ChEMBL-assigned max phase splits
+    -   Imbalanced learning regression and max phase splits
+-   Scoring metrics of trained models
+-   Feature importances in dataset
+    -   feature_importances_attribute in *scikit-learn*
+    -   permutation_importance function in *scikit-learn*
+    -   SHAP approach
+-   Hyperparameter tuning
 
 <br>
 
@@ -45,7 +45,7 @@ The "random" part of the random forest was introduced in two ways. The first one
 
 ##### **Random forest in *scikit-learn***
 
-*Scikit-learn* had two main types of random forest classes - [ensemble.RandomForestClassifier()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) and [ensemble.RandomForestRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor). When to use which class would depend on the target values. The easiest thing to do was to decide whether the target variables had class labels (binary types or non-continuous variables e.g. yes or no, or other different categories to be assigned) or continuous (numerical) variables, which in this case, if I were to continue using the same dataset from the decision tree series, it would be a continuous variable or feature, pKi, the inhibition constant. 
+*Scikit-learn* had two main types of random forest classes - [ensemble.RandomForestClassifier()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) and [ensemble.RandomForestRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor). When to use which class would depend on the target values. The easiest thing to do was to decide whether the target variables had class labels (binary types or non-continuous variables e.g. yes or no, or other different categories to be assigned) or continuous (numerical) variables, which in this case, if I were to continue using the same dataset from the decision tree series, it would be a continuous variable or feature, pKi, the inhibition constant.
 
 There were also two other, alternative random forest methods in *scikit-learn*, which were ensemble.RandomTreesEmbedding() and ensemble.ExtraTreesClassifier() or ensemble.ExtraTreesRegressor(). The difference for RandomTreesEmbedding() was that it was an unsupervised method that used data transformations (more details from section 1.11.2.6. on "Totally Random Trees Embedding" in [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#totally-random-trees-embedding)). On the other side, there was also an option to use ExtraTreesClassifier() or ExtraTreesRegressor() to generate extremely randomised trees that would go for another level up in randomness (more deatils in section 1.11.2.2. on Extremely Randomized Trees from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)). The main difference for this type of random forest was that while there was already a random subset of feature selection used (with an intention to select the most discerning features), more randomness were added on top of this by using purely randomly generated splitting rules for picking features at the nodes.
 
@@ -130,9 +130,9 @@ y_mp4
 
 <br>
 
-###### **Training model with the training dataset using max phase split only** 
+###### **Training model with the training dataset using max phase split only**
 
-Both X and y variables were used to fit an estimator, RandomForestRegressor().
+Both X and y variables were used to fit the RandomForestRegressor() estimator.
 
 ```{python}
 # n_estimators = 100 by default
@@ -144,6 +144,8 @@ rfreg.fit(X_mp4, y_mp4)
 <br>
 
 ###### **Preparing testing data using max phase split only**
+
+Testing data was mainly based on compounds with max phase assigned as "0" or "null" after I renamed it above.
 
 ```{python}
 # Compounds with max phase as "null"
@@ -168,18 +170,22 @@ X_mp_test
 
 ###### **Training/testing splits using ImbalancedLearningRegression and max phase splits**
 
-I didn't really pay a lot of attentions when I was doing data splits in the decision tree series, as my main focus was on building a single tree in order to fully understand and see what could be derived from just one tree. Now, when I reached this series on random forest, I realised I forgot to mention in the last series that data splitting was actually very crucial on model performance and also could influence outcome predictions. It could also become quite complicated as more approaches were available to split the data. Also, the way the data was splitted could produce different outcomes. 
+I didn't really pay a lot of attentions when I was doing data splits in the decision tree series, as my main focus was on building a single tree in order to fully understand and see what could be derived from just one tree. Now, when I reached this series on random forest, I realised I forgot to mention in the last series that data splitting was actually very crucial on model performance and also could influence outcome predictions. It could also become quite complicated as more approaches were available to split the data. Also, the way the data was splitted could produce different outcomes.
 
-After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that, the training and testing data were very imbalanced, and I probably should do something about it before fitting them onto another model. 
+After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that the training and testing data were very imbalanced and I probably should do something about it before fitting them onto another model.
 
-Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few other studies that looked into this type of problem, which seemed very interesting. One of them that I've looked into was SMOTER, which was based on synthetic
-minority over-sampling technique (SMOTE), and was named this way because it was basically a SMOTE for regression (hence SMOTER), and subsequently this led me further down the line to use ImbalancedLearningRegression on my very imbalanced dataset, which was shown in the section below.
+Based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, with more recent ML researches looking into the issue of imbalanced datasets in regression, this [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few studies that looked into this type of problem, which seemed very interesting. One of them that I've looked into was SMOTER, which was based on synthetic minority over-sampling technique (SMOTE)[@chawla2002], and was named this way because it was basically a SMOTE for regression (hence SMOTER)[@torgo2013]. Synthetic Minority Over-Sampling Technique for Regression with Gaussian Noise (SMOGN)[@smogn] was another technique that was built upon SMOTER, with Gaussian noises added. This has subsequently led me to ImbalancedLearningRegression library [@wu2022imbalancedlearningregression], which was built based on SMOGN and was the one I've used on my imbalanced dataset, shown in the section below.
 
-A simplified flow diagram showing evolution of the method dealing with imbalanced datasets in regression:
+A simplified flow diagram showing evolution of the method dealing with imbalanced datasets in classification and regression:
 
-SMOTE -> SMOTER -> SMOGN -> ImbalancedLearningRegression
+```{mermaid}
+flowchart LR
+  A(SMOTE) --> B(SMOTER)
+  B --> C(SMOGN)
+  C --> D(ImbalancedLearningRegression)
+```
 
-The GitHub reposiotry for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html) *cite paper
+GitHub repository for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html)
 
 Also, another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
 
@@ -246,7 +252,7 @@ Random over-sampling actually oversampled the max phase null compounds (sample s
 
 Under-sampling removed all of the max phase 4 compounds (which was most likely not the best option), with max phase null compounds also reduced in size too.
 
-I also used the Gauissian Noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds. 
+I also used the Gauissian Noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds.
 
 The change in the distribution of pKi values between the original and sample-modified datasets could be seen in the plot below.
 
@@ -348,7 +354,7 @@ print(f"Random forest regressor training accuracy: {rfreg.score(X_mp4, y_mp4):.2
 print(f"Random forest regressor testing accuracy: {rfreg.score(X_mp_test, y_mp_test):.2f}")
 ```
 
-So it looked like both the training and testing accuracies for the random forest regressor model (rfreg) were quite high, meaning that the model was able to remember the molecular features well from the training set (the tiny sample of 10 compounds), and the model was able to apply them to the testing set (which should contain about 400s of compounds) as well, in order to make predictions on the target value of pKi. So this has confirmed that the model was indeed making predictions (rather than not making any at all, which meant there might be no point in finding out which features were important in the data, so it was a good checking point during the random forest model building exercise), therefore, we could proceed to the next step of generating some feature importances, which were useful information to fill in the bigger story i.e. which features were pivotal for influencing the pKi values of prescription drugs targeting AChE? 
+So it looked like both the training and testing accuracies for the random forest regressor model (rfreg) were quite high, meaning that the model was able to remember the molecular features well from the training set (the tiny sample of 10 compounds), and the model was able to apply them to the testing set (which should contain about 400s of compounds) as well, in order to make predictions on the target value of pKi. So this has confirmed that the model was indeed making predictions (rather than not making any at all, which meant there might be no point in finding out which features were important in the data, so it was a good checking point during the random forest model building exercise), therefore, we could proceed to the next step of generating some feature importances, which were useful information to fill in the bigger story i.e. which features were pivotal for influencing the pKi values of prescription drugs targeting AChE?
 
 ```{python}
 # iblr-Gaussian noise & max phase splitted data
@@ -422,7 +428,7 @@ There were two types of feature importances available in *scikit-learn*, which I
 
 <br>
 
-###### **feature_importances_ attribute from *scikit-learn***
+###### **feature_importances\_ attribute from *scikit-learn***
 
 The impurity-based feature importances (also known as Gini importance).
 
@@ -524,9 +530,9 @@ plt.barh(X_mp4_df.columns, rfreg.feature_importances_)
 
 ###### **permutation_importance function from *scikit-learn***
 
-There were known issues with the built-in feature_importances_ attribute in *scikit-learn*. As quoted from *scikit-learn* on [feature importance evaluation](https://scikit-learn.org/stable/modules/ensemble.html#feature-importance-evaluation):
+There were known issues with the built-in feature_importances\_ attribute in *scikit-learn*. As quoted from *scikit-learn* on [feature importance evaluation](https://scikit-learn.org/stable/modules/ensemble.html#feature-importance-evaluation):
 
->... The impurity-based feature importances computed on tree-based models suffer from two flaws that can lead to misleading conclusions. First they are computed on statistics derived from the training dataset and therefore do not necessarily inform us on which features are most important to make good predictions on held-out dataset. Secondly, they favor high cardinality features, that is features with many unique values. Permutation feature importance is an alternative to impurity-based feature importance that does not suffer from these flaws. ...
+> ... The impurity-based feature importances computed on tree-based models suffer from two flaws that can lead to misleading conclusions. First they are computed on statistics derived from the training dataset and therefore do not necessarily inform us on which features are most important to make good predictions on held-out dataset. Secondly, they favor high cardinality features, that is features with many unique values. Permutation feature importance is an alternative to impurity-based feature importance that does not suffer from these flaws. ...
 
 So here I've tried to use the model-agnostic permutation_importance function.
 
@@ -600,8 +606,8 @@ from numpy import mean, std
 from sklearn.model_selection import cross_val_score, RepeatedKFold
 ```
 
-* Cross validations & hyperparameter tuning 
-- number of trees (n_estimators) 
+-   Cross validations & hyperparameter tuning
+-   number of trees (n_estimators)
 
 ```{python}
 # ---Evaluate a list of models with different number of trees---
@@ -656,11 +662,11 @@ for name, model in models.items():
 
 Best model performance would be the one with the most negative value for average mean squared error (note: the random forest algorithm was stochastic in nature, so every time it was run, it would provide different results due to random bootstrap sampling, so there wouldn't be a fixed answer). The negated version of the same value was due to how the scoring parameter source code was written in scikit-learn, which was written this way to take into account of both *scoring* functions and *loss* functions (please see provided links below). When the number of trees went past 500 and reaching 1000, we could see an increase in the average mean squared error (the value being less negative), meaning the error increased.
 
-* Links to help understanding neg_mean_squared_error:
+-   Links to help understanding neg_mean_squared_error:
 
-1. scikit-learn source code - https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/_scorer.py#L624
+1.  scikit-learn source code - https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624
 
-2. StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated
+2.  StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated
 
 ```{python}
 # Matplotlib boxplots for each no. of tree model with average mean squared errors shown
@@ -712,19 +718,18 @@ The Seaborn boxplot shown should be very similar to the Matplotlib one with also
 # sklearn.metrics.get_scorer_names() 
 ```
 
-*Not coding for the ones below (due to length of post), but they should be looked into if doing full-scale, comprehensive ML models using random forest:
+\*Not coding for the ones below (due to length of post), but they should be looked into if doing full-scale, comprehensive ML models using random forest:
 
-- tree depths (max_depth)
+-   tree depths (max_depth)
 
-- number of samples (max_samples) (probably won't do this as the training sample size was already very small to start with!)
+-   number of samples (max_samples) (probably won't do this as the training sample size was already very small to start with!)
 
-- number of features (max_features) (can mention using RDKit's version to generate molecular features which would provide 209)
+-   number of features (max_features) (can mention using RDKit's version to generate molecular features which would provide 209)
 
-- nodes
+-   nodes
 
+-   Plots - Black-box ML e.g. if comparing clogp vs. pKi? (unlike white-box ML for decision tree) - or can mention that the feature importances section was necessary to shed some lights and remove some layers of the black-box style of random forest by showing which features were making impacts on the predictive models.
 
-* Plots - Black-box ML e.g. if comparing clogp vs. pKi? (unlike white-box ML for decision tree) - or can mention that the feature importances section was necessary to shed some lights and remove some layers of the black-box style of random forest by showing which features were making impacts on the predictive models.
+-   Other options available in Scikit-learn ensemble methods e.g. voting classifier/regressor or stacking models to reduce biases
 
-* Other options available in Scikit-learn ensemble methods e.g. voting classifier/regressor or stacking models to reduce biases
-
-* Aim to keep post short and succinct!
+-   Aim to keep post short and succinct!
