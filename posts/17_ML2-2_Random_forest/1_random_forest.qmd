@@ -316,7 +316,7 @@ y_mp_gn_test = rfreg_gn.predict(X_mp_gn_test)
 
 <br>
 
-###### **Scoring metrics of trained models**
+###### **Scoring and metrics of trained models**
 
 Checking model accuracy for both training and testing datasets was actually recommended to take place before moving onto discovering the feature importances. A *scikit-learn* explanation for this could be found in the section on ["Permutation feature importance"](https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance). So the accuracy scores for the model were shown below.
 
@@ -391,7 +391,7 @@ There were two types of feature importances available in *scikit-learn*, which I
 
 ###### **feature_importances\_ attribute from *scikit-learn***
 
-The impurity-based feature importances (also known as Gini importance).
+The impurity-based feature importances (also known as Gini importance) were shown below.
 
 ```{python}
 # Compute feature importances on rfreg training model
@@ -404,40 +404,20 @@ feature_imp
 ```
 
 ```{python}
-# Initial code for converting array into df---
-
-# Convert the feature_imp array into dataframe
-feature_imp_df = pd.DataFrame(feature_imp)
-#feature_imp_df
-
-# Obtain feature names via column names of dataframe
-# Rename the index as "features"
-feature = X_mp4_df.columns.rename("features")
-
-# Convert the index to dataframe
-feature_name_df = feature.to_frame(index = False)
-
-# Concatenate feature_imp_df & feature_name_df
-feature_df = pd.concat([feature_imp_df, feature_name_df], axis=1)
-
-# Rename the column for feature importances
-feature_df = feature_df.rename(columns = {0: "feature_importances"})
-
-# Sort values of feature importances in descending order
-feature_df = feature_df.sort_values("feature_importances", ascending=False)
-```
-
-```{python}
-# Function to convert array to df leading to plots - for use in feature_importances_ & permutation_importance
+# Function to convert array to df leading to plots 
+# - for use in feature_importances_ & permutation_importance
 
 def feat_imp_plot(feat_imp_array, X_df):
 
     """
-    Function to convert feature importance array into a dataframe, which is then used to plot a bar graph to show the feature importance ranking in the random forest model for the dataset used.
+    Function to convert feature importance array into a dataframe, 
+    which is then used to plot a bar graph to show the feature importance ranking in the random forest model for the dataset used.
 
-    feat_imp_array is the array obtained from the feature_importances_ attribute, after having a estimator/model fitted.
+    feat_imp_array is the array obtained from the feature_importances_ attribute, 
+    after having a estimator/model fitted.
 
-    X_df is the dataframe for the X variable, where the feature column names will be used in the plot.
+    X_df is the dataframe for the X variable, 
+    where the feature column names will be used in the plot.
     """
 
     # Convert the feat_imp array into dataframe
