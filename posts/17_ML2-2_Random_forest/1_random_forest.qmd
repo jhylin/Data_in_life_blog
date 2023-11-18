@@ -2,7 +2,7 @@
 title: "Random forest"
 subtitle: "Series 2.2 - model building, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
-date: '2023-11-17'
+date: '2023-11-18'
 draft: true
 categories: 
     - Machine learning projects
@@ -63,6 +63,11 @@ import sklearn
 from sklearn.ensemble import RandomForestRegressor
 # Showing version of *scikit-learn* used
 print(sklearn.__version__)
+
+# For imbalanced datasets in regression 
+import ImbalancedLearningRegression as iblr
+# Plots
+import matplotlib.pyplot as plt
 ```
 
 Importing dataset that was preprocessed from last time. Link to data source: [first decision tree post](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html).
@@ -70,8 +75,7 @@ Importing dataset that was preprocessed from last time. Link to data source: [fi
 ```{python}
 data = pd.read_csv("ache_2d_chembl.csv")
 data.drop(columns = ["Unnamed: 0"], inplace=True)
-# Preparing data for compounds with max phase as "null"
-# Convert max phase with "NaN" to "null"
+# Preparing data for compounds with max phase with "NaN" by re-labelling to "null"
 data["max_phase"].fillna("null", inplace=True)
 data.head()
 ```
@@ -187,9 +191,9 @@ flowchart LR
 
 GitHub repository for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html).
 
-Also, I just wanted to mention that these were not the only techniques available for treating imbalanced datasets in regression, as I'm aware there were other ones in the literature, but I only had time to cover these a bit here for now.
+Also, I just wanted to mention that these were not the only techniques available for treating imbalanced datasets in regression, as there were other ones in the literature and most likely more are being developed currently, but I only had time to cover these here for now.
 
-Another really useful open-source resource for treating imbalanced datasets in classification problems was also available - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
+I also would like to mention another really useful open-source resource for treating imbalanced datasets in classifications since I did not use it in this post due to the problem being more of a regression one than a classification one in this post - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
 
 ```{python}
 # Original dataset - checking shape again
@@ -200,84 +204,47 @@ data.head()
 So my little test on using ImbalancedLearningRegression package started from down below.
 
 ```{python}
-# Trial using ImbalancedLearningRegression
-import ImbalancedLearningRegression as iblr
+iblr_data = data.copy()
 
-data = data.copy()
-
-# Using random over-sampling on the original dataset (pre-max phase split)
-# data_ro = iblr.ro(data = data, y = "pKi")
-# print(data_ro.shape)
-```
-
-```{python}
-# Gaussian noise
-data_gn = iblr.gn(data = data, y = "pKi", pert = 1)
+# Introducing Gaussian noise for data sampling
+data_gn = iblr.gn(data = iblr_data, y = "pKi", pert = 1)
 print(data_gn.shape)
 ```
 
 ```{python}
-# Gaussian Noise
-# Followed by max phase split, where 4 = training
+# Followed by max phase split, where max phase 4 = training dataset
 data_gn_mp4 = data_gn[data_gn["max_phase"] == 4]
 data_gn_mp4
 print(data_gn_mp4.shape)
 ```
 
 ```{python}
-# Random over-sampling
-# Followed by max phase split, where 4 = training
-# data_ro_mp4 = data_ro[data_ro["max_phase"] == 4]
-# data_ro_mp4
-# print(data_ro_mp4.shape)
-```
-
-```{python}
-# Gaussian Noise
-# Also splitted max phase null compounds = testing
+# Also splitted max phase null compounds = testing dataset
 data_gn_mp_null = data_gn[data_gn["max_phase"] == "null"]
 data_gn_mp_null
-# Show shape of df for max phase null compounds
 print(data_gn_mp_null.shape)
 ```
 
-```{python}
-# Random over-sampling
-# # Also splitted max phase null compounds = testing
-# data_ro_mp_null = data_ro[data_ro["max_phase"] == "null"]
-# data_ro_mp_null
-# # Show shape of df for max phase null compounds
-# print(data_ro_mp_null.shape)
-```
+Random over-sampling actually oversampled the max phase null compounds (sample size increased), while keeping all 10 max phase 4 compounds. Under-sampling removed all of the max phase 4 compounds (which was most likely not the best option), with max phase null compounds also reduced in size too. Due to post length, I did not show the code for random over-sampling and under-sampling, but for people who are interested, I think it would be interesting to test this out.
 
-Random over-sampling actually oversampled the max phase null compounds (sample size increased), and keeping all 10 max phase 4 compounds.
+So I ended up using Gauissian noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds, which seemed to be the most balanced data sampling outcome. (Note: as stated from the documentation for ImbalancedLearningRegression pakcage, missing values within features would be removed automatically, I've taken care of this in my last series of posts so no difference were observed here.)
 
-Under-sampling removed all of the max phase 4 compounds (which was most likely not the best option), with max phase null compounds also reduced in size too.
+The change in the distribution of pKi values for the Gaussian noise sampling method between the original and sample-modified datasets could be seen in the kernel density estimate plot below. The modified dataset had a flatter target density curve than the original density plot, which was more concentrated and peaked between pKi values of 6 and 8.
 
-I also used the Gauissian Noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds.
-
-The change in the distribution of pKi values between the original and sample-modified datasets could be seen in the plot below.
+Plot reference: https://github.com/paobranco/ImbalancedLearningRegression/blob/master/examples/Gaussian_noise.ipynb
 
 ```{python}
 # Quick look at how the pKi values differed 
-# after applying iblr to dataset
-
-import matplotlib.pyplot as plt
-
-# Plot target variable distributions
+# after applying Gaussian noise sampling to dataset
+# Plot target variable, pKi distributions
 sns.kdeplot(data["pKi"], label = "Original")
 sns.kdeplot(data_gn["pKi"], label = "Modified")
 plt.legend(labels = ["Original", "Modified"])
 ```
 
-Range of pKi values for max phase 4 compounds was between 4 and 8.
+It was also worth mentioning the range of pKi values for the 10 max phase 4 compounds collected was between 4 and 8.
 
-```{python}
-# Checking pKi value range for max phase 4 compounds
-#data_mp4
-```
-
-Preparing training data.
+Next, the modified ImbalancedLearningRegression-Gaussian noise (iblr-gn) training data was converted into a NumPy array.
 
 ```{python}
 # Select molecular features for X variable
@@ -291,6 +258,8 @@ X_mp4_gn_df.head()
 X_mp4_gn = X_mp4_gn_df.to_numpy()
 ```
 
+Similarly, this was also applied to the target y variable in the iblr-gn dataset.
+
 ```{python}
 # y variable (target outcome - pKi)
 y_mp4_gn_df = data_gn_mp4["pKi"]
@@ -299,7 +268,7 @@ y_mp4_gn = y_mp4_gn_df.to_numpy()
 y_mp4_gn
 ```
 
-Fitting iblr-Gaussian noise training data onto another random forest regressor model.
+Then the iblr-gn training data were fitted onto another random forest regressor model.
 
 ```{python}
 # n_estimators = 100 by default
@@ -308,7 +277,7 @@ rfreg_gn = RandomForestRegressor(max_depth=3, random_state=1)
 rfreg_gn.fit(X_mp4_gn, y_mp4_gn)
 ```
 
-Preparing testing data.
+Modified iblr-gn testing data were also prepared and converted into a NumPy array.
 
 ```{python}
 # Set up X test variable with the same molecular features
@@ -346,7 +315,7 @@ y_mp_gn_test = rfreg_gn.predict(X_mp_gn_test)
 
 ###### **Accuracy/scoring metrics of trained models**
 
-Checking model accuracy for both training and testing datasets was actually recommended to occur before moving onto finding out the feature importances. A *scikit-learn* explanation for this could be found in the section on ["Permutation feature importance"](https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance).
+Checking model accuracy for both training and testing datasets was actually recommended to take place before moving onto finding out feature importances. A *scikit-learn* explanation for this could be found in the section on ["Permutation feature importance"](https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance).
 
 ```{python}
 # Training set accuracy
