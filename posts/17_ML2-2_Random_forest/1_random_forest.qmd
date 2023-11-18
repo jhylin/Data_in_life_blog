@@ -385,7 +385,7 @@ Well, it appeared iblr-gn dataset might not offer much advantage than the origin
 
 ##### **Feature importances**
 
-There were two types of feature importances available in *scikit-learn*, which I've described below.
+There were two types of feature importances available in *scikit-learn*, which I've described below. I've also added a Shapley additive explanations (SHAP)approach to this section as well to show the different visualisation styles for feature importances on the same set of data.
 
 <br>
 
@@ -454,11 +454,6 @@ def feat_imp_plot(feat_imp_array, X_df):
 feat_imp_plot(feature_imp, X_mp4_df)
 ```
 
-```{python}
-# Seaborn bar plot
-# sns.barplot(feature_df, x = "feature_importances", y = "features")
-```
-
 An alternative way to plot was via Matplotlib directly (note: Seaborn also uses Matplotlib as well, so the plots are pretty similar). The code below were probably a bit more straightforward but without axes named and values were not sorted.
 
 ```{python}
@@ -504,9 +499,7 @@ It generated a different feature importance ranking, although somewhat similar a
 
 ###### **SHAP approach**
 
-Shapley additive explanations
-
-GitHub repo: https://github.com/shap/shap
+Shapley additive explanations - GitHub repo: https://github.com/shap/shap
 
 TreeExplainer ref [@lundberg2020local2global]
 
