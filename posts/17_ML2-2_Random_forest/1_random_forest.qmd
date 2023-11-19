@@ -71,6 +71,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
+import shap
 ```
 
 Importing dataset that was preprocessed from last time. Link to data source: [first decision tree post](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html).
@@ -483,9 +484,9 @@ type(perm_result)
 
 It normally returns a dictionary-like objects (e.g. Bunch) with the following 3 attributes:
 
-- importances_mean (mean of feature importance)
-- importances_std (standard deviation of feature importance)
-- importances (raw permutation/feature importance scores)
+-   importances_mean (mean of feature importance)
+-   importances_std (standard deviation of feature importance)
+-   importances (raw permutation/feature importance scores)
 
 For details on these attributes, this *scikit-learn* [link](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance) will add a bit more explanations.
 
@@ -510,16 +511,15 @@ It generated a different feature importance ranking, although somewhat similar a
 
 ###### **SHAP approach**
 
-Shapley additive explanations was added here to provide a another way to figure out the feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
+SHAP (Shapley additive explanations) values[@lundberg2020local2global][@shapley1953] were used here to provide a another way to figure out the feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
 
-TreeExplainer ref [@lundberg2020local2global]
+SHAP's TreeExplainer() was based on Tree SHAP algorithms [@lundberg2020local2global], and was used to show and explain feature importances within tree models. It could also be extended to boosted tree models such as LightGBM and XGBoost and also other tree models (as explained by the GitHub repository README.md and its documentation link provided).
 
 Other reference: https://mljar.com/blog/feature-importance-in-random-forest/
 
 ```{python}
-import shap
-
 shap_explainer = shap.TreeExplainer(rfreg)
+
 # X_test needs to be a dataframe (not numpy array)
 # otherwise feature names won't show in plot
 shap_values = shap_explainer.shap_values(X_mp_test_df)
@@ -528,16 +528,18 @@ shap_values = shap_explainer.shap_values(X_mp_test_df)
 shap.summary_plot(shap_values, X_mp_test_df, plot_type = "bar")
 ```
 
+Dot plot version:
+
 ```{python}
-# Dot plot
 shap.summary_plot(shap_values, X_mp_test_df)
 ```
 
+Violin plot:
+
 ```{python}
-# Violin plot
 shap.summary_plot(shap_values, X_mp_test_df, plot_type = "violin")
 
-# Alternative option: "layered_violin"
+# Alternative plot option: "layered_violin"
 ```
 
 <br>
