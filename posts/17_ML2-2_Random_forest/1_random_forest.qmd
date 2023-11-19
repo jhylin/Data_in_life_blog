@@ -2,7 +2,7 @@
 title: "Random forest"
 subtitle: "Series 2.2 - model building, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
-date: '2023-11-18'
+date: '2023-11-19'
 draft: true
 categories: 
     - Machine learning projects
@@ -454,7 +454,7 @@ def feat_imp_plot(feat_imp_array, X_df):
 feat_imp_plot(feature_imp, X_mp4_df)
 ```
 
-An alternative way to plot was via Matplotlib directly (note: Seaborn also uses Matplotlib as well, so the plots are pretty similar). The code below were probably a bit more straightforward but without axes named and values were not sorted.
+An alternative way to plot was via Matplotlib directly (note: Seaborn also uses Matplotlib as well, so the plots are pretty similar). The code below were probably a bit more straightforward but without axes named and values were not sorted (only as an example but more code could be added to do this).
 
 ```{python}
 # Matplotlib plot
@@ -470,15 +470,26 @@ There were known issues with the built-in feature_importances\_ attribute in *sc
 
 > ... The impurity-based feature importances computed on tree-based models suffer from two flaws that can lead to misleading conclusions. First they are computed on statistics derived from the training dataset and therefore do not necessarily inform us on which features are most important to make good predictions on held-out dataset. Secondly, they favor high cardinality features, that is features with many unique values. Permutation feature importance is an alternative to impurity-based feature importance that does not suffer from these flaws. ...
 
-So here I've tried to use the model-agnostic permutation_importance function.
+So I've also tried the permutation_importance function (a model-agnostic method).
 
 ```{python}
 from sklearn.inspection import permutation_importance
 
 perm_result = permutation_importance(rfreg, X_mp_test, y_mp_test, n_repeats=10, random_state=1, n_jobs=2)
 
+# Checking data type of perm_result
 type(perm_result)
 ```
+
+It normally returns a dictionary-like objects (e.g. Bunch) with the following 3 attributes:
+
+- importances_mean (mean of feature importance)
+- importances_std (standard deviation of feature importance)
+- importances (raw permutation/feature importance scores)
+
+For details on these attributes, this *scikit-learn* [link](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance) will add a bit more explanations.
+
+I decided to only use importances_mean for now.
 
 ```{python}
 perm_imp = perm_result.importances_mean
@@ -488,7 +499,7 @@ type(perm_imp)
 ```
 
 ```{python}
-# Trial using the function feat_imp_plot(feat_imp_array, X_df) on perm_imp result
+# Using the function feat_imp_plot() on perm_imp result to show plot
 
 feat_imp_plot(perm_imp, X_mp4_df)
 ```
@@ -499,7 +510,7 @@ It generated a different feature importance ranking, although somewhat similar a
 
 ###### **SHAP approach**
 
-Shapley additive explanations - GitHub repo: https://github.com/shap/shap
+Shapley additive explanations was added here to provide a another way to figure out the feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
 
 TreeExplainer ref [@lundberg2020local2global]
 
