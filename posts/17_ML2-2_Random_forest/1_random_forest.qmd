@@ -351,12 +351,24 @@ y_true = y_true.to_numpy(copy=True)
 
 I also found out the mean squared error (MSE) between y_true (actual max phase null compounds' pKi values) and y_pred (predicted max phase null compounds' pKi values). When MSE was closer to zero, the better the model was, meaning less errors were present.
 
+Some references that might help with explaining MSE:
+
+- [*scikit-learn* link](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error)
+- [Stats StackExchange link](https://stats.stackexchange.com/questions/579755/whats-a-reasonable-mean-squared-error-or-rmse)
+- [blog post link](https://statisticsbyjim.com/regression/mean-squared-error-mse/) 
+
 ```{python}
 # For max phase splitted dataset only
 mean_squared_error(y_true, y_mp_test)
 ```
 
-When R^2^ was closer to 1, the better the model is. If it was negative, then likely model was not performing as well as expected or as quoted from scikit-learn "arbitrarily worse".
+When R^2^ was closer to 1, the better the model is, with a usual range between 0 and 1 [@bruce2020]. If it was negative, then the model might not be performing as well as expected. However, there could be exceptions as other model evaluation methods should also be interpreted together with R^2^ (so a poor R^2^ might not be wholly indicating it's a poor model).
+
+Some references that might help with understanding R^2^:
+
+- [Stats StackExchange link](https://stats.stackexchange.com/questions/414349/is-my-model-any-good-based-on-the-diagnostic-metric-r2-auc-accuracy-rmse)
+- [*scikit-learn* link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score)
+
 
 ```{python}
 # For max phase splitted dataset only
@@ -546,15 +558,16 @@ shap.summary_plot(shap_values, X_mp_test_df, plot_type = "violin")
 
 ##### **Hyperparameter tuning**
 
+One example was shown below on tuning the number of trees (n_estimators) used in the random forest model.
+
 ```{python}
 # Import additional ibraries
 from numpy import mean, std
+
 # RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold
+
 from sklearn.model_selection import cross_val_score, RepeatedKFold
 ```
-
--   Cross validations & hyperparameter tuning
--   number of trees (n_estimators)
 
 ```{python}
 # ---Evaluate a list of models with different number of trees---
@@ -654,7 +667,7 @@ cv_results = cv_results.sort_values(
 ```
 
 ```{python}
-# Try Seaborn version too
+# Seaborn version
 sns.boxplot(cv_results, x="Number_of_trees", y="value", showmeans=True)
 ```
 
@@ -665,15 +678,21 @@ The Seaborn boxplot shown should be very similar to the Matplotlib one with also
 # sklearn.metrics.get_scorer_names() 
 ```
 
-\*Not coding for the ones below (due to length of post), but they should be looked into if doing full-scale, comprehensive ML models using random forest:
+Other hyperparameters that could be tuned included: 
 
 -   tree depths (max_depth)
 
--   number of samples (max_samples) (probably won't do this as the training sample size was already very small to start with!)
+-   number of samples (max_samples) 
 
 -   number of features (max_features) (can mention using RDKit's version to generate molecular features which would provide 209)
 
 -   nodes
+
+I've decided not to code for these other hyperparameters mentioned above due to the length of post currently, but they should be looked into if doing full-scale and comprehensive ML using random forest.
+
+<br>
+
+##### **Other things in random forests**
 
 -   Plots - Black-box ML e.g. if comparing clogp vs. pKi? (unlike white-box ML for decision tree) - or can mention that the feature importances section was necessary to shed some lights and remove some layers of the black-box style of random forest by showing which features were making impacts on the predictive models.
 
