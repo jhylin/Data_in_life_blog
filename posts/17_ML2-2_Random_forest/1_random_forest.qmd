@@ -47,7 +47,7 @@ The "random" part of the random forest was introduced in two ways. The first one
 
 *Scikit-learn* had two main types of random forest classes - [ensemble.RandomForestClassifier()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) and [ensemble.RandomForestRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor). When to use which class would depend on the target values. The easiest thing to do was to decide whether the target variables had class labels (binary types or non-continuous variables e.g. yes or no, or other different categories to be assigned) or continuous (numerical) variables, which in this case, if I were to continue using the same dataset from the decision tree series, it would be a continuous variable or feature, pKi, the inhibition constant.
 
-There were also two other, alternative random forest methods in *scikit-learn*, which were ensemble.RandomTreesEmbedding() and ensemble.ExtraTreesClassifier() or ensemble.ExtraTreesRegressor(). The difference for RandomTreesEmbedding() was that it was an unsupervised method that used data transformations (more details from section 1.11.2.6. on "Totally Random Trees Embedding" in [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#totally-random-trees-embedding)). On the other side, there was also an option to use ExtraTreesClassifier() or ExtraTreesRegressor() to generate extremely randomised trees that would go for another level up in randomness (more deatils in section 1.11.2.2. on Extremely Randomized Trees from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)). The main difference for this type of random forest was that while there was already a random subset of feature selection used (with an intention to select the most discerning features), more randomness were added on top of this by using purely randomly generated splitting rules for picking features at the nodes.
+There were also two other, alternative random forest methods in *scikit-learn*, which were ensemble.RandomTreesEmbedding() and ensemble.ExtraTreesClassifier() or ensemble.ExtraTreesRegressor(). The difference for RandomTreesEmbedding() was that it was an unsupervised method that used data transformations (more details from section 1.11.2.6. on "Totally Random Trees Embedding" in [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#totally-random-trees-embedding)). On the other side, there was also an option to use ExtraTreesClassifier() or ExtraTreesRegressor() to generate extremely randomised trees that would go for another level up in randomness (more deatils in section 1.11.2.2. on Extremely Randomized Trees from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)). The main difference for this type of random forest was that while there was already a random subset of feature selection used (with an intention to select the most discerning features), more randomness were added on top of this by using purely randomly generated splitting rules for picking features at the nodes. The advantage of this type of method was that it would reduce variance and increase the accuracy of the model, but the downside was there might be an increase in bias within the model.
 
 <br>
 
@@ -116,7 +116,7 @@ data_mp4.head()
 ```
 
 ```{python}
-# Select molecular features for X variable
+# Select molecular features for X array (n_samples, n_features)
 X_mp4_df = data_mp4[['mw', 'fsp3', 'n_lipinski_hba', 'n_lipinski_hbd', 'n_rings', 'n_hetero_atoms', 'n_heavy_atoms', 'n_rotatable_bonds', 'n_radical_electrons', 'tpsa', 'qed', 'clogp', 'sas', 'n_aliphatic_carbocycles', 'n_aliphatic_heterocyles', 'n_aliphatic_rings', 'n_aromatic_carbocycles', 'n_aromatic_heterocyles', 'n_aromatic_rings', 'n_saturated_carbocycles', 'n_saturated_heterocyles', 'n_saturated_rings']]
 
 print(X_mp4_df.shape)
@@ -132,7 +132,7 @@ X_mp4
 Again, y variable was arranged via the dataframe as well, and converted into a NumPy array, that consisted of number of samples only as this was the target variable, which was also kept the same as the decision tree series.
 
 ```{python}
-# y variable (target outcome - pKi)
+# y array (n_samples) - target outcome pKi
 y_mp4_df = data_mp4["pKi"]
 y_mp4_df
 ```
@@ -565,10 +565,10 @@ shap.summary_plot(shap_values, X_mp_test_df, plot_type = "violin")
 
 ##### **Hyperparameter tuning**
 
-One example was shown below on tuning the number of trees (n_estimators) used in the random forest model.
+An example was shown below on tuning the number of trees (n_estimators) used in the random forest model.
 
 ```{python}
-# Function code adapted with thanks from ML Mastery - add URL
+# Function code adapted with thanks from ML Mastery - https://machinelearningmastery.com/random-forest-ensemble-in-python/
 
 # ---Evaluate a list of models with different number of trees---
 
@@ -622,15 +622,15 @@ for name, model in models.items():
     print((name, mean(scores), std(scores)))
 ```
 
-From how I understood it, the best model performance would be the one with the most negative value for average mean squared error, i.e. minimal loss/error. The negated version of the mean squared error was due to how the scoring parameter source code was written in *scikit-learn*. It was written this way to take into account of both *scoring* and *loss* functions (please see links provided below for further explanations). Also, the random forest algorithm was stochastic in nature, meaning that every time hyperparameter tuning took place, it would generate different scores due to random bootstrap sampling.
+The negated version of the mean squared error (neg_mean_squared_error) was due to how the scoring parameter source code was written in *scikit-learn*. It was written this way to take into account of both *scoring* and *loss* functions (please see links provided below for further explanations). All scoring metrics could be accessed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter) for *scikit-learn*.
+
+Also, the random forest algorithm was stochastic in nature, meaning that every time hyperparameter tuning took place, it would generate different scores due to random bootstrap sampling. The best approach to evaluate model performance during the cross-validation process was to use the average outcome from several runs of cross-validations, then fit the hyperparameters on a final model, or getting several final models ready and then obtaining the average from these models instead.
 
 Reference links to help with understanding neg_mean_squared_error:
 
 1.  scikit-learn source code - https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624
 
 2.  StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated
-
-As a side note, all scoring metrics could be accessed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter) for *scikit-learn*.
 
 Below was a version of boxplot plotted using Matplotlib showing the differences in the distributions of the cross validation scores and mean squared errors between different number of trees.
 
@@ -679,18 +679,22 @@ Other hyperparameters that could be tuned included:
 
 -   number of samples (max_samples) 
 
--   number of features (max_features) (can mention using RDKit's version to generate molecular features which would provide 209)
+-   number of features (max_features) - I didn't use RDKit to generate molecular features for this post (the Datamol version was used instead) which would provide around 209 at least (trying to keep the post at a readable length), but I think this might be a better option when doing cross-validations in model evaluations
 
--   nodes
+-   number of nodes (max_leaf_nodes)
 
-I've decided not to code for these other hyperparameters mentioned above due to length of post currently (I seemed to be unable to achieve short posts as hoped previously), but they should be looked into if doing full-scale and comprehensive ML using random forest.
+I've decided not to code for these other hyperparameters in the cross-validation step due to length of post, but they should be looked into if doing full-scale and comprehensive ML using the ensemble random forest algorithm.
 
 <br>
 
-##### **Other things to consider in random forests**
+##### **Final words**
 
--   Plots - Black-box ML e.g. if comparing clogp vs. pKi? (unlike white-box ML for decision tree) - or can mention that the feature importances section was necessary to shed some lights and remove some layers of the black-box style of random forest by showing which features were making impacts on the predictive models.
+Random forest was known to be a black-box ML algorithm [@bruce2020], which was completely different from the white-box ML style revealed in decision tree graphs. Feature importances was therefore crucial to shed some lights and remove some layers of the black-box nature in random forest by showing which features were contributing more towards model accuracy by ranking all the features used to train the model. Cross-validation was also vital to avoid over-fitting (which was more applicable to the depth of trees), although in some other cases (e.g. number of trees), it was also mentioned that it was unlikely that the model would be overfitted. Other options available in *scikit-learn* ensemble methods that I didn't get time to try were using voting classifier/regressor and stacking models to reduce biases in models.
 
--   Other options available in Scikit-learn ensemble methods e.g. voting classifier/regressor or stacking models to reduce biases
+Few things I've thought of that I could try to improve what I did here was that I should really look for a different set of testing data, rather than using the max phase splits, which of course was not ideal. However, as a lot of us know nowadays that good data are hard to come by, so I need to take some time to look into this. Another approach that I could try was that I could use RandomForestClassifier() instead on max phase prediction of these small molecules, rather than the pKi value predictions. That might involve re-labelling the max phases for these compounds into a binary label, then I could use the imbalance-learn package to try and alleviate the problem with imbalanced dataset.
 
--   Aim to keep post short and succinct!
+<br>
+
+##### **Acknowledgement**
+
+I'd like to thank all of the authors, developers and contributors towards all of the open-source packages or libraries used in this post. I'd also like to thank all the other senior cheminformatics and ML practitioners who were sharing their work online, which were precious learning materials. 
