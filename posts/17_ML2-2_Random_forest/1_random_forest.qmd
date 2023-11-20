@@ -2,7 +2,7 @@
 title: "Random forest"
 subtitle: "Series 2.2 - model building, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
-date: '2023-11-19'
+date: '2023-11-20'
 draft: true
 categories: 
     - Machine learning projects
@@ -68,10 +68,17 @@ print(sklearn.__version__)
 import ImbalancedLearningRegression as iblr
 # Plots
 import matplotlib.pyplot as plt
-
+# Metrics
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
+
+# Feature importances - SHAP values
 import shap
+# Hyperparameter tuning
+from sklearn.model_selection import cross_val_score, RepeatedKFold
+from numpy import mean, std
+from natsort import index_natsorted
+import numpy as np
 ```
 
 Importing dataset that was preprocessed from last time. Link to data source: [first decision tree post](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html).
@@ -561,15 +568,8 @@ shap.summary_plot(shap_values, X_mp_test_df, plot_type = "violin")
 One example was shown below on tuning the number of trees (n_estimators) used in the random forest model.
 
 ```{python}
-# Import additional ibraries
-from numpy import mean, std
+# Function code adapted with thanks from ML Mastery - add URL
 
-# RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold
-
-from sklearn.model_selection import cross_val_score, RepeatedKFold
-```
-
-```{python}
 # ---Evaluate a list of models with different number of trees---
 
 # Define dataset by using the same training dataset as above---
@@ -588,7 +588,9 @@ def models():
 
 # Define function to evaluate a single model using cross-validation---
 def evaluate(model, X, y):
-    # Define evaluation process
+
+    # RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold
+    # so using ReaptedKFold instead
     cross_val = RepeatedKFold(n_splits=10, n_repeats=15, random_state=1)
     # Run evaluation process & collect cv scores
     # Since estimator/model was based on DecisionTreeRegressor, using neg_mean_squared_error metric
@@ -620,22 +622,26 @@ for name, model in models.items():
     print((name, mean(scores), std(scores)))
 ```
 
-Best model performance would be the one with the most negative value for average mean squared error (note: the random forest algorithm was stochastic in nature, so every time it was run, it would provide different results due to random bootstrap sampling, so there wouldn't be a fixed answer). The negated version of the same value was due to how the scoring parameter source code was written in scikit-learn, which was written this way to take into account of both *scoring* functions and *loss* functions (please see provided links below). When the number of trees went past 500 and reaching 1000, we could see an increase in the average mean squared error (the value being less negative), meaning the error increased.
+From how I understood it, the best model performance would be the one with the most negative value for average mean squared error, i.e. minimal loss/error. The negated version of the mean squared error was due to how the scoring parameter source code was written in *scikit-learn*. It was written this way to take into account of both *scoring* and *loss* functions (please see links provided below for further explanations). Also, the random forest algorithm was stochastic in nature, meaning that every time hyperparameter tuning took place, it would generate different scores due to random bootstrap sampling.
 
--   Links to help understanding neg_mean_squared_error:
+Reference links to help with understanding neg_mean_squared_error:
 
 1.  scikit-learn source code - https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624
 
 2.  StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated
 
+As a side note, all scoring metrics could be accessed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter) for *scikit-learn*.
+
+Below was a version of boxplot plotted using Matplotlib showing the differences in the distributions of the cross validation scores and mean squared errors between different number of trees.
+
 ```{python}
-# Matplotlib boxplots for each no. of tree model with average mean squared errors shown
-import matplotlib.pyplot as plt
 plt.boxplot(results, labels=names, showmeans=True)
 plt.show()
 ```
 
-Small data prep for Seaborn plot - a long-winded way of sorting data and plotting in Seaborn! Matplotlib seems much more straightforward.
+To plot this in Seaborn, I had to prepare the data slightly differently to achieve a different version of the boxplot. Matplotlib was a bit more straightforward to use without these steps.
+
+I also used natural sort to sort numerical values. GitHub repo: https://github.com/SethMMorton/natsort. Otherwise, if using sort_values() only, it would only sort the numbers in lexicographical order (i.e. by first digit only), which was not able to show the tree numbers in ascending order.
 
 ```{python}
 # Combine results & names lists into dataframe
@@ -652,14 +658,8 @@ cv_results = cv_results.reset_index().rename(columns={"level_0": "Number_of_tree
 cv_results = cv_results.melt(id_vars="Number_of_trees")
 ```
 
-Using natural sort to sort numerical values. GitHub repo: https://github.com/SethMMorton/natsort
-
-Otherwise, using sort_values() by itself will be sorting the numbers lexicographical order (i.e. by first digit only), which is not really in ascending order.
-
 ```{python}
 # Sort by the number of trees column
-from natsort import index_natsorted
-import numpy as np
 cv_results = cv_results.sort_values(
     by="Number_of_trees",
     key=lambda x: np.argsort(index_natsorted(cv_results["Number_of_trees"]))
@@ -667,16 +667,11 @@ cv_results = cv_results.sort_values(
 ```
 
 ```{python}
-# Seaborn version
+# Seaborn boxplot
 sns.boxplot(cv_results, x="Number_of_trees", y="value", showmeans=True)
 ```
 
-The Seaborn boxplot shown should be very similar to the Matplotlib one with also the mean scores shown for different number of trees used.
-
-```{python}
-# Show all scoring metrics - URL link: https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter
-# sklearn.metrics.get_scorer_names() 
-```
+The Seaborn boxplot shown should be very similar to the Matplotlib one.
 
 Other hyperparameters that could be tuned included: 
 
@@ -688,11 +683,11 @@ Other hyperparameters that could be tuned included:
 
 -   nodes
 
-I've decided not to code for these other hyperparameters mentioned above due to the length of post currently, but they should be looked into if doing full-scale and comprehensive ML using random forest.
+I've decided not to code for these other hyperparameters mentioned above due to length of post currently (I seemed to be unable to achieve short posts as hoped previously), but they should be looked into if doing full-scale and comprehensive ML using random forest.
 
 <br>
 
-##### **Other things in random forests**
+##### **Other things to consider in random forests**
 
 -   Plots - Black-box ML e.g. if comparing clogp vs. pKi? (unlike white-box ML for decision tree) - or can mention that the feature importances section was necessary to shed some lights and remove some layers of the black-box style of random forest by showing which features were making impacts on the predictive models.
 
