@@ -5,7 +5,7 @@ website:
   title: "Home"
   site-url: https://jhylin.github.io/Data_in_life_blog/
   description: "A blog website on using data science for pharmaceutical and healthcare data"
-  page-footer: "Website made with ❤️ in [Quarto](https://quarto.org/) by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used"
+  page-footer: "Website made with 💜 in [Quarto](https://quarto.org/) by Jennifer HY Lin © 2022 - 2023 📕 Citation as author and URL link if used"
   google-analytics: "G-5CHVP3K63C"
   navbar:
     right:
