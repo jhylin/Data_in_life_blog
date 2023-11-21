@@ -2,8 +2,8 @@
 title: "Random forest"
 subtitle: "Series 2.2 - model building, imbalanced dataset, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
-date: '2023-11-20'
-draft: true
+date: '2023-11-21'
+draft: false
 categories: 
     - Machine learning projects
     - Tree models
@@ -541,7 +541,7 @@ SHAP values [@lundberg2020local2global][@shapley1953] were used here to provide 
 
 SHAP's TreeExplainer() was based on Tree SHAP algorithms [@lundberg2020local2global], and was used to show and explain feature importances within tree models. It could also be extended to boosted tree models such as LightGBM and XGBoost and also other tree models (as explained by the GitHub repository README.md and its documentation link provided).
 
-[Other reference](https://mljar.com/blog/feature-importance-in-random-forest/)
+[*Other reference*](https://mljar.com/blog/feature-importance-in-random-forest/)
 
 ```{python}
 shap_explainer = shap.TreeExplainer(rfreg)
