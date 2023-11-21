@@ -1,6 +1,6 @@
 ---
 title: "Random forest"
-subtitle: "Series 2.2 - model building, feature importances & hyperparameter tuning"
+subtitle: "Series 2.2 - model building, imbalanced dataset, feature importances & hyperparameter tuning"
 author: Jennifer HY Lin
 date: '2023-11-20'
 draft: true
@@ -18,7 +18,7 @@ bibliography: references.bib
 
 ##### **Quick overview of this post**
 
--   Introduction to random forest
+-   Short introduction of random forest
 -   Random forest methods or classes in *scikit-learn*
 -   Random forest regressor model in *scikit-learn*
 -   Training and testing data splits
@@ -29,13 +29,13 @@ bibliography: references.bib
     -   feature_importances_attribute in *scikit-learn*
     -   permutation_importance function in *scikit-learn*
     -   SHAP approach
--   Hyperparameter tuning
+-   Hyperparameter tuning on number of trees
 
 <br>
 
 ##### **What is a random forest?**
 
-The [decision tree model built last time](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/3_model_build.html) was purely based on one model on its own, which often might not be as accurate or reflective in real-life. To improve the model, we would then consider using the average of multiple models [@breiman1998] to see if this average output would provide a more realistic outcome. This model averaging approach was constantly used in our lives, for example, using majority votes in elections or decision-making steps.
+The [decision tree model built last time](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/3_model_build.html) was purely based on one model on its own, which often might not be as accurate or reflective in real-life. To improve the model, the average outcome from multiple models [@breiman1998] should be considered to see if this would provide a more realistic image. This model averaging approach was also constantly used in our daily lives, for example, using majority votes during decision-making steps.
 
 The same model averaging concept was also used in random forest [@breiman2001], which as the name suggested, was composed of many decision trees (models) forming a forest. Each tree model would be making its own model prediction. By accruing multiple predictions since we have multiple trees, the average obtained from these predictions would produce one single result in the end. The advantage of this was that it improved the accuracy of the prediction by reducing variances, and also minimised the problem of overfitting the model if it was purely based on one model only (more details in section 1.11.2.1. Random Forests from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#random-forests)).
 
@@ -47,7 +47,7 @@ The "random" part of the random forest was introduced in two ways. The first one
 
 *Scikit-learn* had two main types of random forest classes - [ensemble.RandomForestClassifier()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) and [ensemble.RandomForestRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor). When to use which class would depend on the target values. The easiest thing to do was to decide whether the target variables had class labels (binary types or non-continuous variables e.g. yes or no, or other different categories to be assigned) or continuous (numerical) variables, which in this case, if I were to continue using the same dataset from the decision tree series, it would be a continuous variable or feature, pKi, the inhibition constant.
 
-There were also two other, alternative random forest methods in *scikit-learn*, which were ensemble.RandomTreesEmbedding() and ensemble.ExtraTreesClassifier() or ensemble.ExtraTreesRegressor(). The difference for RandomTreesEmbedding() was that it was an unsupervised method that used data transformations (more details from section 1.11.2.6. on "Totally Random Trees Embedding" in [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#totally-random-trees-embedding)). On the other side, there was also an option to use ExtraTreesClassifier() or ExtraTreesRegressor() to generate extremely randomised trees that would go for another level up in randomness (more deatils in section 1.11.2.2. on Extremely Randomized Trees from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)). The main difference for this type of random forest was that while there was already a random subset of feature selection used (with an intention to select the most discerning features), more randomness were added on top of this by using purely randomly generated splitting rules for picking features at the nodes. The advantage of this type of method was that it would reduce variance and increase the accuracy of the model, but the downside was there might be an increase in bias within the model.
+There were also two other alternative random forest methods in *scikit-learn*, which were ensemble.RandomTreesEmbedding() and ensemble.ExtraTreesClassifier() or ensemble.ExtraTreesRegressor(). The difference for RandomTreesEmbedding() was that it was an unsupervised method that used data transformations (more details from section 1.11.2.6. on "Totally Random Trees Embedding" in [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#totally-random-trees-embedding)). On the other side, there was also an option to use ExtraTreesClassifier() or ExtraTreesRegressor() to generate extremely randomised trees that would go for another level up in randomness (more deatils in section 1.11.2.2. on Extremely Randomized Trees from [*scikit-learn*](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)). The main difference for this type of random forest was that while there was already a random subset of feature selection used (with an intention to select the most discerning features), more randomness were added on top of this by using purely randomly generated splitting rules for picking features at the nodes. The advantage of this type of method was that it would reduce variance and increase the accuracy of the model, but the downside was there might be an increase in bias within the model.
 
 <br>
 
@@ -56,9 +56,7 @@ There were also two other, alternative random forest methods in *scikit-learn*, 
 As usual, all the required libraries were imported first.
 
 ```{python}
-# Add more libraries from below!
 import pandas as pd
-import seaborn as sns
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
 # Showing version of *scikit-learn* used
@@ -66,22 +64,27 @@ print(sklearn.__version__)
 
 # For imbalanced datasets in regression 
 import ImbalancedLearningRegression as iblr
+
 # Plots
 import matplotlib.pyplot as plt
+import seaborn as sns
+
 # Metrics
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 
 # Feature importances - SHAP values
 import shap
+
 # Hyperparameter tuning
 from sklearn.model_selection import cross_val_score, RepeatedKFold
+
 from numpy import mean, std
 from natsort import index_natsorted
 import numpy as np
 ```
 
-Importing dataset that was preprocessed from last time. Link to data source: [first decision tree post](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html).
+Importing dataset that was preprocessed from last time - link to data source: [first decision tree post](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html).
 
 ```{python}
 data = pd.read_csv("ache_2d_chembl.csv")
@@ -101,9 +104,11 @@ Two approaches were used, where one was based purely on max phase split (between
 
 ###### **Preparing training data using max phase split**
 
-X variable was set up first via the dataframe, and then converted to a NumPy array, that consisted of the number of samples and number of features. This was kept the same as how it was in the decision tree posts.
+X variable was set up first from the dataframe, and then converted into a NumPy array, which consisted of the number of samples and number of features. This was kept the same as how it was in the decision tree posts.
 
-Note: It's usually recommended to copy the original data or dataframe for further data manipulations to avoid any unnecessary changes to the original dataset (this was not used in the decision tree posts, but since I'm going to use the same set of data again I'm doing it here now.)
+::: callout-note
+It's usually recommended to copy the original data or dataframe before doing any data manipulations to avoid any unnecessary changes to the original dataset (this was not used in the decision tree posts, but since I'm going to use the same set of data again I'm doing it here.)
+:::
 
 ```{python}
 # X variables (molecular features)
@@ -145,7 +150,7 @@ y_mp4
 
 <br>
 
-###### **Training model with the training dataset using max phase split only**
+###### **Training model using max phase split only**
 
 Both X and y variables were used to fit the RandomForestRegressor() estimator.
 
@@ -163,7 +168,6 @@ rfreg.fit(X_mp4, y_mp4)
 Testing data was mainly based on compounds with max phase assigned as "0" or "null" after I renamed it above.
 
 ```{python}
-# Compounds with max phase as "null"
 data_mp_null = data.copy()
 # Selecting all max phase "null" compounds
 data_mp_null = data_mp_null[data_mp_null["max_phase"] == "null"]
@@ -189,7 +193,7 @@ I didn't really pay a lot of attentions when I was doing data splits in the deci
 
 After I've splitted the same dataset based on compounds' max phase assignments in ChEMBL and also fitted the training data on the random forest regressor, I went back and noticed that the training and testing data were very imbalanced and I probably should do something about it before fitting them onto another model.
 
-At this stage, I went further to look into whether imbalanced datasets should be addressed in regression tasks, and did a surface search online. So based on common ML concensus, imbalanced dataset was more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, recent ML research looked into the issue of imbalanced datasets in regression. This [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few studies that looked into this type of problem, and I thought they were very interesting and worth a mention at least. One of them that I've looked into was SMOTER, which was based on synthetic minority over-sampling technique (SMOTE)[@chawla2002], and was named this way because it was basically a SMOTE for regression (hence SMOTER)[@torgo2013]. Synthetic minority over-sampling technique for regression with Gaussian noise (SMOGN)[@smogn] was another technique that was built upon SMOTER, but with Gaussian noises added. This has subsequently led me to ImbalancedLearningRegression library [@wu2022imbalancedlearningregression], which was a variation of SMOGN. This was the one used on my imbalanced dataset, shown in the section below.
+At this stage, I went further to look into whether imbalanced datasets should be addressed in regression tasks, and did a surface search online. So based on common ML concensus, addressing imbalanced datasets were more applicable to classification tasks (e.g. binary labels or multi-class labels), rather than regression problems. However, recent ML research looked into the issue of imbalanced datasets in regression. This [blog post](https://neptune.ai/blog/how-to-deal-with-imbalanced-classification-and-regression-data) mentioned a few studies that looked into this type of problem, and I thought they were very interesting and worth a mention at least. One of them that I've looked into was SMOTER, which was based on synthetic minority over-sampling technique (SMOTE)[@chawla2002], and was named this way because it was basically a SMOTE for regression (hence SMOTER)[@torgo2013]. Synthetic minority over-sampling technique for regression with Gaussian noise (SMOGN)[@smogn] was another technique that was built upon SMOTER, but with Gaussian noises added. This has subsequently led me to ImbalancedLearningRegression library [@wu2022imbalancedlearningregression], which was a variation of SMOGN. This was the one used on my imbalanced dataset, shown in the section below.
 
 A simple flow diagram was drawn below showing the evolution of different techniques when dealing with imbalanced datasets in classification (SMOTE) and regression (SMOTER, SMOGN and ImbalancedLearningRegression):
 
@@ -200,11 +204,11 @@ flowchart LR
   C --> D(ImbalancedLearningRegression)
 ```
 
-GitHub repository for ImbalancedLearningRegression package is available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html).
+GitHub repository for ImbalancedLearningRegression package is available [here](https://github.com/paobranco/ImbalancedLearningRegression), with its documentation available [here](https://imbalancedlearningregression.readthedocs.io/en/latest/intro.html).
 
 Also, I just wanted to mention that these were not the only techniques available for treating imbalanced datasets in regression, as there were other ones in the literature and most likely more are being developed currently, but I only had time to cover these here for now.
 
-I also would like to mention another really useful open-source resource for treating imbalanced datasets in classifications since I did not use it in this post due to the problem being more of a regression one than a classification one in this post - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
+I also would like to mention another really useful open-source resource for treating imbalanced datasets in classifications since I did not use it in this post due to the problem being more of a regression one than a classification one - [imbalance-learn library](https://imbalanced-learn.org/stable/index.html#).
 
 ```{python}
 # Original dataset - checking shape again
@@ -212,7 +216,7 @@ print(data.shape)
 data.head()
 ```
 
-So my little test on using ImbalancedLearningRegression package started from down below.
+So my little test on using ImbalancedLearningRegression package started from below.
 
 ```{python}
 iblr_data = data.copy()
@@ -236,13 +240,15 @@ data_gn_mp_null
 print(data_gn_mp_null.shape)
 ```
 
-Random over-sampling actually oversampled the max phase null compounds (sample size increased), while keeping all 10 max phase 4 compounds. Under-sampling removed all of the max phase 4 compounds (which was most likely not the best option), with max phase null compounds also reduced in size too. Due to post length, I did not show the code for random over-sampling and under-sampling, but for people who are interested, I think it would be interesting to test this out.
+There were several different sampling techniques in ImbalancedLearningRegression package. I've only tried random over-sampling, under-sampling and Gaussian noise, but there were also other ones such as SMOTE and ADASYN (in over-sampling technique) or condensed nearest neighbor, Tomeklinks and edited nearest neightbour (in under-sampling technique) that I haven't used.
 
-So I ended up using Gauissian noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds, which seemed to be the most balanced data sampling outcome. (Note: as stated from the documentation for ImbalancedLearningRegression pakcage, missing values within features would be removed automatically, I've taken care of this in my last series of posts so no difference were observed here.)
+Random over-sampling actually oversampled the max phase null compounds (sample size increased), while keeping all 10 max phase 4 compounds. Under-sampling removed all of the max phase 4 compounds (which was most likely not the best option, since I was aiming to use them as training compounds), with max phase null compounds also reduced in size too. Due to post length, I did not show the code for random over-sampling and under-sampling, but for people who are interested, I think it would be interesting to test them out.
 
-The change in the distribution of pKi values for the Gaussian noise sampling method between the original and sample-modified datasets could be seen in the kernel density estimate plot below. The modified dataset had a flatter target density curve than the original density plot, which was more concentrated and peaked between pKi values of 6 and 8.
+I ended up using Gauissian noise sampling and it reduced max phase 4 compounds slightly, and increased the max phase null compounds a little bit too, which seemed to be the most balanced data sampling at the first try. (Note: as stated from the documentation for ImbalancedLearningRegression pakcage, missing values within features would be removed automatically, I've taken care of this in my last series of posts so no difference were observed here.)
 
-Plot reference: https://github.com/paobranco/ImbalancedLearningRegression/blob/master/examples/Gaussian_noise.ipynb
+The change in the distribution of pKi values for the Gaussian noise sampling method between the original and sample-modified datasets could be seen in the kernel density estimate plot below. The modified dataset had a flatter target density curve than the original density plot, which was more concentrated and peaked between pKi values of 6 and 8. The range of pKi values for the ten max phase 4 compounds collected was between 4 and 8.
+
+[*Plot reference*](https://github.com/paobranco/ImbalancedLearningRegression/blob/master/examples/Gaussian_noise.ipynb)
 
 ```{python}
 # Quick look at how the pKi values differed 
@@ -252,8 +258,6 @@ sns.kdeplot(data["pKi"], label = "Original")
 sns.kdeplot(data_gn["pKi"], label = "Modified")
 plt.legend(labels = ["Original", "Modified"])
 ```
-
-It was also worth mentioning the range of pKi values for the 10 max phase 4 compounds collected was between 4 and 8.
 
 Next, the modified ImbalancedLearningRegression-Gaussian noise (iblr-gn) training data was converted into a NumPy array.
 
@@ -326,7 +330,7 @@ y_mp_gn_test = rfreg_gn.predict(X_mp_gn_test)
 
 ###### **Scoring and metrics of trained models**
 
-Checking model accuracy for both training and testing datasets was actually recommended to take place before moving onto discovering the feature importances. A *scikit-learn* explanation for this could be found in the section on ["Permutation feature importance"](https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance). So the accuracy scores for the model were shown below.
+Checking model accuracy for both training and testing datasets was recommended to take place before moving onto discovering feature importances. A *scikit-learn* explanation for this could be found in the section on ["Permutation feature importance"](https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-feature-importance). So the accuracy scores for the model were shown below.
 
 ```{python}
 # Training set accuracy
@@ -336,9 +340,9 @@ print(f"Random forest regressor training accuracy: {rfreg.score(X_mp4, y_mp4):.2
 print(f"Random forest regressor testing accuracy: {rfreg.score(X_mp_test, y_mp_test):.2f}")
 ```
 
-It looked like both the training and testing accuracies for the random forest regressor model (rfreg) were quite high, meaning that the model was able to remember the molecular features well from the training set (the tiny sample of 10 compounds), and the model was able to apply them to the testing set (which should contain about 400 or so compounds) as well, in order to make predictions on the target value of pKi. This has somewhat confirmed that the model was indeed making predictions, rather than not making any predictions at all, which meant there might be no point in finding out which features were important in the data, so this step was a checking point prior to proceeding to next steps. Therefore, now we could move onto the next step of generating some feature importances to provide more useful information to fill in the bigger story i.e. which features were more pivotal towards influencing pKi values of approved drugs targeting acetylcholinesterase (AChE).
+It looked like both the training and testing accuracies for the random forest regressor model (rfreg) were quite high, meaning that the model was able to remember the molecular features well from the training set (the tiny sample of 10 compounds), and the model was able to apply them to the testing set (which should contain about 400 or so compounds) as well, in order to make predictions on the target value of pKi. This has somewhat confirmed that the model was indeed making predictions, rather than not making any predictions at all, which meant there might be no point in finding out which features were important in the data. Therefore, we could now move onto processing the feature importances to fill in the bigger story i.e. which features were more pivotal towards influencing pKi values of approved drugs targeting acetylcholinesterase (AChE).
 
-Similar model accuracy scores were also done for the iblr-gn modified dataset, which appeared to follow a similar pattern as the purely max phase-splitted dataset.
+Similar model accuracy scores were also generated for the iblr-gn modified dataset, which appeared to follow a similar pattern as the max phase-splitted dataset.
 
 ```{python}
 # iblr-Gaussian noise & max phase splitted data
@@ -405,7 +409,7 @@ Well, it appeared iblr-gn dataset might not offer much advantage than the origin
 
 ##### **Feature importances**
 
-There were two types of feature importances available in *scikit-learn*, which I've described below. I've also added a Shapley additive explanations (SHAP)approach to this section as well to show the different visualisation styles for feature importances on the same set of data.
+There were two types of feature importances available in *scikit-learn*, which I've described below. I've also added a Shapley additive explanations (SHAP) approach to this section as well to show different visualisation styles for feature importances on the same set of data.
 
 <br>
 
@@ -423,6 +427,8 @@ feature_imp = rfreg.feature_importances_
 feature_imp
 ```
 
+I decided to write a function to convert a NumPy array into a plot below as this was needed in this also needed in the next section.
+
 ```{python}
 # Function to convert array to df leading to plots 
 # - for use in feature_importances_ & permutation_importance
@@ -431,7 +437,8 @@ def feat_imp_plot(feat_imp_array, X_df):
 
     """
     Function to convert feature importance array into a dataframe, 
-    which is then used to plot a bar graph to show the feature importance ranking in the random forest model for the dataset used.
+    which is then used to plot a bar graph 
+    to show the feature importance ranking in the random forest model for the dataset used.
 
     feat_imp_array is the array obtained from the feature_importances_ attribute, 
     after having a estimator/model fitted.
@@ -474,7 +481,7 @@ def feat_imp_plot(feat_imp_array, X_df):
 feat_imp_plot(feature_imp, X_mp4_df)
 ```
 
-An alternative way to plot was via Matplotlib directly (note: Seaborn also uses Matplotlib as well, so the plots are pretty similar). The code below were probably a bit more straightforward but without axes named and values were not sorted (only as an example but more code could be added to do this).
+An alternative way to plot was via Matplotlib directly (note: Seaborn was built based on Matplotlib, so the plots were pretty similar). The code below were probably a bit more straightforward but without axes named and the values were not sorted (only as an example but more code could be added to do this).
 
 ```{python}
 # Matplotlib plot
@@ -503,9 +510,9 @@ type(perm_result)
 
 It normally returns a dictionary-like objects (e.g. Bunch) with the following 3 attributes:
 
--   importances_mean (mean of feature importance)
--   importances_std (standard deviation of feature importance)
--   importances (raw permutation/feature importance scores)
+-   importances_mean (mean of feature importances)
+-   importances_std (standard deviation of feature importances)
+-   importances (raw permutation/feature importances scores)
 
 For details on these attributes, this *scikit-learn* [link](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance) will add a bit more explanations.
 
@@ -524,17 +531,17 @@ type(perm_imp)
 feat_imp_plot(perm_imp, X_mp4_df)
 ```
 
-It generated a different feature importance ranking, although somewhat similar as well, as shown from the horizontal bar graph.
+It generated a different feature importances ranking, although somewhat similar as well as shown from the horizontal bar graph.
 
 <br>
 
 ###### **SHAP approach**
 
-SHAP (Shapley additive explanations) values[@lundberg2020local2global][@shapley1953] were used here to provide a another way to figure out the feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
+SHAP values [@lundberg2020local2global][@shapley1953] were used here to provide another way to figure out feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
 
 SHAP's TreeExplainer() was based on Tree SHAP algorithms [@lundberg2020local2global], and was used to show and explain feature importances within tree models. It could also be extended to boosted tree models such as LightGBM and XGBoost and also other tree models (as explained by the GitHub repository README.md and its documentation link provided).
 
-Other reference: https://mljar.com/blog/feature-importance-in-random-forest/
+[Other reference](https://mljar.com/blog/feature-importance-in-random-forest/)
 
 ```{python}
 shap_explainer = shap.TreeExplainer(rfreg)
@@ -568,14 +575,15 @@ shap.summary_plot(shap_values, X_mp_test_df, plot_type = "violin")
 An example was shown below on tuning the number of trees (n_estimators) used in the random forest model.
 
 ```{python}
-# Function code adapted with thanks from ML Mastery - https://machinelearningmastery.com/random-forest-ensemble-in-python/
+# Function code adapted with thanks from ML Mastery 
+# https://machinelearningmastery.com/random-forest-ensemble-in-python/
 
 # ---Evaluate a list of models with different number of trees---
 
-# Define dataset by using the same training dataset as above---
+# Define dataset by using the same training dataset as above
 X, y = X_mp4, y_mp4
 
-# Define function to generate a list of models with different no. of trees---
+# Define function to generate a list of models with different no. of trees
 def models():
     # Create empty dictionary (key, value pairs) for models
     models = dict()
@@ -586,20 +594,22 @@ def models():
     return models
 
 
-# Define function to evaluate a single model using cross-validation---
+# Define function to evaluate a single model using cross-validation
 def evaluate(model, X, y):
 
-    # RepeatedStratifiedKFold usually for binary or multi-class labels - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold
+    # RepeatedStratifiedKFold usually for binary or multi-class labels 
+    # - ref link: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold
     # so using ReaptedKFold instead
     cross_val = RepeatedKFold(n_splits=10, n_repeats=15, random_state=1)
     # Run evaluation process & collect cv scores
-    # Since estimator/model was based on DecisionTreeRegressor, using neg_mean_squared_error metric
+    # Since estimator/model was based on DecisionTreeRegressor, 
+    # using neg_mean_squared_error metric
     # n_jobs = -1 meaning using all processors to run jobs in parallel
     scores = cross_val_score(model, X, y, scoring="neg_mean_squared_error", cv=cross_val, n_jobs=-1)
     return scores
 
 
-# Evaluate results---
+# Evaluate results
 # Run models with different RepeatedKFold & different no. of tress
 # with results shown as diff. trees with calculated mean cv scores & std
 
@@ -622,15 +632,15 @@ for name, model in models.items():
     print((name, mean(scores), std(scores)))
 ```
 
-The negated version of the mean squared error (neg_mean_squared_error) was due to how the scoring parameter source code was written in *scikit-learn*. It was written this way to take into account of both *scoring* and *loss* functions (please see links provided below for further explanations). All scoring metrics could be accessed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter) for *scikit-learn*.
-
-Also, the random forest algorithm was stochastic in nature, meaning that every time hyperparameter tuning took place, it would generate different scores due to random bootstrap sampling. The best approach to evaluate model performance during the cross-validation process was to use the average outcome from several runs of cross-validations, then fit the hyperparameters on a final model, or getting several final models ready and then obtaining the average from these models instead.
+The negated version of the mean squared error (neg_mean_squared_error) was due to how the scoring parameter source code was written in *scikit-learn*. It was written this way to take into account of both *scoring* and *loss* functions (links provided below for further explanations). All scoring metrics could be accessed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter) for *scikit-learn*.
 
 Reference links to help with understanding neg_mean_squared_error:
 
-1.  scikit-learn source code - https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624
+1.  [scikit-learn source code](https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624)
 
-2.  StackOverflow answer - https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated
+2.  [StackOverflow answer](https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated)
+
+Also, the random forest algorithm was stochastic in nature, meaning that every time hyperparameter tuning took place, it would generate different scores due to random bootstrap sampling. The best approach to evaluate model performance during the cross-validation process was to use the average outcome from several runs of cross-validations, then fit the hyperparameters on a final model, or getting several final models ready and then obtaining the average from these models instead.
 
 Below was a version of boxplot plotted using Matplotlib showing the differences in the distributions of the cross validation scores and mean squared errors between different number of trees.
 
@@ -641,7 +651,7 @@ plt.show()
 
 To plot this in Seaborn, I had to prepare the data slightly differently to achieve a different version of the boxplot. Matplotlib was a bit more straightforward to use without these steps.
 
-I also used natural sort to sort numerical values. GitHub repo: https://github.com/SethMMorton/natsort. Otherwise, if using sort_values() only, it would only sort the numbers in lexicographical order (i.e. by first digit only), which was not able to show the tree numbers in ascending order.
+I also used natural sort to sort numerical values ([GitHub repository](https://github.com/SethMMorton/natsort)). Otherwise, if using sort_values() only, it would only sort the numbers in lexicographical order (i.e. by first digit only), which was not able to show the tree numbers in ascending order.
 
 ```{python}
 # Combine results & names lists into dataframe
@@ -679,22 +689,22 @@ Other hyperparameters that could be tuned included:
 
 -   number of samples (max_samples) 
 
--   number of features (max_features) - I didn't use RDKit to generate molecular features for this post (the Datamol version was used instead) which would provide around 209 at least (trying to keep the post at a readable length), but I think this might be a better option when doing cross-validations in model evaluations
+-   number of features (max_features) - I didn't use RDKit to generate molecular features for this post (Datamol version was used instead) which would provide around 209 at least (trying to keep the post at a readable length), but I think this might be a better option when doing cross-validations in model evaluations
 
 -   number of nodes (max_leaf_nodes)
 
-I've decided not to code for these other hyperparameters in the cross-validation step due to length of post, but they should be looked into if doing full-scale and comprehensive ML using the ensemble random forest algorithm.
+I've decided not to code for these other hyperparameters in the cross-validation step due to length of post (the function code used in cross-validation above could also be adapted to cater for other hyperparameters mentioned here), but they should be looked into if doing full-scale and comprehensive ML using the ensemble random forest algorithm.
 
 <br>
 
 ##### **Final words**
 
-Random forest was known to be a black-box ML algorithm [@bruce2020], which was completely different from the white-box ML style revealed in decision tree graphs. Feature importances was therefore crucial to shed some lights and remove some layers of the black-box nature in random forest by showing which features were contributing more towards model accuracy by ranking all the features used to train the model. Cross-validation was also vital to avoid over-fitting (which was more applicable to the depth of trees), although in some other cases (e.g. number of trees), it was also mentioned that it was unlikely that the model would be overfitted. Other options available in *scikit-learn* ensemble methods that I didn't get time to try were using voting classifier/regressor and stacking models to reduce biases in models.
+Random forest was known to be a black-box ML algorithm [@bruce2020], which was completely different from the white-box ML style revealed in decision tree graphs. Feature importances was therefore crucial to shed some lights and remove some layers of the black-box nature in random forest by showing which features were contributing towards model accuracy by ranking features used to train the model. Cross-validation was also vital to avoid over-fitting (which was more applicable to depth of trees), although in some other cases (e.g. number of trees), it was mentioned that it was unlikely the model would be overfitted. Other options available in *scikit-learn* ensemble methods that I didn't get time to try were using voting classifier/regressor and stacking models to reduce biases in models, but I'd imagine they might be very useful in some other cases.
 
-Few things I've thought of that I could try to improve what I did here was that I should really look for a different set of testing data, rather than using the max phase splits, which of course was not ideal. However, as a lot of us know nowadays that good data are hard to come by, so I need to take some time to look into this. Another approach that I could try was that I could use RandomForestClassifier() instead on max phase prediction of these small molecules, rather than the pKi value predictions. That might involve re-labelling the max phases for these compounds into a binary label, then I could use the imbalance-learn package to try and alleviate the problem with imbalanced dataset.
+Few things I've thought of that I could try to improve what I did here was that I should really look for a different set of testing data, rather than using the max phase splits, which of course was not ideal. However, as a lot of us are aware currently, and probably has been a long-standing problem, that good data are hard to come by, so I need to take some time to look into this. Another approach that I could try was that I could use RandomForestClassifier() instead on max phase prediction of these small molecules, rather than making pKi value predictions. This might involve re-labelling the max phases for these compounds into a binary label or class labels, then I could use the imbalance-learn package to try and alleviate the problem with imbalanced dataset. Nevertheless, I had some fun working on this post and learnt a lot while doing it, and I hope some of the readers might find this post somewhat helpful or informative.
 
 <br>
 
 ##### **Acknowledgement**
 
-I'd like to thank all of the authors, developers and contributors towards all of the open-source packages or libraries used in this post. I'd also like to thank all the other senior cheminformatics and ML practitioners who were sharing their work online, which were precious learning materials. 
+I'd like to thank all of the authors, developers and contributors towards all of the open-source packages or libraries used in this post. I'd also like to thank all of the other senior cheminformatics and ML practitioners who were sharing their work online, these were great teaching and learning materials to share. 
