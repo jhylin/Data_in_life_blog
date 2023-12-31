@@ -20,7 +20,7 @@ comments: false
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
 * Latest project: ML series 2.2 - random forest
-* Next project in the pipeline: ML series 2.2.1 - random forest classifier and imbalanced datasets
+* Next project in the pipeline: ML series 2.2.1 - imbalanced dataset in random forest classifier (aiming for first-half of January 2024)
 
 <br>
 
