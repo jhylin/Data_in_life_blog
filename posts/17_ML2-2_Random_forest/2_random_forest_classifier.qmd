@@ -27,7 +27,7 @@ This post was really just an addition towards the last random forest (RF) post (
 ##### **Overview of post (packages/scripts used)**
 
 -   Data source using *chembl_downloader*
--   Minor data preprocessing using own little script of random_forest.py (avoid repeating code) and also a SMILES checker from *scikit_mol*
+-   Minor data preprocessing using own little script of mol_prep.py (avoid repeating code) and also a SMILES checker from *scikit_mol*
 - *scikit-learn*'s RandomForestClassifier()
 -   Dealing with imbalanced dataset in RF classifiers by using *ghostml*
 
@@ -72,8 +72,9 @@ print(f"The latest ChEMBL version is: {latest_version}")
 ```
 
 ```{python}
-# Query chembl_downloader to show SQL required to extract ChEMBL data for a specific protein target
-# e.g. target_chembl_id for AChE: CHEMBL220
+# Query chembl_downloader to show SQL required 
+# to extract ChEMBL data for a specific protein target
+# e.g. target_chembl_id for acetylcholinesterase (AChE): CHEMBL220
 queries.markdown(queries.get_target_sql(target_id="CHEMBL220", target_type="SINGLE PROTEIN"))
 ```
 
@@ -81,8 +82,8 @@ The code below took several minutes to run.
 
 ``` {{python}}
 # Following data download worked (4.41GB for SQL query below)
-
-# Added an extra line - MOLECULE_DICTIONARY.max_phase into sql to show max phases for compounds targeting AChE
+# Added an extra line - MOLECULE_DICTIONARY.max_phase 
+# into sql to show max phases for compounds targeting AChE
 
 sql = """
 SELECT
@@ -108,9 +109,9 @@ WHERE TARGET_DICTIONARY.chembl_id = 'CHEMBL220'
 df = chembl_downloader.query(sql)
 ```
 
-```{{python}}
-# Save df as .csv file
-df.to_csv("chembl_d_ache", sep=",", index=False)
+```{python}
+# Save df as .csv file (uncomment last line to run)
+#df.to_csv("chembl_d_ache", sep=",", index=False)
 ```
 
 ```{python}
@@ -274,14 +275,13 @@ df_mp4_lb
 
 ```{python}
 # Also create a new column max_phase_lb column for df_null to merge 2 dfs together
-
 df_null_lb = df_null.assign(max_phase_lb = df_null["max_phase"])
 first_col_null = df_null_lb.pop("max_phase_lb")
 df_null_lb.insert(0, "max_phase_lb", first_col_null)
 df_null_lb.head()
 ```
 
-The two dataframes should share same column names which could be combined together.
+The two dataframes should share the same column names to be combined together.
 
 ```{python}
 # Concatenate df_mp4_lb & df_null_lb
@@ -334,7 +334,9 @@ Reference notebook: https://github.com/rinikerlab/GHOST/blob/main/notebooks/exam
 
 ```{python}
 # Using RandomForestClassifier() to train model
-# max_features = "sqrt" by default, I decided to show it explicitly in the code to make sure the right one was used
+# max_features = "sqrt" by default, 
+# I decided to show it explicitly in the code 
+# to make sure the right one was used
 rfc = RandomForestClassifier(max_depth=3, random_state=1, max_features="sqrt", oob_score=True)
 rfc.fit(X_train, y_train)
 ```
@@ -346,10 +348,14 @@ rfc.fit(X_train, y_train)
 test_probs = rfc.predict_proba(X_test)[:, 1]
 ```
 
-A useful web link on area under the receiver operating characteristic curve - https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
+A useful web link on area under the receiver operating characteristic (ROC) curve - https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
 
 ```{python}
-# Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model was adapted from Landrum et al., from this notebook: https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
+# Rather than re-inventing the wheel, 
+# the following function code for calculating metrics of the RF model 
+# was adapted from Landrum et al., 
+# from this notebook: https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
+# Some comments were added for clarities
 
 def calc_metrics(y_test, test_probs, threshold = 0.5):
     # Scores to differentiate between stated decision threshold (default = 0.5)
@@ -366,9 +372,7 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
     return 
 ```
 
-Initially I made a mistake when doing the data split, which created a problem with y_test which only contained one label in it (1 only), needs binary labels (0 & 1)
-
-It was needed for roc_auc_score (measures true +ve & false +ve rates).
+Note: roc_auc_score measures true positive and false positive rates, therefore needs to have binary labels (e.g. 0s and 1s) in the data
 
 ```{python}
 # Show confusion matrix along with AUC and Cohen's Kappa
@@ -377,13 +381,16 @@ calc_metrics(y_test, test_probs, threshold = 0.5)
 # This was an extreme case - as only 10 actives vs. 5256 inactives
 ```
 
+**TODO**
+Mention confusion matrix results - TP, FP etc.
+
 5.  two approaches from GHOST (generalized threshold shifting) paper (main idea was optimising and shifting decision threshold):
 
-    -   approach 1 (out-of-bag method, aimed for RF classifiers) based on RDKit blog post (ref. 41) - http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html ([viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer)
+    -   approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on RDKit blog post (ref. 41) - http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html ([viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer)
 
     -   approach 2 led to Generalised threshold shifting (GHOST) procedure (could be used for any classification methods) - ghostml package
 
-I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and also approach 1 was already described in a RDKit blog post.
+I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and also approach 1 was already described in the RDKit blog post as mentioned above.
 
 -   extract the prediction probabilities from the RF classifier trained model
 
