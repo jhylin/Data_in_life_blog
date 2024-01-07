@@ -18,9 +18,9 @@ bibliography: references.bib
 
 ##### **Brief introduction**
 
-This post was really just an addition towards the last random forest (RF) post (machine learning (ML) series 2.2). It was mainly inspired by this paper [@esposito2021] from [rinikerlab](https://github.com/rinikerlab). It was also nice to complete the RF series by adding a RF classifier model since last post was only on a regressor. Also, knowing that imbalanced datasets were common in drug discovery projects, learning new strategies to deal with them was also extremely useful[^1], and while I was working on this post, I also came across a few other packages that I haven't used before, so I've included them all down below.
+This post was really just an addition towards the last random forest (RF) post (machine learning (ML) series 2.2). It was mainly inspired by this paper [@esposito2021] from [rinikerlab](https://github.com/rinikerlab)[^1]. It was also nice to complete the RF series by adding a RF classifier model since last post was only on a regressor. Also, knowing that imbalanced datasets were common in drug discovery projects, learning new strategies to deal with them was also extremely useful, and while I was working on this post, I also came across a few other packages that I haven't used before, so I've included them all down below.
 
-[^1]: 1
+[^1]: h/t: Greg Landrum for his comment on Mastodon for the last RF post (which led to this follow-up post)
 
 <br>
 
@@ -303,7 +303,7 @@ df_full.value_counts("max_phase_lb")
 
 ```{python}
 # Cast max_phase_lb column into integer
-df_full["max_phase_lb"] = df_full["max_phase_lb"].astype(int)
+# df_full["max_phase_lb"] = df_full["max_phase_lb"].astype(int)
 ```
 
 ```{python}
@@ -381,7 +381,7 @@ calc_metrics(y_test, test_probs, threshold = 0.5)
 # This was an extreme case - as only 10 actives vs. 5256 inactives
 ```
 
-5.  two approaches from GHOST paper (main idea was optimising and shifting decision threshold):
+5.  two approaches from GHOST (generalized threshold shifting) paper (main idea was optimising and shifting decision threshold):
 
     -   approach 1 (out-of-bag method, aimed for RF classifiers) based on RDKit blog post (ref. 41) - http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html ([viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer)
 
