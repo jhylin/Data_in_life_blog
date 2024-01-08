@@ -2,7 +2,7 @@
 title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
-date: '2024-1-7'
+date: '2024-1-8'
 draft: true
 categories: 
     - Machine learning projects
@@ -475,10 +475,12 @@ plt.show()
 
 ##### **Downsides and thoughts**
 
-I also wanted to mention that the testing set used here was most likely not the best ones to be used. There could be many overlaps between the compounds in the training and testing sets, since they all came from ChEMBL database. For demonstration and learning purposes, I ended up using similar dataset as last time, however, my future tasks would be to look for new open-source or public drug discovery datasets. I also should probably slowly move onto using multiple datasets or targets concurrently, which would likely make things more interesting in blog posts. On the other hand, I also wanted to avoid this in order to make the topic of study as clear and simple as possible for me or anyone who's trying to learn. In my mind, understanding the smallest building blocks first is always the best starting point before trying to build something bigger.
+I also wanted to mention that the testing set used here was most likely not the best ones to be used. There could be many overlaps or similarities between the compounds in the training and testing sets, since they all came from ChEMBL database. For demonstration and learning purposes, I ended up using similar dataset as last time. Hopefully, I can try other open-source or public drug discovery datasets in the near future. 
+
+The other thing to mention was that I should try different molecular fingerprints or descriptors as well, rather than only using RDKit2D, which might lead to different results. I should also probably slowly move onto using multiple datasets or targets in a project, which would likely make things more interesting. On the other hand, I also wanted to avoid this in order to make the topic of interest as clear and simple as possible for me or anyone who's trying to learn. It'll be easier to build on small things, rather than providing a messy lump of information which could be hard to decipher for new comers.
 
 <br>
 
 ##### **Acknowledgements**
 
-I'd like to thank [rinikerlab](https://github.com/rinikerlab) again, and also all the authors, contributors or developers of all the software packages mentioned in this post, and also all the authors of the reference notebooks I've referred to in this post too.
+I'd like to thank [rinikerlab](https://github.com/rinikerlab) again, and also all the authors, contributors or developers of all the software packages mentioned in this post, and all the authors of the reference notebooks I've referred to in this post too.
