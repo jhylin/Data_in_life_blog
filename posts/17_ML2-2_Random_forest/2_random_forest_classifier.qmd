@@ -55,7 +55,7 @@ import ghostml
 
 ##### **Data retrieval using chembl_downloader**
 
-chembl_downloader package was something I wanted to try a while back. I've tried manual download and chembl_webresource_client previously, and they were probably not the best strategies for data reproducibility. The idea of chembl_downloader was to generate a ChEMBL data source that could be fully reproducible. It involved some SQL at the beginning to specify the exact type of data needed, so some SQL knowledge were required. Other uses for this package were elaborated much more nicely in its GitHub repository at https://github.com/cthoyt/chembl-downloader. Overall, I think it was very useful in a Jupyter notebook or equivalent environments to document ChEMBL-sourced data used.
+chembl_downloader package was something I wanted to try a while back. I've tried manual download and chembl_webresource_client previously, and they were probably not the best strategies for data reproducibility. The idea of chembl_downloader was to generate a ChEMBL data source that could be fully reproducible. It involved some SQL at the beginning to specify the exact type of data needed, so some SQL knowledge were required. Other uses for this package were elaborated much more nicely in its GitHub repository at [https://github.com/cthoyt/chembl-downloader](https://github.com/cthoyt/chembl-downloader). 
 
 Some reference notebooks I've referred to when I worked on this post that used chembl_downloader (more available in its repository):
 
@@ -125,13 +125,13 @@ df_ache.head()
 
 ##### **Some data cleaning**
 
-Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced datasets in RF classifier. I've also attempted to use a similar dataset as last post since I've used a different way to retrieve ChEMBL data this time (via chembl_downloader), so the datasets used in the RF series might not be exactly the same.
+Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced datasets in RF classifier. I've also attempted to use a similar dataset but since I used a different way to retrieve ChEMBL data this time (via chembl_downloader), the datasets used here might be slightly different from the one used in previous post.
 
 <br>
 
 ###### **mol_prep.py**
 
-I've more or less accumulated small pieces of code over time, and I've decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time, as they've been used frequently in the last few posts. The script would be saved into the blog project repository or under the RF repository. It would still be considered as a "work-in-progress" script only since I kind of still want to work on it further in the future.
+I've more or less accumulated small pieces of code over time, and I've decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time, as they've been used frequently in the last few posts. The script would be saved into the blog project repository or under the RF repository. It would still be considered as a "work-in-progress" script only since I still want to work on it further in the future.
 
 ```{python}
 ## Trial own mol_prep.py script
@@ -150,26 +150,23 @@ df_prep.head(3)
 
 ###### **scikit_mol**
 
-scikit_mol was a package originated from 2022 RDKit UGM hackathon. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether my preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method on multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol)
+scikit_mol was a package originated from RDKit UGM hackathon in 2022. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method on multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol)
 
 ```{python}
 # Quick simple way to check for missing SMILES
 print(f'Dataset contains {df_prep.standard_smiles.isna().sum()} unparsable mols')
 ```
 
-It appeared to have no unparsable (missing) molecules.
-
 ```{python}
 # Checking for invalid SMILES using scikit_mol
 smileschecker = CheckSmilesSanitazion()
-
 smileschecker.sanitize(list(df_prep.standard_smiles))
 
 # Showing SMILES errors
 smileschecker.errors
 ```
 
-It also confirmed that there were no errors in SMILES.
+It also confirmed that there were no errors in SMILES (if there were errors, it should be listed in the code cell output).
 
 ```{python}
 ## Generate RDKit2D descriptors/fingerprints
@@ -227,7 +224,7 @@ df_merge_new.head()
 ```
 
 ```{python}
-# Previously used 10 max phase 4 compounds were found in df_merge_new
+# Making sure previously used 10 max phase 4 compounds could be found in df_merge_new
 df_mp4 = df_merge_new.loc[df_merge_new["molecule_chembl_id"].isin(list_mp4)]
 df_mp4
 ```
@@ -241,7 +238,7 @@ df_merge_new.value_counts("max_phase")
 
 ##### **Model building**
 
-The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e. whether the compounds in the testing set are in max phase 4 or not. The target was max_phase and features to be used were the various RDKit 2D descriptors (RDKit2D).
+The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e. whether the compounds in the testing set (consisted of max phase 0 or null compounds) might be eventually classified as max phase 4 or not. The target was "max_phase" and features to be used were the various RDKit 2D (RDKit2D) descriptors.
 
 The steps I've taken in model building were shown as follow:
 
@@ -253,7 +250,7 @@ df_merge_new = df_merge_new.fillna(0)
 df_merge_new
 ```
 
-2.  Splitting data into max phase null & max phase 4 (reason being needing to re-label max phase 4 column only as 1, and not disrupting max phase 0 compounds)
+2.  Splitting data into max phase null & max phase 4 (reason being needing to re-label max phase 4 column only as 1, and not disrupting the labels of max phase 0 compounds)
 
 ```{python}
 # Select all max phase null compounds
@@ -269,19 +266,19 @@ df_mp4_lb = df_mp4.assign(max_phase_lb = df_mp4["max_phase"] / 4)
 # Using pd.DataFrame.pop() & insert() to shift added column to first column position
 first_col = df_mp4_lb.pop("max_phase_lb")
 df_mp4_lb.insert(0, "max_phase_lb", first_col)
-
 df_mp4_lb
 ```
 
 ```{python}
-# Also create a new column max_phase_lb column for df_null to merge 2 dfs together
+# Also create a new column max_phase_lb column for df_null 
+# in order to merge 2 dfs later
 df_null_lb = df_null.assign(max_phase_lb = df_null["max_phase"])
 first_col_null = df_null_lb.pop("max_phase_lb")
 df_null_lb.insert(0, "max_phase_lb", first_col_null)
 df_null_lb.head()
 ```
 
-The two dataframes should share the same column names to be combined together.
+These two dataframes were then combined together.
 
 ```{python}
 # Concatenate df_mp4_lb & df_null_lb
@@ -291,19 +288,10 @@ df_full
 
 3.  Define X and y variables and train RF classifier model
 
-Eventually df_full contained 10 active compounds and 5256 inactive compounds, as shown from the value counts.
+Eventually df_full contained 10 active compounds and 5256 inactive compounds (as shown from the value counts).
 
 ```{python}
 df_full.value_counts("max_phase_lb")
-```
-
-```{python}
-# Cast max_phase_lb column into integer
-# df_full["max_phase_lb"] = df_full["max_phase_lb"].astype(int)
-```
-
-```{python}
-df_full.head()
 ```
 
 ```{python}
@@ -328,12 +316,9 @@ y = y.to_numpy()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=1)
 ```
 
--   Training RF classifier model
-
-Reference notebook: https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
+After data splitting, a RF classifier was trained with reference to this notebook: [https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb)
 
 ```{python}
-# Using RandomForestClassifier() to train model
 # max_features = "sqrt" by default, 
 # I decided to show it explicitly in the code 
 # to make sure the right one was used
@@ -348,19 +333,23 @@ rfc.fit(X_train, y_train)
 test_probs = rfc.predict_proba(X_test)[:, 1]
 ```
 
-A useful web link on area under the receiver operating characteristic (ROC) curve - https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
+Some references links for area under the receiver operating characteristic (ROC) curve and Cohen's Kappa.
+
+Area under the ROC curve: [reference link](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)
+
+Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#r219a3b9132e1-1)
 
 ```{python}
 # Rather than re-inventing the wheel, 
 # the following function code for calculating metrics of the RF model 
-# was adapted from Landrum et al., 
-# from this notebook: https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
+# was adapted from Landrum et al., from this notebook: 
+# https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
 # Some comments were added for clarities
 
 def calc_metrics(y_test, test_probs, threshold = 0.5):
-    # Scores to differentiate between stated decision threshold (default = 0.5)
+    # Predicted probability scores according to the stated decision threshold (default = 0.5)
     scores = [1 if x>=threshold else 0 for x in test_probs]
-    # Calculate area under the receiver operating characteristic curve
+    # Calculate area under the ROC curve
     auc = metrics.roc_auc_score(y_test, test_probs)
     # Calculate Cohen's Kappa score
     kappa = metrics.cohen_kappa_score(y_test, scores)
@@ -372,7 +361,7 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
     return 
 ```
 
-Note: roc_auc_score measures true positive and false positive rates, therefore needs to have binary labels (e.g. 0s and 1s) in the data
+Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g. 0s and 1s) in the data
 
 ```{python}
 # Show confusion matrix along with AUC and Cohen's Kappa
@@ -386,26 +375,26 @@ Mention confusion matrix results - TP, FP etc.
 
 5.  two approaches from GHOST (generalized threshold shifting) paper (main idea was optimising and shifting decision threshold):
 
-    -   approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on RDKit blog post (ref. 41) - http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html ([viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer)
+    -   Approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on [RDKit blog post](http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html) or its [viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer
 
-    -   approach 2 led to Generalised threshold shifting (GHOST) procedure (could be used for any classification methods) - ghostml package
+    -   Approach 2 led to generalised threshold shifting (GHOST) procedure (for any classification methods) - GitHub repository: [https://github.com/rinikerlab/GHOST](https://github.com/rinikerlab/GHOST)
 
-I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and also approach 1 was already described in the RDKit blog post as mentioned above.
+I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had a detailed explanation for approach 1.
 
--   extract the prediction probabilities from the RF classifier trained model
+The next step involved extracting prediction probabilities from the RF classifier trained model
 
 ```{python}
 # Get the positive prediction probabilities of the training set
 train_probs = rfc.predict_proba(X_train)[:, 1]
 ```
 
-6.  Shift decision threshold using ghostml in a postprocessing way (note: last post used re-sampling method in a preprocessing way)
+6.  Shifting decision threshold by using ghostml in a postprocessing way (note: last post used re-sampling method in a preprocessing way)
 
--   optimise the decision threshold using ghostml via testing various thresholds (in spaces of 0.05 with range of 0.05 to 0.5) - to search for the most optimal threshold with most maximised Cohen's kappa
+The decision threshold were optimised by using ghostml via testing various different thresholds, e.g. in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the maximised Cohen's kappa.
 
 ```{python}
 # Setting up different decision thresholds in space of 0.05
-thresholds = np.round(np.arange(0.05,0.55,0.05),2)
+thresholds = np.round(np.arange(0.05,0.55,0.05), 2)
 thresholds
 ```
 
