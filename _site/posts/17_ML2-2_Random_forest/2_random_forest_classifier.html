@@ -545,7 +545,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>4.59</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x1377e26c0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13289a6c0&gt;</td>
       <td>CC/C(=C(/CC)c1ccc(O)cc1)c1ccc(O)cc1</td>
       <td>[C][C][/C][=Branch1][P][=C][Branch1][Ring1][/C...</td>
       <td>InChI=1S/C18H20O2/c1-3-17(13-5-9-15(19)10-6-13...</td>
@@ -562,7 +562,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>4.27</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x1377e2730&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13289a730&gt;</td>
       <td>COc1c2occc2cc2ccc(=O)oc12</td>
       <td>[C][O][C][=C][O][C][=C][C][Ring1][Branch1][=C]...</td>
       <td>InChI=1S/C12H8O4/c1-14-12-10-8(4-5-15-10)6-7-2...</td>
@@ -579,7 +579,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>6.12</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x1377e27a0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13289a7a0&gt;</td>
       <td>COc1c2occc2cc2ccc(=O)oc12</td>
       <td>[C][O][C][=C][O][C][=C][C][Ring1][Branch1][=C]...</td>
       <td>InChI=1S/C12H8O4/c1-14-12-10-8(4-5-15-10)6-7-2...</td>
@@ -2005,6 +2005,9 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5256, 212)</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 
 <div>
@@ -2164,13 +2167,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pd.DataFrame.assign to add a new column to re-label max_phase 4 into "1"</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df_mp4_lb <span class="op">=</span> df_mp4.assign(max_phase_lb <span class="op">=</span> df_mp4[<span class="st">"max_phase"</span>] <span class="op">/</span> <span class="dv">4</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pd.DataFrame.pop() &amp; insert() to shift added column to first column position</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>first_col <span class="op">=</span> df_mp4_lb.pop(<span class="st">"max_phase_lb"</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df_mp4_lb.insert(<span class="dv">0</span>, <span class="st">"max_phase_lb"</span>, first_col)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>df_mp4_lb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pd.DataFrame.assign to add a new column to re-label max_phase 4 into "1"</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df_mp4_lb <span class="op">=</span> df_mp4.assign(max_phase_lb <span class="op">=</span> df_mp4[<span class="st">"max_phase"</span>] <span class="op">/</span> <span class="dv">4</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pd.DataFrame.pop() &amp; insert() to shift added column to first column position</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>first_col <span class="op">=</span> df_mp4_lb.pop(<span class="st">"max_phase_lb"</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>df_mp4_lb.insert(<span class="dv">0</span>, <span class="st">"max_phase_lb"</span>, first_col)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>df_mp4_lb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 
 <div>
@@ -2450,12 +2453,12 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Also create a new column max_phase_lb column for df_null </span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in order to merge 2 dfs later</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>df_null_lb <span class="op">=</span> df_null.assign(max_phase_lb <span class="op">=</span> df_null[<span class="st">"max_phase"</span>])</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>first_col_null <span class="op">=</span> df_null_lb.pop(<span class="st">"max_phase_lb"</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>df_null_lb.insert(<span class="dv">0</span>, <span class="st">"max_phase_lb"</span>, first_col_null)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>df_null_lb.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Also create a new column max_phase_lb column for df_null </span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in order to merge 2 dfs later</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>df_null_lb <span class="op">=</span> df_null.assign(max_phase_lb <span class="op">=</span> df_null[<span class="st">"max_phase"</span>])</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>first_col_null <span class="op">=</span> df_null_lb.pop(<span class="st">"max_phase_lb"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>df_null_lb.insert(<span class="dv">0</span>, <span class="st">"max_phase_lb"</span>, first_col_null)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>df_null_lb.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 
 <div>
@@ -2616,9 +2619,9 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>These two dataframes were then combined together.</p>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate df_mp4_lb &amp; df_null_lb</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df_full <span class="op">=</span> pd.concat([df_null_lb, df_mp4_lb])</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>df_full</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate df_mp4_lb &amp; df_null_lb</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df_full <span class="op">=</span> pd.concat([df_null_lb, df_mp4_lb])</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df_full</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 
 <div>
@@ -2922,11 +2925,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li>Define X and y variables and train RF classifier model</li>
+<li>Defined X and y variables and trained RF classifier model</li>
 </ol>
 <p>Eventually df_full contained 10 active compounds and 5256 inactive compounds (as shown from the value counts).</p>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_full.value_counts(<span class="st">"max_phase_lb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df_full.value_counts(<span class="st">"max_phase_lb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>max_phase_lb
 0.0    5256
@@ -2935,13 +2938,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining X (features) &amp; y (target)</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_full.iloc[:, <span class="dv">3</span>:]</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_full.iloc[:, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining X (features) &amp; y (target)</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_full.iloc[:, <span class="dv">3</span>:]</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_full.iloc[:, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the right data have been selected</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the right data have been selected</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>4       0.0
 8       0.0
@@ -2958,55 +2961,54 @@ Name: max_phase_lb, Length: 5266, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert both X &amp; y to arrays</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> X.to_numpy()</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y.to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert both X &amp; y to arrays</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> X.to_numpy()</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y.to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using train_test_split() this time to split data</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using train_test_split() this time to split data</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After data splitting, a RF classifier was trained with reference to this notebook: <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb</a></p>
 <div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max_features = "sqrt" by default, </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># decided to show it explicitly in the code </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to make sure the right one was used</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>rfc <span class="op">=</span> RandomForestClassifier(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>, max_features<span class="op">=</span><span class="st">"sqrt"</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>rfc.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max_features = "sqrt" by default, </span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># decided to show it explicitly in the code </span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to make sure the right one was used</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>rfc <span class="op">=</span> RandomForestClassifier(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>, max_features<span class="op">=</span><span class="st">"sqrt"</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>rfc.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=3, oob_score=True, random_state=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(max_depth=3, oob_score=True, random_state=1)</pre></div></div></div></div></div>
 </div>
 </div>
 <ol start="4" type="1">
-<li>Obtain the prediction probabilities on the testing data and show confusion matrix with classification metrics</li>
+<li>Extracted positive prediction probabilities for the testing set and showed confusion matrix with classification metrics</li>
 </ol>
 <div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract positive prediction probabilities for the testing set</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>test_probs <span class="op">=</span> rfc.predict_proba(X_test)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>test_probs <span class="op">=</span> rfc.predict_proba(X_test)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some references links for area under the receiver operating characteristic (ROC) curve and Cohen’s Kappa.</p>
 <p>Area under the ROC curve: <a href="https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc">reference link</a></p>
 <p>Cohen’s Kappa score: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#r219a3b9132e1-1">reference link</a></p>
 <p>Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model was adapted from Landrum et al., from <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">this notebook</a>. I have only added some comments for clarities.</p>
 <div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>):</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predicted probability scores according to the stated decision threshold (default = 0.5)</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> [<span class="dv">1</span> <span class="cf">if</span> x<span class="op">&gt;=</span>threshold <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> x <span class="kw">in</span> test_probs]</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate area under the ROC curve</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y_test, test_probs)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate Cohen's Kappa score</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    kappa <span class="op">=</span> metrics.cohen_kappa_score(y_test, scores)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Formulate the confusion matrix</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    confusion <span class="op">=</span> metrics.confusion_matrix(y_test, scores, labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(y_test)))</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'thresh: </span><span class="sc">%.2f</span><span class="st">, kappa: </span><span class="sc">%.3f</span><span class="st">, AUC test-set: </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(threshold, kappa, auc))</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(confusion)</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_test,scores))</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predicted probability scores according to the stated decision threshold (default = 0.5)</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> [<span class="dv">1</span> <span class="cf">if</span> x<span class="op">&gt;=</span>threshold <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> x <span class="kw">in</span> test_probs]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate area under the ROC curve</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    auc <span class="op">=</span> metrics.roc_auc_score(y_test, test_probs)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate Cohen's Kappa score</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    kappa <span class="op">=</span> metrics.cohen_kappa_score(y_test, scores)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Formulate the confusion matrix</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    confusion <span class="op">=</span> metrics.confusion_matrix(y_test, scores, labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(y_test)))</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'thresh: </span><span class="sc">%.2f</span><span class="st">, kappa: </span><span class="sc">%.3f</span><span class="st">, AUC test-set: </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(threshold, kappa, auc))</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(confusion)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_test,scores))</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g.&nbsp;0s and 1s) in the data</p>
+<p>Then showed confusion matrix along with AUC and Cohen’s Kappa.</p>
 <div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show confusion matrix along with AUC and Cohen's Kappa</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>thresh: 0.50, kappa: 0.000, AUC test-set: 0.536
 [[1052    0]
@@ -3030,51 +3032,47 @@ weighted avg       1.00      1.00      1.00      1054
   _warn_prf(average, modifier, msg_start, len(result))</code></pre>
 </div>
 </div>
-<p>To help with interpreting the confusion matrix, <em>scikit-learn</em> actually had a very handy plotting class code to visualise the matrix. I’ve used the one from the estimator and there is also another option to plot from prediction as well.</p>
+<p>To help with interpreting the confusion matrix, <em>scikit-learn</em> actually had a very handy plotting code to visualise the matrix.</p>
 <div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-33-output-1.png" width="525" height="429"></p>
 </div>
 </div>
-<p>Without going too in-depth into the confusion matrix result (an earlier, not the most perfect, example could be referred to in my previous post using logistic regression), it was very obvious that not all compounds were classified in the testing set. The likely reason could be due to the very imbalanced ratio of actives (max phase 4 or labelled as 1 compounds) and inactives (max phase 0 compounds), and also the threshold being at 0.5 in usual circumstances.</p>
+<p>It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due the very imbalanced ratio of actives (only 10 max phase 4 or labelled as 1 compounds) and inactives (5256 max phase 0 compounds), with also the threshold being normally set at 0.5, it would lose the chance to classify the true positive compounds (hinting at the possibility to test for the outcome if the threshold were lowered, there might be more true positives caught).</p>
 <ol start="5" type="1">
-<li><p>two approaches from GHOST (generalized threshold shifting) paper (main idea was optimising and shifting decision threshold):</p>
+<li><p>Two approaches were used in the GHOST (generalized threshold shifting) paper:</p>
 <ul>
 <li><p>Approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on <a href="http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html">RDKit blog post</a> or its <a href="https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb">viewable notebook version</a> via nbviewer</p></li>
-<li><p>Approach 2 led to generalised threshold shifting (GHOST) procedure (for any classification methods) - GitHub repository: <a href="https://github.com/rinikerlab/GHOST">https://github.com/rinikerlab/GHOST</a></p></li>
+<li><p>Approach 2 led to GHOST procedure to optimise and shift the decision threshold for any classification methods - GitHub repository: <a href="https://github.com/rinikerlab/GHOST">https://github.com/rinikerlab/GHOST</a></p></li>
 </ul></li>
 </ol>
-<p>I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had a detailed explanation for approach 1.</p>
-<p>The next step involved extracting prediction probabilities from the RF classifier trained model</p>
+<p>I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had detailed explanations for approach 1.</p>
+<p>The next step involved extracting prediction probabilities from the RF classifier trained model.</p>
 <div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the positive prediction probabilities of the training set</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>train_probs <span class="op">=</span> rfc.predict_proba(X_train)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the positive prediction probabilities of the training set</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>train_probs <span class="op">=</span> rfc.predict_proba(X_train)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
-<li>Shifting decision threshold by using ghostml in a postprocessing way (note: last post used re-sampling method in a preprocessing way)</li>
+<li>Used GHOST strategy in a postprocessing way (note: last post used re-sampling method in a preprocessing way)</li>
 </ol>
-<p>The decision threshold were optimised by using ghostml via testing various different thresholds, e.g.&nbsp;in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the maximised Cohen’s kappa.</p>
+<p>The decision threshold were optimised by using ghostml code via testing various different thresholds, e.g.&nbsp;in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen’s kappa.</p>
 <div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting up different decision thresholds in space of 0.05</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.<span class="bu">round</span>(np.arange(<span class="fl">0.05</span>,<span class="fl">0.55</span>,<span class="fl">0.05</span>), <span class="dv">2</span>)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>thresholds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting up different decision thresholds</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.<span class="bu">round</span>(np.arange(<span class="fl">0.05</span>,<span class="fl">0.55</span>,<span class="fl">0.05</span>), <span class="dv">2</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>thresholds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>array([0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 ])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking for the best threshold with the most optimal Cohen's Kappa</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>new_threshold <span class="op">=</span> ghostml.optimize_threshold_from_predictions(y_train, train_probs, thresholds, ThOpt_metrics <span class="op">=</span> <span class="st">'ROC'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looking for the best threshold with the most optimal Cohen's Kappa</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>new_threshold <span class="op">=</span> ghostml.optimize_threshold_from_predictions(y_train, train_probs, thresholds, ThOpt_metrics <span class="op">=</span> <span class="st">'ROC'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li>calculate confusion matrix and classification metrics based on the optimised decision threshold</li>
-</ul>
+<p>Using the calc_metrics function again on the newly-found/shifted decision threshold.</p>
 <div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using calc_metrics function again on the newly-found/shifted decision threshold</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># It showed an improved classification outcome through the confusion matrix</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>calc_metrics(y_train, train_probs, threshold<span class="op">=</span>new_threshold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>calc_metrics(y_train, train_probs, threshold<span class="op">=</span>new_threshold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>thresh: 0.10, kappa: 0.933, AUC test-set: 1.000
 [[4204    0]
@@ -3090,7 +3088,7 @@ weighted avg       1.00      1.00      1.00      4212
 </code></pre>
 </div>
 </div>
-<p>Here, after shifting the decision threshold with the most optimal Cohen’s Kappa score, we could see an improved numbers of compounds being labelled within the true positive class (increasing from 1052 to 4204). The false negative class however also had an increase from 0 to 7.</p>
+<p>Here, after shifting the decision threshold with the most optimal Cohen’s Kappa score, we could see an improved numbers of compounds being labelled within the true negative class (increasing from 1052 to 4204). The true positive class had also improved from 0 to 7.</p>
 <p><br></p>
 </section>
 <section id="plotting-roc-curves" class="level5">
@@ -3102,10 +3100,10 @@ weighted avg       1.00      1.00      1.00      4212
 <section id="testing-set-roc-curve" class="level6">
 <h6 class="anchored" data-anchor-id="testing-set-roc-curve"><strong>Testing set ROC curve</strong></h6>
 <div class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set ROC curve</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_test, test_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set ROC curve</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_test, test_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x138e665c0&gt;</code></pre>
+<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x133fe4c10&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-38-output-2.png" width="589" height="429"></p>
@@ -3117,10 +3115,10 @@ weighted avg       1.00      1.00      1.00      4212
 <h6 class="anchored" data-anchor-id="training-set-roc-curve"><strong>Training set ROC curve</strong></h6>
 <p>This probably looked too good to be true or a textbook-standard ROC curve with AUC at 1.0.</p>
 <div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set ROC curve</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_train, train_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set ROC curve</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_train, train_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
-<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x138e8b580&gt;</code></pre>
+<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x133f72c80&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-39-output-2.png" width="589" height="429"></p>
@@ -3130,19 +3128,19 @@ weighted avg       1.00      1.00      1.00      4212
 <li>Alternative method using matplotlib which reproduced a similar training set ROC plot:</li>
 </ol>
 <div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for true positive rate (tpr), false positive rate (fpr) &amp; threshold</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thresh <span class="op">=</span> metrics.roc_curve(y_train, train_probs)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># lw = linewidth</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fpr, tpr, lw <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># show random guessing line (threshold = 0.5)</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], color <span class="op">=</span> <span class="st">"g"</span>, lw <span class="op">=</span> <span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>])</span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1.0</span>])</span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"specificity"</span>)</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"recall"</span>)</span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for true positive rate (tpr), false positive rate (fpr) &amp; threshold</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thresh <span class="op">=</span> metrics.roc_curve(y_train, train_probs)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># lw = linewidth</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fpr, tpr, lw <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co"># show random guessing line (threshold = 0.5)</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], color <span class="op">=</span> <span class="st">"g"</span>, lw <span class="op">=</span> <span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>])</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1.0</span>])</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"specificity"</span>)</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"recall"</span>)</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-40-output-1.png" width="599" height="429"></p>
 </div>

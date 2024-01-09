@@ -339,7 +339,7 @@ Area under the ROC curve: [reference link](https://developers.google.com/machine
 
 Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#r219a3b9132e1-1)
 
-Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model was adapted from Landrum et al., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities.
+Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities.
 
 ```{python}
 def calc_metrics(y_test, test_probs, threshold = 0.5):
