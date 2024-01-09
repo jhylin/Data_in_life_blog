@@ -2,7 +2,7 @@
 title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
-date: '2024-1-8'
+date: '2024-1-9'
 draft: true
 categories: 
     - Machine learning projects
@@ -24,7 +24,7 @@ This post was really just an addition towards the last random forest (RF) post (
 
 <br>
 
-##### **Overview of post (packages/scripts used)**
+##### **Overview of post**
 
 -   Data source using *chembl_downloader*
 -   Minor data preprocessing using own little script of mol_prep.py (avoid repeating code) and also a SMILES checker from *scikit_mol*
@@ -46,6 +46,7 @@ import datamol as dm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import RocCurveDisplay, roc_curve
 from scikit_mol.utilities import CheckSmilesSanitazion
 import ghostml
@@ -286,7 +287,7 @@ df_full = pd.concat([df_null_lb, df_mp4_lb])
 df_full
 ```
 
-3.  Define X and y variables and train RF classifier model
+3.  Defined X and y variables and trained RF classifier model
 
 Eventually df_full contained 10 active compounds and 5256 inactive compounds (as shown from the value counts).
 
@@ -320,16 +321,15 @@ After data splitting, a RF classifier was trained with reference to this noteboo
 
 ```{python}
 # max_features = "sqrt" by default, 
-# I decided to show it explicitly in the code 
+# decided to show it explicitly in the code 
 # to make sure the right one was used
 rfc = RandomForestClassifier(max_depth=3, random_state=1, max_features="sqrt", oob_score=True)
 rfc.fit(X_train, y_train)
 ```
 
-4.  Obtain the prediction probabilities on the testing data and show confusion matrix with classification metrics
+4.  Extracted positive prediction probabilities for the testing set and showed confusion matrix with classification metrics
 
 ```{python}
-# Extract positive prediction probabilities for the testing set
 test_probs = rfc.predict_proba(X_test)[:, 1]
 ```
 
@@ -339,13 +339,9 @@ Area under the ROC curve: [reference link](https://developers.google.com/machine
 
 Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#r219a3b9132e1-1)
 
-```{python}
-# Rather than re-inventing the wheel, 
-# the following function code for calculating metrics of the RF model 
-# was adapted from Landrum et al., from this notebook: 
-# https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb
-# Some comments were added for clarities
+Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model was adapted from Landrum et al., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities.
 
+```{python}
 def calc_metrics(y_test, test_probs, threshold = 0.5):
     # Predicted probability scores according to the stated decision threshold (default = 0.5)
     scores = [1 if x>=threshold else 0 for x in test_probs]
@@ -363,37 +359,42 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
 
 Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g. 0s and 1s) in the data
 
-```{python}
-# Show confusion matrix along with AUC and Cohen's Kappa
-calc_metrics(y_test, test_probs, threshold = 0.5)
+Then showed confusion matrix along with AUC and Cohen's Kappa.
 
-# This was an extreme case - as only 10 actives vs. 5256 inactives
+```{python}
+calc_metrics(y_test, test_probs, threshold = 0.5)
 ```
 
-**TODO**
-Mention confusion matrix results - TP, FP etc.
+To help with interpreting the confusion matrix, *scikit-learn* actually had a very handy plotting code to visualise the matrix. 
 
-5.  two approaches from GHOST (generalized threshold shifting) paper (main idea was optimising and shifting decision threshold):
+```{python}
+ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)
+plt.show()
+```
+
+It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due the very imbalanced ratio of actives (only 10 max phase 4 or labelled as 1 compounds) and inactives (5256 max phase 0 compounds), with also the threshold being normally set at 0.5, it would lose the chance to classify the true positive compounds (hinting at the possibility to test for the outcome if the threshold were lowered, there might be more true positives caught).
+
+5.  Two approaches were used in the GHOST (generalized threshold shifting) paper:
 
     -   Approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on [RDKit blog post](http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html) or its [viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer
 
-    -   Approach 2 led to generalised threshold shifting (GHOST) procedure (for any classification methods) - GitHub repository: [https://github.com/rinikerlab/GHOST](https://github.com/rinikerlab/GHOST)
+    -   Approach 2 led to GHOST procedure to optimise and shift the decision threshold for any classification methods - GitHub repository: [https://github.com/rinikerlab/GHOST](https://github.com/rinikerlab/GHOST)
 
-I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had a detailed explanation for approach 1.
+I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had detailed explanations for approach 1.
 
-The next step involved extracting prediction probabilities from the RF classifier trained model
+The next step involved extracting prediction probabilities from the RF classifier trained model.
 
 ```{python}
 # Get the positive prediction probabilities of the training set
 train_probs = rfc.predict_proba(X_train)[:, 1]
 ```
 
-6.  Shifting decision threshold by using ghostml in a postprocessing way (note: last post used re-sampling method in a preprocessing way)
+6.  Used GHOST strategy in a postprocessing way (note: last post used re-sampling method in a preprocessing way)
 
-The decision threshold were optimised by using ghostml via testing various different thresholds, e.g. in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the maximised Cohen's kappa.
+The decision threshold were optimised by using ghostml code via testing various different thresholds, e.g. in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen's kappa.
 
 ```{python}
-# Setting up different decision thresholds in space of 0.05
+# Setting up different decision thresholds
 thresholds = np.round(np.arange(0.05,0.55,0.05), 2)
 thresholds
 ```
@@ -403,18 +404,13 @@ thresholds
 new_threshold = ghostml.optimize_threshold_from_predictions(y_train, train_probs, thresholds, ThOpt_metrics = 'ROC') 
 ```
 
-```{python}
-# Show the optimal decision threshold
-new_threshold
-```
-
--   calculate confusion matrix and classification metrics based on the optimised decision threshold
+Using the calc_metrics function again on the newly-found/shifted decision threshold.
 
 ```{python}
-# Using calc_metrics function again on the newly-found/shifted decision threshold
-# It showed an improved classification outcome through the confusion matrix
 calc_metrics(y_train, train_probs, threshold=new_threshold)
 ```
+
+Here, after shifting the decision threshold with the most optimal Cohen's Kappa score, we could see an improved numbers of compounds being labelled within the true negative class (increasing from 1052 to 4204). The true positive class had also improved from 0 to 7.
 
 <br>
 
