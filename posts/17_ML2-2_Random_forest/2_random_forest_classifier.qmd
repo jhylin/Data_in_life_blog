@@ -239,7 +239,7 @@ df_merge_new.value_counts("max_phase")
 
 ##### **Model building**
 
-The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e. whether the compounds in the testing set (consisted of max phase 0 or null compounds) might be eventually classified as max phase 4 or not. The target was "max_phase" and features to be used were the various RDKit 2D (RDKit2D) descriptors.
+The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e. whether the compounds in the testing set (consisted of max phase 0 or null compounds) might be eventually classified as max phase 4 or not. The target was "max_phase" and features to be used were the various RDKit 2D descriptors (RDKit2D).
 
 The steps I've taken in model building were shown as follow:
 
@@ -333,11 +333,11 @@ rfc.fit(X_train, y_train)
 test_probs = rfc.predict_proba(X_test)[:, 1]
 ```
 
-Some references links for area under the receiver operating characteristic (ROC) curve and Cohen's Kappa.
+Some references links and explanations for area under the receiver operating characteristic (ROC) curve and Cohen's Kappa.
 
-Area under the ROC curve: [reference link](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)
+Area under the ROC curve: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc) - the area under a curve plot between *sensitivity* or *recall* (percent of all 1s classified correctly by a classifier or true positive rate) and *specificity* (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold
 
-Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#r219a3b9132e1-1)
+Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
 
 Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities.
 
@@ -468,4 +468,4 @@ The other thing to mention was that I should try different molecular fingerprint
 
 ##### **Acknowledgements**
 
-I'd like to thank [rinikerlab](https://github.com/rinikerlab) again, and also all the authors, contributors or developers of all the software packages mentioned in this post, and all the authors of the reference notebooks I've referred to in this post too.
+I'd like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last and not the least, huge thanks also should go to all the authors of the reference notebooks mentioned in this post too.
