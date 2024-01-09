@@ -2,7 +2,7 @@
 
 #### **Introduction**
 
-This website serves as my portfolio in a blog style on data science or cheminformatics projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical (current) or healthcare (earlier) themes due to my background. Each project will be showcased in a blog post format, published by using Quarto in RStudio IDE. Currently, I'm aiming to post one new project each month if possible. Most of the projects are done in Python with a smaller proportion of posts in R, and also an even smaller proportion in Rust as experiments only.
+This website serves as my portfolio in a blog style on data science or cheminformatics projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical or drug discovery (current) or healthcare (earlier) themes due to my background. Each project will be showcased in a blog post format, published by using Quarto. Currently, I'm aiming to post one post or project every two to three months if possible. Most of the projects are done in Python with a smaller portion of posts in R, and also with an even smaller number of posts in Rust as experiments only.
 
 #### **Code**
 
