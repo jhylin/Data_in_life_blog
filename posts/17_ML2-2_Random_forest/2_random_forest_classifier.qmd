@@ -2,7 +2,7 @@
 title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
-date: '2024-1-9'
+date: '2024-1-10'
 draft: true
 categories: 
     - Machine learning projects
@@ -335,11 +335,11 @@ test_probs = rfc.predict_proba(X_test)[:, 1]
 
 Some references links and explanations for area under the receiver operating characteristic (ROC) curve and Cohen's Kappa.
 
-Area under the ROC curve: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc) - the area under a curve plot between *sensitivity* or *recall* (percent of all 1s classified correctly by a classifier or true positive rate) and *specificity* (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number which usually ranges between 0 and 1 (1 being a perfect classifier, and at 0.5 or below, this means a poor, ineffective classifier)
+**Area under the ROC curve**: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc) - the area under a curve plot between *sensitivity* or *recall* (percent of all 1s classified correctly by a classifier or true positive rate) and *specificity* (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number which usually ranges between 0 and 1 (1 being a perfect classifier, and at 0.5 or below, this means a poor, ineffective classifier)
 
-Cohen's Kappa score: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
+**Cohen's Kappa score**: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
 
-Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities.
+Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the result ended up being 0.
 
 ```{python}
 def calc_metrics(y_test, test_probs, threshold = 0.5):
@@ -353,13 +353,15 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
     confusion = metrics.confusion_matrix(y_test, scores, labels = list(set(y_test)))
     print('thresh: %.2f, kappa: %.3f, AUC test-set: %.3f'%(threshold, kappa, auc))
     print(confusion)
-    print(metrics.classification_report(y_test,scores))
+    print(metrics.classification_report(y_test,scores, zero_division=0.0))
     return 
 ```
 
 Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g. 0s and 1s) in the data
 
 Then showed confusion matrix along with AUC and Cohen's Kappa.
+
+**Warning message ?to silence**
 
 ```{python}
 calc_metrics(y_test, test_probs, threshold = 0.5)
