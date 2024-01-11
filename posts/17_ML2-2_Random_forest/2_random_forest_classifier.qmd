@@ -2,7 +2,7 @@
 title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
-date: '2024-1-10'
+date: '2024-1-11'
 draft: true
 categories: 
     - Machine learning projects
@@ -339,7 +339,7 @@ Some references links and explanations for area under the receiver operating cha
 
 **Cohen's Kappa score**: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
 
-Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the result ended up being 0.
+Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum *et al*., from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb). I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the results ended up being 0 due to divisions by zero.
 
 ```{python}
 def calc_metrics(y_test, test_probs, threshold = 0.5):
@@ -360,8 +360,6 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
 Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g. 0s and 1s) in the data
 
 Then showed confusion matrix along with AUC and Cohen's Kappa.
-
-**Warning message ?to silence**
 
 ```{python}
 calc_metrics(y_test, test_probs, threshold = 0.5)
