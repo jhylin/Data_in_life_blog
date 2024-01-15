@@ -408,11 +408,13 @@ Here, after shifting the decision threshold with the most optimal Cohen's Kappa 
 
 ##### **Plotting ROC curves**
 
-Time for some plots - I've shown two different ways to plot ROC curve below.
+Time for some plots if anyone's interested - I've shown two different ways to plot ROC curve below.
 
 1.  Using *scikit-learn*
 
 ###### **Testing set ROC curve**
+
+Obviously, this was not a good classifier with a poor AUC.
 
 ```{python}
 # Testing set ROC curve
