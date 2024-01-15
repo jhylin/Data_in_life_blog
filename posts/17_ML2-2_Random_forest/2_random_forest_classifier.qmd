@@ -27,7 +27,7 @@ This post was really just an addition towards the last random forest (RF) post. 
 ##### **Overview of post**
 
 -   Data source using *chembl_downloader*
--   Minor data preprocessing using own little script of mol_prep.py (avoid repeating code) and also a SMILES checker from *scikit_mol*
+-   Minor data preprocessing using own little script of mol_prep.py and also a SMILES checker from *scikit_mol*
 - *scikit-learn*'s RandomForestClassifier()
 -   Dealing with imbalanced dataset in RF classifiers by using *ghostml*
 
@@ -145,7 +145,7 @@ df_prep.head(3)
 
 ###### **scikit_mol**
 
-scikit_mol was a package originated from RDKit UGM hackathon in 2022. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method for multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol), and [reference notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/05_smiles_sanitaztion.ipynb) used.
+scikit_mol was a package originated from RDKit UGM hackathon in 2022. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method for multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol) - I've referred to this [reference notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/05_smiles_sanitaztion.ipynb).
 
 ```{python}
 # Quick simple way to check for missing SMILES
@@ -271,8 +271,6 @@ df_null_lb.insert(0, "max_phase_lb", first_col_null)
 df_null_lb.head()
 ```
 
-These two dataframes were then combined together.
-
 ```{python}
 # Concatenate df_mp4_lb & df_null_lb
 df_full = pd.concat([df_null_lb, df_mp4_lb])
@@ -362,7 +360,7 @@ ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)
 plt.show()
 ```
 
-It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, since the decision threshold was also usually set at 0.5, it would lose the chance to classify the true positive compounds due to the very small proportion of active molecules. 
+It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, the decision threshold was also usually set at 0.5, this meant the classifier would lose the chance to classify the true positive compounds due to the very small proportion of the active molecules. 
 
 5.  Two approaches were used in the GHOST (generalized threshold shifting) paper:
 
@@ -396,39 +394,33 @@ thresholds
 new_threshold = ghostml.optimize_threshold_from_predictions(y_train, train_probs, thresholds, ThOpt_metrics = 'ROC') 
 ```
 
-Using the calc_metrics function again on the newly-found/shifted decision threshold.
+Using the calc_metrics function again on the newly-found or shifted decision threshold.
 
 ```{python}
 calc_metrics(y_train, train_probs, threshold=new_threshold)
 ```
 
-Here, after shifting the decision threshold with the most optimal Cohen's Kappa score, we could see an improved numbers of compounds being labelled within the true negative class (increasing from 1052 to 4204). The true positive class had also improved from 0 to 7.
+Here, after shifting the decision threshold with the most optimal Cohen's Kappa score, we could see an improved number of compounds labelled within the true negative class (increasing from 1052 to 4204). The true positive class had also improved from 0 to 7.
 
 <br>
 
 ##### **Plotting ROC curves**
 
-Time for some plots if anyone's interested - I've shown two different ways to plot ROC curve below.
+Time for some plots - I've shown two different ways to plot ROC curves below.
 
 1.  Using *scikit-learn*
 
-###### **Testing set ROC curve**
-
-Obviously, this was not a good classifier with a poor AUC.
+Testing set ROC curve - obviously, this was not a good classifier with a poor AUC.
 
 ```{python}
-# Testing set ROC curve
 RocCurveDisplay.from_predictions(y_test, test_probs, plot_chance_level = True)
 ```
 
 <br>
 
-###### **Training set ROC curve**
-
-This probably looked too good to be true or a textbook-standard ROC curve with AUC at 1.0.
+Training set ROC curve - this probably looked too good to be true or a textbook-standard ROC curve with AUC at 1.0.
 
 ```{python}
-# Training set ROC curve
 RocCurveDisplay.from_predictions(y_train, train_probs, plot_chance_level = True)
 ```
 
@@ -454,9 +446,9 @@ plt.show()
 
 ##### **Downsides and thoughts**
 
-I also wanted to mention that the testing set used here was most likely not the best ones to be used. There could be many overlaps or similarities between the compounds in the training and testing sets, since they all came from ChEMBL database. For demonstration and learning purposes, I ended up using similar dataset as last time. Hopefully, I can try other open-source or public drug discovery datasets in the near future. 
+I wanted to mention that the testing set used here was most likely not the best ones to be used. There could be many overlaps or similarities between the training and testing sets, since they all came from ChEMBL database. For demonstration and learning purposes, I ended up using similar dataset as last time. Hopefully, I can try other open-source or public drug discovery datasets in the near future. 
 
-The other thing to mention was that I should try different molecular fingerprints or descriptors as well, rather than only using RDKit2D, which might lead to different results. I should also probably slowly move onto using multiple datasets or targets in a project, which would likely make things more interesting. On the other hand, I also wanted to avoid this in order to make the topic of interest as clear and simple as possible for me or anyone who's trying to learn. It'll be easier to build on small things, rather than providing a messy lump of information which could be hard to decipher for new comers.
+The other thing to mention was that I should try different molecular fingerprints or descriptors as well, rather than only using RDKit2D, which might lead to different results. I should also probably slowly move onto using multiple datasets or targets in a project, which would likely make things more interesting. On the other hand, I also wanted to avoid this in order to make the topic of interest as clear and simple as possible for me or anyone who's trying to learn. 
 
 <br>
 

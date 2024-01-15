@@ -323,12 +323,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="data-retrieval-using-chembl_downloader" class="level5">
 <h5 class="anchored" data-anchor-id="data-retrieval-using-chembl_downloader"><strong>Data retrieval using chembl_downloader</strong></h5>
-<p>chembl_downloader package was something I wanted to try a while back. I’ve tried manual download and chembl_webresource_client previously, and they were probably not the best strategies for data reproducibility. The idea of chembl_downloader was to generate a ChEMBL data source that could be fully reproducible. It involved some SQL at the beginning to specify the exact type of data needed, so some SQL knowledge were required. Other uses for this package were elaborated much more nicely in its GitHub repository at <a href="https://github.com/cthoyt/chembl-downloader">https://github.com/cthoyt/chembl-downloader</a>.</p>
-<p>Some reference notebooks I’ve referred to when I worked on this post that used chembl_downloader (more available in its repository):</p>
-<ul>
-<li><p><a href="https://github.com/cthoyt/chembl-downloader/blob/main/notebooks/drug-indications.ipynb">https://github.com/cthoyt/chembl-downloader/blob/main/notebooks/drug-indications.ipynb</a></p></li>
-<li><p><a href="https://github.com/PatWalters/practical_cheminformatics_tutorials/blob/1f7c61f83eec81081ef2605ac70440bf1940d914/misc/working_with_ChEMBL_drug_data.ipynb#L80">https://github.com/PatWalters/practical_cheminformatics_tutorials/blob/1f7c61f83eec81081ef2605ac70440bf1940d914/misc/working_with_ChEMBL_drug_data.ipynb#L80</a></p></li>
-</ul>
+<p>chembl_downloader was something I wanted to try a while back. I’ve tried manual download and chembl_webresource_client previously, and they were probably not the best strategies for data reproducibility. The idea of chembl_downloader was to generate a reproducible ChEMBL data source. It involved some SQL at the beginning to specify the exact type of data needed, so some SQL knowledge were required. Other uses for this package were elaborated much more clearly in its GitHub repository at <a href="https://github.com/cthoyt/chembl-downloader">https://github.com/cthoyt/chembl-downloader</a>. One of the reference notebooks that I’ve used could be reached <a href="https://github.com/cthoyt/chembl-downloader/blob/main/notebooks/drug-indications.ipynb">here</a> (more available in its repository).</p>
 <p>What I did was shown below.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the latest version of ChEMBL used</span></span>
@@ -366,9 +361,9 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 <p>The code below took several minutes to run.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Following data download worked (4.41GB for SQL query below)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Following data were 4.41GB in total from the SQL query</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Added an extra line - MOLECULE_DICTIONARY.max_phase </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># into sql to show max phases for compounds targeting AChE</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># into sql to show max phases of compounds targeting AChE</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sql <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
@@ -494,11 +489,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="some-data-cleaning" class="level5">
 <h5 class="anchored" data-anchor-id="some-data-cleaning"><strong>Some data cleaning</strong></h5>
-<p>Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced datasets in RF classifier. I’ve also attempted to use a similar dataset but since I used a different way to retrieve ChEMBL data this time (via chembl_downloader), the datasets used here might be slightly different from the one used in previous post.</p>
+<p>Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced datasets in RF classifier. Since I used a different way to retrieve ChEMBL data this time, the datasets used here might be slightly different from the one used in previous post.</p>
 <p><br></p>
 <section id="mol_prep.py" class="level6">
 <h6 class="anchored" data-anchor-id="mol_prep.py"><strong>mol_prep.py</strong></h6>
-<p>I’ve more or less accumulated small pieces of code over time, and I’ve decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time, as they’ve been used frequently in the last few posts. The script would be saved into the blog project repository or under the RF repository. It would still be considered as a “work-in-progress” script only since I still want to work on it further in the future.</p>
+<p>I’ve more or less accumulated small pieces of code over time, and I’ve decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time, as they’ve been used frequently in the last few posts. The script would be saved into the <a href="https://github.com/jhylin/ML2-2_random_forest">RF repository</a>. It would still be a “work-in-progress” script (needs more work in the future).</p>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Trial own mol_prep.py script</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mol_prep <span class="im">import</span> preprocess, rdkit_2d_descriptors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -545,7 +540,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>4.59</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x130892730&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12ca8e6c0&gt;</td>
       <td>CC/C(=C(/CC)c1ccc(O)cc1)c1ccc(O)cc1</td>
       <td>[C][C][/C][=Branch1][P][=C][Branch1][Ring1][/C...</td>
       <td>InChI=1S/C18H20O2/c1-3-17(13-5-9-15(19)10-6-13...</td>
@@ -562,7 +557,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>4.27</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x1308927a0&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12ca8e730&gt;</td>
       <td>COc1c2occc2cc2ccc(=O)oc12</td>
       <td>[C][O][C][=C][O][C][=C][C][Ring1][Branch1][=C]...</td>
       <td>InChI=1S/C12H8O4/c1-14-12-10-8(4-5-15-10)6-7-2...</td>
@@ -579,7 +574,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <td>4.0</td>
       <td>IC50</td>
       <td>6.12</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x130892810&gt;</td>
+      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x12ca8e7a0&gt;</td>
       <td>COc1c2occc2cc2ccc(=O)oc12</td>
       <td>[C][O][C][=C][O][C][=C][C][Ring1][Branch1][=C]...</td>
       <td>InChI=1S/C12H8O4/c1-14-12-10-8(4-5-15-10)6-7-2...</td>
@@ -594,7 +589,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="scikit_mol" class="level6">
 <h6 class="anchored" data-anchor-id="scikit_mol"><strong>scikit_mol</strong></h6>
-<p>scikit_mol was a package originated from RDKit UGM hackathon in 2022. This <a href="https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/">blog post</a> elaborated further on its functions and uses in machine learning. For this post I’ve only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with <em>scikit-learn</em>’s pipeline method on multiple estimators. Its GitHub Repository link: <a href="https://github.com/EBjerrum/scikit-mol">https://github.com/EBjerrum/scikit-mol</a></p>
+<p>scikit_mol was a package originated from RDKit UGM hackathon in 2022. This <a href="https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/">blog post</a> elaborated further on its functions and uses in machine learning. For this post I’ve only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with <em>scikit-learn</em>’s pipeline method for multiple estimators. Its GitHub Repository link: <a href="https://github.com/EBjerrum/scikit-mol">https://github.com/EBjerrum/scikit-mol</a>, and <a href="https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/05_smiles_sanitaztion.ipynb">reference notebook</a> used.</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick simple way to check for missing SMILES</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Dataset contains </span><span class="sc">{</span>df_prep<span class="sc">.</span>standard_smiles<span class="sc">.</span>isna()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> unparsable mols'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -626,7 +621,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>It also confirmed that there were no errors in SMILES (if there were errors, it should be listed in the code cell output).</p>
+<p>It showed no errors in SMILES (errors should be listed in the code cell output).</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Generate RDKit2D descriptors/fingerprints</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Running rdkit_2d_descriptors function</span></span>
@@ -865,7 +860,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>A different spreads of max phases were shown this time as the SQL query mainly used IC50, whereas last post was strictly limited to Ki via ChEMBL web resource client. Other likely reason was that in the decision tree series, I’ve attempted data preprocessing at a larger scale (which eliminated some data). So, it appeared that there were more max phase 4 compounds here than last time (Note: null compounds were not shown in the value counts as it was labelled as “NaN”, but it should be the largest max phase portion in the data).</p>
+<p>A different spreads of max phases were shown this time as the SQL query mainly used IC50, whereas last post was strictly limited to Ki via ChEMBL web resource client. Other likely reason was that in the decision tree series, I’ve attempted data preprocessing at a larger scale, so some data were eliminated. It appeared that there were more max phase 4 compounds here than last time (note: null compounds were not shown in the value counts as it was labelled as “NaN”, but it should be the largest max phase portion in the data).</p>
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out counts of each max phase</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df_merge.value_counts(<span class="st">"max_phase"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -883,14 +878,13 @@ Name: count, dtype: int64</code></pre>
 <p>I then tried searching for the chembl_id of the 10 max phase 4 compounds used in the last post in the dataframe (df_merge).</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Previously used 10 max phase 4 compounds</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># donepezil = CHEMBL502 </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># galantamine = CHEMBL659</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>list_mp4 <span class="op">=</span> [<span class="st">"CHEMBL95"</span>, <span class="st">"CHEMBL1128"</span>, <span class="st">"CHEMBL640"</span>, <span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL481"</span>, <span class="st">"CHEMBL360055"</span>, <span class="st">"CHEMBL1025"</span>, <span class="st">"CHEMBL659"</span>, <span class="st">"CHEMBL1200970"</span>, <span class="st">"CHEMBL1677"</span>]</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Search for compounds in list_mp4 within df_merge's "molecule_chembl_id" column</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># using Series.isin</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>df_prev <span class="op">=</span> df_merge.loc[df_merge[<span class="st">"molecule_chembl_id"</span>].isin(list_mp4)]</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>df_prev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># donepezil = CHEMBL502 &amp; galantamine = CHEMBL659</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>list_mp4 <span class="op">=</span> [<span class="st">"CHEMBL95"</span>, <span class="st">"CHEMBL1128"</span>, <span class="st">"CHEMBL640"</span>, <span class="st">"CHEMBL502"</span>, <span class="st">"CHEMBL481"</span>, <span class="st">"CHEMBL360055"</span>, <span class="st">"CHEMBL1025"</span>, <span class="st">"CHEMBL659"</span>, <span class="st">"CHEMBL1200970"</span>, <span class="st">"CHEMBL1677"</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Search for compounds in list_mp4 within df_merge's "molecule_chembl_id" column</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># using Series.isin</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>df_prev <span class="op">=</span> df_merge.loc[df_merge[<span class="st">"molecule_chembl_id"</span>].isin(list_mp4)]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>df_prev.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <div>
@@ -1043,161 +1037,16 @@ Name: count, dtype: int64</code></pre>
       <td>0</td>
       <td>0</td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3272</th>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>323.743</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3273</th>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>323.743</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3274</th>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>323.743</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3275</th>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>323.743</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3276</th>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>323.743</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
   </tbody>
 </table>
-<p>439 rows × 212 columns</p>
+<p>5 rows × 212 columns</p>
 </div>
 </div>
 </div>
 <p>There were many duplicates of compounds.</p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some compounds with duplicates</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prev.shape)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_prev.value_counts(<span class="st">"molecule_chembl_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prev.shape)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_prev.value_counts(<span class="st">"molecule_chembl_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(439, 212)</code></pre>
 </div>
@@ -1683,15 +1532,15 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="model-building" class="level5">
 <h5 class="anchored" data-anchor-id="model-building"><strong>Model building</strong></h5>
-<p>The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e.&nbsp;whether the compounds in the testing set (consisted of max phase 0 or null compounds) might be eventually classified as max phase 4 or not. The target was “max_phase” and features to be used were the various RDKit 2D descriptors (RDKit2D).</p>
-<p>The steps I’ve taken in model building were shown as follow:</p>
+<p>The aim of this post was to model and classify the max phases of ChEMBL small molecules, i.e.&nbsp;whether the compounds in the testing set (consisted of max phase 0 or null compounds) might be eventually classified as max phase 4 or not. This was one of the approaches to answer the question in mind, and not the ultimate way to solve the problem (just thought to mention). The target was “max_phase” and features to be used were the various RDKit 2D descriptors (RDKit2D).</p>
+<p>The steps I’ve taken to build the model were shown below:</p>
 <ol type="1">
 <li>Re-labelled max phases as binary labels (e.g.&nbsp;max phase null as 0, max phase 4 as 1)</li>
 </ol>
 <div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-label max phase NaN as 0</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_merge_new <span class="op">=</span> df_merge_new.fillna(<span class="dv">0</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df_merge_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df_merge_new.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 
 <div>
@@ -1734,8 +1583,8 @@ Name: count, dtype: int64</code></pre>
       <td>0.284153</td>
       <td>0.779698</td>
       <td>12.100000</td>
-      <td>268.356000</td>
-      <td>248.196000</td>
+      <td>268.356</td>
+      <td>248.196</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1758,8 +1607,8 @@ Name: count, dtype: int64</code></pre>
       <td>-0.405828</td>
       <td>0.586359</td>
       <td>11.062500</td>
-      <td>216.192000</td>
-      <td>208.128000</td>
+      <td>216.192</td>
+      <td>208.128</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1782,8 +1631,8 @@ Name: count, dtype: int64</code></pre>
       <td>-0.309798</td>
       <td>0.886859</td>
       <td>23.608696</td>
-      <td>333.453000</td>
-      <td>310.269000</td>
+      <td>333.453</td>
+      <td>310.269</td>
       <td>...</td>
       <td>1</td>
       <td>0</td>
@@ -1806,8 +1655,8 @@ Name: count, dtype: int64</code></pre>
       <td>-0.410347</td>
       <td>0.631833</td>
       <td>10.800000</td>
-      <td>270.240000</td>
-      <td>260.160000</td>
+      <td>270.240</td>
+      <td>260.160</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1830,152 +1679,8 @@ Name: count, dtype: int64</code></pre>
       <td>-4.329869</td>
       <td>0.851796</td>
       <td>12.909091</td>
-      <td>309.331000</td>
-      <td>291.187000</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>7139</th>
-      <td>0.0</td>
-      <td>CHEMBL5220560</td>
-      <td>11.547942</td>
-      <td>11.547942</td>
-      <td>0.062169</td>
-      <td>-0.810432</td>
-      <td>0.750636</td>
-      <td>12.818182</td>
-      <td>310.394000</td>
-      <td>284.186000</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7140</th>
-      <td>0.0</td>
-      <td>CHEMBL5220695</td>
-      <td>12.354746</td>
-      <td>12.354746</td>
-      <td>0.126418</td>
-      <td>-0.615512</td>
-      <td>0.522384</td>
-      <td>15.222222</td>
-      <td>377.485000</td>
-      <td>346.237000</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7141</th>
-      <td>0.0</td>
-      <td>CHEMBL5220742</td>
-      <td>11.771511</td>
-      <td>11.771511</td>
-      <td>0.150711</td>
-      <td>0.150711</td>
-      <td>0.493601</td>
-      <td>16.769231</td>
-      <td>393.574000</td>
-      <td>366.358000</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7142</th>
-      <td>0.0</td>
-      <td>CHEMBL5220884</td>
-      <td>12.850331</td>
-      <td>12.850331</td>
-      <td>0.023599</td>
-      <td>-0.023599</td>
-      <td>0.515406</td>
-      <td>14.366667</td>
-      <td>398.466000</td>
-      <td>376.290000</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7143</th>
-      <td>0.0</td>
-      <td>CHEMBL5220983</td>
-      <td>11.721089</td>
-      <td>11.721089</td>
-      <td>0.389678</td>
-      <td>-0.478126</td>
-      <td>0.620639</td>
-      <td>10.285714</td>
-      <td>288.311434</td>
-      <td>271.175434</td>
+      <td>309.331</td>
+      <td>291.187</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1990,12 +1695,12 @@ Name: count, dtype: int64</code></pre>
     </tr>
   </tbody>
 </table>
-<p>5357 rows × 212 columns</p>
+<p>5 rows × 212 columns</p>
 </div>
 </div>
 </div>
 <ol start="2" type="1">
-<li>Splitting data into max phase null &amp; max phase 4 (reason being needing to re-label max phase 4 column only as 1, and not disrupting the labels of max phase 0 compounds)</li>
+<li>Splitted data into max phase null &amp; max phase 4 (needing to re-label max phase 4 column only as 1, and not disrupting the labels of max phase 0 compounds)</li>
 </ol>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select all max phase null compounds</span></span>
@@ -2170,7 +1875,7 @@ Name: count, dtype: int64</code></pre>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pd.DataFrame.pop() &amp; insert() to shift added column to first column position</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>first_col <span class="op">=</span> df_mp4_lb.pop(<span class="st">"max_phase_lb"</span>)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df_mp4_lb.insert(<span class="dv">0</span>, <span class="st">"max_phase_lb"</span>, first_col)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>df_mp4_lb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>df_mp4_lb.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 
 <div>
@@ -2323,129 +2028,9 @@ Name: count, dtype: int64</code></pre>
       <td>0</td>
       <td>0</td>
     </tr>
-    <tr>
-      <th>1013</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>CHEMBL1025</td>
-      <td>12.703056</td>
-      <td>12.703056</td>
-      <td>0.426312</td>
-      <td>-4.304784</td>
-      <td>0.629869</td>
-      <td>13.000000</td>
-      <td>184.147</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1345</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>CHEMBL1128</td>
-      <td>9.261910</td>
-      <td>9.261910</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.608112</td>
-      <td>10.692308</td>
-      <td>201.697</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2028</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>CHEMBL360055</td>
-      <td>6.476818</td>
-      <td>6.476818</td>
-      <td>0.656759</td>
-      <td>0.656759</td>
-      <td>0.205822</td>
-      <td>12.583333</td>
-      <td>510.828</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2725</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>CHEMBL1677</td>
-      <td>6.199769</td>
-      <td>6.199769</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.760853</td>
-      <td>14.250000</td>
-      <td>234.730</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3271</th>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>CHEMBL1200970</td>
-      <td>2.520809</td>
-      <td>2.520809</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.709785</td>
-      <td>14.000000</td>
-      <td>348.943</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
   </tbody>
 </table>
-<p>10 rows × 213 columns</p>
+<p>5 rows × 213 columns</p>
 </div>
 </div>
 </div>
@@ -2924,7 +2509,7 @@ Name: count, dtype: int64</code></pre>
 <ol start="3" type="1">
 <li>Defined X and y variables and trained RF classifier model</li>
 </ol>
-<p>Eventually df_full contained 10 active compounds and 5256 inactive compounds (as shown from the value counts).</p>
+<p>Eventually df_full contained 10 active compounds and 5256 inactive compounds (from the value counts).</p>
 <div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_full.value_counts(<span class="st">"max_phase_lb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
@@ -2940,7 +2525,7 @@ Name: count, dtype: int64</code></pre>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_full.iloc[:, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the right data have been selected</span></span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking right data were selected e.g. y as target</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>4       0.0
@@ -2966,13 +2551,11 @@ Name: max_phase_lb, Length: 5266, dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using train_test_split() this time to split data</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After data splitting, a RF classifier was trained with reference to this notebook: <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb</a></p>
+<p>After data splitting, a RF classifier was trained with reference to this <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">notebook</a>.</p>
 <div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max_features = "sqrt" by default, </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># decided to show it explicitly in the code </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to make sure the right one was used</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>rfc <span class="op">=</span> RandomForestClassifier(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>, max_features<span class="op">=</span><span class="st">"sqrt"</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>rfc.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max_features = "sqrt" by default</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>rfc <span class="op">=</span> RandomForestClassifier(max_depth<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>, max_features<span class="op">=</span><span class="st">"sqrt"</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>rfc.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=3, oob_score=True, random_state=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(max_depth=3, oob_score=True, random_state=1)</pre></div></div></div></div></div>
 </div>
@@ -2983,10 +2566,10 @@ Name: max_phase_lb, Length: 5266, dtype: float64</code></pre>
 <div class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>test_probs <span class="op">=</span> rfc.predict_proba(X_test)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Some references links and explanations for area under the receiver operating characteristic (ROC) curve and Cohen’s Kappa.</p>
-<p><strong>Area under the ROC curve</strong>: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc">reference link</a> - the area under a curve plot between <em>sensitivity</em> or <em>recall</em> (percent of all 1s classified correctly by a classifier or true positive rate) and <em>specificity</em> (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number which usually ranges between 0 and 1 (1 being a perfect classifier, and at 0.5 or below, this means a poor, ineffective classifier)</p>
+<p>Some reference links and explanations for area under the receiver operating characteristic (ROC) curve and Cohen’s Kappa.</p>
+<p><strong>Area under the ROC curve</strong>: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc">reference link</a> - the area under a curve plot between <em>sensitivity</em> or <em>recall</em> (percent of all 1s classified correctly by a classifier or true positive rate) and <em>specificity</em> (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number ranging from 0 to 1 (1 being a perfect classifier, 0.5 or below meaning a poor, ineffective classifier)</p>
 <p><strong>Cohen’s Kappa score</strong>: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa">reference link</a> - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)</p>
-<p>Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from Landrum <em>et al</em>., from <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">this notebook</a>. I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the results ended up being 0 due to divisions by zero.</p>
+<p>Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from <a href="https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb">this notebook</a>, from <a href="https://github.com/rinikerlab/GHOST">GHOST repository</a>. I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the results ended up being 0 due to divisions by zero.</p>
 <div class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>):</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predicted probability scores according to the stated decision threshold (default = 0.5)</span></span>
@@ -2999,10 +2582,10 @@ Name: max_phase_lb, Length: 5266, dtype: float64</code></pre>
 <span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    confusion <span class="op">=</span> metrics.confusion_matrix(y_test, scores, labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(y_test)))</span>
 <span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'thresh: </span><span class="sc">%.2f</span><span class="st">, kappa: </span><span class="sc">%.3f</span><span class="st">, AUC test-set: </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(threshold, kappa, auc))</span>
 <span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(confusion)</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_test,scores, zero_division<span class="op">=</span><span class="fl">0.0</span>))</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_test, scores, zero_division<span class="op">=</span><span class="fl">0.0</span>))</span>
 <span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note: roc_auc_score measures true positive and false positive rates, therefore it requires binary labels (e.g.&nbsp;0s and 1s) in the data</p>
+<p>Note: roc_auc_score measures true positive and false positive rates, so it requires binary labels (e.g.&nbsp;0s and 1s) in the data</p>
 <p>Then showed confusion matrix along with AUC and Cohen’s Kappa.</p>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>calc_metrics(y_test, test_probs, threshold <span class="op">=</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3021,7 +2604,7 @@ weighted avg       1.00      1.00      1.00      1054
 </code></pre>
 </div>
 </div>
-<p>To help with interpreting the confusion matrix, <em>scikit-learn</em> actually had a very handy plotting code to visualise the matrix.</p>
+<p>To help with interpreting the confusion matrix, <em>scikit-learn</em> actually had a handy plotting code to visualise the matrix.</p>
 <div class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3029,24 +2612,25 @@ weighted avg       1.00      1.00      1.00      1054
 <p><img src="2_random_forest_classifier_files/figure-html/cell-33-output-1.png" width="525" height="429"></p>
 </div>
 </div>
-<p>It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due the very imbalanced ratio of actives (only 10 max phase 4 or labelled as 1 compounds) and inactives (5256 max phase 0 compounds), with also the threshold being normally set at 0.5, it would lose the chance to classify the true positive compounds (hinting at the possibility to test for the outcome if the threshold were lowered, there might be more true positives caught).</p>
+<p>It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as “1” compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, since the decision threshold was also usually set at 0.5, it would lose the chance to classify the true positive compounds due to the very small proportion of active molecules.</p>
 <ol start="5" type="1">
 <li><p>Two approaches were used in the GHOST (generalized threshold shifting) paper:</p>
 <ul>
 <li><p>Approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on <a href="http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html">RDKit blog post</a> or its <a href="https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb">viewable notebook version</a> via nbviewer</p></li>
-<li><p>Approach 2 led to GHOST procedure to optimise and shift the decision threshold for any classification methods - GitHub repository: <a href="https://github.com/rinikerlab/GHOST">https://github.com/rinikerlab/GHOST</a></p></li>
+<li><p>Approach 2 led to <a href="https://github.com/rinikerlab/GHOST">GHOST</a> procedure with a goal to optimise and shift the decision threshold in any classification methods to catch the minor portion of actives (rather than the major portion of inactives)</p></li>
+<li><p>note: both approaches were shown to be performing similarly in the paper</p></li>
 </ul></li>
 </ol>
-<p>I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had detailed explanations for approach 1.</p>
+<p>I only used approach 2 here since the RDKit blog post had already explained approach 1 in depth.</p>
 <p>The next step involved extracting prediction probabilities from the RF classifier trained model.</p>
 <div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the positive prediction probabilities of the training set</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>train_probs <span class="op">=</span> rfc.predict_proba(X_train)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
-<li>Used GHOST strategy in a postprocessing way (note: last post used re-sampling method in a preprocessing way)</li>
+<li>Used GHOST strategy in a postprocessing way (note: last post used data re-sampling method in a preprocessing way)</li>
 </ol>
-<p>The decision threshold were optimised by using ghostml code via testing various different thresholds, e.g.&nbsp;in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen’s kappa.</p>
+<p>The decision threshold were optimised by using <em>ghostml</em> code via testing various different thresholds, e.g.&nbsp;in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen’s kappa.</p>
 <div class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting up different decision thresholds</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.<span class="bu">round</span>(np.arange(<span class="fl">0.05</span>,<span class="fl">0.55</span>,<span class="fl">0.05</span>), <span class="dv">2</span>)</span>
@@ -3082,17 +2666,18 @@ weighted avg       1.00      1.00      1.00      4212
 </section>
 <section id="plotting-roc-curves" class="level5">
 <h5 class="anchored" data-anchor-id="plotting-roc-curves"><strong>Plotting ROC curves</strong></h5>
-<p>Time for some plots - I’ve shown two different ways to plot ROC curve below.</p>
+<p>Time for some plots if anyone’s interested - I’ve shown two different ways to plot ROC curve below.</p>
 <ol type="1">
 <li>Using <em>scikit-learn</em></li>
 </ol>
 <section id="testing-set-roc-curve" class="level6">
 <h6 class="anchored" data-anchor-id="testing-set-roc-curve"><strong>Testing set ROC curve</strong></h6>
+<p>Obviously, this was not a good classifier with a poor AUC.</p>
 <div class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing set ROC curve</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_test, test_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x131feab90&gt;</code></pre>
+<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x12e177610&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-38-output-2.png" width="589" height="429"></p>
@@ -3107,7 +2692,7 @@ weighted avg       1.00      1.00      1.00      4212
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training set ROC curve</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_train, train_probs, plot_chance_level <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
-<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x131f75450&gt;</code></pre>
+<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x12e108130&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="2_random_forest_classifier_files/figure-html/cell-39-output-2.png" width="589" height="429"></p>
@@ -3145,7 +2730,7 @@ weighted avg       1.00      1.00      1.00      4212
 </section>
 <section id="acknowledgements" class="level5">
 <h5 class="anchored" data-anchor-id="acknowledgements"><strong>Acknowledgements</strong></h5>
-<p>I’d like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last and not the least, huge thanks also should go to all the authors of the reference notebooks mentioned in this post too.</p>
+<p>I’d like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last but not the least, huge thanks should also go to the authors of all the reference notebooks mentioned in this post as well.</p>
 
 
 
