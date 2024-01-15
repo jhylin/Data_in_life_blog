@@ -368,9 +368,11 @@ It was very obvious that not all compounds were classified in the testing set. T
 
     -   Approach 1 (out-of-bag method, more computer efficient, aimed for RF classifiers) based on [RDKit blog post](http://rdkit.blogspot.com/2018/11/working-with-unbalanced-data-part-i.html) or its [viewable notebook version](https://nbviewer.org/github/greglandrum/rdkit_blog/blob/master/notebooks/Working%20with%20unbalanced%20data%20part%201.ipynb) via nbviewer
 
-    -   Approach 2 led to [GHOST](https://github.com/rinikerlab/GHOST) procedure to optimise and shift the decision threshold for any classification methods to catch the minor actives (rather than the major portion of inactives)
+    -   Approach 2 led to [GHOST](https://github.com/rinikerlab/GHOST) procedure with a goal to optimise and shift the decision threshold in any classification methods to catch the minor portion of actives (rather than the major portion of inactives) 
 
-I only used approach 2 here as both approaches were shown to be performing similarly in the paper, and the RDKit blog post mentioned above already had detailed explanations for approach 1.
+    - note: both approaches were shown to be performing similarly in the paper
+
+I only used approach 2 here since the RDKit blog post had already explained approach 1 in depth. 
 
 The next step involved extracting prediction probabilities from the RF classifier trained model.
 
@@ -379,9 +381,9 @@ The next step involved extracting prediction probabilities from the RF classifie
 train_probs = rfc.predict_proba(X_train)[:, 1]
 ```
 
-6.  Used GHOST strategy in a postprocessing way (note: last post used re-sampling method in a preprocessing way)
+6.  Used GHOST strategy in a postprocessing way (note: last post used data re-sampling method in a preprocessing way)
 
-The decision threshold were optimised by using ghostml code via testing various different thresholds, e.g. in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen's kappa.
+The decision threshold were optimised by using *ghostml* code via testing various different thresholds, e.g. in spaces of 0.05 that ranged from 0.05 to 0.5. The most optimal threshold would have the most maximised Cohen's kappa.
 
 ```{python}
 # Setting up different decision thresholds
@@ -458,4 +460,4 @@ The other thing to mention was that I should try different molecular fingerprint
 
 ##### **Acknowledgements**
 
-I'd like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last and not the least, huge thanks also should go to all the authors of the reference notebooks mentioned in this post too.
+I'd like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last but not the least, huge thanks should also go to the authors of all the reference notebooks mentioned in this post as well.
