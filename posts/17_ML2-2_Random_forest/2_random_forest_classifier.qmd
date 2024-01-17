@@ -364,7 +364,7 @@ ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)
 plt.show()
 ```
 
-It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, the decision threshold was also normally set at 0.5, meaning the classifier was likely going to lose the chance to classify the true positive compounds due to the very skewed ratio of actives to inactives.
+It was very obvious that not all of the compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, the decision threshold was also normally set at 0.5, meaning the classifier was likely going to lose the chance to classify the true positive compounds due to the very skewed ratio of actives to inactives.
 
 5.  Two approaches were used in the GHOST (generalized threshold shifting) paper:
 
@@ -458,4 +458,4 @@ The other thing to mention was that I should try different molecular fingerprint
 
 ##### **Acknowledgements**
 
-I'd like to thank Riniker lab again for the GHOST paper, and also all the authors, contributors or developers of all the software packages mentioned in this post. Last but not the least, huge thanks should also go to the authors of all the reference notebooks mentioned in this post as well.
+I'd like to thank Riniker lab again for the GHOST paper, along with all the authors, contributors or developers for all of the software packages mentioned in this post, and also, huge thanks should also go to the authors of the reference notebooks mentioned in the post as well.
