@@ -2,7 +2,7 @@
 title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
-date: '2024-1-15'
+date: '2024-1-17'
 draft: true
 categories: 
     - Machine learning projects
@@ -19,7 +19,7 @@ bibliography: references.bib
 
 ##### **Brief introduction**
 
-This post was really just an addition towards the last random forest (RF) post. It was mainly inspired by this paper [@esposito2021] from [rinikerlab](https://github.com/rinikerlab)[^1]. It was nice to complete the RF series by adding a RF classifier model since last post was only on a regressor. Another thing was that imbalanced datasets were common in drug discovery projects, learning different strategies to deal with them was also very useful. While working on this post, I also came across a few other packages that I haven't used before so I've included them all down below.
+This post was really just an addition towards the last random forest (RF) post. It was mainly inspired by this paper [@esposito2021] from [rinikerlab](https://github.com/rinikerlab)[^1]. It was nice to complete the RF series by adding a RF classifier since last post was only on a regressor. Another thing was that imbalanced datasets were common in drug discovery projects, learning different strategies to deal with them was also very useful. While working on this post, I also came across a few other packages that I haven't used before so I've included them all down below.
 
 [^1]: h/t: Greg Landrum for his comment on Mastodon for the last RF post (which led to this follow-up post)
 
@@ -27,10 +27,11 @@ This post was really just an addition towards the last random forest (RF) post. 
 
 ##### **Overview of post**
 
--   Data source using *chembl_downloader*
--   Minor data preprocessing using own little script of mol_prep.py and also a SMILES checker from *scikit_mol*
+-   Data sourcing via *chembl_downloader*
+-   Minor data preprocessing using own little script and also SMILES checker from *scikit_mol*
 - *scikit-learn*'s RandomForestClassifier()
 -   Dealing with imbalanced dataset in RF classifiers by using *ghostml*
+-   A small section on plotting receiver operating characteristic (ROC) curves
 
 <br>
 
@@ -121,13 +122,13 @@ df_ache.head()
 
 ##### **Some data cleaning**
 
-Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced datasets in RF classifier. Since I used a different way to retrieve ChEMBL data this time, the datasets used here might be slightly different from the one used in previous post.
+Minor cleaning and preprocessing were done for this post only, as the focus was more on dealing with imbalanced dataset in RF classifier. Since I used a different way to retrieve ChEMBL data this time, the dataset used here might be slightly different from the one used in previous post.
 
 <br>
 
 ###### **mol_prep.py**
 
-I've more or less accumulated small pieces of code over time, and I've decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time, as they've been used frequently in the last few posts. The script would be saved into the [RF repository](https://github.com/jhylin/ML2-2_random_forest). It would still be a "work-in-progress" script (needs more work in the future).
+I've more or less accumulated small pieces of code over time, and I've decided to compile them into a Python script. The idea was to remove most function code in the post to avoid repeating them all the time since they've been used frequently in the last few posts. The script would be saved into the [RF repository](https://github.com/jhylin/ML2-2_random_forest), and would still be considered as a "work-in-progress" script (needs more work in the future).
 
 ```{python}
 ## Trial own mol_prep.py script
@@ -146,7 +147,7 @@ df_prep.head(3)
 
 ###### **scikit_mol**
 
-scikit_mol was a package originated from RDKit UGM hackathon in 2022. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method for multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol) - I've referred to this [reference notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/05_smiles_sanitaztion.ipynb).
+scikit_mol was a package originated from RDKit UGM hackathon in 2022. This [blog post](https://www.cheminformania.com/scikit-mol-easy-embedding-of-rdkit-into-scikit-learn/) elaborated further on its functions and uses in machine learning. For this post I've only used it for a very small portion, mainly to check for missing SMILES or errors in SMILES (kind of like double checking whether the preprocess function code worked as expected). It could be integrated with *scikit-learn*'s pipeline method for multiple estimators. Its GitHub Repository link: [https://github.com/EBjerrum/scikit-mol](https://github.com/EBjerrum/scikit-mol) - I've referred to this [reference notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/05_smiles_sanitaztion.ipynb) while working on this post.
 
 ```{python}
 # Quick simple way to check for missing SMILES
@@ -165,7 +166,7 @@ smileschecker.errors
 It showed no errors in SMILES (errors should be listed in the code cell output).
 
 ```{python}
-## Generate RDKit2D descriptors/fingerprints
+## Generate RDKit 2D descriptors/fingerprints
 # Running rdkit_2d_descriptors function
 df_2d = rdkit_2d_descriptors(df_prep)
 df_2d.head(3)
@@ -183,7 +184,7 @@ print(df_merge.shape)
 df_merge.head(3)
 ```
 
-A different spreads of max phases were shown this time as the SQL query mainly used IC50, whereas last post was strictly limited to Ki via ChEMBL web resource client. Other likely reason was that in the decision tree series, I've attempted data preprocessing at a larger scale, so some data were eliminated. It appeared that there were more max phase 4 compounds here than last time (note: null compounds were not shown in the value counts as it was labelled as "NaN", but it should be the largest max phase portion in the data).
+A different spreads of max phases were shown this time in the dataframe, as the SQL query mainly used IC50, whereas last post was strictly limited to Ki via ChEMBL web resource client. Other likely reason was that in the decision tree series, I've attempted data preprocessing at a larger scale so some data were eliminated. It appeared that there were more max phase 4 compounds here than last time (note: null compounds were not shown in the value counts as it was labelled as "NaN", it should be the largest max phase portion in the data).
 
 ```{python}
 # Find out counts of each max phase
@@ -254,7 +255,7 @@ df_null.head()
 ```
 
 ```{python}
-# Using pd.DataFrame.assign to add a new column to re-label max_phase 4 into "1"
+# Using pd.DataFrame.assign to add a new column to re-label max_phase 4 as "1"
 df_mp4_lb = df_mp4.assign(max_phase_lb = df_mp4["max_phase"] / 4)
 
 # Using pd.DataFrame.pop() & insert() to shift added column to first column position
@@ -322,21 +323,23 @@ rfc.fit(X_train, y_train)
 test_probs = rfc.predict_proba(X_test)[:, 1]
 ```
 
-Some reference links and explanations for area under the receiver operating characteristic (ROC) curve and Cohen's Kappa.
+Some reference links and explanations for area under the ROC curve and Cohen's Kappa.
 
-**Area under the ROC curve**: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc) - the area under a curve plot between *sensitivity* or *recall* (percent of all 1s classified correctly by a classifier or true positive rate) and *specificity* (percent of all 0s classified correctly by a classifier, or 1 - false positive rate or true negative rate). It is useful for evaluating the performance of a classification model via true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number ranging from 0 to 1 (1 being a perfect classifier, 0.5 or below meaning a poor, ineffective classifier)
+**Area under the ROC curve**: [reference](https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc) - the area under a curve plot between *sensitivity* or *recall* (percent of all 1s classified correctly by a classifier or true positive rate) and *specificity* (percent of all 0s classified correctly by a classifier, or equivalent to 1 - false positive rate or true negative rate) [@bruce2020]. It is useful for evaluating the performance of a classification model via comparing the true positive rate and false positive rate which are influenced by shifting the decision threshold. Area under the ROC is usually represented as a number ranging from 0 to 1 (1 being a perfect classifier, 0.5 or below meaning a poor, ineffective classifier)
 
-**Cohen's Kappa score**: [reference link](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
+**Cohen's Kappa score**: [reference](https://scikit-learn.org/stable/modules/model_evaluation.html#cohen-s-kappa) - a score that is used to measure the agreement of labelling between two annotators (usually between -1 and 1, the higher the score the better the agreement)
 
 Rather than re-inventing the wheel, the following function code for calculating metrics of the RF model were adapted from [this notebook](https://github.com/rinikerlab/GHOST/blob/main/notebooks/example_GHOST.ipynb), from [GHOST repository](https://github.com/rinikerlab/GHOST). I have only added some comments for clarities, and also added a zero_division parameter for the classification_report to mute the warning message when the results ended up being 0 due to divisions by zero.
 
 ```{python}
 def calc_metrics(y_test, test_probs, threshold = 0.5):
-    # Predicted probability scores according to the stated decision threshold (default = 0.5)
+    # Target label assigned according to stated decision threshold (default = 0.5)
+    # e.g. second annotator (expected label)
     scores = [1 if x>=threshold else 0 for x in test_probs]
-    # Calculate area under the ROC curve
+    # Calculate area under the ROC curve based on prediction score
     auc = metrics.roc_auc_score(y_test, test_probs)
     # Calculate Cohen's Kappa score
+    # e.g. y_test as first annotator (predicted label)
     kappa = metrics.cohen_kappa_score(y_test, scores)
     # Formulate the confusion matrix
     confusion = metrics.confusion_matrix(y_test, scores, labels = list(set(y_test)))
@@ -346,9 +349,9 @@ def calc_metrics(y_test, test_probs, threshold = 0.5):
     return 
 ```
 
-Note: roc_auc_score measures true positive and false positive rates, so it requires binary labels (e.g. 0s and 1s) in the data
+Note: roc_auc_score measures true positive and false positive rates, requiring binary labels (e.g. 0s and 1s) in the data
 
-Then showed confusion matrix along with AUC and Cohen's Kappa.
+Then showed confusion matrix along with area under the ROC curve and Cohen's Kappa.
 
 ```{python}
 calc_metrics(y_test, test_probs, threshold = 0.5)
@@ -361,7 +364,7 @@ ConfusionMatrixDisplay.from_estimator(rfc, X_test, y_test)
 plt.show()
 ```
 
-It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, the decision threshold was also usually set at 0.5, this meant the classifier would lose the chance to classify the true positive compounds due to the very small proportion of the active molecules. 
+It was very obvious that not all compounds were classified in the testing set. There were only 1052 compounds classified as true negative, and none in the testing set were labelled as true positive. The likely reason was due to the very imbalanced ratio of actives (only 10 max phase 4 which were labelled as "1" compounds) and inactives (5256 max phase 0 compounds). Besides the imbalanced dataset, the decision threshold was also normally set at 0.5, meaning the classifier was likely going to lose the chance to classify the true positive compounds due to the very skewed ratio of actives to inactives.
 
 5.  Two approaches were used in the GHOST (generalized threshold shifting) paper:
 
@@ -398,10 +401,10 @@ new_threshold = ghostml.optimize_threshold_from_predictions(y_train, train_probs
 Using the calc_metrics function again on the newly-found or shifted decision threshold.
 
 ```{python}
-calc_metrics(y_train, train_probs, threshold=new_threshold)
+calc_metrics(y_train, train_probs, threshold = new_threshold)
 ```
 
-Here, after shifting the decision threshold with the most optimal Cohen's Kappa score, we could see an improved number of compounds labelled within the true negative class (increasing from 1052 to 4204). The true positive class had also improved from 0 to 7.
+Here, after shifting the decision threshold with the most optimal Cohen's Kappa score, we could see an improved number of compounds labelled within the true negative class (increasing from 1052 to 4204), and more importantly, we could see the true positive class improved from 0 to 7 as well.
 
 <br>
 
@@ -428,7 +431,7 @@ RocCurveDisplay.from_predictions(y_train, train_probs, plot_chance_level = True)
 2.  Alternative method using matplotlib which reproduced a similar training set ROC plot:
 
 ```{python}
-# Look for true positive rate (tpr), false positive rate (fpr) & threshold
+# Looking for true positive rate (tpr), false positive rate (fpr) & threshold
 fpr, tpr, thresh = metrics.roc_curve(y_train, train_probs)
 # Plotting
 plt.figure()
