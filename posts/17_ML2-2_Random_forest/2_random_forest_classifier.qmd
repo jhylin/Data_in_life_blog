@@ -3,7 +3,7 @@ title: "Random forest classifier"
 subtitle: "Series 2.2.1 - more on imbalanced dataset"
 author: Jennifer HY Lin
 date: '2024-1-17'
-draft: true
+draft: false
 categories: 
     - Machine learning projects
     - Tree models
