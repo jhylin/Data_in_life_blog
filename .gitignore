@@ -9,3 +9,4 @@ derby.log
 venv
 /.luarc.json
 2_random_forest_classifier.qmd
+protein_in_nb_test.ipynb
