@@ -70,19 +70,10 @@ latest_version = latest()
 print(f"The latest ChEMBL version is: {latest_version}")
 ```
 
-```{python}
-# Query chembl_downloader to show SQL required 
-# to extract ChEMBL data for a specific protein target
-# e.g. target_chembl_id for acetylcholinesterase (AChE): CHEMBL220
-queries.markdown(queries.get_target_sql(target_id="CHEMBL220", target_type="SINGLE PROTEIN"))
-```
-
 The code below took several minutes to run.
 
 ``` {python}
 # Following data were 4.41GB in total from the SQL query
-# Added an extra line - MOLECULE_DICTIONARY.max_phase 
-# into sql to show max phases of compounds targeting AChE
 
 sql = """
 SELECT
