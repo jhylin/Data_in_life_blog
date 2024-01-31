@@ -72,7 +72,7 @@ latest_version = latest()
 print(f"The latest ChEMBL version is: {latest_version}")
 ```
 
-The following section was updated as suggested by cthoyt (please see comment below). I ended up putting through my first ever pull request in an open-source and cheminformatics-related package. A new option to add max_phase was added into the get_target_sql function in chembl_downloader, and it was kept as a togglable option that could be turned on via boolean flag. Many thanks for the patience from cthoyt for guiding me through it. The overall code was now changed as shown below.
+The following section was updated as suggested by cthoyt (please see his comment for post below). I ended up putting through my first ever pull request in an open-source and cheminformatics-related package. A new option to add max_phase was added into the get_target_sql function in chembl_downloader, and it was kept as a togglable option that could be turned on via boolean flag. Many thanks for the patience from cthoyt for guiding me through it. The overall code was now changed as shown below.
 
 ```{python}
 # Generate SQL for a query on acetylcholinesterase (AChE): CHEMBL220
