@@ -1,5 +1,5 @@
 ---
-title: "About Jennifer HY Lin"
+title: "About me"
 image: profile avatar.jpg
 about:
   template: jolla
