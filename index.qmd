@@ -20,7 +20,7 @@ comments: false
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
 * Latest project: Random forest classifier - more on imbalanced dataset
-* Next project in the pipeline: on break (possibly on boosted trees)
+* Next project in the pipeline: Working on boosted trees at a slow pace
 
 <br>
 
