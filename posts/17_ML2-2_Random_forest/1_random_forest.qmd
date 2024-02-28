@@ -368,9 +368,9 @@ I also found out the mean squared error (MSE) between y_true (actual max phase n
 
 Some references that might help with explaining MSE:
 
-- [*scikit-learn* link](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error)
-- [Stats StackExchange link](https://stats.stackexchange.com/questions/579755/whats-a-reasonable-mean-squared-error-or-rmse)
-- [blog post link](https://statisticsbyjim.com/regression/mean-squared-error-mse/) 
+-   [*scikit-learn* link](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error)
+-   [Stats StackExchange link](https://stats.stackexchange.com/questions/579755/whats-a-reasonable-mean-squared-error-or-rmse)
+-   [blog post link](https://statisticsbyjim.com/regression/mean-squared-error-mse/)
 
 ```{python}
 # For max phase splitted dataset only
@@ -381,9 +381,8 @@ When R^2^ (coefficient of determination) was closer to 1, the better the model i
 
 Some references that might help with understanding R^2^:
 
-- [Stats StackExchange link](https://stats.stackexchange.com/questions/414349/is-my-model-any-good-based-on-the-diagnostic-metric-r2-auc-accuracy-rmse)
-- [*scikit-learn* link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score)
-
+-   [Stats StackExchange link](https://stats.stackexchange.com/questions/414349/is-my-model-any-good-based-on-the-diagnostic-metric-r2-auc-accuracy-rmse)
+-   [*scikit-learn* link](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score)
 
 ```{python}
 # For max phase splitted dataset only
@@ -538,7 +537,7 @@ It generated a different feature importances ranking (if looking at top 6 featur
 
 ###### **SHAP approach**
 
-SHAP values [@lundberg2020local2global], [@shapley1953] were used here to provide another way to figure out feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
+SHAP values [@lundberg2020local2global], [@shapley1953value] were used here to provide another way to figure out feature importances. The GitHub repository for this SHAP approach could be accessed [here](https://github.com/shap/shap).
 
 SHAP's TreeExplainer() was based on Tree SHAP algorithms [@lundberg2020local2global], and was used to show and explain feature importances within tree models. It could also be extended to boosted tree models such as LightGBM and XGBoost and also other tree models (as explained by the GitHub repository README.md and its documentation link provided). It was also a model-agnostic method, which could be quite handy.
 
@@ -637,7 +636,7 @@ The negated version of the mean squared error (neg_mean_squared_error) was due t
 
 Reference links to help with understanding neg_mean_squared_error:
 
-1.  [scikit-learn source code](https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/\_scorer.py#L624)
+1.  [scikit-learn source code](https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/metrics/_scorer.py#L624)
 
 2.  [StackOverflow answer](https://stackoverflow.com/questions/48244219/is-sklearn-metrics-mean-squared-error-the-larger-the-better-negated)
 
@@ -684,11 +683,11 @@ sns.boxplot(cv_results, x="Number_of_trees", y="value", showmeans=True)
 
 The Seaborn boxplot shown should be very similar to the Matplotlib one.
 
-Other hyperparameters that could be tuned included: 
+Other hyperparameters that could be tuned included:
 
 -   tree depths (max_depth)
 
--   number of samples (max_samples) 
+-   number of samples (max_samples)
 
 -   number of features (max_features) - I didn't use RDKit to generate molecular features for this post (Datamol version was used instead) which would provide around 209 at least (trying to keep the post at a readable length), but I think this might be a better option when doing cross-validations in model evaluations
 
@@ -708,4 +707,4 @@ Few things I've thought of that I could try to improve what I did here was that 
 
 ##### **Acknowledgement**
 
-I'd like to thank all the authors, developers and contributors who worked towards all of the open-source packages or libraries used in this post. I'd also like to thank all of the other senior cheminformatics and ML practitioners who were sharing their work and knowledge online. 
+I'd like to thank all the authors, developers and contributors who worked towards all of the open-source packages or libraries used in this post. I'd also like to thank all of the other senior cheminformatics and ML practitioners who were sharing their work and knowledge online.
