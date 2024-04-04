@@ -208,7 +208,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
 <p>This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise macromolecules and small molecules in an <em>in silico</em> environment.</p>
 <p>Most bioinformaticians or structural biologists are probably already familiar with this software package, Molstar or Mol* <span class="citation" data-cites="Sehnal2021">(<a href="#ref-Sehnal2021" role="doc-biblioref">Sehnal et al. 2021</a>)</span>. Molstar is a 3D viewer for large macromolecules (e.g.&nbsp;proteins), which are commonly used in structural biology and drug discovery (and also other related scientific disciplines).</p>
-<p>A Quarto extension has been developed to embed a Molstar interactive 3D viewer inside a Quarto markdown document. The main advantage of this is that it’s useful for reports or presentations. The only thing to note is that this extension is currently presented as HTML pages only (rendered from Quarto documents).</p>
+<p>A Quarto extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it’s useful for reports or presentations.</p>
 <p><br></p>
 </section>
 <section id="some-useful-links" class="level5">
@@ -217,32 +217,32 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <li><p>Molstar webpage: <a href="https://molstar.org/">https://molstar.org/</a></p></li>
 <li><p>GitHub repository for the Quarto extension (thanks to the contributing team for this extension!): <a href="https://github.com/jmbuhr/quarto-molstar">https://github.com/jmbuhr/quarto-molstar</a> - example provided <a href="https://jmbuhr.de/quarto-molstar/">https://jmbuhr.de/quarto-molstar/</a></p></li>
 <li><p>Other Molstar example: <a href="https://ljmartin.github.io/sideprojects/dockviz2.html">https://ljmartin.github.io/sideprojects/dockviz2.html</a></p></li>
-<li><p>R Shiny and Molstar example (for people who prefer using R): <a href="https://www.appsilon.com/post/shiny-molstar-r-package-molecular-structures-visualizations">https://www.appsilon.com/post/shiny-molstar-r-package-molecular-structures-visualizations</a></p></li>
+<li><p>R Shiny and Molstar example (for people who prefer using R and R Shiny): <a href="https://www.appsilon.com/post/shiny-molstar-r-package-molecular-structures-visualizations">https://www.appsilon.com/post/shiny-molstar-r-package-molecular-structures-visualizations</a></p></li>
 <li><p>Streamlit and Dash integrations are also possible, this also makes me think that I could probably try integrating Molstar with Shiny for Python, it’ll likely be a future side project.</p></li>
 </ul>
 <p><br></p>
 </section>
 <section id="an-example-using-molstar-with-rcsb-pdb" class="level5">
 <h5 class="anchored" data-anchor-id="an-example-using-molstar-with-rcsb-pdb"><strong>An example using Molstar with RCSB PDB</strong></h5>
-<p>Retrieve a protein (PDB ID: 4MQT) from RCSB PDB:</p>
+<p>The following example retrieves a protein (PDB ID: 4MQT) from RCSB PDB.</p>
 <p><code>{{&lt; mol-rcsb 4mqt &gt;}}</code></p>
     <div id="app-4mqt" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-4mqt", {"viewportShowExpand":true,"layoutShowControls":false,"layoutShowSequence":false,"layoutShowLeftPanel":true,"viewportShowAnimation":true,"layoutShowLog":false,"emdbProvider":"rcsb","layoutIsExpanded":false,"pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-4mqt", {"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowLog":false,"viewportShowAnimation":true,"viewportShowExpand":true,"layoutIsExpanded":false,"pdbProvider":"rcsb","layoutShowRemoteState":false,"layoutShowSequence":false,"emdbProvider":"rcsb","viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadPdb("4mqt");    });
     </script>
     
-<p>Hover over protein structure to see details of amino acid residues or ligand name within the structure.</p>
-<p>To focus or zoom-in on the ligand bound to the receptor, just click on the ligand first. This shows most of the chemical interactions between the protein receptor and ligand bound to it (e.g.&nbsp;hydrogen bondings between the ligand and amino acid residues, other chemical interactions will appear if present e.g.&nbsp;pi-pi stacking).</p>
+<p>Hover over protein structure to see details of amino acid residues or ligands present in the structure.</p>
+<p>To focus or zoom-in on the ligand bound to the receptor, just click on the ligand first. This shows most of the chemical interactions between the receptor and ligand bound to it (e.g.&nbsp;hydrogen bondings, other chemical interactions will appear if present e.g.&nbsp;pi-pi stacking).</p>
 <p>Screenshots or state snapshots are also available from the viewer (other utility functions can be found on the top right corner of the viewer).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="close-up_shot.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">An example of ligand-4MQT close-up screenshot</figcaption><p></p>
+<p></p><figcaption class="figure-caption">An close-up screenshot of 4MQT showing bound ligand</figcaption><p></p>
 </figure>
 </div>
-<p>MD trajectories are also available, although I haven’t quite got there yet but it’s useful to know this may be possible in a Quarto document which can be rendered as a HTML page.</p>
-<p>It’s also possible to upload AlphaFold-sourced proteins, or from other file sources (see example shown from <a href="https://jmbuhr.de/quarto-molstar/">Molstar example</a>).</p>
+<p>MD trajectories are also available, although I haven’t quite got there yet but it’s useful to know this may be possible (see example C from <a href="https://molstar.org/viewer-docs/examples/">https://molstar.org/viewer-docs/examples/</a>).</p>
+<p>It’s also possible to upload AlphaFold-sourced proteins, or from other file sources (see examples shown from <a href="https://jmbuhr.de/quarto-molstar/">Molstar example</a>).</p>
 
 
 
