@@ -46,6 +46,8 @@ Retrieve a protein (PDB ID: 4MQT) from RCSB PDB:
 
 {{< mol-rcsb 4mqt >}}
 
+Hover over protein structure to see details of amino acid residues or ligand name within the structure.
+
 To focus or zoom-in on the ligand bound to the receptor, just click on the ligand first. This shows most of the chemical interactions between the protein receptor and ligand bound to it (e.g. hydrogen bondings between the ligand and amino acid residues, other chemical interactions will appear if present e.g. pi-pi stacking).
 
 Screenshots or state snapshots are also available from the viewer (other utility functions can be found on the top right corner of the viewer).

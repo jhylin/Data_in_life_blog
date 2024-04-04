@@ -228,10 +228,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p><code>{{&lt; mol-rcsb 4mqt &gt;}}</code></p>
     <div id="app-4mqt" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-4mqt", {"layoutShowControls":false,"viewportShowSelectionMode":false,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowAnimation":true,"emdbProvider":"rcsb","viewportShowExpand":true,"layoutShowLog":false,"layoutShowLeftPanel":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-4mqt", {"viewportShowExpand":true,"layoutShowControls":false,"layoutShowSequence":false,"layoutShowLeftPanel":true,"viewportShowAnimation":true,"layoutShowLog":false,"emdbProvider":"rcsb","layoutIsExpanded":false,"pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadPdb("4mqt");    });
     </script>
     
+<p>Hover over protein structure to see details of amino acid residues or ligand name within the structure.</p>
 <p>To focus or zoom-in on the ligand bound to the receptor, just click on the ligand first. This shows most of the chemical interactions between the protein receptor and ligand bound to it (e.g.&nbsp;hydrogen bondings between the ligand and amino acid residues, other chemical interactions will appear if present e.g.&nbsp;pi-pi stacking).</p>
 <p>Screenshots or state snapshots are also available from the viewer (other utility functions can be found on the top right corner of the viewer).</p>
 <div class="quarto-figure quarto-figure-center">
