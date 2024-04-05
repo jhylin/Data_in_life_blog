@@ -1,7 +1,7 @@
 ---
 title: Using Molstar in Quarto
 author: Jennifer HY Lin
-date: '2024-4-4'
+date: '2024-4-6'
 draft: false
 categories: 
     - Notes
@@ -20,7 +20,7 @@ This is really a short post (note) for myself and probably for others who may be
 
 Most bioinformaticians or structural biologists are probably already familiar with this software package, Molstar or Mol\* [@Sehnal2021]. Molstar is a 3D viewer for large macromolecules (e.g. proteins), which are commonly used in structural biology and drug discovery (and also other related scientific disciplines).
 
-A Quarto extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it's useful for reports or presentations.
+A [Quarto](https://quarto.org/) extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it's useful for reports or presentations.
 
 <br>
 
