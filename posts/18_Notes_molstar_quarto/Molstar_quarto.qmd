@@ -40,7 +40,7 @@ A [Quarto](https://quarto.org/) extension has been developed to embed the Molsta
 
 ##### **An example using Molstar with RCSB PDB**
 
-The following example retrieves a protein (PDB ID: 4MQT) from RCSB PDB.
+The following example retrieves a protein (PDB ID: 4MQT) from [RCSB PDB](https://www.rcsb.org/).
 
 `{{{< mol-rcsb 4mqt >}}}`
 

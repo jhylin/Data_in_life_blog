@@ -224,11 +224,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="an-example-using-molstar-with-rcsb-pdb" class="level5">
 <h5 class="anchored" data-anchor-id="an-example-using-molstar-with-rcsb-pdb"><strong>An example using Molstar with RCSB PDB</strong></h5>
-<p>The following example retrieves a protein (PDB ID: 4MQT) from RCSB PDB.</p>
+<p>The following example retrieves a protein (PDB ID: 4MQT) from <a href="https://www.rcsb.org/">RCSB PDB</a>.</p>
 <p><code>{{&lt; mol-rcsb 4mqt &gt;}}</code></p>
     <div id="app-4mqt" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-4mqt", {"layoutShowControls":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLog":false,"layoutShowRemoteState":false,"pdbProvider":"rcsb","layoutShowLeftPanel":true,"viewportShowExpand":true,"layoutShowSequence":false}).then(viewer => {
+    molstar.Viewer.create("app-4mqt", {"pdbProvider":"rcsb","emdbProvider":"rcsb","viewportShowExpand":true,"layoutShowSequence":false,"viewportShowSelectionMode":false,"layoutIsExpanded":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowRemoteState":false,"layoutShowLog":false,"layoutShowControls":false}).then(viewer => {
     viewer.loadPdb("4mqt");    });
     </script>
     
