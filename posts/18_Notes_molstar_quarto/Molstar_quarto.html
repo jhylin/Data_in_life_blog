@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2024-04-04">
+<meta name="dcterms.date" content="2024-04-06">
 
 <title>Home - Using Molstar in Quarto</title>
 <style>
@@ -176,7 +176,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 4, 2024</p>
+        <p class="date">April 6, 2024</p>
       </div>
     </div>
     
@@ -206,9 +206,9 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="background" class="level5">
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
-<p>This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise macromolecules and small molecules in an <em>in silico</em> environment.</p>
+<p>This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise <em>in silico</em> macromolecules and small molecules.</p>
 <p>Most bioinformaticians or structural biologists are probably already familiar with this software package, Molstar or Mol* <span class="citation" data-cites="Sehnal2021">(<a href="#ref-Sehnal2021" role="doc-biblioref">Sehnal et al. 2021</a>)</span>. Molstar is a 3D viewer for large macromolecules (e.g.&nbsp;proteins), which are commonly used in structural biology and drug discovery (and also other related scientific disciplines).</p>
-<p>A Quarto extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it’s useful for reports or presentations.</p>
+<p>A <a href="https://quarto.org/">Quarto</a> extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it’s useful for reports or presentations.</p>
 <p><br></p>
 </section>
 <section id="some-useful-links" class="level5">
@@ -224,11 +224,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="an-example-using-molstar-with-rcsb-pdb" class="level5">
 <h5 class="anchored" data-anchor-id="an-example-using-molstar-with-rcsb-pdb"><strong>An example using Molstar with RCSB PDB</strong></h5>
-<p>The following example retrieves a protein (PDB ID: 4MQT) from RCSB PDB.</p>
+<p>The following example retrieves a protein (PDB ID: 4MQT) from <a href="https://www.rcsb.org/">RCSB PDB</a>.</p>
 <p><code>{{&lt; mol-rcsb 4mqt &gt;}}</code></p>
     <div id="app-4mqt" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-4mqt", {"layoutShowRemoteState":false,"layoutIsExpanded":false,"layoutShowControls":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowLeftPanel":true,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLog":false}).then(viewer => {
+    molstar.Viewer.create("app-4mqt", {"layoutShowControls":false,"layoutIsExpanded":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowLog":false,"viewportShowSelectionMode":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowLeftPanel":true,"viewportShowAnimation":true}).then(viewer => {
     viewer.loadPdb("4mqt");    });
     </script>
     
