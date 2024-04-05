@@ -16,7 +16,7 @@ bibliography: references.bib
 
 ##### **Background**
 
-This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise macromolecules and small molecules in an *in silico* environment.
+This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise *in silico* macromolecules and small molecules.
 
 Most bioinformaticians or structural biologists are probably already familiar with this software package, Molstar or Mol\* [@Sehnal2021]. Molstar is a 3D viewer for large macromolecules (e.g. proteins), which are commonly used in structural biology and drug discovery (and also other related scientific disciplines).
 

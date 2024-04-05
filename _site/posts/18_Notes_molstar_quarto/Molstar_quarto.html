@@ -206,7 +206,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 <section id="background" class="level5">
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
-<p>This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise macromolecules and small molecules in an <em>in silico</em> environment.</p>
+<p>This is really a short post (note) for myself and probably for others who may be interested in software tools to visualise <em>in silico</em> macromolecules and small molecules.</p>
 <p>Most bioinformaticians or structural biologists are probably already familiar with this software package, Molstar or Mol* <span class="citation" data-cites="Sehnal2021">(<a href="#ref-Sehnal2021" role="doc-biblioref">Sehnal et al. 2021</a>)</span>. Molstar is a 3D viewer for large macromolecules (e.g.&nbsp;proteins), which are commonly used in structural biology and drug discovery (and also other related scientific disciplines).</p>
 <p>A <a href="https://quarto.org/">Quarto</a> extension has been developed to embed the Molstar interactive 3D viewer inside Quarto markdown documents, which can be rendered as HTML pages. The main advantage of this is that it’s useful for reports or presentations.</p>
 <p><br></p>
@@ -228,7 +228,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <p><code>{{&lt; mol-rcsb 4mqt &gt;}}</code></p>
     <div id="app-4mqt" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-4mqt", {"pdbProvider":"rcsb","emdbProvider":"rcsb","viewportShowExpand":true,"layoutShowSequence":false,"viewportShowSelectionMode":false,"layoutIsExpanded":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowRemoteState":false,"layoutShowLog":false,"layoutShowControls":false}).then(viewer => {
+    molstar.Viewer.create("app-4mqt", {"layoutShowLeftPanel":true,"layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"pdbProvider":"rcsb","emdbProvider":"rcsb","viewportShowExpand":true,"layoutShowLog":false}).then(viewer => {
     viewer.loadPdb("4mqt");    });
     </script>
     
