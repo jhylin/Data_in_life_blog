@@ -19,8 +19,8 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
-* Latest project: Random forest classifier - more on imbalanced dataset
-* Next project in the pipeline: Boosted trees and possibly a short post on a protein 3D viewer (at a slow pace)
+* Latest project: A note on "Using Molstar in Quarto"
+* Next project in the pipeline: Boosted trees (at a slow pace)
 
 <br>
 
