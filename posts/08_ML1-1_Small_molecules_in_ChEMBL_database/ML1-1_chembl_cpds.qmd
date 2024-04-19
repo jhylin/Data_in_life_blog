@@ -17,9 +17,11 @@ jupyter: python3
 
 ##### ***Machine learning in drug discovery - series 1.1***
 
-*The ML series has been re-numbered to reflect all 3 posts relevant to small molecules in ChEMBL database to avoid confusions*
+<br>
 
-*Some of the code involving Polars dataframe library have been updated on 16th August 2023 due to updates to the package - please always refer to Polars API reference documentations for most up-to-date code*
+*Latest update from 19th April 2024 - Polars is currently more integrated with Scikit-learn from version 1.4 (since January 2024), see this link re. [Polars output in set_output](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_4_0.html#polars-output-in-set-output) for Polars dataframe outputs in Scikit-learn, and also a few other Polars enhancements from release [version 1.4 changelog](https://scikit-learn.org/dev/whats_new/v1.4.html#). I may attempt to update this series of posts in the future as they most probably won't need the conversion from Polars to Pandas dataframes anymore.*
+
+*Previous post update was on 16th August 2023 - some code updates only, please always refer to [Polars API reference](https://docs.pola.rs/py-polars/html/reference/index.html) documentations for most up-to-date code.*
 
 <br>
 
