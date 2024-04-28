@@ -16,6 +16,10 @@ format: html
 bibliography: references.bib
 ---
 
+*Post updated on 28th April 2024 - dtreeviz code (under the "Model building" section) were updated to improve the scale of the dtreeviz tree plot*
+
+<br>
+
 ##### **Data source**
 
 The data used here was extracted from ChEMBL database by using ChEMBL web resource client in Python. The details of all the steps taken to reach the final .csv file could be seen in these earlier posts - [post 1](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html) and [post 2](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/2_data_prep_tran.html) (yes, it took quite a while to clean the data, so it was splitted into two posts).
@@ -290,13 +294,13 @@ graph
 
 The following was a dtreeviz version of the decision tree, which actually included the regression plots of different molecular features e.g. clogp versus the target value of pKi. It seemed a bit more intuitive as these plots clearly showed where the threshold cut-offs would be for each feature (molecular descriptors). The GitHub repository link for dtreeviz could be accessed [here](https://github.com/parrt/dtreeviz).
 
-*Note: it might be smaller in size and not as clear as the graphviz version in the published version of the post, but if the code was run in any IDE, it should be larger to view, and potentailly could be saved as a PDF file*
-
 ```{python}
 import dtreeviz 
 
 viz = dtreeviz.model(ache_tree_mp4, X_train=X_mp4, y_train=y_mp4, target_name="pKi", feature_names=list(X_mp4_df.columns))
-viz.view()
+# Added "scale = 2" to view()
+# to make plot larger in size
+viz.view(scale = 2)
 ```
 
 <br>
