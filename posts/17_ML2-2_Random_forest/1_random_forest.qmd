@@ -16,6 +16,8 @@ format: html
 bibliography: references.bib
 ---
 
+*Post updated on 3rd May 2024 - Added comment regarding ImbalancedLearningRegression package (installation tip) & [Jupyter notebook link](https://github.com/jhylin/ML2-2_random_forest/blob/main/1_random_forest.ipynb) of this post*
+
 ##### **Quick overview of this post**
 
 -   Short introduction of random forest
@@ -61,6 +63,8 @@ import sklearn
 from sklearn.ensemble import RandomForestRegressor
 
 # For imbalanced datasets in regression 
+# May need to set env variable (SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True) when installing
+# due to package dependency on older sklearn version
 import ImbalancedLearningRegression as iblr
 
 # Plots
