@@ -1,0 +1,626 @@
+---
+title: "Boosted trees"
+subtitle: "Series 2.3.1 - AdaBoost, XGBoost and Scikit-mol"
+author: Jennifer HY Lin
+date: '2024-6-5'
+draft: true
+categories: 
+    - Machine learning projects
+    - Tree models
+    - Pandas
+    - Scikit-learn
+    - RDKit
+    - ChEMBL database
+    - Python
+jupyter: python3
+format: html
+bibliography: references.bib
+---
+
+##### **Some introductions**
+
+I've somehow promised myself to do a tree series on machine learning and glad I've made it to the boosted trees part (it took a while...). This is also likely my last post on this topic for now as there are other things I want to explore in the near future. Hopefully this is somewhat useful for anyone who's new to this.
+
+<br>
+
+###### **AdaBoost**
+
+Adaptive Boost or AdaBoost has originated from Robert E. Schapire in 1990 [@schapire1990], [@mlbook2022], and was further introduced in 1996 by Robert Schapire and Yoav Freund at a conference which also led to a publication [@freund1997].
+
+As quoted from [scikit-learn](https://scikit-learn.org/stable/modules/ensemble.html#adaboost), an AdaBoost algorithm is doing this:
+
+> ...fit a sequence of weak learners (i.e., models that are only slightly better than random guessing, such as small decision trees) on repeatedly modified versions of the data.
+
+::: {.callout-note}
+Weak learner means an ensemble of very simple base classifiers such as decision tree stumps [@mlbook2022]
+:::
+
+During the process of running the algorithm, increased weights are given to the incorrectly predicted samples at each iteration, and less weights are given to the correctly predicted ones. This then forces the AdaBoost models to focus more on the less accurately predicted samples with the aim to improve ensemble performance. The predictions from these iterations are combined to produce a final prediction via a weighted majority vote style, which is a well-known signature of tree models. Overall, AdaBoost algorithm can be used for classification or regression problems. The main difference between bagging and boosting is that boosting only uses random subsets of training samples drawn from the training dataset without any replacements [@mlbook2022]. One caveat to note is that AdaBoost tend to overfit training data (high variance).
+
+Parameters to tune:
+
+* *n_estimators* - number of weak learners
+
+* *learning_rate* - contributions of weak learners in the final combination
+
+* *max_depth* - depth of trees
+
+* *min_samples_split* - minimum required number of samples to consider a split
+
+<br>
+
+###### **Gradient boosted trees**
+
+Essentially a similar concept is behind gradient boosted trees where a series of weak learners is trained in order to create a stronger ensemble of models [@mlbook2022]. However, some differences between these two types of boosted trees (e.g. AdaBoost and XGBoost) should be noted, and rather than describing them in a paragraph, I've summarised them in a table below.
+
+```{python}
+#| echo: false
+#| tbl-cap-location: margin
+#| tbl-cap: Differences between XGBoost and AdaBoost [@mlbook2022]
+
+
+from IPython.display import Markdown
+from tabulate import tabulate
+
+table = [
+    ["trains weak learners based on errors from previous decision tree stump", 
+    "trains weak learners that are deeper than decision tree stumps with a max depth of 3 to 6 (or max number of leaf nodes from 8 to 64)"], 
+    ["uses prediction errors to calculate sample weights and classifier weights", 
+    "uses prediction errors directly to produce the target variable to fit the next tree"], 
+    ["uses individual weighting terms for each tree", 
+    "uses a global learning rate for each tree"]
+    ]
+
+Markdown(tabulate(table, headers=["AdaBoost", "XGBoost"]))
+```
+
+XGBoost or extreme gradient boosting [@DBLP:journals/corr/ChenG16] is one of the most commonly used open-source packages, originally developed at the University of Washington by T. Chen and C. Guestrin, that uses stochastic gradient boosting to build an ensemble of predictive models. 
+
+[XGBoost documentation](https://xgboost.readthedocs.io/en/stable/index.html) - https://xgboost.readthedocs.io/en/stable/index.html
+
+Main parameters to tune as suggested by [@bruce2020]: 
+
+- *subsample* - controls fraction of observations that should be sampled at each iteration or a subsample ratio of the training instance (as per [XGBoost's Scikit-learn API](https://xgboost.readthedocs.io/en/latest/python/python_api.html#module-xgboost.sklearn)). This is similar to how a random forest operates but without the sample replacement part
+
+- *eta* (in XGBoost) or *learning_rate* (in scikit-learn wrapper interface for XGBoost) - a shrinkage factor applied to alpha (a factor derived from weighted errors) in the boosting algorithm or it simply may be more easily understood as the boosting learning rate used to prevent overfitting
+
+There are of course a whole bunch of other [XGBoost parameters](https://xgboost.readthedocs.io/en/latest/parameter.html#xgboost-parameters) that can be tuned, and in order to keep this post at a reasonable reading length, I won't go through every single one of them, but see this link as an example parameter set for [XGBClassifier()](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBClassifier).
+
+In scikit-learn, there are also two types of gradient boosted tree methods, GradientBoostingClassifer() and HistGradientBoostingClassifier(), in its sklearn.ensemble module (note: equivalent regressor class also available). One way to choose between them is to check sample size first. [GradientBoostingClassifer()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html#sklearn.ensemble.GradientBoostingClassifier) class is likely better when there is only a small sample size (e.g. when number of sample is less than 10,000), while [HistGradientBoostingClassifier()](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier) class is likely better when your sample size is at least 10,000+ or more. The HistGradientBoostingClassifier() is a histogram-based gradient boosting classification tree that is mainly inpired by [LightGBM](https://github.com/Microsoft/LightGBM). 
+
+<br>
+
+##### **A demo**
+
+In the example below, I'm only using AdaBoost classifier and XGBoost classifier for now. Please note that the dataset used here is very small and the example is likely not going to reflect real-life use case completely (use with care). 
+
+<br>
+
+###### **Import libraries**
+
+```{python}
+import sys
+import pandas as pd
+import numpy as np
+import chembl_downloader
+import rdkit
+from rdkit import Chem
+import pickle
+
+# Import Scikit_mol
+## Check and clean SMILES
+from scikit_mol.utilities import CheckSmilesSanitazion
+## Standardise molecules
+from scikit_mol.standardizer import Standardizer
+## Import fingerprints & descriptors
+from scikit_mol.fingerprints import MorganFingerprintTransformer
+from scikit_mol.descriptors import MolecularDescriptorTransformer
+## Import smi2mol transformer
+from scikit_mol.conversions import SmilesToMolTransformer
+
+# Import scikit-learn
+import sklearn
+from sklearn.model_selection import train_test_split, GridSearchCV
+## Data scaler (variance scaling)
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import AdaBoostClassifier
+
+# Import xgboost classifier
+import xgboost
+from xgboost import XGBClassifier
+
+print(f"xgboost version used: {xgboost.__version__}")
+print(f"scikit-learn version used: {sklearn.__version__}")
+print(f"rdkit version used: {rdkit.__version__}")
+```
+
+```{python}
+# Show Python version used 
+print(sys.version)
+```
+
+<br>
+
+###### **Data source**
+
+Data source is based on ChEMBL database version 33 (as shown by the file name below, "chembl_d_ache_33"), which was downloaded previously from last post (on [random forest classifier](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html)) by using [chembl_downloader](https://github.com/cthoyt/chembl-downloader).
+
+```{python}
+from pathlib import Path
+
+# Pick any directory, but make sure it's relative to your home directory
+directory = Path.home().joinpath(".data", "blog")
+# Create the directory if it doesn't exist
+directory.mkdir(exist_ok=True, parents=True)
+
+# Create a file path that corresponds to the previously cached ChEMBL data 
+path = directory.joinpath(f"chembl_d_ache_33.tsv")
+
+# alternative way to download latest ChEMBL version
+# please see post link - https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html#data-retrieval-using-chembl_downloader for details
+# note: need to specify late_version = latest() first
+# path = directory.joinpath(f"chembl_d_ache_{latest_version}.tsv")
+
+if path.is_file():
+    # If the file already exists, load it
+    df_ache = pd.read_csv(path, sep=',')
+else:
+    # If the file doesn't already exist, make the query then cache it
+    df_ache = chembl_downloader.query(sql)
+    df_ache.to_csv(path, sep=",", index=False)
+```
+
+```{python}
+print(df_ache.shape)
+df_ache.head()
+```
+
+Exploring max phases of compounds in the dataset.
+
+```{python}
+df_ache.value_counts("max_phase", dropna=False)
+```
+
+<br>
+
+##### **Datasets**
+
+The [definition of "NaN" assigned to max_phase](https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/drug-and-compound-questions#what-is-max-phase) indicates that compounds labelled as "NaN" or "null" have no evidence of showing they've reached clinical trials, so I'm removing them from the dataset(this can also be included in the dataset depending on project goals). 
+
+A max_phase of -1 is assigned to molecules with unknown clinical phase status ([ChEMBL reference](https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/drug-and-compound-questions#what-is-max-phase)), so I'm also going to drop them for this particular experiment.
+
+```{python}
+# Fill "NaNs" as "0" first
+df_ache.fillna({"max_phase": 0}, inplace=True)
+```
+
+```{python}
+# Select only mols with max_phase of 0 and above
+df_ache = df_ache[(df_ache["max_phase"] >= 0)]
+```
+
+```{python}
+df_ache["max_phase"].describe()
+```
+
+```{python}
+df_ache.value_counts("max_phase", dropna=False)
+```
+
+```{python}
+# Convert max_phase from float to int for the ease of reading predicted outcomes,
+# otherwise it'll look like "4., 2., 4., ..."
+df_ache = df_ache.astype({"max_phase": int, "canonical_smiles": "string"})
+```
+
+```{python}
+df_ache.dtypes
+```
+
+Please note: the only molecule with max_phase of "0.5" was converted into "0" after I've converted the datatype of max_phase from float to integer (I've left it deliberately like this since this is only a demonstration on using scikit_learn's pipeline along with scikit_mol, but in reality this should be handled with care i.e. don't discard it as different max phase values have different meanings!). Therefore the following max_phase value count will have 6411 molecules with max_phase "0", rather than the previous number of 6410.
+
+```{python}
+df_ache.value_counts("max_phase", dropna=False)
+```
+
+<br>
+
+##### **Model building using scikit-learn's pipeline**
+
+Binary classification has been used in my previous posts, e.g. target as max_phase 4 (re-labelled as "1") with training set of max_phase "null" re-labelled as "0" with their different RDKit molecular features. This time I'll be using multi-class classification to predict a training set of molecules containing max_phase of 0, 1, 2, 3 and 4.
+
+<br>
+
+###### **Define X and y variables**
+
+```{python}
+# A sanity check and view on the original dataset 
+df_ache
+```
+
+```{python}
+X = df_ache.canonical_smiles
+y = df_ache.max_phase
+```
+
+```{python}
+X.shape
+```
+
+```{python}
+y.shape
+```
+
+```{python}
+print(X)
+```
+
+```{python}
+print(y)
+```
+
+<br>
+
+###### **Sanitise SMILES**
+
+This post is going to focus only on Scikit_mol which has a different way to handle SMILES errors. Another useful way to deal with SMILES errors is [Molpipeline](https://github.com/basf/MolPipeline)'s SMILES error handling, with an example shown in one of [its notebooks](https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb). The main difference from what I could see, even though I haven't got to use molpipeline yet, was that molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a "NaN" label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).
+
+```{python}
+checksmi = CheckSmilesSanitazion()
+# Checking on SMILES (X) 
+X_valid, X_errors = checksmi.sanitize(X)
+```
+
+Ideally, X_valid & y_valid will be used for further work, meaning all the invalids or errors will be removed from the training set.
+
+```{python}
+checksmi.errors
+```
+
+No SMILES errors are shown.
+
+```{python}
+X_errors
+```
+
+No outputs are there (no errors detected). 
+
+```{python}
+print(X_valid)
+```
+
+A list of valid SMILES are shown.
+
+Also, manually checking for any "NaNs" in the canonical SMILES column (X variable), since AdaBoostClassifier won't accept missing values in the dataset, but if using HistGradientBoostingClassifier() instead, it should take care of the native NaNs.
+
+```{python}
+print(f"{df_ache.canonical_smiles.isna().sum()} out of {len(df_ache)} SMILES failed in conversion")
+```
+
+There are other ways to deal with NaNs with a few examples provided by [scikit-learn](https://scikit-learn.org/stable/modules/impute.html). However, with regards to drug discovery data, there are probably more caveats that need to be taken during data preprocessing (I'm also still exploring this too). 
+
+<br>
+
+###### **Split data**
+
+Randomly splitting data this time.
+
+```{python}
+# Found a silly error when naming X, y train/test sets!
+# Remember to name them in this order: X_train, X_test, y_train, y_test
+# otherwise model fitting won't work...
+X_train, X_test, y_train, y_test = train_test_split(X_valid, y, test_size=0.2, random_state=3)
+```
+
+<br>
+
+##### **Create pipelines**
+
+The aim is to create pipeline(s) using *scikit-learn*.
+
+<br>
+
+###### **AdaBoost classifier**
+
+The original plan is to chain an AdaBoost classifier, XGBoost classifier, along with Scikit-mol transformers all at once. However, it turns out that I'm building two separate pipelines of AdaBoost classifier and XGBoost classifier so that I can compare the difference(s) between them, and this also serves better for the purpose of this post really.
+
+This is also the time to think about generating molecular features for model training. Choosing data features such as fingerprints (e.g. Morgan fingerprints which is usually best for larger dataset) or RDKit 2D descriptors (which is useful for smaller datasets) or others. For RDKit 2D descriptors, Scikit_mol has integrated RDKit's [rdkit.Chem.Descriptors module](https://www.rdkit.org/docs/source/rdkit.Chem.Descriptors.html#module-rdkit.Chem.Descriptors) and [rdkit.ML.Descriptors.MoleculeDescriptors module](https://www.rdkit.org/docs/source/rdkit.ML.Descriptors.MoleculeDescriptors.html#rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator) within its MolecularDescriptorTransformer().
+
+Some useful links regarding building pipelines in *scikit-learn* and also another reference notebook on when to use parallel calculations for different molecular features:
+
+- [Pipeline module](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn-pipeline-pipeline)
+
+- [make_pipeline module](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html#sklearn-pipeline-make-pipeline) (simpler pipeline construction, without naming estimators ourselves but rather naming them automatically)
+
+- [Useful notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/07_parallel_transforms.ipynb) explaining when is the best to run parallel calculations to calculate molecular fingerprints and descriptors
+
+Initally, RDKit 2D descriptors are used and to see all the available descriptors, run the following code.
+
+```{python}
+rdkit2d = MolecularDescriptorTransformer()
+available_descriptors = rdkit2d.available_descriptors
+print(f"First 10 descriptor names: {available_descriptors[:10]}")
+```
+
+For the first sample pipeline I'm building below, I've noticed that not all of the 209 RDKit 2D descriptors can be used for AdaBoost classifier, as some of the descriptors will have values of "0" and AdaBoost classifier will not be able to take care of them. Therefore, I'm only using a small selection of descriptors only, but HistGradientBoostingClassifier() should be able to take into account of NaNs and can be chained on all descriptors in a pipeline.
+
+The following is an example of building a *scikit_learn* pipeline by using AdaBoost classifier model, along with Scikit_mol's transformers for multi-class max_phase predictions with training set consists of molecules with max_phase 1, 2, 3 and 4. I've used Morgan fingerprints instead eventually so that'll be shown in the following pipeline code, but I've also kept the RDKit 2D descriptor option on (just need to uncomment to run).
+
+```{python}
+# Set parameters for RDKit 2D descriptors
+# params_rdkit2d = {
+#     "desc_list": ['HeavyAtomCount', 'FractionCSP3', 'RingCount', 'MolLogP', 'MolWt']
+# }
+
+# Set parameters for adaboost model
+params_adaboost = {
+    "estimator": DecisionTreeClassifier(max_depth = 3), 
+    # default: n_estimators = 50, learning_rate = 1.0 (trade-off between them)
+    "n_estimators": 80, 
+    "learning_rate": 0.2, 
+    # SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) algorithm 
+    # for multi-class classification
+    "algorithm": "SAMME", 
+    "random_state": 2,
+    }
+
+# Building AdaBoostClassifier pipeline
+mlpipe_adaboost = make_pipeline(
+    # Convert SMILES to RDKit molecules
+    SmilesToMolTransformer(), 
+    # Molecule standardisations
+    Standardizer(),
+    ## A choice of using either Morgan fingerprints or RDKit 2D descriptors:
+    # Generate MorganFingerprintTransformer()
+    MorganFingerprintTransformer(useFeatures=True),
+    # Generate RDKit2D descriptors
+    #MolecularDescriptorTransformer(**params_rdkit2d),
+    # Scale variances in descriptor data
+    StandardScaler(),
+    # Apply adaptive boost classifier
+    AdaBoostClassifier(**params_adaboost)
+)
+```
+
+```{python}
+# Check on pipeline
+mlpipe_adaboost
+```
+
+An interactive pipeline diagram should show with a status of "not fitted" if you hover the mouse over the question mark on top right. The pipeline is then fitted onto the training sets.
+
+```{python}
+mlpipe_adaboost.fit(X_train, y_train)
+```
+
+The pipeline status should now show a "fitted" message if hovering over the same question mark symbol. Then the pipeline is used on the X_test (testing X set) to predict the target (max_phase) variable.
+
+```{python}
+mlpipe_adaboost.predict(X_test)
+```
+
+<br>
+
+###### **XGBoost classfier**
+
+The following code snippet is an example of a scikit_learn pipeline using Scikit_mol's transformers and XGBoost classifier. One nice thing about XGBoost is that is has [*scikit_learn* interface](https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html) so that it can be integrated into the sklearn pipeline and Scikit_mol's transformers, which is what I've tried below.
+
+```{python}
+# Set parameters for xgboost model
+params_xgboost = {
+    "n_estimators": 100,
+    "max_depth": 3,
+    # For multi-class classification, use softprob for loss function (learning task parameters)
+    # source: https://xgboost.readthedocs.io/en/latest/parameter.html#learning-task-parameters
+    "objective": 'multi:softprob', 
+    "learning_rate": 0.1, 
+    "subsample": 0.5, 
+    "random_state": 2
+    }
+
+# Building XGBoostClassifier pipeline
+mlpipe_xgb = make_pipeline(
+    # Convert SMILES to RDKit molecules
+    SmilesToMolTransformer(), 
+    # Molecule standardisations
+    Standardizer(),
+    ## A choice of using either Morgan fingerprints  or RDKit 2D descriptors:
+    # Generate MorganFingerprintTransformer()
+    MorganFingerprintTransformer(useFeatures=True),
+    # Generate RDKit2D descriptors
+    #MolecularDescriptorTransformer(**params_rdkit2d),
+    # Scale variances in descriptor data
+    StandardScaler(),
+    # XGBoost classifier
+    XGBClassifier(**params_xgboost)
+)
+```
+
+```{python}
+mlpipe_xgb
+```
+
+```{python}
+mlpipe_xgb.fit(X_train, y_train)
+```
+
+```{python}
+pred = mlpipe_xgb.predict(X_test)
+pred
+```
+
+<br>
+
+###### **Model metrics**
+
+One can never just leave the process of building a machine learning model without evaluating it. Although what I have done below is probably very minimal but it's somewhat a starting point to think about how good the model is.
+
+```{python}
+from sklearn.metrics import accuracy_score
+
+# Following misclassification score function code borrowed and adapted from:
+# https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_multiclass.html#sphx-glr-auto-examples-ensemble-plot-adaboost-multiclass-py
+
+def misclassification_error(y_true, y_pred):
+    return 1 - accuracy_score(y_true, y_pred)
+
+mlpipe_adaboost_misclassification_error = misclassification_error(
+    y_test, mlpipe_adaboost.fit(X_train, y_train).predict(X_test)
+)
+
+mlpipe_xgb_misclassifiaction_error = misclassification_error(
+    y_test, mlpipe_xgb.fit(X_train, y_train).predict(X_test)
+)
+
+print(f"Training score for mlpipe_adaboost: {mlpipe_adaboost.score(X_train, y_train):0.2f}")
+print(f"Testing score for mlpipe_adaboost: {mlpipe_adaboost.score(X_test, y_test):0.2f}")
+print("AdaBoostClassifier's misclassification_error: "f"{mlpipe_adaboost_misclassification_error:0.3f}")
+
+print(f"Training score for mlpipe_adaboost: {mlpipe_xgb.score(X_train, y_train):0.2f}")
+print(f"Testing score for mlpipe_adaboost: {mlpipe_xgb.score(X_test, y_test):0.2f}")
+print("XGBClassifier's missclassification_error: "f"{mlpipe_xgb_misclassifiaction_error:0.3f}")
+```
+
+It appears that XGBoost model obtained a better prediction accuracy than the AdaBoost one (although the models were built in a very simple and crude way, but shows the slight difference in performance). The training data being used here is also very imbalanced with a lot of them being max_phase of "0" than "4", and with max_phase "4" being our ultimate aim, the dataset used above is really for demonstration only. Also, since this post is already quite long, I'd rather not make this post into a gigantic tl;dr, so for the imbalanced data discussion and exploration, my previous posts have tried to touch on this topic - ["Random forest"](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/1_random_forest.html) and ["Random forest classifier"](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html).
+
+<br>
+
+###### **Hyperparameter tuning for XGBoost classifier**
+
+For XGBoost, one of the main things is to minimise model overfitting where several parameters will play important roles to achieve this. For example, *learning_rate* and *subsample* are the first two mentioned previously, and another technique is based on regularisation which includes two other parameters, *reg_alpha* (L1 regularisation based on Manhattan distance) and *reg_lamda* (L2 regularisation based on Euclidean distance). Both of these regularisation parameters aim to penalise XGBoost's model complexity to make it a bit more conservative in order to reduce overfitting [@bruce2020].
+
+A full list of XGBoost classifier pipeline parameters and settings used can be retrieved as shown below. It contains a **long** list of parameters and one of the ways to find the optimal set of parameters is by using cross-validation (CV).
+
+```{python}
+mlpipe_xgb.get_params()
+```
+
+::: {.callout-note}
+To see the default values or types of each XGBoost parameter, this XGBoost documentation [link](https://xgboost.readthedocs.io/en/latest/parameter.html#xgboost-parameters) is useful (which can be cross-referenced with XGBoost's [Python API reference](https://xgboost.readthedocs.io/en/latest/python/python_api.html#python-api-reference)).
+:::
+
+```{python}
+# To obtain only the parameter names for the ease of reading
+mlpipe_xgb.get_params().keys()
+```
+
+Some of the main XGBoost parameters that can be tuned are n_estimators, max_depth, learning_rate, subsample and reg_lambda. Here, I'm going to try to look for the best combination of learning_rate and subsample for a XGBoost classifier model for now.
+
+```{python}
+# Specify parameters and distributions to be sampled
+params_dist = {
+    # learning_rate usually between 0.01 - 0.1 as suggested by Raschka et al. 
+    # default is between 0 and 1
+    "xgbclassifier__learning_rate": [0.05, 0.1, 0.3], 
+    # subsample default is between 0 and 1
+    "xgbclassifier__subsample": [0.5, 0.7, 1.0]
+}
+```
+
+<br>
+
+###### **Randomised search CV**
+
+The following chunk of code is an example of running randomised search CV. I've deliberately folded the code to minimise the reading length of the post and also because the result from it is very similar to the grid search CV used below (randomised search CV run time was 13 min 33.2 seconds due to having two pipelines containing two different machine learning models for the same set of data). It's being kept as a code reference for anyone who'd like to try it and also as an alternative way to do hyperparameter tuning. 
+
+```{python}
+#| code-fold: true
+## Uncomment code below to run
+# from sklearn.model_selection import RandomizedSearchCV
+# from time import time
+
+## Borrowing a utility function code from scikit_learn documentation to report best scores
+## Source: https://scikit-learn.org/stable/auto_examples/model_selection/plot_randomized_search.html#sphx-glr-auto-examples-model-selection-plot-randomized-search-py
+
+# def report(results, n_top=3):
+#     for i in range(1, n_top + 1):
+#         candidates = np.flatnonzero(results["rank_test_score"] == i)
+#         for candidate in candidates:
+#             print("Model with rank: {0}".format(i))
+#             print(
+#                 "Mean validation score: {0:.3f} (std: {1:.3f})".format(
+#                     results["mean_test_score"][candidate],
+#                     results["std_test_score"][candidate],
+#                 )
+#             )
+#             print("Parameters: {0}".format(results["params"][candidate]))
+#             print("")
+
+## The following code has also referenced and adapted from this notebook 
+## https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb
+
+# n_iter_search = 9
+
+# random_search = RandomizedSearchCV(
+#     mlpipe_xgb, 
+#     param_distributions=params_dist,
+#     n_iter=n_iter_search,
+#     n_jobs=2
+# )
+
+# t_start = time()
+# random_search.fit(X_train, y_train)
+# t_finish = time()
+
+# print(f'Runtime: {t_finish-t_start:0.2F} seconds for {n_iter_search} iterations')
+
+## Run report function code
+# report(random_search.cv_results_)
+```
+
+<br>
+
+###### **Grid search CV**
+
+```{python}
+grid_search = GridSearchCV(
+    mlpipe_xgb,
+    param_grid=params_dist,
+    verbose=1,
+    n_jobs=2
+)
+
+grid_search.fit(X_train, y_train)
+
+print(f"The best cv score is: {grid_search.best_score_:0.2f}")
+print(f"The best cv parameter settings are: {grid_search.best_params_}")
+```
+
+For tuning parameters of Morgan fingerprints, this Scikit_mol [example notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb) explains how to do it with code, so I won't repeat them here, but have only shown how to tune some of the main XGBoost parameters.
+
+<br>
+
+###### **Pickle model**
+
+The next step is to pickle the model or pipeline if wanting to save it for future use and to avoid re-training model again.
+
+Some security tips regarding pickle module:
+
+- [Python documentation](https://docs.python.org/3/library/pickle.html)
+- [Reference blog post 1](https://www.synopsys.com/blogs/software-security/python-pickling.html) and [blog post 2](https://snyk.io/blog/guide-to-python-pickle/)
+
+One thing to remember is to avoid unpickling unknown files over insecure network, and add security key if needed.
+
+```{python}
+# Pickle save (serialise) the model in working directory (specify path by changing code if needed)
+pickle.dump(mlpipe_xgb, open("xgb_pipeline.pkl", "wb"))
+# Unpickle (de-serialise) the model
+mlpipe_xgb_2 = pickle.load(open("xgb_pipeline.pkl", "rb"))
+
+# Use the unpickled model object to make prediction
+pred2 = mlpipe_xgb_2.predict(X_test)
+
+## Check unpickled model and original model are the same via Python's assertion method
+#assert np.sum(np.abs(pred2 - pred)) == 0
+## or alternatively use numpy's allclose()
+## https://numpy.org/doc/stable/reference/generated/numpy.allclose.html#numpy-allclose
+print(np.allclose(pred, pred2))
+```
+
+<br>
+
+##### **Acknowledgement**
+
+Again, this grows into another really long post... Although this post has taken quite a long time to build up to completion, I still want to thank all the contributors or developers for all the packages used in this post.
