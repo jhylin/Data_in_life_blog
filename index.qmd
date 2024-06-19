@@ -19,8 +19,8 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
-* Latest project - Boosted trees (at last...)
-* Next project in the pipeline - Break and inspiration time
+* Latest project - Boosted trees 
+* Next project in the pipeline - Something about CYP450 and drug molecules
 
 <br>
 
