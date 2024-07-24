@@ -20,7 +20,7 @@ comments: false
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
 * Latest project - Boosted trees 
-* Next project in the pipeline - Something about CYP450 and drug molecules
+* Next project in the pipeline - CYP3A4 and 2D6 inhibitors (likely in August)
 
 <br>
 
