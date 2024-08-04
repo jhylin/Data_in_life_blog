@@ -4,7 +4,7 @@ listing:
   contents: posts
   sort: "date desc"
   type: default
-  fields: [date, title, author, reading-time]
+  fields: [date, title, reading-time]
   categories: true
   feed: 
     categories: [R, Python]
