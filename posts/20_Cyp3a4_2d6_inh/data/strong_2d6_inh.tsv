@@ -1,0 +1,6 @@
+chembl_id	pref_name	max_phase	canonical_smiles
+CHEMBL894	BUPROPION	4.0	CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1
+CHEMBL41	FLUOXETINE	4.0	CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1
+CHEMBL490	PAROXETINE	4.0	Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1
+CHEMBL21578	QUINIDINE		C=C[C@H]1CN2CCC1C[C@@H]2[C@@H](O)c1ccnc2ccc(OC)cc12
+CHEMBL1294	QUINIDINE	4.0	C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2ccc(OC)cc12

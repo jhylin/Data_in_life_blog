@@ -9,3 +9,4 @@ derby.log
 venv
 /.luarc.json
 xgb_pipeline.pkl
+__pycache__
