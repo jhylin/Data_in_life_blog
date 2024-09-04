@@ -20,7 +20,7 @@ comments: false
 Welcome to my blog on selected cheminformatics, machine learning (ML) and data science projects in drug discovery.
 
 * Latest project - CYP3A4 and 2D6 inhibitors 
-* Next project in the pipeline - Break time until further notice
+* Next project in the pipeline - Updating first post on small molecules in ChEMBL database (hopefully by final quarter of the year...)
 
 <br>
 
