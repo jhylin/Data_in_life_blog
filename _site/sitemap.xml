@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jhylin.github.io/Data_in_life_blog/posts/10_ML1-2_Small_molecules_in_ChEMBL_database/ML1-2_chembl_cpds.html</loc>
-    <lastmod>2024-09-04T23:05:26.226Z</lastmod>
-  </url>
-  <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/Blog-Portfolio_projects/Portfolio_projects.html</loc>
     <lastmod>2024-09-04T23:05:27.300Z</lastmod>
   </url>
@@ -154,7 +150,7 @@
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/index.html</loc>
-    <lastmod>2024-10-12T22:52:03.494Z</lastmod>
+    <lastmod>2024-10-12T23:01:52.512Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/about.html</loc>
