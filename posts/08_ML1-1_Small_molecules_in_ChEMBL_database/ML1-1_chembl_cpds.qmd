@@ -234,7 +234,7 @@ Firstly, I had a look at the overall distribution of the max phase compounds in 
 ```{python}
 # Interested in what types of "Max Phase" were recorded 
 # for the curated small molecules in ChEMBL database
-df_dn.groupby("Max Phase", maintain_order = True).agg(pl.count())
+df_dn.group_by("Max Phase", maintain_order = True).agg(pl.count())
 ```
 
 A quick groupby function showed that there were only 954 small molecules approved. Phase 3 recorded a total of 303 small molecules. For phase 2, there were 441 small molecules, followed by 239 compounds in phase 1. There were, however, a total amount of 734,633 small molecules that had zero as phase number (as per ChEMBL_31 schema documentation). Note: these figures were only for ChEMBL compounds with full documentations in the dataset (excluding entries or compounds with N/A or "" (empty) string cells).
@@ -336,13 +336,13 @@ print(df_concat)
 This df_concat dataset was checked to see it had all compounds in Max Phase 0 and 4 only. Note: Max Phase 4 (approved) compounds were re-labelled as Max_Phase = 1.
 
 ```{python}
-df_concat.groupby("Max_Phase").count()
+df_concat.group_by("Max_Phase").count()
 ```
 
 I then checked df_concat dataset only had small molecules to confirm what I've tried to achieve.
 
 ```{python}
-df_concat.groupby("Type").count()
+df_concat.group_by("Type").count()
 ```
 
 So here we had the final version of the dataset, which I've renamed to df_ml to avoid confusion from the previous dataframes, before entering the ML phase.
