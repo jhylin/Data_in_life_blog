@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-01-04">
+
+<title>Home - Small molecules in ChEMBL database</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Small molecules in ChEMBL database</h1>
+            <p class="subtitle lead">Series 1.1.1 - Parquet file in Polars dataframe library</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine learning projects</div>
+                <div class="quarto-category">Polars</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Jupyter</div>
+                <div class="quarto-category">ChEMBL database</div>
+                <div class="quarto-category">Cheminformatics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 4, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 18, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-updating-this-post" id="toc-why-updating-this-post" class="nav-link active" data-scroll-target="#why-updating-this-post"><strong>Why updating this post?</strong></a></li>
+  <li><a href="#previous-post-updates" id="toc-previous-post-updates" class="nav-link" data-scroll-target="#previous-post-updates"><strong>Previous post updates</strong></a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><strong>Background</strong></a></li>
+  <li><a href="#install-and-import-polars" id="toc-install-and-import-polars" class="nav-link" data-scroll-target="#install-and-import-polars"><strong>Install and import Polars</strong></a></li>
+  <li><a href="#download-dataset" id="toc-download-dataset" class="nav-link" data-scroll-target="#download-dataset"><strong>Download dataset</strong></a></li>
+  <li><a href="#some-data-wrangling-and-converting-a-csv-file-into-a-parquet-file" id="toc-some-data-wrangling-and-converting-a-csv-file-into-a-parquet-file" class="nav-link" data-scroll-target="#some-data-wrangling-and-converting-a-csv-file-into-a-parquet-file"><strong>Some data wrangling and converting a csv file into a parquet file</strong></a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="why-updating-this-post" class="level5">
+<h5 class="anchored" data-anchor-id="why-updating-this-post"><strong>Why updating this post?</strong></h5>
+<p>Three reasons for this:</p>
+<ol type="1">
+<li><p>ChEMBL data downloaded straight from the ChEMBL database website is way too large to be uploaded to GitHub - this is one of my very early posts where ChEMBL is completely new to me at the time so I’ve downloaded the ChEMBL data without thinking too much, obviously there are other better and more reproducible ways to source ChEMBL data e.g.&nbsp;my more recent posts or through other ways in the literatures</p>
+<p>Note: GitHub blocks files larger than 100 MiB, which is in mebibytes and equivalent to 1,048,576 bytes or 1.04858 MB (<a href="https://www.ibm.com/docs/en/storage-insights?topic=overview-units-measurement-storage-data">reference</a>) - my bad before as I’ve read “MiB” as “MB” from this <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github">GitHub doc</a>!</p></li>
+<li><p>Polars seems to be a bit more integrated with scikit-learn now so I’m wondering if Polars dataframe library can be used with scikit-learn solely (i.e.&nbsp;not using Pandas at all)</p></li>
+<li><p>This post is one of my earlier less mature posts (very embarrassing when I’m looking at it now…) so I just want to improve it a little at least</p></li>
+</ol>
+<p><br></p>
+</section>
+<section id="previous-post-updates" class="level5">
+<h5 class="anchored" data-anchor-id="previous-post-updates"><strong>Previous post updates</strong></h5>
+<p><em>Update on 19th April 2024 - Polars is currently more integrated with scikit-learn from version 1.4 (since January 2024), see this link re. <a href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_4_0.html#polars-output-in-set-output">Polars output in set_output</a> for Polars dataframe outputs in scikit-learn, and also a few other Polars enhancements from release <a href="https://scikit-learn.org/dev/whats_new/v1.4.html#">version 1.4 changelog</a>.</em></p>
+<p><em>Update on 16th August 2023 - some code updates only, please always refer to <a href="https://docs.pola.rs/py-polars/html/reference/index.html">Polars API reference</a> for most up-to-date code.</em></p>
+<p><br></p>
+</section>
+<section id="background" class="level5">
+<h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
+<p>This is the first part of the series of posts on building a logistic regression model by using scikit-learn with <a href="https://docs.pola.rs/">Polars dataframe library</a> (note: the older version of this post also uses Pandas). Polars is a fast (or more commonly known as “blazingly fast”) dataframe library that is written completely in Rust with a very light Python binding that is available for use in Python or Rust programming language. Here I’ll be using Python throughout all posts in the series.</p>
+<p>This post will only focus on getting the small molecules data ready from ChEMBL database via a straight website download (not recommended if you’re researching or doing virtual experiments that require a good level of data reproducibility, e.g.&nbsp;you’ll need the version of data etc., this is however only a demonstration so I’ll leave it as it is), and then convert the comma separated value (.csv) file into a parquet file (for better file compressions) in order to upload the data into GitHub.</p>
+<p><br></p>
+</section>
+<section id="install-and-import-polars" class="level5">
+<h5 class="anchored" data-anchor-id="install-and-import-polars"><strong>Install and import Polars</strong></h5>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## To install Polars dataframe library (or install in virtual environments)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#%pip install polars</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Update Polars version</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#%pip install --upgrade polars</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pl.show_versions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--------Version info---------
+Polars:              1.9.0
+Index type:          UInt32
+Platform:            macOS-12.7.6-x86_64-i386-64bit
+Python:              3.11.0 (v3.11.0:deaf509e8f, Oct 24 2022, 14:43:23) [Clang 13.0.0 (clang-1300.0.29.30)]
+
+----Optional dependencies----
+adbc_driver_manager  </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+altair               </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5.4.1
+cloudpickle          </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+connectorx           </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+deltalake            </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+fastexcel            </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+fsspec               </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2024.6.1
+gevent               </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+great_tables         </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+matplotlib           </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.9.2
+nest_asyncio         </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.6.0
+numpy                </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.26.4
+openpyxl             </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+pandas               </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.1.4
+pyarrow              </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+pydantic             </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+pyiceberg            </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+sqlalchemy           </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+torch                </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+xlsx2csv             </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;
+xlsxwriter           </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;not installed&gt;</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="download-dataset" class="level5">
+<h5 class="anchored" data-anchor-id="download-dataset"><strong>Download dataset</strong></h5>
+<p>The file being used here will be equivalent to a straight download from the home page of ChEMBL database, via clicking on the “Distinct compounds” (see the circled area in the image below). Options are available to download the files as .csv, .tsv or .sdf formats (located at the top right of the page).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ChEMBL_cpds.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image adapted from ChEMBL database website at version 31</figcaption><p></p>
+</figure>
+</div>
+<p>I’m reading the .csv file first to have an overall look at the data.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"chembl_mols.csv"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 1)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID";"Name";"Synonyms";"Type";"Max Phase";"Molecular Weight";"Targets";"Bioactivities";"AlogP";"Polar Surface Area";"HBA";"HBD";"#RO5 Violations";"#Rotatable Bonds";"Passes Ro3";"QED Weighted";"CX Acidic pKa";"CX Basic pKa";"CX LogP";"CX LogD";"Aromatic Rings";"Structure Type";"Inorganic Flag";"Heavy Atoms";"HBA (Lipinski)";"HBD (Lipinski)";"#RO5 Violations (Lipinski)";"Molecular Weight (Monoisotopic)";"Molecular Species";"Molecular Formula";"Smiles";"Inchi Key</th></tr><tr><td>str</td></tr></thead><tbody><tr><td>"CHEMBL1206185;";";Small molecu…</td></tr><tr><td>"CHEMBL539070;";";Small molecul…</td></tr><tr><td>"CHEMBL3335528;";";Small molecu…</td></tr><tr><td>"CHEMBL2419030;";";Small molecu…</td></tr><tr><td>"CHEMBL4301448;";";Small molecu…</td></tr></tbody></table></div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="some-data-wrangling-and-converting-a-csv-file-into-a-parquet-file" class="level5">
+<h5 class="anchored" data-anchor-id="some-data-wrangling-and-converting-a-csv-file-into-a-parquet-file"><strong>Some data wrangling and converting a csv file into a parquet file</strong></h5>
+<p>A .csv file tends to be separated by delimiters e.g.&nbsp;commas, semicolons or tabs. To read it properly, we can add a delimiter term in the code to transform the dataframe into a more readable format.</p>
+<p>Another thing being added below is to deal with null values early - by filling in “None” and “” values in the dataframe as “null” first. This will save some hassles later on (I’ve encountered this problem when trying to convert column data types so found out this may be the best way to resolve it).</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"chembl_mols.csv"</span>, separator <span class="op">=</span> <span class="st">";"</span>, null_values <span class="op">=</span> [<span class="st">"None"</span>, <span class="st">""</span>])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df.head()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL1206185"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>607.88</td><td>null</td><td>null</td><td>9.46</td><td>89.62</td><td>5</td><td>2</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>-1.91</td><td>8.38</td><td>9.4</td><td>9.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>42</td><td>5</td><td>3</td><td>2</td><td>607.279</td><td>"ACID"</td><td>"C35H45NO4S2"</td><td>"CCCCCCCCCCC#CC(N)c1ccccc1-c1cc…</td><td>"UFBLKYIDZFRLPR-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL4301448"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>465.55</td><td>null</td><td>null</td><td>5.09</td><td>105.28</td><td>6</td><td>4</td><td>1</td><td>10</td><td>"N"</td><td>0.15</td><td>null</td><td>12.14</td><td>4.41</td><td>2.0</td><td>4</td><td>"MOL"</td><td>-1</td><td>33</td><td>7</td><td>5</td><td>1</td><td>465.1635</td><td>"BASE"</td><td>"C24H24FN5O2S"</td><td>"N=C(N)NCCCOc1ccc(CNc2nc3ccc(Oc…</td><td>"RXTJPHLPHOZLFS-UHFFFAOYSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Below is a series of data checks and cleaning that’ll reduce the original .csv file size (about 664.8 MB) into something more manageable. My goal is to get a parquet file under 104 MB which can then be uploaded to GitHub without using Git large file storage (this will be the last resort if this fails).</p>
+<p>I’m checking the “Type” column first.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df.group_by(<span class="st">"Type"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Type</th><th>len</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>"Gene"</td><td>77</td></tr><tr><td>"Oligosaccharide"</td><td>92</td></tr><tr><td>"Antibody"</td><td>974</td></tr><tr><td>"Unknown"</td><td>18015</td></tr><tr><td>"Protein"</td><td>22682</td></tr><tr><td>…</td><td>…</td></tr><tr><td>"Cell"</td><td>47</td></tr><tr><td>null</td><td>369155</td></tr><tr><td>"Enzyme"</td><td>118</td></tr><tr><td>"Unclassified"</td><td>4</td></tr><tr><td>"Small molecule"</td><td>1920366</td></tr></tbody></table></div>
+</div>
+</div>
+<p>The dataframe is further reduced in size by filtering the data for small molecules only, which are what I aim to look at.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_sm <span class="op">=</span> df.<span class="bu">filter</span>((pl.col(<span class="st">"Type"</span>) <span class="op">==</span> <span class="st">"Small molecule"</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_sm <span class="co">#1,920,366 entries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_920_366, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL1206185"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>607.88</td><td>null</td><td>null</td><td>9.46</td><td>89.62</td><td>5</td><td>2</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>-1.91</td><td>8.38</td><td>9.4</td><td>9.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>42</td><td>5</td><td>3</td><td>2</td><td>607.279</td><td>"ACID"</td><td>"C35H45NO4S2"</td><td>"CCCCCCCCCCC#CC(N)c1ccccc1-c1cc…</td><td>"UFBLKYIDZFRLPR-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL4301448"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>465.55</td><td>null</td><td>null</td><td>5.09</td><td>105.28</td><td>6</td><td>4</td><td>1</td><td>10</td><td>"N"</td><td>0.15</td><td>null</td><td>12.14</td><td>4.41</td><td>2.0</td><td>4</td><td>"MOL"</td><td>-1</td><td>33</td><td>7</td><td>5</td><td>1</td><td>465.1635</td><td>"BASE"</td><td>"C24H24FN5O2S"</td><td>"N=C(N)NCCCOc1ccc(CNc2nc3ccc(Oc…</td><td>"RXTJPHLPHOZLFS-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>null</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>null</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>null</td><td>null</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I’m looking at “Structure Type” column next.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_sm.group_by(<span class="st">"Structure Type"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (4, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Structure Type</th><th>len</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>"MOL"</td><td>1914876</td></tr><tr><td>"BOTH"</td><td>4</td></tr><tr><td>"NONE"</td><td>5485</td></tr><tr><td>"SEQ"</td><td>1</td></tr></tbody></table></div>
+</div>
+</div>
+<p>There are 5485 entries with “NONE” as “Structure Type” which means they have unknown compound structures or not recorded in either compound_structures table or protein_therapeutics table. These entries will be removed from df_sm first.</p>
+<p>Next, I’m filtering the df_sm dataset further by restricting the filters to only small molecules and excluding all “NONE” structure types.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_sm <span class="op">=</span> df.<span class="bu">filter</span>((pl.col(<span class="st">"Type"</span>) <span class="op">==</span> <span class="st">"Small molecule"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Structure Type"</span>) <span class="op">!=</span> <span class="st">"NONE"</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df_sm <span class="co">#1,914,881 entries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_914_881, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL1206185"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>607.88</td><td>null</td><td>null</td><td>9.46</td><td>89.62</td><td>5</td><td>2</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>-1.91</td><td>8.38</td><td>9.4</td><td>9.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>42</td><td>5</td><td>3</td><td>2</td><td>607.279</td><td>"ACID"</td><td>"C35H45NO4S2"</td><td>"CCCCCCCCCCC#CC(N)c1ccccc1-c1cc…</td><td>"UFBLKYIDZFRLPR-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL4301448"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>465.55</td><td>null</td><td>null</td><td>5.09</td><td>105.28</td><td>6</td><td>4</td><td>1</td><td>10</td><td>"N"</td><td>0.15</td><td>null</td><td>12.14</td><td>4.41</td><td>2.0</td><td>4</td><td>"MOL"</td><td>-1</td><td>33</td><td>7</td><td>5</td><td>1</td><td>465.1635</td><td>"BASE"</td><td>"C24H24FN5O2S"</td><td>"N=C(N)NCCCOc1ccc(CNc2nc3ccc(Oc…</td><td>"RXTJPHLPHOZLFS-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>null</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>null</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>null</td><td>null</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check "NONE" entries are removed/filtered</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_sm.group_by(<span class="st">"Structure Type"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Structure Type</th><th>len</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>"BOTH"</td><td>4</td></tr><tr><td>"SEQ"</td><td>1</td></tr><tr><td>"MOL"</td><td>1914876</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I’ve tried filtering out data using “Inorganic flag” previously, however it turns out to be not so suitable - it’ll rule out a lot of preclinical compounds with max phase 0 or max phase &gt; 1 compounds with no calculated physicochemical properties, which means there may not be enough training data to build a machine learning model. So I’m opting for the “Targets” column here by ruling out the ones with zero targets.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_sm.group_by(<span class="st">"Targets"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (553, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Targets</th><th>len</th></tr><tr><td>i64</td><td>u32</td></tr></thead><tbody><tr><td>295</td><td>6</td></tr><tr><td>697</td><td>2</td></tr><tr><td>27</td><td>6674</td></tr><tr><td>557</td><td>2</td></tr><tr><td>274</td><td>2</td></tr><tr><td>…</td><td>…</td></tr><tr><td>125</td><td>37</td></tr><tr><td>482</td><td>2</td></tr><tr><td>220</td><td>2</td></tr><tr><td>485</td><td>2</td></tr><tr><td>256</td><td>3</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_sm <span class="op">=</span> df.<span class="bu">filter</span>((pl.col(<span class="st">"Type"</span>) <span class="op">==</span> <span class="st">"Small molecule"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Structure Type"</span>) <span class="op">!=</span> <span class="st">"NONE"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Targets"</span>) <span class="op">&gt;</span> <span class="dv">0</span> ))</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df_sm <span class="co">#1,831,560 entries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_831_560, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3827271"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>712.85</td><td>1</td><td>1</td><td>-2.84</td><td>319.06</td><td>10</td><td>11</td><td>2</td><td>16</td><td>"N"</td><td>0.07</td><td>4.08</td><td>10.49</td><td>-6.88</td><td>-8.95</td><td>0</td><td>"MOL"</td><td>-1</td><td>50</td><td>19</td><td>14</td><td>3</td><td>712.4232</td><td>"ZWITTERION"</td><td>"C31H56N10O9"</td><td>"CC(C)C[C@@H]1NC(=O)[C@H](CCCNC…</td><td>"QJQNNLICZLLPMB-VUBDRERZSA-N"</td></tr><tr><td>"CHEMBL3465961"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>319.42</td><td>16</td><td>22</td><td>2.22</td><td>50.5</td><td>4</td><td>1</td><td>0</td><td>6</td><td>"N"</td><td>0.87</td><td>null</td><td>9.38</td><td>2.13</td><td>-0.44</td><td>1</td><td>"MOL"</td><td>-1</td><td>23</td><td>4</td><td>1</td><td>0</td><td>319.206</td><td>"BASE"</td><td>"C18H26FN3O"</td><td>"CC(O)CN1CCC(CN(C)Cc2cc(C#N)ccc…</td><td>"FZEVYCHTADTXPM-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>null</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>null</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>null</td><td>null</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p>The next step is to save the dataframe as a parquet file.</p>
+<p>Reference: <a href="https://parquet.apache.org/docs/">Apache Parquet documentations</a></p>
+<p>I have tried two main different ways where one is using the <code>write_parquet()</code> by only adding file compression level parameter (the “without partition” way), and the other one using use_pyarrow &amp; pyarrow_options to partition datasets. The changes in parquet file size are shown in the following two tables.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Without partitioning dataset</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> Path.cwd() <span class="op">/</span> <span class="st">"chembl_sm_mols.parquet"</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>df_sm.write_parquet(path, compression_level<span class="op">=</span><span class="dv">22</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<caption>Parquet file size changes without data partitions (note: original .csv file size is 664.8 MB)</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Compression level</th>
+<th>Data restrictions</th>
+<th>File size</th>
+<th>Number of entries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>22</td>
+<td><ul>
+<li>None</li>
+</ul></td>
+<td>127.3 MB</td>
+<td>2,331,700</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td><ul>
+<li>Small molecules only</li>
+</ul></td>
+<td>105.4 MB</td>
+<td>1,920,366</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td><ul>
+<li>Small molecules only</li>
+<li>Exclude structure type with “NONE”</li>
+</ul></td>
+<td>105.1 MB</td>
+<td>1,914,881</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td><ul>
+<li>Small molecules only</li>
+<li>Exclude structure type with “NONE”</li>
+<li>Remove compounds with no targets</li>
+</ul></td>
+<td>100.4 MB</td>
+<td>1,831,560</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb34"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Partitioning dataset</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> Path.cwd() <span class="op">/</span> <span class="st">"chembl_mols_type_part"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>df.write_parquet(</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    path,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#compression_level=20,</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    use_pyarrow<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    pyarrow_options<span class="op">=</span>{<span class="st">"partition_cols"</span>: [<span class="st">"Type"</span>]},</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="table">
+<caption>Parquet file size changes with data partitions (note: original .csv file size is 664.8 MB)</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 41%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Compression level</th>
+<th>Data restrictions</th>
+<th>File size</th>
+<th>Number of entries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>default</td>
+<td>None</td>
+<td><ul>
+<li>using “Max Phase” as partition column</li>
+<li>max phase 0 &gt; 104 MB</li>
+<li>max phases 1-4: each &lt; 104 MB</li>
+</ul></td>
+<td>2,331,700</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>None</td>
+<td><ul>
+<li>max phase 0 &gt; 104 MB</li>
+<li>max phase 1-4: each &lt; 104 MB</li>
+</ul></td>
+<td>2,331,700</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>None</td>
+<td><ul>
+<li>similar sizes as mentioned above</li>
+</ul></td>
+<td>2,331,700</td>
+</tr>
+<tr class="even">
+<td>default</td>
+<td>None</td>
+<td><ul>
+<li>using “Type” as partition column</li>
+<li>“Small molecule” file size = 135.2 MB</li>
+</ul></td>
+<td>2,331,700</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, it appears that the one with three data restrictions at compression level of 22 has produced a file at 100.4 MB. I’m reading this file below into a dataframe to see if it’s working.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_pa <span class="op">=</span> pl.read_parquet(<span class="st">"chembl_sm_mols.parquet"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df_pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_831_560, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3827271"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>712.85</td><td>1</td><td>1</td><td>-2.84</td><td>319.06</td><td>10</td><td>11</td><td>2</td><td>16</td><td>"N"</td><td>0.07</td><td>4.08</td><td>10.49</td><td>-6.88</td><td>-8.95</td><td>0</td><td>"MOL"</td><td>-1</td><td>50</td><td>19</td><td>14</td><td>3</td><td>712.4232</td><td>"ZWITTERION"</td><td>"C31H56N10O9"</td><td>"CC(C)C[C@@H]1NC(=O)[C@H](CCCNC…</td><td>"QJQNNLICZLLPMB-VUBDRERZSA-N"</td></tr><tr><td>"CHEMBL3465961"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>319.42</td><td>16</td><td>22</td><td>2.22</td><td>50.5</td><td>4</td><td>1</td><td>0</td><td>6</td><td>"N"</td><td>0.87</td><td>null</td><td>9.38</td><td>2.13</td><td>-0.44</td><td>1</td><td>"MOL"</td><td>-1</td><td>23</td><td>4</td><td>1</td><td>0</td><td>319.206</td><td>"BASE"</td><td>"C18H26FN3O"</td><td>"CC(O)CN1CCC(CN(C)Cc2cc(C#N)ccc…</td><td>"FZEVYCHTADTXPM-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>null</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>null</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>null</td><td>null</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p>So it looks like it does. The next series of posts will be about trying to use Polars dataframe library all the way with scikit-learn.</p>
+<p>Note: the way I’ve compressed the original data file may not be the best as I’m losing some data along the way by restricting the number of data entries. There are definitely other better ways out there, please use this example with care.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2024 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
