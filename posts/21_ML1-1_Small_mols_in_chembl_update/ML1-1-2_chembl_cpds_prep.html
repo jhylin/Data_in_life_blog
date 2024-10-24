@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jennifer HY Lin">
+<meta name="dcterms.date" content="2023-01-04">
+
+<title>Home - Small molecules in ChEMBL database</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Home</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
+ <span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Small molecules in ChEMBL database</h1>
+            <p class="subtitle lead">Series 1.1.2 - Preprocessing data in Polars dataframe library</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine learning projects</div>
+                <div class="quarto-category">Polars</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Jupyter</div>
+                <div class="quarto-category">ChEMBL database</div>
+                <div class="quarto-category">Cheminformatics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jennifer HY Lin </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 4, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 25, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#import-polars-and-read-parquet-file" id="toc-import-polars-and-read-parquet-file" class="nav-link active" data-scroll-target="#import-polars-and-read-parquet-file"><strong>Import Polars and read parquet file</strong></a>
+  <ul>
+  <li><a href="#looking-at-some-of-the-physicochemical-properties-in-the-dataset" id="toc-looking-at-some-of-the-physicochemical-properties-in-the-dataset" class="nav-link" data-scroll-target="#looking-at-some-of-the-physicochemical-properties-in-the-dataset"><strong>Looking at some of the physicochemical properties in the dataset</strong></a></li>
+  </ul></li>
+  <li><a href="#dealing-with-nulls" id="toc-dealing-with-nulls" class="nav-link" data-scroll-target="#dealing-with-nulls"><strong>Dealing with nulls</strong></a></li>
+  <li><a href="#looking-at-max-phase-and-qed-weighted" id="toc-looking-at-max-phase-and-qed-weighted" class="nav-link" data-scroll-target="#looking-at-max-phase-and-qed-weighted"><strong>Looking at max phase and QED weighted</strong></a></li>
+  <li><a href="#prepare-data-prior-to-running-ml-model" id="toc-prepare-data-prior-to-running-ml-model" class="nav-link" data-scroll-target="#prepare-data-prior-to-running-ml-model"><strong>Prepare data prior to running ML model</strong></a>
+  <ul>
+  <li><a href="#re-sampling-via-under-sampling---dealing-with-imbalanced-dataset" id="toc-re-sampling-via-under-sampling---dealing-with-imbalanced-dataset" class="nav-link" data-scroll-target="#re-sampling-via-under-sampling---dealing-with-imbalanced-dataset"><strong>Re-sampling via under-sampling - dealing with imbalanced dataset</strong></a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="import-polars-and-read-parquet-file" class="level5">
+<h5 class="anchored" data-anchor-id="import-polars-and-read-parquet-file"><strong>Import Polars and read parquet file</strong></h5>
+<p>This second post will mostly be about doing some data preprocessing for the parquet file we’ve saved from the first post, trying to get the data in a reasonable state before moving onto the machine learning model building and training phase. The first step is to import Polars dataframe library and then read the parquet file as a dataframe.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_pa <span class="op">=</span> pl.read_parquet(<span class="st">"chembl_sm_mols.parquet"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_831_560, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>null</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>null</td><td>null</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3827271"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>712.85</td><td>1</td><td>1</td><td>-2.84</td><td>319.06</td><td>10</td><td>11</td><td>2</td><td>16</td><td>"N"</td><td>0.07</td><td>4.08</td><td>10.49</td><td>-6.88</td><td>-8.95</td><td>0</td><td>"MOL"</td><td>-1</td><td>50</td><td>19</td><td>14</td><td>3</td><td>712.4232</td><td>"ZWITTERION"</td><td>"C31H56N10O9"</td><td>"CC(C)C[C@@H]1NC(=O)[C@H](CCCNC…</td><td>"QJQNNLICZLLPMB-VUBDRERZSA-N"</td></tr><tr><td>"CHEMBL3465961"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>319.42</td><td>16</td><td>22</td><td>2.22</td><td>50.5</td><td>4</td><td>1</td><td>0</td><td>6</td><td>"N"</td><td>0.87</td><td>null</td><td>9.38</td><td>2.13</td><td>-0.44</td><td>1</td><td>"MOL"</td><td>-1</td><td>23</td><td>4</td><td>1</td><td>0</td><td>319.206</td><td>"BASE"</td><td>"C18H26FN3O"</td><td>"CC(O)CN1CCC(CN(C)Cc2cc(C#N)ccc…</td><td>"FZEVYCHTADTXPM-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>null</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>null</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>null</td><td>null</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I’m having a look at the max phase column first to see the distribution or counts of molecules in each max phase.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_pa.group_by(<span class="st">"Max Phase"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Max Phase</th><th>len</th></tr><tr><td>i64</td><td>u32</td></tr></thead><tbody><tr><td>3</td><td>773</td></tr><tr><td>0</td><td>1826345</td></tr><tr><td>4</td><td>2870</td></tr><tr><td>1</td><td>520</td></tr><tr><td>2</td><td>1052</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I also want to find out what types of physicochemical properties are there in this dataset.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all column names and data types </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pa.glimpse())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1831560
+Columns: 32
+$ ChEMBL ID                       &lt;str&gt; 'CHEMBL539070', 'CHEMBL3335528', 'CHEMBL2419030', 'CHEMBL3827271', 'CHEMBL3465961', 'CHEMBL3824158', 'CHEMBL194112', 'CHEMBL2047226', 'CHEMBL1991010', 'CHEMBL195644'
+$ Name                            &lt;str&gt; None, None, None, None, None, None, None, None, None, None
+$ Synonyms                        &lt;str&gt; None, None, None, None, None, None, None, None, None, None
+$ Type                            &lt;str&gt; 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule', 'Small molecule'
+$ Max Phase                       &lt;i64&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+$ Molecular Weight                &lt;f64&gt; 286.79, 842.8, 359.33, 712.85, 319.42, 422.48, 366.38, 452.4, 454.05, 375.47
+$ Targets                         &lt;i64&gt; 1, 2, 4, 1, 16, 2, 2, 4, 60, 2
+$ Bioactivities                   &lt;i64&gt; 1, 6, 4, 1, 22, 4, 3, 8, 60, 3
+$ AlogP                           &lt;f64&gt; 2.28, 0.18, 3.94, -2.84, 2.22, 5.09, 4.8, 4.93, 5.18, 4.95
+$ Polar Surface Area              &lt;f64&gt; 73.06, 269.57, 85.13, 319.06, 50.5, 109.54, 57.53, 53.08, 40.54, 70.42
+$ HBA                             &lt;i64&gt; 6, 18, 6, 10, 4, 6, 3, 5, 3, 4
+$ HBD                             &lt;i64&gt; 2, 5, 1, 11, 1, 2, 2, 2, 1, 2
+$ #RO5 Violations                 &lt;i64&gt; 0, 2, 0, 2, 0, 1, 0, 0, 1, 0
+$ #Rotatable Bonds                &lt;i64&gt; 5, 17, 3, 16, 6, 10, 1, 7, 8, 2
+$ Passes Ro3                      &lt;str&gt; 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'
+$ QED Weighted                    &lt;f64&gt; 0.63, 0.09, 0.66, 0.07, 0.87, 0.31, 0.75, 0.53, 0.6, 0.73
+$ CX Acidic pKa                   &lt;f64&gt; 13.84, 3.2, None, 4.08, None, 4.59, 8.98, None, 13.88, 9.52
+$ CX Basic pKa                    &lt;f64&gt; 3.64, None, None, 10.49, 9.38, 7.99, None, 8.47, 8.48, 3.73
+$ CX LogP                         &lt;f64&gt; 2.57, 3.31, 3.66, -6.88, 2.13, 2.49, 4.84, 4.51, 6.34, 3.92
+$ CX LogD                         &lt;f64&gt; 2.57, -0.14, 3.66, -8.95, -0.44, 2.42, 4.83, 3.29, 5.22, 3.91
+$ Aromatic Rings                  &lt;i64&gt; 2, 3, 2, 0, 1, 2, 1, 3, 2, 2
+$ Structure Type                  &lt;str&gt; 'MOL', 'MOL', 'MOL', 'MOL', 'MOL', 'MOL', 'MOL', 'MOL', 'MOL', 'MOL'
+$ Inorganic Flag                  &lt;i64&gt; -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+$ Heavy Atoms                     &lt;i64&gt; 17, 60, 24, 50, 23, 31, 26, 29, 31, 28
+$ HBA (Lipinski)                  &lt;i64&gt; 5, 19, 6, 19, 4, 7, 3, 5, 3, 4
+$ HBD (Lipinski)                  &lt;i64&gt; 3, 5, 1, 14, 1, 2, 2, 2, 1, 2
+$ #RO5 Violations (Lipinski)      &lt;i64&gt; 0, 2, 0, 3, 0, 1, 0, 0, 1, 0
+$ Molecular Weight (Monoisotopic) &lt;f64&gt; 250.0888, 842.2633, 359.0551, 712.4232, 319.206, 422.1842, 366.1443, 451.1372, 417.2668, 375.1834
+$ Molecular Species               &lt;str&gt; 'NEUTRAL', 'ACID', 'NEUTRAL', 'ZWITTERION', 'BASE', 'ACID', 'NEUTRAL', 'NEUTRAL', 'NEUTRAL', 'NEUTRAL'
+$ Molecular Formula               &lt;str&gt; 'C11H15ClN4OS', 'C41H46O19', 'C14H12F3N3O3S', 'C31H56N10O9', 'C18H26FN3O', 'C24H26N2O5', 'C20H21F3O3', 'C23H26BrN5', 'C28H36ClNO2', 'C24H25NO3'
+$ Smiles                          &lt;str&gt; 'CCCOc1ccccc1-c1nnc(NN)s1.Cl', 'COC(=O)[C@H](O[C@@H]1O[C@@H](C)[C@@H](O)[C@@H](O)[C@@H]1O)[C@@H](O[C@@H]1O[C@H](CO)[C@H](OC(=O)c2ccccc2)[C@H](O[C@H](Cc2ccccc2)C(=O)O)[C@H]1OC(=O)c1ccccc1)C(=O)OC', 'O=c1nc(NC2CCCC2)sc2c([N+](=O)[O-])cc(C(F)(F)F)cc12', 'CC(C)C[C@@H]1NC(=O)[C@H](CCCNC(N)=O)NC(=O)[C@H](CCCCN)NC(=O)[C@H](CC(=O)O)NC(=O)[C@H](CCCCN)NC(=O)CCNC1=O', 'CC(O)CN1CCC(CN(C)Cc2cc(C#N)ccc2F)CC1', 'CCCCCCCNC(C1=C(O)C(=O)c2ccccc2C1=O)c1ccc([N+](=O)[O-])cc1', 'C[C@]12CCC3c4ccc(O)cc4CCC3C1CC(C(=O)C(F)(F)F)=C2O', 'Brc1ccc(CNc2ccnc(NC3CCN(Cc4ccccc4)CC3)n2)cc1', 'CCc1ccc(/C=C/C(=O)C2CN(CC)CCC2(O)/C=C/c2ccc(CC)cc2)cc1.Cl', 'C[C@]12CCC3c4ccc(O)cc4CCC3C1CC(C(=O)c1cccnc1)=C2O'
+$ Inchi Key                       &lt;str&gt; 'WPEWNRKLKLNLSO-UHFFFAOYSA-N', 'KGUJQZWYZPYYRZ-LWEWUKDVSA-N', 'QGDMYSDFCXOKML-UHFFFAOYSA-N', 'QJQNNLICZLLPMB-VUBDRERZSA-N', 'FZEVYCHTADTXPM-UHFFFAOYSA-N', 'AXOVDUYYBUYLPC-UHFFFAOYSA-N', 'FIBOSLUEJGPVMK-RYCRIANLSA-N', 'WOAVNWHCIXCOIZ-UHFFFAOYSA-N', 'XJDPAUYFONOZBC-DCPGAFKKSA-N', 'MOBPUUUBXAHZBM-KSAYNYSMSA-N'
+
+None</code></pre>
+</div>
+</div>
+<p><br></p>
+<section id="looking-at-some-of-the-physicochemical-properties-in-the-dataset" class="level6">
+<h6 class="anchored" data-anchor-id="looking-at-some-of-the-physicochemical-properties-in-the-dataset"><strong>Looking at some of the physicochemical properties in the dataset</strong></h6>
+<p>I’ve gone through the ChEMBL_31 schema documentation and ChEMBL database website to find out the meanings for some of the column names. The explanations of the selected term are adapted from ChEMBL_31 schema documentation (available as “Release notes” on the website at the time), or if definitions for certain terms are not available, I resort to interpret them myself by going into “Dinstict compounds” section of the ChEMBL database.</p>
+<p>The definitions for some of the listed physicochemical properties are:</p>
+<p><strong>Max Phase</strong> - Maximum phase of development reached for the compound (where 4 = approved). Null is where max phase has not yet been assigned.</p>
+<p><strong>Bioactivities</strong> - Various biological assays used for the compounds e.g.&nbsp;IC<sub>50</sub>, GI<sub>50</sub>, potency tests etc.</p>
+<p><strong>AlogP</strong> - Calculated partition coefficient</p>
+<p><strong>HBA</strong> - Number of hydrogen bond acceptors</p>
+<p><strong>HBD</strong> - Number of hydrogen bond donors</p>
+<p><strong>#RO5 Violations</strong> - Number of violations of Lipinski’s rule-of-five, using HBA and HBD definitions</p>
+<p><strong>Passes Ro3</strong> - Indicating whether the compound passed the rule-of-three (MW &lt; 300, logP &lt; 3 etc)</p>
+<p><strong>QED Weighted</strong> - Weighted quantitative estimate of drug likeness <span class="citation" data-cites="Bickerton2012">(<a href="#ref-Bickerton2012" role="doc-biblioref">Bickerton et al. 2012</a>)</span></p>
+<p><strong>Inorganic flag</strong> - Indicating whether the molecule is inorganic (i.e., containing only metal atoms and &lt;2 carbon atoms), where 1 = inorganic compound and 0 = non-inorganic compound (-1 meaning preclinical compound or not a drug)</p>
+<p><strong>Heavy Atoms</strong> - Number of heavy (non-hydrogen) atoms</p>
+<p><strong>CX Acidic pKa</strong> - The most acidic pKa calculated using ChemAxon v17.29.0</p>
+<p><strong>CX Basic pKa</strong> - The most basic pKa calculated using ChemAxon v17.29.0</p>
+<p><strong>CX LogP</strong> - The calculated octanol/water partition coefficient using ChemAxon v17.29.0</p>
+<p><strong>CX LogD</strong> - The calculated octanol/water distribution coefficient at pH = 7.4 using ChemAxon v17.29.0</p>
+<p><strong>Structure Type</strong> - based on compound_structures table, where SEQ indicates an entry in the protein_therapeutics table instead, NONE indicates an entry in neither tables, e.g.&nbsp;structure unknown</p>
+<p><strong>Inchi Key</strong> - the IUPAC international chemical identifier key</p>
+<p>The older version of this post has had a code section for changing the data types of several columns. I’ve found out that this is no longer needed as I’ve taken care of this in the first post when I’ve specifically stated the null_values (e.g.&nbsp;“None” and ““) to be converted to”null” during <code>pl.read_csv()</code>. When the same dataframe df_pa is read here, you’ll notice that the data type for each column should be how it should be, matching the data inside each column.</p>
+<p><br></p>
+</section>
+</section>
+<section id="dealing-with-nulls" class="level5">
+<h5 class="anchored" data-anchor-id="dealing-with-nulls"><strong>Dealing with nulls</strong></h5>
+<p>I’m using <code>null_count()</code> to see the distributions of all null entries in the dataset.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative code: df_pa.select(pl.all().null_count())</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_pa.null_count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td></tr></thead><tbody><tr><td>0</td><td>1795946</td><td>1753154</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>783038</td><td>691442</td><td>26560</td><td>26560</td><td>26426</td><td>0</td><td>0</td><td>26426</td><td>26426</td><td>26426</td><td>26426</td><td>0</td><td>43392</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+</div>
+</div>
+<p>The following is basically several different ways to remove null values from the original dataset.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## ---Drop all rows with null entries---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#df_pa.drop_nulls()</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Number of rows reduced to 2,645 - seems way too much...</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">## ---Restricting drop nulls to only subsets of nulls in strings ---</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># import polars.selectors as cs</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_pa.drop_nulls(subset=cs.string())</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Number of rows reduced to 17,735 - hmm... try other ways?</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">## ---Drop a row if all values are null---</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># df_pa.filter(~pl.all_horizontal(pl.all().is_null()))</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">## No change in number of rows - meaning no one row contains all null values</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">## ---Restricting drop nulls to a specific column---</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># df_pa.drop_nulls(subset="CX LogP")</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">## Number of rows reduced to 1,873,678</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Initially, I’ve tried to remove all nulls first, then I realise that removing nulls above may not be the best way to prepare the data as all max phase 4 compounds are actually also removed completely! So what I’m going to do instead is to keep them by using <code>fill_null()</code> to replace all “null” as “0” (this’ll only apply to all the integers or floats in the data).</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_pa <span class="op">=</span> df_pa.fill_null(<span class="dv">0</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_831_560, 32)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>str</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"CHEMBL539070"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>286.79</td><td>1</td><td>1</td><td>2.28</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.63</td><td>13.84</td><td>3.64</td><td>2.57</td><td>2.57</td><td>2</td><td>"MOL"</td><td>-1</td><td>17</td><td>5</td><td>3</td><td>0</td><td>250.0888</td><td>"NEUTRAL"</td><td>"C11H15ClN4OS"</td><td>"CCCOc1ccccc1-c1nnc(NN)s1.Cl"</td><td>"WPEWNRKLKLNLSO-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3335528"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>842.8</td><td>2</td><td>6</td><td>0.18</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>17</td><td>"N"</td><td>0.09</td><td>3.2</td><td>0.0</td><td>3.31</td><td>-0.14</td><td>3</td><td>"MOL"</td><td>-1</td><td>60</td><td>19</td><td>5</td><td>2</td><td>842.2633</td><td>"ACID"</td><td>"C41H46O19"</td><td>"COC(=O)[C@H](O[C@@H]1O[C@@H](C…</td><td>"KGUJQZWYZPYYRZ-LWEWUKDVSA-N"</td></tr><tr><td>"CHEMBL2419030"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>359.33</td><td>4</td><td>4</td><td>3.94</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>3</td><td>"N"</td><td>0.66</td><td>0.0</td><td>0.0</td><td>3.66</td><td>3.66</td><td>2</td><td>"MOL"</td><td>-1</td><td>24</td><td>6</td><td>1</td><td>0</td><td>359.0551</td><td>"NEUTRAL"</td><td>"C14H12F3N3O3S"</td><td>"O=c1nc(NC2CCCC2)sc2c([N+](=O)[…</td><td>"QGDMYSDFCXOKML-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL3827271"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>712.85</td><td>1</td><td>1</td><td>-2.84</td><td>319.06</td><td>10</td><td>11</td><td>2</td><td>16</td><td>"N"</td><td>0.07</td><td>4.08</td><td>10.49</td><td>-6.88</td><td>-8.95</td><td>0</td><td>"MOL"</td><td>-1</td><td>50</td><td>19</td><td>14</td><td>3</td><td>712.4232</td><td>"ZWITTERION"</td><td>"C31H56N10O9"</td><td>"CC(C)C[C@@H]1NC(=O)[C@H](CCCNC…</td><td>"QJQNNLICZLLPMB-VUBDRERZSA-N"</td></tr><tr><td>"CHEMBL3465961"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>319.42</td><td>16</td><td>22</td><td>2.22</td><td>50.5</td><td>4</td><td>1</td><td>0</td><td>6</td><td>"N"</td><td>0.87</td><td>0.0</td><td>9.38</td><td>2.13</td><td>-0.44</td><td>1</td><td>"MOL"</td><td>-1</td><td>23</td><td>4</td><td>1</td><td>0</td><td>319.206</td><td>"BASE"</td><td>"C18H26FN3O"</td><td>"CC(O)CN1CCC(CN(C)Cc2cc(C#N)ccc…</td><td>"FZEVYCHTADTXPM-UHFFFAOYSA-N"</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>312.35</td><td>3</td><td>3</td><td>2.86</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.8</td><td>8.13</td><td>3.49</td><td>2.17</td><td>2.1</td><td>3</td><td>"MOL"</td><td>-1</td><td>22</td><td>6</td><td>1</td><td>0</td><td>312.0681</td><td>"NEUTRAL"</td><td>"C15H12N4O2S"</td><td>"COc1ccc(-c2nnc(NC(=O)c3cccnc3)…</td><td>"XIZUJGDKNPVNQA-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL374652"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>403.83</td><td>1</td><td>1</td><td>5.98</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>4</td><td>"N"</td><td>0.42</td><td>13.65</td><td>0.0</td><td>5.36</td><td>5.36</td><td>3</td><td>"MOL"</td><td>-1</td><td>26</td><td>2</td><td>2</td><td>1</td><td>403.0421</td><td>"NEUTRAL"</td><td>"C18H14ClF4NOS"</td><td>"CC(O)(CSc1ccc(F)cc1)c1cc2cc(Cl…</td><td>"CRPQTBRTHURKII-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1416264"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>380.41</td><td>6</td><td>8</td><td>3.06</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>5</td><td>"N"</td><td>0.54</td><td>13.85</td><td>3.86</td><td>2.47</td><td>2.47</td><td>4</td><td>"MOL"</td><td>-1</td><td>27</td><td>7</td><td>1</td><td>0</td><td>380.0856</td><td>"NEUTRAL"</td><td>"C18H13FN6OS"</td><td>"O=C(CSc1ccc2nnc(-c3cccnc3)n2n1…</td><td>"QVYIEKHEJKFNAT-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL213734"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>288.26</td><td>2</td><td>3</td><td>2.32</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>5</td><td>"N"</td><td>0.5</td><td>7.2</td><td>0.0</td><td>2.36</td><td>1.95</td><td>2</td><td>"MOL"</td><td>-1</td><td>21</td><td>7</td><td>2</td><td>0</td><td>288.0746</td><td>"NEUTRAL"</td><td>"C14H12N2O5"</td><td>"O=C(COc1ccccc1)Nc1ccc([N+](=O)…</td><td>"PZTWAHGBGTWVEB-UHFFFAOYSA-N"</td></tr><tr><td>"CHEMBL1531634"</td><td>null</td><td>null</td><td>"Small molecule"</td><td>0</td><td>320.16</td><td>19</td><td>21</td><td>4.4</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>4</td><td>"N"</td><td>0.67</td><td>0.0</td><td>0.0</td><td>4.04</td><td>4.04</td><td>2</td><td>"MOL"</td><td>-1</td><td>19</td><td>2</td><td>1</td><td>0</td><td>319.0008</td><td>"NEUTRAL"</td><td>"C15H11BrFNO"</td><td>"O=C(/C=C/Nc1ccc(F)cc1)c1ccc(Br…</td><td>"DKPWCCDDKFLKEC-MDZDMXLPSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for df_dn dataset</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_pa.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 33)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>statistic</th><th>ChEMBL ID</th><th>Name</th><th>Synonyms</th><th>Type</th><th>Max Phase</th><th>Molecular Weight</th><th>Targets</th><th>Bioactivities</th><th>AlogP</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>#Rotatable Bonds</th><th>Passes Ro3</th><th>QED Weighted</th><th>CX Acidic pKa</th><th>CX Basic pKa</th><th>CX LogP</th><th>CX LogD</th><th>Aromatic Rings</th><th>Structure Type</th><th>Inorganic Flag</th><th>Heavy Atoms</th><th>HBA (Lipinski)</th><th>HBD (Lipinski)</th><th>#RO5 Violations (Lipinski)</th><th>Molecular Weight (Monoisotopic)</th><th>Molecular Species</th><th>Molecular Formula</th><th>Smiles</th><th>Inchi Key</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>str</td><td>str</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>"count"</td><td>"1831560"</td><td>"35614"</td><td>"78406"</td><td>"1831560"</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>"1805134"</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>"1831560"</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>1.83156e6</td><td>"1788168"</td><td>"1831560"</td><td>"1831560"</td><td>"1831560"</td></tr><tr><td>"null_count"</td><td>"0"</td><td>"1795946"</td><td>"1753154"</td><td>"0"</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"26426"</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"0"</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"43392"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr><tr><td>"mean"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.008967</td><td>418.62922</td><td>6.499244</td><td>9.722575</td><td>3.456912</td><td>80.668031</td><td>5.18864</td><td>1.549416</td><td>0.398376</td><td>5.616697</td><td>null</td><td>0.54128</td><td>5.269918</td><td>3.389479</td><td>3.156906</td><td>2.541117</td><td>2.441586</td><td>null</td><td>-0.995465</td><td>28.001124</td><td>6.187292</td><td>1.69613</td><td>0.443761</td><td>414.111544</td><td>null</td><td>null</td><td>null</td><td>null</td></tr><tr><td>"std"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.177118</td><td>186.287522</td><td>14.273599</td><td>49.829009</td><td>1.897507</td><td>42.587594</td><td>2.445579</td><td>1.480168</td><td>0.710891</td><td>3.680179</td><td>null</td><td>0.225859</td><td>5.342831</td><td>3.640044</td><td>2.115381</td><td>2.433513</td><td>1.247167</td><td>null</td><td>0.067517</td><td>9.239756</td><td>2.86568</td><td>1.700808</td><td>0.780102</td><td>184.202916</td><td>null</td><td>null</td><td>null</td><td>null</td></tr><tr><td>"min"</td><td>"CHEMBL1"</td><td>"(+) NEOMENTHOL"</td><td>"'CLOPRA-''YELLOW'''|AHR-3070-C…</td><td>"Small molecule"</td><td>0.0</td><td>4.0</td><td>1.0</td><td>1.0</td><td>-14.26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>"N"</td><td>0.0</td><td>-19.61</td><td>0.0</td><td>-20.95</td><td>-29.96</td><td>0.0</td><td>"MOL"</td><td>-1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>4.0026</td><td>"ACID"</td><td>"Ag+"</td><td>"B.CC(=O)OC1CN2CCC1CC2"</td><td>"AAAAEENPAALFRN-UHFFFAOYSA-N"</td></tr><tr><td>"25%"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.0</td><td>326.42</td><td>1.0</td><td>2.0</td><td>2.34</td><td>54.35</td><td>4.0</td><td>1.0</td><td>0.0</td><td>3.0</td><td>null</td><td>0.38</td><td>0.0</td><td>0.0</td><td>1.96</td><td>1.29</td><td>2.0</td><td>null</td><td>-1.0</td><td>22.0</td><td>4.0</td><td>1.0</td><td>0.0</td><td>323.2209</td><td>null</td><td>null</td><td>null</td><td>null</td></tr><tr><td>"50%"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.0</td><td>393.49</td><td>3.0</td><td>4.0</td><td>3.45</td><td>75.27</td><td>5.0</td><td>1.0</td><td>0.0</td><td>5.0</td><td>null</td><td>0.56</td><td>3.89</td><td>2.13</td><td>3.21</td><td>2.72</td><td>2.0</td><td>null</td><td>-1.0</td><td>27.0</td><td>6.0</td><td>1.0</td><td>0.0</td><td>389.2355</td><td>null</td><td>null</td><td>null</td><td>null</td></tr><tr><td>"75%"</td><td>null</td><td>null</td><td>null</td><td>null</td><td>0.0</td><td>471.73</td><td>6.0</td><td>9.0</td><td>4.59</td><td>99.38</td><td>6.0</td><td>2.0</td><td>1.0</td><td>7.0</td><td>null</td><td>0.73</td><td>10.61</td><td>6.58</td><td>4.43</td><td>4.02</td><td>3.0</td><td>null</td><td>-1.0</td><td>33.0</td><td>8.0</td><td>2.0</td><td>1.0</td><td>467.1879</td><td>null</td><td>null</td><td>null</td><td>null</td></tr><tr><td>"max"</td><td>"CHEMBL99999"</td><td>"xerophilusin G"</td><td>"zygosporamide"</td><td>"Small molecule"</td><td>4.0</td><td>12546.32</td><td>1334.0</td><td>17911.0</td><td>22.57</td><td>568.39</td><td>32.0</td><td>25.0</td><td>4.0</td><td>67.0</td><td>"Y"</td><td>0.95</td><td>14.0</td><td>61.9</td><td>24.88</td><td>22.99</td><td>30.0</td><td>"MOL"</td><td>1.0</td><td>79.0</td><td>35.0</td><td>31.0</td><td>4.0</td><td>8214.3786</td><td>"ZWITTERION"</td><td>"Zn+2"</td><td>"n1onc2c1NC1Nc3nonc3NC1N2"</td><td>"ZZZZVQYIUQRCGN-UHFFFAOYSA-N"</td></tr></tbody></table></div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="looking-at-max-phase-and-qed-weighted" class="level5">
+<h5 class="anchored" data-anchor-id="looking-at-max-phase-and-qed-weighted"><strong>Looking at max phase and QED weighted</strong></h5>
+<p>To explore some of the physicochemical and molecular properties in the dataframe, “Max Phase” is one of the first few that I want to have a look. Each ChEMBL compound will have a max phase number from 0 to 4 (for this particular dataset only, you’ll notice that this can start from -1 in other ChEMBL datasets), where 4 means the compound is approved (e.g.&nbsp;a prescription medicine).</p>
+<p>While looking at max phases, I’m thinking the compounds with max phase 0 could be a testing set for prediction of their max phase outcomes, while the max phase 4 compounds could be the training set for building a machine learning (ML) model. There are of course some obvious and potential flaws of splitting a dataset like this, please treat this as an exercise for demonstration only.</p>
+<p>Below I’m checking that I do have max phases of molecules spanning across the entire range of 0 to 4.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Alternative code</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df_pa.group_by("Max Phase", maintain_order = True).agg(pl.len())</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_pa.group_by(<span class="st">"Max Phase"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Max Phase</th><th>len</th></tr><tr><td>i64</td><td>u32</td></tr></thead><tbody><tr><td>0</td><td>1826345</td></tr><tr><td>3</td><td>773</td></tr><tr><td>4</td><td>2870</td></tr><tr><td>1</td><td>520</td></tr><tr><td>2</td><td>1052</td></tr></tbody></table></div>
+</div>
+</div>
+<p>One of the other parameters I’m interested in is “QED Weighted” <span class="citation" data-cites="Bickerton2012">(<a href="#ref-Bickerton2012" role="doc-biblioref">Bickerton et al. 2012</a>)</span>. It’s a measure of druglikeness for small molecules based on the concept of desirability, which is based on a total of 8 different molecular properties. These molecular properties include molecular weight, ALogP, polar surface area, number of hydrogen bond acceptors, number of hydrogen bond donors, number of rotatable bonds, number of aromatic rings and structural alerts. It’s normally recorded as a number ranging from 0 to 1, where 0 is the least druglike and 1 being the most druglike.</p>
+<p><br></p>
+</section>
+<section id="prepare-data-prior-to-running-ml-model" class="level5">
+<h5 class="anchored" data-anchor-id="prepare-data-prior-to-running-ml-model"><strong>Prepare data prior to running ML model</strong></h5>
+<p>The goal of this ML model is to answer this question - which physicochemical features may be useful to predict whether a compound may enter into max phase 4?</p>
+<p>A rough plan at this stage is:</p>
+<ul>
+<li><p>to filter out max phase 4 and 0 compounds from the df_pa dataset</p></li>
+<li><p>to use “Max Phase” as the target y variable for a logistic regression (LR) model because ultimately stakeholders are more likely to be interested in knowing which candidate compounds have the most likely chance to reach the final approved phase during a drug discovery project (<em>please bear in mind that this ML model building is more like a demo only and may not reflect real-life scenarios…</em>)</p></li>
+<li><p>to use “Polar Surface Area”, “HBA”, “HBD”, “#RO5 Violations”, “QED Weighted”, “CX LogP”, “CX LogD” and “Heavy atoms” as the training features for building the ML model (<em>these molecular features are selected randomly and ideally I should include more… the first three are newly added in this updated version</em>)</p></li>
+<li><p>to use max phase 0 compounds as the testing set since they are the ones not assigned with any max phase category yet</p></li>
+<li><p>to use max phase 4 compounds as the training set since they’ve reached the approved phase</p></li>
+<li><p>to build a confusion matrix in the end to see if the features selected may generate a somewhat reasonable model for predicting the outcomes of these small molecules</p></li>
+</ul>
+<p>Downsides of this plan are (there are many…):</p>
+<ul>
+<li><p>the dataset used here may include some inorganic compounds (e.g.&nbsp;molecules containing metals)</p></li>
+<li><p>the dataset is likely not very-chemically-diverse</p></li>
+<li><p>there are only a small number of max phase 4 compounds for model training (especially comparing with the “much larger” amount of max phase 0 compounds present)</p></li>
+<li><p>LR may not be the best choice of ML model to start off with (I just wanted to find out how it works at the time and because I’m updating the post now so I’m trying to keep it the same…)</p></li>
+<li><p>other exploratory data analysis should be done really… e.g.&nbsp;how chemically diverse is the dataset?</p></li>
+<li><p>this is only an exercise so will not be taking into account many other important aspects of drug discovery e.g.&nbsp;what disorders or illnesses are we targeting? (is it an experimentally validated and actually a suitable target?) and what have been done so far in the literatures? etc.</p></li>
+</ul>
+<p>Firstly, I’m filtering out all the max phase 0 compounds and also all the max phase 4 compounds then save them in separate dataframes.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting all max phase 0 molecules with their training features</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="op">=</span> df_pa.<span class="bu">filter</span>((pl.col(<span class="st">"Max Phase"</span>) <span class="op">==</span> <span class="dv">0</span>)).select([</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ChEMBL ID"</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Max Phase"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Polar Surface Area"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HBA"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HBD"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#RO5 Violations"</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"QED Weighted"</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CX LogP"</span>, </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CX LogD"</span>, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Heavy Atoms"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  ])</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>df_0  <span class="co">#1,826,345 mols</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_826_345, 10)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL539070"</td><td>0</td><td>73.06</td><td>6</td><td>2</td><td>0</td><td>0.63</td><td>2.57</td><td>2.57</td><td>17</td></tr><tr><td>"CHEMBL3335528"</td><td>0</td><td>269.57</td><td>18</td><td>5</td><td>2</td><td>0.09</td><td>3.31</td><td>-0.14</td><td>60</td></tr><tr><td>"CHEMBL2419030"</td><td>0</td><td>85.13</td><td>6</td><td>1</td><td>0</td><td>0.66</td><td>3.66</td><td>3.66</td><td>24</td></tr><tr><td>"CHEMBL3827271"</td><td>0</td><td>319.06</td><td>10</td><td>11</td><td>2</td><td>0.07</td><td>-6.88</td><td>-8.95</td><td>50</td></tr><tr><td>"CHEMBL3465961"</td><td>0</td><td>50.5</td><td>4</td><td>1</td><td>0</td><td>0.87</td><td>2.13</td><td>-0.44</td><td>23</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2017916"</td><td>0</td><td>77.0</td><td>6</td><td>1</td><td>0</td><td>0.8</td><td>2.17</td><td>2.1</td><td>22</td></tr><tr><td>"CHEMBL374652"</td><td>0</td><td>36.02</td><td>2</td><td>2</td><td>1</td><td>0.42</td><td>5.36</td><td>5.36</td><td>26</td></tr><tr><td>"CHEMBL1416264"</td><td>0</td><td>85.07</td><td>7</td><td>1</td><td>0</td><td>0.54</td><td>2.47</td><td>2.47</td><td>27</td></tr><tr><td>"CHEMBL213734"</td><td>0</td><td>101.7</td><td>5</td><td>2</td><td>0</td><td>0.5</td><td>2.36</td><td>1.95</td><td>21</td></tr><tr><td>"CHEMBL1531634"</td><td>0</td><td>29.1</td><td>2</td><td>1</td><td>0</td><td>0.67</td><td>4.04</td><td>4.04</td><td>19</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting all max phase 4 molecules with their training features</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_4 <span class="op">=</span> df_pa.<span class="bu">filter</span>((pl.col(<span class="st">"Max Phase"</span>) <span class="op">==</span> <span class="dv">4</span>)).select([</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ChEMBL ID"</span>, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Max Phase"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Polar Surface Area"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"HBA"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"HBD"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"#RO5 Violations"</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"QED Weighted"</span>, </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"CX LogP"</span>, </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">"CX LogD"</span>, </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Heavy Atoms"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>      ])</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>df_4  <span class="co"># 2,870 mols</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2_870, 10)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL1200675"</td><td>4</td><td>12.47</td><td>2</td><td>0</td><td>1</td><td>0.31</td><td>6.27</td><td>4.89</td><td>29</td></tr><tr><td>"CHEMBL1200436"</td><td>4</td><td>46.53</td><td>3</td><td>1</td><td>0</td><td>0.7</td><td>2.95</td><td>2.95</td><td>22</td></tr><tr><td>"CHEMBL1096882"</td><td>4</td><td>186.07</td><td>10</td><td>5</td><td>0</td><td>0.31</td><td>-1.97</td><td>-5.12</td><td>24</td></tr><tr><td>"CHEMBL256997"</td><td>4</td><td>76.22</td><td>4</td><td>1</td><td>0</td><td>0.8</td><td>3.92</td><td>0.68</td><td>21</td></tr><tr><td>"CHEMBL2023898"</td><td>4</td><td>174.64</td><td>8</td><td>4</td><td>2</td><td>0.14</td><td>4.18</td><td>4.16</td><td>54</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL1619785"</td><td>4</td><td>128.03</td><td>8</td><td>2</td><td>0</td><td>0.49</td><td>2.09</td><td>1.86</td><td>34</td></tr><tr><td>"CHEMBL4297142"</td><td>4</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td></tr><tr><td>"CHEMBL2364639"</td><td>4</td><td>74.02</td><td>6</td><td>1</td><td>0</td><td>0.68</td><td>3.65</td><td>2.3</td><td>30</td></tr><tr><td>"CHEMBL1232131"</td><td>4</td><td>94.83</td><td>4</td><td>3</td><td>0</td><td>0.44</td><td>1.2</td><td>-1.18</td><td>12</td></tr><tr><td>"CHEMBL3989949"</td><td>4</td><td>95.92</td><td>6</td><td>1</td><td>0</td><td>0.9</td><td>1.66</td><td>1.66</td><td>18</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_4.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 11)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>statistic</th><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>str</td><td>str</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td><td>f64</td></tr></thead><tbody><tr><td>"count"</td><td>"2870"</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td><td>2870.0</td></tr><tr><td>"null_count"</td><td>"0"</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><td>"mean"</td><td>null</td><td>4.0</td><td>74.951927</td><td>4.574216</td><td>1.780488</td><td>0.340418</td><td>0.54947</td><td>1.966551</td><td>0.841592</td><td>23.863066</td></tr><tr><td>"std"</td><td>null</td><td>0.0</td><td>53.875964</td><td>3.06589</td><td>1.762048</td><td>0.703626</td><td>0.235063</td><td>2.61846</td><td>3.015392</td><td>11.064927</td></tr><tr><td>"min"</td><td>"CHEMBL1000"</td><td>4.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-10.11</td><td>-17.92</td><td>0.0</td></tr><tr><td>"25%"</td><td>null</td><td>4.0</td><td>37.61</td><td>2.0</td><td>1.0</td><td>0.0</td><td>0.39</td><td>0.34</td><td>-0.63</td><td>17.0</td></tr><tr><td>"50%"</td><td>null</td><td>4.0</td><td>65.78</td><td>4.0</td><td>1.0</td><td>0.0</td><td>0.58</td><td>2.29</td><td>1.12</td><td>23.0</td></tr><tr><td>"75%"</td><td>null</td><td>4.0</td><td>100.9</td><td>6.0</td><td>2.0</td><td>0.0</td><td>0.74</td><td>3.73</td><td>2.75</td><td>30.0</td></tr><tr><td>"max"</td><td>"CHEMBL99946"</td><td>4.0</td><td>359.42</td><td>20.0</td><td>15.0</td><td>4.0</td><td>0.94</td><td>11.62</td><td>11.62</td><td>69.0</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I have to go back to the first post at this point to change the data restriction criteria for the parquet file as I’ve found out in this step above that if I restrict data via inorganic flags, then it’ll remove a lot of compounds with calculated physicochemical properties (because most of the ones in the data are preclinical compounds with inorganic flag of -1 or max phase 0 compounds; inorganic flag of 1 is inorganic ones and 0 should be the non-inorganic ones - I’ve updated its definition above too after re-checking the ChEMBL schema). For now, I’m restricting data via removing compounds with zero targets rather than via the inorganic flag, and this leaves us a set of max phase 4 compounds with their physicochemical properties calculated in ChEMBL (which is needed for training the model in the next post).</p>
+<p><br></p>
+<section id="re-sampling-via-under-sampling---dealing-with-imbalanced-dataset" class="level6">
+<h6 class="anchored" data-anchor-id="re-sampling-via-under-sampling---dealing-with-imbalanced-dataset"><strong>Re-sampling via under-sampling - dealing with imbalanced dataset</strong></h6>
+<p>Because of the presence of a large number of max phase 0 compounds (1,826,345 molecules) and the relatively smaller number of max phase 4 compounds (2,870 molecules) in the original dataset, I’m going to randomly sample 2800 small molecules from the max phase 0 group to balance out the ratio of max phase 0 versus max phase 4 compounds. This will allow us to have a similar amount of data in each group to avoid a very imbalanced dataset.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For an alternative and likely a better way to deal with imbalanced datasets, please see <a href="https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html#model-building">my later post</a> that attempts to use a “generalized threshold shifting” method.</p>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_0 <span class="op">=</span> df_0.sample(n <span class="op">=</span> <span class="dv">2800</span>, shuffle <span class="op">=</span> <span class="va">True</span>, seed <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2_800, 10)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL1420527"</td><td>0</td><td>66.81</td><td>4</td><td>1</td><td>0</td><td>0.47</td><td>3.94</td><td>3.94</td><td>32</td></tr><tr><td>"CHEMBL1878707"</td><td>0</td><td>62.55</td><td>3</td><td>1</td><td>0</td><td>0.93</td><td>3.38</td><td>3.38</td><td>25</td></tr><tr><td>"CHEMBL3971884"</td><td>0</td><td>73.86</td><td>5</td><td>1</td><td>2</td><td>0.12</td><td>9.34</td><td>9.34</td><td>40</td></tr><tr><td>"CHEMBL3438846"</td><td>0</td><td>84.22</td><td>4</td><td>2</td><td>0</td><td>0.76</td><td>2.01</td><td>-0.19</td><td>26</td></tr><tr><td>"CHEMBL1819378"</td><td>0</td><td>40.46</td><td>4</td><td>0</td><td>0</td><td>0.62</td><td>4.0</td><td>4.0</td><td>26</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2145354"</td><td>0</td><td>84.67</td><td>5</td><td>1</td><td>0</td><td>0.68</td><td>3.51</td><td>3.51</td><td>30</td></tr><tr><td>"CHEMBL3926224"</td><td>0</td><td>87.15</td><td>5</td><td>1</td><td>2</td><td>0.33</td><td>2.51</td><td>2.51</td><td>38</td></tr><tr><td>"CHEMBL3448203"</td><td>0</td><td>86.37</td><td>4</td><td>1</td><td>0</td><td>0.88</td><td>1.7</td><td>1.7</td><td>26</td></tr><tr><td>"CHEMBL1478078"</td><td>0</td><td>37.38</td><td>2</td><td>0</td><td>0</td><td>0.74</td><td>2.9</td><td>2.9</td><td>20</td></tr><tr><td>"CHEMBL3105607"</td><td>0</td><td>64.99</td><td>5</td><td>1</td><td>0</td><td>0.68</td><td>4.15</td><td>4.15</td><td>28</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Since the plan is to use LR method for the ML model, the y variable I’m interested in is going to be a binary categorical variable - meaning it needs to be 0 (not approved) or 1 (approved). To do this, I’m going to add a new column with a new name of “Max_Phase” and replace “4” as “1” by dividing the whole column by 4 to reach this new label in the max phase 4 dataset.</p>
+<p>Then I’m changing the data type of “Max_Phase” from float to integer, so that the two different dataframes can be concatenated (which will only work if both are of the same data types).</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_4 <span class="op">=</span> df_4.with_columns((pl.col(<span class="st">"Max Phase"</span>) <span class="op">/</span> <span class="dv">4</span>).alias(<span class="st">"Max_Phase"</span>)).cast({<span class="st">"Max_Phase"</span>: pl.Int64})</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2_870, 11)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th><th>Max_Phase</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL1200675"</td><td>4</td><td>12.47</td><td>2</td><td>0</td><td>1</td><td>0.31</td><td>6.27</td><td>4.89</td><td>29</td><td>1</td></tr><tr><td>"CHEMBL1200436"</td><td>4</td><td>46.53</td><td>3</td><td>1</td><td>0</td><td>0.7</td><td>2.95</td><td>2.95</td><td>22</td><td>1</td></tr><tr><td>"CHEMBL1096882"</td><td>4</td><td>186.07</td><td>10</td><td>5</td><td>0</td><td>0.31</td><td>-1.97</td><td>-5.12</td><td>24</td><td>1</td></tr><tr><td>"CHEMBL256997"</td><td>4</td><td>76.22</td><td>4</td><td>1</td><td>0</td><td>0.8</td><td>3.92</td><td>0.68</td><td>21</td><td>1</td></tr><tr><td>"CHEMBL2023898"</td><td>4</td><td>174.64</td><td>8</td><td>4</td><td>2</td><td>0.14</td><td>4.18</td><td>4.16</td><td>54</td><td>1</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL1619785"</td><td>4</td><td>128.03</td><td>8</td><td>2</td><td>0</td><td>0.49</td><td>2.09</td><td>1.86</td><td>34</td><td>1</td></tr><tr><td>"CHEMBL4297142"</td><td>4</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td><td>1</td></tr><tr><td>"CHEMBL2364639"</td><td>4</td><td>74.02</td><td>6</td><td>1</td><td>0</td><td>0.68</td><td>3.65</td><td>2.3</td><td>30</td><td>1</td></tr><tr><td>"CHEMBL1232131"</td><td>4</td><td>94.83</td><td>4</td><td>3</td><td>0</td><td>0.44</td><td>1.2</td><td>-1.18</td><td>12</td><td>1</td></tr><tr><td>"CHEMBL3989949"</td><td>4</td><td>95.92</td><td>6</td><td>1</td><td>0</td><td>0.9</td><td>1.66</td><td>1.66</td><td>18</td><td>1</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I’m also going to create a new column with the same name of “Max_Phase” in the max phase 0 dataframe, so that the two dataframes can be combined.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_0 <span class="op">=</span> df_0.with_columns((pl.col(<span class="st">"Max Phase"</span>)).alias(<span class="st">"Max_Phase"</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2_800, 11)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th><th>Max_Phase</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL1420527"</td><td>0</td><td>66.81</td><td>4</td><td>1</td><td>0</td><td>0.47</td><td>3.94</td><td>3.94</td><td>32</td><td>0</td></tr><tr><td>"CHEMBL1878707"</td><td>0</td><td>62.55</td><td>3</td><td>1</td><td>0</td><td>0.93</td><td>3.38</td><td>3.38</td><td>25</td><td>0</td></tr><tr><td>"CHEMBL3971884"</td><td>0</td><td>73.86</td><td>5</td><td>1</td><td>2</td><td>0.12</td><td>9.34</td><td>9.34</td><td>40</td><td>0</td></tr><tr><td>"CHEMBL3438846"</td><td>0</td><td>84.22</td><td>4</td><td>2</td><td>0</td><td>0.76</td><td>2.01</td><td>-0.19</td><td>26</td><td>0</td></tr><tr><td>"CHEMBL1819378"</td><td>0</td><td>40.46</td><td>4</td><td>0</td><td>0</td><td>0.62</td><td>4.0</td><td>4.0</td><td>26</td><td>0</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL2145354"</td><td>0</td><td>84.67</td><td>5</td><td>1</td><td>0</td><td>0.68</td><td>3.51</td><td>3.51</td><td>30</td><td>0</td></tr><tr><td>"CHEMBL3926224"</td><td>0</td><td>87.15</td><td>5</td><td>1</td><td>2</td><td>0.33</td><td>2.51</td><td>2.51</td><td>38</td><td>0</td></tr><tr><td>"CHEMBL3448203"</td><td>0</td><td>86.37</td><td>4</td><td>1</td><td>0</td><td>0.88</td><td>1.7</td><td>1.7</td><td>26</td><td>0</td></tr><tr><td>"CHEMBL1478078"</td><td>0</td><td>37.38</td><td>2</td><td>0</td><td>0</td><td>0.74</td><td>2.9</td><td>2.9</td><td>20</td><td>0</td></tr><tr><td>"CHEMBL3105607"</td><td>0</td><td>64.99</td><td>5</td><td>1</td><td>0</td><td>0.68</td><td>4.15</td><td>4.15</td><td>28</td><td>0</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Then I’m combining df_0 (dataframe with max phase 0 compounds) and df_4 (dataframe with max phase 4 compounds).</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_concat <span class="op">=</span> pl.concat([df_0, df_4])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_concat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5_670, 11)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>ChEMBL ID</th><th>Max Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th><th>Max_Phase</th></tr><tr><td>str</td><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td><td>i64</td></tr></thead><tbody><tr><td>"CHEMBL1420527"</td><td>0</td><td>66.81</td><td>4</td><td>1</td><td>0</td><td>0.47</td><td>3.94</td><td>3.94</td><td>32</td><td>0</td></tr><tr><td>"CHEMBL1878707"</td><td>0</td><td>62.55</td><td>3</td><td>1</td><td>0</td><td>0.93</td><td>3.38</td><td>3.38</td><td>25</td><td>0</td></tr><tr><td>"CHEMBL3971884"</td><td>0</td><td>73.86</td><td>5</td><td>1</td><td>2</td><td>0.12</td><td>9.34</td><td>9.34</td><td>40</td><td>0</td></tr><tr><td>"CHEMBL3438846"</td><td>0</td><td>84.22</td><td>4</td><td>2</td><td>0</td><td>0.76</td><td>2.01</td><td>-0.19</td><td>26</td><td>0</td></tr><tr><td>"CHEMBL1819378"</td><td>0</td><td>40.46</td><td>4</td><td>0</td><td>0</td><td>0.62</td><td>4.0</td><td>4.0</td><td>26</td><td>0</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>"CHEMBL1619785"</td><td>4</td><td>128.03</td><td>8</td><td>2</td><td>0</td><td>0.49</td><td>2.09</td><td>1.86</td><td>34</td><td>1</td></tr><tr><td>"CHEMBL4297142"</td><td>4</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td><td>1</td></tr><tr><td>"CHEMBL2364639"</td><td>4</td><td>74.02</td><td>6</td><td>1</td><td>0</td><td>0.68</td><td>3.65</td><td>2.3</td><td>30</td><td>1</td></tr><tr><td>"CHEMBL1232131"</td><td>4</td><td>94.83</td><td>4</td><td>3</td><td>0</td><td>0.44</td><td>1.2</td><td>-1.18</td><td>12</td><td>1</td></tr><tr><td>"CHEMBL3989949"</td><td>4</td><td>95.92</td><td>6</td><td>1</td><td>0</td><td>0.9</td><td>1.66</td><td>1.66</td><td>18</td><td>1</td></tr></tbody></table></div>
+</div>
+</div>
+<p>This df_concat dataset is checked to see if it has all compounds in max phases 0 and 4 only.</p>
+<p>Note: max phase 4 (approved) compounds are re-labelled as Max_Phase = 1.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_concat.group_by(<span class="st">"Max_Phase"</span>).<span class="bu">len</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2, 2)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Max_Phase</th><th>len</th></tr><tr><td>i64</td><td>u32</td></tr></thead><tbody><tr><td>1</td><td>2870</td></tr><tr><td>0</td><td>2800</td></tr></tbody></table></div>
+</div>
+</div>
+<p>So here we have the final version of the dataset, renamed to df_ml to avoid confusion from the previous dataframes, before entering into the ML phase.</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_ml <span class="op">=</span> df_concat.select([</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Max_Phase"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Polar Surface Area"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HBA"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HBD"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#RO5 Violations"</span>, </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"QED Weighted"</span>, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CX LogP"</span>, </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CX LogD"</span>, </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Heavy Atoms"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  ])</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>df_ml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5_670, 9)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Max_Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>i64</td><td>f64</td><td>i64</td><td>i64</td><td>i64</td><td>f64</td><td>f64</td><td>f64</td><td>i64</td></tr></thead><tbody><tr><td>0</td><td>66.81</td><td>4</td><td>1</td><td>0</td><td>0.47</td><td>3.94</td><td>3.94</td><td>32</td></tr><tr><td>0</td><td>62.55</td><td>3</td><td>1</td><td>0</td><td>0.93</td><td>3.38</td><td>3.38</td><td>25</td></tr><tr><td>0</td><td>73.86</td><td>5</td><td>1</td><td>2</td><td>0.12</td><td>9.34</td><td>9.34</td><td>40</td></tr><tr><td>0</td><td>84.22</td><td>4</td><td>2</td><td>0</td><td>0.76</td><td>2.01</td><td>-0.19</td><td>26</td></tr><tr><td>0</td><td>40.46</td><td>4</td><td>0</td><td>0</td><td>0.62</td><td>4.0</td><td>4.0</td><td>26</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>1</td><td>128.03</td><td>8</td><td>2</td><td>0</td><td>0.49</td><td>2.09</td><td>1.86</td><td>34</td></tr><tr><td>1</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0</td></tr><tr><td>1</td><td>74.02</td><td>6</td><td>1</td><td>0</td><td>0.68</td><td>3.65</td><td>2.3</td><td>30</td></tr><tr><td>1</td><td>94.83</td><td>4</td><td>3</td><td>0</td><td>0.44</td><td>1.2</td><td>-1.18</td><td>12</td></tr><tr><td>1</td><td>95.92</td><td>6</td><td>1</td><td>0</td><td>0.9</td><td>1.66</td><td>1.66</td><td>18</td></tr></tbody></table></div>
+</div>
+</div>
+<p>I’m just checking for any nulls in the final dataset (should be none as I’ve filled all nulls in one of the steps above).</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_ml.null_count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1, 9)</small><table class="dataframe table table-sm table-striped"><thead><tr><th>Max_Phase</th><th>Polar Surface Area</th><th>HBA</th><th>HBD</th><th>#RO5 Violations</th><th>QED Weighted</th><th>CX LogP</th><th>CX LogD</th><th>Heavy Atoms</th></tr><tr><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Also, I’m checking the data types in df_ml dataset to make sure they’re all integers or floats for scikit-learn algorithms to work.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># also shown in the dataframe below the column names</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df_ml.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>[Int64, Float64, Int64, Int64, Int64, Float64, Float64, Float64, Int64]</code></pre>
+</div>
+</div>
+<p>Then finally I’m saving this tidied dataset as a separate .csv file for use in the next post.</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_ml.write_csv(<span class="st">"df_ml.csv"</span>, separator <span class="op">=</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Bickerton2012" class="csl-entry" role="doc-biblioentry">
+Bickerton, G. Richard, Gaia V. Paolini, Jérémy Besnard, Sorel Muresan, and Andrew L. Hopkins. 2012. <span>“Quantifying the Chemical Beauty of Drugs.”</span> <em>Nature Chemistry</em> 4 (2): 90–98. <a href="https://doi.org/10.1038/nchem.1243">https://doi.org/10.1038/nchem.1243</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2024 📕 Citation as author and URL link if used</div>
+  </div>
+</footer>
+
+
+
+</body></html>
