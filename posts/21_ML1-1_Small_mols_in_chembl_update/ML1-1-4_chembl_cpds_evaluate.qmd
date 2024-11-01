@@ -4,7 +4,7 @@ subtitle: Series 1.1.4 - Evaluating logistic regression model in *scikit-learn*
 author: Jennifer HY Lin
 date: '2023-1-4'
 date-modified: last-modified
-draft: true
+draft: false
 categories:
   - Machine learning projects
   - Scikit-learn

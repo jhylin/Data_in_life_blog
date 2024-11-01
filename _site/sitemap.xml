@@ -154,10 +154,18 @@
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/index.html</loc>
-    <lastmod>2024-11-01T00:23:52.825Z</lastmod>
+    <lastmod>2024-11-01T00:27:58.511Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/about.html</loc>
     <lastmod>2024-10-24T22:01:55.098Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-3_chembl_cpds_ml_model.html</loc>
+    <lastmod>2024-11-01T00:27:33.205Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-4_chembl_cpds_evaluate.html</loc>
+    <lastmod>2024-11-01T00:28:10.774Z</lastmod>
   </url>
 </urlset>

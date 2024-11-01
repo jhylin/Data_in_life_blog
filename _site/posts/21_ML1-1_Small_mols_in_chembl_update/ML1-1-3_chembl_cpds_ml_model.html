@@ -292,14 +292,16 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <pre><code>scikit-learn version used is: 1.5.0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>polars version used is: 1.9.0
-altair version used is: 5.4.1</code></pre>
+<pre><code>polars version used is: 1.9.0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>altair version used is: 5.4.1</code></pre>
 </div>
 </div>
 <p>The same set of data saved in the previous post will be read here using polars dataframe library.</p>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"df_ml.csv"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"df_ml.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 
 <div><style>
@@ -321,9 +323,9 @@ altair version used is: 5.4.1</code></pre>
 <h6 class="anchored" data-anchor-id="define-x-and-y-variables"><strong>Define X and y variables</strong></h6>
 <p>The dataset will be splitted into X (features) and y (target) variables first.</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define X variables</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[<span class="st">"#RO5 Violations"</span>, <span class="st">"Polar Surface Area"</span>, <span class="st">"HBA"</span>, <span class="st">"HBD"</span>, <span class="st">"QED Weighted"</span>, <span class="st">"CX LogP"</span>, <span class="st">"CX LogD"</span>, <span class="st">"Heavy Atoms"</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define X variables</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[<span class="st">"#RO5 Violations"</span>, <span class="st">"Polar Surface Area"</span>, <span class="st">"HBA"</span>, <span class="st">"HBD"</span>, <span class="st">"QED Weighted"</span>, <span class="st">"CX LogP"</span>, <span class="st">"CX LogD"</span>, <span class="st">"Heavy Atoms"</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
 <div><style>
@@ -337,9 +339,9 @@ altair version used is: 5.4.1</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define y variable</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"Max_Phase"</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define y variable</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"Max_Phase"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <div><style>
@@ -359,12 +361,12 @@ altair version used is: 5.4.1</code></pre>
 <h6 class="anchored" data-anchor-id="prepare-training-and-testing-sets"><strong>Prepare training and testing sets</strong></h6>
 <p>Then the data will be further splitted into separate training and testing sets.</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Random number generator</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rng = np.random.RandomState(0) - note: this may produce different result each time</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">50</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Training set:'</span>, X_train.shape, y_train.shape)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Testing set:'</span>, X_test.shape, y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Random number generator</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rng = np.random.RandomState(0) - note: this may produce different result each time</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">50</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Training set:'</span>, X_train.shape, y_train.shape)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Testing set:'</span>, X_test.shape, y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Training set: (4536, 8) (4536,)
 Testing set: (1134, 8) (1134,)</code></pre>
@@ -382,32 +384,32 @@ Testing set: (1134, 8) (1134,)</code></pre>
 </ul>
 <p>The example below uses <code>Pipeline()</code> to construct a pipeline that takes in a standard scaler to scale data and also a LR estimator, along with some parameters.</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Pipeline:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure prediction output can be read in polars df</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>set_config(transform_output<span class="op">=</span><span class="st">"polars"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># multi_class defaults to 'auto' which selects 'ovr' if the data is binary, or if solver='liblinear'</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># multi_class is deprecated in version 1.5 and will be removed in 1.7 </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this post uses sklearn version 1.5.0</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>params_lr <span class="op">=</span> {</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># solver for small dataset</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"solver"</span>: <span class="st">"liblinear"</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"random_state"</span>: <span class="dv">50</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Preprocess/scale the dataset (transformer)</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"StandardScaler"</span>, StandardScaler()), <span class="co"># can add set_output() if preferred</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># e.g. StandardScaler().set_output(transform="polars")</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create an instance of LR classifier (estimator)</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"LogR"</span>, LogisticRegression(<span class="op">**</span>params_lr))</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  ])</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># can add set_output() if preferred e.g. LR.set_output(transform="polars")</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>LR.fit(X_train, y_train)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> LR.predict(X_test)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>LR.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Pipeline:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure prediction output can be read in polars df</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>set_config(transform_output<span class="op">=</span><span class="st">"polars"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># multi_class defaults to 'auto' which selects 'ovr' if the data is binary, or if solver='liblinear'</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># multi_class is deprecated in version 1.5 and will be removed in 1.7 </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this post uses sklearn version 1.5.0</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>params_lr <span class="op">=</span> {</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># solver for small dataset</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"solver"</span>: <span class="st">"liblinear"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"random_state"</span>: <span class="dv">50</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Preprocess/scale the dataset (transformer)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"StandardScaler"</span>, StandardScaler()), <span class="co"># can add set_output() if preferred</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># e.g. StandardScaler().set_output(transform="polars")</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create an instance of LR classifier (estimator)</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"LogR"</span>, LogisticRegression(<span class="op">**</span>params_lr))</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  ])</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># can add set_output() if preferred e.g. LR.set_output(transform="polars")</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>LR.fit(X_train, y_train)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> LR.predict(X_test)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>LR.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>0.689594356261023</code></pre>
 </div>
@@ -417,13 +419,13 @@ Testing set: (1134, 8) (1134,)</code></pre>
 <div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.compose import ColumnTransformer</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># num_cols = ["#RO5 Violations", "Polar Surface Area", "HBA", "HBD", "QED Weighted", "CX LogP", "CX LogD", "Heavy Atoms"]</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ct = ColumnTransformer(</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     ("numerical", num_cols),</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     verbose_feature_names_out=False,</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ct.set_output(transform="polars")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.compose import ColumnTransformer</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># num_cols = ["#RO5 Violations", "Polar Surface Area", "HBA", "HBD", "QED Weighted", "CX LogP", "CX LogD", "Heavy Atoms"]</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ct = ColumnTransformer(</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     ("numerical", num_cols),</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     verbose_feature_names_out=False,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ct.set_output(transform="polars")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The pipeline above is the final version that works to show molecular feature names with their corresponding coefficients in a polars dataframe output. There are 3 options to add either <code>set_config(transform_output="polars")</code> or <code>set_output(transform_output="polars")</code> with the pipeline code - only really needing one line (and not all 3 - it’ll still work but probably unnecessary to add extra code). I’ve marked all 3 options in the pipeline code above.</p>
@@ -433,8 +435,8 @@ Testing set: (1134, 8) (1134,)</code></pre>
 <h6 class="anchored" data-anchor-id="molecular-features-and-coefficients"><strong>Molecular features and coefficients</strong></h6>
 <p>Next, I’m calling out the LR model used above in the pipeline as we want to get the feature names used for training and predicting along with their corresponding coefficients, and generate a bar chart to show their relationship (<a href="https://docs.pola.rs/api/python/stable/reference/dataframe/plot.html">reference on plotting directly in Polars using Altair</a>).</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>log_reg <span class="op">=</span> LR[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>log_reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>log_reg <span class="op">=</span> LR[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>log_reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
@@ -844,47 +846,47 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save feature array as df</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>lr_feat <span class="op">=</span> pl.Series(log_reg.feature_names_in_).to_frame(<span class="st">"Feature_names"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Explode df due to a list series - e.g. array([[1, 2, 3...]]) and not array([1, 2, 3...])</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>lr_coef <span class="op">=</span> pl.Series(log_reg.coef_).to_frame(<span class="st">"Coef"</span>).explode(<span class="st">"Coef"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate dfs horizontally</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_feat <span class="op">=</span> pl.concat([lr_feat, lr_coef], how<span class="op">=</span><span class="st">"horizontal"</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Using altair to plot feature names vs. coefficients </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>df_feat.plot.bar(</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Coef"</span>, </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -x = sorting in descending order, x = ascending</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span>alt.Y(<span class="st">"Feature_names"</span>).sort(<span class="st">"-x"</span>), </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#color="Feature_names", #will create a legend if used</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  tooltip<span class="op">=</span><span class="st">"Coef"</span>,</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>).configure_axis(</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  labelFontSize<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  titleFontSize<span class="op">=</span><span class="dv">15</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>).configure_view(</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  continuousWidth<span class="op">=</span><span class="dv">600</span>,</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  discreteHeight<span class="op">=</span><span class="dv">300</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save feature array as df</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lr_feat <span class="op">=</span> pl.Series(log_reg.feature_names_in_).to_frame(<span class="st">"Feature_names"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Explode df due to a list series - e.g. array([[1, 2, 3...]]) and not array([1, 2, 3...])</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>lr_coef <span class="op">=</span> pl.Series(log_reg.coef_).to_frame(<span class="st">"Coef"</span>).explode(<span class="st">"Coef"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate dfs horizontally</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df_feat <span class="op">=</span> pl.concat([lr_feat, lr_coef], how<span class="op">=</span><span class="st">"horizontal"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Using altair to plot feature names vs. coefficients </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>df_feat.plot.bar(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Coef"</span>, </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -x = sorting in descending order, x = ascending</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span>alt.Y(<span class="st">"Feature_names"</span>).sort(<span class="st">"-x"</span>), </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#color="Feature_names", #will create a legend if used</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  tooltip<span class="op">=</span><span class="st">"Coef"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>).configure_axis(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  labelFontSize<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  titleFontSize<span class="op">=</span><span class="dv">15</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>).configure_view(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  continuousWidth<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  discreteHeight<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-7583d6cee5b54830befb77c005f83757.vega-embed {
+  #altair-viz-3167e88a1ba64764967d5f4e10c5fbaf.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7583d6cee5b54830befb77c005f83757.vega-embed details,
-  #altair-viz-7583d6cee5b54830befb77c005f83757.vega-embed details summary {
+  #altair-viz-3167e88a1ba64764967d5f4e10c5fbaf.vega-embed details,
+  #altair-viz-3167e88a1ba64764967d5f4e10c5fbaf.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7583d6cee5b54830befb77c005f83757"></div>
+<div id="altair-viz-3167e88a1ba64764967d5f4e10c5fbaf"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7583d6cee5b54830befb77c005f83757") {
-      outputDiv = document.getElementById("altair-viz-7583d6cee5b54830befb77c005f83757");
+    if (outputDiv.id !== "altair-viz-3167e88a1ba64764967d5f4e10c5fbaf") {
+      outputDiv = document.getElementById("altair-viz-3167e88a1ba64764967d5f4e10c5fbaf");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -939,9 +941,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">## note: df.columns = column names of physicochemical properties</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># feat_names = pl.Series("feat_names", df.columns[1:])</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># LR[:-1].get_feature_names_out(feat_names)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## note: df.columns = column names of physicochemical properties</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># feat_names = pl.Series("feat_names", df.columns[1:])</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># LR[:-1].get_feature_names_out(feat_names)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><br></p>
@@ -950,8 +952,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <h6 class="anchored" data-anchor-id="predicted-probabilities"><strong>Predicted probabilities</strong></h6>
 <p>One way to get predicted probabilities of the samples in each outcome class (either 0 - not approved or 1 - approved) is via <code>predict_proba()</code> in <em>scikit-learn</em>.</p>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>y_mp_pre_proba <span class="op">=</span> LR.predict_proba(X_test)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_mp_pre_proba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_mp_pre_proba <span class="op">=</span> LR.predict_proba(X_test)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_mp_pre_proba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0.45825999 0.54174001]
  [0.15229678 0.84770322]
@@ -964,7 +966,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Then we can convert the predicted probabilities into a polars dataframe, along with a statistics summary.</p>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(y_mp_pre_proba).describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(y_mp_pre_proba).describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <div><style>
@@ -983,16 +985,16 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <h6 class="anchored" data-anchor-id="pickle-lr-pipeline"><strong>Pickle LR pipeline</strong></h6>
 <p>This last part is really for saving the LR pipeline for the next post on evaluating the LR model. I’ve talked a bit more about the security aspect of pickling files in <a href="https://jhylin.github.io/Data_in_life_blog/posts/19_ML2-3_Boosted_trees/1_adaboost_xgb.html#pickle-model">this old post</a> in case anyone’s interested.</p>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pickle to save (serialise) the model in working directory (specify path if needed)</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pickle.dump(LR, <span class="bu">open</span>(<span class="st">"LR.pkl"</span>, <span class="st">"wb"</span>)) <span class="co"># "wb" - write binary</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpickle (de-serialise) the model</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>LR2 <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">"LR.pkl"</span>, <span class="st">"rb"</span>)) <span class="co"># "rb" - read binary</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the unpickled model object to make prediction</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>pred2 <span class="op">=</span> LR2.predict(X_test)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Check unpickled model and original model are the same via Python's assertion method</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#assert np.sum(np.abs(pred2 - pred)) == 0</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">## or alternatively use numpy's allclose()</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.allclose(pred, pred2)) <span class="co"># note: pred = LR.predict(X_test) from original LR pipeline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pickle to save (serialise) the model in working directory (specify path if needed)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pickle.dump(LR, <span class="bu">open</span>(<span class="st">"LR.pkl"</span>, <span class="st">"wb"</span>)) <span class="co"># "wb" - write binary</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpickle (de-serialise) the model</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>LR2 <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">"LR.pkl"</span>, <span class="st">"rb"</span>)) <span class="co"># "rb" - read binary</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the unpickled model object to make prediction</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>pred2 <span class="op">=</span> LR2.predict(X_test)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Check unpickled model and original model are the same via Python's assertion method</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#assert np.sum(np.abs(pred2 - pred)) == 0</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">## or alternatively use numpy's allclose()</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.allclose(pred, pred2)) <span class="co"># note: pred = LR.predict(X_test) from original LR pipeline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
