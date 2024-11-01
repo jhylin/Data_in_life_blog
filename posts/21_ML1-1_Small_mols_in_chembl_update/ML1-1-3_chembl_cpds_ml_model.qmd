@@ -1,0 +1,231 @@
+---
+title: Small molecules in ChEMBL database
+subtitle: Series 1.1.3 - Building logistic regression model using *scikit-learn*
+author: Jennifer HY Lin
+date: '2023-1-4'
+date-modified: last-modified
+draft: true
+categories:
+  - Machine learning projects
+  - Scikit-learn
+  - Polars
+  - Python
+  - Jupyter
+  - ChEMBL database
+  - Cheminformatics
+jupyter: python3
+---
+
+##### **Import libraries**
+
+This is the third post that follows on from the previous two about parquet file and data preprocessing, and it will need the following libraries to build and train a logistic regression (LR) model before using it to predict max phase outcome on a testing dataset by using scikit-learn.
+
+```{python}
+## using magic pip to install sklearn & altair (somehow venv keeps switching off in vscode...)
+# %pip install -U scikit-learn
+# %pip install altair
+
+import sklearn
+print(f"scikit-learn version used is: {sklearn.__version__}")
+from sklearn import preprocessing, set_config
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+import polars as pl
+print(f"polars version used is: {pl.__version__}")
+import altair as alt
+print(f"altair version used is: {alt.__version__}")
+import pickle
+import numpy as np
+```
+
+The same set of data saved in the previous post will be read here using polars dataframe library.
+
+```{python}
+df = pl.read_csv("df_ml.csv")
+df
+```
+
+<br>
+
+##### **Logistic regression with *scikit-learn***
+
+[LR](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#logisticregression) is one of the supervised methods in the statistical machine learning (ML) area. As the term "supervised" suggests, this type of ML is purely data-driven to allow computers to learn patterns from the input data with known outcomes in order to predict the same target outcomes for a different set of data that is previously unseen by the computer.
+
+###### **Define X and y variables**
+
+The dataset will be splitted into X (features) and y (target) variables first.
+
+```{python}
+# Define X variables
+X = df["#RO5 Violations", "Polar Surface Area", "HBA", "HBD", "QED Weighted", "CX LogP", "CX LogD", "Heavy Atoms"]
+X
+```
+
+```{python}
+# Define y variable
+y = df["Max_Phase"]
+y
+```
+
+Note: no need to use `to_numpy()` as there's a transform step included when using pipeline to create a LR model (also `StandardScaler()` going to be used). This also applies if using `fit_transform()` or `transform()` when not using pipeline - see scikit-learn reference on "[transform](https://scikit-learn.org/stable/glossary.html#term-transform)".
+
+<br>
+
+###### **Prepare training and testing sets**
+
+Then the data will be further splitted into separate training and testing sets.
+
+```{python}
+## Random number generator
+#rng = np.random.RandomState(0) - note: this may produce different result each time
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 50)
+print('Training set:', X_train.shape, y_train.shape)
+print('Testing set:', X_test.shape, y_test.shape)
+```
+
+<br>
+
+###### **Pipeline method**
+
+Some benefits of using pipeline ([scikit-learn reference](https://scikit-learn.org/stable/modules/compose.html#pipeline-chaining-estimators)):
+
+- chaining preprocessing step with different transformers and estimators in one go where we only have to call fit and predict once on our data 
+
+- avoiding data leakage from the testing set into the training set by making sure the same set of samples is used to train the transformers and predictors 
+
+- avoiding missing out on the transform step (note: calling `fit()` on pipeline is equivalent to calling `fit()` on each estimator and `transform()` input data before the next step, plus `StandardScaler()` is going to be used in the pipeline as well - repeating myself here but this is just a gentle reminder...)
+
+The example below uses `Pipeline()` to construct a pipeline that takes in a standard scaler to scale data and also a LR estimator, along with some parameters.
+
+```{python}
+## Pipeline:
+
+# Ensure prediction output can be read in polars df
+set_config(transform_output="polars")
+
+# multi_class defaults to 'auto' which selects 'ovr' if the data is binary, or if solver='liblinear'
+# multi_class is deprecated in version 1.5 and will be removed in 1.7 
+# this post uses sklearn version 1.5.0
+params_lr = {
+  # solver for small dataset
+  "solver": "liblinear",
+  "random_state": 50
+}
+
+LR = Pipeline(steps=[
+  # Preprocess/scale the dataset (transformer)
+  ("StandardScaler", StandardScaler()), # can add set_output() if preferred
+  # e.g. StandardScaler().set_output(transform="polars")
+  # Create an instance of LR classifier (estimator)
+  ("LogR", LogisticRegression(**params_lr))
+  ])
+
+# can add set_output() if preferred e.g. LR.set_output(transform="polars")
+LR.fit(X_train, y_train)
+pred = LR.predict(X_test)
+LR.score(X_test, y_test)
+```
+
+During the pipeline building, I've figured out how to integrate set_output() in Polars, and noted that the best use case is to show the `feature_names_in_` along with `coef_` ([scikit-learn reference](https://scikit-learn.org/stable/glossary.html#term-coef_)). The first issue is that the feature names are being generated as "[x0, x1, x2...]", which is not useful. One of the possible reasons could be because all the molecular features are not in strings (as they're either i64 or f64), so the feature names are not shown - I'm actually unsure about this but this is just my guess. 
+
+One of the other ways I've tried is to use `ColumnTransformer()` within the pipeline ([scikit-learn reference]((https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html)) - code example folded below) but unfortunately it hasn't worked as well as expected.
+
+```{python}
+#| code-fold: true
+
+# from sklearn.compose import ColumnTransformer
+# num_cols = ["#RO5 Violations", "Polar Surface Area", "HBA", "HBD", "QED Weighted", "CX LogP", "CX LogD", "Heavy Atoms"]
+# ct = ColumnTransformer(
+#     ("numerical", num_cols),
+#     verbose_feature_names_out=False,
+#   )
+# ct.set_output(transform="polars")
+```
+
+The pipeline above is the final version that works to show molecular feature names with their corresponding coefficients in a polars dataframe output. There are 3 options to add either `set_config(transform_output="polars")` or `set_output(transform_output="polars")` with the pipeline code - only really needing one line (and not all 3 - it'll still work but probably unnecessary to add extra code). I've marked all 3 options in the pipeline code above.
+
+<br>
+
+###### **Molecular features and coefficients**
+
+Next, I'm calling out the LR model used above in the pipeline as we want to get the feature names used for training and predicting along with their corresponding coefficients, and generate a bar chart to show their relationship ([reference on plotting directly in Polars using Altair](https://docs.pola.rs/api/python/stable/reference/dataframe/plot.html)).
+
+```{python}
+log_reg = LR[-1]
+log_reg
+```
+
+```{python}
+# Save feature array as df
+lr_feat = pl.Series(log_reg.feature_names_in_).to_frame("Feature_names")
+# Explode df due to a list series - e.g. array([[1, 2, 3...]]) and not array([1, 2, 3...])
+lr_coef = pl.Series(log_reg.coef_).to_frame("Coef").explode("Coef")
+# Concatenate dfs horizontally
+df_feat = pl.concat([lr_feat, lr_coef], how="horizontal")
+
+# Using altair to plot feature names vs. coefficients 
+df_feat.plot.bar(
+  x="Coef", 
+  # -x = sorting in descending order, x = ascending
+  y=alt.Y("Feature_names").sort("-x"), 
+  #color="Feature_names", #will create a legend if used
+  tooltip="Coef",
+).configure_axis(
+  labelFontSize=15,
+  titleFontSize=15
+).configure_view(
+  continuousWidth=600,
+  discreteHeight=300
+)
+```
+
+#RO5 Violations, CXLogP, HBA and HBD all have positive weights or coefficients, when the rest of the molecular features (CXLogD, heavy atoms, polar surface area and QED Weighted) all have the negative coefficients. This is likely the equivalent of using the `feature_importances_` in random forest I'm guessing. I've sorted the order of coefficients from highest to lowest in the chart.
+
+Another way to get features names is from the pipeline as well but requires a step saving dataframe column names separately as an NumPy array first ([scikit-learn reference](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.get_feature_names_out)). The previous way seems to save a bit more time on coding as there's no need to do this, and also you can retrieve the coefficients of the features at the same time. 
+
+```{python}
+#| code-fold: true
+
+## note: df.columns = column names of physicochemical properties
+# feat_names = pl.Series("feat_names", df.columns[1:])
+# LR[:-1].get_feature_names_out(feat_names)
+```
+
+<br>
+
+###### **Predicted probabilities**
+
+One way to get predicted probabilities of the samples in each outcome class (either 0 - not approved or 1 - approved) is via `predict_proba()` in *scikit-learn*.
+
+```{python}
+y_mp_pre_proba = LR.predict_proba(X_test)
+print(y_mp_pre_proba)
+```
+
+Then we can convert the predicted probabilities into a polars dataframe, along with a statistics summary.
+
+```{python}
+pl.DataFrame(y_mp_pre_proba).describe()
+```
+
+<br>
+
+###### **Pickle LR pipeline**
+
+This last part is really for saving the LR pipeline for the next post on evaluating the LR model. I've talked a bit more about the security aspect of pickling files in [this old post](https://jhylin.github.io/Data_in_life_blog/posts/19_ML2-3_Boosted_trees/1_adaboost_xgb.html#pickle-model) in case anyone's interested.
+
+```{python}
+# Pickle to save (serialise) the model in working directory (specify path if needed)
+pickle.dump(LR, open("LR.pkl", "wb")) # "wb" - write binary
+# Unpickle (de-serialise) the model
+LR2 = pickle.load(open("LR.pkl", "rb")) # "rb" - read binary
+# Use the unpickled model object to make prediction
+pred2 = LR2.predict(X_test)
+## Check unpickled model and original model are the same via Python's assertion method
+#assert np.sum(np.abs(pred2 - pred)) == 0
+## or alternatively use numpy's allclose()
+print(np.allclose(pred, pred2)) # note: pred = LR.predict(X_test) from original LR pipeline
+```

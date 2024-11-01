@@ -10,3 +10,4 @@ venv
 /.luarc.json
 xgb_pipeline.pkl
 __pycache__
+LR.pkl
