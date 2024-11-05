@@ -1,9 +1,9 @@
 ---
-title: Small molecules in ChEMBL database
+title: Small molecules in ChEMBL database (old)
 subtitle: Series 1.1 - Polars dataframe library and machine learning in *scikit-learn*
 author: Jennifer HY Lin
 date: '2023-1-4'
-draft: true
+draft: false
 categories:
   - Machine learning projects
   - Scikit-learn
@@ -15,11 +15,24 @@ categories:
 jupyter: python3
 ---
 
+This post has been updated since October 2024 (separated into four shorter posts) using only Polars dataframe library (the older version uses both Polars and Pandas):
+
+1^st^ post - [Parquet file in Polars dataframe library](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-1_chembl_cpds_parquet_new.html)
+
+2^nd^ post - [Preprocessing data in Polars dataframe library](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-2_chembl_cpds_prep.html) 
+
+3^rd^ post - [Building logistic regression model using scikit-learn](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-3_chembl_cpds_ml_model.html)
+
+4^th^ post - [Evaluating logistic regression model in scikit-learn](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-4_chembl_cpds_evaluate.html)
+
+<br>
+
+
 ##### ***Machine learning in drug discovery - series 1.1***
 
 <br>
 
-*Latest update from 19th April 2024 - Polars is currently more integrated with Scikit-learn from version 1.4 (since January 2024), see this link re. [Polars output in set_output](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_4_0.html#polars-output-in-set-output) for Polars dataframe outputs in Scikit-learn, and also a few other Polars enhancements from release [version 1.4 changelog](https://scikit-learn.org/dev/whats_new/v1.4.html#). I may attempt to update this series of posts in the future as they most probably won't need the conversion from Polars to Pandas dataframes anymore.*
+*Latest update from 19th April 2024 - Polars is currently more integrated with Scikit-learn from version 1.4 (since January 2024), see this link re. [Polars output in set_output](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_4_0.html#polars-output-in-set-output) for Polars dataframe outputs in Scikit-learn, and also a few other Polars enhancements from release [version 1.4 changelog](https://scikit-learn.org/dev/whats_new/v1.4.html#). 
 
 *Previous post update was on 16th August 2023 - some code updates only, please always refer to [Polars API reference](https://docs.pola.rs/py-polars/html/reference/index.html) documentations for most up-to-date code.*
 
