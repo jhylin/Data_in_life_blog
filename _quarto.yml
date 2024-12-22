@@ -4,7 +4,7 @@ project:
 website:
   title: "Home"
   site-url: https://jhylin.github.io/Data_in_life_blog/
-  description: "A blog website about using data science tools in pharmaceutical data"
+  description: "A blog website about using software tools to decipher drug discovery and development data"
   page-footer: "Website made with 💜 in [Quarto](https://quarto.org/) by Jennifer HY Lin © 2022 - 2024 📕 Citation as author and URL link if used"
   google-analytics: "G-5CHVP3K63C"
   navbar:
@@ -12,6 +12,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/jhylin
+      - icon: cloud-fill
+        href: https://bsky.app/profile/jhylin.bsky.social
       - icon: mastodon
         href: https://fosstodon.org/@jhylin
       - icon: twitter
