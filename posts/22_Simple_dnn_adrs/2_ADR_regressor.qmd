@@ -1,6 +1,6 @@
 ---
 title: Building a simple deep learning model about adverse drug reactions
-date: 2024-1-8
+date: 2025-1-8
 author: Jennifer HY Lin
 draft: false
 categories:
