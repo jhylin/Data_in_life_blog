@@ -51,7 +51,7 @@ print(f"Python version used: {sys.version}")
 
 ##### **Import adverse drug reactions (ADRs) data**
 
-This is an extremely small set of data compiled manually (by me) via references stated in the dataframe. For details about what and how the data are collected, I've prepared a separate post as a data note (*add post link*) to explain key things about the data. It may not lead to a very significant result but it is done as an example of what an early or basic deep neural network (DNN) model may look like. Ideally there should be more training data and also more features added or used. I've hypothetically set the goal of this introductory piece to predict therapeutic drug classes from ADRs, molecular fingerprints and cytochrome P450 substrate strengths, but this won't be achieved in this initial post (yet).
+This is an extremely small set of data compiled manually (by me) via references stated in the dataframe. For details about what and how the data are collected, I've prepared a separate post as a [data note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/1_ADR_data.html) to explain key things about the data. It may not lead to a very significant result but it is done as an example of what an early or basic deep neural network (DNN) model may look like. Ideally there should be more training data and also more features added or used. I've hypothetically set the goal of this introductory piece to predict therapeutic drug classes from ADRs, molecular fingerprints and cytochrome P450 substrate strengths, but this won't be achieved in this initial post (yet).
 
 ```{python}
 data = pd.read_csv("All_CYP3A4_substrates")
@@ -59,7 +59,7 @@ print(data.shape)
 data.head(3)
 ```
 
-For drug with astericks marked in "notes" column, see data notes under "Exceptions for ADRs" section in 1_ADR_data.qmd (separate post).
+For drug with astericks marked in "notes" column, see data notes under "Exceptions or notes for ADRs" section in [separate post](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/1_ADR_data.html).
 
 I'm dropping some of the columns that are not going to be used later.
 

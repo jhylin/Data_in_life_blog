@@ -10,7 +10,7 @@ categories:
 jupyter: python3
 ---
 
-Here are the notes regarding the strong and moderate CYP3A4 substrates used in the data in the accompanying notebook.
+Here are the notes regarding the strong and moderate CYP3A4 substrates used in the data in the [accompanying notebook](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html).
 
 <br>
 
