@@ -19,8 +19,8 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning and data science projects in drug discovery.
 
-* Latest project - Please see updated web links for logistic regression under machine learning below
-* Next project in the pipeline - Likely a simple DNN model about ADRs first
+* Latest project - [A simple deep learning model about adverse drug reactions](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html)
+* Next project in the pipeline - Break time until further notice
 
 <br>
 
