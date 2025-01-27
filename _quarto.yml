@@ -18,6 +18,8 @@ website:
         href: https://fosstodon.org/@jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/
       - text: CV
         href: https://jhylin.github.io/CV_resume_quarto/
       - icon: rss

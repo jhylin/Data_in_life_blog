@@ -4,9 +4,6 @@ image: profile avatar.jpg
 about:
   template: jolla
   links:
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/
     - icon: book
       text: Portfolio
       href: https://www.datascienceportfol.io/jhylin
