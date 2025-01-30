@@ -259,6 +259,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 30, 2025</p>
+      </div>
+    </div>
       
     </div>
     
@@ -429,14 +435,14 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>xgboost version used: 2.0.3
 scikit-learn version used: 1.5.0
-rdkit version used: 2023.09.6</code></pre>
+rdkit version used: 2024.09.4</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show Python version used </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.11.0 (v3.11.0:deaf509e8f, Oct 24 2022, 14:43:23) [Clang 13.0.0 (clang-1300.0.29.30)]</code></pre>
+<pre><code>3.12.7 (main, Oct 16 2024, 09:10:10) [Clang 18.1.8 ]</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -636,7 +642,7 @@ pchembl_value                float64
 dtype: object</code></pre>
 </div>
 </div>
-<p>Please note: the only molecule with max_phase of “0.5” was converted into “0” after I’ve converted the datatype of max_phase from float to integer (I’ve left it deliberately like this since this is only a demonstration on using scikit_learn’s pipeline along with scikit_mol, but in reality this should be handled with care i.e.&nbsp;don’t discard it as different max phase values have different meanings!). Therefore the following max_phase value count will have 6411 molecules with max_phase “0”, rather than the previous number of 6410.</p>
+<p>Please note: the only molecule with max_phase of “0.5” was converted into “0” after I’ve converted the datatype of max_phase from float to integer (I’ve left it deliberately like this since this is only a demonstration on using scikit_learn’s pipeline along with Scikit-mol <span class="citation" data-cites="bjerrum2023">(<a href="#ref-bjerrum2023" role="doc-biblioref">Bjerrum et al. 2023</a>)</span>, but in reality this should be handled with care i.e.&nbsp;don’t discard it as different max phase values have different meanings!). Therefore the following max_phase value count will have 6411 molecules with max_phase “0”, rather than the previous number of 6410.</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_ache.value_counts(<span class="st">"max_phase"</span>, dropna<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -872,7 +878,8 @@ Name: max_phase, Length: 7075, dtype: int64</code></pre>
 </section>
 <section id="sanitise-smiles" class="level6">
 <h6 class="anchored" data-anchor-id="sanitise-smiles"><strong>Sanitise SMILES</strong></h6>
-<p>This post is going to focus on Scikit_mol which has a manual way to handle SMILES errors, as shown in the code below. Another useful way to deal with SMILES errors is <a href="https://github.com/basf/MolPipeline">Molpipeline</a>’s SMILES error handling, with an example shown in one of <a href="https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb">its notebooks</a>. The main difference from what I can see, even though I haven’t got to use it yet, is that Molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a “NaN” label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).</p>
+<p><em>Update on 30th Jan 2025 - A new safe inference mode feature has been introduced in Scikit-mol recently which will be able to handle invalid SMILES, please visit this <a href="https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/11_safe_inference.ipynb">demonstration notebook</a> for details (thanks to Esben Jannik Bjerrum for mentioning this in the comment below).</em></p>
+<p>This post is going to focus on Scikit-mol which has a manual way to handle SMILES errors, as shown in the code below. Another useful way to deal with SMILES errors is <a href="https://github.com/basf/MolPipeline">Molpipeline</a>’s SMILES error handling, with an example shown in one of <a href="https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb">its notebooks</a>. The main difference from what I can see, even though I haven’t got to use it yet, is that Molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a “NaN” label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).</p>
 <div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>checksmi <span class="op">=</span> CheckSmilesSanitazion()</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking on SMILES (X) </span></span>
@@ -941,7 +948,7 @@ Name: max_phase, Length: 7075, dtype: int64</code></pre>
 <section id="adaboost-classifier" class="level6">
 <h6 class="anchored" data-anchor-id="adaboost-classifier"><strong>AdaBoost classifier</strong></h6>
 <p>The original plan is to chain an AdaBoost classifier, XGBoost classifier, along with Scikit-mol transformers all at once. However, it turns out that I’m building two separate pipelines of AdaBoost classifier and XGBoost classifier so that I can compare the difference(s) between them, and this also serves better for the purpose of this post really.</p>
-<p>This is also the time to think about generating molecular features for model training. Choosing data features such as fingerprints (e.g.&nbsp;Morgan fingerprints which is usually best for larger dataset) or RDKit 2D descriptors (which is useful for smaller datasets) or others. For RDKit 2D descriptors, Scikit_mol has integrated RDKit’s <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Descriptors.html#module-rdkit.Chem.Descriptors">rdkit.Chem.Descriptors module</a> and <a href="https://www.rdkit.org/docs/source/rdkit.ML.Descriptors.MoleculeDescriptors.html#rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator">rdkit.ML.Descriptors.MoleculeDescriptors module</a> within its MolecularDescriptorTransformer().</p>
+<p>This is also the time to think about generating molecular features for model training. Choosing data features such as fingerprints (e.g.&nbsp;Morgan fingerprints which is usually best for larger dataset) or RDKit 2D descriptors (which is useful for smaller datasets) or others. For RDKit 2D descriptors, Scikit-mol has integrated RDKit’s <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Descriptors.html#module-rdkit.Chem.Descriptors">rdkit.Chem.Descriptors module</a> and <a href="https://www.rdkit.org/docs/source/rdkit.ML.Descriptors.MoleculeDescriptors.html#rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator">rdkit.ML.Descriptors.MoleculeDescriptors module</a> within its MolecularDescriptorTransformer().</p>
 <p>Some useful links regarding building pipelines in <em>scikit-learn</em> and also another reference notebook on when to use parallel calculations for different molecular features:</p>
 <ul>
 <li><p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn-pipeline-pipeline">Pipeline module</a></p></li>
@@ -958,7 +965,7 @@ Name: max_phase, Length: 7075, dtype: int64</code></pre>
 </div>
 </div>
 <p>For the first sample pipeline I’m building below, I’ve noticed that not all of the 209 RDKit 2D descriptors can be used for AdaBoost classifier, as some of the descriptors will have values of “0” and AdaBoost classifier will not be able to take care of them. Therefore, I’m only using a small selection of descriptors only, but HistGradientBoostingClassifier() should be able to take into account of NaNs and can be chained to include all descriptors in a pipeline.</p>
-<p>The following is an example of building a <em>scikit_learn</em> pipeline by using AdaBoost classifier model, along with Scikit_mol’s transformers for multi-class max_phase predictions with training set consisting of molecules with max_phase 0, 1, 2, 3 and 4. I’ve used Morgan fingerprints instead eventually so that’ll be shown in the following pipeline code, but I’ve also kept the RDKit 2D descriptor option on (just need to uncomment to run).</p>
+<p>The following is an example of building a <em>scikit_learn</em> pipeline by using AdaBoost classifier model, along with Scikit-mol’s transformers for multi-class max_phase predictions with training set consisting of molecules with max_phase 0, 1, 2, 3 and 4. I’ve used Morgan fingerprints instead eventually so that’ll be shown in the following pipeline code, but I’ve also kept the RDKit 2D descriptor option on (just need to uncomment to run).</p>
 <div class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters for RDKit 2D descriptors</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># params_rdkit2d = {</span></span>
@@ -1860,14 +1867,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mlpipe_adaboost.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-<pre><code>array([0, 0, 0, ..., 0, 0, 0])</code></pre>
+<pre><code>array([0, 0, 0, ..., 0, 0, 0], shape=(1415,))</code></pre>
 </div>
 </div>
 <p><br></p>
 </section>
 <section id="xgboost-classfier" class="level6">
 <h6 class="anchored" data-anchor-id="xgboost-classfier"><strong>XGBoost classfier</strong></h6>
-<p>The following code snippet is an example of a <em>scikit_learn</em> pipeline using Scikit_mol’s transformers and XGBoost classifier. One nice thing about XGBoost is that is has <a href="https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html"><em>scikit_learn</em> interface</a> so that it can be integrated into the <em>scikit-learn</em> pipeline and Scikit_mol’s transformers, which is what I’ve tried below.</p>
+<p>The following code snippet is an example of a <em>scikit_learn</em> pipeline using Scikit-mol’s transformers and XGBoost classifier. One nice thing about XGBoost is that is has <a href="https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html"><em>scikit_learn</em> interface</a> so that it can be integrated into the <em>scikit-learn</em> pipeline and Scikit-mol’s transformers, which is what I’ve tried below.</p>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters for xgboost model</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>params_xgboost <span class="op">=</span> {</span>
@@ -2818,7 +2825,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> mlpipe_xgb.predict(X_test)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
-<pre><code>array([0, 0, 0, ..., 0, 0, 0])</code></pre>
+<pre><code>array([0, 0, 0, ..., 0, 0, 0], shape=(1415,))</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -2910,11 +2917,14 @@ XGBClassifier's missclassification_error: 0.014</code></pre>
                multi_strategy=None, n_estimators=100, n_jobs=None,
                num_parallel_tree=None, objective='multi:softprob', ...),
  'smilestomoltransformer__parallel': False,
+ 'smilestomoltransformer__safe_inference_mode': False,
  'standardizer__neutralize': True,
  'standardizer__parallel': False,
- 'morganfingerprinttransformer__nBits': 2048,
+ 'standardizer__safe_inference_mode': False,
+ 'morganfingerprinttransformer__fpSize': 2048,
  'morganfingerprinttransformer__parallel': False,
  'morganfingerprinttransformer__radius': 2,
+ 'morganfingerprinttransformer__safe_inference_mode': False,
  'morganfingerprinttransformer__useBondTypes': True,
  'morganfingerprinttransformer__useChirality': False,
  'morganfingerprinttransformer__useCounts': False,
@@ -2980,7 +2990,7 @@ Note
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To obtain only the parameter names for the ease of reading</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>mlpipe_xgb.get_params().keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-<pre><code>dict_keys(['memory', 'steps', 'verbose', 'smilestomoltransformer', 'standardizer', 'morganfingerprinttransformer', 'standardscaler', 'xgbclassifier', 'smilestomoltransformer__parallel', 'standardizer__neutralize', 'standardizer__parallel', 'morganfingerprinttransformer__nBits', 'morganfingerprinttransformer__parallel', 'morganfingerprinttransformer__radius', 'morganfingerprinttransformer__useBondTypes', 'morganfingerprinttransformer__useChirality', 'morganfingerprinttransformer__useCounts', 'morganfingerprinttransformer__useFeatures', 'standardscaler__copy', 'standardscaler__with_mean', 'standardscaler__with_std', 'xgbclassifier__objective', 'xgbclassifier__base_score', 'xgbclassifier__booster', 'xgbclassifier__callbacks', 'xgbclassifier__colsample_bylevel', 'xgbclassifier__colsample_bynode', 'xgbclassifier__colsample_bytree', 'xgbclassifier__device', 'xgbclassifier__early_stopping_rounds', 'xgbclassifier__enable_categorical', 'xgbclassifier__eval_metric', 'xgbclassifier__feature_types', 'xgbclassifier__gamma', 'xgbclassifier__grow_policy', 'xgbclassifier__importance_type', 'xgbclassifier__interaction_constraints', 'xgbclassifier__learning_rate', 'xgbclassifier__max_bin', 'xgbclassifier__max_cat_threshold', 'xgbclassifier__max_cat_to_onehot', 'xgbclassifier__max_delta_step', 'xgbclassifier__max_depth', 'xgbclassifier__max_leaves', 'xgbclassifier__min_child_weight', 'xgbclassifier__missing', 'xgbclassifier__monotone_constraints', 'xgbclassifier__multi_strategy', 'xgbclassifier__n_estimators', 'xgbclassifier__n_jobs', 'xgbclassifier__num_parallel_tree', 'xgbclassifier__random_state', 'xgbclassifier__reg_alpha', 'xgbclassifier__reg_lambda', 'xgbclassifier__sampling_method', 'xgbclassifier__scale_pos_weight', 'xgbclassifier__subsample', 'xgbclassifier__tree_method', 'xgbclassifier__validate_parameters', 'xgbclassifier__verbosity'])</code></pre>
+<pre><code>dict_keys(['memory', 'steps', 'verbose', 'smilestomoltransformer', 'standardizer', 'morganfingerprinttransformer', 'standardscaler', 'xgbclassifier', 'smilestomoltransformer__parallel', 'smilestomoltransformer__safe_inference_mode', 'standardizer__neutralize', 'standardizer__parallel', 'standardizer__safe_inference_mode', 'morganfingerprinttransformer__fpSize', 'morganfingerprinttransformer__parallel', 'morganfingerprinttransformer__radius', 'morganfingerprinttransformer__safe_inference_mode', 'morganfingerprinttransformer__useBondTypes', 'morganfingerprinttransformer__useChirality', 'morganfingerprinttransformer__useCounts', 'morganfingerprinttransformer__useFeatures', 'standardscaler__copy', 'standardscaler__with_mean', 'standardscaler__with_std', 'xgbclassifier__objective', 'xgbclassifier__base_score', 'xgbclassifier__booster', 'xgbclassifier__callbacks', 'xgbclassifier__colsample_bylevel', 'xgbclassifier__colsample_bynode', 'xgbclassifier__colsample_bytree', 'xgbclassifier__device', 'xgbclassifier__early_stopping_rounds', 'xgbclassifier__enable_categorical', 'xgbclassifier__eval_metric', 'xgbclassifier__feature_types', 'xgbclassifier__gamma', 'xgbclassifier__grow_policy', 'xgbclassifier__importance_type', 'xgbclassifier__interaction_constraints', 'xgbclassifier__learning_rate', 'xgbclassifier__max_bin', 'xgbclassifier__max_cat_threshold', 'xgbclassifier__max_cat_to_onehot', 'xgbclassifier__max_delta_step', 'xgbclassifier__max_depth', 'xgbclassifier__max_leaves', 'xgbclassifier__min_child_weight', 'xgbclassifier__missing', 'xgbclassifier__monotone_constraints', 'xgbclassifier__multi_strategy', 'xgbclassifier__n_estimators', 'xgbclassifier__n_jobs', 'xgbclassifier__num_parallel_tree', 'xgbclassifier__random_state', 'xgbclassifier__reg_alpha', 'xgbclassifier__reg_lambda', 'xgbclassifier__sampling_method', 'xgbclassifier__scale_pos_weight', 'xgbclassifier__subsample', 'xgbclassifier__tree_method', 'xgbclassifier__validate_parameters', 'xgbclassifier__verbosity'])</code></pre>
 </div>
 </div>
 <p>Some of the main XGBoost parameters that can be tuned are <em>n_estimators</em>, <em>max_depth</em>, <em>learning_rate</em>, <em>subsample</em> and <em>reg_lambda</em>. Here, I’m going to try to look for the best combination of <em>learning_rate</em> and <em>subsample</em> for a XGBoost classifier model for now.</p>
@@ -3066,12 +3076,24 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 9 candidates, totalling 45 fits</code></pre>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/joblib/externals/loky/backend/fork_exec.py:38: DeprecationWarning: This process (pid=1491) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/joblib/externals/loky/backend/fork_exec.py:38: DeprecationWarning: This process (pid=1491) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/joblib/externals/loky/backend/fork_exec.py:38: DeprecationWarning: This process (pid=1491) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The best cv score is: 0.99
 The best cv parameter settings are: {'xgbclassifier__learning_rate': 0.3, 'xgbclassifier__subsample': 0.7}</code></pre>
 </div>
 </div>
-<p>For tuning parameters of Morgan fingerprints, this Scikit_mol <a href="https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb">example notebook</a> explains how to do it with code, so I won’t repeat them here, but have only shown how to tune some of the main XGBoost parameters.</p>
+<p>For tuning parameters of Morgan fingerprints, this Scikit-mol <a href="https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb">example notebook</a> explains how to do it with code, so I won’t repeat them here, but have only shown how to tune some of the main XGBoost parameters.</p>
 <p><br></p>
 </section>
 <section id="pickle-model" class="level6">
@@ -3084,20 +3106,20 @@ The best cv parameter settings are: {'xgbclassifier__learning_rate': 0.3, 'xgbcl
 </ul>
 <p>One thing to remember is to avoid unpickling unknown files over insecure network, and add security key if needed.</p>
 <div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pickle to save (serialise) the model in working directory (specify path if needed)</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "wb" - write binary</span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>pickle.dump(mlpipe_xgb, <span class="bu">open</span>(<span class="st">"xgb_pipeline.pkl"</span>, <span class="st">"wb"</span>))</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpickle (de-serialise) the model</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co"># "rb" - read binary</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>mlpipe_xgb_2 <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">"xgb_pipeline.pkl"</span>, <span class="st">"rb"</span>))</span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the unpickled model object to make prediction</span></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>pred2 <span class="op">=</span> mlpipe_xgb_2.predict(X_test)</span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a><span class="co">## Check unpickled model and original model are the same via Python's assertion method</span></span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="co">#assert np.sum(np.abs(pred2 - pred)) == 0</span></span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co">## or alternatively use numpy's allclose()</span></span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.allclose(pred, pred2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pickle to save (serialise) the model in working directory (specify path if needed)</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "wb" - write binary</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>pickle.dump(mlpipe_xgb, <span class="bu">open</span>(<span class="st">"xgb_pipeline.pkl"</span>, <span class="st">"wb"</span>))</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpickle (de-serialise) the model</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># "rb" - read binary</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>mlpipe_xgb_2 <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">"xgb_pipeline.pkl"</span>, <span class="st">"rb"</span>))</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the unpickled model object to make prediction</span></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>pred2 <span class="op">=</span> mlpipe_xgb_2.predict(X_test)</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co">## Check unpickled model and original model are the same via Python's assertion method</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="co">#assert np.sum(np.abs(pred2 - pred)) == 0</span></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="co">## or alternatively use numpy's allclose()</span></span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.allclose(pred, pred2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
@@ -3114,6 +3136,9 @@ The best cv parameter settings are: {'xgbclassifier__learning_rate': 0.3, 'xgbcl
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-bjerrum2023" class="csl-entry" role="doc-biblioentry">
+Bjerrum, EJ, RA Bachorz, A Bitton, O Choung, Y Chen, C Esposito, SV Ha, and A Poehlmann. 2023. <span>“Scikit-Mol Brings Cheminformatics to Scikit-Learn.”</span> <a href="https://chemrxiv.org/engage/chemrxiv/article-details/60ef0fc58825826143a82cc0">https://chemrxiv.org/engage/chemrxiv/article-details/60ef0fc58825826143a82cc0</a>.
+</div>
 <div id="ref-bruce2020" class="csl-entry" role="doc-biblioentry">
 Bruce, Peter, Andrew Bruce, and Peter Gedeck. 2020. <em>Practical Statistics for Data Scientists</em>. <a href="https://www.oreilly.com/library/view/practical-statistics-for/9781492072935/">https://www.oreilly.com/library/view/practical-statistics-for/9781492072935/</a>.
 </div>
