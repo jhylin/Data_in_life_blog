@@ -3,6 +3,7 @@ title: "Boosted trees"
 subtitle: "Series 2.3.1 - AdaBoost, XGBoost and Scikit-mol"
 author: Jennifer HY Lin
 date: '2024-6-6'
+date-modified: '2025-1-30'
 draft: false
 categories: 
     - Machine learning projects
@@ -264,6 +265,8 @@ print(y)
 <br>
 
 ###### **Sanitise SMILES**
+
+*Update on 30th Jan 2025 - A new safe inference mode feature has been introduced in Scikit_mol recently which will be able to handle invalid SMILES, please visit this [demonstration notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/11_safe_inference.ipynb) for details (thanks to Esben Jannik Bjerrum for mentioning this in the comment below).*
 
 This post is going to focus on Scikit_mol which has a manual way to handle SMILES errors, as shown in the code below. Another useful way to deal with SMILES errors is [Molpipeline](https://github.com/basf/MolPipeline)'s SMILES error handling, with an example shown in one of [its notebooks](https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb). The main difference from what I can see, even though I haven't got to use it yet, is that Molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a "NaN" label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).
 
