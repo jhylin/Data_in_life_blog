@@ -220,7 +220,7 @@ df_ache = df_ache.astype({"max_phase": int, "canonical_smiles": "string"})
 df_ache.dtypes
 ```
 
-Please note: the only molecule with max_phase of "0.5" was converted into "0" after I've converted the datatype of max_phase from float to integer (I've left it deliberately like this since this is only a demonstration on using scikit_learn's pipeline along with scikit_mol, but in reality this should be handled with care i.e. don't discard it as different max phase values have different meanings!). Therefore the following max_phase value count will have 6411 molecules with max_phase "0", rather than the previous number of 6410.
+Please note: the only molecule with max_phase of "0.5" was converted into "0" after I've converted the datatype of max_phase from float to integer (I've left it deliberately like this since this is only a demonstration on using scikit_learn's pipeline along with Scikit-mol [@bjerrum2023], but in reality this should be handled with care i.e. don't discard it as different max phase values have different meanings!). Therefore the following max_phase value count will have 6411 molecules with max_phase "0", rather than the previous number of 6410.
 
 ```{python}
 df_ache.value_counts("max_phase", dropna=False)
@@ -266,9 +266,9 @@ print(y)
 
 ###### **Sanitise SMILES**
 
-*Update on 30th Jan 2025 - A new safe inference mode feature has been introduced in Scikit_mol recently which will be able to handle invalid SMILES, please visit this [demonstration notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/11_safe_inference.ipynb) for details (thanks to Esben Jannik Bjerrum for mentioning this in the comment below).*
+*Update on 30th Jan 2025 - A new safe inference mode feature has been introduced in Scikit-mol recently which will be able to handle invalid SMILES, please visit this [demonstration notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/11_safe_inference.ipynb) for details (thanks to Esben Jannik Bjerrum for mentioning this in the comment below).*
 
-This post is going to focus on Scikit_mol which has a manual way to handle SMILES errors, as shown in the code below. Another useful way to deal with SMILES errors is [Molpipeline](https://github.com/basf/MolPipeline)'s SMILES error handling, with an example shown in one of [its notebooks](https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb). The main difference from what I can see, even though I haven't got to use it yet, is that Molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a "NaN" label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).
+This post is going to focus on Scikit-mol which has a manual way to handle SMILES errors, as shown in the code below. Another useful way to deal with SMILES errors is [Molpipeline](https://github.com/basf/MolPipeline)'s SMILES error handling, with an example shown in one of [its notebooks](https://github.com/basf/MolPipeline/blob/main/notebooks/03_error_handling.ipynb). The main difference from what I can see, even though I haven't got to use it yet, is that Molpipeline takes into account of all the invalid SMILES by giving each invalid SMILES a "NaN" label in the pipeline process - this maintains the matrix shape and good for tracking down the problematic SMILES (molecules).
 
 ```{python}
 checksmi = CheckSmilesSanitazion()
@@ -327,7 +327,7 @@ The aim is to create pipeline(s) using *scikit-learn*.
 
 The original plan is to chain an AdaBoost classifier, XGBoost classifier, along with Scikit-mol transformers all at once. However, it turns out that I'm building two separate pipelines of AdaBoost classifier and XGBoost classifier so that I can compare the difference(s) between them, and this also serves better for the purpose of this post really.
 
-This is also the time to think about generating molecular features for model training. Choosing data features such as fingerprints (e.g. Morgan fingerprints which is usually best for larger dataset) or RDKit 2D descriptors (which is useful for smaller datasets) or others. For RDKit 2D descriptors, Scikit_mol has integrated RDKit's [rdkit.Chem.Descriptors module](https://www.rdkit.org/docs/source/rdkit.Chem.Descriptors.html#module-rdkit.Chem.Descriptors) and [rdkit.ML.Descriptors.MoleculeDescriptors module](https://www.rdkit.org/docs/source/rdkit.ML.Descriptors.MoleculeDescriptors.html#rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator) within its MolecularDescriptorTransformer().
+This is also the time to think about generating molecular features for model training. Choosing data features such as fingerprints (e.g. Morgan fingerprints which is usually best for larger dataset) or RDKit 2D descriptors (which is useful for smaller datasets) or others. For RDKit 2D descriptors, Scikit-mol has integrated RDKit's [rdkit.Chem.Descriptors module](https://www.rdkit.org/docs/source/rdkit.Chem.Descriptors.html#module-rdkit.Chem.Descriptors) and [rdkit.ML.Descriptors.MoleculeDescriptors module](https://www.rdkit.org/docs/source/rdkit.ML.Descriptors.MoleculeDescriptors.html#rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator) within its MolecularDescriptorTransformer().
 
 Some useful links regarding building pipelines in *scikit-learn* and also another reference notebook on when to use parallel calculations for different molecular features:
 
@@ -347,7 +347,7 @@ print(f"First 10 descriptor names: {available_descriptors[:10]}")
 
 For the first sample pipeline I'm building below, I've noticed that not all of the 209 RDKit 2D descriptors can be used for AdaBoost classifier, as some of the descriptors will have values of "0" and AdaBoost classifier will not be able to take care of them. Therefore, I'm only using a small selection of descriptors only, but HistGradientBoostingClassifier() should be able to take into account of NaNs and can be chained to include all descriptors in a pipeline.
 
-The following is an example of building a *scikit_learn* pipeline by using AdaBoost classifier model, along with Scikit_mol's transformers for multi-class max_phase predictions with training set consisting of molecules with max_phase 0, 1, 2, 3 and 4. I've used Morgan fingerprints instead eventually so that'll be shown in the following pipeline code, but I've also kept the RDKit 2D descriptor option on (just need to uncomment to run).
+The following is an example of building a *scikit_learn* pipeline by using AdaBoost classifier model, along with Scikit-mol's transformers for multi-class max_phase predictions with training set consisting of molecules with max_phase 0, 1, 2, 3 and 4. I've used Morgan fingerprints instead eventually so that'll be shown in the following pipeline code, but I've also kept the RDKit 2D descriptor option on (just need to uncomment to run).
 
 ```{python}
 # Set parameters for RDKit 2D descriptors
@@ -406,7 +406,7 @@ mlpipe_adaboost.predict(X_test)
 
 ###### **XGBoost classfier**
 
-The following code snippet is an example of a *scikit_learn* pipeline using Scikit_mol's transformers and XGBoost classifier. One nice thing about XGBoost is that is has [*scikit_learn* interface](https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html) so that it can be integrated into the *scikit-learn* pipeline and Scikit_mol's transformers, which is what I've tried below.
+The following code snippet is an example of a *scikit_learn* pipeline using Scikit-mol's transformers and XGBoost classifier. One nice thing about XGBoost is that is has [*scikit_learn* interface](https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html) so that it can be integrated into the *scikit-learn* pipeline and Scikit-mol's transformers, which is what I've tried below.
 
 ```{python}
 # Set parameters for xgboost model
@@ -591,7 +591,7 @@ print(f"The best cv parameter settings are: {grid_search.best_params_}")
 # This may take longer time to run depending on computer hardware specs (for me it's taken ~13min)
 ```
 
-For tuning parameters of Morgan fingerprints, this Scikit_mol [example notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb) explains how to do it with code, so I won't repeat them here, but have only shown how to tune some of the main XGBoost parameters.
+For tuning parameters of Morgan fingerprints, this Scikit-mol [example notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb) explains how to do it with code, so I won't repeat them here, but have only shown how to tune some of the main XGBoost parameters.
 
 <br>
 
