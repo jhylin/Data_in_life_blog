@@ -12,7 +12,7 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/jhylin
-      - icon: cloud-fill
+      - text: "{{< fa brands bluesky >}}"
         href: https://bsky.app/profile/jhylin.bsky.social
       - icon: mastodon
         href: https://fosstodon.org/@jhylin
