@@ -19,12 +19,16 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning and data science projects in drug discovery.
 
-* Latest project - [A simple deep learning model about adverse drug reactions](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html)
-* Next project in the pipeline - Likely a short note about preventing overfitting in PyTorch
+* Latest project - A short note about preventing model overfitting in PyTorch
+* Next project in the pipeline - Break
 
 <br>
 
 **🌟Past projects🌟**
+
+**Deep learning**
+
+* [A simple deep learning model about adverse drug reactions](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html) - this is like an introductory piece to the world of deep learning and is also an early prototype of a QSAR/QSPR workflow as well
 
 **Machine learning**
 
