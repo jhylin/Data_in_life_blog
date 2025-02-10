@@ -19,7 +19,7 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning and data science projects in drug discovery.
 
-* Latest project - A short note about preventing model overfitting in PyTorch
+* Latest project - A short note about [preventing model overfitting in PyTorch](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/4_Prevent_overfit_note.html)
 * Next project in the pipeline - Break
 
 <br>

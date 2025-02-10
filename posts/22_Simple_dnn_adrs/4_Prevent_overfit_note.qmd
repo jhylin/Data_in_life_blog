@@ -196,6 +196,6 @@ It is also possible to mix checkpoints along with early stoppings in the model t
 
 ##### **Other related readings that might be of interest**
 
-* Unsure how useful this may be, but I happen to come across a [preprint paper](https://arxiv.org/pdf/2501.19195) while working on this note and it talks about how early stopping on validation loss is likely going to lead to problems with calibration and refinement errors (components of cross-entropy), and what they're using to overcome this (its [GitHub repo](https://github.com/dholzmueller/probmetrics))
+* unsure how useful this may be, but I happen to come across a [preprint paper](https://arxiv.org/pdf/2501.19195) while working on this note and it talks about how early stopping on validation loss is likely going to lead to problems with calibration and refinement errors (components of cross-entropy), and what they're using to overcome this (its [GitHub repo](https://github.com/dholzmueller/probmetrics))
 
 * and I'm sure there will be others in the literatures
