@@ -1,6 +1,8 @@
 ---
 title: Small molecules in ChEMBL database (old)
 subtitle: Series 1.1 - Polars dataframe library and machine learning in *scikit-learn*
+aliases: 
+  - https://jhylin.github.io//Data_in_life_blog/posts/08_ML1_Small_molecules_in_ChEMBL_database/ML1_chembl_cpds.html
 author: Jennifer HY Lin
 date: '2023-1-4'
 draft: false
