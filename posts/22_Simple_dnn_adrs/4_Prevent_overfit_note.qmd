@@ -1,0 +1,201 @@
+---
+title: "Prevent model overfitting in deep neural networks"
+date: "2025-2-11"
+author: Jennifer HY Lin
+draft: false
+categories: 
+    - Notes
+    - Deep learning
+jupyter: python3
+format: html
+fontsize: "12.5pt"
+---
+
+*note: there could be more ways to handle model overfitting, so this note is more like a slow-evolving document over time, and it mainly describes approaches applicable to neural networks (NN) built by using PyTorch but I suspect similar concepts may also apply (to a certain degree) towards other deep learning libraries/frameworks such as TensorFlow or Keras (and likely may apply to other machine learning algorithms too)*
+
+<br>
+
+##### **How to prevent overfitting in neural networks?**
+
+It appears there are three main approaches used to prevent model overfitting:
+
+1. **Drop out layer**
+
+- based on this (preprint) [paper](https://arxiv.org/abs/1207.0580)
+
+- adding a drop out layer is likely better and more useful for a larger NN, and is probably not great for the tiny two-layer NN that has been used in this [post](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html)
+
+- there are 2 types: [`nn.Dropout()`](https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html) with a [code example](https://machinelearningmastery.com/using-dropout-regularization-in-pytorch-models/) and [`F.dropout()`](https://pytorch.org/docs/stable/generated/torch.nn.functional.dropout.html) (note: F = functional)
+
+- drop out is most effective if used during model training phase
+
+- an [explanation](https://stackoverflow.com/a/53452827/19218378) about differences between these 2 types of drop out, but essentially they're the same but useful to use `F.dropout()` (a functional interface) when there are no parameters (e.g. weights and biases) required and will need to specify if in training or evaluation mode, and use `nn.Dropout()` (a PyTorch module) when parameters are needed with no need to specify the training or evaluation mode since nn.Dropout() will take care of this automatically
+
+<br>
+
+2. **Checkpoints with early stopping**
+
+- based on the concept that PyTorch can retrieve and restore weights or parameters of NN
+- first to save weights or parameters of the model
+
+```{{python}}
+torch.save(model.state_dict(), model_filename_or_path)
+```
+- then reload the model
+
+```{{python}}
+model.load_state_dict(torch.load(model_filename_or_path)) 
+```
+- need to set up an early stop threshold and use accuracy (e.g. accuracy as y_predict = model (X_test))
+- one feature is that you can set n_epochs with a very large number as the training loop can be terminated with a code break when there's a threshold set up
+- a [code example](https://machinelearningmastery.com/managing-a-pytorch-training-process-with-checkpoints-and-early-stopping/) which may be useful
+
+<br>
+
+3. **Early stopping in model training loop**
+
+Version 1:
+
+The code being used here is inspired and adapted (with thanks) from this [thread](https://stackoverflow.com/questions/71998978/early-stopping-in-pytorch).
+
+```{{python}}
+class EarlyStopping:
+    def __init__(self, epochs_to_wait = 1, delta = 0):
+        self.epochs_to_wait = epochs_to_wait
+        self.delta = delta
+        self.early_stop = False
+        self.counter = 0
+
+    def __call__(self, test_loss, train_loss):
+        if (test_loss - train_loss) > self.delta:
+            self.counter += 1
+            if self.counter > self.epochs_to_wait:
+                self.early_stop = True
+
+early_stopper = EarlyStopping(epochs_to_wait = 2, delta = 0)
+
+for i in range(len(train_epoch_loss)):
+    early_stopper(train_epoch_loss[i], test_epoch_loss[i])
+    print(f"train loss: {train_epoch_loss[i]} test loss: {test_epoch_loss[i]}")
+    if early_stopper.early_stop:
+        print("Early stop at epoch:", i)
+        break
+```
+
+The code output for one of the runs from the [notebook](https://github.com/jhylin/Adverse_drug_reactions/blob/main/3_ADR_reg_early_stop.ipynb):
+
+train loss: 1.2966824769973755 test loss: 1.9737834930419922
+train loss: 1.293437123298645 test loss: 1.93597412109375
+train loss: 1.2902556657791138 test loss: 1.8992326259613037
+train loss: 1.2871367931365967 test loss: 1.8635075092315674
+train loss: 1.2840790748596191 test loss: 1.828752040863037
+train loss: 1.2810810804367065 test loss: 1.7949209213256836
+train loss: 1.2781414985656738 test loss: 1.7619731426239014
+train loss: 1.275259256362915 test loss: 1.7298691272735596
+train loss: 1.2724330425262451 test loss: 1.6985728740692139
+train loss: 1.269661545753479 test loss: 1.6680500507354736
+train loss: 1.2669436931610107 test loss: 1.6382684707641602
+train loss: 1.2642782926559448 test loss: 1.6091980934143066
+train loss: 1.2616642713546753 test loss: 1.580810308456421
+train loss: 1.2591005563735962 test loss: 1.5532073974609375
+train loss: 1.2565860748291016 test loss: 1.5262627601623535
+train loss: 1.2541197538375854 test loss: 1.499927043914795
+train loss: 1.251700758934021 test loss: 1.474177360534668
+train loss: 1.2493280172348022 test loss: 1.4489929676055908
+train loss: 1.2470005750656128 test loss: 1.424353837966919
+train loss: 1.2447175979614258 test loss: 1.4002411365509033
+train loss: 1.2424780130386353 test loss: 1.3766369819641113
+train loss: 1.240281105041504 test loss: 1.3535246849060059
+train loss: 1.2381259202957153 test loss: 1.3308889865875244
+train loss: 1.2360116243362427 test loss: 1.3090163469314575
+train loss: 1.2339375019073486 test loss: 1.2876880168914795
+train loss: 1.2319027185440063 test loss: 1.2667698860168457
+train loss: 1.229906439781189 test loss: 1.246250867843628
+train loss: 1.2279479503631592 test loss: 1.226119875907898
+train loss: 1.2260264158248901 test loss: 1.2063673734664917
+train loss: 1.2241413593292236 test loss: 1.1869832277297974
+Early stop at epoch: 29
+
+Some comments:
+
+- can alter delta to specify how big the difference is between train and test losses (the gap between them)
+
+- epochs_to_wait can be altered too to specify at least how many epochs need to pass before using early stopping
+
+- due to the small-sized dataset being used here, the delta needs to be at 0 (since the losses are very small as well...), otherwise there won't be an early stop at all and the training epochs will just keep rolling...
+
+- other dataset should bring more interesting results!
+
+- again butina split with shuffling will alter results on each refreshed run (only specific to the notebook I'm using, and this shouldn't be an issue if the data produced in the end are of fixed or set values only)
+
+<br>
+
+Version 2:
+
+The code below may need more tweaking. This one focusses more on the test loss trend rather than the gap between train loss and test loss (and to be honest, I somehow understand version 1 better than this one at the moment...)
+
+```{{python}}
+class Early_stopping:
+
+    ## earlier version:
+    def __init__(self, epochs_to_wait = 5, delta = 0):
+        self.epochs_to_wait = epochs_to_wait
+        self.delta = delta
+        self.min_test_loss = np.inf
+        self.counter = 0
+    
+    def early_stop(self, test_loss):
+        if test_loss < self.min_test_loss: 
+            self.min_test_loss = test_loss
+            self.counter = 0
+        elif test_loss > (self.min_test_loss + self.delta):
+            self.counter += 1
+            if self.counter >= self.epochs_to_wait:
+                return True
+        return False
+
+    ## alternative version: 
+    # def __init__(self, epochs_to_wait = 1, delta = 0):
+    #     self.epochs_to_wait = epochs_to_wait
+    #     self.delta = delta
+    #     self.min_test_loss = 0
+    #     self.counter = 0
+    #     self.early_stop = False
+
+    # def __call__(self, test_loss):
+    #     if self.min_test_loss == None:
+    #         self.min_test_loss = test_loss
+    #     elif test_loss < self.min_test_loss:
+    #         self.min_test_loss = test_loss
+    #         self.counter = 0    # reset counter to zero if test loss improves
+    #     elif test_loss > (self.min_test_loss + self.delta):
+    #         self.counter += 1
+    #         #print(f"Early stopping counter {self.counter} of {self.epochs_to_wait}")
+    #         if self.counter >= self.epochs_to_wait:
+    #             #print("Early stopping")
+    #             self.early_stop = True
+
+early_stopper = Early_stopping()
+
+for i in range(len(test_epoch_loss)):
+    #early_stopper(test_epoch_loss[i])
+    print(f"train loss: {train_epoch_loss[i]} test loss: {test_epoch_loss[i]}")
+    if early_stopper.early_stop:
+        print(f"early stop at epoch: {i}")
+        break
+```
+
+The code output for one of the runs in the [notebook](https://github.com/jhylin/Adverse_drug_reactions/blob/main/3_ADR_reg_early_stop.ipynb) (note: epoch 0 is first epoch):
+
+train loss: 0.4035276174545288 test loss: 0.919343888759613
+early stop at epoch: 0
+
+It is also possible to mix checkpoints along with early stoppings in the model training loops (set up your own functions/classes according to needs), a [code example](https://machinelearningmastery.com/managing-a-pytorch-training-process-with-checkpoints-and-early-stopping/) will be the section on "Checkpointing with Early Stopping" from the same link as provided above.
+
+<br>
+
+##### **Other related readings that might be of interest**
+
+* Unsure how useful this may be, but I happen to come across a [preprint paper](https://arxiv.org/pdf/2501.19195) while working on this note and it talks about how early stopping on validation loss is likely going to lead to problems with calibration and refinement errors (components of cross-entropy), and what they're using to overcome this (its [GitHub repo](https://github.com/dholzmueller/probmetrics))
+
+* and I'm sure there will be others in the literatures

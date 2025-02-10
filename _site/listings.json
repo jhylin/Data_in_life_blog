@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/22_Simple_dnn_adrs/4_Prevent_overfit_note.html",
       "/posts/22_Simple_dnn_adrs/2_ADR_regressor.html",
       "/posts/22_Simple_dnn_adrs/1_ADR_data.html",
       "/posts/20_Cyp3a4_2d6_inh/1_CYP450_drugs.html",
