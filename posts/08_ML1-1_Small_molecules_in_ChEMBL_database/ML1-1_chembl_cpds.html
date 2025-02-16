@@ -600,7 +600,7 @@ None</code></pre>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for the curated small molecules in ChEMBL database</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df_dn.group_by(<span class="st">"Max Phase"</span>, maintain_order <span class="op">=</span> <span class="va">True</span>).agg(pl.count())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_8426/3278305966.py:3: DeprecationWarning: `pl.count()` is deprecated. Please use `pl.len()` instead.
+<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_1386/3278305966.py:3: DeprecationWarning: `pl.count()` is deprecated. Please use `pl.len()` instead.
   df_dn.group_by("Max Phase", maintain_order = True).agg(pl.count())</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -792,7 +792,7 @@ None</code></pre>
 <div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_concat.group_by(<span class="st">"Max_Phase"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_8426/631682218.py:1: DeprecationWarning: `GroupBy.count` is deprecated. It has been renamed to `len`.
+<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_1386/631682218.py:1: DeprecationWarning: `GroupBy.count` is deprecated. It has been renamed to `len`.
   df_concat.group_by("Max_Phase").count()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -811,7 +811,7 @@ None</code></pre>
 <div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_concat.group_by(<span class="st">"Type"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_8426/3888448416.py:1: DeprecationWarning: `GroupBy.count` is deprecated. It has been renamed to `len`.
+<pre><code>/var/folders/0y/p72zn_cx4vz1lv6zmyd7gkt00000gn/T/ipykernel_1386/3888448416.py:1: DeprecationWarning: `GroupBy.count` is deprecated. It has been renamed to `len`.
   df_concat.group_by("Type").count()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="22">
