@@ -2,24 +2,25 @@
 title: Notes on adverse drug reactions (ADRs) data
 subtitle: For strong and moderate strength cytochrome P450 (CYP) enzyme substrates
 date: '2025-1-8'
-date-modified: '2025-4-10'
+date-modified: '2025-4-11'
 author: Jennifer HY Lin
 draft: true
 categories:
   - Data
   - Notes
 jupyter: python3
+bibliography: references.bib
 ---
 
 Here are the notes regarding the ADRs of strong and moderate cytochrome P450 (CYP) substrates used in the data in the [accompanying notebook](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html). The dataset currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates.
 
 <br>
 
-##### **drug_name and cyp_strength_of_evidence source** 
+##### **For columns "drug_name" and "cyp_strength_of_evidence"** 
 
-*note: "cyp_strength_of_evidence source" column has been renamed as "cyp_type_and_cyp_strength_of_evidence in the cyp_substrates_adrs.csv file"*
+*note: "cyp_strength_of_evidence" column has been renamed as "cyp_type_and_cyp_strength_of_evidence" in the [cyp_substrates_adrs.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/cyp_substrates_adrs.csv) file"*
 
-This is all based on the Flockhart table of drug interactions at [https://drug-interactions.medicine.iu.edu/MainTable.aspx](https://drug-interactions.medicine.iu.edu/MainTable.aspx)
+This is all based on the Flockhart cytochrome P450 drug-drug interaction table [@Flockhart2021] at [https://drug-interactions.medicine.iu.edu/MainTable.aspx](https://drug-interactions.medicine.iu.edu/MainTable.aspx).
 
 Strength of evidence that the drug is metabolised by a certain CYP enzyme (as quoted from above web link):
 
@@ -28,14 +29,14 @@ Strength of evidence that the drug is metabolised by a certain CYP enzyme (as qu
 
 <br>
 
-##### **drug_class data sources**
+##### **Data sources for column "drug_class"**
 
 This information can be found in many different national drug formularies, drug reference textbooks e.g. Martindale, American society of health-system pharmacists' (ASHP) drug information (DI) monographs,
 PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com. For the particular small dataset used in the notebook, and also the later expanded dataset on all CYP substrates, the ADR reference sources listed below also contain information on therapeutic drug classes for all drugs.
 
 <br>
 
-##### **ADRs data sources**
+##### **Data sources for ADRs**
 
 * 1st-line: [Drugs.com](https://www.drugs.com/sfx/) 
   - using the health professional version for ADRs which usually contains ADR references from pharmaceutical manufacturers' medicines information data sheets, ASHP DI monographs or journal paper references
@@ -66,9 +67,9 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 <br>
 
-##### **Exceptions or notes for ADRs**
+##### **Notes for ADRs**
 
-###### About similar ADR terms
+###### **About similar ADR terms**
 
 - all minor ADRs are removed as the current focus will be more on ADRs that'll affect qualities of lives or are potentially more life-threatening (e.g. dry skin, acne, chills, flatulence and abdominal discomforts are removed)
 
@@ -82,7 +83,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 ---
 
-###### Regarding ADRs and categories
+###### **Regarding ADRs and categories**
 
 - ADR mentioned in common ADR category and repeated in the less common one will have the ADR recorded in the higher incidence rate (at > 10%) only
 
@@ -94,7 +95,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 ---
 
-###### For postmarketing reports
+###### **For postmarketing reports**
 
 - some postmarketing adverse effects are for different age populations e.g. paediatric patients of up to 12 years of age or elderly people - for now all of them are labelled as "(pm)" to denote postmarketing reports and are not differentiated in age groups
 
@@ -104,7 +105,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 ---
 
-###### More on psychiatric medicines
+###### **More on psychiatric medicines**
 
 - serotonergic drugs tend to induce serotonin syndrome (e.g. tremor, ataxia, restlestness, shivering, sweating, fever, tachycardia, tachypnoea, confusion, agitation, coma) especially if used in combinations concomitantly (monotherapy tends to have smaller risk) 
 
@@ -112,7 +113,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 ---
 
-###### Other bits and pieces
+###### **Other bits and pieces**
 
 - one other thing I'd like to mention is that all the ADRs recorded in this repository are not merely a copy-and-paste action from the drug reference sources, they also include or are integrated with the ones I've encountered from my previous pharmacist work experience (in the hope to better reflect bedside or clinical ADRs, and this is also why collecting data has been taking a long time...)
 
@@ -120,71 +121,102 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 <br>
 
-###### **Notes for specific drugs**
+###### **Notes for specific selected drugs**
 
-*May turn each drug into sub-headings later for quick access from table of contents in blog post*
+*note: list of drugs not in alphabetical order; quick links for each drug in table of contents on the right*
 
-- hydrocortisone (a moderate CYP3A4 substrate) has no reported ADR frequencies at all for its ADRs as they are entirely dependent on the dosage and duration of use (ADRs tend to be unnoticeable at appropriate low doses for short durations)
+###### ***hydrocortisone***
+- A moderate CYP3A4 substrate with no reported ADR frequencies at all for its ADRs as they are entirely dependent on the dosage and duration of use (ADRs tend to be unnoticeable at appropriate low doses for short durations)
 
-- terfenadine (a strong CYP3A4 substrate) is actually withdrawn from the market in 1990s due to QT prolongations
+###### ***terfenadine***
+- A strong CYP3A4 substrate that is actually withdrawn from the market in 1990s due to QT prolongations
 
-- lercanidipine (a moderate CYP3A4 substrate) has nil reported ADRs of more than 1% but has a few postmarketing reports recorded
+###### ***lercanidipine***
+- A moderate CYP3A4 substrate that has nil reported ADRs of more than 1% but has a few postmarketing reports recorded
 
-- telaprevir (a moderate CYP3A4 substrate) is usually administered within a combination therapy (e.g. along with peginterferon alfa and ribavirin)
+###### ***telaprevir*** 
+- A moderate CYP3A4 substrate that is usually administered within a combination therapy (e.g. along with peginterferon alfa and ribavirin)
 
-- quinine (a moderate CYP3A4 substrate) has all of its ADRs reported without frequencies. The most common ADRs are presented as a cluster of symptoms (known as cinchonism) and can occur during overdoses (usually very toxic) and also normal doses. These symptoms include "...tinnitus, hearing impairment, headache, nausea, vomiting, abdominal pain, diarrhoea, visual disturbances (including blindness), arrhythmias (which can have a very rapid onset), convulsions (which can be intractable), and rashes." (as quoted from NZ formulary v150 - 01 Dec 2024)
+###### ***quinine*** 
+- A moderate CYP3A4 substrate that has all of its ADRs reported without frequencies. The most common ADRs are presented as a cluster of symptoms (known as cinchonism) and can occur during overdoses (usually very toxic) and also normal doses. These symptoms include "...tinnitus, hearing impairment, headache, nausea, vomiting, abdominal pain, diarrhoea, visual disturbances (including blindness), arrhythmias (which can have a very rapid onset), convulsions (which can be intractable), and rashes." (as quoted from NZ formulary v150 - 01 Dec 2024)
 
-- ribociclib (a moderate CYP3A4 substrate) has a listed ADR of on-treatment deaths, which were found to be associated with patients also taking letrozole or fulvestrant at the same time and/or in patients with underlying malignancy
+###### ***ribociclib*** 
+- A moderate CYP3A4 substrate that has a listed ADR of on-treatment deaths, which were found to be associated with patients also taking letrozole or fulvestrant at the same time and/or in patients with underlying malignancy
 
-- nortriptyline (a strong CYP2D6 substrate) has no frequencies recorded for all of its ADRs - the recorded ADRs in files will be mainly based on nzf which has stated these ADRs as common ones with varying risk and extent, a good rule of thumb is to be aware of the well-known tricyclic antidepressant-related ADRs e.g. antimuscarinic effects (dry mouth, blurred vision, constipation, urinary retention)
+###### ***nortriptyline*** 
+- A strong CYP2D6 substrate with no frequencies recorded for all of its ADRs - the recorded ADRs in files will be mainly based on nzf which has stated these ADRs as common ones with varying risk and extent, a good rule of thumb is to be aware of the well-known tricyclic antidepressant-related ADRs e.g. antimuscarinic effects (dry mouth, blurred vision, constipation, urinary retention)
 
-- perhexiline (a strong CYP2D6 substrate) has no records of medicines information in Drugs@FDA or Drugs.com so the main source of drug information is nzf and its pharmaceutical manufacturer's [medicines data sheet](https://www.medsafe.govt.nz/profs/datasheet/p/pexsigtab.pdf). The ADRs may be present for the first two to four weeks of treatment only
+###### ***perhexiline*** 
+- A strong CYP2D6 substrate with no records of medicines information in Drugs@FDA or Drugs.com so the main source of drug information is nzf and its pharmaceutical manufacturer's [medicines data sheet](https://www.medsafe.govt.nz/profs/datasheet/p/pexsigtab.pdf). The ADRs may be present for the first two to four weeks of treatment only
 
-- escitalopram (a moderate CYP2D6 substrate) is also known to induce selective serotonin reuptake inhibitor-related hyponatraemia (through inappropriate antidiuretic hormone secretion) when certain risk factors are also present at the same time e.g. diuretic use, female gender, low body weight, geriatric populations along with low baseline sodium level
+###### ***escitalopram*** 
+- A moderate CYP2D6 substrate that is also known to induce selective serotonin reuptake inhibitor-related hyponatraemia (through inappropriate antidiuretic hormone secretion) when certain risk factors are also present at the same time e.g. diuretic use, female gender, low body weight, geriatric populations along with low baseline sodium level
 
-- lidocaine (a moderate CYP2D6 substrate) doesn't have ADR frequencies recorded - ADRs for amide local anaesthetics apply instead (mainly central nervous and cardiovascular system-related) and toxicity is commonly dose-dependent (e.g. increased risk due to high plasma concentration); hypersensitivity reactions may sometimes be due to preservatives used (e.g. parabens)
+###### ***lidocaine*** 
+- A moderate CYP2D6 substrate that doesn't have ADR frequencies recorded - ADRs for amide local anaesthetics apply instead (mainly central nervous and cardiovascular system-related) and toxicity is commonly dose-dependent (e.g. increased risk due to high plasma concentration); hypersensitivity reactions may sometimes be due to preservatives used (e.g. parabens)
 
-- metoclopramide (a moderate CYP2D6 substrate) has ADRs of acute dystonic reaction and extrapyramidal disorders -  more details about extrapyramidal effects [here](https://www.psychdb.com/meds/antipsychotics/eps#extrapyramidal-symptoms-eps) and this [one](https://www.medsafe.govt.nz/profs/PUArticles/March2023/Metoclopramide-risk-dystonic-side-effects-children-and-young-adults.html) about dystonic reactions
+###### ***metoclopramide*** 
+- A moderate CYP2D6 substrate that has ADRs of acute dystonic reaction and extrapyramidal disorders -  more details about extrapyramidal effects [here](https://www.psychdb.com/meds/antipsychotics/eps#extrapyramidal-symptoms-eps) and this [one](https://www.medsafe.govt.nz/profs/PUArticles/March2023/Metoclopramide-risk-dystonic-side-effects-children-and-young-adults.html) about dystonic reactions
 
-- cyclophosphamide (a moderate CYP2C19 substrate) is a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity.
+###### ***cyclophosphamide*** 
+- A moderate CYP2C19 substrate that is also a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity.
 
-- r-mephobarbital (a strong CYP2C19 substrate), manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADR is based on this medicines data sheet [link](https://www.drugs.com/pro/mephobarbital.html) from its last pharmaceutical manufacturer (Lundbeck Inc.)
+###### ***r-mephobarbital*** 
+- A strong CYP2C19 substrate, manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADR is based on this medicines data sheet [link](https://www.drugs.com/pro/mephobarbital.html) from its last pharmaceutical manufacturer (Lundbeck Inc.)
 
-- flurbiprofen (a moderate CYP2C9 substrate) is one of the non-steroidal anti-inflammatory drugs which are well-known to be associated with cardiovascular, gastrointestinal (cyclo-oxygenase-2 selective inhibitors may have lower risk) and renal-related risks, therefore most of the ADRs recorded, including postmarketing reports, will focus on these physiological influences mainly
+###### ***flurbiprofen*** 
+- A moderate CYP2C9 substrate and also one of the non-steroidal anti-inflammatory drugs known to be associated with cardiovascular, gastrointestinal (cyclo-oxygenase-2 selective inhibitors may have lower risk) and renal-related risks, therefore most of the ADRs and postmarketing reports recorded will focus on these physiological influences mainly
 
-- glimepiride (a moderate CYP2C9 substrate) is one of the sulfonylureas used for blood glucose control in type-2 diabetics. One of its postmarketing reports of "disulfiram-like reaction" is about the unpleasant effects (e.g. facial flushing, headache, palpitations, tachycardia) experienced after alcohol consumption (note: disulfiram is another drug often used for treating alcohol dependence)
+###### ***glimepiride*** 
+- A moderate CYP2C9 substrate which is also one of the sulfonylureas used for blood glucose control in type-2 diabetics. One of its postmarketing reports of "disulfiram-like reaction" is about the unpleasant effects (e.g. facial flushing, headache, palpitations, tachycardia) experienced after alcohol consumption (note: disulfiram is another drug often used for treating alcohol dependence)
 
-- glyburide (a moderate CYP2C9 substrate) is also known as glibenclamide in some of the countries around the world
+###### ***glyburide*** 
+- A moderate CYP2C9 substrate which is also known as glibenclamide in some of the countries around the world
 
-- phenytoin (a moderate CYP2C9 substrate) may cause severe cutaneous adverse reactions (SCAR), e.g. drug reaction with eosinophilia and systemic symptoms, Stevens-Johnson syndrome, toxic epidermal necrolysis, erythema multiforme, and acute generalised exanthematous pustulosis, which may require closer monitoring and drug discontinuation if required. Its occurrence is more likely in a genetic population with a particular human leukocyte antigen (HLA) allele present e.g. HLA-B^*15:02
+###### ***phenytoin*** 
+- A moderate CYP2C9 substrate that may cause severe cutaneous adverse reactions (SCAR), e.g. drug reaction with eosinophilia and systemic symptoms, Stevens-Johnson syndrome, toxic epidermal necrolysis, erythema multiforme, and acute generalised exanthematous pustulosis, which may require closer monitoring and drug discontinuation if required. Its occurrence is more likely in a genetic population with a particular human leukocyte antigen (HLA) allele present e.g. HLA-B^*15:02
 
-- warfarin (a moderate CYP2C9 substrate) doesn't have any ADR frequencies recorded as it's a well-known vitamin K antagonist, often used as an oral anticoagulant, with a prominent ADR of causing fatal or non-fatal organ or tissue haemorrhage. The best strategy to prevent any haemorrhagic events is to monitor via international normalised ratio (INR) testing
+###### ***warfarin*** 
+- A moderate CYP2C9 substrate that doesn't have any ADR frequencies recorded as it's a well-known vitamin K antagonist, often used as an oral anticoagulant, with a prominent ADR of causing fatal or non-fatal organ or tissue haemorrhage. The best strategy to prevent any haemorrhagic events is to monitor via international normalised ratio (INR) testing
 
-- caffeine (a strong CYP1A2 substrate) is normally quite well tolerated orally; the ADRs recorded in the dataset here is mostly based on caffeine citrate 20mg/mL injection, which is often used in premature infants and may not be applicable to other populations
+###### ***caffeine*** 
+- A strong CYP1A2 substrate which is normally quite well tolerated orally; the ADRs recorded in the dataset here is mostly based on caffeine citrate 20mg/mL injection, which is often used in premature infants and may not be applicable to other populations
 
-- clozpine (a strong CYP1A2 substrate) is one of the second generation or atypical antipsychotics with many ADRs requiring close monitoring e.g. frequencies of bowel motions (contipation is one of the common ADRs that is potentially fatal), white cell counts and cardiac toxicity-related symptoms and/or cardiovascular-related lab marker changes; people with pre-existing diabetes or liver diseases are also prone to ADRs related to these diseases while on clozapine
+###### ***clozpine*** 
+- A strong CYP1A2 substrate that is one of the second generation or atypical antipsychotics with many ADRs requiring close monitoring e.g. frequencies of bowel motions (contipation is one of the common ADRs that is potentially fatal), white cell counts and cardiac toxicity-related symptoms and/or cardiovascular-related lab marker changes; people with pre-existing diabetes or liver diseases are also prone to ADRs related to these diseases while on clozapine
 
-- melatonin (a strong CYP1A2 substrate) has no ADRs with frequencies above 10% as it's normally quite well tolerated at appropriate dose for short-term use (e.g. 3 months)
+###### ***melatonin*** 
+- A strong CYP1A2 substrate that has no ADRs with frequencies above 10% as it's normally quite well tolerated at appropriate dose for short-term use (e.g. 3 months)
 
-- pomalidomide (a moderate CYP1A2 substrate) is an immunomodulating drug that has antineoplastic property to treat relapsed multiple myeloma and is structurally related to thalidomide
+###### ***pomalidomide*** 
+- A moderate CYP1A2 substrate which is also an immunomodulating drug that has antineoplastic property to treat relapsed multiple myeloma and is structurally related to thalidomide
 
-- tacrine (a strong CYP1A2 substrate) has been withdrawn from the US market in May 2012. An [archived LiverTox reference](https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm) has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by drugs.com for the ADRs of tacrine, here's a [list of references](https://www.drugs.com/sfx/tacrine-side-effects.html#refs) (which included the old pharmaceutical manufacturer's data sheet)
+###### ***tacrine*** 
+- A strong CYP1A2 substrate that has been withdrawn from the US market in May 2012. An [archived LiverTox reference](https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm) has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by drugs.com for the ADRs of tacrine, here's a [list of references](https://www.drugs.com/sfx/tacrine-side-effects.html#refs) (which included the old pharmaceutical manufacturer's data sheet)
 
-- theophylline (a moderate CYP1A2 substrate) ADRs are more likely to occur in overdoses (therapeutic drug monitoring is recommended as therapeutic and toxic doses may be very close to each other)
+###### ***theophylline*** 
+- A moderate CYP1A2 substrate with ADRs that are more likely to occur in overdoses (therapeutic drug monitoring is recommended as therapeutic and toxic doses may be very close to each other)
 
-- bupropion (a strong CYP2B6 substrate) is also used for smoking cessation
+###### ***bupropion*** 
+- A strong CYP2B6 substrate that is also used for smoking cessation
 
-- efavirenz (a strong CYP2B6 substrate) has a very common ADR of rash that often occurs in the first 2 weeks of treatment, it could be minor if there are no blistering, desquamations or any other widespread signs and the drug can be continued with symptoms disappearing usually after about a month; alternatively, if the symptoms are severe, the drug should be discontinued. Central nervous system-type ADRs will usually slowly improve after continuous use of drug, but if there are pre-existing psychiatric conditions, the risk of psychiatric ADRs may need to be further considered before initiating or continuing the drug
+###### ***efavirenz***
+- A strong CYP2B6 substrate that has a very common ADR of rash that often occurs in the first 2 weeks of treatment, it could be minor if there are no blistering, desquamations or any other widespread signs and the drug can be continued with symptoms disappearing usually after about a month; alternatively, if the symptoms are severe, the drug should be discontinued. Central nervous system-type ADRs will usually slowly improve after continuous use of drug, but if there are pre-existing psychiatric conditions, the risk of psychiatric ADRs may need to be further considered before initiating or continuing the drug
 
-- isoflurane (a strong CYP2E1 substrate) is a type of inhalational anaesthetic agent (in volatile liquid form) that is normally administered through vaporiser and requires highly trained staff for administration and resuscitation if needed
+###### ***isoflurane*** 
+- A strong CYP2E1 substrate which is also a type of inhalational anaesthetic agent (in volatile liquid form) that is normally administered through vaporiser and requires highly trained staff for administration and resuscitation if needed
 
-- cerivastatin (a strong CYP2C8 substrate) has been withdrawn from the market since 2001 due to serious adverse effect of rhabdomyolysis leading to kidney failure and subsequently reported deaths ([reference](https://pubmed.ncbi.nlm.nih.gov/11806796/) or [alternative link](https://trialsjournal.biomedcentral.com/articles/10.1186/cvm-2-5-205))
+###### ***cerivastatin*** 
+- A strong CYP2C8 substrate that has been withdrawn from the market since 2001 due to serious adverse effect of rhabdomyolysis leading to kidney failure and subsequently reported deaths ([reference](https://pubmed.ncbi.nlm.nih.gov/11806796/) or [alternative link](https://trialsjournal.biomedcentral.com/articles/10.1186/cvm-2-5-205))
 
-- enzalutamide (a moderate CYP2C8 substrate) has a known postmarketing ADR report of posterior reversible encephalopathy syndrome, which include symptoms such as seizure, headache, confusion, other visual and neurological disturbances with or without associated hypertension (more details [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC5410886/) or [alternative link](https://academic.oup.com/omcr/article/2017/4/omx011/3098656))
+###### ***enzalutamide*** 
+- A moderate CYP2C8 substrate with a known postmarketing ADR report of posterior reversible encephalopathy syndrome, which include symptoms such as seizure, headache, confusion, other visual and neurological disturbances with or without associated hypertension (more details [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC5410886/) or [alternative link](https://academic.oup.com/omcr/article/2017/4/omx011/3098656))
 
-- rosiglitazone (a moderate CYP2C8 substrate) has an ADR of increasing the risk of congestive heart failure and heart attack reported from postmarketing use and also one of its earlier clinical trials. It was withdrawn for medical use in several countries back in 2011 but US continued its use with restrictions and further removed the restriction ([reference](https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-eliminates-risk-evaluation-and-mitigation-strategy-rems)) when the drug was found not to increase cardiovascular risk in another clinical trial. Currently, the cardiovascular risk is still recommended to be considered before use
+###### ***rosiglitazone*** 
+- A moderate CYP2C8 substrate that has an ADR of increasing the risk of congestive heart failure and heart attack reported from postmarketing use and also one of its earlier clinical trials. It was withdrawn for medical use in several countries back in 2011 but US continued its use with restrictions and further removed the restriction ([reference](https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-eliminates-risk-evaluation-and-mitigation-strategy-rems)) when the drug was found not to increase cardiovascular risk in another clinical trial. Currently, the cardiovascular risk is still recommended to be considered before use
 
-- tucatinib (a moderate CYP2C8 substrate) has been tested along with trastuzumab and capecitabine in clinical trials, therefore its ADRs are based on these combination of treatments, and not solely on tucatinib. One of its ADRs, palmar plantar erythrodysesthesia syndrome is also known as hand-foot syndrome or chemotherapy-induced acral erythema, with symptoms such as tingling, numbness and redness of palms and soles ([reference](https://dermnetnz.org/topics/hand-foot-syndrome))
+###### ***tucatinib*** 
+- A moderate CYP2C8 substrate that has been tested along with trastuzumab and capecitabine in clinical trials, therefore its ADRs are based on these combination of treatments, and not solely on tucatinib. One of its ADRs, palmar plantar erythrodysesthesia syndrome is also known as hand-foot syndrome or chemotherapy-induced acral erythema, with symptoms such as tingling, numbness and redness of palms and soles ([reference](https://dermnetnz.org/topics/hand-foot-syndrome))
 
 <br>
 
