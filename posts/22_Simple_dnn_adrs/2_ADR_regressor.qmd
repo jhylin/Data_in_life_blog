@@ -40,6 +40,8 @@ from rdkit.Chem import rdFingerprintGenerator
 import useful_rdkit_utils as uru
 import sys
 from matplotlib import pyplot as plt
+import warnings
+warnings.filterwarnings('ignore')
 print(f"Pandas version used: {pd.__version__}")
 print(f"PyTorch version used: {torch.__version__}")
 print(f"NumPy version used: {np.__version__}")
@@ -54,7 +56,7 @@ print(f"Python version used: {sys.version}")
 This is an extremely small set of data compiled manually (by me) via references stated in the dataframe. For details about what and how the data are collected, I've prepared a separate post as a [data note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/1_ADR_data.html) to explain key things about the data. It may not lead to a very significant result but it is done as an example of what an early or basic deep neural network (DNN) model may look like. Ideally there should be more training data and also more features added or used. I've hypothetically set the goal of this introductory piece to predict therapeutic drug classes from ADRs, molecular fingerprints and cytochrome P450 substrate strengths, but this won't be achieved in this initial post (yet).
 
 ```{python}
-data = pd.read_csv("All_CYP3A4_substrates")
+data = pd.read_csv("cyp3a4_substrates.csv")
 print(data.shape)
 data.head(3)
 ```
@@ -609,7 +611,7 @@ To mitigate overfitting:
 
 - use [torch.nn.Dropout()](https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html) to randomly drop out some of the neurons to ensure the exisiting neurons will learn features without being too reliant on other neighbouring neurons in the network
 
-- *I'll try the early stopping or drop out method in future posts since current post is relatively long already...*
+- *I'll try the early stopping or drop out method in future posts since current post is relatively long already...* (***[note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/4_Prevent_overfit_note.html) on preventing model overfitting in DNN added in February 2025***)
 
 To overcome underfitting:
 
