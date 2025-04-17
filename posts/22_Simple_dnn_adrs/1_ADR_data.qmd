@@ -2,9 +2,9 @@
 title: Notes on adverse drug reactions (ADRs) data
 subtitle: For strong and moderate strength cytochrome P450 (CYP) enzyme substrates
 date: '2025-1-8'
-date-modified: '2025-4-11'
+date-modified: '2025-4-18'
 author: Jennifer HY Lin
-draft: true
+draft: false
 categories:
   - Data
   - Notes
@@ -12,17 +12,21 @@ jupyter: python3
 bibliography: references.bib
 ---
 
-Here are the notes regarding the ADRs of strong and moderate cytochrome P450 (CYP) substrates used in the data in the [accompanying notebook](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html). The dataset currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates.
+Here are the notes regarding the ADRs of strong and moderate cytochrome P450 (CYP) substrates used in the data in the accompanying notebook ([post version](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html) or [Jupyter notebook version](https://github.com/jhylin/Adverse_drug_reactions/blob/main/2_ADR_regressor.ipynb)). The dataset currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates.
 
 <br>
 
 ##### **For columns "drug_name" and "cyp_strength_of_evidence"** 
 
-*note: "cyp_strength_of_evidence" column has been renamed as "cyp_type_and_cyp_strength_of_evidence" in the [cyp_substrates_adrs.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/cyp_substrates_adrs.csv) file"*
+*note*: 
 
-This is all based on the Flockhart cytochrome P450 drug-drug interaction table [@Flockhart2021] at [https://drug-interactions.medicine.iu.edu/MainTable.aspx](https://drug-interactions.medicine.iu.edu/MainTable.aspx).
+- *"cyp_strength_of_evidence" column has been renamed as "cyp_type_and_cyp_strength_of_evidence" in the [cyp_substrates_adrs.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/cyp_substrates_adrs.csv) file to include all the different CYP enzyme substrates*
 
-Strength of evidence that the drug is metabolised by a certain CYP enzyme (as quoted from above web link):
+- *"cyp_strength_of_evidence" column is only used in [cyps3a4_substrates.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/Data/cyp3a4_substrates.csv) as it's a file specifically for CYP3A4 substrates*
+
+All drug names and CYP strengths of evidence are based on the Flockhart cytochrome P450 drug-drug interaction table [@Flockhart2021], which is available at [https://drug-interactions.medicine.iu.edu/MainTable.aspx](https://drug-interactions.medicine.iu.edu/MainTable.aspx).
+
+The strengths of evidence that a drug is metabolised by a certain CYP enzyme are categorised as below (as quoted from above web link):
 
 - **Strong Evidence** (denoted with s_ followed by CYP name e.g. s_3A4) - the enzyme is majorly responsible for drug metabolism.
 - **Moderate Evidence** (denoted with m_ followed by CYP name e.g. m_3A4) - the enzyme plays a significant but not exclusive role in drug metabolism or the supporting literature is not extensive.
@@ -39,7 +43,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 ##### **Data sources for ADRs**
 
 * 1st-line: [Drugs.com](https://www.drugs.com/sfx/) 
-  - using the health professional version for ADRs which usually contains ADR references from pharmaceutical manufacturers' medicines information data sheets, ASHP DI monographs or journal paper references
+  - using the health professional version for ADRs which usually contains references from pharmaceutical manufacturers' medicines information data sheets, ASHP DI monographs or journal paper references
 
   - reason for choosing this web data source is that it is open to public (without login registrations or paywalls) and contains the last updated date along with all references used for the ADRs information on each drug
 
@@ -75,7 +79,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 - nausea and vomiting applies to many drugs so won't be included (almost every drug will have these ADRs, they can be alleviated with electrolytes replacements and anti-nausea meds or other non-med options; rash on the other hand can sometimes be serious and life-threatening e.g. Stevens-Johnson syndrome)
 
-- similar or overlapping adverse effects will be removed to keep only one adverse effect for the same drug e.g. adverse skin reactions, rash, urticaria - rash and urticaria will be removed as allergic skin reactions encompass both symptoms
+- similar or overlapping adverse effects will be removed to keep only one adverse effect for the same drug e.g. adverse skin reactions, rash, urticaria - rash and urticaria will be removed as adverse skin reactions encompass both symptoms
 
 - for ADR terms with similar meanings, e.g. pyrexia/fever - fever is used instead (only one will be used); attempts have been made to use just one ADR term to represent various other similar-meaning ADRs to minimise duplications
 
@@ -85,11 +89,11 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 
 ###### **Regarding ADRs and categories**
 
-- ADR mentioned in common ADR category and repeated in the less common one will have the ADR recorded in the higher incidence rate (at > 10%) only
+- ADRs mentioned in common ADRs category and repeated in the less common one will have the ADR recorded in the higher incidence rate (at > 10%) only
 
-- some ADRs can be dose-related or formulations-related e.g. injection site irritations or allergic reactions caused by excipients/fillers, since my very initial (and naive) aim is to investigate the relationships between ADRs and drugs via computational tools e.g. any patterns between ADRs and drugs, so these types of ADRs will not be recorded in the dataset; all ADRs are currently not formulation-specific (i.e. not differentiated between oral, suspensions/liquids, subcutaneous, intravenous or intramuscular injections or topical formulations) 
+- some ADRs can be dose-related or formulations-related e.g. injection site irritations or allergic reactions caused by excipients/fillers, since my very initial (and naive) aim is to investigate the relationships between ADRs and drugs via computational tools e.g. any patterns between ADRs and drugs, so these types of ADRs will not be recorded in the dataset; all ADRs are currently not formulation-specific (i.e. not differentiated between solid oral dosage forms such as tablets or capsules, suspensions/liquids, subcutaneous, intravenous or intramuscular injections or topical formulations) 
 
-- Some of the ADRs recorded for some of the drugs may apply to younger or paediatrics populations only - this may need to be taken care of when using these data to build machine learning models, specific drug notes with astericks in the dataset should be in place as reminders, otherwise most of the ADRs in the datset should be mainly applicable to adult and/or paediatric populations (individual drug information data sheet should provide more details about this)
+- Some of the ADRs recorded for some of the drugs may apply to younger or paediatrics populations only - this may need to be taken care of when using these data to build machine learning models, specific drug notes with astericks in the dataset should be in place as reminders, otherwise most of the ADRs in the datset should be mainly applicable to adult and/or paediatric populations (individual drug information data sheet should hopefully provide more details about this)
 
 - this current ADRs dataset has not directly considered any pharmacogenetic/pharmacogenomic factors but this may be useful and interesting to look into in the future for relevant drug projects
 
@@ -159,10 +163,10 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 - A moderate CYP2D6 substrate that has ADRs of acute dystonic reaction and extrapyramidal disorders -  more details about extrapyramidal effects [here](https://www.psychdb.com/meds/antipsychotics/eps#extrapyramidal-symptoms-eps) and this [one](https://www.medsafe.govt.nz/profs/PUArticles/March2023/Metoclopramide-risk-dystonic-side-effects-children-and-young-adults.html) about dystonic reactions
 
 ###### ***cyclophosphamide*** 
-- A moderate CYP2C19 substrate that is also a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity.
+- A moderate CYP2C19 substrate that is also a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity
 
 ###### ***r-mephobarbital*** 
-- A strong CYP2C19 substrate, manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADR is based on this medicines data sheet [link](https://www.drugs.com/pro/mephobarbital.html) from its last pharmaceutical manufacturer (Lundbeck Inc.)
+- A strong CYP2C19 substrate, manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADRs is based on this medicines data sheet [link](https://www.drugs.com/pro/mephobarbital.html) from its last pharmaceutical manufacturer (Lundbeck Inc.)
 
 ###### ***flurbiprofen*** 
 - A moderate CYP2C9 substrate and also one of the non-steroidal anti-inflammatory drugs known to be associated with cardiovascular, gastrointestinal (cyclo-oxygenase-2 selective inhibitors may have lower risk) and renal-related risks, therefore most of the ADRs and postmarketing reports recorded will focus on these physiological influences mainly
@@ -192,7 +196,7 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 - A moderate CYP1A2 substrate which is also an immunomodulating drug that has antineoplastic property to treat relapsed multiple myeloma and is structurally related to thalidomide
 
 ###### ***tacrine*** 
-- A strong CYP1A2 substrate that has been withdrawn from the US market in May 2012. An [archived LiverTox reference](https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm) has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by drugs.com for the ADRs of tacrine, here's a [list of references](https://www.drugs.com/sfx/tacrine-side-effects.html#refs) (which included the old pharmaceutical manufacturer's data sheet)
+- A strong CYP1A2 substrate that has been withdrawn from the US market in May 2012. An [archived LiverTox reference](https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm) has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by Drugs.com for the ADRs of tacrine, here's a [list of references](https://www.drugs.com/sfx/tacrine-side-effects.html#refs) (which included the old pharmaceutical manufacturer's data sheet)
 
 ###### ***theophylline*** 
 - A moderate CYP1A2 substrate with ADRs that are more likely to occur in overdoses (therapeutic drug monitoring is recommended as therapeutic and toxic doses may be very close to each other)
@@ -221,6 +225,8 @@ PubChem, ChEMBL, FDA, Micromedex etc. or online drug resources such as Drugs.com
 <br>
 
 ##### **Abbreviations used**
+
+*note: not in alphabetical order*
 
 - ws = withdrawal symptoms
 - ADH = antidiuretic hormone

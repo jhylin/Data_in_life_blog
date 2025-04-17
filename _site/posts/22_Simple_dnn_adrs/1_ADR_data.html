@@ -192,7 +192,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 11, 2025</p>
+        <p class="date-modified">April 18, 2025</p>
       </div>
     </div>
       
@@ -260,13 +260,17 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 
 
 
-<p>Here are the notes regarding the ADRs of strong and moderate cytochrome P450 (CYP) substrates used in the data in the <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html">accompanying notebook</a>. The dataset currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates.</p>
+<p>Here are the notes regarding the ADRs of strong and moderate cytochrome P450 (CYP) substrates used in the data in the accompanying notebook (<a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html">post version</a> or <a href="https://github.com/jhylin/Adverse_drug_reactions/blob/main/2_ADR_regressor.ipynb">Jupyter notebook version</a>). The dataset currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates.</p>
 <p><br></p>
 <section id="for-columns-drug_name-and-cyp_strength_of_evidence" class="level5">
 <h5 class="anchored" data-anchor-id="for-columns-drug_name-and-cyp_strength_of_evidence"><strong>For columns “drug_name” and “cyp_strength_of_evidence”</strong></h5>
-<p><em>note: “cyp_strength_of_evidence” column has been renamed as “cyp_type_and_cyp_strength_of_evidence” in the <a href="https://github.com/jhylin/Adverse_drug_reactions/blob/main/cyp_substrates_adrs.csv">cyp_substrates_adrs.csv</a> file”</em></p>
-<p>This is all based on the Flockhart cytochrome P450 drug-drug interaction table <span class="citation" data-cites="Flockhart2021">(<a href="#ref-Flockhart2021" role="doc-biblioref">Flockhart et al. 2021</a>)</span> at <a href="https://drug-interactions.medicine.iu.edu/MainTable.aspx">https://drug-interactions.medicine.iu.edu/MainTable.aspx</a>.</p>
-<p>Strength of evidence that the drug is metabolised by a certain CYP enzyme (as quoted from above web link):</p>
+<p><em>note</em>:</p>
+<ul>
+<li><p><em>“cyp_strength_of_evidence” column has been renamed as “cyp_type_and_cyp_strength_of_evidence” in the <a href="https://github.com/jhylin/Adverse_drug_reactions/blob/main/cyp_substrates_adrs.csv">cyp_substrates_adrs.csv</a> file to include all the different CYP enzyme substrates</em></p></li>
+<li><p><em>“cyp_strength_of_evidence” column is only used in <a href="https://github.com/jhylin/Adverse_drug_reactions/blob/main/Data/cyp3a4_substrates.csv">cyps3a4_substrates.csv</a> as it’s a file specifically for CYP3A4 substrates</em></p></li>
+</ul>
+<p>All drug names and CYP strengths of evidence are based on the Flockhart cytochrome P450 drug-drug interaction table <span class="citation" data-cites="Flockhart2021">(<a href="#ref-Flockhart2021" role="doc-biblioref">Flockhart et al. 2021</a>)</span>, which is available at <a href="https://drug-interactions.medicine.iu.edu/MainTable.aspx">https://drug-interactions.medicine.iu.edu/MainTable.aspx</a>.</p>
+<p>The strengths of evidence that a drug is metabolised by a certain CYP enzyme are categorised as below (as quoted from above web link):</p>
 <ul>
 <li><strong>Strong Evidence</strong> (denoted with s_ followed by CYP name e.g.&nbsp;s_3A4) - the enzyme is majorly responsible for drug metabolism.</li>
 <li><strong>Moderate Evidence</strong> (denoted with m_ followed by CYP name e.g.&nbsp;m_3A4) - the enzyme plays a significant but not exclusive role in drug metabolism or the supporting literature is not extensive.</li>
@@ -283,7 +287,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <ul>
 <li><p>1st-line: <a href="https://www.drugs.com/sfx/">Drugs.com</a></p>
 <ul>
-<li><p>using the health professional version for ADRs which usually contains ADR references from pharmaceutical manufacturers’ medicines information data sheets, ASHP DI monographs or journal paper references</p></li>
+<li><p>using the health professional version for ADRs which usually contains references from pharmaceutical manufacturers’ medicines information data sheets, ASHP DI monographs or journal paper references</p></li>
 <li><p>reason for choosing this web data source is that it is open to public (without login registrations or paywalls) and contains the last updated date along with all references used for the ADRs information on each drug</p></li>
 </ul></li>
 <li><p>2nd-line as separate data checks:</p>
@@ -309,7 +313,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <ul>
 <li><p>all minor ADRs are removed as the current focus will be more on ADRs that’ll affect qualities of lives or are potentially more life-threatening (e.g.&nbsp;dry skin, acne, chills, flatulence and abdominal discomforts are removed)</p></li>
 <li><p>nausea and vomiting applies to many drugs so won’t be included (almost every drug will have these ADRs, they can be alleviated with electrolytes replacements and anti-nausea meds or other non-med options; rash on the other hand can sometimes be serious and life-threatening e.g.&nbsp;Stevens-Johnson syndrome)</p></li>
-<li><p>similar or overlapping adverse effects will be removed to keep only one adverse effect for the same drug e.g.&nbsp;adverse skin reactions, rash, urticaria - rash and urticaria will be removed as allergic skin reactions encompass both symptoms</p></li>
+<li><p>similar or overlapping adverse effects will be removed to keep only one adverse effect for the same drug e.g.&nbsp;adverse skin reactions, rash, urticaria - rash and urticaria will be removed as adverse skin reactions encompass both symptoms</p></li>
 <li><p>for ADR terms with similar meanings, e.g.&nbsp;pyrexia/fever - fever is used instead (only one will be used); attempts have been made to use just one ADR term to represent various other similar-meaning ADRs to minimise duplications</p></li>
 <li><p>deduplications of ADR data have been attempted e.g.&nbsp;for fatigue, malaise, lethary or asthenia, I’ve decided to use fatigue only to cover all of these similar-meaning terms; the only exception is when the same term is reported as an ADR and also during postmarketing period, then both terms are kept (there may still be some duplicated terms that I’ve missed… but this can be sorted during the data preprocessing step if needed)</p></li>
 </ul>
@@ -318,9 +322,9 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="regarding-adrs-and-categories" class="level6">
 <h6 class="anchored" data-anchor-id="regarding-adrs-and-categories"><strong>Regarding ADRs and categories</strong></h6>
 <ul>
-<li><p>ADR mentioned in common ADR category and repeated in the less common one will have the ADR recorded in the higher incidence rate (at &gt; 10%) only</p></li>
-<li><p>some ADRs can be dose-related or formulations-related e.g.&nbsp;injection site irritations or allergic reactions caused by excipients/fillers, since my very initial (and naive) aim is to investigate the relationships between ADRs and drugs via computational tools e.g.&nbsp;any patterns between ADRs and drugs, so these types of ADRs will not be recorded in the dataset; all ADRs are currently not formulation-specific (i.e.&nbsp;not differentiated between oral, suspensions/liquids, subcutaneous, intravenous or intramuscular injections or topical formulations)</p></li>
-<li><p>Some of the ADRs recorded for some of the drugs may apply to younger or paediatrics populations only - this may need to be taken care of when using these data to build machine learning models, specific drug notes with astericks in the dataset should be in place as reminders, otherwise most of the ADRs in the datset should be mainly applicable to adult and/or paediatric populations (individual drug information data sheet should provide more details about this)</p></li>
+<li><p>ADRs mentioned in common ADRs category and repeated in the less common one will have the ADR recorded in the higher incidence rate (at &gt; 10%) only</p></li>
+<li><p>some ADRs can be dose-related or formulations-related e.g.&nbsp;injection site irritations or allergic reactions caused by excipients/fillers, since my very initial (and naive) aim is to investigate the relationships between ADRs and drugs via computational tools e.g.&nbsp;any patterns between ADRs and drugs, so these types of ADRs will not be recorded in the dataset; all ADRs are currently not formulation-specific (i.e.&nbsp;not differentiated between solid oral dosage forms such as tablets or capsules, suspensions/liquids, subcutaneous, intravenous or intramuscular injections or topical formulations)</p></li>
+<li><p>Some of the ADRs recorded for some of the drugs may apply to younger or paediatrics populations only - this may need to be taken care of when using these data to build machine learning models, specific drug notes with astericks in the dataset should be in place as reminders, otherwise most of the ADRs in the datset should be mainly applicable to adult and/or paediatric populations (individual drug information data sheet should hopefully provide more details about this)</p></li>
 <li><p>this current ADRs dataset has not directly considered any pharmacogenetic/pharmacogenomic factors but this may be useful and interesting to look into in the future for relevant drug projects</p></li>
 </ul>
 <hr>
@@ -423,13 +427,13 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="cyclophosphamide" class="level6">
 <h6 class="anchored" data-anchor-id="cyclophosphamide"><strong><em>cyclophosphamide</em></strong></h6>
 <ul>
-<li>A moderate CYP2C19 substrate that is also a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity.</li>
+<li>A moderate CYP2C19 substrate that is also a cytotoxic drug in the class of aklyating agents. One of its notable ADRs is urothelial toxicity (presented as haemorrhagic cystitis) caused by acrolein (its urinary metabolite via hepatic metabolism). Ways to alleviate this is to increase fluid intake for at least 24 to 48 hours after intravenous injection or use mesna. High dose of cyclophosphamide may also cause cardiotoxicity</li>
 </ul>
 </section>
 <section id="r-mephobarbital" class="level6">
 <h6 class="anchored" data-anchor-id="r-mephobarbital"><strong><em>r-mephobarbital</em></strong></h6>
 <ul>
-<li>A strong CYP2C19 substrate, manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADR is based on this medicines data sheet <a href="https://www.drugs.com/pro/mephobarbital.html">link</a> from its last pharmaceutical manufacturer (Lundbeck Inc.)</li>
+<li>A strong CYP2C19 substrate, manufactured previously as mephobarbital (also known as methylphenobarbital), is currently not commonly prescribed (discontinued from 2011-12). One of the likely reasons could be due to its metabolism by CYP enzymes to phenobarbital, which is also available as an antiepileptic drug. Other possible reasons are its higher risk from overdose and drug dependency, so often barbiturate-based drug is replaced with other antiepileptics or non-antiepileptics instead depending on indications. Its ADRs is based on this medicines data sheet <a href="https://www.drugs.com/pro/mephobarbital.html">link</a> from its last pharmaceutical manufacturer (Lundbeck Inc.)</li>
 </ul>
 </section>
 <section id="flurbiprofen" class="level6">
@@ -489,7 +493,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="tacrine" class="level6">
 <h6 class="anchored" data-anchor-id="tacrine"><strong><em>tacrine</em></strong></h6>
 <ul>
-<li>A strong CYP1A2 substrate that has been withdrawn from the US market in May 2012. An <a href="https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm">archived LiverTox reference</a> has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by drugs.com for the ADRs of tacrine, here’s a <a href="https://www.drugs.com/sfx/tacrine-side-effects.html#refs">list of references</a> (which included the old pharmaceutical manufacturer’s data sheet)</li>
+<li>A strong CYP1A2 substrate that has been withdrawn from the US market in May 2012. An <a href="https://web.archive.org/web/20190702153735/http://www.livertox.nih.gov/Tacrine.htm">archived LiverTox reference</a> has explained in details about the highly common hepatoxicity caused by tacrine which eventually led to the market withdrawal of this drug (while there are also other anticholinesterase inhibitors available for use). For exact drug information references used by Drugs.com for the ADRs of tacrine, here’s a <a href="https://www.drugs.com/sfx/tacrine-side-effects.html#refs">list of references</a> (which included the old pharmaceutical manufacturer’s data sheet)</li>
 </ul>
 </section>
 <section id="theophylline" class="level6">
@@ -544,6 +548,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="abbreviations-used" class="level5">
 <h5 class="anchored" data-anchor-id="abbreviations-used"><strong>Abbreviations used</strong></h5>
+<p><em>note: not in alphabetical order</em></p>
 <ul>
 <li>ws = withdrawal symptoms</li>
 <li>ADH = antidiuretic hormone</li>
