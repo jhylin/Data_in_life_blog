@@ -1,9 +1,9 @@
 ---
 title: Looking at minimising adverse drug reactions (ADRs) 
 date: '2024-11-12'
-date-modified: '2025-4-18'
+date-modified: '2025-4-21'
 author: Jennifer HY Lin
-draft: true
+draft: false
 categories:
   - Ideas
   - Notes
@@ -11,7 +11,7 @@ jupyter: python3
 bibliography: references.bib
 ---
 
-##### **How it all begins...**
+##### **How it all begins**
 
 I have always wondered if there's a more succinct, straightforward or better way to look at ADRs. I'm also aware that ADRs as a subject matter is complicated enough in research, but I also can't help to think that it is also how a newly initiated drug commonly fails in clinical trials (with tons of resources going down the drain after that), and also seeing people experiencing ADRs in real-life previously, it will be unwise to avoid it in the drug discovery and development landscape. So here's my very tiny attempt at this tremendous task of sorting out how to minimise ADRs by starting at the very beginning, at the preclinical and computational stage.
 
@@ -23,7 +23,7 @@ I then started by having a look at [SIDER database](http://sideeffects.embl.de/)
 
 ##### **Other reasons for this work**
 
-It's been known that combining results from *in vitro* biological assays is a major issue in ML predictions due to the wide variations in *in vitro* experiments running in different labs leading to noises in the ML-predicted outcomes. These variations can be from different equipments used (calibration differences), variations in measurements, transcription errors (possible human errors) and likely many others I haven't mentioned here. So to mitigate this, my thought is to possibly treat clinical trials as live, *in vivo* biological assays and assemble data from clinical trials (which are what the pharmaceutical manufacturers' data sheets usually contain). However, the possible underlying problem here is that there are genetics variations in human populations, age group and gender differences, and likely others as well. The only thing that may possibly help then is to document data in details so that these specific factors can be taken into account when training ML models.
+It's been known that combining results from *in vitro* biological assays is a major issue in ML predictions due to the wide variations in *in vitro* experiments running in different labs leading to noises in the ML-predicted outcomes. These variations can be from different equipments used (calibration differences), variations in measurements, transcription errors (possible human errors) and likely many others I haven't mentioned here. So to mitigate this, my thought is to possibly treat clinical trials as live, *in vivo* biological assays and assemble data from clinical trials (which are what the pharmaceutical manufacturers' data sheets usually contain). However, the possible underlying problem here is that there are genetics variations in human populations, age group and gender differences, and likely others as well. Another downside is that clinical trials are usually done in very restricted, highly selective and controlled environments so they won't be very representative of the real patient populations. This is also the reason why I'm including postmarketing reports in the dataset I've been curating. The only thing that may possibly help with these issues is then to document data in details so that these specific factors can be taken into account when training ML models (e.g. when tuning hyperparameters or by using other strategies).
 
 **TL;DR: It may be good to add another layer of data complexity, e.g. the Flockhart cytochrome P450 drug-drug interaction table [@Flockhart2021], to better reflect real-life drug effects in human uses**. One more reason for this work which springs to my mind after viewing several different ADMET prediction applications are that most of them seem to be using *in vitro*-based data (a few other ones use PubChem, which can vary too from different sources e.g. journal papers or from drugbank etc.). I think if the Flockhart table can be added at the same time (to include *in-vivo* evidence in humans, although as I look through some of the citations for drugs in the table, it is also true that not all of them have *in-vivo* human-use evidence, however it should have a decent number of them in it). Overall, this may make ADMET research more well-covered and may improve data quality even more. Another thing is Flockhart table differentiates drugs with strong clinical evidence from the moderate ones, and also other ones pending reviews - this is probably something *in-vitro* data won't be able to provide.
 
@@ -33,7 +33,7 @@ It's been known that combining results from *in vitro* biological assays is a ma
 
 ###### **Data sources**
 
-Details of data sources used for the current ADRs dataset (file name: cyp_substrates_adrs.csv) will be documented in the [ADRs data note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/1_ADR_data.html). The same data note also applies to the earlier smaller dataset on ADRs for CYP3A4 substrates (file name: cyp3a4_substrates.csv) as well.
+Details of data sources used and related information for the current ADRs dataset (file name: [cyp_substrates_adrs.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/Data/cyp_substrates_adrs.csv)) will be documented in the [ADRs data note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/1_ADR_data.html). The same data note also applies to the earlier smaller dataset on ADRs for CYP3A4 substrates (file name: [cyp3a4_substrates.csv](https://github.com/jhylin/Adverse_drug_reactions/blob/main/Data/cyp3a4_substrates.csv)) as well, which is used in the notebook mentioned below.
 
 <br>
 
@@ -49,9 +49,9 @@ Before immersing in the process of curating ADRs data, I've made a visit to PubM
 
 While curating the ADRs dataset, I also have a feeling that this type of data may have already existed in proprietary settings, but probably not the open-source versions or if they do, it may have a low chance of being curated by a pharmacist/researcher (me here) who may have a slightly different angle or perspective on therapeutic drugs in general.
 
-Currently, an introductory ADRs regressor [notebook](https://github.com/jhylin/Adverse_drug_reactions/blob/main/2_ADR_regressor.ipynb) has been done in this [repository](https://github.com/jhylin/Adverse_drug_reactions) showing how ADRs can be represented as PyTorch tensors (with the idea originated from natural language processing (NLP)) in a simple two-layer deep neural network model after I've initially curated ADRs for CYP3A4 substrates only. From there, I've then attempted to predict therapeutic drug classes for a testing set of molecules within this dataset using shuffled Butina split. The dataset of course is way too small for a deep learning model, and is likely flawed, biased and prone to data leakage etc., but the main idea here is to show that we may be able to observe some patterns or links between drugs (or molecular fingerprints) and ADRs first.
+Currently, an introductory ADRs regressor [notebook](https://github.com/jhylin/Adverse_drug_reactions/blob/main/2_ADR_regressor.ipynb) has been done and stored in this [repository](https://github.com/jhylin/Adverse_drug_reactions) showing how ADRs can be represented as PyTorch tensors (with the idea originated from natural language processing (NLP)) in a simple two-layer deep neural network model after I've initially curated ADRs for CYP3A4 substrates only. From there, I've then attempted to predict therapeutic drug classes for a testing set of molecules within this dataset using shuffled Butina split. The dataset of course is way too small for a deep learning model, and is likely flawed, biased and prone to data leakage etc., but the main idea here is to show that we may be able to observe some patterns or links between drugs (or molecular fingerprints) and ADRs first.
 
-After that, I've gone on to curate more CYP substrates-ADRs data based on the Flockhart table, which currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates. The ADRs documented in the dataset have focussed on ones that are more likely going to affect the qualities of lives of people administering the drugs/CYP substrates and  ones that are potentially going to be life-threatening.
+After that, I've gone on to curate more CYP substrates-ADRs data based on the Flockhart table, which currently contains ADRs for CYP3A4, 2D6, 2C19, 2C9, 1A2, 2B6, 2E1 and 2C8 substrates. The ADRs documented in the dataset have focussed on ones that are more likely going to affect the qualities of lives of people administering the drugs (CYP substrates) and  ones that are potentially going to be life-threatening.
 
 <br>
 
@@ -84,7 +84,7 @@ flowchart LR
 
 ##### **Possible future work**
 
-My very early thoughts on how this ADRs dataset can be further extended in the future:
+Here are my very early thoughts on how this ADRs dataset may be further used and extended in the future:
 
 1. Exploring the possibility of structure-ADRs relationships where we may be able to link ADRs via treating them as dense vectors of real numbers (early demonstration in the introductory ADRs regressor notebook) with two-dimensional (2D) drug molecular structures. This is coming from the commonly known structure-activity or property relationships used for small molecules in drug discovery or materials science, where we're actively seeking the connections between drug or molecular activities with their 2D molecular structures. I'm just having a very naive thought here about why not looking at this from the ADRs perspective, rather than the usual activity/property part of the molecules. This may shed some lights about how ADRs relate to chemical structures of drugs, potentially may be useful when desgining drugs (a bit like a risk aversion way).
 
@@ -96,8 +96,8 @@ My very early thoughts on how this ADRs dataset can be further extended in the f
 
     - the molecular representations for drugs such as SMILES, SMARTS, or chemical fingerprints (as vector representations) can be obtained from PubChem, ChEMBL or others, and will require more thoughts into them e.g. whether to use canonical SMILES or not and also types of fingerprints to use etc.
 
-    - may be restricted by computational resources available depending on the sizes of datasets, if images are going to be utilised or if other larger datasets are going to be integrated (perhaps active learning can be used; if this is only working off the current CYP substrates ADRs dataset, it shouldn't be a huge problem)
+    - may be restricted by computational resources available depending on the sizes of datasets, if images are going to be used or if other larger datasets are going to be integrated with the current smaller ADRs dataset (perhaps active learning can be used; if this is only working off the current small ADRs dataset, then it shouldn't be a huge problem)
 
-2. By focussing on specific therapeutic targets (within the same therapeutic drug classes), and trying to learn the patterns of ADRs for the same target. It may be possible to look at what common CYP enzymes are involved in their metabolisms and what common ADRs they all share - trying to link them back to drug structures and we may be able to set up ADRs profiles for each CYP enzyme that can be drug class-specific. From here, we may be able to draw out drug-ADR lineages e.g. parent compound metabolised to a child compound where both may be biologically active with similar or different ADRs.
+2. By focussing on specific therapeutic targets (within the same therapeutic drug classes), and trying to learn the patterns of ADRs for the same target. It may be possible to look at what common CYP enzymes are involved in their metabolisms and what common ADRs they all share - trying to link them back to drug structures and we may be able to set up ADRs profiles for each CYP enzyme that can be drug class-specific or CYP enzyme type-specific. From here, we may be able to draw out drug-ADRs lineages e.g. a parent compound is metabolised to a child compound where both may be biologically active and related in therapeutic uses with similar or different ADRs.
 
-3. This work is opened to other ideas as well!
+3. This work is opened to other ideas as well as I'm sure there are very likely other things I haven't thought of yet!
