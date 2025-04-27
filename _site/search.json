@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "past_projects.html",
+    "href": "past_projects.html",
+    "title": "Past projects",
+    "section": "",
+    "text": "Deep learning\n\nA simple deep learning model about adverse drug reactions - this is like an introductory piece to the world of deep learning and is also an early prototype of a QSAR/QSPR workflow as well\n\nMachine learning\n\nTree series - Decision tree 1 - data collection and preprocessing, 2 - data preprocessing and transformation, 3 - model building and estimating experimental errors, Random forest - model building, imbalanced dataset, feature importances & hyperparameter tuning, Random forest classifier - more on imbalanced dataset, Boosted trees - AdaBoost, XGBoost and Scikit-mol\nLogistic regression - 1 - Parquet file in Polars dataframe library, 2 - Preprocessing data in Polars dataframe library, 3 - Building logistic regression model using scikit-learn, 4 - Evaluating logistic regression model in scikit-learn, older long version\n\nData explorations\n\nCytochrome P450 and small drug molecules with a focus on CYP3A4 and CYP2D6 inhibitors\nWorking with scaffolds in small molecules - Manipulating SMILES strings\nMolecular similarities in selected COVID-19 antivirals - Using RDKit’s similarity map and fingerprint generator\n\nWeb applications\n\nMolecular visualisation web application - Interactive data table, Using Shiny for Python web application framework\nShinylive app in Python - Data preparation, Embedding app in Quarto document & using pyodide.http"
+  },
+  {
     "objectID": "posts/Blog-Portfolio_projects/Portfolio_projects.html",
     "href": "posts/Blog-Portfolio_projects/Portfolio_projects.html",
     "title": "Portfolio projects",
@@ -327,12 +334,5 @@
     "title": "About me",
     "section": "",
     "text": "Aside from being a Taiwanese New Zealander, I stumbled upon the world involving computers a long time ago, and always had an interest in them but didn’t quite go down that career path and ended up having my training to become a pharmacist instead. I worked as a community and hospital pharmacist for many years in New Zealand and Australia (this also happened while doing my master and PhD studies). My interest in the computer and data world was re-ignited from the end of 2021, after completing my PhD on using computer-aided drug design in small molecule discovery in 2020.\nI currently work as a freelance data scientist, and I’m also an enthusiast in using Python mainly (plus R to a smaller extent, and I did play with Rust a little) to work with drug discovery and development data. I’m still very much humbled by everything that is happening in the computational or digital chemistry, cheminformatics and computer-aided drug design fields, as there are a vast amount of information, theories, techniques and experiments to be learnt and absorbed. I also particularly would like to thank several well-known and experienced figures in these areas, which I’ve often mentioned in my blog posts, for their generous sharing of experiences and knowledge through various means.\nWhile sharing my work, I also hope that these work will help people, who are interested in these areas, to get started in coding and learning about the computational side of pharmaceutical chemistry and drug discovery. I’m currently still working on new projects, always trying to brainstorm for the next idea, and also open to any work opportunaties or project collaborations.\nThanks for visiting."
-  },
-  {
-    "objectID": "past_projects.html",
-    "href": "past_projects.html",
-    "title": "Past projects",
-    "section": "",
-    "text": "Deep learning\n\nA simple deep learning model about adverse drug reactions - this is like an introductory piece to the world of deep learning and is also an early prototype of a QSAR/QSPR workflow as well\n\nMachine learning\n\nTree series - Decision tree 1 - data collection and preprocessing, 2 - data preprocessing and transformation, 3 - model building and estimating experimental errors, Random forest - model building, imbalanced dataset, feature importances & hyperparameter tuning, Random forest classifier - more on imbalanced dataset, Boosted trees - AdaBoost, XGBoost and Scikit-mol\nLogistic regression - 1 - Parquet file in Polars dataframe library, 2 - Preprocessing data in Polars dataframe library, 3 - Building logistic regression model using scikit-learn, 4 - Evaluating logistic regression model in scikit-learn, older long version\n\nData explorations\n\nCytochrome P450 and small drug molecules with a focus on CYP3A4 and CYP2D6 inhibitors\nWorking with scaffolds in small molecules - Manipulating SMILES strings\nMolecular similarities in selected COVID-19 antivirals - Using RDKit’s similarity map and fingerprint generator\n\nWeb applications\n\nMolecular visualisation web application - Interactive data table, Using Shiny for Python web application framework\nShinylive app in Python - Data preparation, Embedding app in Quarto document & using pyodide.http"
   }
 ]
