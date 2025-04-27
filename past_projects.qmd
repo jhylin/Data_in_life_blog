@@ -1,0 +1,29 @@
+---
+title: "Past projects"
+comments: false
+---
+
+**Deep learning**
+
+* [A simple deep learning model about adverse drug reactions](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/2_ADR_regressor.html) - this is like an introductory piece to the world of deep learning and is also an early prototype of a QSAR/QSPR workflow as well
+
+**Machine learning**
+
+* Tree series - Decision tree [1 - data collection and preprocessing](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/1_data_col_prep.html), [2 - data preprocessing and transformation](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/2_data_prep_tran.html), [3 - model building and estimating experimental errors](https://jhylin.github.io/Data_in_life_blog/posts/16_ML2-1_Decision_tree/3_model_build.html), Random forest - [model building, imbalanced dataset, feature importances & hyperparameter tuning](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/1_random_forest.html), Random forest classifier - [more on imbalanced dataset](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html), Boosted trees - [AdaBoost, XGBoost and Scikit-mol](https://jhylin.github.io/Data_in_life_blog/posts/19_ML2-3_Boosted_trees/1_adaboost_xgb.html)
+
+* Logistic regression - [1 - Parquet file in Polars dataframe library](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-1_chembl_cpds_parquet_new.html), [2 - Preprocessing data in Polars dataframe library](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-2_chembl_cpds_prep.html), [3 - Building logistic regression model using scikit-learn](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-3_chembl_cpds_ml_model.html), [4 - Evaluating logistic regression model in scikit-learn](https://jhylin.github.io/Data_in_life_blog/posts/21_ML1-1_Small_mols_in_chembl_update/ML1-1-4_chembl_cpds_evaluate.html), [older long version](https://jhylin.github.io/Data_in_life_blog/posts/08_ML1-1_Small_molecules_in_ChEMBL_database/ML1-1_chembl_cpds.html)
+
+**Data explorations**
+
+- Cytochrome P450 and small drug molecules with a focus on [CYP3A4 and CYP2D6 inhibitors](https://jhylin.github.io/Data_in_life_blog/posts/20_Cyp3a4_2d6_inh/1_CYP450_drugs.html)
+
+- Working with scaffolds in small molecules - [Manipulating SMILES strings](https://jhylin.github.io/Data_in_life_blog/posts/14_Scaffolds_in_small_molecules/chembl_anti-inf_data_prep_current.html)
+
+- Molecular similarities in selected COVID-19 antivirals - [Using RDKit’s similarity map and fingerprint generator](https://jhylin.github.io/Data_in_life_blog/posts/07_Molecular_similarities_in_COVID-19_antivirals/Mol_sim_covid.html)
+
+**Web applications**
+
+- Molecular visualisation web application - [Interactive data table](https://jhylin.github.io/Data_in_life_blog/posts/15_Molviz/itables.html), [Using Shiny for Python web application framework](https://jhylin.github.io/Data_in_life_blog/posts/15_Molviz/Molviz.html)
+
+- Shinylive app in Python - [Data preparation](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_data_prep.html), [Embedding app in Quarto document & using pyodide.http](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed_pyodide_http.html)
+
