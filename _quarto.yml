@@ -27,6 +27,7 @@ website:
         href: index.xml
   repo-url: https://github.com/jhylin/Data_in_life_blog
   repo-actions: [issue]
+  back-to-top-navigation: true
     
 format:
   html:
@@ -35,7 +36,6 @@ format:
       dark: darkly
     css: styles.css
     
-
 editor: visual
 
 comments:

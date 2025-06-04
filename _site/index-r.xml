@@ -6,10 +6,10 @@
       version="2.0">
 <channel>
 <title>Home</title>
-<link>https://jhylin.github.io/Data_in_life_blog/index.html#category=R</link>
+<link>https://jhylin.github.io/Data_in_life_blog/#category=R</link>
 <atom:link href="https://jhylin.github.io/Data_in_life_blog/index-r.xml" rel="self" type="application/rss+xml"/>
 <description>A blog website about using software tools to decipher drug discovery and development data</description>
-<generator>quarto-1.2.280</generator>
+<generator>quarto-1.7.31</generator>
 <lastBuildDate>Thu, 06 Apr 2023 12:00:00 GMT</lastBuildDate>
 <item>
   <title>Shiny app in R</title>
@@ -49,32 +49,197 @@
 </figure>
 </div>
 <p>I ended up working through this issue of not being able to display the boxplots properly over at least two days, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app. I actually wrote a plot function code (as shown below) before working on the app.R file, in order to trial plotting the boxplots, making sure that the code worked before using it in the app.R file.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="in" style="color: #5E5E5E;">```{r}</span></span>
-<span id="cb1-2">dfBoxplot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="cf" style="color: #003B4F;">function</span>(var) {</span>
-<span id="cb1-3">  label <span class="ot" style="color: #003B4F;">&lt;-</span> rlang<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">englue</span>(<span class="st" style="color: #20794D;">"{{var}} vs. Max Phases of small molecules"</span>)</span>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```{r}</span></span>
+<span id="cb1-2">dfBoxplot <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(var) {</span>
+<span id="cb1-3">  label <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rlang<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">englue</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{{var}} vs. Max Phases of small molecules"</span>)</span>
 <span id="cb1-4">  </span>
-<span id="cb1-5">  chembl <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb1-6">    <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, {{ var }}) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb1-7">    <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">y =</span> {{ var }})) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb1-8">    <span class="fu" style="color: #4758AB;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">group =</span> <span class="fu" style="color: #4758AB;">cut_width</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="fl" style="color: #AD0000;">0.25</span>), </span>
-<span id="cb1-9">                     <span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>), </span>
-<span id="cb1-10">                 <span class="at" style="color: #657422;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;">0.2</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb1-11">    <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">title =</span> label)</span>
+<span id="cb1-5">  chembl <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, {{ var }}) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> {{ var }})) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cut_width</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.25</span>), </span>
+<span id="cb1-9">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>), </span>
+<span id="cb1-10">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-11">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> label)</span>
 <span id="cb1-12">}</span>
-<span id="cb1-13"><span class="in" style="color: #5E5E5E;">```</span></span></code></pre></div>
+<span id="cb1-13"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```</span></span></code></pre></div>
 <p>Once I made sure this code worked, I transplanted the code into the server section of the app.R file, however it wasn’t that simple obviously. Through the process of more trials-and-errors, I managed to figure out the code for the plot output in the final version, which was not the same as the function code above, but more like this.</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><span class="in" style="color: #5E5E5E;">```{r}</span></span>
-<span id="cb2-2">  output<span class="sc" style="color: #5E5E5E;">$</span>BPlot <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">renderPlot</span>({ </span>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```{r}</span></span>
+<span id="cb2-2">  output<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>BPlot <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">renderPlot</span>({ </span>
 <span id="cb2-3">    </span>
-<span id="cb2-4">    <span class="fu" style="color: #4758AB;">ggplot</span>(chembl, <span class="fu" style="color: #4758AB;">aes</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, .data[[input<span class="sc" style="color: #5E5E5E;">$</span>variable]])) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb2-5">      <span class="fu" style="color: #4758AB;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">group =</span> <span class="fu" style="color: #4758AB;">cut_width</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, <span class="fl" style="color: #AD0000;">0.25</span>), </span>
-<span id="cb2-6">                       <span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>), <span class="at" style="color: #657422;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;">0.2</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb2-7">      <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">title =</span> <span class="st" style="color: #20794D;">"Distributions of physicochemical properties against max phases"</span>,</span>
-<span id="cb2-8">           <span class="at" style="color: #657422;">caption =</span> <span class="st" style="color: #20794D;">"(based on ChEMBL database version 31)"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb2-9">      <span class="fu" style="color: #4758AB;">theme_minimal</span>()</span>
+<span id="cb2-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(chembl, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, .data[[input<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>variable]])) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-5">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_boxplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cut_width</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.25</span>), </span>
+<span id="cb2-6">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outlier.alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-7">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Distributions of physicochemical properties against max phases"</span>,</span>
+<span id="cb2-8">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(based on ChEMBL database version 31)"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-9">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>()</span>
 <span id="cb2-10">    </span>
-<span id="cb2-11">    }, <span class="at" style="color: #657422;">res =</span> <span class="dv" style="color: #AD0000;">96</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">bindCache</span>(chembl<span class="sc" style="color: #5E5E5E;">$</span><span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Max Phase</span><span class="st" style="color: #20794D;">`</span>, input<span class="sc" style="color: #5E5E5E;">$</span>variable)</span>
-<span id="cb2-12"><span class="in" style="color: #5E5E5E;">```</span></span></code></pre></div>
+<span id="cb2-11">    }, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">res =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">96</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bindCache</span>(chembl<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Max Phase</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, input<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>variable)</span>
+<span id="cb2-12"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```</span></span></code></pre></div>
 <p>I then read about the section on “Tidy evaluation” in the “Mastering Shiny” book, which had thoroughly described the problems I’ve encountered (and which I wished I had actually read this section before and not after hitting the roadblock…). So I’d highly recommend new users to read this section and also the rest of the book if Shiny’s also new to you.</p>
 <p><br></p>
 </section>
@@ -115,7 +280,6 @@
   <category>Cheminformatics</category>
   <guid>https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/ShinyAppChembl.html</guid>
   <pubDate>Thu, 06 Apr 2023 12:00:00 GMT</pubDate>
-  <media:content url="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_1.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Long COVID - an update</title>
@@ -141,24 +305,54 @@
 <section id="data-inspection-and-wrangling" class="level4">
 <h4 class="anchored" data-anchor-id="data-inspection-and-wrangling"><strong>Data inspection and wrangling</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># Uncomment below if requiring installations of packages</span></span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;"># install.packages("wordcloud")</span></span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;"># install.packages("RColorBrewer")</span></span>
-<span id="cb1-4"><span class="co" style="color: #5E5E5E;"># install.packages("tidytext")</span></span>
-<span id="cb1-5"><span class="co" style="color: #5E5E5E;"># install.packages("leaflet")</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Uncomment below if requiring installations of packages</span></span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages("wordcloud")</span></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages("RColorBrewer")</span></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages("tidytext")</span></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages("leaflet")</span></span></code></pre></div>
 </div>
 <p>Loading all the required libraries below. Install libraries needed as shown in code above.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(ggplot2)</span>
-<span id="cb2-3"><span class="fu" style="color: #4758AB;">library</span>(knitr)</span>
-<span id="cb2-4"><span class="fu" style="color: #4758AB;">library</span>(leaflet)</span>
-<span id="cb2-5"><span class="fu" style="color: #4758AB;">library</span>(tidytext)</span>
-<span id="cb2-6"><span class="fu" style="color: #4758AB;">library</span>(wordcloud)</span>
-<span id="cb2-7"><span class="fu" style="color: #4758AB;">library</span>(RColorBrewer)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(knitr)</span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(leaflet)</span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidytext)</span>
+<span id="cb2-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(wordcloud)</span>
+<span id="cb2-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RColorBrewer)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_csv</span>(<span class="st" style="color: #20794D;">"Full_table.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Full_table.csv"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 Rows: 75 Columns: 9
@@ -177,8 +371,26 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>Here’s a quick overview on the hospitalisation rates across all the studies from this paper.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">df_hosp <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Author (country)</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Hospital (%) {ICU (%)}</span><span class="st" style="color: #20794D;">`</span>)</span>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">df_hosp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Author (country)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Hospital (%) {ICU (%)}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
 <span id="cb5-3">df_hosp</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 75 × 2
@@ -202,14 +414,58 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <h5 class="anchored" data-anchor-id="separating-columns-and-change-column-type"><strong>Separating columns and change column type</strong></h5>
 <p>The table column of Hospital (%) {ICU (%)} was separated into two separate columns to allow clearer differentiation between hospital and ICU rates within each study. The data type for Hospital (%) column was also changed from character to numeric so we can plot a bar graph later on (otherwise the x-axis may not be accurate or properly shown).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">df_hosp_icu <span class="ot" style="color: #003B4F;">&lt;-</span> df_hosp <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb7-2">  <span class="co" style="color: #5E5E5E;"># separate column into two columns</span></span>
-<span id="cb7-3">  <span class="fu" style="color: #4758AB;">separate</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Hospital (%) {ICU (%)}</span><span class="st" style="color: #20794D;">`</span>, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Hospital (%)"</span>, <span class="st" style="color: #20794D;">"ICU (%)"</span>))<span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb7-4">  <span class="co" style="color: #5E5E5E;"># change column type</span></span>
-<span id="cb7-5">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="fu" style="color: #4758AB;">across</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Hospital (%)</span><span class="st" style="color: #20794D;">`</span>, as.numeric))</span>
-<span id="cb7-6"><span class="co" style="color: #5E5E5E;"># show the first 10 rows as example</span></span>
-<span id="cb7-7">c <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">head</span>(df_hosp_icu, <span class="dv" style="color: #AD0000;">10</span>)</span>
-<span id="cb7-8"><span class="fu" style="color: #4758AB;">kable</span>(c)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">df_hosp_icu <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df_hosp <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb7-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># separate column into two columns</span></span>
+<span id="cb7-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Hospital (%) {ICU (%)}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hospital (%)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ICU (%)"</span>))<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb7-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># change column type</span></span>
+<span id="cb7-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Hospital (%)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, as.numeric))</span>
+<span id="cb7-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># show the first 10 rows as example</span></span>
+<span id="cb7-7">c <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(df_hosp_icu, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span>
+<span id="cb7-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(c)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <thead>
@@ -279,11 +535,31 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <h5 class="anchored" data-anchor-id="separating-rows"><strong>Separating rows</strong></h5>
 <p>The listed co-morbidities for each study were separated into separate rows, rather than into columns, to avoid adding too many columns all at once.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">df_new <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-2">  <span class="fu" style="color: #4758AB;">separate_rows</span>(Comorbidities, <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">", "</span>)</span>
-<span id="cb8-3"><span class="co" style="color: #5E5E5E;"># Show the first 10 rows as example</span></span>
-<span id="cb8-4">e <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">head</span>(df_new, <span class="dv" style="color: #AD0000;">10</span>)</span>
-<span id="cb8-5"><span class="fu" style="color: #4758AB;">kable</span>(e)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">df_new <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate_rows</span>(Comorbidities, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">", "</span>)</span>
+<span id="cb8-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Show the first 10 rows as example</span></span>
+<span id="cb8-4">e <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(df_new, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span>
+<span id="cb8-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(e)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <colgroup>
@@ -437,13 +713,45 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </figure>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">df_new <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb9-2">  <span class="co" style="color: #5E5E5E;"># Remove % symbol, numbers and don't forget to remove spaces as well in the column! </span></span>
-<span id="cb9-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">Comorbidities =</span> <span class="fu" style="color: #4758AB;">str_remove_all</span>(Comorbidities, <span class="st" style="color: #20794D;">"[:digit:]|[%]|[ ]"</span>)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb9-4">  <span class="co" style="color: #5E5E5E;"># Add this line to filter out all the "NA"s</span></span>
-<span id="cb9-5">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(Comorbidities)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb9-6">  <span class="co" style="color: #5E5E5E;"># Count the comorbidities in descending order</span></span>
-<span id="cb9-7">  <span class="fu" style="color: #4758AB;">count</span>(Comorbidities, <span class="at" style="color: #657422;">sort =</span> <span class="cn" style="color: #8f5902;">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">df_new <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb9-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Remove % symbol, numbers and don't forget to remove spaces as well in the column! </span></span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Comorbidities =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_remove_all</span>(Comorbidities, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[:digit:]|[%]|[ ]"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb9-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add this line to filter out all the "NA"s</span></span>
+<span id="cb9-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(Comorbidities)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb9-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Count the comorbidities in descending order</span></span>
+<span id="cb9-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(Comorbidities, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sort =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) </span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 37 × 2
    Comorbidities     n
@@ -471,13 +779,65 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <h5 class="anchored" data-anchor-id="bar-graph-for-hospitalisation-rate"><strong>Bar graph for hospitalisation rate</strong></h5>
 <p>Then a line of code to filter out the results of “NA” under the column of Hospital (%) was added. Most of the cells with “NA” were there to fill the multiple empty row entries for other variables and not for the Hospital (%) column, therefore these “NA”s were removed in this instance. The horizontal bar graph below showed the COVID-19 hospitalisation rate for studies in different countries, presenting a very diverse results between 0% and 100% hospitalisations across all 19 cohort studies.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">df_hosp_icu <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb11-2">  <span class="co" style="color: #5E5E5E;"># filter out all NAs</span></span>
-<span id="cb11-3">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Hospital (%)</span><span class="st" style="color: #20794D;">`</span>)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb11-4">  <span class="co" style="color: #5E5E5E;"># plot the bar graph</span></span>
-<span id="cb11-5">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Author (country)</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Hospital (%)</span><span class="st" style="color: #20794D;">`</span>)) <span class="sc" style="color: #5E5E5E;">+</span> </span>
-<span id="cb11-6">  <span class="fu" style="color: #4758AB;">geom_bar</span>(<span class="at" style="color: #657422;">stat =</span> <span class="st" style="color: #20794D;">"identity"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb11-7">  <span class="fu" style="color: #4758AB;">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">df_hosp_icu <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb11-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># filter out all NAs</span></span>
+<span id="cb11-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Hospital (%)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb11-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># plot the bar graph</span></span>
+<span id="cb11-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Author (country)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Hospital (%)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb11-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_bar</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"identity"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb11-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -494,19 +854,75 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <section id="preparing-dataframe-for-map" class="level6">
 <h6 class="anchored" data-anchor-id="preparing-dataframe-for-map"><strong>Preparing dataframe for map</strong></h6>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">df_new_a <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb12-2">  <span class="co" style="color: #5E5E5E;"># separate Author (country) column into two columns </span></span>
-<span id="cb12-3">  <span class="co" style="color: #5E5E5E;"># note: rename country as region - needed for joining data later on</span></span>
-<span id="cb12-4">  <span class="fu" style="color: #4758AB;">separate</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Author (country)</span><span class="st" style="color: #20794D;">`</span>, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Author"</span>, <span class="st" style="color: #20794D;">"region"</span>)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb12-5">  <span class="co" style="color: #5E5E5E;"># print only the columns as selected</span></span>
-<span id="cb12-6">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">region</span><span class="st" style="color: #20794D;">`</span>, Results)</span>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">df_new_a <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb12-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># separate Author (country) column into two columns </span></span>
+<span id="cb12-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># note: rename country as region - needed for joining data later on</span></span>
+<span id="cb12-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Author (country)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Author"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb12-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># print only the columns as selected</span></span>
+<span id="cb12-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, Results)</span>
 <span id="cb12-7"></span>
-<span id="cb12-8"><span class="co" style="color: #5E5E5E;"># The study author name, Fernandez-de-Las-Penas (Spain), got separated as above</span></span>
-<span id="cb12-9"><span class="co" style="color: #5E5E5E;"># so replace "de" under Country column with the actual country name of Spain</span></span>
-<span id="cb12-10">df_new_a[df_new_a <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"de"</span>] <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"Spain"</span> </span>
-<span id="cb12-11"><span class="co" style="color: #5E5E5E;"># Show first 10 rows as example</span></span>
-<span id="cb12-12">d <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">head</span>(df_new_a, <span class="dv" style="color: #AD0000;">10</span>)</span>
-<span id="cb12-13"><span class="fu" style="color: #4758AB;">kable</span>(d)</span></code></pre></div>
+<span id="cb12-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># The study author name, Fernandez-de-Las-Penas (Spain), got separated as above</span></span>
+<span id="cb12-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># so replace "de" under Country column with the actual country name of Spain</span></span>
+<span id="cb12-10">df_new_a[df_new_a <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"de"</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Spain"</span> </span>
+<span id="cb12-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Show first 10 rows as example</span></span>
+<span id="cb12-12">d <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(df_new_a, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span>
+<span id="cb12-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(d)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <colgroup>
@@ -565,11 +981,39 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">df1 <span class="ot" style="color: #003B4F;">&lt;-</span> df_new_a <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb13-2">  <span class="co" style="color: #5E5E5E;"># re-group dataframe based on region column</span></span>
-<span id="cb13-3">  <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">region</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb13-4">  <span class="co" style="color: #5E5E5E;"># merge all rows under Results column into one string</span></span>
-<span id="cb13-5">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="fu" style="color: #4758AB;">across</span>(<span class="fu" style="color: #4758AB;">everything</span>(), <span class="sc" style="color: #5E5E5E;">~</span><span class="fu" style="color: #4758AB;">toString</span>(.)))</span>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">df1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df_new_a <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb13-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># re-group dataframe based on region column</span></span>
+<span id="cb13-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb13-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># merge all rows under Results column into one string</span></span>
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">everything</span>(), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toString</span>(.)))</span>
 <span id="cb13-6">df1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 2
@@ -591,16 +1035,42 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># grab the world map data from ggplot</span></span>
-<span id="cb15-2">mapdata <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">map_data</span>(<span class="st" style="color: #20794D;">"world"</span>) </span>
-<span id="cb15-3"><span class="co" style="color: #5E5E5E;"># view full dataset in separate tab </span></span>
-<span id="cb15-4"><span class="fu" style="color: #4758AB;">view</span>(mapdata)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># grab the world map data from ggplot</span></span>
+<span id="cb15-2">mapdata <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"world"</span>) </span>
+<span id="cb15-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># view full dataset in separate tab </span></span>
+<span id="cb15-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">view</span>(mapdata)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># combine mapdata dataframe (contains longitudes &amp; latitudes of each country) </span></span>
-<span id="cb16-2"><span class="co" style="color: #5E5E5E;"># with df_new_a dataframe (contains country info)</span></span>
-<span id="cb16-3">mapdata <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">left_join</span>(mapdata, df1, <span class="at" style="color: #657422;">by =</span> <span class="st" style="color: #20794D;">"region"</span>)</span>
-<span id="cb16-4"><span class="fu" style="color: #4758AB;">head</span>(mapdata)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># combine mapdata dataframe (contains longitudes &amp; latitudes of each country) </span></span>
+<span id="cb16-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># with df_new_a dataframe (contains country info)</span></span>
+<span id="cb16-3">mapdata <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(mapdata, df1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>)</span>
+<span id="cb16-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(mapdata)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       long      lat group order region subregion Results
 1 -69.89912 12.45200     1     1  Aruba      &lt;NA&gt;    &lt;NA&gt;
@@ -612,9 +1082,25 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;"># filter out all the empty or "NA" cells</span></span>
-<span id="cb18-2">mapdata_new <span class="ot" style="color: #003B4F;">&lt;-</span> mapdata <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(mapdata<span class="sc" style="color: #5E5E5E;">$</span>Results))</span>
-<span id="cb18-3"><span class="fu" style="color: #4758AB;">head</span>(mapdata_new)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># filter out all the empty or "NA" cells</span></span>
+<span id="cb18-2">mapdata_new <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mapdata <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(mapdata<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Results))</span>
+<span id="cb18-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(mapdata_new)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      long       lat group order    region                   subregion
 1 123.5945 -12.42568   133  7115 Australia Ashmore and Cartier Islands
@@ -634,11 +1120,33 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p>I realised that map_data(“world”) showed all the longitudes and latitudes for subregions of each country, which might not be required for the map I wanted. So after trialling the map visualisation several times, I opted to use centroids of each country instead, to leave the map in a cleaner and easy-to-see state. Otherwise one of the maps I tested before ended up with countless blobs of circles marking the boundaries of each country, looking like a 5-year-old’s map drawing!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">mapdata_final <span class="ot" style="color: #003B4F;">&lt;-</span> mapdata_new <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb20-2">  <span class="fu" style="color: #4758AB;">group_by</span>(region) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb20-3">  <span class="co" style="color: #5E5E5E;"># Using centroids of countries = means of longitudes and latitudes for each country</span></span>
-<span id="cb20-4">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">long =</span> <span class="fu" style="color: #4758AB;">mean</span>(long), <span class="at" style="color: #657422;">lat =</span> <span class="fu" style="color: #4758AB;">mean</span>(lat))</span>
-<span id="cb20-5"><span class="fu" style="color: #4758AB;">kable</span>(mapdata_final)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">mapdata_final <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mapdata_new <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb20-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(region) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb20-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Using centroids of countries = means of longitudes and latitudes for each country</span></span>
+<span id="cb20-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">long =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(long), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lat =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(lat))</span>
+<span id="cb20-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(mapdata_final)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <thead>
@@ -714,9 +1222,21 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;"># join above mapdata_final with the df1 which contains countries and long COVID results</span></span>
-<span id="cb21-2">df1_mapdata <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">left_join</span>(mapdata_final, df1, <span class="at" style="color: #657422;">by =</span> <span class="st" style="color: #20794D;">"region"</span>)</span>
-<span id="cb21-3"><span class="fu" style="color: #4758AB;">kable</span>(df1_mapdata)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># join above mapdata_final with the df1 which contains countries and long COVID results</span></span>
+<span id="cb21-2">df1_mapdata <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(mapdata_final, df1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>)</span>
+<span id="cb21-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(df1_mapdata)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <colgroup>
@@ -811,11 +1331,41 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co" style="color: #5E5E5E;"># Prepare pop up information</span></span>
-<span id="cb22-2">df1_mapdata <span class="ot" style="color: #003B4F;">&lt;-</span> df1_mapdata <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb22-3">  <span class="co" style="color: #5E5E5E;"># paste region and Results columns into popup_info and add it as a new column into dataset</span></span>
-<span id="cb22-4">  <span class="co" style="color: #5E5E5E;"># bold texts and add break lines by using html tags as shown</span></span>
-<span id="cb22-5">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">popup_info =</span> <span class="fu" style="color: #4758AB;">paste</span>(<span class="st" style="color: #20794D;">"&lt;b&gt;"</span>,region,<span class="st" style="color: #20794D;">"&lt;/b&gt;"</span>,<span class="st" style="color: #20794D;">"&lt;br/&gt;"</span>,<span class="st" style="color: #20794D;">"&lt;b&gt;"</span>,<span class="st" style="color: #20794D;">"Long COVID symptoms:"</span>,<span class="st" style="color: #20794D;">"&lt;/b&gt;"</span>,<span class="st" style="color: #20794D;">"&lt;br/&gt;"</span>, Results))</span>
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Prepare pop up information</span></span>
+<span id="cb22-2">df1_mapdata <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df1_mapdata <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb22-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># paste region and Results columns into popup_info and add it as a new column into dataset</span></span>
+<span id="cb22-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># bold texts and add break lines by using html tags as shown</span></span>
+<span id="cb22-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">popup_info =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;b&gt;"</span>,region,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;/b&gt;"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;br/&gt;"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;b&gt;"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Long COVID symptoms:"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;/b&gt;"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;br/&gt;"</span>, Results))</span>
 <span id="cb22-6">df1_mapdata</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 5
@@ -837,13 +1387,51 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;">leaflet</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb24-2">  <span class="co" style="color: #5E5E5E;"># initialising the graphics environment for map</span></span>
-<span id="cb24-3">  <span class="fu" style="color: #4758AB;">addTiles</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb24-4">  <span class="co" style="color: #5E5E5E;"># add circle markers to map</span></span>
-<span id="cb24-5">  <span class="co" style="color: #5E5E5E;"># use the df1_mapdata dataset containing countries, longitudes, latitudes and long COVID results</span></span>
-<span id="cb24-6">  <span class="co" style="color: #5E5E5E;"># add data, latitudes, longitudes, radius of circles, pop up information</span></span>
-<span id="cb24-7">  <span class="fu" style="color: #4758AB;">addCircleMarkers</span>(<span class="at" style="color: #657422;">data =</span> df1_mapdata, <span class="at" style="color: #657422;">lat =</span> <span class="sc" style="color: #5E5E5E;">~</span>lat, <span class="at" style="color: #657422;">lng =</span> <span class="sc" style="color: #5E5E5E;">~</span>long, <span class="at" style="color: #657422;">radius =</span> <span class="sc" style="color: #5E5E5E;">~</span><span class="dv" style="color: #AD0000;">3</span>, <span class="at" style="color: #657422;">popup =</span> <span class="sc" style="color: #5E5E5E;">~</span>popup_info)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">leaflet</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb24-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># initialising the graphics environment for map</span></span>
+<span id="cb24-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">addTiles</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb24-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add circle markers to map</span></span>
+<span id="cb24-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># use the df1_mapdata dataset containing countries, longitudes, latitudes and long COVID results</span></span>
+<span id="cb24-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add data, latitudes, longitudes, radius of circles, pop up information</span></span>
+<span id="cb24-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">addCircleMarkers</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> df1_mapdata, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lat =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>lat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lng =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>long, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">radius =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">popup =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>popup_info)</span></code></pre></div>
 <div class="cell-output-display">
 <div id="htmlwidget-6e7b029f5abdf20926fb" style="width:100%;height:464px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-6e7b029f5abdf20926fb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[-25.1829968212449,47.5797318991493,23.5090516557296,50.5906272841377,35.082435437586,55.7047330613104,46.166861050188,51.2046085478554,42.1659824923549,40.6799529790878,55.5581316630046,48.7433333759119],[136.998543415789,13.4733656855191,90.5061180392901,4.73210363007762,106.847574829439,10.731254580837,3.22697920310042,10.4011560552557,11.7528526644143,-2.90682090616818,-4.09875010597435,-121.625310071961],3,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,["<b> Australia <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 50% fatigue, 35.7% arthralgia, 21.4% myalgia, 28.6% cough, 25% dyspnoea, 3.6% chest pain, 10.7% headache, 28.6% olfactory dysfunction, 14.3% rhinorrhoea, no abdominal pain","<b> Austria <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 24% night sweats, 0% fever, 63% abnormal chest CT: ground-glass opacities, reticular lesions, consolidations, bronchial dilation. 36% dyspnoea, abnormal spirometry: 22% reduced FVC, 22% reduced FEV1, normal FEV1/FVC. 21% reduced DLCO, 17% cough, 22% sleep disorders, 19% olfactory dysfunction, 9% diarrhoea/vomiting, 97% normal LVEF, 55% diastolic dysfunction on echo, 23% raised NT-proBNP, 10% pulmonary hypertension, 1% pericardial effusion, raised D-dimer, potentially raised ferritin, normal CRP, normal procalcitonin, normal IL-6","<b> Bangladesh <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 33% fatigue, 1.4% arthralgia, 0.6% myalgia, 8.5% cough, 7% dyspnoea, 0.8% chest pain, 3.9% circadian rhythm disorders, 3.4% headache, 2.3% sleep disturbance, 1.4% adjustment disorder, 2.3% vertigo, 2% olfactory dysfunction, 1.4% palpitation","<b> Belgium <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 25% fatigue, abnormal chest CT: 67% ground glass opacities, 44% reticulations, 20% fibrotic lesions/traction bronchiectasis, 7% consolidations. 46% reduced DLCO, 35% dyspnoea, 10% dry cough, 4% chest tightness, normal spirometry","<b> China <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 62% abnormal chest CT: 35% fibrotic-like changes, 27% ground glass opacities/interstitial thickening, nodules/masses, interlobar pleural traction, pulmonary atelectasis and bronchiectasis. 26% reduced DLCO, 14% mild dyspnoea, 10% sputum production, 6.1% dry cough","<b> Denmark <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> fatigue, myalgia, arthralgia, chills, fever, dyspnoea, cough, chest pain, sputum production, memory issues, concentration issues, headache, olfactory dysfunction, gustatory dysfunction, sore throat, rhinorrhoea, sneezing, diarrhoea, anorexia, abdominal pain, nausea, red runny eyes, 63% fatigue, 35% myalgia, 53% dyspnoea, 24% cough, 20% chest pain, 12% sputum production, 45% concentration issues, 27% headache, 27% paraesthesia, 31% gustatory dysfunction, 27% olfactory dysfunction, 10% sore throat, 10% abdominal pain, 8% diarrhoea, 8% nausea, 4% anorexia","<b> France <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 16.8% olfactory dysfunction, 9.6% gustatory dysfunction, fatigue, arthralgia, myalgia, dyspnoea, cough, headache, rhinorrhoea, olfactory dysfunction, gustatory dysfunction, sore throat","<b> Germany <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 45% fatigue, 15% myalgia, 3% fever, slight pain/discomfort, 33% dyspnoea, 33% cough. Normal spirometry, normal ABG, reduced DLCO, reduced distance on 6MWT, 18% cognitive issues, 15% headache, mild depression, subthreshold anxiety, 12% olfactory dysfunction, 12% rhinorrhoea, 9% gustatory dysfunction, 9% sore throat, 9% diarrhoea, 6% nausea, 3% abdominal pain, normal LFTs, 18% angina, normal left ventricular function, normal right ventricular function, normal cardiac biomarkers, normal FBC, normal coagulation screen, raised ferritin, potentially raised D-dimer, normal U&Es, normal CRP, normal procalcitonin, normal TFTs, normal IL-6, 17% fatigue, depression, concentration issues, 27% olfactory/gustatory dysfunction, alopecia, 42.3% subjective olfactory dysfunction, 26.9% objective olfactory  dysfunction (discrimination and identification issues)","<b> Italy <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 5.9% myalgia, 5.9% arthralgia, 5.5% dyspnoea, 2.5% cough, 0.4% chest pain, 51.6% reduced DLCO, normal spirometry, 43% PTSD symptoms, 5% gustatory dysfunction, 4.6% olfactory dysfunction, 1.3% diarrhoea, 13.1% fatigue, 8.2% rheumatological issues, 6% dyspnoea, 2% cough, 0.8% chest pain, 9.6% neurological disorders, 4.9% psychiatric disorders, 2.7% headache, 10.4% olfactory/gustatory dysfunction, 1.5% gastrointestinal disorders, 3.7% alopecia, 3.4% cutaneous manifestations, 0.3% ocular symptoms, 21% olfactory dysfunction, 7.9% gustatory dysfunction","<b> Spain <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 61.2% fatigue, 23.3% dyspnoea, 6.5% chest pain, 2.5% cough","<b> UK <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> fatigue, myalgia, fever, dyspnoea, cough, chest pain, headache, paraesthesia, numbness, concentration/ memory issues, olfactory dysfunction, sore throat, hoarse voice, tinnitus, earache, diarrhoea, abdominal pain, palpitations/tachycardia","<b> USA <\/b> <br/> <b> Long COVID symptoms: <\/b> <br/> 44.8% fatigue, 21.3% myalgia, 15.8% arthralgia, 1.1% fever, 1.1% ulcer, 31.7% dyspnoea, 25.1% cough, 14.8% sputum production, 12.6% headache, 8.7% cognitive issues, 9.8% gustatory dysfunction, 9.3% olfactory dysfunction, 3.8% diarrhoea, 8.2% eye irritation, 1.1% ulcer"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-25.1829968212449,55.7047330613104],"lng":[-121.625310071961,136.998543415789]}},"evals":[],"jsHooks":[]}</script>
@@ -857,10 +1445,26 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <h5 class="anchored" data-anchor-id="text-mining-for-word-cloud"><strong>Text mining for word cloud</strong></h5>
 <p>When skimming through the Results column, it appeared some of the terms recorded were repetitive, so a wordcloud might be another interesting way to see if it could highlight any particular long COVID symptoms from this meta-analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;"># Select the results column</span></span>
-<span id="cb25-2">text <span class="ot" style="color: #003B4F;">&lt;-</span> df<span class="sc" style="color: #5E5E5E;">$</span>Results</span>
-<span id="cb25-3"><span class="co" style="color: #5E5E5E;"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
-<span id="cb25-4">text1 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">str_replace_all</span>(text, <span class="st" style="color: #20794D;">"[:digit:]"</span>, <span class="st" style="color: #20794D;">""</span>)</span>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Select the results column</span></span>
+<span id="cb25-2">text <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Results</span>
+<span id="cb25-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Remove numbers from the texts so that the digits won't appear in the wordcloud</span></span>
+<span id="cb25-4">text1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace_all</span>(text, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[:digit:]"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
 <span id="cb25-5">text1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] ".% myalgia, .% arthralgia"                                                                                                                                                                                                                                
@@ -941,8 +1545,24 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co" style="color: #5E5E5E;"># Change the text into a tibble</span></span>
-<span id="cb27-2">text_df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">tibble</span>(<span class="at" style="color: #657422;">line =</span> <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">75</span>, <span class="at" style="color: #657422;">text =</span> text1)</span>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Change the text into a tibble</span></span>
+<span id="cb27-2">text_df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">line =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">75</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">text =</span> text1)</span>
 <span id="cb27-3">text_df</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 75 × 2
@@ -963,9 +1583,17 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><span class="co" style="color: #5E5E5E;"># Tokenise the texts in the selected column</span></span>
-<span id="cb29-2">text_df1 <span class="ot" style="color: #003B4F;">&lt;-</span> text_df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb29-3">  <span class="fu" style="color: #4758AB;">unnest_tokens</span>(word, text)</span>
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tokenise the texts in the selected column</span></span>
+<span id="cb29-2">text_df1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> text_df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb29-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unnest_tokens</span>(word, text)</span>
 <span id="cb29-4">text_df1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 399 × 2
@@ -986,17 +1614,47 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">text_df1 <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb31-2">  <span class="co" style="color: #5E5E5E;"># Remove stop_words</span></span>
-<span id="cb31-3">  <span class="fu" style="color: #4758AB;">anti_join</span>(stop_words) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb31-4">  <span class="co" style="color: #5E5E5E;"># Count the frequency of appearance of each word</span></span>
-<span id="cb31-5">  <span class="fu" style="color: #4758AB;">count</span>(word) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb31-6">  <span class="co" style="color: #5E5E5E;"># Then create a wordcloud</span></span>
-<span id="cb31-7">  <span class="fu" style="color: #4758AB;">with</span>(<span class="fu" style="color: #4758AB;">wordcloud</span>(word, n, <span class="at" style="color: #657422;">colors =</span> <span class="fu" style="color: #4758AB;">brewer.pal</span>(<span class="dv" style="color: #AD0000;">8</span>,<span class="st" style="color: #20794D;">"Dark2"</span>)))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">text_df1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb31-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Remove stop_words</span></span>
+<span id="cb31-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anti_join</span>(stop_words) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb31-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Count the frequency of appearance of each word</span></span>
+<span id="cb31-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(word) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb31-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Then create a wordcloud</span></span>
+<span id="cb31-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">wordcloud</span>(word, n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colors =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">brewer.pal</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dark2"</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co" style="color: #5E5E5E;"># display.brewer.all to display all colour palettes if wanting to use different colours</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># display.brewer.all to display all colour palettes if wanting to use different colours</span></span></code></pre></div>
 </div>
 <p>A known drawback of wordcloud was that the length of a word might influence how big it might appear in the wordcloud, so it was not completely dependent on the word frequencies in a set of texts. Nevertheless, it was one of the ways to get a rough idea about the most common terms cropping up in collected texts. This last part was more like a small exercise for me and also for anyone who might want to try this but did not where to start.</p>
 </section>
@@ -1013,7 +1671,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </ol>
 <p>I also have to thank all the package creators for all the packages used here and all the authors of the journal paper (as mentioned under “Source of dataset”) which provided the long COVID data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="fu" style="color: #4758AB;">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sessionInfo</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.2.0 (2022-04-22)
 Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -1082,7 +1742,6 @@ loaded via a namespace (and not attached):
   <category>Long COVID</category>
   <guid>https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update.html</guid>
   <pubDate>Sun, 18 Sep 2022 12:00:00 GMT</pubDate>
-  <media:content url="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Zoom-in%20shot.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Phenotypes associated with rare diseases</title>
@@ -1104,14 +1763,28 @@ loaded via a namespace (and not attached):
 <p><em>Photo by</em> <a href="https://unsplash.com/@sangharsh_l?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sangharsh Lohakare</a> on <a href="https://unsplash.com/s/photos/genes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 <p>The following libraries were used for the exploratory data analysis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(lubridate)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(ggplot2)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;">library</span>(knitr)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lubridate)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(knitr)</span></code></pre></div>
 </div>
 <p>Read imported .csv file after data cleaning in Python.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">df <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_csv</span>(<span class="st" style="color: #20794D;">"rare_disease_phenotypes.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rare_disease_phenotypes.csv"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 112243 Columns: 13
 ── Column specification ────────────────────────────────────────────────────────
@@ -1126,7 +1799,9 @@ dttm  (1): Validation date
 </div>
 <p>Note: HPO = human phenotype ontology</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;">spec</span>(df)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">spec</span>(df)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>cols(
   `Disorder group` = col_character(),
@@ -1151,9 +1826,35 @@ dttm  (1): Validation date
 <p>Since I wasn’t intending for this project<sup>2</sup> to be extremely long (as most people would likely lose interests by then), I’d like to first ask a question about the dataset, in order to keep it at a reasonably short but informative length. So, here’s the question: what are the most common rare disorders and their associated phenotypic features?</p>
 <p>To answer it, let’s observe the spread of the disorder groups and types first by formulating a contingency table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">df_type <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb6-2">  <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder group</span><span class="st" style="color: #20794D;">`</span>,<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb6-3">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">Number =</span> <span class="fu" style="color: #4758AB;">n</span>())</span>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">df_type <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder group</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Number =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>())</span>
 <span id="cb6-4">df_type</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 3
@@ -1175,9 +1876,29 @@ dttm  (1): Validation date
 </div>
 <p>After a quick view on the column of “Disorder group”, it mainly provided different disorder types a group label for each, which to a certain extent, was not necessary at this early stage. So this column was removed for now from the contingency table, in order to focus solely on, “Disorder type” with the number of counts (or times it appeared in the dataset).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">df_type <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-2">  <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-3">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">Number =</span> <span class="fu" style="color: #4758AB;">n</span>())</span>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">df_type <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Number =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>())</span>
 <span id="cb8-4">df_type</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 2
@@ -1198,11 +1919,95 @@ dttm  (1): Validation date
 </div>
 <p>Then to visualise this in a graphic way, a lollypop chart was built horizontally, with different types of rare disorders on the y-axis and the number of each type on the x-axis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;">ggplot</span>(<span class="at" style="color: #657422;">data =</span> df_type, <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Number</span><span class="st" style="color: #20794D;">`</span>)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb10-2">  <span class="fu" style="color: #4758AB;">geom_segment</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">xend =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="at" style="color: #657422;">y =</span> <span class="dv" style="color: #AD0000;">0</span>, <span class="at" style="color: #657422;">yend =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Number</span><span class="st" style="color: #20794D;">`</span>), <span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">"dark blue"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb10-3">  <span class="fu" style="color: #4758AB;">geom_point</span>(<span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">"dark green"</span>, <span class="at" style="color: #657422;">size =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">alpha =</span> <span class="fl" style="color: #AD0000;">0.6</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb10-4">  <span class="fu" style="color: #4758AB;">theme_light</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb10-5">  <span class="fu" style="color: #4758AB;">coord_flip</span>() </span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> df_type, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Number</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_segment</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xend =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yend =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Number</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dark blue"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dark green"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_light</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>() </span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases_files/figure-html/lollypop chart-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1212,10 +2017,40 @@ dttm  (1): Validation date
 <p>For “Malformation syndrome”, this was defined as, “A disorder resulting from a developmental anomaly involving more than one morphogenetic field. Malformative sequences and associations are included.”</p>
 <p>To demonstrate this in a tabular form, with corresponding proportions of each disorder type in the dataset, the following code were used:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">df1 <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb11-2">  <span class="fu" style="color: #4758AB;">group_by</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb11-3">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">n =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb11-4">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">prop =</span> n<span class="sc" style="color: #5E5E5E;">/</span><span class="fu" style="color: #4758AB;">sum</span>(n))</span>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">df1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb11-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb11-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">prop =</span> n<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(n))</span>
 <span id="cb11-5">df1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 3
@@ -1236,7 +2071,13 @@ dttm  (1): Validation date
 </div>
 <p>The table was then rearranged with proportions in descending order (from highest to lowest). It also showed the top two were “Disease” (51.6%) and “Malformation syndrome” (33.5%).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">df1 <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(prop))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">df1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(prop))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 3
    `Disorder type`                                            n     prop
@@ -1258,9 +2099,27 @@ dttm  (1): Validation date
 <h5 class="anchored" data-anchor-id="distributions-of-hpo-frequency"><strong>Distributions of HPO frequency</strong></h5>
 <p>This was followed by checking out the distributions of HPO frequency to see which categories had the most and least number of counts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">df_freq <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb15-2">  <span class="fu" style="color: #4758AB;">count</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb15-3">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(n))</span>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">df_freq <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb15-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb15-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(n))</span>
 <span id="cb15-4">df_freq</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
@@ -1277,9 +2136,57 @@ dttm  (1): Validation date
 </div>
 <p>Results for rare disorders with obligate or 100% frequency in patient’s populations were then filtered, showing disorder type, HPO frequency and disorder name. Specifically, I wanted to find out the disorder names associated with the “Disease” disorder type with HPO frequency of “Obligate (100%)”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">df_freq_ob <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb17-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Disease"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Obligate (100%)"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb17-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>)</span>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">df_freq_ob <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb17-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Disease"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Obligate (100%)"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb17-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
 <span id="cb17-4">df_freq_ob</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 404 × 3
@@ -1301,9 +2208,27 @@ dttm  (1): Validation date
 </div>
 <p>I’d then like to look into associated counts of appearance of each disorder name. When I cross-checked with the full dataset in table view, I’ve noted that the number of appearance of each disorder name is linked to the number of preferred HPO phenotype terms for each of these disorder types.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">df2 <span class="ot" style="color: #003B4F;">&lt;-</span> df_freq_ob <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb19-2">  <span class="fu" style="color: #4758AB;">count</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>) </span>
-<span id="cb19-3">df2 <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(n))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">df2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df_freq_ob <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb19-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) </span>
+<span id="cb19-3">df2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(n))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 239 × 2
    `Disorder name`                                                             n
@@ -1324,10 +2249,76 @@ dttm  (1): Validation date
 </div>
 <p>To show this, let’s link preferred HPO terms to a disorder name such as this one, “Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction”, which had the “Disease” disorder type with obligate or 100% HPO frequency.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">df_disease <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb21-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Disease"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Obligate (100%)"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb21-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Preferred HPO term</span><span class="st" style="color: #20794D;">`</span>)</span>
-<span id="cb21-4"><span class="fu" style="color: #4758AB;">kable</span>(df_disease)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">df_disease <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb21-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Disease"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Obligate (100%)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Autosomal recessive complex spastic paraplegia due to Kennedy pathway dysfunction"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb21-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Preferred HPO term</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
+<span id="cb21-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(df_disease)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <colgroup>
@@ -1413,9 +2404,57 @@ dttm  (1): Validation date
 <p>By using similar filtering method, we could quickly narrow down any particular rare disease of interest to find out specific phenotype or clinical features, along with associated HPO phenotype frequency, for further investigations.</p>
 <p>For “Malformation syndrome”, a similar search process was used to find out what was the most common phenotypes associated with it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">df_freq_ma <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb22-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Malformation syndrome"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Obligate (100%)"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb22-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>)</span>
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">df_freq_ma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb22-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Malformation syndrome"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Obligate (100%)"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb22-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
 <span id="cb22-4">df_freq_ma</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 125 × 3
@@ -1437,9 +2476,27 @@ dttm  (1): Validation date
 </div>
 <p>Count() was used to find out the number of appearance of each disorder name in descending order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">df3 <span class="ot" style="color: #003B4F;">&lt;-</span> df_freq_ma <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb24-2">  <span class="fu" style="color: #4758AB;">count</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>)</span>
-<span id="cb24-3">df3 <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(n))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">df3 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df_freq_ma <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb24-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
+<span id="cb24-3">df3 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(n))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 40 × 2
    `Disorder name`                                                             n
@@ -1460,10 +2517,76 @@ dttm  (1): Validation date
 </div>
 <p>To show one of the examples of the most common malformation syndrome with the most associated phenotypic features (with a total of 12 different phenotypic descriptions):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">df_mal_syn <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb26-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Malformation syndrome"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Obligate (100%)"</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Hydrocephalus-obesity-hypogonadism syndrome"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb26-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">HPO frequency</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder name</span><span class="st" style="color: #20794D;">`</span>, <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Preferred HPO term</span><span class="st" style="color: #20794D;">`</span>)</span>
-<span id="cb26-4"><span class="fu" style="color: #4758AB;">kable</span>(df_mal_syn)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">df_mal_syn <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb26-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Malformation syndrome"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Obligate (100%)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hydrocephalus-obesity-hypogonadism syndrome"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb26-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">HPO frequency</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder name</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Preferred HPO term</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>)</span>
+<span id="cb26-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(df_mal_syn)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <colgroup>
@@ -1563,8 +2686,32 @@ dttm  (1): Validation date
 <p>Now, to add one more piece of work towards this exploratory data analysis, I thought to check out the Validation date column. “Validation date” in this context meant the dates when the annotations of HPO terms were made for each rare disorder, which were based on the source articles listed (as shown in the Source column).</p>
 <p>Firstly, I started with the “Disease” disorder type and singled out the year component from the Validation date column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">df_val_date <span class="ot" style="color: #003B4F;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb27-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">year =</span> <span class="fu" style="color: #4758AB;">year</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Validation date</span><span class="st" style="color: #20794D;">`</span>), <span class="at" style="color: #657422;">label =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">abbr =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">df_val_date <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb27-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Validation date</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">abbr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
 <span id="cb27-3">df_val_date</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 112,243 × 16
@@ -1591,9 +2738,35 @@ dttm  (1): Validation date
 </div>
 <p>To show this in a dataframe, observations for “Disease” disorder type were shown by using a filter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">df_val_date_d <span class="ot" style="color: #003B4F;">&lt;-</span> df_val_date <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb29-2">  <span class="fu" style="color: #4758AB;">select</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span>, year) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb29-3">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Disorder type</span><span class="st" style="color: #20794D;">`</span> <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Disease"</span>)</span>
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">df_val_date_d <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df_val_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb29-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>, year) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb29-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Disorder type</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Disease"</span>)</span>
 <span id="cb29-4">df_val_date_d</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 57,920 × 2
@@ -1615,9 +2788,21 @@ dttm  (1): Validation date
 </div>
 <p>Then to make it easier to visualise, the year counts were plotted in a bar graph. Interestingly, 2016 seemed to be the year for rare disorders to be annotated with the most phenotypic features (if referring back to the original dataset, each observation or row was present for a unique “Preferred HPO term” or phenotypic abnormality).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">df_val_date_d <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb31-2">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> year)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb31-3">  <span class="fu" style="color: #4758AB;">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">df_val_date_d <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb31-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb31-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_bar</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 49 rows containing non-finite values (stat_count).</code></pre>
 </div>
@@ -1627,8 +2812,12 @@ dttm  (1): Validation date
 </div>
 <p>It was also worth noting that there were 49 rows of non-finite values excluded from the bar graph above. To look into this, a count on the year column of the dataframe df_val_date_d was done, which confirmed that these were the “NA” or missing values in the validation date column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1">df_val_date_d <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb33-2">  <span class="fu" style="color: #4758AB;">count</span>(year)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1">df_val_date_d <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb33-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(year)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
    year     n
@@ -1703,7 +2892,6 @@ dttm  (1): Validation date
   <category>Rare diseases</category>
   <guid>https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases.html</guid>
   <pubDate>Mon, 01 Aug 2022 12:00:00 GMT</pubDate>
-  <media:content url="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Genes.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Drugs in rare diseases</title>
@@ -1772,7 +2960,6 @@ dttm  (1): Validation date
   <category>Rare diseases</category>
   <guid>https://jhylin.github.io/Data_in_life_blog/posts/01_Drugs_in_rare_diseases/Rare_diseases_drugs.html</guid>
   <pubDate>Fri, 27 May 2022 12:00:00 GMT</pubDate>
-  <media:content url="https://jhylin.github.io/Data_in_life_blog/posts/01_Drugs_in_rare_diseases/Pills.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
