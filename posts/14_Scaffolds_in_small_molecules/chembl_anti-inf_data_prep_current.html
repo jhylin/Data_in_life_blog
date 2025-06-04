@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
 <meta name="dcterms.date" content="2023-07-06">
 
-<title>Home - Working with scaffolds in small molecules</title>
+<title>Working with scaffolds in small molecules – Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,9 +19,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,43 +50,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,17 +67,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -114,7 +89,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -123,8 +104,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
@@ -145,69 +128,231 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Home</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
- <span class="menu-text">About me</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../past_projects.html">
- <span class="menu-text">Past projects</span></a>
+    <a class="nav-link" href="../../past_projects.html"> 
+<span class="menu-text">Past projects</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/jhylin"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social">
- <span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
+    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social"> 
+<span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"> <i class="bi bi-mastodon" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/jenhylin"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/"> 
+<span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -303,10 +448,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#some-answers" id="toc-some-answers" class="nav-link" data-scroll-target="#some-answers"><strong>Some answers</strong></a></li>
   <li><a href="#afterthoughts" id="toc-afterthoughts" class="nav-link" data-scroll-target="#afterthoughts"><strong>Afterthoughts</strong></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
 
 
 
@@ -367,7 +514,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_ai <span class="op">=</span> pl.read_csv(<span class="st">"chembl_anti-inf.csv"</span>, sep <span class="op">=</span> <span class="st">";"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -398,7 +544,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
         line-height: 95%;
     }
 </style>
-<small>shape: (144, 29)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (144, 29)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -2820,7 +2966,6 @@ str
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_ai.groupby(<span class="st">"Availability Type"</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2851,7 +2996,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (4, 2)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (4, 2)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -2914,7 +3059,6 @@ u32
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai.<span class="bu">filter</span>(pl.col(<span class="st">"Availability Type"</span>) <span class="op">==</span> <span class="st">"Prescription Only"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="66">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2945,7 +3089,7 @@ u32
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 29)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 29)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -3583,7 +3727,6 @@ str
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_ai_rx.<span class="bu">filter</span>(pl.col(<span class="st">"Smiles"</span>) <span class="op">==</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -3614,7 +3757,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (1, 29)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (1, 29)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -3915,7 +4058,6 @@ str
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df_ai_rx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="68">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -3946,7 +4088,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (72, 29)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (72, 29)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -6364,7 +6506,6 @@ str
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.select([<span class="st">"Smiles"</span>, <span class="st">"Name"</span>, <span class="st">"USAN Definition"</span>, <span class="st">"Level 4 ATC Codes"</span>])</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="69">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -6395,7 +6536,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -6508,7 +6649,6 @@ str
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.rename({<span class="st">"Smiles"</span>: <span class="st">"smiles"</span>, <span class="st">"Name"</span>: <span class="st">"names"</span>})</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="70">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -6539,7 +6679,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -6653,7 +6793,6 @@ str
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_ai_rx <span class="op">=</span> df_ai_rx.with_columns(pl.col(<span class="st">"names"</span>).<span class="bu">str</span>.to_lowercase())</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_ai_rx.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="71">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -6684,7 +6823,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 4)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -6797,57 +6936,58 @@ str
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_ai_pd <span class="op">=</span> df_ai_rx.to_pandas()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_ai_pd.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="72">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>names</th>
-      <th>USAN Definition</th>
-      <th>Level 4 ATC Codes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>cefepime</td>
-      <td>cephalosporins</td>
-      <td>J01DE - Fourth-generation cephalosporins</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>sarecycline</td>
-      <td>antibiotics (tetracycline derivatives)</td>
-      <td>J01AA - Tetracyclines</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>gatifloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>gentamicin</td>
-      <td>antibiotics (Micromonospora strains)</td>
-      <td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>dicloxacillin</td>
-      <td>penicillins</td>
-      <td>J01CF - Beta-lactamase resistant penicillins</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">names</th>
+<th data-quarto-table-cell-role="th">USAN Definition</th>
+<th data-quarto-table-cell-role="th">Level 4 ATC Codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>cefepime</td>
+<td>cephalosporins</td>
+<td>J01DE - Fourth-generation cephalosporins</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>sarecycline</td>
+<td>antibiotics (tetracycline derivatives)</td>
+<td>J01AA - Tetracyclines</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>gatifloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>gentamicin</td>
+<td>antibiotics (Micromonospora strains)</td>
+<td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>dicloxacillin</td>
+<td>penicillins</td>
+<td>J01CF - Beta-lactamase resistant penicillins</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -6904,147 +7044,148 @@ str
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>data_mol_clean <span class="op">=</span> df_ai_pd.<span class="bu">apply</span>(_preprocess, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>data_mol_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="75">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>names</th>
-      <th>USAN Definition</th>
-      <th>Level 4 ATC Codes</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>cefepime</td>
-      <td>cephalosporins</td>
-      <td>J01DE - Fourth-generation cephalosporins</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
-      <td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
-      <td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>sarecycline</td>
-      <td>antibiotics (tetracycline derivatives)</td>
-      <td>J01AA - Tetracyclines</td>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
-      <td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
-      <td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>gatifloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
-      <td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
-      <td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>gentamicin</td>
-      <td>antibiotics (Micromonospora strains)</td>
-      <td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
-      <td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
-      <td>NPEFREDMMVQEPL-RWPARATISA-N</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>dicloxacillin</td>
-      <td>penicillins</td>
-      <td>J01CF - Beta-lactamase resistant penicillins</td>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
-      <td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
-      <td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
-      <td>benzylpenicillin</td>
-      <td>penicillins</td>
-      <td>J01CE - Beta-lactamase sensitive penicillins |...</td>
-      <td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
-      <td>[C][C][Branch1][C][C][S][C@@H1][C@H1][Branch1]...</td>
-      <td>InChI=1S/C16H18N2O4S/c1-16(2)12(15(21)22)18-13...</td>
-      <td>JGSARLDLIJGVTE-MBNYWOFBSA-N</td>
-    </tr>
-    <tr>
-      <th>68</th>
-      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
-      <td>ciprofloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>J01MA - Fluoroquinolones | S03AA - Antiinfecti...</td>
-      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
-      <td>[O][=C][Branch1][C][O][C][=C][N][Branch1][=Bra...</td>
-      <td>InChI=1S/C17H18FN3O3/c18-13-7-11-14(8-15(13)20...</td>
-      <td>MYSWGUAQZAJSOK-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>69</th>
-      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
-      <td>norfloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>J01MA - Fluoroquinolones | S01AE - Fluoroquino...</td>
-      <td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
-      <td>[C][C][N][C][=C][Branch1][=Branch1][C][=Branch...</td>
-      <td>InChI=1S/C16H18FN3O3/c1-2-19-9-11(16(22)23)15(...</td>
-      <td>OGJPXUAPXNRGGI-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>70</th>
-      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
-      <td>sulfanilamide</td>
-      <td>antimicrobials (sulfonamides derivatives)</td>
-      <td>D06BA - Sulfonamides | J01EB - Short-acting su...</td>
-      <td>Nc1ccc(S(N)(=O)=O)cc1</td>
-      <td>[N][C][=C][C][=C][Branch1][=Branch2][S][Branch...</td>
-      <td>InChI=1S/C6H8N2O2S/c7-5-1-3-6(4-2-5)11(8,9)10/...</td>
-      <td>FDDDEECHVMSUSB-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>71</th>
-      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
-      <td>ofloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>J01MA - Fluoroquinolones | S02AA - Antiinfecti...</td>
-      <td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
-      <td>[C][C][C][O][C][=C][Branch1][N][N][C][C][N][Br...</td>
-      <td>InChI=1S/C18H20FN3O4/c1-10-9-26-17-14-11(16(23...</td>
-      <td>GSDSWSVVBLHKDQ-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">names</th>
+<th data-quarto-table-cell-role="th">USAN Definition</th>
+<th data-quarto-table-cell-role="th">Level 4 ATC Codes</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>cefepime</td>
+<td>cephalosporins</td>
+<td>J01DE - Fourth-generation cephalosporins</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
+<td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
+<td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>sarecycline</td>
+<td>antibiotics (tetracycline derivatives)</td>
+<td>J01AA - Tetracyclines</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
+<td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
+<td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>gatifloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
+<td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
+<td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>gentamicin</td>
+<td>antibiotics (Micromonospora strains)</td>
+<td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
+<td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
+<td>NPEFREDMMVQEPL-RWPARATISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>dicloxacillin</td>
+<td>penicillins</td>
+<td>J01CF - Beta-lactamase resistant penicillins</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
+<td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
+<td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">67</td>
+<td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
+<td>benzylpenicillin</td>
+<td>penicillins</td>
+<td>J01CE - Beta-lactamase sensitive penicillins |...</td>
+<td>CC1(C)S[C@@H]2[C@H](NC(=O)Cc3ccccc3)C(=O)N2[C@...</td>
+<td>[C][C][Branch1][C][C][S][C@@H1][C@H1][Branch1]...</td>
+<td>InChI=1S/C16H18N2O4S/c1-16(2)12(15(21)22)18-13...</td>
+<td>JGSARLDLIJGVTE-MBNYWOFBSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">68</td>
+<td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+<td>ciprofloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>J01MA - Fluoroquinolones | S03AA - Antiinfecti...</td>
+<td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+<td>[O][=C][Branch1][C][O][C][=C][N][Branch1][=Bra...</td>
+<td>InChI=1S/C17H18FN3O3/c18-13-7-11-14(8-15(13)20...</td>
+<td>MYSWGUAQZAJSOK-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">69</td>
+<td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+<td>norfloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>J01MA - Fluoroquinolones | S01AE - Fluoroquino...</td>
+<td>CCn1cc(C(=O)O)c(=O)c2cc(F)c(N3CCNCC3)cc21</td>
+<td>[C][C][N][C][=C][Branch1][=Branch1][C][=Branch...</td>
+<td>InChI=1S/C16H18FN3O3/c1-2-19-9-11(16(22)23)15(...</td>
+<td>OGJPXUAPXNRGGI-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Nc1ccc(S(N)(=O)=O)cc1</td>
+<td>sulfanilamide</td>
+<td>antimicrobials (sulfonamides derivatives)</td>
+<td>D06BA - Sulfonamides | J01EB - Short-acting su...</td>
+<td>Nc1ccc(S(N)(=O)=O)cc1</td>
+<td>[N][C][=C][C][=C][Branch1][=Branch2][S][Branch...</td>
+<td>InChI=1S/C6H8N2O2S/c7-5-1-3-6(4-2-5)11(8,9)10/...</td>
+<td>FDDDEECHVMSUSB-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">71</td>
+<td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+<td>ofloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>J01MA - Fluoroquinolones | S02AA - Antiinfecti...</td>
+<td>CC1COc2c(N3CCN(C)CC3)c(F)cc3c(=O)c(C(=O)O)cn1c23</td>
+<td>[C][C][C][O][C][=C][Branch1][N][N][C][C][N][Br...</td>
+<td>InChI=1S/C18H20FN3O4/c1-10-9-26-17-14-11(16(23...</td>
+<td>GSDSWSVVBLHKDQ-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 <p>72 rows × 8 columns</p>
 </div>
 </div>
@@ -7079,7 +7220,11 @@ str
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ls, n_cols <span class="op">=</span> <span class="dv">4</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-16-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-16-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -7091,7 +7236,11 @@ str
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ls]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-17-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-17-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -7109,7 +7258,11 @@ str
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cpd1 <span class="op">=</span> dm.from_inchi(<span class="st">"InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-21(25)20-3-1-2-17(22(20)26)14-16-6-11-19(24)12-7-16/h4-14,20,23-24H,1-3H2/b13-8+,17-14+"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>cpd1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>I then converted compound 2 using SMILES string instead.</p>
@@ -7118,7 +7271,11 @@ str
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cpd2 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=C(C=CC=C1CC1=CC=C(C=C1)O)C(CCC1=CC=C(C=C1)O)=O"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cpd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Same thing followed for compound 3.</p>
@@ -7127,7 +7284,11 @@ str
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cpd3 <span class="op">=</span> dm.to_mol(<span class="st">"OC1=CC=C(CC2C(C(CCC2)C(CCC2=CC=C(C=C2)O)=O)=O)C=C1"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cpd3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="80">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="20">
@@ -7145,31 +7306,32 @@ str
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dm.to_df(mol_lst)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="82">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -7179,35 +7341,36 @@ str
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"names"</span>] <span class="op">=</span> names</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="83">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>names</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
-      <td>Compound_1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
-      <td>Compound_2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>Compound_3</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">names</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+<td>Compound_1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+<td>Compound_2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>Compound_3</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -7220,51 +7383,52 @@ str
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data_cleaned <span class="op">=</span> df.<span class="bu">apply</span>(_preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>data_cleaned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="84">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>names</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
-      <td>Compound_1</td>
-      <td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
-      <td>[O][=C][Branch1][=C][/C][=C][/C][=C][C][=C][Br...</td>
-      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
-      <td>QNBFRAOWJNMPAF-ZIQQYUHESA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
-      <td>Compound_2</td>
-      <td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
-      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
-      <td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
-      <td>CWVXMBYGWRWONE-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
-      <td>InChI=1S/C22H24O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
-      <td>KWPXNGBFYRHREW-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">names</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+<td>Compound_1</td>
+<td>O=C(/C=C/c1ccc(O)cc1)C1CCC/C(=C\c2ccc(O)cc2)C1=O</td>
+<td>[O][=C][Branch1][=C][/C][=C][/C][=C][C][=C][Br...</td>
+<td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+<td>QNBFRAOWJNMPAF-ZIQQYUHESA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+<td>Compound_2</td>
+<td>O=C(CCc1ccc(O)cc1)c1cccc(Cc2ccc(O)cc2)c1O</td>
+<td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+<td>InChI=1S/C22H20O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+<td>CWVXMBYGWRWONE-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>[O][=C][Branch1][=C][C][C][C][=C][C][=C][Branc...</td>
+<td>InChI=1S/C22H24O4/c23-18-9-4-15(5-10-18)8-13-2...</td>
+<td>KWPXNGBFYRHREW-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -7285,7 +7449,11 @@ str
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the list of molecules into 2D images</span></span>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>dm.to_image(mol_ftsz_list, n_cols <span class="op">=</span> <span class="dv">5</span>, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="85">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-25-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-25-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -7297,7 +7465,11 @@ str
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>m_ftsz_scaffolds <span class="op">=</span> [dm.to_scaffold_murcko(mol) <span class="cf">for</span> mol <span class="kw">in</span> mol_ftsz_list]</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>dm.to_image(m_ftsz_scaffolds, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), legends <span class="op">=</span> legends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="86">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-26-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-26-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -7313,81 +7485,82 @@ str
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>full_data <span class="op">=</span> pd.concat(combined_lists, ignore_index <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>full_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="87">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>names</th>
-      <th>USAN Definition</th>
-      <th>Level 4 ATC Codes</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>cefepime</td>
-      <td>cephalosporins</td>
-      <td>J01DE - Fourth-generation cephalosporins</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
-      <td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
-      <td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>sarecycline</td>
-      <td>antibiotics (tetracycline derivatives)</td>
-      <td>J01AA - Tetracyclines</td>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
-      <td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
-      <td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>gatifloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
-      <td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
-      <td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>gentamicin</td>
-      <td>antibiotics (Micromonospora strains)</td>
-      <td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
-      <td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
-      <td>NPEFREDMMVQEPL-RWPARATISA-N</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>dicloxacillin</td>
-      <td>penicillins</td>
-      <td>J01CF - Beta-lactamase resistant penicillins</td>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
-      <td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
-      <td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">names</th>
+<th data-quarto-table-cell-role="th">USAN Definition</th>
+<th data-quarto-table-cell-role="th">Level 4 ATC Codes</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>cefepime</td>
+<td>cephalosporins</td>
+<td>J01DE - Fourth-generation cephalosporins</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
+<td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
+<td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>sarecycline</td>
+<td>antibiotics (tetracycline derivatives)</td>
+<td>J01AA - Tetracyclines</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
+<td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
+<td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>gatifloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
+<td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
+<td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>gentamicin</td>
+<td>antibiotics (Micromonospora strains)</td>
+<td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
+<td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
+<td>NPEFREDMMVQEPL-RWPARATISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>dicloxacillin</td>
+<td>penicillins</td>
+<td>J01CF - Beta-lactamase resistant penicillins</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
+<td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
+<td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -7423,7 +7596,11 @@ Name: standard_smiles, Length: 75, dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>aligned_list <span class="op">=</span> dm.align.auto_align_many(mol_full, partition_method <span class="op">=</span> <span class="st">"anon-scaffold"</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dm.to_image(aligned_list, mol_size <span class="op">=</span> (<span class="dv">400</span>, <span class="dv">400</span>), max_mols <span class="op">=</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="90">
-<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-30-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="chembl_anti-inf_data_prep_current_files/figure-html/cell-30-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>An attempt to combine Datamol’s auto_align_many() with mols2grid library was shown below. Unfortunately, the compounds did not re-align but all 75 compounds were shown in the grids.</p>
@@ -8572,87 +8749,88 @@ listObj.on(&quot;updated&quot;, function (list) {
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>full_data <span class="op">=</span> full_data.rename(columns <span class="op">=</span> {<span class="st">"standard_smiles"</span>: <span class="st">"SMILES"</span>, <span class="st">"names"</span>: <span class="st">"Name"</span>})</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>full_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="94">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>smiles</th>
-      <th>Name</th>
-      <th>USAN Definition</th>
-      <th>Level 4 ATC Codes</th>
-      <th>SMILES</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-      <th>mol</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>cefepime</td>
-      <td>cephalosporins</td>
-      <td>J01DE - Fourth-generation cephalosporins</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
-      <td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
-      <td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x134307680&gt;</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>sarecycline</td>
-      <td>antibiotics (tetracycline derivatives)</td>
-      <td>J01AA - Tetracyclines</td>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-      <td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
-      <td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
-      <td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x134306c00&gt;</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>gatifloxacin</td>
-      <td>antibacterials (quinolone derivatives)</td>
-      <td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
-      <td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
-      <td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
-      <td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
-      <td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e729d0&gt;</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>gentamicin</td>
-      <td>antibiotics (Micromonospora strains)</td>
-      <td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
-      <td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
-      <td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
-      <td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
-      <td>NPEFREDMMVQEPL-RWPARATISA-N</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e72500&gt;</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>dicloxacillin</td>
-      <td>penicillins</td>
-      <td>J01CF - Beta-lactamase resistant penicillins</td>
-      <td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
-      <td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
-      <td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
-      <td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e719a0&gt;</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">smiles</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">USAN Definition</th>
+<th data-quarto-table-cell-role="th">Level 4 ATC Codes</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+<th data-quarto-table-cell-role="th">mol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>cefepime</td>
+<td>cephalosporins</td>
+<td>J01DE - Fourth-generation cephalosporins</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>[C][O][/N][=C][Branch2][Ring2][#Branch2][\C][=...</td>
+<td>InChI=1S/C19H24N6O5S2/c1-25(5-3-4-6-25)7-10-8-...</td>
+<td>HVFLCNVBZFFHBT-ZKDACBOMSA-N</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x134307680&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>sarecycline</td>
+<td>antibiotics (tetracycline derivatives)</td>
+<td>J01AA - Tetracyclines</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+<td>[C][O][N][Branch1][C][C][C][C][=C][C][=C][Bran...</td>
+<td>InChI=1S/C24H29N3O8/c1-26(2)18-13-8-11-7-12-10...</td>
+<td>PQJQFLNBMSCUSH-SBAJWEJLSA-N</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x134306c00&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>gatifloxacin</td>
+<td>antibacterials (quinolone derivatives)</td>
+<td>S01AE - Fluoroquinolones | J01MA - Fluoroquino...</td>
+<td>COc1c(N2CCNC(C)C2)c(F)cc2c(=O)c(C(=O)O)cn(C3CC...</td>
+<td>[C][O][C][=C][Branch1][N][N][C][C][N][C][Branc...</td>
+<td>InChI=1S/C19H22FN3O4/c1-10-8-22(6-5-21-10)16-1...</td>
+<td>XUBOMFCQGDBHNK-UHFFFAOYSA-N</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e729d0&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>gentamicin</td>
+<td>antibiotics (Micromonospora strains)</td>
+<td>S01AA - Antibiotics | S02AA - Antiinfectives |...</td>
+<td>CNC(C)[C@@H]1CC[C@@H](N)[C@@H](O[C@H]2[C@H](O)...</td>
+<td>[C][N][C][Branch1][C][C][C@@H1][C][C][C@@H1][B...</td>
+<td>InChI=1S/C21H43N5O7.C20H41N5O7.C19H39N5O7/c1-9...</td>
+<td>NPEFREDMMVQEPL-RWPARATISA-N</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e72500&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>dicloxacillin</td>
+<td>penicillins</td>
+<td>J01CF - Beta-lactamase resistant penicillins</td>
+<td>Cc1onc(-c2c(Cl)cccc2Cl)c1C(=O)N[C@@H]1C(=O)N2[...</td>
+<td>[C][C][O][N][=C][Branch1][=N][C][=C][Branch1][...</td>
+<td>InChI=1S/C19H17Cl2N3O5S/c1-7-10(12(23-29-7)11-...</td>
+<td>YFAGHNZHGGCZAX-JKIFEVAISA-N</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x133e719a0&gt;</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -8670,111 +8848,112 @@ listObj.on(&quot;updated&quot;, function (list) {
 <div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mol_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="96">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>NumAtoms</th>
-      <th>NumRgroupgs</th>
-      <th>Name</th>
-      <th>SMILES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)/C(...</td>
-      <td>31</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4csc(N)...</td>
-      <td>28</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=C(C[NH+]4CCC...</td>
-      <td>27</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>24</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
-      <td>18</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
-      <td>19</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>25</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>26</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+<th data-quarto-table-cell-role="th">NumRgroupgs</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)/C(...</td>
+<td>31</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4csc(N)...</td>
+<td>28</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
+<td>21</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
+<td>22</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=C(C[NH+]4CCC...</td>
+<td>27</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>24</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
+<td>18</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19</td>
+<td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
+<td>19</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>25</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>26</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+</tbody>
 </table>
+
 <p>5320 rows × 5 columns</p>
 </div>
 </div>
@@ -8783,87 +8962,88 @@ listObj.on(&quot;updated&quot;, function (list) {
 <div class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>scaffold_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="97">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>Count</th>
-      <th>NumAtoms</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1156</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>7</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>1101</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>6</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>173</th>
-      <td>CC(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)(C)[C@@H]2C(=O)O</td>
-      <td>5</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>174</th>
-      <td>CC(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)[C@@H]2C(=O)O</td>
-      <td>5</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>552</th>
-      <td>CC1(C)S[C@@H]2[C@H](NC=O)C(=O)N2[C@H]1C(=O)O</td>
-      <td>5</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3684</th>
-      <td>Cc1nccn1C</td>
-      <td>1</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>4456</th>
-      <td>Nc1ccccc1</td>
-      <td>1</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>4775</th>
-      <td>O=P(O)(O)[C@@H]1CO1</td>
-      <td>1</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>3722</th>
-      <td>Cn1ccnc1</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>4807</th>
-      <td>c1ccccc1</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1156</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>7</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1101</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>6</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">173</td>
+<td>CC(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)(C)[C@@H]2C(=O)O</td>
+<td>5</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">174</td>
+<td>CC(=O)N[C@@H]1C(=O)N2[C@@H]1SC(C)[C@@H]2C(=O)O</td>
+<td>5</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">552</td>
+<td>CC1(C)S[C@@H]2[C@H](NC=O)C(=O)N2[C@H]1C(=O)O</td>
+<td>5</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3684</td>
+<td>Cc1nccn1C</td>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4456</td>
+<td>Nc1ccccc1</td>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4775</td>
+<td>O=P(O)(O)[C@@H]1CO1</td>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3722</td>
+<td>Cn1ccnc1</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4807</td>
+<td>c1ccccc1</td>
+<td>1</td>
+<td>6</td>
+</tr>
+</tbody>
 </table>
+
 <p>4808 rows × 3 columns</p>
 </div>
 </div>
@@ -9437,7 +9617,6 @@ listObj.on(&quot;updated&quot;, function (list) {
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cefe_scaffolds <span class="op">=</span> pl.from_pandas(mol_df).<span class="bu">filter</span>(pl.col(<span class="st">"Name"</span>) <span class="op">==</span> <span class="st">"cefepime"</span>)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>cefe_scaffolds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="101">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -9468,7 +9647,7 @@ listObj.on(&quot;updated&quot;, function (list) {
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 5)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 5)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -9608,7 +9787,6 @@ str
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>cpd3_scaffolds <span class="op">=</span> pl.from_pandas(mol_df).<span class="bu">filter</span>(pl.col(<span class="st">"Name"</span>) <span class="op">==</span> <span class="st">"Compound_3"</span>)</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>cpd3_scaffolds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="102">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -9639,7 +9817,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (14, 5)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (14, 5)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -10540,25 +10718,26 @@ listObj.on(&quot;updated&quot;, function (list) {
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Showing only compound 3 as a distinctive compound (no other molecules with similar scaffold)</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>chem_mol_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="107">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>SMILES</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>Compound_3</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>Compound_3</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -10593,150 +10772,151 @@ listObj.on(&quot;updated&quot;, function (list) {
 <div class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cpd3_scaffolds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="110">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>NumAtoms</th>
-      <th>NumRgroupgs</th>
-      <th>Name</th>
-      <th>SMILES</th>
-      <th>mol</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=CC1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>17</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d3f0&gt;</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>O=CC1CCCC(Cc2ccccc2)C1=O</td>
-      <td>16</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d4d0&gt;</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>18</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580dd20&gt;</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>17</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580e880&gt;</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CCC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>19</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d930&gt;</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CCC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>18</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580ea40&gt;</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>O=C(CCc1ccccc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>25</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580ca50&gt;</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>O=C1CCCCC1C(=O)CCc1ccccc1</td>
-      <td>17</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580fbc0&gt;</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CC1CCCC(C(=O)CCc2ccccc2)C1=O</td>
-      <td>18</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580f4c0&gt;</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>24</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580f060&gt;</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
-      <td>18</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580c200&gt;</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
-      <td>19</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d770&gt;</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>25</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580de70&gt;</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>26</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580e2d0&gt;</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+<th data-quarto-table-cell-role="th">NumRgroupgs</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+<th data-quarto-table-cell-role="th">mol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=CC1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>17</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d3f0&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>O=CC1CCCC(Cc2ccccc2)C1=O</td>
+<td>16</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d4d0&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>18</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580dd20&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>17</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580e880&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CCC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>19</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d930&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>CCC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>18</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580ea40&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>O=C(CCc1ccccc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>25</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580ca50&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>O=C1CCCCC1C(=O)CCc1ccccc1</td>
+<td>17</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580fbc0&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>CC1CCCC(C(=O)CCc2ccccc2)C1=O</td>
+<td>18</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580f4c0&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>24</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580f060&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
+<td>18</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580c200&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
+<td>19</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580d770&gt;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>25</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580de70&gt;</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>26</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x13580e2d0&gt;</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -10830,127 +11010,128 @@ Name: mol, dtype: object</code></pre>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>match_df <span class="op">=</span> mol_df.query(<span class="st">"Scaffold in @count_top_scaffold"</span>)</span>
 <span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>match_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="116">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>NumAtoms</th>
-      <th>NumRgroupgs</th>
-      <th>Name</th>
-      <th>SMILES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>102</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>1</td>
-      <td>sarecycline</td>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-    </tr>
-    <tr>
-      <th>128</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>2</td>
-      <td>sarecycline</td>
-      <td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
-    </tr>
-    <tr>
-      <th>92</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>tigecycline</td>
-      <td>CN(C)c1cc(NC(=O)CNC(C)(C)C)c(O)c2c1C[C@H]1C[C@...</td>
-    </tr>
-    <tr>
-      <th>115</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>demeclocycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>demeclocycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>1</td>
-      <td>minocycline</td>
-      <td>CN(C)c1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O...</td>
-    </tr>
-    <tr>
-      <th>65</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>2</td>
-      <td>minocycline</td>
-      <td>CN(C)c1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O...</td>
-    </tr>
-    <tr>
-      <th>115</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>tetracycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>tetracycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>171</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>eravacycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>201</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>eravacycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>172</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-      <td>30</td>
-      <td>3</td>
-      <td>oxytetracycline</td>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
-    </tr>
-    <tr>
-      <th>92</th>
-      <td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>omadacycline</td>
-      <td>CN(C)c1cc(CNCC(C)(C)C)c(O)c2c1C[C@H]1C[C@H]3[C...</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+<th data-quarto-table-cell-role="th">NumRgroupgs</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">102</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>1</td>
+<td>sarecycline</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">128</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>2</td>
+<td>sarecycline</td>
+<td>CON(C)Cc1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">92</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>3</td>
+<td>tigecycline</td>
+<td>CN(C)c1cc(NC(=O)CNC(C)(C)C)c(O)c2c1C[C@H]1C[C@...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>3</td>
+<td>demeclocycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">129</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>2</td>
+<td>demeclocycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>1</td>
+<td>minocycline</td>
+<td>CN(C)c1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">65</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>2</td>
+<td>minocycline</td>
+<td>CN(C)c1ccc(O)c2c1C[C@H]1C[C@H]3[C@H](N(C)C)C(O...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>3</td>
+<td>tetracycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">129</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>2</td>
+<td>tetracycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">171</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>3</td>
+<td>eravacycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">201</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>2</td>
+<td>eravacycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">172</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+<td>30</td>
+<td>3</td>
+<td>oxytetracycline</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@@]2(O)C(O)=C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">92</td>
+<td>CN(C)[C@@H]1C(O)=C(C(N)=O)C(=O)[C@H]2C(O)=C3C(...</td>
+<td>29</td>
+<td>3</td>
+<td>omadacycline</td>
+<td>CN(C)c1cc(CNCC(C)(C)C)c(O)c2c1C[C@H]1C[C@H]3[C...</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -11054,135 +11235,136 @@ Name: mol, dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing query_scaffolds_via_smiles() function</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>query_scaffolds_via_smiles(<span class="st">"cpd3.smi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="121">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>NumAtoms</th>
-      <th>NumRgroupgs</th>
-      <th>Name</th>
-      <th>SMILES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>O=CC1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>17</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>O=CC1CCCC(Cc2ccccc2)C1=O</td>
-      <td>16</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>18</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>17</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CCC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>19</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>CCC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>18</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>O=C(CCc1ccccc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>25</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>O=C1CCCCC1C(=O)CCc1ccccc1</td>
-      <td>17</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>CC1CCCC(C(=O)CCc2ccccc2)C1=O</td>
-      <td>18</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>24</td>
-      <td>2</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
-      <td>18</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
-      <td>19</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
-      <td>25</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-      <td>26</td>
-      <td>1</td>
-      <td>Compound_3</td>
-      <td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+<th data-quarto-table-cell-role="th">NumRgroupgs</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>O=CC1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>17</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>O=CC1CCCC(Cc2ccccc2)C1=O</td>
+<td>16</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>CC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>18</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>CC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>17</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>CCC(=O)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>19</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>CCC(=O)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>18</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>O=C(CCc1ccccc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>25</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>O=C1CCCCC1C(=O)CCc1ccccc1</td>
+<td>17</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>CC1CCCC(C(=O)CCc2ccccc2)C1=O</td>
+<td>18</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>O=C(CCc1ccccc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>24</td>
+<td>2</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>O=C1CCCCC1C(=O)CCc1ccc(O)cc1</td>
+<td>18</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>CC1CCCC(C(=O)CCc2ccc(O)cc2)C1=O</td>
+<td>19</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">21</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccccc2)C1=O</td>
+<td>25</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">22</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+<td>26</td>
+<td>1</td>
+<td>Compound_3</td>
+<td>O=C(CCc1ccc(O)cc1)C1CCCC(Cc2ccc(O)cc2)C1=O</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -11191,487 +11373,488 @@ Name: mol, dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test on cefe.smi</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>query_scaffolds_via_smiles(<span class="st">"cefe.smi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="122">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Scaffold</th>
-      <th>NumAtoms</th>
-      <th>NumRgroupgs</th>
-      <th>Name</th>
-      <th>SMILES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)/C(...</td>
-      <td>31</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4csc(N)...</td>
-      <td>28</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=C(C[NH+]4CCC...</td>
-      <td>27</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C=NO)[C@H]3SC2...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4cscn4)...</td>
-      <td>27</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
-      <td>24</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>O=C([O-])C1=CCS[C@@H]2[C@H](NC(=O)C(=NO)c3cscn...</td>
-      <td>23</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
-      <td>25</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C=NO)[C@H]...</td>
-      <td>19</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
-      <td>24</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>O=C(C=NO)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+]3...</td>
-      <td>24</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>O=C([O-])C1=C(C[NH+]2CCCC2)CS[C@@H]2[C@H](NC(=...</td>
-      <td>29</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)C=N...</td>
-      <td>25</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)C(=...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3...</td>
-      <td>29</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
-      <td>22</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1cscn1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
-      <td>23</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[...</td>
-      <td>28</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>CON=CC(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[C...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[...</td>
-      <td>27</td>
-      <td>3</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>CON=CC(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3)CS...</td>
-      <td>23</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3)C...</td>
-      <td>28</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C...</td>
-      <td>25</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C@H...</td>
-      <td>25</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C@H...</td>
-      <td>24</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)C...</td>
-      <td>26</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[...</td>
-      <td>26</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[C...</td>
-      <td>20</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[...</td>
-      <td>25</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>31</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+]...</td>
-      <td>25</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+...</td>
-      <td>30</td>
-      <td>2</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>CO/N=C\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+...</td>
-      <td>26</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+]3...</td>
-      <td>26</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>31</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-      <td>32</td>
-      <td>1</td>
-      <td>cefepime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefixime</td>
-      <td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\OCC(=...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefixime</td>
-      <td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\OCC(=...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>ceftriaxone</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
-      <td>23</td>
-      <td>2</td>
-      <td>ceftriaxone</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
-      <td>22</td>
-      <td>3</td>
-      <td>ceftriaxone</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
-      <td>21</td>
-      <td>2</td>
-      <td>cefdinir</td>
-      <td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\O)c3c...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
-      <td>22</td>
-      <td>2</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1cscn1</td>
-      <td>21</td>
-      <td>3</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
-      <td>23</td>
-      <td>2</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
-      <td>22</td>
-      <td>3</td>
-      <td>cefotaxime</td>
-      <td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
-      <td>22</td>
-      <td>3</td>
-      <td>ceftazidime</td>
-      <td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
-      <td>24</td>
-      <td>2</td>
-      <td>ceftazidime</td>
-      <td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>O=C([O-])C1=CCS[C@@H]2[C@H](NC(=O)C(=NO)c3cscn...</td>
-      <td>23</td>
-      <td>3</td>
-      <td>ceftazidime</td>
-      <td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
-      <td>25</td>
-      <td>2</td>
-      <td>ceftazidime</td>
-      <td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
-      <td>24</td>
-      <td>3</td>
-      <td>ceftazidime</td>
-      <td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Scaffold</th>
+<th data-quarto-table-cell-role="th">NumAtoms</th>
+<th data-quarto-table-cell-role="th">NumRgroupgs</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">SMILES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)/C(...</td>
+<td>31</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4csc(N)...</td>
+<td>28</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
+<td>21</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
+<td>22</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=C(C[NH+]4CCC...</td>
+<td>27</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C=NO)[C@H]3SC2...</td>
+<td>22</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>C[N+]1(CC2=CN3C(=O)[C@@H](NC(=O)C(=NO)c4cscn4)...</td>
+<td>27</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
+<td>24</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>O=C([O-])C1=CCS[C@@H]2[C@H](NC(=O)C(=NO)c3cscn...</td>
+<td>23</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
+<td>25</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C=NO)[C@H]...</td>
+<td>19</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
+<td>24</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
+<td>30</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>O=C(C=NO)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+]3...</td>
+<td>24</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>O=C([O-])C1=C(C[NH+]2CCCC2)CS[C@@H]2[C@H](NC(=...</td>
+<td>29</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)C=N...</td>
+<td>25</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>C[N+]1(CC2=C(C(=O)[O-])N3C(=O)[C@@H](NC(=O)C(=...</td>
+<td>30</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3...</td>
+<td>29</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
+<td>22</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1cscn1</td>
+<td>21</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
+<td>23</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
+<td>22</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[...</td>
+<td>28</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>CON=CC(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[C...</td>
+<td>22</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[NH+]3CCCC3)CS[...</td>
+<td>27</td>
+<td>3</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>CON=CC(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3)CS...</td>
+<td>23</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C[N+]3(C)CCCC3)C...</td>
+<td>28</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">27</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C...</td>
+<td>25</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C@H...</td>
+<td>25</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">30</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=CCS[C@H...</td>
+<td>24</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)C...</td>
+<td>26</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">32</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[...</td>
+<td>26</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33</td>
+<td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[C...</td>
+<td>20</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">34</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C)CS[...</td>
+<td>25</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">35</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>31</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">36</td>
+<td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+]...</td>
+<td>25</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">37</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[NH+...</td>
+<td>30</td>
+<td>2</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">38</td>
+<td>CO/N=C\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+...</td>
+<td>26</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">39</td>
+<td>CON=CC(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N+]3...</td>
+<td>26</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">40</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>31</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+<td>32</td>
+<td>1</td>
+<td>cefepime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=C(C[N...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
+<td>21</td>
+<td>3</td>
+<td>cefixime</td>
+<td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\OCC(=...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
+<td>22</td>
+<td>3</td>
+<td>cefixime</td>
+<td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\OCC(=...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
+<td>22</td>
+<td>3</td>
+<td>ceftriaxone</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
+<td>23</td>
+<td>2</td>
+<td>ceftriaxone</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
+<td>22</td>
+<td>3</td>
+<td>ceftriaxone</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(CSc3nc...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
+<td>21</td>
+<td>2</td>
+<td>cefdinir</td>
+<td>C=CC1=C(C(=O)O)N2C(=O)[C@@H](NC(=O)/C(=N\O)c3c...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C=CCS[C@H]23)cs1</td>
+<td>21</td>
+<td>3</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
+<td>22</td>
+<td>3</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1csc(N)n1</td>
+<td>22</td>
+<td>2</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=CCS[C@H]12)c1cscn1</td>
+<td>21</td>
+<td>3</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cs...</td>
+<td>23</td>
+<td>2</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>CON=C(C(=O)N[C@@H]1C(=O)N2C=C(C)CS[C@H]12)c1cscn1</td>
+<td>22</td>
+<td>3</td>
+<td>cefotaxime</td>
+<td>CO/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)O)=C(COC(C)...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33</td>
+<td>CC1=CN2C(=O)[C@@H](NC(=O)C(=NO)c3csc(N)n3)[C@H...</td>
+<td>22</td>
+<td>3</td>
+<td>ceftazidime</td>
+<td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">36</td>
+<td>Nc1nc(C(=NO)C(=O)N[C@@H]2C(=O)N3C(C(=O)[O-])=C...</td>
+<td>24</td>
+<td>2</td>
+<td>ceftazidime</td>
+<td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">37</td>
+<td>O=C([O-])C1=CCS[C@@H]2[C@H](NC(=O)C(=NO)c3cscn...</td>
+<td>23</td>
+<td>3</td>
+<td>ceftazidime</td>
+<td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">38</td>
+<td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
+<td>25</td>
+<td>2</td>
+<td>ceftazidime</td>
+<td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39</td>
+<td>CC1=C(C(=O)[O-])N2C(=O)[C@@H](NC(=O)C(=NO)c3cs...</td>
+<td>24</td>
+<td>3</td>
+<td>ceftazidime</td>
+<td>CC(C)(O/N=C(\C(=O)N[C@@H]1C(=O)N2C(C(=O)[O-])=...</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -11702,7 +11885,7 @@ Name: mol, dtype: object</code></pre>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Simplified Molecular Input Line Entry Systems<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -11714,261 +11897,464 @@ Name: mol, dtype: object</code></pre>
 {"state":{"05010a765f8d4d5aade8293ab5f67ee0":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_4b055fc779014a81a08cd0b2669d5f6a","placeholder":"​","style":"IPY_MODEL_a095ad781c634f3992da9e35e339bafc","value":" 75/75 [00:06&lt;00:00, 20.35it/s]"}},"09f564e9170c44578497a67ad73c9e51":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_545283ece4454e2b830667205f7ac989","selection":"{}"}},"11db5566befb46e398e98ac4a9b81500":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"1a53c9bc5d1f4b60a21e1a830c087d25":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"21419912ea3f47cf9f2a317e74b55747":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_a0a5d3a97ece4e1cbb8671243dd30dee","IPY_MODEL_6328b6adfab54b198214977afe7c7f31","IPY_MODEL_51d31928350741128b9445601961109a"],"layout":"IPY_MODEL_65dbb4d1216347a380eddc2a63fefbc3"}},"24e0e3ab4d87415fb494670f87d32971":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"257c8045b4044abbad4d15cc7883bbd6":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"25c2f7bd53fc4ab5a34eb7f2c9631058":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"27b242d43bfd4970a75d59a9151c3866":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_443487571baa47a69c7e6465ee9bc1cf","placeholder":"​","style":"IPY_MODEL_257c8045b4044abbad4d15cc7883bbd6","value":"100%"}},"2e872226f867406984194babe9f34d16":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"33980de111b94f44bf33dd3aea547e3f":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_25c2f7bd53fc4ab5a34eb7f2c9631058","selection":"{}"}},"33b2063057c048f1911ea70a1f15031f":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"40f0cee9b414444184ad09296d7ba14b":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"443487571baa47a69c7e6465ee9bc1cf":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"4aa25827f68d45689c831fb351f29580":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"4b055fc779014a81a08cd0b2669d5f6a":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"51d31928350741128b9445601961109a":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_983ce867dd9c42d5a3002f2eb3c5e5e2","placeholder":"​","style":"IPY_MODEL_9371b2a6bbe443018d751f786f457b00","value":" 75/75 [00:06&lt;00:00, 20.25it/s]"}},"545283ece4454e2b830667205f7ac989":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"6328b6adfab54b198214977afe7c7f31":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"success","description":"","description_tooltip":null,"layout":"IPY_MODEL_2e872226f867406984194babe9f34d16","max":75,"min":0,"orientation":"horizontal","style":"IPY_MODEL_24e0e3ab4d87415fb494670f87d32971","value":75}},"65dbb4d1216347a380eddc2a63fefbc3":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"688d3bb6d764459099387ef7cbad17d7":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"778adefe94474bffa6ce1daa54f6b10c":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"890b0907e33f46529fafccb60d850afb":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_27b242d43bfd4970a75d59a9151c3866","IPY_MODEL_da676813baad4d75b37f2916c109a294","IPY_MODEL_05010a765f8d4d5aade8293ab5f67ee0"],"layout":"IPY_MODEL_bcc15b1066554ea3a3fe2cf9886af250"}},"9371b2a6bbe443018d751f786f457b00":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"97f05bc881344cc1ace724235126dbe3":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_33b2063057c048f1911ea70a1f15031f","selection":"{}"}},"983ce867dd9c42d5a3002f2eb3c5e5e2":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"a095ad781c634f3992da9e35e339bafc":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"a0a5d3a97ece4e1cbb8671243dd30dee":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_11db5566befb46e398e98ac4a9b81500","placeholder":"​","style":"IPY_MODEL_c1407fad01cd4927b2009a55de53d917","value":"100%"}},"aa1838a6a4704f2b96ba4756f67eb4ff":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_40f0cee9b414444184ad09296d7ba14b","selection":"{}"}},"ac63c1c0295e4c3abd26f9bea1d9367e":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_4aa25827f68d45689c831fb351f29580","selection":"{}"}},"bcc15b1066554ea3a3fe2cf9886af250":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"be42a3db4c664961a9fead3f52ad4511":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"c1407fad01cd4927b2009a55de53d917":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"c7ae3797f90d494e831e0fbede88f34a":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_1a53c9bc5d1f4b60a21e1a830c087d25","selection":"{}"}},"da676813baad4d75b37f2916c109a294":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"success","description":"","description_tooltip":null,"layout":"IPY_MODEL_f6d3d53ce50149408b5977608d3b4601","max":75,"min":0,"orientation":"horizontal","style":"IPY_MODEL_688d3bb6d764459099387ef7cbad17d7","value":75}},"dc023981854642cb92633654c1003278":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_be42a3db4c664961a9fead3f52ad4511","selection":"{}"}},"e689dbd99c7242a2a464041f8cd6e67a":{"model_module":"mols2grid","model_module_version":"^1.0.0","model_name":"MolGridModel","state":{"_dom_classes":[],"_model_module":"mols2grid","_model_module_version":"^1.0.0","_model_name":"MolGridModel","_view_count":null,"_view_module":"mols2grid","_view_module_version":"^1.0.0","_view_name":"MolGridView","callback_kwargs":"{}","filter_mask":[],"grid_id":"default","layout":"IPY_MODEL_778adefe94474bffa6ce1daa54f6b10c","selection":"{}"}},"f6d3d53ce50149408b5977608d3b4601":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}}},"version_major":2,"version_minor":0}
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jhylin\.github\.io\/Data_in_life_blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jhylin/Data_in_life_blog";
+    script.dataset.repoId = "R_kgDOHw7lGQ";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHw7lGc4CQzQ_";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
   }
-});
-</script>
-<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+  loadGiscus();
 </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
+
 
 
 
