@@ -29,7 +29,7 @@ Note: if importing binary files, use pyodide.http.pyfetch() instead - check out 
 ***Note: it may take a few minutes to load the app (code provided at the top, with app at the bottom).***
 
 ::: column-screen-inset
-``` {shinylive-python}
+```{shinylive-python}
 #| standalone: true
 #| components: [editor, viewer]
 #| layout: vertical

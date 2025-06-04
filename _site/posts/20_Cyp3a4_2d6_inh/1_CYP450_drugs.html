@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
 <meta name="dcterms.date" content="2024-08-22">
 
-<title>Home - Cytochrome P450 and small drug molecules</title>
+<title>Cytochrome P450 and small drug molecules – Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,9 +19,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,48 +50,20 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +77,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,17 +87,20 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -133,7 +109,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -142,8 +124,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
@@ -163,69 +147,231 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Home</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
- <span class="menu-text">About me</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../past_projects.html">
- <span class="menu-text">Past projects</span></a>
+    <a class="nav-link" href="../../past_projects.html"> 
+<span class="menu-text">Past projects</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/jhylin"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social">
- <span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
+    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social"> 
+<span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"> <i class="bi bi-mastodon" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/jenhylin"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/"> 
+<span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -300,10 +446,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#some-findings-and-future-work" id="toc-some-findings-and-future-work" class="nav-link" data-scroll-target="#some-findings-and-future-work"><strong>Some findings and future work</strong></a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
 
 
 
@@ -438,57 +586,58 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df_3a4_strong_inh.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL2403108</td>
-      <td>CERITINIB</td>
-      <td>4.0</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1741</td>
-      <td>CLARITHROMYCIN</td>
-      <td>4.0</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL2216870</td>
-      <td>IDELALISIB</td>
-      <td>4.0</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL115</td>
-      <td>INDINAVIR</td>
-      <td>4.0</td>
-      <td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL22587</td>
-      <td>ITRACONAZOLE</td>
-      <td>NaN</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL2403108</td>
+<td>CERITINIB</td>
+<td>4.0</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1741</td>
+<td>CLARITHROMYCIN</td>
+<td>4.0</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL2216870</td>
+<td>IDELALISIB</td>
+<td>4.0</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL115</td>
+<td>INDINAVIR</td>
+<td>4.0</td>
+<td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL22587</td>
+<td>ITRACONAZOLE</td>
+<td>NaN</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -501,57 +650,58 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df_3a4_mod_inh.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL1491</td>
-      <td>AMLODIPINE</td>
-      <td>4</td>
-      <td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1471</td>
-      <td>APREPITANT</td>
-      <td>4</td>
-      <td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL8</td>
-      <td>CIPROFLOXACIN</td>
-      <td>4</td>
-      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL601719</td>
-      <td>CRIZOTINIB</td>
-      <td>4</td>
-      <td>C[C@@H](Oc1cc(-c2cnn(C3CCNCC3)c2)cnc1N)c1c(Cl)...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL23</td>
-      <td>DILTIAZEM</td>
-      <td>4</td>
-      <td>COc1ccc([C@@H]2Sc3ccccc3N(CCN(C)C)C(=O)[C@@H]2...</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL1491</td>
+<td>AMLODIPINE</td>
+<td>4</td>
+<td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1471</td>
+<td>APREPITANT</td>
+<td>4</td>
+<td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL8</td>
+<td>CIPROFLOXACIN</td>
+<td>4</td>
+<td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL601719</td>
+<td>CRIZOTINIB</td>
+<td>4</td>
+<td>C[C@@H](Oc1cc(-c2cnn(C3CCNCC3)c2)cnc1N)c1c(Cl)...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL23</td>
+<td>DILTIAZEM</td>
+<td>4</td>
+<td>COc1ccc([C@@H]2Sc3ccccc3N(CCN(C)C)C(=O)[C@@H]2...</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -563,57 +713,58 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df_2d6_strong_inh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL894</td>
-      <td>BUPROPION</td>
-      <td>4.0</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL41</td>
-      <td>FLUOXETINE</td>
-      <td>4.0</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL490</td>
-      <td>PAROXETINE</td>
-      <td>4.0</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL21578</td>
-      <td>QUINIDINE</td>
-      <td>NaN</td>
-      <td>C=C[C@H]1CN2CCC1C[C@@H]2[C@@H](O)c1ccnc2ccc(OC...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL1294</td>
-      <td>QUINIDINE</td>
-      <td>4.0</td>
-      <td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL894</td>
+<td>BUPROPION</td>
+<td>4.0</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL41</td>
+<td>FLUOXETINE</td>
+<td>4.0</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL490</td>
+<td>PAROXETINE</td>
+<td>4.0</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL21578</td>
+<td>QUINIDINE</td>
+<td>NaN</td>
+<td>C=C[C@H]1CN2CCC1C[C@@H]2[C@@H](O)c1ccnc2ccc(OC...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL1294</td>
+<td>QUINIDINE</td>
+<td>4.0</td>
+<td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -625,57 +776,58 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df_2d6_mod_inh.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL254328</td>
-      <td>ABIRATERONE</td>
-      <td>4</td>
-      <td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1201284</td>
-      <td>CINACALCET</td>
-      <td>4</td>
-      <td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL70418</td>
-      <td>CLOBAZAM</td>
-      <td>4</td>
-      <td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL1628227</td>
-      <td>DOXEPIN</td>
-      <td>4</td>
-      <td>CN(C)CCC=C1c2ccccc2COc2ccccc21</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL1175</td>
-      <td>DULOXETINE</td>
-      <td>4</td>
-      <td>CNCC[C@H](Oc1cccc2ccccc12)c1cccs1</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL254328</td>
+<td>ABIRATERONE</td>
+<td>4</td>
+<td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1201284</td>
+<td>CINACALCET</td>
+<td>4</td>
+<td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL70418</td>
+<td>CLOBAZAM</td>
+<td>4</td>
+<td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL1628227</td>
+<td>DOXEPIN</td>
+<td>4</td>
+<td>CN(C)CCC=C1c2ccccc2COc2ccccc21</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL1175</td>
+<td>DULOXETINE</td>
+<td>4</td>
+<td>CNCC[C@H](Oc1cccc2ccccc12)c1cccs1</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -701,63 +853,64 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>df_3a4_s_inh_p <span class="op">=</span> df_3a4_s_inh.<span class="bu">apply</span>(preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>df_3a4_s_inh_p.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL2403108</td>
-      <td>CERITINIB</td>
-      <td>4.0</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
-      <td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
-      <td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1741</td>
-      <td>CLARITHROMYCIN</td>
-      <td>4.0</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
-      <td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
-      <td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL2216870</td>
-      <td>IDELALISIB</td>
-      <td>4.0</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
-      <td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
-      <td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL2403108</td>
+<td>CERITINIB</td>
+<td>4.0</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
+<td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
+<td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1741</td>
+<td>CLARITHROMYCIN</td>
+<td>4.0</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
+<td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
+<td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL2216870</td>
+<td>IDELALISIB</td>
+<td>4.0</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
+<td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
+<td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -767,63 +920,64 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_3a4_m_inh_p <span class="op">=</span> df_3a4_m_inh.<span class="bu">apply</span>(preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df_3a4_m_inh_p.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL1491</td>
-      <td>AMLODIPINE</td>
-      <td>4</td>
-      <td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3990&gt;</td>
-      <td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
-      <td>[C][C][O][C][=Branch1][C][=O][C][=C][Branch1][...</td>
-      <td>InChI=1S/C20H25ClN2O5/c1-4-28-20(25)18-15(11-2...</td>
-      <td>HTIQEAQVCYTUBX-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1471</td>
-      <td>APREPITANT</td>
-      <td>4</td>
-      <td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2ce0&gt;</td>
-      <td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
-      <td>[C][C@@H1][Branch2][Ring2][C][O][C@H1][O][C][C...</td>
-      <td>InChI=1S/C23H21F7N4O3/c1-12(14-8-15(22(25,26)2...</td>
-      <td>ATALOFNDEOCMKK-OITMNORJSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL8</td>
-      <td>CIPROFLOXACIN</td>
-      <td>4</td>
-      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2ff0&gt;</td>
-      <td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
-      <td>[O][=C][Branch1][C][O][C][=C][N][Branch1][=Bra...</td>
-      <td>InChI=1S/C17H18FN3O3/c18-13-7-11-14(8-15(13)20...</td>
-      <td>MYSWGUAQZAJSOK-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL1491</td>
+<td>AMLODIPINE</td>
+<td>4</td>
+<td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3990&gt;</td>
+<td>CCOC(=O)C1=C(COCCN)NC(C)=C(C(=O)OC)C1c1ccccc1Cl</td>
+<td>[C][C][O][C][=Branch1][C][=O][C][=C][Branch1][...</td>
+<td>InChI=1S/C20H25ClN2O5/c1-4-28-20(25)18-15(11-2...</td>
+<td>HTIQEAQVCYTUBX-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1471</td>
+<td>APREPITANT</td>
+<td>4</td>
+<td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2ce0&gt;</td>
+<td>C[C@@H](O[C@H]1OCCN(Cc2n[nH]c(=O)[nH]2)[C@H]1c...</td>
+<td>[C][C@@H1][Branch2][Ring2][C][O][C@H1][O][C][C...</td>
+<td>InChI=1S/C23H21F7N4O3/c1-12(14-8-15(22(25,26)2...</td>
+<td>ATALOFNDEOCMKK-OITMNORJSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL8</td>
+<td>CIPROFLOXACIN</td>
+<td>4</td>
+<td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2ff0&gt;</td>
+<td>O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O</td>
+<td>[O][=C][Branch1][C][O][C][=C][N][Branch1][=Bra...</td>
+<td>InChI=1S/C17H18FN3O3/c18-13-7-11-14(8-15(13)20...</td>
+<td>MYSWGUAQZAJSOK-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -833,63 +987,64 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_2d6_s_inh_p <span class="op">=</span> df_2d6_s_inh.<span class="bu">apply</span>(preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df_2d6_s_inh_p.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL894</td>
-      <td>BUPROPION</td>
-      <td>4.0</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
-      <td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
-      <td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL41</td>
-      <td>FLUOXETINE</td>
-      <td>4.0</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
-      <td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
-      <td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL490</td>
-      <td>PAROXETINE</td>
-      <td>4.0</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
-      <td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
-      <td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL894</td>
+<td>BUPROPION</td>
+<td>4.0</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
+<td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
+<td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL41</td>
+<td>FLUOXETINE</td>
+<td>4.0</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
+<td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
+<td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL490</td>
+<td>PAROXETINE</td>
+<td>4.0</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
+<td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
+<td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -899,63 +1054,64 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_2d6_m_inh_p <span class="op">=</span> df_2d6_m_inh.<span class="bu">apply</span>(preprocess, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df_2d6_m_inh_p.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL254328</td>
-      <td>ABIRATERONE</td>
-      <td>4</td>
-      <td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135dd0270&gt;</td>
-      <td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
-      <td>[C][C@][C][C][C@H1][Branch1][C][O][C][C][Ring1...</td>
-      <td>InChI=1S/C24H31NO/c1-23-11-9-18(26)14-17(23)5-...</td>
-      <td>GZOSMCIZMLWJML-VJLLXTKPSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1201284</td>
-      <td>CINACALCET</td>
-      <td>4</td>
-      <td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3e60&gt;</td>
-      <td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
-      <td>[C][C@@H1][Branch2][Ring1][#Branch1][N][C][C][...</td>
-      <td>InChI=1S/C22H22F3N/c1-16(20-13-5-10-18-9-2-3-1...</td>
-      <td>VDHAWDNDOKGFTD-MRXNPFEDSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL70418</td>
-      <td>CLOBAZAM</td>
-      <td>4</td>
-      <td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3b50&gt;</td>
-      <td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
-      <td>[C][N][C][=Branch1][C][=O][C][C][=Branch1][C][...</td>
-      <td>InChI=1S/C16H13ClN2O2/c1-18-13-8-7-11(17)9-14(...</td>
-      <td>CXOXHMZGEKVPMT-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL254328</td>
+<td>ABIRATERONE</td>
+<td>4</td>
+<td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135dd0270&gt;</td>
+<td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
+<td>[C][C@][C][C][C@H1][Branch1][C][O][C][C][Ring1...</td>
+<td>InChI=1S/C24H31NO/c1-23-11-9-18(26)14-17(23)5-...</td>
+<td>GZOSMCIZMLWJML-VJLLXTKPSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1201284</td>
+<td>CINACALCET</td>
+<td>4</td>
+<td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3e60&gt;</td>
+<td>C[C@@H](NCCCc1cccc(C(F)(F)F)c1)c1cccc2ccccc12</td>
+<td>[C][C@@H1][Branch2][Ring1][#Branch1][N][C][C][...</td>
+<td>InChI=1S/C22H22F3N/c1-16(20-13-5-10-18-9-2-3-1...</td>
+<td>VDHAWDNDOKGFTD-MRXNPFEDSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL70418</td>
+<td>CLOBAZAM</td>
+<td>4</td>
+<td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3b50&gt;</td>
+<td>CN1C(=O)CC(=O)N(c2ccccc2)c2cc(Cl)ccc21</td>
+<td>[C][N][C][=Branch1][C][=O][C][C][=Branch1][C][...</td>
+<td>InChI=1S/C16H13ClN2O2/c1-18-13-8-7-11(17)9-14(...</td>
+<td>CXOXHMZGEKVPMT-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -973,7 +1129,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    legends<span class="op">=</span><span class="bu">list</span>(df_2d6_m_inh_p[<span class="st">"pref_name"</span>])</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-12-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-12-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="12">
@@ -985,7 +1145,11 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    legends<span class="op">=</span><span class="bu">list</span>(df_2d6_s_inh_p[<span class="st">"pref_name"</span>])</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-13-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-13-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -2614,75 +2778,76 @@ Q 229.7 64.5, 229.7 65.4
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_2d6_s_inh_p <span class="op">=</span> df_2d6_s_inh_p.drop(labels <span class="op">=</span> <span class="dv">3</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_2d6_s_inh_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL894</td>
-      <td>BUPROPION</td>
-      <td>4.0</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
-      <td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
-      <td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL41</td>
-      <td>FLUOXETINE</td>
-      <td>4.0</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
-      <td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
-      <td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL490</td>
-      <td>PAROXETINE</td>
-      <td>4.0</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
-      <td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
-      <td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL1294</td>
-      <td>QUINIDINE</td>
-      <td>4.0</td>
-      <td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2d50&gt;</td>
-      <td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
-      <td>[C][=C][C@H1][C][N][C][C][C@H1][Ring1][=Branch...</td>
-      <td>InChI=1S/C20H24N2O2/c1-3-13-12-22-9-7-14(13)10...</td>
-      <td>LOUPRKONTZGTKE-LHHVKLHASA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL894</td>
+<td>BUPROPION</td>
+<td>4.0</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
+<td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
+<td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL41</td>
+<td>FLUOXETINE</td>
+<td>4.0</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
+<td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
+<td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL490</td>
+<td>PAROXETINE</td>
+<td>4.0</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
+<td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
+<td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL1294</td>
+<td>QUINIDINE</td>
+<td>4.0</td>
+<td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2d50&gt;</td>
+<td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
+<td>[C][=C][C@H1][C][N][C][C][C@H1][Ring1][=Branch...</td>
+<td>InChI=1S/C20H24N2O2/c1-3-13-12-22-9-7-14(13)10...</td>
+<td>LOUPRKONTZGTKE-LHHVKLHASA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -5287,147 +5452,148 @@ Q 320.0 52.2, 320.0 52.7
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocessed df of strong cyp3a4 inhibitors</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>df_3a4_s_inh_p.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL2403108</td>
-      <td>CERITINIB</td>
-      <td>4.0</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
-      <td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
-      <td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1741</td>
-      <td>CLARITHROMYCIN</td>
-      <td>4.0</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
-      <td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
-      <td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL2216870</td>
-      <td>IDELALISIB</td>
-      <td>4.0</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
-      <td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
-      <td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL115</td>
-      <td>INDINAVIR</td>
-      <td>4.0</td>
-      <td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1ee0&gt;</td>
-      <td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
-      <td>[C][C][Branch1][C][C][Branch1][C][C][N][C][=Br...</td>
-      <td>InChI=1S/C36H47N5O4/c1-36(2,3)39-35(45)31-24-4...</td>
-      <td>CBVCZFGXHXORBI-PXQQMZJSSA-N</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL22587</td>
-      <td>ITRACONAZOLE</td>
-      <td>NaN</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1cb0&gt;</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
-      <td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
-      <td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
-      <td>VHVPQPYKVGDNFY-ZPGVKDDISA-N</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CHEMBL64391</td>
-      <td>ITRACONAZOLE</td>
-      <td>4.0</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1d90&gt;</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
-      <td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
-      <td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
-      <td>VHVPQPYKVGDNFY-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>CHEMBL224725</td>
-      <td>ITRACONZOLE</td>
-      <td>NaN</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5COC(Cn6...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1f50&gt;</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5COC(Cn6...</td>
-      <td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
-      <td>InChI=1S/C35H38F2N8O4/c1-3-25(2)45-34(46)44(24...</td>
-      <td>HUADITLKOCMHSB-RPOYNCMSSA-N</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>CHEMBL157101</td>
-      <td>KETOCONAZOLE</td>
-      <td>4.0</td>
-      <td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2030&gt;</td>
-      <td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
-      <td>[C][C][=Branch1][C][=O][N][C][C][N][Branch2][R...</td>
-      <td>InChI=1S/C26H28Cl2N4O4/c1-19(33)31-10-12-32(13...</td>
-      <td>XMAYWYJOQHXEEK-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CHEMBL45816</td>
-      <td>MIBEFRADIL</td>
-      <td>4.0</td>
-      <td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1e70&gt;</td>
-      <td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
-      <td>[C][O][C][C][=Branch1][C][=O][O][C@][Branch2][...</td>
-      <td>InChI=1S/C29H38FN3O3/c1-20(2)28-23-12-11-22(30...</td>
-      <td>HBNPJJILLOYFJU-VMPREFPWSA-N</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CHEMBL623</td>
-      <td>NEFAZODONE</td>
-      <td>4.0</td>
-      <td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da20a0&gt;</td>
-      <td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
-      <td>[C][C][C][=N][N][Branch2][Ring1][=Branch2][C][...</td>
-      <td>InChI=1S/C25H32ClN5O2/c1-2-24-27-31(25(32)30(2...</td>
-      <td>VRBKIVRKKCLPHA-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL2403108</td>
+<td>CERITINIB</td>
+<td>4.0</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
+<td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
+<td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1741</td>
+<td>CLARITHROMYCIN</td>
+<td>4.0</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
+<td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
+<td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL2216870</td>
+<td>IDELALISIB</td>
+<td>4.0</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
+<td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
+<td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL115</td>
+<td>INDINAVIR</td>
+<td>4.0</td>
+<td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1ee0&gt;</td>
+<td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
+<td>[C][C][Branch1][C][C][Branch1][C][C][N][C][=Br...</td>
+<td>InChI=1S/C36H47N5O4/c1-36(2,3)39-35(45)31-24-4...</td>
+<td>CBVCZFGXHXORBI-PXQQMZJSSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL22587</td>
+<td>ITRACONAZOLE</td>
+<td>NaN</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1cb0&gt;</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5CO[C@](...</td>
+<td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
+<td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
+<td>VHVPQPYKVGDNFY-ZPGVKDDISA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>CHEMBL64391</td>
+<td>ITRACONAZOLE</td>
+<td>4.0</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1d90&gt;</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
+<td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
+<td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
+<td>VHVPQPYKVGDNFY-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>CHEMBL224725</td>
+<td>ITRACONZOLE</td>
+<td>NaN</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5COC(Cn6...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1f50&gt;</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OC[C@H]5COC(Cn6...</td>
+<td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
+<td>InChI=1S/C35H38F2N8O4/c1-3-25(2)45-34(46)44(24...</td>
+<td>HUADITLKOCMHSB-RPOYNCMSSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>CHEMBL157101</td>
+<td>KETOCONAZOLE</td>
+<td>4.0</td>
+<td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2030&gt;</td>
+<td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
+<td>[C][C][=Branch1][C][=O][N][C][C][N][Branch2][R...</td>
+<td>InChI=1S/C26H28Cl2N4O4/c1-19(33)31-10-12-32(13...</td>
+<td>XMAYWYJOQHXEEK-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>CHEMBL45816</td>
+<td>MIBEFRADIL</td>
+<td>4.0</td>
+<td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1e70&gt;</td>
+<td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
+<td>[C][O][C][C][=Branch1][C][=O][O][C@][Branch2][...</td>
+<td>InChI=1S/C29H38FN3O3/c1-20(2)28-23-12-11-22(30...</td>
+<td>HBNPJJILLOYFJU-VMPREFPWSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>CHEMBL623</td>
+<td>NEFAZODONE</td>
+<td>4.0</td>
+<td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da20a0&gt;</td>
+<td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
+<td>[C][C][C][=N][N][Branch2][Ring1][=Branch2][C][...</td>
+<td>InChI=1S/C25H32ClN5O2/c1-2-24-27-31(25(32)30(2...</td>
+<td>VRBKIVRKKCLPHA-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -5438,147 +5604,148 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df_3a4_s_inh_p <span class="op">=</span> df_3a4_s_inh_p.drop(labels <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">6</span>])</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>df_3a4_s_inh_p.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL2403108</td>
-      <td>CERITINIB</td>
-      <td>4.0</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
-      <td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
-      <td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1741</td>
-      <td>CLARITHROMYCIN</td>
-      <td>4.0</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
-      <td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
-      <td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL2216870</td>
-      <td>IDELALISIB</td>
-      <td>4.0</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
-      <td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
-      <td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CHEMBL115</td>
-      <td>INDINAVIR</td>
-      <td>4.0</td>
-      <td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1ee0&gt;</td>
-      <td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
-      <td>[C][C][Branch1][C][C][Branch1][C][C][N][C][=Br...</td>
-      <td>InChI=1S/C36H47N5O4/c1-36(2,3)39-35(45)31-24-4...</td>
-      <td>CBVCZFGXHXORBI-PXQQMZJSSA-N</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CHEMBL64391</td>
-      <td>ITRACONAZOLE</td>
-      <td>4.0</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1d90&gt;</td>
-      <td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
-      <td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
-      <td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
-      <td>VHVPQPYKVGDNFY-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>CHEMBL157101</td>
-      <td>KETOCONAZOLE</td>
-      <td>4.0</td>
-      <td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2030&gt;</td>
-      <td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
-      <td>[C][C][=Branch1][C][=O][N][C][C][N][Branch2][R...</td>
-      <td>InChI=1S/C26H28Cl2N4O4/c1-19(33)31-10-12-32(13...</td>
-      <td>XMAYWYJOQHXEEK-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>CHEMBL45816</td>
-      <td>MIBEFRADIL</td>
-      <td>4.0</td>
-      <td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1e70&gt;</td>
-      <td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
-      <td>[C][O][C][C][=Branch1][C][=O][O][C@][Branch2][...</td>
-      <td>InChI=1S/C29H38FN3O3/c1-20(2)28-23-12-11-22(30...</td>
-      <td>HBNPJJILLOYFJU-VMPREFPWSA-N</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>CHEMBL623</td>
-      <td>NEFAZODONE</td>
-      <td>4.0</td>
-      <td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da20a0&gt;</td>
-      <td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
-      <td>[C][C][C][=N][N][Branch2][Ring1][=Branch2][C][...</td>
-      <td>InChI=1S/C25H32ClN5O2/c1-2-24-27-31(25(32)30(2...</td>
-      <td>VRBKIVRKKCLPHA-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>CHEMBL584</td>
-      <td>NELFINAVIR</td>
-      <td>4.0</td>
-      <td>Cc1c(O)cccc1C(=O)N[C@@H](CSc1ccccc1)[C@H](O)CN...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2180&gt;</td>
-      <td>Cc1c(O)cccc1C(=O)N[C@@H](CSc1ccccc1)[C@H](O)CN...</td>
-      <td>[C][C][=C][Branch1][C][O][C][=C][C][=C][Ring1]...</td>
-      <td>InChI=1S/C32H45N3O4S/c1-21-25(15-10-16-28(21)3...</td>
-      <td>QAGYKUNXZHXKMR-HKWSIXNMSA-N</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>CHEMBL3545110</td>
-      <td>RIBOCICLIB</td>
-      <td>4.0</td>
-      <td>CN(C)C(=O)c1cc2cnc(Nc3ccc(N4CCNCC4)cn3)nc2n1C1...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da22d0&gt;</td>
-      <td>CN(C)C(=O)c1cc2cnc(Nc3ccc(N4CCNCC4)cn3)nc2n1C1...</td>
-      <td>[C][N][Branch1][C][C][C][=Branch1][C][=O][C][=...</td>
-      <td>InChI=1S/C23H30N8O/c1-29(2)22(32)19-13-16-14-2...</td>
-      <td>RHXHGRAEPCAFML-UHFFFAOYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL2403108</td>
+<td>CERITINIB</td>
+<td>4.0</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
+<td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
+<td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1741</td>
+<td>CLARITHROMYCIN</td>
+<td>4.0</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
+<td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
+<td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL2216870</td>
+<td>IDELALISIB</td>
+<td>4.0</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
+<td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
+<td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CHEMBL115</td>
+<td>INDINAVIR</td>
+<td>4.0</td>
+<td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1ee0&gt;</td>
+<td>CC(C)(C)NC(=O)[C@@H]1CN(Cc2cccnc2)CCN1C[C@@H](...</td>
+<td>[C][C][Branch1][C][C][Branch1][C][C][N][C][=Br...</td>
+<td>InChI=1S/C36H47N5O4/c1-36(2,3)39-35(45)31-24-4...</td>
+<td>CBVCZFGXHXORBI-PXQQMZJSSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>CHEMBL64391</td>
+<td>ITRACONAZOLE</td>
+<td>4.0</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1d90&gt;</td>
+<td>CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn...</td>
+<td>[C][C][C][Branch1][C][C][N][N][=C][N][Branch2]...</td>
+<td>InChI=1S/C35H38Cl2N8O4/c1-3-25(2)45-34(46)44(2...</td>
+<td>VHVPQPYKVGDNFY-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>CHEMBL157101</td>
+<td>KETOCONAZOLE</td>
+<td>4.0</td>
+<td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2030&gt;</td>
+<td>CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)c...</td>
+<td>[C][C][=Branch1][C][=O][N][C][C][N][Branch2][R...</td>
+<td>InChI=1S/C26H28Cl2N4O4/c1-19(33)31-10-12-32(13...</td>
+<td>XMAYWYJOQHXEEK-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>CHEMBL45816</td>
+<td>MIBEFRADIL</td>
+<td>4.0</td>
+<td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1e70&gt;</td>
+<td>COCC(=O)O[C@]1(CCN(C)CCCc2nc3ccccc3[nH]2)CCc2c...</td>
+<td>[C][O][C][C][=Branch1][C][=O][O][C@][Branch2][...</td>
+<td>InChI=1S/C29H38FN3O3/c1-20(2)28-23-12-11-22(30...</td>
+<td>HBNPJJILLOYFJU-VMPREFPWSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>CHEMBL623</td>
+<td>NEFAZODONE</td>
+<td>4.0</td>
+<td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da20a0&gt;</td>
+<td>CCc1nn(CCCN2CCN(c3cccc(Cl)c3)CC2)c(=O)n1CCOc1c...</td>
+<td>[C][C][C][=N][N][Branch2][Ring1][=Branch2][C][...</td>
+<td>InChI=1S/C25H32ClN5O2/c1-2-24-27-31(25(32)30(2...</td>
+<td>VRBKIVRKKCLPHA-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>CHEMBL584</td>
+<td>NELFINAVIR</td>
+<td>4.0</td>
+<td>Cc1c(O)cccc1C(=O)N[C@@H](CSc1ccccc1)[C@H](O)CN...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2180&gt;</td>
+<td>Cc1c(O)cccc1C(=O)N[C@@H](CSc1ccccc1)[C@H](O)CN...</td>
+<td>[C][C][=C][Branch1][C][O][C][=C][C][=C][Ring1]...</td>
+<td>InChI=1S/C32H45N3O4S/c1-21-25(15-10-16-28(21)3...</td>
+<td>QAGYKUNXZHXKMR-HKWSIXNMSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>CHEMBL3545110</td>
+<td>RIBOCICLIB</td>
+<td>4.0</td>
+<td>CN(C)C(=O)c1cc2cnc(Nc3ccc(N4CCNCC4)cn3)nc2n1C1...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da22d0&gt;</td>
+<td>CN(C)C(=O)c1cc2cnc(Nc3ccc(N4CCNCC4)cn3)nc2n1C1...</td>
+<td>[C][N][Branch1][C][C][C][=Branch1][C][=O][C][=...</td>
+<td>InChI=1S/C23H30N8O/c1-29(2)22(32)19-13-16-14-2...</td>
+<td>RHXHGRAEPCAFML-UHFFFAOYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -5591,7 +5758,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    subImgSize<span class="op">=</span>(<span class="dv">400</span>, <span class="dv">300</span>), </span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    legends<span class="op">=</span><span class="bu">list</span>(df_3a4_s_inh_p[<span class="st">"pref_name"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-33-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-33-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="33">
@@ -5603,7 +5774,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    legends<span class="op">=</span><span class="bu">list</span>(df_3a4_m_inh_p[<span class="st">"pref_name"</span>])</span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-34-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-34-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -5643,7 +5818,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(s3a4_mcs.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_s3a4]</span>
 <span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-35-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-35-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>You can get the number of atoms and bonds and also SMARTS string for the MCS like this below.</p>
@@ -5671,7 +5850,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(s3a4_mcs_80.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_s3a4]</span>
 <span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-38-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-38-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="38">
@@ -5683,7 +5866,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>Draw.MolsToGridImage([s3a4_mcs1, s3a4_mcs2], legends<span class="op">=</span>[<span class="st">"MCS1"</span>, <span class="st">"MCS2 with threshold = 0.8"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-39-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-39-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here the MCS differs between different MCS thresholds - when the threshold is not changed, it shows a partial contour of a ring structure, whereas the lowered threshold shows more of an alkyl chain structure.</p>
@@ -5708,7 +5895,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(m3a4_mcs.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_m3a4]</span>
 <span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-40-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-40-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Aromatic (and macrolide) rings are highlighted in the MCS for this group.</p>
@@ -5727,63 +5918,64 @@ Q 320.0 52.2, 320.0 52.7
 <pre><code>(27, 9)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="40">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL2403108</td>
-      <td>CERITINIB</td>
-      <td>4.0</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
-      <td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
-      <td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
-      <td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
-      <td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL1741</td>
-      <td>CLARITHROMYCIN</td>
-      <td>4.0</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
-      <td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
-      <td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
-      <td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
-      <td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL2216870</td>
-      <td>IDELALISIB</td>
-      <td>4.0</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
-      <td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
-      <td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
-      <td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
-      <td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL2403108</td>
+<td>CERITINIB</td>
+<td>4.0</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da19a0&gt;</td>
+<td>Cc1cc(Nc2ncc(Cl)c(Nc3ccccc3S(=O)(=O)C(C)C)n2)c...</td>
+<td>[C][C][=C][C][Branch2][Ring2][=Branch1][N][C][...</td>
+<td>InChI=1S/C28H36ClN5O3S/c1-17(2)37-25-15-21(20-...</td>
+<td>VERWOWGGCGHDQE-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL1741</td>
+<td>CLARITHROMYCIN</td>
+<td>4.0</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1b60&gt;</td>
+<td>CC[C@H]1OC(=O)[C@H](C)[C@@H](O[C@H]2C[C@@](C)(...</td>
+<td>[C][C][C@H1][O][C][=Branch1][C][=O][C@H1][Bran...</td>
+<td>InChI=1S/C38H69NO13/c1-15-26-38(10,45)31(42)21...</td>
+<td>AGOYDEPGAOXOCK-KCBOHYOISA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL2216870</td>
+<td>IDELALISIB</td>
+<td>4.0</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da1a80&gt;</td>
+<td>CC[C@H](Nc1ncnc2[nH]cnc12)c1nc2cccc(F)c2c(=O)n...</td>
+<td>[C][C][C@H1][Branch1][#C][N][C][=N][C][=N][C][...</td>
+<td>InChI=1S/C22H18FN7O/c1-2-15(28-20-18-19(25-11-...</td>
+<td>IFSDAJWBUCMOAH-HNNXBMFYSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -5802,7 +5994,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(all_3a4_mcs.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_3a4_all]</span>
 <span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-42-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-42-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It appears the MCS for most of them involves (partial) rings (e.g.&nbsp;cycloalkane, aromatic and macrolide ones). This result is basically not very different from when we’ve looked at the the CYP3A4 inhibitors separately in their moderate and strong potencies. The next thing I want to try is to add in the ring bonds matching.</p>
@@ -5818,7 +6014,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(all_3a4_mcs_ring.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_3a4_all]</span>
 <span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-43-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-43-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The ring bond matching also shows a very similar result here as it only restricts the MCS matching to ring bonds only.</p>
@@ -5836,7 +6036,7 @@ Q 320.0 52.2, 320.0 52.7
 <p><strong>Ring systems</strong></p>
 <p>Here, I’m trying the AtomCompare &amp; BondCompare along with RingMatchesRingOnly and CompleteRingsOnly first.</p>
 <div class="cell" data-execution_count="43">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Customise MCS parameters</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Initiate a MCSParameter object</span></span>
@@ -5861,7 +6061,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="43">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-44-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-44-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Some MCS characteristics noted after trying this:</p>
@@ -5874,7 +6078,7 @@ Q 320.0 52.2, 320.0 52.7
 <p><strong>Non-ring systems</strong></p>
 <p>The class code below is also borrowed from the <a href="https://greglandrum.github.io/rdkit-blog/posts/2023-10-27-mcswhatsnew.html">RDKit blog post</a>, which explains why it’s done as a custom “class” code and not a “function” one.</p>
 <div class="cell" data-execution_count="44">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I've had to think harder about the what the class code are doing below, </span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># especially the differences between comparing bond orders and ring atoms... </span></span>
@@ -5944,7 +6148,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb53-66"><a href="#cb53-66" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="44">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-45-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-45-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>By using the suggested class code above, the MCS has indeed become larger, where a full ring is highlighted as the MCS.</p>
@@ -5964,87 +6172,88 @@ Q 320.0 52.2, 320.0 52.7
 <pre><code>(14, 9)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="45">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>chembl_id</th>
-      <th>pref_name</th>
-      <th>max_phase</th>
-      <th>canonical_smiles</th>
-      <th>rdkit_mol</th>
-      <th>standard_smiles</th>
-      <th>selfies</th>
-      <th>inchi</th>
-      <th>inchikey</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL894</td>
-      <td>BUPROPION</td>
-      <td>4.0</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
-      <td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
-      <td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
-      <td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
-      <td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CHEMBL41</td>
-      <td>FLUOXETINE</td>
-      <td>4.0</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
-      <td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
-      <td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
-      <td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
-      <td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>CHEMBL490</td>
-      <td>PAROXETINE</td>
-      <td>4.0</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
-      <td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
-      <td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
-      <td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
-      <td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>CHEMBL1294</td>
-      <td>QUINIDINE</td>
-      <td>4.0</td>
-      <td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2d50&gt;</td>
-      <td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
-      <td>[C][=C][C@H1][C][N][C][C][C@H1][Ring1][=Branch...</td>
-      <td>InChI=1S/C20H24N2O2/c1-3-13-12-22-9-7-14(13)10...</td>
-      <td>LOUPRKONTZGTKE-LHHVKLHASA-N</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>CHEMBL254328</td>
-      <td>ABIRATERONE</td>
-      <td>4.0</td>
-      <td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
-      <td>&lt;rdkit.Chem.rdchem.Mol object at 0x135dd0270&gt;</td>
-      <td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
-      <td>[C][C@][C][C][C@H1][Branch1][C][O][C][C][Ring1...</td>
-      <td>InChI=1S/C24H31NO/c1-23-11-9-18(26)14-17(23)5-...</td>
-      <td>GZOSMCIZMLWJML-VJLLXTKPSA-N</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">chembl_id</th>
+<th data-quarto-table-cell-role="th">pref_name</th>
+<th data-quarto-table-cell-role="th">max_phase</th>
+<th data-quarto-table-cell-role="th">canonical_smiles</th>
+<th data-quarto-table-cell-role="th">rdkit_mol</th>
+<th data-quarto-table-cell-role="th">standard_smiles</th>
+<th data-quarto-table-cell-role="th">selfies</th>
+<th data-quarto-table-cell-role="th">inchi</th>
+<th data-quarto-table-cell-role="th">inchikey</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL894</td>
+<td>BUPROPION</td>
+<td>4.0</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3530&gt;</td>
+<td>CC(NC(C)(C)C)C(=O)c1cccc(Cl)c1</td>
+<td>[C][C][Branch1][#Branch2][N][C][Branch1][C][C]...</td>
+<td>InChI=1S/C13H18ClNO/c1-9(15-13(2,3)4)12(16)10-...</td>
+<td>SNPPWIUOZRMYNY-UHFFFAOYSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>CHEMBL41</td>
+<td>FLUOXETINE</td>
+<td>4.0</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3290&gt;</td>
+<td>CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1</td>
+<td>[C][N][C][C][C][Branch2][Ring1][Ring2][O][C][=...</td>
+<td>InChI=1S/C17H18F3NO/c1-21-12-11-16(13-5-3-2-4-...</td>
+<td>RTHCYVBBDHJXIQ-UHFFFAOYSA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>CHEMBL490</td>
+<td>PAROXETINE</td>
+<td>4.0</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da3bc0&gt;</td>
+<td>Fc1ccc([C@@H]2CCNC[C@H]2COc2ccc3c(c2)OCO3)cc1</td>
+<td>[F][C][=C][C][=C][Branch2][Ring1][#Branch2][C@...</td>
+<td>InChI=1S/C19H20FNO3/c20-15-3-1-13(2-4-15)17-7-...</td>
+<td>AHOUBRCZNHFOSL-YOEHRIQHSA-N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>CHEMBL1294</td>
+<td>QUINIDINE</td>
+<td>4.0</td>
+<td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135da2d50&gt;</td>
+<td>C=C[C@H]1CN2CC[C@H]1C[C@@H]2[C@@H](O)c1ccnc2cc...</td>
+<td>[C][=C][C@H1][C][N][C][C][C@H1][Ring1][=Branch...</td>
+<td>InChI=1S/C20H24N2O2/c1-3-13-12-22-9-7-14(13)10...</td>
+<td>LOUPRKONTZGTKE-LHHVKLHASA-N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>CHEMBL254328</td>
+<td>ABIRATERONE</td>
+<td>4.0</td>
+<td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
+<td>&lt;rdkit.Chem.rdchem.Mol object at 0x135dd0270&gt;</td>
+<td>C[C@]12CC[C@H](O)CC1=CC[C@@H]1[C@@H]2CC[C@]2(C...</td>
+<td>[C][C@][C][C][C@H1][Branch1][C][O][C][C][Ring1...</td>
+<td>InChI=1S/C24H31NO/c1-23-11-9-18(26)14-17(23)5-...</td>
+<td>GZOSMCIZMLWJML-VJLLXTKPSA-N</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -6063,7 +6272,11 @@ Q 320.0 52.2, 320.0 52.7
 <span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    highlightAtomLists<span class="op">=</span>[m.GetSubstructMatch(all_2d6_mcs.queryMol) <span class="cf">for</span> m <span class="kw">in</span> mols_all_2d6]</span>
 <span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
-<p><img src="1_CYP450_drugs_files/figure-html/cell-47-output-1.svg" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="1_CYP450_drugs_files/figure-html/cell-47-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Again, only a phenyl ring is highlighted as the MCS so this is not informative at all.</p>
@@ -6091,291 +6304,494 @@ Q 320.0 52.2, 320.0 52.7
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Curran1995" class="csl-entry" role="doc-biblioentry">
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Curran1995" class="csl-entry" role="listitem">
 Curran, Mark E, Igor Splawski, Katherine W Timothy, G.Michael Vincen, Eric D Green, and Mark T Keating. 1995. <span>“A Molecular Basis for Cardiac Arrhythmia: HERG Mutations Cause Long QT Syndrome.”</span> <em>Cell</em> 80 (5): 795–803. <a href="https://doi.org/10.1016/0092-8674(95)90358-5">https://doi.org/10.1016/0092-8674(95)90358-5</a>.
 </div>
-<div id="ref-dalke2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-dalke2013" class="csl-entry" role="listitem">
 Dalke, Andrew, and Janna Hastings. 2013. <span>“FMCS: A Novel Algorithm for the Multiple MCS Problem.”</span> <em>Journal of Cheminformatics</em> 5 (S1). <a href="https://doi.org/10.1186/1758-2946-5-s1-o6">https://doi.org/10.1186/1758-2946-5-s1-o6</a>.
 </div>
-<div id="ref-Doveston2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Doveston2015" class="csl-entry" role="listitem">
 Doveston, Richard G., Paolo Tosatti, Mark Dow, Daniel J. Foley, Ho Yin Li, Amanda J. Campbell, David House, Ian Churcher, Stephen P. Marsden, and Adam Nelson. 2015. <span>“A Unified Lead-Oriented Synthesis of over Fifty Molecular Scaffolds.”</span> <em>Organic &amp; Biomolecular Chemistry</em> 13 (3): 859–65. <a href="https://doi.org/10.1039/c4ob02287d">https://doi.org/10.1039/c4ob02287d</a>.
 </div>
-<div id="ref-Flockhart2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Flockhart2021" class="csl-entry" role="listitem">
 Flockhart, DA., D. Thacker, C. McDonald, and Z. Desta. 2021. <span>“The Flockhart Cytochrome P450 Drug-Drug Interaction Table.”</span> <a href="https://drug-interactions.medicine.iu.edu/" class="uri">https://drug-interactions.medicine.iu.edu/</a>.
 </div>
-<div id="ref-Fraser2024" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fraser2024" class="csl-entry" role="listitem">
 Fraser, James S., and Mark A. Murcko. 2024. <span>“Structure Is Beauty, but Not Always Truth.”</span> <em>Cell</em> 187 (3): 517–20. <a href="https://doi.org/10.1016/j.cell.2024.01.003">https://doi.org/10.1016/j.cell.2024.01.003</a>.
 </div>
-<div id="ref-chembl2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-chembl2017" class="csl-entry" role="listitem">
 Gaulton, Anna, Anne Hersey, Michał Nowotka, A. Patrícia Bento, Jon Chambers, David Mendez, Prudence Mutowo, et al. 2016. <span>“<span class="nocase">The ChEMBL database in 2017</span>.”</span> <em>Nucleic Acids Research</em> 45 (D1): D945–54. <a href="https://doi.org/10.1093/nar/gkw1074">https://doi.org/10.1093/nar/gkw1074</a>.
 </div>
-<div id="ref-Guengerich2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Guengerich2021" class="csl-entry" role="listitem">
 Guengerich, F. Peter. 2020. <span>“A History of the Roles of Cytochrome P450 Enzymes in the Toxicity of Drugs.”</span> <em>Toxicological Research</em> 37 (1): 1–23. <a href="https://doi.org/10.1007/s43188-020-00056-z">https://doi.org/10.1007/s43188-020-00056-z</a>.
 </div>
-<div id="ref-Jadhav2010" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Jadhav2010" class="csl-entry" role="listitem">
 Jadhav, Ajit, Rafaela S. Ferreira, Carleen Klumpp, Bryan T. Mott, Christopher P. Austin, James Inglese, Craig J. Thomas, David J. Maloney, Brian K. Shoichet, and Anton Simeonov. 2010. <span>“Quantitative Analyses of Aggregation, Autofluorescence, and Reactivity Artifacts in a Screen for Inhibitors of a Thiol Protease.”</span> <em>Journal of Medicinal Chemistry</em> 53 (1): 37–51. <a href="https://doi.org/10.1021/jm901070c">https://doi.org/10.1021/jm901070c</a>.
 </div>
-<div id="ref-Taylor2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Taylor2014" class="csl-entry" role="listitem">
 Taylor, Richard D., Malcolm MacCoss, and Alastair D. G. Lawson. 2014. <span>“Rings in Drugs.”</span> <em>Journal of Medicinal Chemistry</em> 57 (14): 5845–59. <a href="https://doi.org/10.1021/jm4017625">https://doi.org/10.1021/jm4017625</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jhylin\.github\.io\/Data_in_life_blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jhylin/Data_in_life_blog";
+    script.dataset.repoId = "R_kgDOHw7lGQ";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHw7lGc4CQzQ_";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
   }
-});
-</script>
-<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+  loadGiscus();
 </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
+
 
 
 

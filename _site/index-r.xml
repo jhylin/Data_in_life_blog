@@ -20,6 +20,8 @@
 
 
 
+
+
 <section id="back-story" class="level5">
 <h5 class="anchored" data-anchor-id="back-story"><strong>Back story</strong></h5>
 <p>It has been a long while since I’ve used R in my projects. Last year during the time when I bravely embraced the role of rotating curator for <span class="citation" data-cites="WeAreRLadies">@WeAreRLadies</span> on Twitter around end of October, I did mention that I wanted to learn Shiny. I haven’t forgotten about this actually. So as promised, here it is, my first Shiny app in R, which is really a very simple interactive web app about small molecules from ChEMBL database. The URL to reach this app, <a href="https://jhylin.shinyapps.io/ShinyAppChembl/">ShinyAppChembl</a>, is at: https://jhylin.shinyapps.io/ShinyAppChembl/. It shows a selected set of physicochemical properties for the curated small molecules in different max phases in boxplot formats. <strong><em>Note: it may take a few minutes to load the plot when first opening the app.</em></strong></p>
@@ -37,7 +39,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_1.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">First draft app using S3 method in R code to plot boxplots - screenshot taken by author</figcaption><p></p>
+<figcaption>First draft app using S3 method in R code to plot boxplots - screenshot taken by author</figcaption>
 </figure>
 </div>
 <p><br></p>
@@ -45,7 +47,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Draft_app_error_2.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption><p></p>
+<figcaption>Second draft app using ggplot2 boxplot format - screenshot taken by author</figcaption>
 </figure>
 </div>
 <p>I ended up working through this issue of not being able to display the boxplots properly over at least two days, where I tried to figure out how to change the code so that the boxplots would appear as the output in the app. I actually wrote a plot function code (as shown below) before working on the app.R file, in order to trial plotting the boxplots, making sure that the code worked before using it in the app.R file.</p>
@@ -249,7 +251,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/12_Shiny_app_chembl/Final_app.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot taken by author</figcaption><p></p>
+<figcaption>Screenshot taken by author</figcaption>
 </figure>
 </div>
 <p><br></p>
@@ -273,7 +275,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 
 </section>
 
- ]]></description>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
   <category>R</category>
   <category>Shiny</category>
   <category>ChEMBL database</category>
@@ -286,6 +288,8 @@ font-style: inherit;">```</span></span></code></pre></div>
   <dc:creator>Jennifer HY Lin</dc:creator>
   <link>https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update.html</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -365,9 +369,6 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...8`
 • `` -&gt; `...9`</code></pre>
 </div>
-</div>
-<div class="cell">
-
 </div>
 <p>Here’s a quick overview on the hospitalisation rates across all the studies from this paper.</p>
 <div class="cell">
@@ -467,7 +468,7 @@ font-style: inherit;">10</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(c)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Author (country)</th>
@@ -561,7 +562,7 @@ font-style: inherit;">10</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(e)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 11%">
 <col style="width: 15%">
@@ -709,7 +710,7 @@ font-style: inherit;">kable</span>(e)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Zoom-in shot.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot of the extra space(s) in dataframe</figcaption><p></p>
+<figcaption>Screenshot of the extra space(s) in dataframe</figcaption>
 </figure>
 </div>
 <div class="cell">
@@ -842,7 +843,7 @@ font-style: inherit;">coord_flip</span>()</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">COVID-19 hospitalisation rate across different countries</figcaption><p></p>
+<figcaption>COVID-19 hospitalisation rate across different countries</figcaption>
 </figure>
 </div>
 </div>
@@ -924,7 +925,7 @@ font-style: inherit;">10</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(d)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 8%">
 <col style="width: 91%">
@@ -1148,7 +1149,7 @@ font-style: inherit;">mean</span>(lat))</span>
 background-color: null;
 font-style: inherit;">kable</span>(mapdata_final)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">region</th>
@@ -1238,7 +1239,7 @@ font-style: inherit;">"region"</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(df1_mapdata)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 1%">
 <col style="width: 1%">
@@ -1650,7 +1651,11 @@ font-style: inherit;">8</span>,<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Dark2"</span>)))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/06_Long_COVID_update/Long_COVID_update_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1727,7 +1732,7 @@ loaded via a namespace (and not attached):
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>It took probably at least half an hour to figure this out… eventually I thought to look at the column itself long enough to see if I’d missed anything… then voila!↩︎</p></li>
@@ -1748,6 +1753,8 @@ loaded via a namespace (and not attached):
   <dc:creator>Jennifer HY Lin</dc:creator>
   <link>https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases.html</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -2009,7 +2016,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">coord_flip</span>() </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases_files/figure-html/lollypop chart-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases_files/figure-html/lollypop chart-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Two disorder types stood out the most, with “Disease” type appeared 57,920 times and “Malformation syndrome” at 37,634 times. To understand further what each of these two disorder types were, a direct reference<sup>3</sup> was used. According to the source of the dataset:</p>
@@ -2320,7 +2331,7 @@ font-style: inherit;">`</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(df_disease)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 9%">
 <col style="width: 10%">
@@ -2588,7 +2599,7 @@ font-style: inherit;">`</span>)</span>
 background-color: null;
 font-style: inherit;">kable</span>(df_mal_syn)</span></code></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 14%">
@@ -2807,7 +2818,11 @@ font-style: inherit;">geom_bar</span>()</span></code></pre></div>
 <pre><code>Warning: Removed 49 rows containing non-finite values (stat_count).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/05_Phenotypes_associated_with_rare_diseases/Phenotypes_rare_diseases_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It was also worth noting that there were 49 rows of non-finite values excluded from the bar graph above. To look into this, a count on the year column of the dataframe df_val_date_d was done, which confirmed that these were the “NA” or missing values in the validation date column.</p>
@@ -2877,7 +2892,7 @@ font-style: inherit;">count</span>(year)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Used only for initial data cleaning stage - please see this <a href="https://github.com/jhylin/Portfolio-projects/blob/main/Phenotypes%20associated%20with%20rare%20diseases%20-%20initial%20data%20cleaning.ipynb">GitHub link</a> for details. R was used for the rest of the analysis↩︎</p></li>
@@ -2898,6 +2913,8 @@ font-style: inherit;">count</span>(year)</span></code></pre></div>
   <dc:creator>Jennifer HY Lin</dc:creator>
   <link>https://jhylin.github.io/Data_in_life_blog/posts/01_Drugs_in_rare_diseases/Rare_diseases_drugs.html</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -2946,7 +2963,7 @@ font-style: inherit;">count</span>(year)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>This work is under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 International License</a> for anyone interested in exploring the topic further.↩︎</p></li>

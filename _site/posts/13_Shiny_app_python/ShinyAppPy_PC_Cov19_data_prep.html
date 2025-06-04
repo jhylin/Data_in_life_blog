@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
 <meta name="dcterms.date" content="2023-05-08">
 
-<title>Home - Shinylive app in Python</title>
+<title>Shinylive app in Python – Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,9 +19,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,43 +50,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,17 +67,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -114,7 +89,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -123,8 +104,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5CHVP3K63C"></script>
@@ -160,69 +143,231 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Home</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
- <span class="menu-text">About me</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../past_projects.html">
- <span class="menu-text">Past projects</span></a>
+    <a class="nav-link" href="../../past_projects.html"> 
+<span class="menu-text">Past projects</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/jhylin"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/jhylin"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social">
- <span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
+    <a class="nav-link" href="https://bsky.app/profile/jhylin.bsky.social"> 
+<span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://fosstodon.org/@jhylin"><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://fosstodon.org/@jhylin"> <i class="bi bi-mastodon" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/jenhylin"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/jenhylin"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="https://jhylin.github.io/CV_resume_quarto/"> 
+<span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -295,10 +440,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#export-prepared-dataset" id="toc-export-prepared-dataset" class="nav-link" data-scroll-target="#export-prepared-dataset"><strong>Export prepared dataset</strong></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
 
 
 
@@ -327,7 +474,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> pl.read_csv(<span class="st">"pubchem.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pc.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -358,7 +504,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -1201,7 +1347,6 @@ str
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pc.null_count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1232,7 +1377,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (1, 38)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (1, 38)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -1626,7 +1771,6 @@ u32
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>pc_cov.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1657,7 +1801,7 @@ u32
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -2513,7 +2657,6 @@ str
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pc_cov <span class="op">=</span> pc_cov.with_column((pl.col(<span class="st">"Partition coefficients"</span>)).cast(pl.Float64, strict <span class="op">=</span> <span class="va">False</span>))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pc_cov.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2544,7 +2687,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 38)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -3396,7 +3539,6 @@ str
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>pc_cov.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -3427,7 +3569,7 @@ str
         line-height: 95%;
     }
 </style>
-<small>shape: (5, 20)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (5, 20)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -3879,7 +4021,6 @@ i64
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall descriptive statistics of kept columns</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pc_cov.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -3910,7 +4051,7 @@ i64
         line-height: 95%;
     }
 </style>
-<small>shape: (7, 21)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (7, 21)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -4536,7 +4677,6 @@ null
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># with a new column name, "Part_coef_group" </span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (scroll to the very right to see the added column)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
-
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -4567,7 +4707,7 @@ null
         line-height: 95%;
     }
 </style>
-<small>shape: (10, 21)</small><table class="dataframe table table-sm table-striped">
+<small>shape: (10, 21)</small><table class="dataframe table table-sm table-striped small">
 
 <thead>
 <tr>
@@ -5403,7 +5543,6 @@ str
 <span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>                            <div id="158afe7e-913a-4e64-af6e-1482fe05c388" class="plotly-graph-div" style="height:400px; width:800px;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("158afe7e-913a-4e64-af6e-1482fe05c388")) {                    Plotly.newPlot(                        "158afe7e-913a-4e64-af6e-1482fe05c388",                        [{"hovertemplate":"<b>%{hovertext}</b><br><br>color=Larger than 6<br>x=%{x}<br>y=%{y}<extra></extra>","hovertext":["Calcitriol","Ubiquinol","Vitamin E","Ciclosporin","Ergocalciferol","Docosahexaenoic Acid","Calcifediol","Cepharanthine","Cholecalciferol","Coenzyme Q10","Tacrolimus monohydrate","Alisporivir","Voclosporin","Manganese, dichloro((4aS,13aS,17aS,21aS)-1,2,3,4,4a,5,6,12,13,13a,14,15,16,17,17a,18,19,20,21,21a-eicosahydro-7,11-nitrilo-7H-dibenzo(b,H)-5,13,18,21-tetraazacycloheptadecine-kappaN5,kappaN13,kappaN18,kappaN21,kappaN22)-, (pb-7-11-2344'3')-","Tetrandrine","Sirolimus","Prasugrel hydrochloride","Plitidepsin","Rubramin","Methylcobalamin","Calderol","Dactolisib","Chlorpromazine","Itraconazolum [Latin]","Loratadine","Chloroquine sulfate","Bardoxolone methyl","Heartgard-30","Ivermectine 100 microg/mL in Acetonitrile","MaxEPA","Methylene Blue","Bromocresol green","Hydroxychloroquine sulfate","Ritonavir","Sildenafil Citrate","Clofazimine","Clonitralid","Pimozide","Deferoxamine hydrochloride","Chloroquine monophosphate","Retinol","Acrivastine and pseudoephedrine hydrochloride","4-(carboxymethyl)-2-((R)-1-(2-(2,5-dichlorobenzamido)acetamido)-3-methylbutyl)-6-oxo-1,3,2-dioxaborinane-4-carboxylic acid","Raloxifene","Estradiol cypionate","Cetylpyridinium Chloride","Telmisartan","Bacitracin zinc","Cob(II)alamin","Elsulfavirine","Adenosylcobalamin","Lactoferrin","Bemcentinib","Metoprolol succinate","Ceftriaxone sodium","Ventolin","Ceftriaxone disodium salt hemiheptahydrate","Siponimod fumarate","(s)-1-(3-Chloro-4-fluorophenyl)ethanamine hydrochloride","Prezcobix","[(2R,3R,4R,5R)-5-(4-amino-5-deuteriopyrrolo[2,1-f][1,2,4]triazin-7-yl)-5-cyano-3,4-bis(2-methylpropanoyloxy)oxolan-2-yl]methyl 2-methylpropanoate;hydrobromide","Deferoxamine mesylate","Tramadol Hydrochloride","Argatroban monohydrate","Sulfamethoxazole and trimethoprim","Zinc Gluconate","Zinc;(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoate","(2S,5R,6R)-6-[[(2S)-2-[(4-ethyl-2,3-dioxo-piperazine-1-carbonyl)amino]-2-phenyl-propanoyl]amino]-3,3-dimethyl-7-oxo-4-thia-1-azabicyclo[3.2.0]heptane-2-carboxylic acid; (2S,3S,5R)-3-methyl-4,4,7-trioxo-3-(triazol-1-ylmethyl)-4$l^{6}-thia-1-azabicyclo[3.2.0]heptane-2-carboxylic acid","Maraviroc","Toremifene","Enalapril maleate","Naltrexone hydrochloride","Chlorhexidine Gluconate","Piperacillin/tazobactam","Sivelestat sodium","CID 23679441","Masitinib mesylate","Natrii chloridi solutio composita","CID 87060529","Sinapultide acetate","Bemnifosbuvir hemisulfate","Reamberin","Selenious acid","Ebselen","Pyridostigmine bromide","Cyproheptadine hydrochloride","Carmoisine","Albuterol Sulfate","2,2-Dimethyl-4-(chloromethyl)-1,3-dioxa-2-silacyclopentane","Oseltamivir phosphate","Lactose monohydrate","Tafenoquine","Atazanavir","Cannabidiol","Heme arginate","Zincacetate","Montelukast","Crocetin","Artemether and lumefantrine","Luminol sodium salt","Zinc Picolinate","Pregna-1,4-diene-3,20-dione,21-(3-carboxy-1-oxopropoxy)-11,17-dihydroxy-6-methyl-, monosodiumsalt, (6a,11b)-","Enisamium iodide","Cenicriviroc","Quinine sulfate dihydrate","Hydrocortisone 21-hemisuccinate sodium salt","Liothyronine sodium","sodium;8-amino-4-oxo-3H-phthalazin-1-olate","Edoxaban tosylate monohydrate","Daclatasvir","Larazotide acetate","Kaolin","H-Ile-OH.H-Thr-OH.H-Leu-OH.H-Val-OH.H-Met-OH.H-Phe-OH.H-Trp-OH.H-Lys-OH","Isuzinaxib hydrochloride","CID 66726979","7-[[2-Ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid;acetate","Ceftriaxone disodium hemiheptahydrate","Descovy","CID 131673872","Sodium;5-amino-2,3-dihydrophthalazine-1,4-dione;hydride","Unii-7kyp9tkt70","4-acetamidobenzoic acid;9-[(2R,3R,4R,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1H-purin-6-one;1-(dimethylamino)propan-2-ol","Stannous protoporphyrin","Candesartan cilexetil","4,4'-Diphenylmethane diisocyanate","Silver","Phorbol 12-myristate 13-acetate","Propranolol Hydrochloride","Lopinavir","Imatinib Mesylate","Povidone iodine","(-)-(S)-9-Fluoro-2,3-dihydro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-7H-pyrido(1,2,3-de)-1,4-benzoxazine-6-carboxylic acid, hemihydrate","Glatiramer acetate","Nafamostat mesylate","Bromhexine Hydrochloride","Tenofovir Disoproxil Fumarate","Eritoran","Icatibant acetate","Dalcetrapib","Icosapent ethyl","Azithromycin Monohydrate","Mitoquinone","Apilimod mesylate","Emtricitabine and tenofovir disoproxil fumarate","Sodium pyruvate","Brequinar sodium","Montelukast Sodium","Sivelestat sodium anhydrous","Methylprednisolone sodium succinate","Bromelains","Fostamatinib disodium","Phosphate-Buffered Saline","CID 45114162","Emvododstat","8-chloro-N-[4-(trifluoromethoxy)phenyl]quinolin-2-amine","Riamilovir sodium dihydrate","Doxycycline hyclate","Budesonide and formoterol fumarate dihydrate","Ledipasvir","Telacebec","Quinidine monohydrate","Dexamethasone phosphate disodium","Montmorillonite","Nadide sodium","N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]undecanamide","Ezurpimtrostat","Dexamethasone 21-phosphate disodium salt","H-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-OH","CID 131844884","Inosine pranobex","Eltrombopag","Rintatolimod","Normosang","Artecom","Imunovir; Delimmun; Groprinosin;Inosine pranobex","1-(4-fluorobenzene-6-id-1-yl)-N-phenylmethanimine;iridium(3+);1,2,3,4,5-pentamethylcyclopenta-1,3-diene;chloride","CID 154701548","alpha-D-Glucopyranoside, methyl O-2-deoxy-6-O-sulfo-2-(sulfoamino)-alpha-D-glucopyranosyl-(1-->4)-O-beta-D-glucopyranuronosyl-(1-->4)-O-2-deoxy-3,6-di-O-sulfo-2-(sulfoamino)-alpha-D-glucopyranosyl-(1-->4)-O-2-O-sulfo-alpha-L-idopyranuronosyl-(1-->4)-2-deoxy-2-(sulfoamino)-, 6-(hydrogen sulfate), sodium salt (1:10)","propan-2-yl (2S)-2-[[[(2R,3R,4R,5R)-5-[2-amino-6-(methylamino)purin-9-yl]-4-fluoro-3-hydroxy-4-methyloxolan-2-yl]methoxy-phenoxyphosphoryl]amino]propanoate;sulfuric acid","Amiodarone","Fenofibrate","Palmitoylethanolamide","Zinc Citrate","Zinc Acetate","Zinc, bis(D-gluconato-kappaO1,kappaO2)-, (T-4)-","Zinc Sulfate","Sodium Thiosulfate","Cromolyn sodium","Calcium dobesilate","Almitrine","Brequinar","Amantadine hydrochloride","Chloroquine Phosphate","Bis (2-Carboxyethylgermanium)sesquioxide","Moxifloxacin Hydrochloride","Tetrasul sulfoxide","Azithromycin Dihydrate","Best","Isotretinoin","Camostat mesylate","Ciclesonide","Dutasteride","Almitrine mesylate","butyl (3-(4-((1H-imidazol-1-yl)methyl)phenyl)-5-isobutylthiophen-2-yl)sulfonylcarbamate","Anhydrous Ceftriaxone Sodium","Tradipitant","CID 9939931","1-Palmitoyl-2-linoleoyl-3-acetyl-rac-glycerol","Zinforo","Transcrocetinate sodium","5-Cholesten-3beta-25-diol-3-sulfate","disodium;(6R,7R)-7-[[(2Z)-2-(2-amino-1,3-thiazol-4-yl)-2-methoxyiminoacetyl]amino]-3-[(2-methyl-6-oxido-5-oxo-1,2,4-triazin-3-yl)sulfanylmethyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylate;hydrate","Losartan potassium","Lopinavir and ritonavir","N-[5-[[2-(2,6-dimethylphenoxy)acetyl]amino]-4-hydroxy-1,6-diphenylhexan-2-yl]-3-methyl-2-(2-oxo-1,3-diazinan-1-yl)butanamide;1,3-thiazol-5-ylmethyl N-[(2S,3S,5S)-3-hydroxy-5-[[(2S)-3-methyl-2-[[methyl-[(2-propan-2-yl-1,3-thiazol-4-yl)methyl]carbamoyl]amino]butanoyl]amino]-1,6-diphenylhexan-2-yl]carbamate","CID 16219160","Sodium valproate","Amoxicillin sodium","Potassium canrenoate","Hydrocortisone sodium succinate","Piperacillin-tazobactam","Antroquinonol","Ruxolitinib phosphate","Metformin glycinate","1-Palmityl-2-(4-carboxybutyl)-SN-glycero-3-phosphocholine","Solu-Medrol","Ixazomib citrate","Vidofludimus calcium anhydrous","1,1'-hexamethylene bis[5-(p-chlorophenyl) biguanide] di-D-gluconate","Rocefin","Galidesivir hydrochloride","Entresto","Harvoni","Legalon SIL","Maltofer","CID 87071853","disodium;[2-[(8S,9R,10S,11S,13S,14S,16R,17R)-9-fluoro-11,17-dihydroxy-10,13,16-trimethyl-3-oxo-6,7,8,11,12,14,15,16-octahydrocyclopenta[a]phenanthren-17-yl]-2-oxoethyl] phosphate;hydrate","Heparin sodium","Disodium;2-[[2-[[4-(2,2-dimethylpropanoyloxy)phenyl]sulfonylamino]benzoyl]amino]acetate","Estetrol monohydrate","4-acetamidobenzoic acid;9-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1H-purin-6-one;(2R)-1-(dimethylamino)propan-2-ol","[(1R,3R)-4-[(15Z,17E)-16-formyl-18-(4-hydroxy-2,2,6,6-tetramethylcyclohexyl)-3,7,12-trimethyl-14-oxooctadeca-2,4,6,8,10,12,15,17-octaenylidene]-3-hydroxy-3,5,5-trimethylcyclohexyl] acetate","Abivertinib maleate","azane;(2R,3S,4S,5R,6R)-2-(hydroxymethyl)-6-[(2R,3S,4R,5R,6S)-4,5,6-trihydroxy-2-(hydroxymethyl)oxan-3-yl]oxyoxane-3,4,5-triol","hexasodium;4-[[(2S,4R)-5-ethoxy-4-methyl-5-oxo-1-(4-phenylphenyl)pentan-2-yl]amino]-4-oxobutanoate;hydride;(2S)-3-methyl-2-[pentanoyl-[[4-[2-(1,2,3-triaza-4-azanidacyclopenta-2,5-dien-5-yl)phenyl]phenyl]methyl]amino]butanoate;pentahydrate"],"legendgroup":"Larger than 6","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"Larger than 6","orientation":"v","showlegend":true,"x":[5.1,20.2,10.7,7.5,7.4,6.2,6.2,6.5,7.9,19.4,null,7.9,7.9,null,6.4,6.0,null,5.7,null,null,null,5.2,5.2,5.7,5.2,null,6.7,null,null,null,null,6.5,null,6.0,null,7.1,null,6.3,null,null,5.7,null,null,6.1,7.1,null,6.9,null,null,5.2,null,6.8,5.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,5.1,7.2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,5.4,5.6,6.5,null,null,7.7,5.4,null,null,null,null,null,7.5,null,null,null,null,null,5.1,null,null,null,null,null,null,null,null,null,null,null,null,null,7.0,5.4,null,6.5,null,5.9,null,null,null,null,null,null,null,15.4,null,7.1,6.3,null,9.4,null,null,null,null,null,null,null,null,null,null,null,6.3,5.9,null,null,null,7.4,7.9,null,null,null,null,7.9,5.9,null,11.9,null,null,5.4,null,null,null,null,null,null,null,null,7.6,5.2,6.2,null,null,null,null,null,null,null,5.6,5.6,null,null,null,null,5.2,null,null,6.3,null,5.3,5.4,null,5.3,null,6.2,null,14.1,null,null,6.4,null,null,null,null,null,null,null,null,null,null,5.8,null,null,6.7,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,9.3,null,null,null],"xaxis":"x","y":[416.6,865.4,430.7,1202.6,396.6,328.5,400.6,606.7,384.6,863.3,822.0,1216.6,1214.6,483.4,622.7,914.2,409.9,1110.3,1355.4,1345.4,418.7,469.5,318.9,705.6,382.9,418.0,505.7,1736.2,1736.2,645.0,319.9,698.0,434.0,720.9,666.7,473.4,388.2,461.5,597.1,417.9,286.5,550.1,517.1,473.6,396.6,340.0,514.6,1488.1,1329.3,629.3,1579.6,3125.8,506.6,652.8,598.6,337.39,1323.2,1149.3,210.07,1323.7,583.4,656.8,299.83,526.7,543.6,455.7,455.7,831.9,513.7,406.0,492.5,377.9,897.8,817.9,528.5,576.6,594.8,309.11,577.6,2529.5,1261.1,357.27,128.99,274.19,261.12,323.9,502.4,576.7,166.68,410.4,360.31,463.5,704.9,314.5,792.7,185.5,586.2,328.4,827.3,200.15,309.6,497.5,354.19,696.9,782.9,485.5,672.95,199.14,738.3,738.9,785.9,258.16,1163.4,315.8,457.5,744.7,600.6,723.7,202.17,201.16,879.6,1115.2,679.4,610.7,250.25,107.868,616.8,295.8,628.8,589.7,364.95,740.7,623.7,539.6,412.59,635.5,1313.7,1364.6,389.6,330.5,767.0,583.7,610.7,882.8,110.04,397.3,608.2,456.4,496.5,248.25,732.5,411.04,520.6,467.3,338.71,286.2,545.0,774.9,889.0,557.0,342.4,518.4,360.31,685.4,647.9,423.0,548.5,2469.4,1738.2,1115.2,442.5,995.6,792.7,1294.4,1115.2,561.1,287.21,1531.3,679.6,645.3,360.8,299.5,574.3,183.5,457.7,161.4,158.11,512.299,418.4,477.6,375.4,187.71,515.9,339.4,437.9,340.0,785.0,572.3,300.4,494.5,540.7,528.5,669.8,475.6,577.6,587.9,701.6,635.0,744.7,372.4,482.7,616.6,461.0,1349.7,1349.7,397.6,166.19,387.4,396.6,484.5,839.8,390.6,404.4,204.23,581.8,497.5,517.1,748.8,735.7,652.6,301.73,1916.0,1418.4,1453.1,449.16,1003.2,534.4,1157.9,479.4,322.4,1115.2,672.9,639.6,359.33,1922.0],"yaxis":"y","type":"scatter"},{"hovertemplate":"<b>%{hovertext}</b><br><br>color=Between -11 and 5<br>x=%{x}<br>y=%{y}<extra></extra>","hovertext":["Glutamine","Aspirin","1-Methylnicotinamide","Losartan","Nicotinamide","Adenosine","Inosine","Nicotinamide riboside","Dimethyl Fumarate","Inosinic acid","Acetyl-L-carnitine","Camostat","Estradiol","Aspartic Acid","Ribavirin","Angiotensin (1-7)","alpha-Maltose","Ambrisentan","Tacrolimus","Budesonide","Pacritinib","Topotecan","(1R,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2R)-Butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Oxytocin","(1R,4S,6R,10E,14E,16E,21R)-6'-butan-2-yl-21,24-dihydroxy-12-[(2R,4S,6S)-5-[(2S,4S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Ivermectin B1a","Dipyridamole","Iloprost","Ramipril","Uproleselan","MET-enkephalin","(18Z)-1,14-dihydroxy-12-[(E)-1-(4-hydroxy-3-methoxycyclohexyl)prop-1-en-2-yl]-23,25-dimethoxy-13,19,21,27-tetramethyl-17-prop-2-enyl-11,28-dioxa-4-azatricyclo[22.3.1.04,9]octacos-18-ene-2,3,10,16-tetrone","(1R,4S,5'S,6R,6'R,8R,10E,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(10Z,14Z,16Z)-6'-butan-2-yl-21,24-dihydroxy-12-[5-(5-hydroxy-4-methoxy-6-methyloxan-2-yl)oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1R,4S,5'S,6R,6'R,8R,12S,13S,20R,21R,24S)-6'-[(2R)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1R,4S,5'S,6R,6'S,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Zidovudine","Resveratrol","Curcumin","6'-Butan-2-yl-21,24-dihydroxy-12-[5-(5-hydroxy-4-methoxy-6-methyloxan-2-yl)oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Regorafenib","Pharmakon1600-01300027","(1R,4S,5'S,6R,6'R,8R,10Z,12S,13S,14Z,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1R,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4R,5S,6S)-5-[(2S,4R,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Spironolactone","Prednisone","Quercetin","Enzalutamide","Selinexor","Nifedipine","Prazosin","Alizarin","Methylprednisolone","(1R,4S,5'S,6R,6'R,8R,12S,13S,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Duvelisib","(4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Zotatifin","(1R,4S,5'S,6R,6'R,8R,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1S,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Indomethacin","Fisetin","Palbociclib","Ruxolitinib","Nintedanib","Melatonin","Carbamazepine","Diphenhydramine","Thalidomide","Hydrocortisone","Progesterone","o-Aminoazotoluene","Nitazoxanide","Melphalan","Dasatinib","Masitinib","Remdesivir","Ivermectin B1a, epi-","Hydroxocobalamin","Zanubrutinib","Gamma-Aminobutyric Acid","Caffeine","Dapsone","Leflunomide","Imatinib","Dexamethasone","Colchicine","Plerixafor","Sorafenib","Hymecromone","Tofacitinib","Fostamatinib","3-(4-chlorophenyl)-N-(pyridin-4-ylmethyl)adamantane-1-carboxamide","Subasumstat","Compstatin 40","Celecoxib","Eucalyptol","Disulfiram","Ibuprofen","Niclosamide","Simvastatin","Methotrexate","Angiotensin II","Lenalidomide","Aspartyl-alanyl-diketopiperazine","Silmitasertib","Ibrutinib","Teriflunomide","Tazemetostat","Acalabrutinib","Ifenprodil","Ursodeoxycholic acid","Merimepodib","Fludrocortisone acetate","Triazavirin","Rivaroxaban","Apixaban","Vadadustat","Berberine","Cyproheptadine","Doxazosin","Fluconazole","Irbesartan","Sulfamethoxazole","D-Glucose","N-Vinyl-2-pyrrolidone","Trimetazidine","Estetrol","Nebivolol","(+)-Mefloquine","Favipiravir","(3-methyl-2,4-dioxo-3,4-dihydroquinazolin-1(2H)-yl)acetic acid","3-[5-(azetidine-1-carbonyl)pyrazin-2-yl]oxy-5-[(2S)-1-methoxypropan-2-yl]oxy-N-(5-methylpyrazin-2-yl)benzamide","Degarelix","(3S)-3-amino-6-(diaminomethylideneazaniumyl)hex-1-en-2-olate","[(1S,4R,6S,7Z,18R)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","(2S,3R)-3-[(2-aminopyridin-4-yl)methyl]-1-[[(1R)-1-cyclooctylethyl]carbamoyl]-4-oxoazetidine-2-carboxylic acid","Pomotrelvir","Spermidine","Salbutamol","Bromhexine","Fluoxetine","Ketotifen","Mefloquine","Midazolam","Nitroglycerin","Quetiapine","Liothyronine","Psilocybine","Luminol","Acetylcysteine","Etoposide","Dexbudesonide","Clopidogrel","Valsartan","Tirofiban","Voriconazole","N-Phenylethylenediamine","Nicotine","2,4-Dioxaspiro[5.5]undec-8-ene, 3-(2-furanyl)-","Sivelestat","IB-Meca","(S)-Hexahydropyrrolo[1,2-a]pyrazine-1,4-dione","Arbidol","Tempol","Centhaquine","Regadenoson","Teprotide","Azithromycin","Posaconazole","(R)-[2,8-bis(trifluoromethyl)-4-quinolyl]-[(2R)-2-piperidyl]methanol","Tetramethylol-melamin-dioxy-propylen [German]","Fluvoxamine","Naltrexone","20-Hydroxyecdysone","Ceftriaxone","(3E,4S)-4-Hydroxy-3-{2-[(1R,4aS,5R,6R,8aS)-6-hydroxy-5-(hydroxymethyl)-5,8a-dimethyl-2-methylenedecahydronaphthalen-1-yl]ethylidene}dihydrofuran-2(3H)-one","Isavuconazonium","Dapagliflozin","Vortioxetine","Apremilast","Empagliflozin","N6-ethanimidoyl-D-lysine","Emricasan","2-[(4S)-4-amino-5,5-dihydroxyhexyl]guanidine","Fosmanogepix","Sofosbuvir","Razuprotafib","Nalpha-[(4-Methylpiperazin-1-Yl)carbonyl]-N-[(3s)-1-Phenyl-5-(Phenylsulfonyl)pentan-3-Yl]-L-Phenylalaninamide","Ascorbic Acid","Doxycycline","Rabeximod","Semaglutide","Desidustat","1-(4-(((6-Amino-5-(4-phenoxyphenyl)pyrimidin-4-yl)amino)methyl)-4-fluoropiperidin-1-yl)prop-2-en-1-one","Zimlovisertib","Zilucoplan","Defibrotide","7-[(3s,4r)-4-(3-Chlorophenyl)carbonylpyrrolidin-3-Yl]-3h-Quinazolin-4-One","[(1S,4R,6S)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","example 13 [US20210284598A1]","3,6-Di-O-acetyl-2-deoxy-d-glucopyranose","X6 hydrobromide [PMID: 34584244]","Amantadine","Amlodipine","Bicalutamide","Formoterol","Hydroxychloroquine","Ibudilast","Lidocaine","Modafinil","Omeprazole","Pentoxifylline","Arginine","Carvacrol","(-)-Mefloquine","Atorvastatin","Oseltamivir","2,4,6-Trinitro-m-xylene","Argatroban","Allopregnanolone","Fingolimod","Meldonium","Ramatroban","Ivabradine","Moxifloxacin","Varespladib","Naproxen","Dabigatran","Senicapoc","beta-L-Arabinose","Quinidine","Pectin","Fluticasone Propionate","Decitabine","Bucillamine","Canrenoic acid","(S)-[2,8-bis(trifluoromethyl)quinolin-4-yl]-[(2S)-piperidin-2-yl]methanol","(S,S)-Formoterol","Isoquercetin","Pitavastatin","Deoxy-methyl-arginine","Dexmedetomidine","7-[[(2Z)-2-ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid","1-Piperazinecarboxamide, 4-methyl-N-((1S)-2-oxo-2-(((1S)-1-(2-phenylethyl)-3-(phenylsulfonyl)-2-propenyl)amino)-1-(phenylmethyl)ethyl)-","Remimazolam","Danoprevir","Belnacasan","Losmapimod","Dapansutrile","(S)-[2,8-bis(trifluoromethyl)quinolin-4-yl]-piperidin-2-ylmethanol","Tridecactide","Pamapimod","4'-C-Azido-2'-deoxy-2'-fluoro-b-D-arabinocytidine","5-Chloro-2-([(2-([3-(furan-2-yl)phenyl]amino)-2-oxoethoxy)acetyl]amino)benzoic acid","[(2R,3S,4R)-4-acetyloxy-3,6-dihydroxyoxan-2-yl]methyl acetate","Ketone Ester","Alvelestat","Vafidemstat","Acebilustat","methyl N-[(2R)-2-[2-[5-[4-[4-[2-[1-[(2S)-2-(methoxycarbonylamino)-3-methyl-butanoyl]pyrrolidin-2-yl]-1H-imidazol-5-yl]phenyl]phenyl]-1H-imidazol-2-yl]pyrrolidine-1-carbonyl]-3-methyl-butyl]carbamate","(6R,7R)-7-[[(2E)-2-ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylate","3-Deoxy-3-[4-(3-Fluorophenyl)-1h-1,2,3-Triazol-1-Yl]-Beta-D-Galactopyranosyl 3-Deoxy-3-[4-(3-Fluorophenyl)-1h-1,2,3-Triazol-1-Yl]-1-Thio-Beta-D-Galactopyranoside","Brensocatib","Enpatoran","Folic Acid","EIDD-2801","Ensitrelvir","3,4-Methylenedioxymethamphetamine","Acetaminophen","Verapamil","Candesartan","Chlordiazepoxide","Chloroquine","Deferoxamine","Famotidine","Ketamine","Lansoprazole","Metformin","Nafamostat","Pioglitazone","Propofol","Sevoflurane","Tranexamic acid","Prednisolone","Levothyroxine","Mannitol","Dexamethasone phosphate","Citrulline","Hesperidin","Canrenone","Hydrocortisone hemisuccinate","Methylprednisolone hemisuccinate","Azo rubin S","2-acetamido-2-deoxy-beta-D-glucopyranose","Diacerein","Levamisole","Amoxicillin","Tramadol","Pirfenidone","Piperacillin","Captopril","Nicorandil","Epigallocatechin Gallate","Artemisinin","1-((2S,3R,4S,5S)-3-Fluoro-4-hydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl)-5-methylpyrimidine-2,4(1H,3H)-dione","Clarithromycin","2,6-Difluorophenol","Levofloxacin","Olmesartan","Ramelteon","Darunavir","Galactomannan","Mometasone furoate","Rosuvastatin","Tenofovir","3-Cyclopentyl-1-(piperazin-1-yl)propan-1-one","D-Alanine, N-methylglycyl-L-arginyl-L-valyl-L-tyrosyl-L-isoleucyl-L-histidyl-L-prolyl-","Arformoterol","3-Hydroxybutyrate","Sitagliptin","Eprosartan","Epoprostenol","Fluticasone","Tenofovir disoproxil","Refanalin","Sulodexide","Metampicillin","Prasugrel","Ile-Ser","Vidofludimus","Reparixin","Ticagrelor","Linagliptin","2-(2-Chloro-4-iodophenylamino)-3,4-difluorobenzoic acid","Edoxaban","Galidesivir","4,5-Dihydro-3-phenyl-5-isoxazoleacetic acid","S-[2-[3-[[(2R)-4-[[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-4-hydroxy-3-phosphonooxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-2-hydroxy-3,3-dimethylbutanoyl]amino]propanoylamino]ethyl] (2S)-2-[4-(2-methylpropyl)phenyl]propanethioate","Bivalirudin","N,N-Diethyl-(2-(4-(2-(18F)fluoroethoxy)phenyl)-5,7-dimethylpyrazolo(1,5-A)pyrimidine-3-YL)acetamide","Brilacidin","Baricitinib","(2R,3R,4S,5R)-2-(4-aminopyrrolo[2,1-f][1,2,4]triazin-7-yl)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-carbonitrile","3-phenyl-4-propyl-1-(pyridin-2-yl)-1H-pyrazol-5-ol","Ozanimod","Sabizabulin","Zavegepant","CID 53477736","Danoprevir (RG7227)","Vericiguat","Aldose reductase-IN-1","Upadacitinib","Asapiprant","Proxalutamide","(2R,6S,12Z,13aS,14aR,16aS)-6-[(tert-Butoxycarbonyl)amino]-14a-[(cyclopropylsulfonyl)carbamoyl]-5,16-dioxo-1,2,3,5,6,7,8,9,10,11,13a,14,14a,15,16,16a-hexadecahydrocyclopropa[e]pyrrolo[1,2-a][1,4]diazacyclopentadecin-2-yl 4-fluoro-1,3-dihydro-2H-isoindole-2-carboxylate","Abivertinib","Zunsemetinib","Treamid","CID 101731853","N-(5-Oxidanyl-1,3-Benzothiazol-2-Yl)ethanamide","Danicopan","propan-2-yl (2S)-2-[[[(3R,4R,5R)-5-[2-amino-6-(methylamino)purin-9-yl]-4-fluoro-3-hydroxy-4-methyloxolan-2-yl]methoxy-phenoxyphosphoryl]amino]propanoate","[(1S,4R,6S,7E,18R)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","Eclitasertib","Dazcapistat","Bexotegrast","Sildenafil","Azilsartan","Echinochrome A","F-Arag F-18","Apabetalone","7-[[2-(2-Amino-1,3-thiazol-4-yl)-2-(2,2-dimethylpropanoyloxymethoxyimino)acetyl]amino]-3-ethenyl-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid","Unii-T5UX5skk2S","Nezulcitinib","P9Zqs28F8C","Lufotrelvir","Nirmatrelvir","Nangibotide"],"legendgroup":"Between -11 and 5","marker":{"color":"#EF553B","symbol":"circle"},"mode":"markers","name":"Between -11 and 5","orientation":"v","showlegend":true,"x":[-3.1,1.2,-0.1,4.3,-0.4,-1.1,-1.3,-1.8,0.7,-3.0,0.4,1.1,4.0,-2.8,-1.8,-3.0,-4.7,3.8,2.7,2.5,3.8,0.5,4.1,-2.6,4.1,4.1,0.7,2.8,1.4,-2.0,-2.1,2.7,4.1,4.1,4.1,4.1,0.0,3.1,3.2,4.1,4.2,4.1,4.1,4.1,2.9,1.5,1.5,3.6,3.0,2.2,2.0,3.2,1.9,4.1,4.1,4.1,2.4,4.1,4.1,4.3,2.0,1.8,2.1,4.3,0.8,2.5,3.3,0.3,1.6,3.9,3.7,2.0,-0.5,3.6,4.3,1.9,4.1,-3.4,3.5,-3.2,-0.1,1.0,2.5,3.5,1.9,1.0,0.0,4.1,1.9,1.5,1.6,4.7,3.5,-2.1,3.4,2.5,3.9,3.5,4.0,4.7,-1.8,-1.7,-0.5,-1.4,4.4,3.6,3.3,4.2,3.0,3.9,4.9,2.1,1.7,0.4,2.5,2.2,2.5,3.6,4.7,2.5,0.4,4.1,0.9,-2.6,0.4,1.0,1.5,3.0,3.6,-0.6,0.4,1.3,3.5,-0.8,3.3,3.7,3.1,-1.0,0.3,4.3,4.0,3.2,3.6,2.5,1.6,2.1,1.7,-1.6,0.3,0.4,0.6,2.5,3.8,4.4,1.4,1.5,0.6,1.2,2.1,3.0,0.9,-0.6,4.4,0.9,4.5,-1.5,-0.9,4.0,4.6,3.6,-0.8,2.6,1.9,0.5,-1.3,2.2,4.1,2.3,4.2,1.8,2.0,-3.1,3.6,-2.5,1.6,1.0,3.7,4.4,-1.6,-0.7,3.9,-5.8,1.9,4.1,2.0,4.8,1.8,2.1,3.3,2.7,-1.7,2.3,2.4,3.0,2.3,1.8,3.6,3.0,2.3,1.7,2.2,0.3,-4.2,3.1,3.6,5.0,1.1,2.0,1.3,4.9,4.2,-2.1,2.9,2.4,0.6,2.8,3.3,1.7,4.1,-2.5,2.9,-2.3,4.0,-1.2,0.4,1.9,3.6,1.8,0.4,3.5,-1.8,3.1,1.6,4.1,3.4,3.3,2.3,3.8,-0.7,3.6,-6.2,2.4,-0.8,3.3,-1.0,-0.1,2.5,2.2,2.2,5.0,2.3,0.2,2.0,2.7,-1.1,-0.8,2.5,2.2,0.5,3.8,4.1,2.4,4.6,-2.1,-0.6,2.2,2.8,-1.3,2.0,3.8,3.8,2.8,-2.0,1.6,2.4,-3.1,0.1,-4.3,-1.1,2.7,1.8,2.2,3.3,-1.7,1.9,1.8,-2.0,2.6,1.9,0.5,0.3,0.8,1.2,2.8,-0.9,3.2,2.0,-0.4,3.2,2.7,2.9,-6.3,3.9,1.6,-1.6,1.6,-2.3,1.8,0.1,0.7,4.5,2.9,3.2,1.6,2.2,0.2,3.0,3.6,-3.3,3.4,2.9,2.0,1.9,5.0,1.4,-2.1,1.3,-1.9,-7.1,3.2,0.3,-0.5,-1.4,3.7,3.1,3.4,3.1,4.0,3.3,1.5,2.3,2.7,3.1,4.3,3.3,4.2,2.5,-0.7,3.1,1.5,3.3,1.7,3.3,1.7,2.9,1.8,1.5,4.4,2.0,-0.9,2.3,1.1,3.5,3.6,3.6,0.5,2.2,-8.3],"xaxis":"x","y":[146.14,180.16,137.16,422.9,122.12,267.24,268.23,255.25,144.12,348.21,203.24,398.4,272.4,133.1,244.2,899.0,342.3,378.4,804.0,430.5,472.6,421.4,875.1,1007.2,875.1,875.1,504.6,360.5,416.5,1304.5,573.7,804.0,875.1,875.1,875.1,875.1,267.24,228.24,368.4,875.1,482.8,875.1,875.1,875.1,416.6,358.4,302.23,464.4,443.3,346.3,383.4,240.21,374.5,875.1,416.9,875.1,487.5,875.1,875.1,357.8,286.24,447.5,306.4,539.6,232.28,236.27,255.35,258.23,362.5,314.5,225.29,307.28,305.2,488.0,498.6,602.6,875.1,1270.4,471.5,103.12,194.19,248.3,270.21,493.6,392.5,399.4,502.8,464.8,176.17,312.37,580.5,380.9,578.1,1789.1,381.4,154.25,296.5,206.28,327.12,418.6,454.4,1046.2,259.26,186.17,349.8,440.5,270.21,572.7,465.5,325.4,392.6,452.5,422.5,228.19,435.9,459.5,306.7,336.4,287.4,451.5,306.27,428.5,253.28,180.16,111.14,266.34,304.4,405.4,378.31,157.1,234.21,478.5,1632.3,172.23,731.8,402.5,455.9,145.25,239.31,376.13,309.33,309.4,378.31,325.8,227.09,383.5,650.97,284.25,177.16,163.2,588.6,430.5,321.8,435.5,440.6,349.31,136.19,162.23,220.26,434.5,510.3,154.17,477.4,172.24,331.5,390.35,1101.3,749.0,700.8,378.31,358.35,318.33,341.4,480.6,554.6,350.4,717.8,408.9,298.4,460.5,450.9,187.24,569.5,190.24,468.4,529.5,586.7,576.8,176.12,444.4,409.9,4114.0,332.31,447.5,361.4,3562.0,444.4,353.8,731.8,257.279,248.23,502.5,151.25,408.9,430.4,344.4,335.9,230.31,234.34,273.4,345.4,278.31,174.2,150.22,378.31,558.6,312.4,241.16,508.6,318.5,307.5,146.19,416.5,468.6,401.4,380.4,230.26,471.5,323.3,150.13,324.4,194.14,500.6,228.21,223.3,358.5,378.31,344.4,464.4,421.5,172.23,200.28,685.7,574.7,439.3,731.8,509.0,383.5,133.17,378.31,1623.8,406.4,286.22,428.8,248.23,176.21,545.5,336.4,481.5,752.9,684.7,648.6,420.5,320.31,441.4,329.31,531.9,193.24,151.16,454.6,440.5,299.75,319.9,560.7,337.5,237.72,369.4,129.16,347.4,356.4,178.27,200.05,157.21,360.4,776.87,182.17,472.4,175.19,610.6,340.5,462.5,474.5,458.5,221.21,368.3,204.29,365.4,263.37,185.22,517.6,217.29,211.17,458.4,282.33,260.22,748.0,130.09,361.4,446.5,259.339,547.7,504.4,521.4,481.5,287.21,210.32,926.1,344.4,103.1,407.31,424.5,352.5,444.5,519.4,176.24,295.29,361.4,373.4,218.25,355.4,283.39,522.6,472.5,409.55,548.1,265.27,205.21,955.8,2180.3,397.5,936.9,371.4,291.26,279.34,404.5,377.4,638.8,749.0,731.8,426.4,421.4,380.4,501.6,517.5,731.8,487.5,513.9,318.37,2088.6,208.24,580.4,581.5,731.8,378.4,395.4,492.6,474.6,456.4,266.2,284.23,370.4,509.6,452.5,527.7,403.5,552.5,499.5,1342.5],"yaxis":"y","type":"scatter"},{"hovertemplate":"<b>%{hovertext}</b><br><br>color=Smaller than -10<br>x=%{x}<br>y=%{y}<extra></extra>","hovertext":["Solnatide","Carbohydrate moiety of bromelain","Fondaparinux","Aviptadil Acetate","Thymosin","Enoxaparin","Aviptadil","Thymalfasin"],"legendgroup":"Smaller than -10","marker":{"color":"#00cc96","symbol":"circle"},"mode":"markers","name":"Smaller than -10","orientation":"v","showlegend":true,"x":[-10.7,-11.6,-14.7,-13.7,-22.0,-10.8,-15.9,-24.0],"xaxis":"x","y":[1923.1,1026.9,1508.3,3344.9,3051.3,1134.9,3326.8,3108.3],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Partition coefficients"},"tickfont":{"size":9}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Molecular weights"},"tickfont":{"size":9}},"legend":{"title":{"text":"color"},"tracegroupgap":0,"font":{"size":9}},"title":{"text":"Partition coefficients vs. molecular weights for compounds used in COVID-19 clinical trials","font":{"size":15},"x":0.5},"height":400,"width":800,"margin":{"l":20,"r":20,"t":40,"b":3}},                        {"responsive": true}                    ).then(function(){
                             
 var gd = document.getElementById('158afe7e-913a-4e64-af6e-1482fe05c388');
@@ -5465,7 +5604,6 @@ if (outputEl) {{
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>                            <div id="56423613-59fa-4a7b-820b-d7b63eb6a681" class="plotly-graph-div" style="height:400px; width:800px;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("56423613-59fa-4a7b-820b-d7b63eb6a681")) {                    Plotly.newPlot(                        "56423613-59fa-4a7b-820b-d7b63eb6a681",                        [{"hovertemplate":"<b>%{hovertext}</b><br><br>x=%{x}<br>y=%{y}<extra></extra>","hovertext":["Calcitriol","Ubiquinol","Glutamine","Aspirin","1-Methylnicotinamide","Losartan","Vitamin E","Nicotinamide","Adenosine","Inosine","Nicotinamide riboside","Dimethyl Fumarate","Inosinic acid","Acetyl-L-carnitine","Camostat","Estradiol","Aspartic Acid","Ribavirin","Angiotensin (1-7)","alpha-Maltose","Ambrisentan","Ciclosporin","Ergocalciferol","Docosahexaenoic Acid","Tacrolimus","Budesonide","Calcifediol","Cepharanthine","Cholecalciferol","Coenzyme Q10","Tacrolimus monohydrate","Alisporivir","Pacritinib","Topotecan","Voclosporin","(1R,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2R)-Butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Oxytocin","(1R,4S,6R,10E,14E,16E,21R)-6'-butan-2-yl-21,24-dihydroxy-12-[(2R,4S,6S)-5-[(2S,4S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Manganese, dichloro((4aS,13aS,17aS,21aS)-1,2,3,4,4a,5,6,12,13,13a,14,15,16,17,17a,18,19,20,21,21a-eicosahydro-7,11-nitrilo-7H-dibenzo(b,H)-5,13,18,21-tetraazacycloheptadecine-kappaN5,kappaN13,kappaN18,kappaN21,kappaN22)-, (pb-7-11-2344'3')-","Ivermectin B1a","Dipyridamole","Tetrandrine","Sirolimus","Iloprost","Ramipril","Prasugrel hydrochloride","Uproleselan","MET-enkephalin","(18Z)-1,14-dihydroxy-12-[(E)-1-(4-hydroxy-3-methoxycyclohexyl)prop-1-en-2-yl]-23,25-dimethoxy-13,19,21,27-tetramethyl-17-prop-2-enyl-11,28-dioxa-4-azatricyclo[22.3.1.04,9]octacos-18-ene-2,3,10,16-tetrone","(1R,4S,5'S,6R,6'R,8R,10E,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Plitidepsin","(10Z,14Z,16Z)-6'-butan-2-yl-21,24-dihydroxy-12-[5-(5-hydroxy-4-methoxy-6-methyloxan-2-yl)oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1R,4S,5'S,6R,6'R,8R,12S,13S,20R,21R,24S)-6'-[(2R)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Rubramin","(1R,4S,5'S,6R,6'S,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Zidovudine","Resveratrol","Curcumin","6'-Butan-2-yl-21,24-dihydroxy-12-[5-(5-hydroxy-4-methoxy-6-methyloxan-2-yl)oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Regorafenib","Pharmakon1600-01300027","(1R,4S,5'S,6R,6'R,8R,10Z,12S,13S,14Z,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1R,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4R,5S,6S)-5-[(2S,4R,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Methylcobalamin","Spironolactone","Prednisone","Quercetin","Calderol","Dactolisib","Enzalutamide","Selinexor","Chlorpromazine","Itraconazolum [Latin]","Loratadine","Nifedipine","Prazosin","Alizarin","Methylprednisolone","Chloroquine sulfate","Bardoxolone methyl","(1R,4S,5'S,6R,6'R,8R,12S,13S,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Heartgard-30","Ivermectine 100 microg/mL in Acetonitrile","Duvelisib","(4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Zotatifin","MaxEPA","(1R,4S,5'S,6R,6'R,8R,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","(1S,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one","Indomethacin","Methylene Blue","Bromocresol green","Hydroxychloroquine sulfate","Ritonavir","Fisetin","Palbociclib","Ruxolitinib","Sildenafil Citrate","Nintedanib","Melatonin","Carbamazepine","Clofazimine","Diphenhydramine","Thalidomide","Hydrocortisone","Progesterone","o-Aminoazotoluene","Clonitralid","Pimozide","Nitazoxanide","Deferoxamine hydrochloride","Chloroquine monophosphate","Retinol","Melphalan","Dasatinib","Masitinib","Acrivastine and pseudoephedrine hydrochloride","4-(carboxymethyl)-2-((R)-1-(2-(2,5-dichlorobenzamido)acetamido)-3-methylbutyl)-6-oxo-1,3,2-dioxaborinane-4-carboxylic acid","Remdesivir","Ivermectin B1a, epi-","Hydroxocobalamin","Zanubrutinib","Gamma-Aminobutyric Acid","Caffeine","Dapsone","Leflunomide","Raloxifene","Imatinib","Dexamethasone","Colchicine","Estradiol cypionate","Cetylpyridinium Chloride","Plerixafor","Telmisartan","Sorafenib","Bacitracin zinc","Hymecromone","Cob(II)alamin","Tofacitinib","Elsulfavirine","Fostamatinib","3-(4-chlorophenyl)-N-(pyridin-4-ylmethyl)adamantane-1-carboxamide","Adenosylcobalamin","Solnatide","Subasumstat","Lactoferrin","Compstatin 40","Celecoxib","Eucalyptol","Disulfiram","Ibuprofen","Niclosamide","Simvastatin","Methotrexate","Angiotensin II","Lenalidomide","Aspartyl-alanyl-diketopiperazine","Silmitasertib","Ibrutinib","Bemcentinib","Teriflunomide","Tazemetostat","Acalabrutinib","Ifenprodil","Ursodeoxycholic acid","Metoprolol succinate","Merimepodib","Fludrocortisone acetate","Triazavirin","Ceftriaxone sodium","Rivaroxaban","Ventolin","Apixaban","Ceftriaxone disodium salt hemiheptahydrate","Vadadustat","Carbohydrate moiety of bromelain","Siponimod fumarate","(s)-1-(3-Chloro-4-fluorophenyl)ethanamine hydrochloride","Prezcobix","[(2R,3R,4R,5R)-5-(4-amino-5-deuteriopyrrolo[2,1-f][1,2,4]triazin-7-yl)-5-cyano-3,4-bis(2-methylpropanoyloxy)oxolan-2-yl]methyl 2-methylpropanoate;hydrobromide","Berberine","Cyproheptadine","Doxazosin","Fluconazole","Irbesartan","Sulfamethoxazole","D-Glucose","N-Vinyl-2-pyrrolidone","Trimetazidine","Estetrol","Deferoxamine mesylate","Tramadol Hydrochloride","Nebivolol","Argatroban monohydrate","Sulfamethoxazole and trimethoprim","Zinc Gluconate","Zinc;(2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoate","(+)-Mefloquine","(2S,5R,6R)-6-[[(2S)-2-[(4-ethyl-2,3-dioxo-piperazine-1-carbonyl)amino]-2-phenyl-propanoyl]amino]-3,3-dimethyl-7-oxo-4-thia-1-azabicyclo[3.2.0]heptane-2-carboxylic acid; (2S,3S,5R)-3-methyl-4,4,7-trioxo-3-(triazol-1-ylmethyl)-4$l^{6}-thia-1-azabicyclo[3.2.0]heptane-2-carboxylic acid","Favipiravir","Maraviroc","Toremifene","(3-methyl-2,4-dioxo-3,4-dihydroquinazolin-1(2H)-yl)acetic acid","Enalapril maleate","Naltrexone hydrochloride","Chlorhexidine Gluconate","Piperacillin/tazobactam","3-[5-(azetidine-1-carbonyl)pyrazin-2-yl]oxy-5-[(2S)-1-methoxypropan-2-yl]oxy-N-(5-methylpyrazin-2-yl)benzamide","Degarelix","(3S)-3-amino-6-(diaminomethylideneazaniumyl)hex-1-en-2-olate","Sivelestat sodium","CID 23679441","Masitinib mesylate","[(1S,4R,6S,7Z,18R)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","Natrii chloridi solutio composita","CID 87060529","(2S,3R)-3-[(2-aminopyridin-4-yl)methyl]-1-[[(1R)-1-cyclooctylethyl]carbamoyl]-4-oxoazetidine-2-carboxylic acid","Sinapultide acetate","Bemnifosbuvir hemisulfate","Reamberin","Pomotrelvir","Selenious acid","Spermidine","Salbutamol","Bromhexine","Ebselen","Fluoxetine","Ketotifen","Mefloquine","Midazolam","Nitroglycerin","Quetiapine","Liothyronine","Pyridostigmine bromide","Psilocybine","Luminol","Acetylcysteine","Cyproheptadine hydrochloride","Carmoisine","Etoposide","Albuterol Sulfate","Dexbudesonide","2,2-Dimethyl-4-(chloromethyl)-1,3-dioxa-2-silacyclopentane","Clopidogrel","Valsartan","Tirofiban","Voriconazole","N-Phenylethylenediamine","Oseltamivir phosphate","Nicotine","Lactose monohydrate","2,4-Dioxaspiro[5.5]undec-8-ene, 3-(2-furanyl)-","Sivelestat","Tafenoquine","IB-Meca","(S)-Hexahydropyrrolo[1,2-a]pyrazine-1,4-dione","Arbidol","Tempol","Atazanavir","Centhaquine","Regadenoson","Teprotide","Azithromycin","Posaconazole","Cannabidiol","(R)-[2,8-bis(trifluoromethyl)-4-quinolyl]-[(2R)-2-piperidyl]methanol","Tetramethylol-melamin-dioxy-propylen [German]","Heme arginate","Zincacetate","Montelukast","Crocetin","Fondaparinux","Fluvoxamine","Naltrexone","20-Hydroxyecdysone","Ceftriaxone","(3E,4S)-4-Hydroxy-3-{2-[(1R,4aS,5R,6R,8aS)-6-hydroxy-5-(hydroxymethyl)-5,8a-dimethyl-2-methylenedecahydronaphthalen-1-yl]ethylidene}dihydrofuran-2(3H)-one","Artemether and lumefantrine","Isavuconazonium","Luminol sodium salt","Dapagliflozin","Zinc Picolinate","Pregna-1,4-diene-3,20-dione,21-(3-carboxy-1-oxopropoxy)-11,17-dihydroxy-6-methyl-, monosodiumsalt, (6a,11b)-","Vortioxetine","Enisamium iodide","Cenicriviroc","Apremilast","Empagliflozin","N6-ethanimidoyl-D-lysine","Emricasan","Aviptadil Acetate","Quinine sulfate dihydrate","Hydrocortisone 21-hemisuccinate sodium salt","Liothyronine sodium","sodium;8-amino-4-oxo-3H-phthalazin-1-olate","Edoxaban tosylate monohydrate","Daclatasvir","2-[(4S)-4-amino-5,5-dihydroxyhexyl]guanidine","Fosmanogepix","Larazotide acetate","Thymosin","Sofosbuvir","Razuprotafib","Nalpha-[(4-Methylpiperazin-1-Yl)carbonyl]-N-[(3s)-1-Phenyl-5-(Phenylsulfonyl)pentan-3-Yl]-L-Phenylalaninamide","Ascorbic Acid","Doxycycline","Rabeximod","Kaolin","H-Ile-OH.H-Thr-OH.H-Leu-OH.H-Val-OH.H-Met-OH.H-Phe-OH.H-Trp-OH.H-Lys-OH","Semaglutide","Isuzinaxib hydrochloride","CID 66726979","Desidustat","7-[[2-Ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid;acetate","1-(4-(((6-Amino-5-(4-phenoxyphenyl)pyrimidin-4-yl)amino)methyl)-4-fluoropiperidin-1-yl)prop-2-en-1-one","Ceftriaxone disodium hemiheptahydrate","Descovy","Zimlovisertib","CID 131673872","Sodium;5-amino-2,3-dihydrophthalazine-1,4-dione;hydride","Zilucoplan","Defibrotide","7-[(3s,4r)-4-(3-Chlorophenyl)carbonylpyrrolidin-3-Yl]-3h-Quinazolin-4-One","Unii-7kyp9tkt70","4-acetamidobenzoic acid;9-[(2R,3R,4R,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1H-purin-6-one;1-(dimethylamino)propan-2-ol","[(1S,4R,6S)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","example 13 [US20210284598A1]","Stannous protoporphyrin","3,6-Di-O-acetyl-2-deoxy-d-glucopyranose","X6 hydrobromide [PMID: 34584244]","Enoxaparin","Amantadine","Amlodipine","Bicalutamide","Candesartan cilexetil","Formoterol","Hydroxychloroquine","Ibudilast","Lidocaine","Modafinil","Omeprazole","Pentoxifylline","Arginine","4,4'-Diphenylmethane diisocyanate","Carvacrol","Silver","Phorbol 12-myristate 13-acetate","(-)-Mefloquine","Atorvastatin","Propranolol Hydrochloride","Oseltamivir","2,4,6-Trinitro-m-xylene","Argatroban","Lopinavir","Allopregnanolone","Fingolimod","Imatinib Mesylate","Meldonium","Ramatroban","Ivabradine","Moxifloxacin","Varespladib","Naproxen","Dabigatran","Senicapoc","Povidone iodine","beta-L-Arabinose","Quinidine","Pectin","Fluticasone Propionate","Decitabine","Bucillamine","Canrenoic acid","(S)-[2,8-bis(trifluoromethyl)quinolin-4-yl]-[(2S)-piperidin-2-yl]methanol","(-)-(S)-9-Fluoro-2,3-dihydro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-7H-pyrido(1,2,3-de)-1,4-benzoxazine-6-carboxylic acid, hemihydrate","(S,S)-Formoterol","Glatiramer acetate","Isoquercetin","Pitavastatin","Deoxy-methyl-arginine","Dexmedetomidine","Nafamostat mesylate","Bromhexine Hydrochloride","Tenofovir Disoproxil Fumarate","Eritoran","Icatibant acetate","Dalcetrapib","7-[[(2Z)-2-ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid","Icosapent ethyl","1-Piperazinecarboxamide, 4-methyl-N-((1S)-2-oxo-2-(((1S)-1-(2-phenylethyl)-3-(phenylsulfonyl)-2-propenyl)amino)-1-(phenylmethyl)ethyl)-","Remimazolam","Azithromycin Monohydrate","Danoprevir","Mitoquinone","Belnacasan","Apilimod mesylate","Losmapimod","Emtricitabine and tenofovir disoproxil fumarate","Dapansutrile","(S)-[2,8-bis(trifluoromethyl)quinolin-4-yl]-piperidin-2-ylmethanol","Tridecactide","Aviptadil","Pamapimod","Sodium pyruvate","Brequinar sodium","Montelukast Sodium","Sivelestat sodium anhydrous","Methylprednisolone sodium succinate","Bromelains","Fostamatinib disodium","Phosphate-Buffered Saline","4'-C-Azido-2'-deoxy-2'-fluoro-b-D-arabinocytidine","5-Chloro-2-([(2-([3-(furan-2-yl)phenyl]amino)-2-oxoethoxy)acetyl]amino)benzoic acid","[(2R,3S,4R)-4-acetyloxy-3,6-dihydroxyoxan-2-yl]methyl acetate","Ketone Ester","CID 45114162","Alvelestat","Emvododstat","8-chloro-N-[4-(trifluoromethoxy)phenyl]quinolin-2-amine","Riamilovir sodium dihydrate","Doxycycline hyclate","Budesonide and formoterol fumarate dihydrate","Vafidemstat","Ledipasvir","Telacebec","Acebilustat","Quinidine monohydrate","Dexamethasone phosphate disodium","Montmorillonite","methyl N-[(2R)-2-[2-[5-[4-[4-[2-[1-[(2S)-2-(methoxycarbonylamino)-3-methyl-butanoyl]pyrrolidin-2-yl]-1H-imidazol-5-yl]phenyl]phenyl]-1H-imidazol-2-yl]pyrrolidine-1-carbonyl]-3-methyl-butyl]carbamate","Nadide sodium","(6R,7R)-7-[[(2E)-2-ethoxyimino-2-[5-(phosphonoamino)-1,2,4-thiadiazol-3-yl]acetyl]amino]-3-[[4-(1-methylpyridin-1-ium-4-yl)-1,3-thiazol-2-yl]sulfanyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylate","3-Deoxy-3-[4-(3-Fluorophenyl)-1h-1,2,3-Triazol-1-Yl]-Beta-D-Galactopyranosyl 3-Deoxy-3-[4-(3-Fluorophenyl)-1h-1,2,3-Triazol-1-Yl]-1-Thio-Beta-D-Galactopyranoside","N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]undecanamide","Brensocatib","Ezurpimtrostat","Dexamethasone 21-phosphate disodium salt","Enpatoran","H-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-D-Leu-D-Leu-D-Leu-D-Leu-D-Lys-OH","CID 131844884","Folic Acid","Inosine pranobex","Eltrombopag","Rintatolimod","Normosang","Artecom","Imunovir; Delimmun; Groprinosin;Inosine pranobex","1-(4-fluorobenzene-6-id-1-yl)-N-phenylmethanimine;iridium(3+);1,2,3,4,5-pentamethylcyclopenta-1,3-diene;chloride","EIDD-2801","CID 154701548","alpha-D-Glucopyranoside, methyl O-2-deoxy-6-O-sulfo-2-(sulfoamino)-alpha-D-glucopyranosyl-(1-->4)-O-beta-D-glucopyranuronosyl-(1-->4)-O-2-deoxy-3,6-di-O-sulfo-2-(sulfoamino)-alpha-D-glucopyranosyl-(1-->4)-O-2-O-sulfo-alpha-L-idopyranuronosyl-(1-->4)-2-deoxy-2-(sulfoamino)-, 6-(hydrogen sulfate), sodium salt (1:10)","propan-2-yl (2S)-2-[[[(2R,3R,4R,5R)-5-[2-amino-6-(methylamino)purin-9-yl]-4-fluoro-3-hydroxy-4-methyloxolan-2-yl]methoxy-phenoxyphosphoryl]amino]propanoate;sulfuric acid","Ensitrelvir","3,4-Methylenedioxymethamphetamine","Acetaminophen","Amiodarone","Verapamil","Candesartan","Chlordiazepoxide","Chloroquine","Deferoxamine","Famotidine","Fenofibrate","Ketamine","Lansoprazole","Metformin","Nafamostat","Palmitoylethanolamide","Pioglitazone","Propofol","Sevoflurane","Tranexamic acid","Prednisolone","Levothyroxine","Mannitol","Dexamethasone phosphate","Citrulline","Hesperidin","Zinc Citrate","Zinc Acetate","Canrenone","Hydrocortisone hemisuccinate","Methylprednisolone hemisuccinate","Azo rubin S","Zinc, bis(D-gluconato-kappaO1,kappaO2)-, (T-4)-","2-acetamido-2-deoxy-beta-D-glucopyranose","Zinc Sulfate","Sodium Thiosulfate","Diacerein","Levamisole","Cromolyn sodium","Calcium dobesilate","Amoxicillin","Tramadol","Almitrine","Pirfenidone","Piperacillin","Captopril","Nicorandil","Brequinar","Amantadine hydrochloride","Chloroquine Phosphate","Epigallocatechin Gallate","Artemisinin","1-((2S,3R,4S,5S)-3-Fluoro-4-hydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl)-5-methylpyrimidine-2,4(1H,3H)-dione","Bis (2-Carboxyethylgermanium)sesquioxide","Clarithromycin","2,6-Difluorophenol","Moxifloxacin Hydrochloride","Levofloxacin","Olmesartan","Tetrasul sulfoxide","Ramelteon","Darunavir","Galactomannan","Mometasone furoate","Rosuvastatin","Tenofovir","3-Cyclopentyl-1-(piperazin-1-yl)propan-1-one","Azithromycin Dihydrate","D-Alanine, N-methylglycyl-L-arginyl-L-valyl-L-tyrosyl-L-isoleucyl-L-histidyl-L-prolyl-","Arformoterol","3-Hydroxybutyrate","Sitagliptin","Best","Eprosartan","Isotretinoin","Epoprostenol","Camostat mesylate","Fluticasone","Tenofovir disoproxil","Refanalin","Sulodexide","Metampicillin","Ciclesonide","Dutasteride","Prasugrel","Almitrine mesylate","Ile-Ser","butyl (3-(4-((1H-imidazol-1-yl)methyl)phenyl)-5-isobutylthiophen-2-yl)sulfonylcarbamate","Vidofludimus","Reparixin","Ticagrelor","Anhydrous Ceftriaxone Sodium","Tradipitant","CID 9939931","1-Palmitoyl-2-linoleoyl-3-acetyl-rac-glycerol","Zinforo","Linagliptin","2-(2-Chloro-4-iodophenylamino)-3,4-difluorobenzoic acid","Edoxaban","Transcrocetinate sodium","Galidesivir","4,5-Dihydro-3-phenyl-5-isoxazoleacetic acid","5-Cholesten-3beta-25-diol-3-sulfate","disodium;(6R,7R)-7-[[(2Z)-2-(2-amino-1,3-thiazol-4-yl)-2-methoxyiminoacetyl]amino]-3-[(2-methyl-6-oxido-5-oxo-1,2,4-triazin-3-yl)sulfanylmethyl]-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylate;hydrate","Losartan potassium","Lopinavir and ritonavir","N-[5-[[2-(2,6-dimethylphenoxy)acetyl]amino]-4-hydroxy-1,6-diphenylhexan-2-yl]-3-methyl-2-(2-oxo-1,3-diazinan-1-yl)butanamide;1,3-thiazol-5-ylmethyl N-[(2S,3S,5S)-3-hydroxy-5-[[(2S)-3-methyl-2-[[methyl-[(2-propan-2-yl-1,3-thiazol-4-yl)methyl]carbamoyl]amino]butanoyl]amino]-1,6-diphenylhexan-2-yl]carbamate","S-[2-[3-[[(2R)-4-[[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-4-hydroxy-3-phosphonooxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-2-hydroxy-3,3-dimethylbutanoyl]amino]propanoylamino]ethyl] (2S)-2-[4-(2-methylpropyl)phenyl]propanethioate","Bivalirudin","Thymalfasin","CID 16219160","Sodium valproate","N,N-Diethyl-(2-(4-(2-(18F)fluoroethoxy)phenyl)-5,7-dimethylpyrazolo(1,5-A)pyrimidine-3-YL)acetamide","Amoxicillin sodium","Potassium canrenoate","Hydrocortisone sodium succinate","Piperacillin-tazobactam","Antroquinonol","Brilacidin","Ruxolitinib phosphate","Baricitinib","(2R,3R,4S,5R)-2-(4-aminopyrrolo[2,1-f][1,2,4]triazin-7-yl)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-carbonitrile","Metformin glycinate","1-Palmityl-2-(4-carboxybutyl)-SN-glycero-3-phosphocholine","3-phenyl-4-propyl-1-(pyridin-2-yl)-1H-pyrazol-5-ol","Ozanimod","Sabizabulin","Zavegepant","CID 53477736","Danoprevir (RG7227)","Solu-Medrol","Vericiguat","Aldose reductase-IN-1","Ixazomib citrate","Vidofludimus calcium anhydrous","Upadacitinib","Asapiprant","1,1'-hexamethylene bis[5-(p-chlorophenyl) biguanide] di-D-gluconate","Proxalutamide","Rocefin","Galidesivir hydrochloride","Entresto","(2R,6S,12Z,13aS,14aR,16aS)-6-[(tert-Butoxycarbonyl)amino]-14a-[(cyclopropylsulfonyl)carbamoyl]-5,16-dioxo-1,2,3,5,6,7,8,9,10,11,13a,14,14a,15,16,16a-hexadecahydrocyclopropa[e]pyrrolo[1,2-a][1,4]diazacyclopentadecin-2-yl 4-fluoro-1,3-dihydro-2H-isoindole-2-carboxylate","Harvoni","Abivertinib","Legalon SIL","Maltofer","Zunsemetinib","Treamid","CID 87071853","disodium;[2-[(8S,9R,10S,11S,13S,14S,16R,17R)-9-fluoro-11,17-dihydroxy-10,13,16-trimethyl-3-oxo-6,7,8,11,12,14,15,16-octahydrocyclopenta[a]phenanthren-17-yl]-2-oxoethyl] phosphate;hydrate","Heparin sodium","CID 101731853","N-(5-Oxidanyl-1,3-Benzothiazol-2-Yl)ethanamide","Danicopan","Disodium;2-[[2-[[4-(2,2-dimethylpropanoyloxy)phenyl]sulfonylamino]benzoyl]amino]acetate","propan-2-yl (2S)-2-[[[(3R,4R,5R)-5-[2-amino-6-(methylamino)purin-9-yl]-4-fluoro-3-hydroxy-4-methyloxolan-2-yl]methoxy-phenoxyphosphoryl]amino]propanoate","[(1S,4R,6S,7E,18R)-4-(cyclopropylsulfonylcarbamoyl)-14-[(2-methylpropan-2-yl)oxycarbonylamino]-2,15-dioxo-3,16-diazatricyclo[14.3.0.04,6]nonadec-7-en-18-yl] 4-fluoro-1,3-dihydroisoindole-2-carboxylate","Eclitasertib","Dazcapistat","Bexotegrast","Estetrol monohydrate","Sildenafil","Azilsartan","Echinochrome A","F-Arag F-18","Apabetalone","4-acetamidobenzoic acid;9-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1H-purin-6-one;(2R)-1-(dimethylamino)propan-2-ol","[(1R,3R)-4-[(15Z,17E)-16-formyl-18-(4-hydroxy-2,2,6,6-tetramethylcyclohexyl)-3,7,12-trimethyl-14-oxooctadeca-2,4,6,8,10,12,15,17-octaenylidene]-3-hydroxy-3,5,5-trimethylcyclohexyl] acetate","Abivertinib maleate","7-[[2-(2-Amino-1,3-thiazol-4-yl)-2-(2,2-dimethylpropanoyloxymethoxyimino)acetyl]amino]-3-ethenyl-8-oxo-5-thia-1-azabicyclo[4.2.0]oct-2-ene-2-carboxylic acid","Unii-T5UX5skk2S","azane;(2R,3S,4S,5R,6R)-2-(hydroxymethyl)-6-[(2R,3S,4R,5R,6S)-4,5,6-trihydroxy-2-(hydroxymethyl)oxan-3-yl]oxyoxane-3,4,5-triol","Nezulcitinib","P9Zqs28F8C","Lufotrelvir","Nirmatrelvir","hexasodium;4-[[(2S,4R)-5-ethoxy-4-methyl-5-oxo-1-(4-phenylphenyl)pentan-2-yl]amino]-4-oxobutanoate;hydride;(2S)-3-methyl-2-[pentanoyl-[[4-[2-(1,2,3-triaza-4-azanidacyclopenta-2,5-dien-5-yl)phenyl]phenyl]methyl]amino]butanoate;pentahydrate","Nangibotide"],"legendgroup":"","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[416.6,865.4,146.14,180.16,137.16,422.9,430.7,122.12,267.24,268.23,255.25,144.12,348.21,203.24,398.4,272.4,133.1,244.2,899.0,342.3,378.4,1202.6,396.6,328.5,804.0,430.5,400.6,606.7,384.6,863.3,822.0,1216.6,472.6,421.4,1214.6,875.1,1007.2,875.1,483.4,875.1,504.6,622.7,914.2,360.5,416.5,409.9,1304.5,573.7,804.0,875.1,1110.3,875.1,875.1,1355.4,875.1,267.24,228.24,368.4,875.1,482.8,875.1,875.1,875.1,1345.4,416.6,358.4,302.23,418.7,469.5,464.4,443.3,318.9,705.6,382.9,346.3,383.4,240.21,374.5,418.0,505.7,875.1,1736.2,1736.2,416.9,875.1,487.5,645.0,875.1,875.1,357.8,319.9,698.0,434.0,720.9,286.24,447.5,306.4,666.7,539.6,232.28,236.27,473.4,255.35,258.23,362.5,314.5,225.29,388.2,461.5,307.28,597.1,417.9,286.5,305.2,488.0,498.6,550.1,517.1,602.6,875.1,1270.4,471.5,103.12,194.19,248.3,270.21,473.6,493.6,392.5,399.4,396.6,340.0,502.8,514.6,464.8,1488.1,176.17,1329.3,312.37,629.3,580.5,380.9,1579.6,1923.1,578.1,3125.8,1789.1,381.4,154.25,296.5,206.28,327.12,418.6,454.4,1046.2,259.26,186.17,349.8,440.5,506.6,270.21,572.7,465.5,325.4,392.6,652.8,452.5,422.5,228.19,598.6,435.9,337.39,459.5,1323.2,306.7,1026.9,1149.3,210.07,1323.7,583.4,336.4,287.4,451.5,306.27,428.5,253.28,180.16,111.14,266.34,304.4,656.8,299.83,405.4,526.7,543.6,455.7,455.7,378.31,831.9,157.1,513.7,406.0,234.21,492.5,377.9,897.8,817.9,478.5,1632.3,172.23,528.5,576.6,594.8,731.8,309.11,577.6,402.5,2529.5,1261.1,357.27,455.9,128.99,145.25,239.31,376.13,274.19,309.33,309.4,378.31,325.8,227.09,383.5,650.97,261.12,284.25,177.16,163.2,323.9,502.4,588.6,576.7,430.5,166.68,321.8,435.5,440.6,349.31,136.19,410.4,162.23,360.31,220.26,434.5,463.5,510.3,154.17,477.4,172.24,704.9,331.5,390.35,1101.3,749.0,700.8,314.5,378.31,358.35,792.7,185.5,586.2,328.4,1508.3,318.33,341.4,480.6,554.6,350.4,827.3,717.8,200.15,408.9,309.6,497.5,298.4,354.19,696.9,460.5,450.9,187.24,569.5,3344.9,782.9,485.5,672.95,199.14,738.3,738.9,190.24,468.4,785.9,3051.3,529.5,586.7,576.8,176.12,444.4,409.9,258.16,1163.4,4114.0,315.8,457.5,332.31,744.7,447.5,600.6,723.7,361.4,202.17,201.16,3562.0,444.4,353.8,879.6,1115.2,731.8,257.279,679.4,248.23,502.5,1134.9,151.25,408.9,430.4,610.7,344.4,335.9,230.31,234.34,273.4,345.4,278.31,174.2,250.25,150.22,107.868,616.8,378.31,558.6,295.8,312.4,241.16,508.6,628.8,318.5,307.5,589.7,146.19,416.5,468.6,401.4,380.4,230.26,471.5,323.3,364.95,150.13,324.4,194.14,500.6,228.21,223.3,358.5,378.31,740.7,344.4,623.7,464.4,421.5,172.23,200.28,539.6,412.59,635.5,1313.7,1364.6,389.6,685.7,330.5,574.7,439.3,767.0,731.8,583.7,509.0,610.7,383.5,882.8,133.17,378.31,1623.8,3326.8,406.4,110.04,397.3,608.2,456.4,496.5,248.25,732.5,411.04,286.22,428.8,248.23,176.21,520.6,545.5,467.3,338.71,286.2,545.0,774.9,336.4,889.0,557.0,481.5,342.4,518.4,360.31,752.9,685.4,684.7,648.6,647.9,420.5,423.0,548.5,320.31,2469.4,1738.2,441.4,1115.2,442.5,995.6,792.7,1294.4,1115.2,561.1,329.31,287.21,1531.3,679.6,531.9,193.24,151.16,645.3,454.6,440.5,299.75,319.9,560.7,337.5,360.8,237.72,369.4,129.16,347.4,299.5,356.4,178.27,200.05,157.21,360.4,776.87,182.17,472.4,175.19,610.6,574.3,183.5,340.5,462.5,474.5,458.5,457.7,221.21,161.4,158.11,368.3,204.29,512.299,418.4,365.4,263.37,477.6,185.22,517.6,217.29,211.17,375.4,187.71,515.9,458.4,282.33,260.22,339.4,748.0,130.09,437.9,361.4,446.5,340.0,259.339,547.7,504.4,521.4,481.5,287.21,210.32,785.0,926.1,344.4,103.1,407.31,572.3,424.5,300.4,352.5,494.5,444.5,519.4,176.24,295.29,361.4,540.7,528.5,373.4,669.8,218.25,475.6,355.4,283.39,522.6,577.6,587.9,701.6,635.0,744.7,472.5,409.55,548.1,372.4,265.27,205.21,482.7,616.6,461.0,1349.7,1349.7,955.8,2180.3,3108.3,397.6,166.19,397.5,387.4,396.6,484.5,839.8,390.6,936.9,404.4,371.4,291.26,204.23,581.8,279.34,404.5,377.4,638.8,749.0,731.8,497.5,426.4,421.4,517.1,748.8,380.4,501.6,735.7,517.5,652.6,301.73,1916.0,731.8,1418.4,487.5,1453.1,449.16,513.9,318.37,1003.2,534.4,1157.9,2088.6,208.24,580.4,479.4,581.5,731.8,378.4,395.4,492.6,322.4,474.6,456.4,266.2,284.23,370.4,1115.2,672.9,639.6,509.6,452.5,359.33,527.7,403.5,552.5,499.5,1922.0,1342.5],"xaxis":"x","y":[688.0,1600.0,146.0,212.0,136.0,520.0,503.0,114.0,335.0,405.0,314.0,141.0,555.0,214.0,602.0,382.0,133.0,304.0,1660.0,382.0,475.0,2330.0,678.0,462.0,1480.0,862.0,655.0,994.0,610.0,1840.0,1480.0,2360.0,644.0,867.0,2380.0,1680.0,1870.0,1680.0,381.0,1680.0,561.0,979.0,1760.0,606.0,619.0,555.0,1870.0,847.0,1480.0,1680.0,2200.0,1680.0,1680.0,3220.0,1680.0,484.0,246.0,507.0,1680.0,686.0,1680.0,1680.0,1680.0,3160.0,818.0,764.0,488.0,655.0,872.0,839.0,621.0,339.0,1120.0,569.0,608.0,544.0,378.0,754.0,390.0,1210.0,1680.0,3340.0,3340.0,668.0,1680.0,819.0,874.0,1680.0,1680.0,506.0,483.0,742.0,413.0,1040.0,459.0,775.0,453.0,1070.0,892.0,270.0,326.0,829.0,211.0,449.0,684.0,589.0,264.0,414.0,632.0,428.0,739.0,359.0,496.0,265.0,642.0,696.0,635.0,815.0,1010.0,1680.0,3140.0,756.0,62.7,293.0,306.0,327.0,655.0,706.0,805.0,740.0,597.0,208.0,456.0,831.0,646.0,2950.0,257.0,3150.0,488.0,977.0,904.0,551.0,3730.0,4170.0,942.0,7330.0,3770.0,577.0,164.0,201.0,203.0,404.0,706.0,704.0,1980.0,437.0,263.0,491.0,678.0,775.0,426.0,992.0,845.0,353.0,605.0,308.0,652.0,838.0,435.0,1120.0,645.0,309.0,777.0,1120.0,393.0,1680.0,896.0,131.0,1980.0,887.0,488.0,423.0,678.0,358.0,682.0,346.0,151.0,120.0,259.0,441.0,832.0,282.0,483.0,887.0,653.0,165.0,385.0,483.0,1600.0,282.0,751.0,483.0,369.0,638.0,621.0,819.0,1550.0,710.0,3390.0,174.0,738.0,1120.0,788.0,1530.0,24.8,1110.0,606.0,4910.0,1000.0,216.0,779.0,26.3,56.8,227.0,256.0,275.0,308.0,476.0,483.0,471.0,219.0,496.0,402.0,183.0,347.0,254.0,148.0,423.0,854.0,969.0,309.0,862.0,107.0,381.0,608.0,579.0,448.0,77.3,468.0,147.0,382.0,266.0,731.0,597.0,589.0,215.0,546.0,159.0,1110.0,404.0,587.0,2330.0,1150.0,1170.0,414.0,483.0,377.0,1180.0,78.6,891.0,608.0,3450.0,327.0,621.0,869.0,1110.0,597.0,1100.0,1210.0,254.0,472.0,108.0,981.0,316.0,241.0,1060.0,825.0,558.0,192.0,934.0,7510.0,538.0,908.0,408.0,269.0,1090.0,1190.0,177.0,644.0,1320.0,6930.0,913.0,906.0,897.0,232.0,956.0,590.0,167.0,988.0,9590.0,412.0,731.0,583.0,1240.0,643.0,1110.0,1050.0,535.0,254.0,254.0,6980.0,773.0,567.0,1210.0,658.0,1530.0,287.0,1010.0,276.0,887.0,2410.0,144.0,647.0,750.0,962.0,388.0,331.0,288.0,228.0,302.0,453.0,426.0,176.0,332.0,120.0,0.0,1150.0,483.0,822.0,257.0,418.0,317.0,887.0,940.0,500.0,258.0,799.0,112.0,689.0,663.0,727.0,589.0,277.0,757.0,397.0,120.0,117.0,457.0,205.0,984.0,356.0,218.0,707.0,483.0,634.0,388.0,519.0,758.0,631.0,174.0,205.0,645.0,256.0,817.0,1900.0,2750.0,481.0,1220.0,425.0,939.0,601.0,1150.0,1530.0,886.0,818.0,637.0,573.0,1190.0,190.0,483.0,3240.0,7580.0,591.0,88.2,557.0,898.0,738.0,988.0,344.0,893.0,96.3,533.0,618.0,290.0,135.0,761.0,1100.0,651.0,388.0,262.0,958.0,1250.0,410.0,1820.0,796.0,728.0,457.0,973.0,18.3,1300.0,1110.0,1210.0,903.0,700.0,699.0,520.0,973.0,472.0,4880.0,3450.0,767.0,658.0,812.0,1600.0,1180.0,1380.0,658.0,601.0,534.0,435.0,3450.0,1000.0,919.0,186.0,139.0,547.0,606.0,660.0,580.0,309.0,739.0,469.0,458.0,269.0,480.0,132.0,552.0,219.0,466.0,135.0,121.0,139.0,724.0,420.0,105.0,973.0,171.0,940.0,211.0,25.5,719.0,908.0,981.0,880.0,385.0,235.0,62.2,82.6,683.0,246.0,824.0,228.0,590.0,282.0,602.0,285.0,982.0,244.0,228.0,551.0,144.0,359.0,667.0,452.0,413.0,259.0,1190.0,87.1,727.0,634.0,656.0,307.0,331.0,853.0,641.0,1020.0,767.0,354.0,206.0,1150.0,1690.0,388.0,63.8,566.0,412.0,618.0,567.0,485.0,695.0,861.0,698.0,170.0,363.0,603.0,1100.0,964.0,555.0,694.0,232.0,690.0,576.0,389.0,736.0,1110.0,865.0,819.0,744.0,1240.0,885.0,363.0,880.0,597.0,334.0,269.0,858.0,1120.0,526.0,1980.0,1980.0,1660.0,4950.0,7190.0,707.0,98.3,525.0,596.0,713.0,915.0,1560.0,648.0,1560.0,503.0,678.0,456.0,175.0,606.0,412.0,609.0,534.0,1160.0,1150.0,1530.0,981.0,622.0,706.0,797.0,571.0,561.0,789.0,819.0,894.0,1120.0,334.0,1140.0,1530.0,2730.0,752.0,1200.0,367.0,888.0,345.0,767.0,962.0,2410.0,4400.0,237.0,891.0,726.0,919.0,1530.0,570.0,611.0,655.0,441.0,838.0,783.0,455.0,449.0,543.0,658.0,1480.0,871.0,961.0,723.0,382.0,866.0,712.0,927.0,964.0,1140.0,2630.0],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Molecular weights"},"tickfont":{"size":9}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Complexity"},"tickfont":{"size":9}},"legend":{"tracegroupgap":0,"font":{"size":9}},"title":{"text":"Molecular weights vs. complexity for compounds used in COVID-19 clinical trials","font":{"size":15},"x":0.5},"height":400,"width":800,"margin":{"l":20,"r":20,"t":40,"b":3}},                        {"responsive": true}                    ).then(function(){
                             
 var gd = document.getElementById('56423613-59fa-4a7b-820b-d7b63eb6a681');
@@ -5519,263 +5657,466 @@ if (outputEl) {{
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jhylin\.github\.io\/Data_in_life_blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jhylin/Data_in_life_blog";
+    script.dataset.repoId = "R_kgDOHw7lGQ";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHw7lGc4CQzQ_";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
   }
-});
-</script>
-<script src="https://giscus.app/client.js" data-repo="jhylin/Data_in_life_blog" data-repo-id="R_kgDOHw7lGQ" data-category="General" data-category-id="DIC_kwDOHw7lGc4CQzQ_" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+  loadGiscus();
 </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Website made with 💜 in <a href="https://quarto.org/">Quarto</a> by Jennifer HY Lin © 2022 - 2025</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
+
 
 
 

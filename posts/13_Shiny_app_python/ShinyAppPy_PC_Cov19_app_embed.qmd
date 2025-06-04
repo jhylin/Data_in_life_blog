@@ -75,7 +75,7 @@ Code for this post (.qmd document) is available [here](https://github.com/jhylin
 ***Update on 24/5/23: to avoid manual file input, see [this updated post](https://jhylin.github.io/Data_in_life_blog/posts/13_Shiny_app_python/ShinyAppPy_PC_Cov19_app_embed_pyodide_http.html) which uses pyodide.http.open_url() method (code change in editor section).***
 
 ::: column-screen-inset
-``` {shinylive-python}
+```{shinylive-python}
 #| standalone: true
 #| components: [editor, viewer]
 #| layout: vertical
