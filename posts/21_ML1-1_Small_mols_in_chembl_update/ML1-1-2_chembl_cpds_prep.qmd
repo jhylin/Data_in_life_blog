@@ -151,35 +151,35 @@ One of the other parameters I'm interested in is "QED Weighted" [@Bickerton2012]
 
 ##### **Prepare data prior to running ML model**
 
-The goal of this ML model is to answer this question - which physicochemical features may be useful to predict whether a compound may enter into max phase 4? 
+The goal of this ML model is to answer this question - which physicochemical features may be useful to predict whether a compound may enter into max phase 4?
 
 A rough plan at this stage is:
 
-- to filter out max phase 4 and 0 compounds from the df_pa dataset
+-   to filter out max phase 4 and 0 compounds from the df_pa dataset
 
-- to use "Max Phase" as the target y variable for a logistic regression (LR) model because ultimately stakeholders are more likely to be interested in knowing which candidate compounds have the most likely chance to reach the final approved phase during a drug discovery project (*please bear in mind that this ML model building is more like a demo only and may not reflect real-life scenarios...*)
+-   to use "Max Phase" as the target y variable for a logistic regression (LR) model because ultimately stakeholders are more likely to be interested in knowing which candidate compounds have the most likely chance to reach the final approved phase during a drug discovery project (*please bear in mind that this ML model building is more like a demo only and may not reflect real-life scenarios...*)
 
-- to use "Polar Surface Area", "HBA", "HBD", "#RO5 Violations", "QED Weighted", "CX LogP", "CX LogD" and "Heavy atoms" as the training features for building the ML model (*these molecular features are selected randomly and ideally I should include more... the first three are newly added in this updated version*)
+-   to use "Polar Surface Area", "HBA", "HBD", "#RO5 Violations", "QED Weighted", "CX LogP", "CX LogD" and "Heavy atoms" as the training features for building the ML model (*these molecular features are selected randomly and ideally I should include more... the first three are newly added in this updated version*)
 
-- to use max phase 0 compounds as the testing set since they are the ones not assigned with any max phase category yet
+-   to use max phase 0 compounds as the testing set since they are the ones not assigned with any max phase category yet
 
-- to use max phase 4 compounds as the training set since they've reached the approved phase
+-   to use max phase 4 compounds as the training set since they've reached the approved phase
 
-- to build a confusion matrix in the end to see if the features selected may generate a somewhat reasonable model for predicting the outcomes of these small molecules
+-   to build a confusion matrix in the end to see if the features selected may generate a somewhat reasonable model for predicting the outcomes of these small molecules
 
 Downsides of this plan are (there are many...):
 
-- the dataset used here may include some inorganic compounds (e.g. molecules containing metals)
+-   the dataset used here may include some inorganic compounds (e.g. molecules containing metals)
 
-- the dataset is likely not very-chemically-diverse 
+-   the dataset is likely not very-chemically-diverse
 
-- there are only a small number of max phase 4 compounds for model training (especially comparing with the "much larger" amount of max phase 0 compounds present)
+-   there are only a small number of max phase 4 compounds for model training (especially comparing with the "much larger" amount of max phase 0 compounds present)
 
-- LR may not be the best choice of ML model to start off with (I just wanted to find out how it works at the time and because I'm updating the post now so I'm trying to keep it the same...)
+-   LR may not be the best choice of ML model to start off with (I just wanted to find out how it works at the time and because I'm updating the post now so I'm trying to keep it the same...)
 
-- other exploratory data analysis should be done really... e.g. how chemically diverse is the dataset?
+-   other exploratory data analysis should be done really... e.g. how chemically diverse is the dataset?
 
-- this is only an exercise so will not be taking into account many other important aspects of drug discovery e.g. what disorders or illnesses are we targeting? (is it an experimentally validated and actually a suitable target?) and what have been done so far in the literatures? etc.
+-   this is only an exercise so will not be taking into account many other important aspects of drug discovery e.g. what disorders or illnesses are we targeting? (is it an experimentally validated and actually a suitable target?) and what have been done so far in the literatures? etc.
 
 Firstly, I'm filtering out all the max phase 0 compounds and also all the max phase 4 compounds then save them in separate dataframes.
 
@@ -229,8 +229,8 @@ I have to go back to the first post at this point to change the data restriction
 
 Because of the presence of a large number of max phase 0 compounds (1,826,345 molecules) and the relatively smaller number of max phase 4 compounds (2,870 molecules) in the original dataset, I'm going to randomly sample 2800 small molecules from the max phase 0 group to balance out the ratio of max phase 0 versus max phase 4 compounds. This will allow us to have a similar amount of data in each group to avoid a very imbalanced dataset.
 
-::: {.callout-note}
-For an alternative and likely a better way to deal with imbalanced datasets, please see [my later post](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html#model-building)  that attempts to use a "generalized threshold shifting" method.
+::: callout-note
+For an alternative and likely a better way to deal with imbalanced datasets, please see [my later post](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html#model-building) that attempts to use a "generalized threshold shifting" method.
 :::
 
 ```{python}
@@ -261,7 +261,7 @@ df_concat = pl.concat([df_0, df_4])
 df_concat
 ```
 
-This df_concat dataset is checked to see if it has all compounds in max phases 0 and 4 only. 
+This df_concat dataset is checked to see if it has all compounds in max phases 0 and 4 only.
 
 Note: max phase 4 (approved) compounds are re-labelled as Max_Phase = 1.
 
@@ -301,6 +301,6 @@ df_ml.dtypes
 
 Then finally I'm saving this tidied dataset as a separate .csv file for use in the next post.
 
-``` {python}
+```{python}
 df_ml.write_csv("df_ml.csv", separator = ",")
 ```
