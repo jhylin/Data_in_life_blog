@@ -27,6 +27,9 @@ jupyter: python3
 
 ```{python}
 #| code-fold: true
+# see comment below re. warning message for OpenMP runtimes
+import warnings
+warnings.filterwarnings('ignore')
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -41,13 +44,16 @@ from rdkit.Chem import rdFingerprintGenerator
 import useful_rdkit_utils as uru
 import sys
 from matplotlib import pyplot as plt
-import warnings
-warnings.filterwarnings('ignore')
 print(f"Pandas version used: {pd.__version__}")
 print(f"PyTorch version used: {torch.__version__}")
 print(f"NumPy version used: {np.__version__}")
 print(f"RDKit version used: {rdkit.__version__}")
 print(f"Python version used: {sys.version}")
+
+# A possible warning may show up when running this notebook re. multiple OpenMP (parallel programming) runtimes, 
+# I've decided to ignore this warning in the meantime as this is a blog post as demonstration only,
+# and in case anyone comes across this, a reference link for proper workarounds is below
+# https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
 ```
 
 <br>
