@@ -108,8 +108,14 @@ df_3a4 = chembl_drugs(
 print(df_3a4.shape)
 df_3a4.head(3)
 
-## Note: latest ChEMBL version 35 (as from 1st Dec 2024) seems to be taking a long time to load (no output after ~7min), 
-## both versions 33 & 34 are ok with outputs loading within a few secs
+
+# 24/6/25: solved the mystery regarding ChEMBL version 35 not loading properly earlier this year, 
+# it has been continuously showing an error message such as 
+# "Database disk image is malformed" every time trying to use v35
+# it was not due to ipython history issue 
+# (mistakenly written down as sqlite history previously which was not right)
+# turned out that the old copy of downloaded ChEMBL v35 might be a bit corrupted 
+# so it was removed with a new one re-downloaded then it worked!
 ```
 
 <br>
@@ -198,7 +204,7 @@ df_p3a4.head(3)
 
 Random splits usually lead to overly optimistic models, where testing molecules are too similar to traininig molecules leading to many problems. This is further discussed in two other blog posts that I've found useful - [post by Greg Landrum](https://greglandrum.github.io/rdkit-blog/posts/2024-05-31-scaffold-splits-and-murcko-scaffolds1.html) and [post by Pat Walters](https://practicalcheminformatics.blogspot.com/2024/11/some-thoughts-on-splitting-chemical.html).
 
-Here I'm trying out Pat's [useful_rdkit_utils](https://github.com/PatWalters/useful_rdkit_utils)' GroupKFoldShuffle code (code originated from [this thread](https://github.com/scikit-learn/scikit-learn/issues/20520)) to split data (Butina clustering/splits). To do this, it requires SMILES to generate molecular fingerprints which will be used in the training and testing sets (potentially for future posts and in real-life cases, more things can be done with the SMILES or other molecular representations for machine learning, but to keep this post easy-to-read, I'll stick with only generating the Morgan fingerprints for now). 
+Here I'm trying out Pat's [useful_rdkit_utils](https://github.com/PatWalters/useful_rdkit_utils)' GroupKFoldShuffle code (code originated from [this thread](https://github.com/scikit-learn/scikit-learn/issues/20520)) to split data (Butina clustering/splits). To do this, it requires SMILES to generate molecular fingerprints which will be used in the training and testing sets (potentially for future posts and in real-life cases, more things can be done with the SMILES or other molecular representations for machine learning, but to keep this post easy-to-read, I'll stick with only generating the Morgan fingerprints for now).
 
 ```{python}
 #| code-fold: true
@@ -221,7 +227,7 @@ for train, test in group_kfold_shuffle.split(np.stack(df_p3a4.fp), df.adverse_dr
 
 ##### **Locate training and testing sets after data split**
 
-While trying to figure out how to locate training and testing sets after the data split, I've gone into a mini rabbit hole myself (a self-confusing session but gladly it clears up when my thought process goes further...). For example, some of the ways I've planned to try: create a dictionary as {index: butina label} first - butina cluster labels vs. index e.g. df_s3a4["butina_cluster"], or maybe can directly convert from NumPy array to tensor - will need to locate drugs via indices first to specify training and testing sets, e.g. torch_train = torch.from_numpy(train) or torch_test = torch.from_numpy(test). It is actually simpler than this, which is to use pd.DataFrame.iloc() as shown below.
+While trying to figure out how to locate training and testing sets after the data split, I've gone into a mini rabbit hole myself (a self-confusing session but gladly it clears up when my thought process goes further...). For example, some of the ways I've planned to try: create a dictionary as {index: butina label} first - butina cluster labels vs. index e.g. df_s3a4\["butina_cluster"\], or maybe can directly convert from NumPy array to tensor - will need to locate drugs via indices first to specify training and testing sets, e.g. torch_train = torch.from_numpy(train) or torch_test = torch.from_numpy(test). It is actually simpler than this, which is to use pd.DataFrame.iloc() as shown below.
 
 ```{python}
 # Training set indices
@@ -262,19 +268,19 @@ This part involves converting X (features) and y (target) variables into either 
 
 There are three coding issues that have triggered warning messages when I'm trying to figure out how to convert CYP strengths into one-hot encodings:
 
-1. A useful [thread](https://github.com/pandas-dev/pandas/issues/57734) has helped me to solve the downcasting issue in pd.DataFrame.replace() when trying to do one-hot encoding to replace the CYP strengths for each drug
+1.  A useful [thread](https://github.com/pandas-dev/pandas/issues/57734) has helped me to solve the downcasting issue in pd.DataFrame.replace() when trying to do one-hot encoding to replace the CYP strengths for each drug
 
-2. A Pandas setting-with-copy warning shows if using df["column_name"]:
+2.  A Pandas setting-with-copy warning shows if using df\["column_name"\]:
 
-> A value is trying to be set on a copy of a slice from a DataFrame. Try using .loc[row_indexer,col_indexer] = value instead
+> A value is trying to be set on a copy of a slice from a DataFrame. Try using .loc\[row_indexer,col_indexer\] = value instead
 
 The solution is to enable the copy-on-write globally (as commented in the code below; from [Pandas reference](https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html#copy-on-write-cow)).
 
-3. PyTorch user warning appers if using df_train["cyp_strength_of_evidence"].values, as this leads to non-writable tensors with a warning like this:
+3.  PyTorch user warning appers if using df_train\["cyp_strength_of_evidence"\].values, as this leads to non-writable tensors with a warning like this:
 
 > UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:212.)
 
-One of the solutions is to add copy() e.g. col_encoded = one_hot(torch.from_numpy(df["column_name"].values.copy()) % total_numbers_in_column) or alternatively, convert column into numpy array first, then make the numpy array writeable (which is what I've used in the code below).
+One of the solutions is to add copy() e.g. col_encoded = one_hot(torch.from_numpy(df\["column_name"\].values.copy()) % total_numbers_in_column) or alternatively, convert column into numpy array first, then make the numpy array writeable (which is what I've used in the code below).
 
 ```{python}
 #| code-fold: true
@@ -403,11 +409,11 @@ y_test
 
 ##### **Input preprocessing pipeline using PyTorch Dataset and DataLoader**
 
-There is a size-mismatch-between-tensors warning when I'm trying to use PyTorch's TensorDataset(). I've found out that to use the data loader and tensor dataset, the first dimension of all tensors needs to be the same. Initially, they're not, where X_train.shape = [24313, 2], y_train.shape = [1, 2]. Eventually I've settled on two ways that can help with this: 
+There is a size-mismatch-between-tensors warning when I'm trying to use PyTorch's TensorDataset(). I've found out that to use the data loader and tensor dataset, the first dimension of all tensors needs to be the same. Initially, they're not, where X_train.shape = \[24313, 2\], y_train.shape = \[1, 2\]. Eventually I've settled on two ways that can help with this:
 
-- use tensor.unsqueeze(dim = 1) or 
+-   use tensor.unsqueeze(dim = 1) or
 
-- use tensor[None] which'll insert a new dimension at the beginning, then it becomes: X_train.shape = [1, 24313, 2], y_train.shape = [1, 1, 2]
+-   use tensor\[None\] which'll insert a new dimension at the beginning, then it becomes: X_train.shape = \[1, 24313, 2\], y_train.shape = \[1, 1, 2\]
 
 ```{python}
 X_train[None].shape
@@ -446,26 +452,25 @@ test_dl = DataLoader(test_data, batch_size, shuffle=True)
 
 <br>
 
-##### **Set up a simple DNN regression model** 
+##### **Set up a simple DNN regression model**
 
 I'm only going to use a very simple two-layer DNN model to match the tiny dataset used here. There are many other types of neural network layers or bits and pieces that can be used to suit the goals and purposes of the dataset used. This [reference link](https://pytorch.org/docs/stable/nn.html) shows different types of neural network layers that can be used in PyTorch.
 
 Below are some short notes regarding a neural network (NN) model:
- 
-- goal of the model is to minimise loss function L(W) (where W = weight) to get the optimal model weights
 
-- matrix with W (for hidden layer) connects input to hidden layer; matrix with W (for outer layer) connects hidden to output layer
+-   goal of the model is to minimise loss function L(W) (where W = weight) to get the optimal model weights
 
-- *Input layer* -> activation function of hidden layer -> *hidden layer* -> activation function of output layer -> *output layer* (a very-simplified flow diagram to show how the layers get connected to each other)
+-   matrix with W (for hidden layer) connects input to hidden layer; matrix with W (for outer layer) connects hidden to output layer
 
+-   *Input layer* -\> activation function of hidden layer -\> *hidden layer* -\> activation function of output layer -\> *output layer* (a very-simplified flow diagram to show how the layers get connected to each other)
 
 About backpropagation for loss function:
 
-- backpropagation is a computationally efficient way to calculate partial derivatives of loss function to update weights in multi-layer NNs
+-   backpropagation is a computationally efficient way to calculate partial derivatives of loss function to update weights in multi-layer NNs
 
-- it's based on calculus chain rule to compute derivatives of mathematical functions (automatic differentiation)
+-   it's based on calculus chain rule to compute derivatives of mathematical functions (automatic differentiation)
 
-- matrix-vector multiplications in backpropagation are computationally more efficient to calculate than matrix-matrix multiplications e.g. forward propagation
+-   matrix-vector multiplications in backpropagation are computationally more efficient to calculate than matrix-matrix multiplications e.g. forward propagation
 
 Note: there are also [other types of activation functions available](https://pytorch.org/docs/stable/nn.functional.html#non-linear-activation-functions) to use in PyTorch.
 
@@ -507,7 +512,7 @@ model
 
 This part is mainly about defining the loss function when training the model with the training data, and optimising model by using a stochastic gradient descent. One key thing I've gathered from trying to learn about deep learning is that we're aiming for global minima and not local minima (e.g. if learning rate is too small, this may end up with local minima; if learning rate is too large, it may end up over-estimating the global minima). I've also encountered the PyTorch padding method to make sure the input and target tensors are of the same size, otherwise the model will run into matrix broadcasting issue (which will likely influence the results). The training loss appears to have converged when the epoch runs reach 100 and/or after (note this may vary due to shuffle data sampling)... (I also think my data size is way too small to show a clear contrast in training loss convergence).
 
-References for: [nn.MSELoss()](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss) - measures mean squared error between X and y, and [nn.functional.pad()](https://pytorch.org/docs/stable/generated/torch.nn.functional.pad.html#torch.nn.functional.pad) - pads tensor (increase tensor size) 
+References for: [nn.MSELoss()](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss) - measures mean squared error between X and y, and [nn.functional.pad()](https://pytorch.org/docs/stable/generated/torch.nn.functional.pad.html#torch.nn.functional.pad) - pads tensor (increase tensor size)
 
 Obtaining training loss via model training:
 
@@ -597,28 +602,28 @@ plt.show
 
 At the moment, when this notebook is re-run on a refreshed kernel, this leads to a different train and test split each time, and also leading to a different train and test (validation) loss each time. There may be two types of scenarios shown in the plot above where:
 
-- test loss is higher than train loss (overfitting) - showing the model may be way too simplified and is likely under-trained
-- train loss is higher than test loss (underfitting) - showing that the model may not have been trained well, and is unable to learn the features in the training data and apply them to the test data
+-   test loss is higher than train loss (overfitting) - showing the model may be way too simplified and is likely under-trained
+-   train loss is higher than test loss (underfitting) - showing that the model may not have been trained well, and is unable to learn the features in the training data and apply them to the test data
 
-When there are actually more training data available with also other hyperparameters fine tuned, it may be possible to see another scenario where both test loss and train loss are very similar in trend, meaning the model is being trained well and able to generalise the training to the unseen data. 
+When there are actually more training data available with also other hyperparameters fine tuned, it may be possible to see another scenario where both test loss and train loss are very similar in trend, meaning the model is being trained well and able to generalise the training to the unseen data.
 
-To mitigate overfitting: 
+To mitigate overfitting:
 
-- firstly there should be more training data than what I've had here
+-   firstly there should be more training data than what I've had here
 
-- use L1 or L2 regularisation to minimise model complexity by adding penalities to large weights
+-   use L1 or L2 regularisation to minimise model complexity by adding penalities to large weights
 
-- use early stopping during model training to stop training the model when test loss is becoming higher than the train loss
+-   use early stopping during model training to stop training the model when test loss is becoming higher than the train loss
 
-- use [torch.nn.Dropout()](https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html) to randomly drop out some of the neurons to ensure the exisiting neurons will learn features without being too reliant on other neighbouring neurons in the network
+-   use [torch.nn.Dropout()](https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html) to randomly drop out some of the neurons to ensure the exisiting neurons will learn features without being too reliant on other neighbouring neurons in the network
 
-- *I'll try the early stopping or drop out method in future posts since current post is relatively long already...* (***[note](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/4_Prevent_overfit_note.html) on preventing model overfitting in DNN added in February 2025***)
+-   *I'll try the early stopping or drop out method in future posts since current post is relatively long already...* ([***note***](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/4_Prevent_overfit_note.html) ***on preventing model overfitting in DNN added in February 2025***)
 
 To overcome underfitting:
 
-- increase training epochs
-- minimise regularisation
-- consider building a more complex or deeper neural network model
+-   increase training epochs
+-   minimise regularisation
+-   consider building a more complex or deeper neural network model
 
 I'm trying to keep this post simple so have only used mean squared error (MSE) and mean absolute error (MAE) to evaluate the model which has made a prediction on the test set. The smaller the MSE, the less error the model has when making predictions. However this is not the only metric that will determine if a model is optimal for predictions, as I've also noticed that every time there's a different train and test split, the MAE and MSE values will vary too, so it appears that some splits will generate smaller MSE and other splits will lead to larger MSE.
 
@@ -669,13 +674,13 @@ print(f"Test accuracy: {accuracy:.4f}")
 
 A few things to consider in the end:
 
-- I haven't done feature standardisation for X_train which is to centre X_train mean and divide by its standard deviation, code may be like this, X_train_normalised = (X_train - np.mean(X_train))/np.std(X_train) (if used on training data, need to apply this to testing data too)
+-   I haven't done feature standardisation for X_train which is to centre X_train mean and divide by its standard deviation, code may be like this, X_train_normalised = (X_train - np.mean(X_train))/np.std(X_train) (if used on training data, need to apply this to testing data too)
 
-- Training features are certainly too small, however, the main goal of this very first post is to get an overall idea of how to construct a baseline DNN regression model. There are lots of other things that can be done to the ADRs data e.g. adding more drug molecular features and properties. I have essentially only used the initial molecular fingerprints generated when doing the data split to add a bit of molecular aspect in the training dataset.
+-   Training features are certainly too small, however, the main goal of this very first post is to get an overall idea of how to construct a baseline DNN regression model. There are lots of other things that can be done to the ADRs data e.g. adding more drug molecular features and properties. I have essentially only used the initial molecular fingerprints generated when doing the data split to add a bit of molecular aspect in the training dataset.
 
-- I haven't taken into account the frequencies of words (e.g. same drug classes and same ADR terms across different drugs) in the training and testing data, however, the aim of this first piece of work is also not a semantic analysis in natural language processing so this might not be needed...
+-   I haven't taken into account the frequencies of words (e.g. same drug classes and same ADR terms across different drugs) in the training and testing data, however, the aim of this first piece of work is also not a semantic analysis in natural language processing so this might not be needed...
 
-- There may be other PyTorch functions that I do not yet know about that will deal with small datasets e.g. perhaps [torch.sparse](https://pytorch.org/docs/stable/sparse.html) may be useful?... so this piece is certainly not the only way to do it, but one of the many ways to work with small data
+-   There may be other PyTorch functions that I do not yet know about that will deal with small datasets e.g. perhaps [torch.sparse](https://pytorch.org/docs/stable/sparse.html) may be useful?... so this piece is certainly not the only way to do it, but one of the many ways to work with small data
 
 <br>
 
@@ -683,11 +688,10 @@ A few things to consider in the end:
 
 I'm very thankful for the existence of these references, websites and reviewer below which have helped me understand (or scratch a small surface of) deep learning and also solve the coding issues mentioned in this post:
 
-- [PyTorch forums](https://discuss.pytorch.org/)
+-   [PyTorch forums](https://discuss.pytorch.org/)
 
-- [Stack Overflow](https://stackoverflow.com/)
+-   [Stack Overflow](https://stackoverflow.com/)
 
-- Raschka, Sebastian, Yuxi (Hayden) Liu, and Vahid Mirjalili. 2022. Machine Learning with PyTorch and Scikit-Learn. Birmingham, UK: Packt Publishing. 
+-   Raschka, Sebastian, Yuxi (Hayden) Liu, and Vahid Mirjalili. 2022. Machine Learning with PyTorch and Scikit-Learn. Birmingham, UK: Packt Publishing.
 
-- [Noel O'Boyle](https://baoilleach.blogspot.com) for feedback on this post
-
+-   [Noel O'Boyle](https://baoilleach.blogspot.com) for feedback on this post
