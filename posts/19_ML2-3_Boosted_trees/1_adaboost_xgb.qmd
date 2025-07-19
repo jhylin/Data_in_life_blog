@@ -3,7 +3,7 @@ title: "Boosted trees"
 subtitle: "Series 2.3.1 - AdaBoost, XGBoost and Scikit-mol"
 author: Jennifer HY Lin
 date: '2024-6-6'
-date-modified: '2025-1-30'
+date-modified: '2025-7-19'
 draft: false
 categories: 
     - Machine learning projects
@@ -16,6 +16,8 @@ categories:
 jupyter: python3
 format: html
 bibliography: references.bib
+execute: 
+  freeze: true
 ---
 
 ##### **Some introductions**
@@ -109,6 +111,7 @@ from rdkit import Chem
 import pickle
 
 # Import Scikit_mol
+import scikit_mol
 ## Check and clean SMILES
 from scikit_mol.utilities import CheckSmilesSanitazion
 ## Standardise molecules
@@ -135,6 +138,7 @@ from xgboost import XGBClassifier
 print(f"xgboost version used: {xgboost.__version__}")
 print(f"scikit-learn version used: {sklearn.__version__}")
 print(f"rdkit version used: {rdkit.__version__}")
+print(f"scikit_mol version used: {scikit_mol.__version__}")
 ```
 
 ```{python}
@@ -484,7 +488,7 @@ One can never just leave the process of building a machine learning model withou
 # print("XGBClassifier's missclassification_error: "f"{mlpipe_xgb_misclassifiaction_error:0.3f}")
 ```
 
-![An example of code output from running above misclassification error code](accuracy_score_output.jpg)
+![An example of code output from running above misclassification error code](accuracy_score_output.jpg){width="40%"}
 
 It appears that XGBoost model obtained a better prediction accuracy than the AdaBoost one (although the models are built in a very simple way, but it still shows the slight difference in performance). The training data being used here is also very imbalanced with a lot of them being max_phase of "0" than "4", and with max_phase "4" being our ultimate aim, the dataset used above is really for demonstration only. Also, since this post is already quite long, I'd rather not make this post into a gigantic tl;dr, so for the imbalanced data discussion and exploration, my previous posts have tried to touch on this topic - ["Random forest"](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/1_random_forest.html) and ["Random forest classifier"](https://jhylin.github.io/Data_in_life_blog/posts/17_ML2-2_Random_forest/2_random_forest_classifier.html).
 
@@ -593,7 +597,7 @@ The following chunk of code is an example of running randomised search CV. I've 
 ## This may take longer time to run depending on computer hardware specs (for me it's taken ~13min)
 ```
 
-![An example of code output from running the grid search code](gs_output.jpg)
+![An example of code output from running the grid search code](gs_output.jpg){width="80%"}
 
 For tuning parameters of Morgan fingerprints, this Scikit-mol [example notebook](https://github.com/EBjerrum/scikit-mol/blob/main/notebooks/06_hyperparameter_tuning.ipynb) explains how to do it with code, so I won't repeat them here, but have only shown how to tune some of the main XGBoost parameters.
 
