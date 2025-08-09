@@ -1,0 +1,274 @@
+---
+title: '**About tokenisation (or tokenization)**'
+draft: true
+jupyter: python3
+---
+
+*draft mode*
+
+This is really just a short piece to explore ways to tokenise texts out of my own interests (it may be useful in the future...?). There appears to be two different ways to do this (there may be other methods as well). The first one is a short demonstration about how to use [tokenizers](https://pypi.org/project/tokenizers/) package to tokenise a very small set of adverse drug reaction (ADR) terms or words into tokens, then encode the ADR terms with token IDs, followed by a final decoding of these token IDs back into the corresponding ADR terms. The second one is a short demonstration about using AutoTokenizer from [transformers](https://pypi.org/project/transformers/) package to tokenise or encode and then decode one line of texts.
+
+Reference links: \* https://huggingface.co/learn/llm-course/chapter2/4?fw=pt#tokenization \* https://huggingface.co/docs/datasets/use_dataset#tokenize-text
+
+My original plan looks like this: \* initial small goal is to try using tokenizer.decode(), so building a tokenization or tokenizer model first \* the idea is that this text data tokenisation part may be added to a larger DNN model to decode ADRs output later (subject to further idea changes... may try a small NER classification model first, see 6_NER_tk_inhibitors.ipynb)
+
+-   trying HuggingFace's transformers package with possible steps like this:
+
+1.  set up tokenizer model that will tokenize the ADRs/words
+2.  apply tokenizer.decode() function to each tensor row/sequence (via using list comprehension)
+3.  use sample code snippet below to decode tensors: e.g. decoded = \[tokenizer.decode(x) for x in adrs_ts\]
+
+-   the code will iterate through each row/sequence of tensors and apply the decode() method which'll transform the numerical IDs back into human-readable texts/words
+
+```{python}
+#from tokenizers.models import WordLevel
+import torch
+from tokenizers import Tokenizer, models, normalizers, pre_tokenizers, trainers
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import sys, datetime
+print(f"Python version used: {sys.version} at {datetime.datetime.now()}")
+```
+
+##### **Using tokenizer**
+
+```{python}
+## Sample normalizers code to "normalise" texts
+# somehow the normalizer code is not quite working yet... text data in and the same text data out...
+
+# from tokenizers.models import BPE, WordLevel, WordPiece
+# from tokenizers import Tokenizer, normalizers
+# from tokenizers.normalizers import StripAccents, Sequence, Replace
+
+# BPE - byte pair encoding
+# bpe_tokenizer = Tokenizer(BPE())
+# print(bpe_tokenizer.normalizer)
+# bpe_tokenizer.normalizer = normalizers.Sequence([StripAccents()])
+## normalizer seems to be set already even though code seems not right within the normalizers.Sequence() (?)
+# print(bpe_tokenizer.normalizer)
+
+# sentences = ['abdominal_pain', 'Höw aRę ŸõŪ dÔįñg?']
+
+# normalized_sentences = [bpe_tokenizer.normalizer.normalize_str(s) for s in sentences]
+# normalized_sentences
+```
+
+```{python}
+# example text data from one of CYP3A4 substrates - bosenten's ADRs 
+# since ADRs data are preprocessed a bit more than raw texts found elsewhere, decided to go straight to create a tokenizer
+data = ["abnormal_LFT^^, headache^^, RTI^^, hemoglobin_decreased^^, sperm_count_decreased^^, edema^^, hepatic_cirrhosis(pm), liver_failure(pm), jaundice(pm), syncope^, sinusitis^, nasal_congestion^, sinus_congestion^, rhinitis^, oropharyngeal_pain^, epistaxis^, nasopharyngitis^, idiopathic_pulmonary_fibrosis^, anemia^, hematocrit_decreased^, thrombocytopenia(pm), neutropenia(pm), leukopenia(pm), flushing^, hypotension^, palpitation^, orthostatic_hypotension^, unstable_angina^, hot_flush^, gastroesophageal_reflux_disease^, diarrhea^, pruritus^, erythema^, angioedema(pm), DRESS(pm), rash(pm), dermatitis(pm), arthralgia^, joint_swelling^, blurred_vision^, chest_pain^, peripheral_edema^, influenza_like_illness^, vertigo^, fever^, chest_pain^, hypersensitivity_reaction^, anaphylaxis(pm)"]
+
+#UNK_TOKEN = '[UNK]'
+PAD_TOKEN = '[PAD]'
+
+# have not yet taken into account of unknown words or padding token
+tokenizer = Tokenizer(models.WordLevel())
+
+# below link explains about how to add special tokens e.g. unknown tokens to take into account diff. scenarios
+# https://huggingface.co/learn/llm-course/chapter6/8?fw=pt#building-a-wordpiece-tokenizer-from-scratch
+special_tokens = ["[UNK]", "[PAD]", "[CLS]", "[SEP]", "[MASK]"]
+trainer = trainers.WordLevelTrainer(vocab_size=100000, special_tokens=special_tokens)
+
+# training tokenizer 
+# specify iterator - pass through iterator a sequence of sequences in the data via using map() function to apply split()
+# and trainer
+tokenizer.train_from_iterator(map(lambda x: x.split(), data), trainer=trainer)
+
+tokenizer.get_vocab()
+# returns the indices of each token in the text data
+```
+
+```{python}
+# using str.split() but punctuations such as commas are not stripped/splitted
+for t in data:
+    print(t.split())
+```
+
+```{python}
+# using pre_tokenizer will split at white spaces and remove punctuations, and set tokens for each word and each punctuation
+pre_tokenizer = pre_tokenizers.Whitespace()
+split_data = [pre_tokenizer.pre_tokenize_str(t) for t in data]
+split_data
+```
+
+```{python}
+for i in range(10):
+    print(f'ID: {i}, token: {tokenizer.id_to_token(i)}')
+```
+
+```{python}
+# number of unique tokens (words)
+tokenizer.get_vocab_size()
+```
+
+```{python}
+# Enable padding
+# need to find out if pad_id is always necessary e.g. pad_id = tokenizer.token_to_id(PAD_TOKEN)
+tokenizer.enable_padding(pad_token=PAD_TOKEN)
+```
+
+```{python}
+output = tokenizer.encode('vertigo^,', 'chest_pain^,')
+print(output.ids)
+```
+
+```{python}
+tokenizer.decode([51, 5])
+```
+
+##### **Using Autotokenizer**
+
+```{python}
+# PyTorch example re. saving & reloading tensors
+# t = torch.tensor([1., 2.])
+# torch.save(t, 'tensor.pt')
+# ts = torch.load('tensor.pt')
+# ts
+
+
+# Load adrs tensors from 2_ADR_regressor.ipynb after it's saved (from 2_ADR_regressor_save_tensors.ipynb)
+# adrs_ts = torch.load("adr_train_tensors.pt")
+# adrs_ts
+```
+
+```{python}
+# note: some of the pre-trained models are freely available but some of them may be gated 
+# (possibly still freely available but may require signing up a HF account)
+# BERT base transformer model (cased -> case-sensitive) has been used - https://huggingface.co/google-bert/bert-base-cased
+# "uncased" version - https://huggingface.co/google-bert/bert-base-uncased
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+
+sequence = "abnormal_LFT^^, headache^^, RTI^^, hemoglobin_decreased^^, sperm_count_decreased^^, edema^^, hepatic_cirrhosis(pm), " \
+"liver_failure(pm), jaundice(pm), syncope^, sinusitis^, nasal_congestion^, sinus_congestion^, rhinitis^, oropharyngeal_pain^, " \
+"epistaxis^, nasopharyngitis^, idiopathic_pulmonary_fibrosis^, anemia^, hematocrit_decreased^, thrombocytopenia(pm), neutropenia(pm), " \
+"leukopenia(pm), flushing^, hypotension^, palpitation^, orthostatic_hypotension^, unstable_angina^, hot_flush^, " \
+"gastroesophageal_reflux_disease^, diarrhea^, pruritus^, erythema^, angioedema(pm), DRESS(pm), rash(pm), dermatitis(pm), " \
+"arthralgia^, joint_swelling^, blurred_vision^, chest_pain^, peripheral_edema^, influenza_like_illness^, vertigo^, fever^, " \
+"chest_pain^, hypersensitivity_reaction^, anaphylaxis(pm)"
+
+tokens = tokenizer.tokenize(sequence)
+print(tokens)
+```
+
+```{python}
+ids = tokenizer.convert_tokens_to_ids(tokens)
+print(ids)
+```
+
+```{python}
+# convert_tokens_to_string() - merges sub-word tokens into complete words
+adrs_words = tokenizer.convert_tokens_to_string(tokens)
+adrs_words
+```
+
+```{python}
+# convert_ids_to_tokens() - converts numerical IDs back into corresponding token identifiers
+token_words = tokenizer.convert_ids_to_tokens(ids)
+print(token_words)
+```
+
+```{python}
+# example to obtain ADR terms from vocabulary indices
+adrs_terms = tokenizer.decode([22832, 168, 149, 26321, 167, 167, 117, 16320, 167, 167])
+print(adrs_terms)
+```
+
+```{python}
+# Try converting the token ID outputs into torch tensors so they can be used in a pytorch model later
+# transformers models expect multiple lines of string sequences, so likely need to add tensor dimensions and/or paddings later 
+# may be applicable to one line string sequence or multiple string sequences 
+```
+
+```{python}
+# API for PreTrainedTokenizerBase class re. parameter on return_tensors 
+# https://huggingface.co/docs/transformers/internal/tokenization_utils#transformers.PreTrainedTokenizerBase.__call__.return_tensors
+tokenised_inputs = tokenizer(sequence, return_tensors="pt")
+tokenised_inputs
+# output contains "input_ids" tensors, "token_type_ids" tensors & "attention_mask" tensors
+```
+
+```{python}
+# printing out only the "input_ids" tensors
+print(tokenised_inputs["input_ids"])
+```
+
+```{python}
+# using pytorch directly to create tensors from token IDs
+import torch
+torch.tensor(ids)
+```
+
+```{python}
+# Adding sample checkpoint & model with the tokenizer
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+
+# Sample multiple sequence data using ADRs of bosentan and carbamazepine
+sequence = ["abnormal_LFT^^, headache^^, RTI^^, hemoglobin_decreased^^, sperm_count_decreased^^, edema^^, hepatic_cirrhosis(pm), " \
+"liver_failure(pm), jaundice(pm), syncope^, sinusitis^, nasal_congestion^, sinus_congestion^, rhinitis^, oropharyngeal_pain^, " \
+"epistaxis^, nasopharyngitis^, idiopathic_pulmonary_fibrosis^, anemia^, hematocrit_decreased^, thrombocytopenia(pm), " \
+"neutropenia(pm), leukopenia(pm), flushing^, hypotension^, palpitation^, orthostatic_hypotension^, unstable_angina^, " \
+"hot_flush^, gastroesophageal_reflux_disease^, diarrhea^, pruritus^, erythema^, angioedema(pm), DRESS(pm), rash(pm), " \
+"dermatitis(pm), arthralgia^, joint_swelling^, blurred_vision^, chest_pain^, peripheral_edema^, influenza_like_illness^, " \
+"vertigo^, fever^, chest_pain^, hypersensitivity_reaction^, anaphylaxis(pm)", "constipation^^, leucopenia^^, dizziness^^, " \
+"sedation^^, ataxia^^, elevated_GGT^^, allergic_skin_reactions^^, eosinophilia^, thrombocytopenia^, neutropenia^, headache^, " \
+"tremor^, elevated_ALP^, pruritus^, paresthesia^, diplopia^, blurred_vision^, hyponatremia^, fluid_retention^, oedema^, "
+"weight_gain^, reduced_plasma_osmolarity_(ADH_like_effect)^, vertigo^"]
+
+tokens = tokenizer(sequence, padding=True, truncation=True, return_tensors="pt")
+output = model(**tokens)
+
+# tokens = tokenizer.tokenize(sequence)
+# ids = tokenizer.convert_tokens_to_ids(tokens)
+# input_ids = torch.tensor(ids)
+# print("Input IDs:", input_ids)
+```
+
+```{python}
+output
+```
+
+```{python}
+# Making a sample batch of token IDs by using the same sequence twice
+batched_ids = [ids, ids]
+batched_ids
+```
+
+```{python}
+input_batched_ids = torch.tensor(batched_ids)
+output_batched = model(input_batched_ids)
+print("Logits:", output_batched.logits)
+```
+
+```{python}
+# attention masks are used to tell the attention layers (which contextualise each token) in transformer models 
+# to ignore the padding tokens when multiple sequences are of different lengths
+```
+
+##### **Some initial thoughts after trying out tokenisation**
+
+The overall concept that I'm getting at the moment is that a language model (whether large or small) consists of:
+
+-   training a data corpus
+-   using tokenizer to encode or decode text data
+-   using pre-trained model of choice as a base or foundation model to train the data provided
+-   producing training output
+
+The pre-trained model can be further adjusted or fine-tuned via training the model on smaller high-quality datasets for other more specific NLP tasks.
+
+This means my initial small goal to convert the tensor outputs back into words will actually be the next step after having the training output from a language translation/summarisation/classification model, meaning I'll have to test the trained model on a different set of test data in order to see if the conversion from tensors to strings will make sense (this leads to the latest new plan to try doing NER for the ADRs of tyrosine kinase inhibitors).
+
+-   possible training workflow of a small part of an early ADR prediction model may be like this:
+
+    input training ADR strings (later may add the "drug" part) -\> encode into token IDs for training -\> tensors -\> token IDs to be decoded -\> ADR strings
+
+    code example for the tensors to token IDs to string representations part:
+
+    tokenizer.batch_decode(outputs.context_input_ids, skip_special_tokens=True)
+
+-   possible workflow to test data in the trained pre-trained ADR decoder model may be like this:
+
+    input testing drug-ADRs -\> token IDs -\> tensors -\> token IDs -\> ADR strings
+
+A useful and informative reference paper to learn about NLP in drug discovery is by Withers et al. - https://doi.org/10.1080/17460441.2025.2490835
