@@ -1,5 +1,12 @@
 ---
 title: '**About tokenisation (or tokenization)**'
+date: "2025-9-1"
+author: Jennifer HY Lin
+categories: 
+    - Python
+    - Pytorch
+    - Notes
+    - Deep learning
 draft: true
 jupyter: python3
 ---
@@ -20,14 +27,25 @@ My original plan looks like this: \* initial small goal is to try using tokenize
 
 -   the code will iterate through each row/sequence of tensors and apply the decode() method which'll transform the numerical IDs back into human-readable texts/words
 
+##### **Import libraries**
+
 ```{python}
+import warnings
+warnings.filterwarnings('ignore')
 #from tokenizers.models import WordLevel
 import torch
+import tokenizers
 from tokenizers import Tokenizer, models, normalizers, pre_tokenizers, trainers
+import transformers
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import sys, datetime
 print(f"Python version used: {sys.version} at {datetime.datetime.now()}")
+print(f"PyTorch version used: {torch.__version__}")
+print(f"tokenizers version used: {tokenizers.__version__}")
+print(f"transformers version used: {transformers.__version__}")
 ```
+
+<br>
 
 ##### **Using tokenizer**
 
