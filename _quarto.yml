@@ -13,14 +13,8 @@ website:
       - past_projects.qmd
       - icon: github
         href: https://github.com/jhylin
-      - text: "{{< fa brands bluesky >}}"
-        href: https://bsky.app/profile/jhylin.bsky.social
-      - icon: mastodon
-        href: https://fosstodon.org/@jhylin
       - icon: twitter
         href: https://twitter.com/jenhylin
-      - icon: linkedin
-        href: https://www.linkedin.com/in/jennifer-hy-lin-a9b86981/
       - text: CV
         href: https://jhylin.github.io/CV_resume_quarto/
       - icon: rss
