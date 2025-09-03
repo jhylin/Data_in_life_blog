@@ -19,8 +19,7 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning and data science projects in drug discovery.
 
--   Latest project - [CYP-ADRs data](https://raw.githubusercontent.com/jhylin/Adverse_drug_reactions/refs/heads/main/Data/cyp_substrates_adrs.csv) (on adverse drug reactions for cytochrome P450 substrates) in this [repository](https://github.com/jhylin/Adverse_drug_reactions) with [ideas](https://jhylin.github.io/Data_in_life_blog/posts/22_Simple_dnn_adrs/0_Ideas.html) behind this work
--   Next project in the pipeline - there may be more to work on for the adverse drug reactions project...
+-   Next project in the pipeline - on temporary break
 
 <br>
 
