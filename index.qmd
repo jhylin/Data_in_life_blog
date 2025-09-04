@@ -22,5 +22,3 @@ Welcome to my blog on selected cheminformatics, machine learning and data scienc
 -   Next project in the pipeline - on temporary break
 
 <br>
-
-<a rel="me" href="https://fosstodon.org/@jhylin"></a>
