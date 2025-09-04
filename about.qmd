@@ -4,9 +4,6 @@ image: profile avatar.jpg
 about:
   template: jolla
   links:
-    - icon: book
-      text: Portfolio
-      href: https://www.datascienceportfol.io/jhylin
     - icon: github
       text: Github
       href: https://github.com/jhylin
