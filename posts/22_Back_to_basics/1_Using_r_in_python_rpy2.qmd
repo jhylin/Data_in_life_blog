@@ -1,0 +1,134 @@
+---
+title: "Using R in Python - rpy2"
+author: Jennifer HY Lin
+date: 2025-11-8
+draft: true
+categories: 
+    - Notes
+format: html
+---
+
+This is something I've always wanted to try, that is using both R and Python in one place, so here it is.
+
+Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I'll try rpy2 first in this post. For the notes about using reticulate package, it'll be in a separate post (**add link**).
+
+There will be two different versions of code below where one is based on using R dataframe in Python and ggplot2, and the other one is based on pandas dataframe in Python with ggplot2. From my little experience using both versions of code, I'd say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course... there are always new things to learn for sure).
+
+<br>
+
+##### **Setting up notebook environment**
+
+Steps:
+
+This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.
+
+1.  Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of Python and R used in this notebook are printed above the plot shown below.
+
+2.  Install R's language server as shown below.
+
+```{{r}}
+install.packages("languageserver")
+```
+
+3.  Install [reticulate package](https://rstudio.github.io/reticulate/) ([GitHub repo](https://github.com/rstudio/reticulate/)). It's a useful R interface to Python and will be used in the other post.
+
+4.  Install rmarkdown package (may not be required as this is really just making sure that this note may be posted on my blog later that uses Quarto).
+
+5.  Install R extension for VS Code (may not be required as this is because I'm using VS Code. There is another very similar IDE called Positron created by Posit which may not require this step).
+
+6.  Install [rpy2 package](https://github.com/rpy2/rpy2). This notebook uses rpy2 version 3.6.4.
+
+Note: the installations of R-related packages need to be done in the R console in RStudio/Positron IDE or R terminal in VS Code. The R code above are not to be executed in Quarto markdown (.qmd) or RMarkdown (.rmd) documents as this will lead to an error message like this, "trying to use CRAN without setting a mirror..." when trying to preview the .qmd or .rmd.
+
+<br>
+
+##### **Using R dataframe in python and ggplot2**
+
+```{python}
+import rpy2
+import rpy2 as robjects
+## To print HTML in notebooks
+import rpy2.ipython.html
+rpy2.ipython.html.init_printing()
+
+from rpy2.robjects.packages import importr
+
+# Using a local converter
+from rpy2.robjects import conversion, default_converter
+with conversion.localconverter(default_converter):
+
+    utils = importr('utils')
+    dataf = utils.read_csv("df_ml.csv")
+    
+    #print(dataf)
+    print(dataf.colnames)
+
+    ## Visualising with ggplot2 in Python
+    import rpy2.robjects.lib.ggplot2 as gp
+
+    p = (gp.ggplot(dataf, gp.aes(x='Polar.Surface.Area', y='QED.Weighted')) + 
+        # gp.aes(x='Polar.Surface.Area', y='QED.Weighted') + 
+        gp.geom_point())
+
+    ## To see plots in an output cell - this doesn't work yet, it generates an empty .png with error message
+    from rpy2.ipython.ggplot import image_png
+    image_png(p)
+
+    ## this code seems to work by completing the run, but no plot is shown
+    # p.plot()
+
+    ## this code also seems to work but with no plot shown
+    # print(p)
+```
+
+<br>
+
+##### **Coding issues**
+
+The first coding issue encountered is that the code to produce a final output of the dataframe won't transform into a .qmd preview i.e. html page. There is an error message showing such as, "Conversion rules for `rpy2.robjects` appear to be missing..." when trying to preview this as a .qmd. One of the solutions I've found online ([code reference](https://stackoverflow.com/questions/75069677/rpy2-throws-a-notimplementederror-concerning-conversion-rules)) is to set up a local converter in the code and run all rpy2-related code within this converter (as commented in the code above).
+
+The second issue is that I've only managed to run the code to show R dataframe in Python but not the plot... hence you will see the error message generated from the code above, with only the column names shown without a plot there. To resolve this issue, more time is spent on looking for answers online. A mini test has been done in a Jupyter notebook to show a short code to achieve a simple plot ([link to Jupyter notebook](https://github.com/jhylin/Back_to_basics/blob/main/1_Using_r_in_python_pd_ggplot2_rpy2.ipynb) which is based on this [code reference](https://stackoverflow.com/questions/43975244/displaying-r-ggplots-inline-in-jupyter-notebooks)) by calling R magic in Python kernel via rpy2. Once this works, I then manage to change the code to import a sample dataframe and set up to display a simple scatter plot as shown below.
+
+<br>
+
+##### **Using pandas and ggplot2**
+
+```{python}
+# python version used
+import sys
+print(sys.version)
+```
+
+```{python}
+# Load R magic
+%load_ext rpy2.ipython
+
+import pandas as pd
+
+df = pd.read_csv("df_ml.csv")
+df = df.rename(columns={"QED Weighted": "QED", "Polar Surface Area": "PSA"})
+df.head()
+```
+
+```{python}
+from rpy2.robjects import conversion, default_converter
+with conversion.localconverter(default_converter):
+
+    # R version
+    %R print(R.version.string)
+
+    # Importing ggplot2
+    %R require(ggplot2)
+
+    # Take name of input variable df and assign it to an R variable of the same name
+    %R -i df
+
+    # Plot the df
+    %R print(ggplot(df, aes(PSA, QED, colour = Max_Phase)) + geom_point())
+```
+
+<br>
+
+##### **Dataframe libraries in R and Python**
+
+There may be frequent debates about which programming language to use for data cleaning and manipulations. I'm open to use either whenever it suits really. As far as I'm aware, R has [dyplr](https://dplyr.tidyverse.org/) package (part of the core tidyverse packages) that is equivalent to pandas in Python (depending on personal preference and habits, different users will have different opinions about "equivalence" here). There is [Polars](https://docs.pola.rs/api/python/stable/reference/index.html) as well that's available to use in Python and R ([R Polars](https://pola-rs.github.io/r-polars/index.html)). I think there's also a more conventional base R code available that can be used to wrangle dataframes (e.g. a R package called [data.table](https://github.com/Rdatatable/data.table) that is based on base R's data.frame, it appears that it may be harder to learn than dyplr due to syntax but it'll be great for large datasets). There is a useful [post](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/) suggested by R users online that introduces and explains data.table's differences from dyplr.
