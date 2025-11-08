@@ -170,10 +170,14 @@
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/index.html</loc>
-    <lastmod>2025-09-04T00:31:22.158Z</lastmod>
+    <lastmod>2025-11-08T23:12:25.468Z</lastmod>
   </url>
   <url>
     <loc>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html</loc>
-    <lastmod>2025-11-08T03:01:57.360Z</lastmod>
+    <lastmod>2025-11-08T23:31:52.185Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html</loc>
+    <lastmod>2025-11-08T23:29:11.339Z</lastmod>
   </url>
 </urlset>

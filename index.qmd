@@ -19,6 +19,6 @@ comments: false
 
 Welcome to my blog on selected cheminformatics, machine learning and data science projects in drug discovery.
 
--   Next project in the pipeline - on temporary break
+-   Next project in the pipeline - on temporary break (but there are two notes about R and Python in the meantime)
 
 <br>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jennifer HY Lin">
-<meta name="dcterms.date" content="2025-11-08">
+<meta name="dcterms.date" content="2025-11-09">
 
 <title>Using R in Python - rpy2 – Home</title>
 <style>
@@ -120,7 +120,6 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<meta name="quarto:status" content="draft">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -291,7 +290,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -347,6 +346,8 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <h1 class="title">Using R in Python - rpy2</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Notes</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -364,7 +365,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 8, 2025</p>
+        <p class="date">November 9, 2025</p>
       </div>
     </div>
     
@@ -403,7 +404,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="setting-up-notebook-environment" class="level5">
 <h5 class="anchored" data-anchor-id="setting-up-notebook-environment"><strong>Setting up notebook environment</strong></h5>
 <p>Steps:</p>
-<p>This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.</p>
+<p>This notebook has been created using a virtual environment using uv, with the associated <a href="https://github.com/jhylin/Back_to_basics">repository</a> created using the project structure from uv too. This step has been done prior to the executions of the following steps.</p>
 <ol type="1">
 <li><p>Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this <a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">post</a>). The versions of Python and R used in this notebook are printed above the plot shown below.</p></li>
 <li><p>Install R’s language server as shown below.</p></li>
@@ -422,12 +423,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </section>
 <section id="using-r-dataframe-in-python-and-ggplot2" class="level5">
 <h5 class="anchored" data-anchor-id="using-r-dataframe-in-python-and-ggplot2"><strong>Using R dataframe in python and ggplot2</strong></h5>
-<div id="f1ea5f15" class="cell" data-execution_count="1">
+<div id="8de755d4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rpy2</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rpy2 <span class="im">as</span> robjects</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#import rpy2 as robjects</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">## To print HTML in notebooks</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rpy2.ipython.html</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rpy2.ipython.html.init_printing()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import rpy2.ipython.html</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rpy2.ipython.html.init_printing()</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects.packages <span class="im">import</span> importr</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -458,43 +459,20 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">## this code also seems to work but with no plot shown</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(p)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Error importing in API mode: ImportError('dlopen(/Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/_rinterface_cffi_api.abi3.so, 0x0002): symbol not found in flat namespace (_R_BaseEnv)')
-Trying to import in ABI mode.</code></pre>
+<pre><code>R callback write-console: In addition:   
+R callback write-console: Warning message:
+  
+R callback write-console: In (function (filename = "Rplot%03d.png", width = 480, height = 480,  :  
+R callback write-console: 
+   
+R callback write-console:  failed to load cairo DLL
+  </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Max_Phase"          "Polar.Surface.Area" "HBA"               
 [4] "HBD"                "X.RO5.Violations"   "QED.Weighted"      
 [7] "CX.LogP"            "CX.LogD"            "Heavy.Atoms"       
 </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>R callback write-console: In addition:   
-R callback write-console: Warning messages:
-  
-R callback write-console: 1:   
-R callback write-console: In grSoftVersion() :  
-R callback write-console: 
-   
-R callback write-console:  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
-  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: '/opt/X11/lib/libSM.6.dylib'
-  Referenced from: '/Library/Frameworks/R.framework/Versions/4.5-x86_64/Resources/modules/R_X11.so'
-  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/usr/local/lib/libSM.6.dylib' (no such file), '/usr/lib/libSM.6.dylib' (no such file)
-  
-R callback write-console: 2:   
-R callback write-console: In cairoVersion() :  
-R callback write-console: 
-   
-R callback write-console:  unable to load shared object '/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so':
-  dlopen(/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so, 0x0006): Library not loaded: '/opt/X11/lib/libSM.6.dylib'
-  Referenced from: '/Library/Frameworks/R.framework/Versions/4.5-x86_64/Resources/library/grDevices/libs/cairo.so'
-  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/usr/local/lib/libSM.6.dylib' (no such file), '/usr/lib/libSM.6.dylib' (no such file)
-  
-R callback write-console: 3:   
-R callback write-console: In (function (filename = "Rplot%03d.png", width = 480, height = 480,  :  
-R callback write-console: 
-   
-R callback write-console:  failed to load cairo DLL
-  </code></pre>
 </div>
 </div>
 <p><br></p>
@@ -507,24 +485,28 @@ R callback write-console:  failed to load cairo DLL
 </section>
 <section id="using-pandas-and-ggplot2" class="level5">
 <h5 class="anchored" data-anchor-id="using-pandas-and-ggplot2"><strong>Using pandas and ggplot2</strong></h5>
-<div id="4c3ee0c8" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python version used</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="68e5aced" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python version used</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3.12.7 (main, Oct 16 2024, 09:10:10) [Clang 18.1.8 ]</code></pre>
 </div>
 </div>
-<div id="99544739" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load R magic</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext rpy2.ipython</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"df_ml.csv"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"QED Weighted"</span>: <span class="st">"QED"</span>, <span class="st">"Polar Surface Area"</span>: <span class="st">"PSA"</span>})</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="5f0fa845" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load R magic</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext rpy2.ipython</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"df_ml.csv"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"QED Weighted"</span>: <span class="st">"QED"</span>, <span class="st">"Polar Surface Area"</span>: <span class="st">"PSA"</span>})</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The rpy2.ipython extension is already loaded. To reload it, use:
+  %reload_ext rpy2.ipython</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -610,7 +592,7 @@ R callback write-console:  failed to load cairo DLL
 </div>
 </div>
 </div>
-<div id="773f68a0" class="cell" data-execution_count="4">
+<div id="f584b099" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects <span class="im">import</span> conversion, default_converter</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> conversion.localconverter(default_converter):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>

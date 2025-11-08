@@ -1,10 +1,12 @@
 ---
 title: "Using R in Python - rpy2"
 author: Jennifer HY Lin
-date: 2025-11-8
-draft: true
+date: 2025-11-9
+draft: false
 categories: 
     - Notes
+    - R
+    - Python
 format: html
 ---
 
@@ -20,7 +22,7 @@ There will be two different versions of code below where one is based on using R
 
 Steps:
 
-This notebook has been created using a virtual environment using uv, with the associated repository created using the project structure from uv too. This step has been done prior to the executions of the following steps.
+This notebook has been created using a virtual environment using uv, with the associated [repository](https://github.com/jhylin/Back_to_basics) created using the project structure from uv too. This step has been done prior to the executions of the following steps.
 
 1.  Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (as suggested by this [post](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of Python and R used in this notebook are printed above the plot shown below.
 
@@ -46,10 +48,10 @@ Note: the installations of R-related packages need to be done in the R console i
 
 ```{python}
 import rpy2
-import rpy2 as robjects
+#import rpy2 as robjects
 ## To print HTML in notebooks
-import rpy2.ipython.html
-rpy2.ipython.html.init_printing()
+# import rpy2.ipython.html
+# rpy2.ipython.html.init_printing()
 
 from rpy2.robjects.packages import importr
 
