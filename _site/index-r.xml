@@ -12,6 +12,349 @@
 <generator>quarto-1.7.31</generator>
 <lastBuildDate>Sat, 08 Nov 2025 11:00:00 GMT</lastBuildDate>
 <item>
+  <title>Using Python in R - reticulate</title>
+  <dc:creator>Jennifer HY Lin</dc:creator>
+  <link>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<section id="background" class="level5">
+<h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
+<p>The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R’s strong statistical packages and Python’s well-developed and maintained machine learning packages in some of our scientific research work.</p>
+<p>For rpy2 package, I’ve tried it in a separate post (<strong>add link</strong>). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
+<p>For <a href="https://rstudio.github.io/reticulate/index.html">reticulate package</a>, the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I’ve changed the title of this post to reflect this.</p>
+<p><br></p>
+</section>
+<section id="setting-up-notebook-environment" class="level5">
+<h5 class="anchored" data-anchor-id="setting-up-notebook-environment"><strong>Setting up notebook environment</strong></h5>
+<p>Steps I’ve taken:</p>
+<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well. This step has been done prior to the executions of the following steps.</p>
+<ol type="1">
+<li><p>Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (<a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">reference</a>). The versions of R and Python used here are suggested by the <a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">old reference post about using rpy2 from 2022</a>. So far when I’ve tried it with reticulate package, it works so I’ll leave them as how they are now.</p></li>
+<li><p>Install R’s language server. All R packages are to be installed via R console/terminal (not in notebooks, otherwise you may run into some error messages).</p></li>
+</ol>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```{r}</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"languageserver"</span>)</span>
+<span id="cb1-3"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```</span></span></code></pre></div>
+<ol start="3" type="1">
+<li><p>Install <a href="https://rstudio.github.io/reticulate/">reticulate package</a> as shown in its <a href="https://github.com/rstudio/reticulate/">GitHub repository</a>.</p></li>
+<li><p>Install rmarkdown package so we can preview .qmd docs (this step may not be required as this is purely for posting on my blog). Some further set-ups may be required if using VS Code, e.g.&nbsp;go to “Settings” of VS Code -&gt; under “User” -&gt; Text Editor -&gt; Files -&gt; Associations -&gt; add *.Rmd as “Item” and rmd as “Value”</p></li>
+<li><p>Install R extension for VS Code (may not be required as this is because I’m using VS Code. There is another very similar IDE called Positron created by Posit which may not require this step).</p></li>
+<li><p>Install shiny package (I was reminded to do this while installing these packages… unsure of its direct relevance to my goal here but it doesn’t hurt so I’ve done it)</p></li>
+</ol>
+<p>Quarto markdown documents (.qmd) and R markdown documents (.rmd) are interchangeable as .qmd are based on .rmd so I’ve done a little trial using reticulate package first in .rmd which worked, and then decided to switch to .qmd so that this piece of work may be published on my blog later. The convenient thing here is that you can literally just change the file name ending with .rmd to .qmd to convert a .rmd file into a .qmd file.</p>
+<p><br></p>
+</section>
+<section id="import-libraries" class="level5">
+<h5 class="anchored" data-anchor-id="import-libraries"><strong>Import libraries</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Show R version used</span></span>
+<span id="cb2-2">R.version.string</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R version 4.5.1 (2025-06-13)"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Import R packages/libraries in R</span></span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(reticulate)</span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Import Python packages/libraries in R </span></span>
+<span id="cb4-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This step is required to install Python packages in R while using reticulate</span></span>
+<span id="cb4-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Reference: https://rstudio.github.io/reticulate/articles/python_packages.html</span></span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Import pandas</span></span>
+<span id="cb4-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_require</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pandas"</span>)</span>
+<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># below likely needed if calling pandas in r code, but since I'll be using python code, </span></span>
+<span id="cb4-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># we can just import python packages as usual without following code</span></span>
+<span id="cb4-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pd &lt;- import("pandas")</span></span>
+<span id="cb4-13"></span>
+<span id="cb4-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Import plotnine</span></span>
+<span id="cb4-15"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_require</span>( <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plotnine"</span>)</span>
+<span id="cb4-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#p9 &lt;- import("plotnine")</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Show Python version used</span></span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_config</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>python:         /Users/jenniferlin/Data_in_life_blog/.venv/bin/python
+libpython:      /Users/jenniferlin/.local/share/uv/python/cpython-3.12.7-macos-x86_64-none/lib/libpython3.12.dylib
+pythonhome:     /Users/jenniferlin/Data_in_life_blog/.venv:/Users/jenniferlin/Data_in_life_blog/.venv
+virtualenv:     /Users/jenniferlin/Data_in_life_blog/.venv/bin/activate_this.py
+version:        3.12.7 (main, Oct 16 2024, 09:10:10) [Clang 18.1.8 ]
+numpy:          /Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/numpy
+numpy_version:  1.26.4
+
+NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
+</div>
+</div>
+<p>Below is a small test snippet of running Python code in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Code snippet below borrowed from https://www.geeksforgeeks.org/r-language/integrating-python-code-with-r/</span></span>
+<span id="cb7-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Running Python code in R</span></span>
+<span id="cb7-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_run_string</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x = 10"</span>)</span>
+<span id="cb7-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_run_string</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y = 5"</span>)</span>
+<span id="cb7-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_run_string</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"z = x + y"</span>)</span>
+<span id="cb7-6"></span>
+<span id="cb7-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Access the Python variable in R</span></span>
+<span id="cb7-8">z <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> py<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>z  </span>
+<span id="cb7-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(z)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>I have a feeling now that it’s easier to use reticulate package for the purpose of combining Python and R in one place.</p>
+<p><br></p>
+</section>
+<section id="plotting-in-r-using-ggplot2-and-plotnine" class="level5">
+<h5 class="anchored" data-anchor-id="plotting-in-r-using-ggplot2-and-plotnine"><strong>Plotting in R using ggplot2 and plotnine</strong></h5>
+<p>Next example is using Python code to read a dataframe using Pandas.</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```{python}</span></span>
+<span id="cb9-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## This is the code for read_df.py</span></span>
+<span id="cb9-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># import pandas</span></span>
+<span id="cb9-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb9-5"></span>
+<span id="cb9-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> reading_df(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span>):</span>
+<span id="cb9-7">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Reading a df (using one of my old cleaned datasets from a while ago)</span></span>
+<span id="cb9-8">    df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span>)</span>
+<span id="cb9-9">    df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QED Weighted"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QED"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Polar Surface Area"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PSA"</span>})</span>
+<span id="cb9-10">    </span>
+<span id="cb9-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> df</span>
+<span id="cb9-12"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```</span></span></code></pre></div>
+<p><br></p>
+<section id="ggplot2" class="level6">
+<h6 class="anchored" data-anchor-id="ggplot2"><strong>ggplot2</strong></h6>
+<p>Then I’m using R’s well-known plotting package, <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, to plot a scatter plot as an example shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Read data using read_df.py</span></span>
+<span id="cb10-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">source_python</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"read_df.py"</span>)</span>
+<span id="cb10-3">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">reading_df</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"df_ml.csv"</span>)</span>
+<span id="cb10-4"></span>
+<span id="cb10-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb10-6"></span>
+<span id="cb10-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(df, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(PSA, QED, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> Max_Phase)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb10-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb10-9">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_jitter</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="plotnine" class="level6">
+<h6 class="anchored" data-anchor-id="plotnine"><strong>plotnine</strong></h6>
+<p>An equivalent Python plotting library based on ggplot2 is <a href="https://plotnine.org/">plotnine</a>. The same plot is shown below using plotnine with Python code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> read_df <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> reading_df</span>
+<span id="cb11-2">df_data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> reading_df(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"df_ml.csv"</span>)</span>
+<span id="cb11-3"></span>
+<span id="cb11-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> plotnine <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> p9</span>
+<span id="cb11-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># from plotnine import *</span></span>
+<span id="cb11-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># from plotnine import ggplot, aes, geom_point</span></span>
+<span id="cb11-7"></span>
+<span id="cb11-8">plot <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (p9.ggplot(data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>df_data) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> p9.geom_point(mapping<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>p9.aes(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PSA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QED"</span>, color <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Max_Phase"</span>)))</span>
+<span id="cb11-9"></span>
+<span id="cb11-10">plot.show()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="614"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>All plots shown in this post using reticulate and the other post using rpy2 should look the same by using the same set of data but different code in two different programming languages (which means I’ve somewhat achieved my small goal here!).</p>
+<p><br></p>
+</section>
+</section>
+<section id="regarding-reproducibility-of-projects-in-r" class="level5">
+<h5 class="anchored" data-anchor-id="regarding-reproducibility-of-projects-in-r"><strong>Regarding reproducibility of projects in R</strong></h5>
+<p>I realise after finishing these two posts about using R and Python together that I should’ve created two separate repositories and virtual environments where one is based on Python and the other based on R to improve the reproducibilities of the work (hmm… currently it may look messy with what I’ve done here, as these two posts are in a Python-based virtual environment). It is possible and most likely recommended to set up a R virtual environment when working on R-related projects. This <a href="https://posit.co/blog/renv-project-environments-for-r/">introductory post</a> about <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> will help with this.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Notes</category>
+  <category>Python</category>
+  <category>R</category>
+  <guid>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html</guid>
+  <pubDate>Sat, 08 Nov 2025 11:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Using R in Python - rpy2</title>
   <dc:creator>Jennifer HY Lin</dc:creator>
   <link>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html</link>
