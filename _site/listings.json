@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html",
       "/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html",
       "/posts/19_ML2-3_Boosted_trees/1_adaboost_xgb.html",
       "/posts/18_Notes_molstar_quarto/Molstar_quarto.html",

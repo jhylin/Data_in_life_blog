@@ -2,7 +2,7 @@
 title: "Using Python in R - reticulate"
 author: Jennifer HY Lin
 date: 2025-11-9
-draft: false
+draft: true
 categories: 
     - Notes
     - Python
@@ -14,7 +14,7 @@ format: html
 
 The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R's strong statistical packages and Python's well-developed and maintained machine learning packages in some of our scientific research work.
 
-For rpy2 package, I've tried it in a separate post (**add link**). Interestingly, I had to pause in the middle of working on it due to an issue about plotting and started working on current post using reticulate. I've since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.
+For rpy2 package, I've tried it in a separate post (**add link**). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I've since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.
 
 For [reticulate package](https://rstudio.github.io/reticulate/index.html), the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I've changed the title of this post to reflect this.
 
@@ -24,7 +24,7 @@ For [reticulate package](https://rstudio.github.io/reticulate/index.html), the c
 
 Steps I've taken:
 
-Initial preparation - this notebook has been created using a virtual environment from uv, with the associated [repository](https://github.com/jhylin/Back_to_basics) created using the uv project management structure as well. This step has been done prior to the executions of the following steps.
+Initial preparation - this notebook has been created using a virtual environment from uv, with the [associated repository](https://github.com/jhylin/Back_to_basics) created using the uv project management structure as well. This step has been done prior to the executions of the following steps.
 
 1.  Install R with version at least 4.0 or above, and Python with version at least 3.7 or above ([reference](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of R and Python used here are suggested by the [old reference post about using rpy2 from 2022](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/). So far when I've tried it with reticulate package, it works so I'll leave them as how they are now.
 
@@ -95,7 +95,7 @@ I have a feeling now that it's easier to use reticulate package for the purpose 
 
 <br>
 
-##### **Plotting in R using ggplot2 and in Python using plotnine**
+##### **Plotting in R using ggplot2 and plotnine**
 
 Next example is using Python code to read a dataframe using Pandas.
 
@@ -116,7 +116,7 @@ def reading_df(file):
 
 ###### **ggplot2**
 
-Then I'm using R's well-known plotting package, [ggplot2](https://ggplot2.tidyverse.org/), to plot a scatter plot based on a sample dataset using read_df.py as an example shown below.
+Then I'm using R's well-known plotting package, [ggplot2](https://ggplot2.tidyverse.org/), to plot a scatter plot as an example shown below.
 
 ```{r}
 # Read data using read_df.py
@@ -150,3 +150,9 @@ plot.show()
 ```
 
 All plots shown in this post using reticulate and the other post using rpy2 should look the same by using the same set of data but different code in two different programming languages (which means I've somewhat achieved my small goal here!).
+
+<br>
+
+##### **Regarding reproducibility of projects in R**
+
+I realise after finishing these two posts about using R and Python together that I should've created two separate repositories and virtual environments where one is based on Python and the other based on R to improve the reproducibilities of the work (hmm... currently it may look messy with what I've done here, as these two posts are in a Python-based virtual environment). It is possible and most likely recommended to set up a R virtual environment when working on R-related projects. This [introductory post](https://posit.co/blog/renv-project-environments-for-r/) about [renv](https://rstudio.github.io/renv/articles/renv.html) will help with this. 

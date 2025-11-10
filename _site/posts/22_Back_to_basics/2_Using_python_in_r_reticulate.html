@@ -117,6 +117,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 </script>
+<meta name="quarto:status" content="draft">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -287,7 +288,7 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -381,11 +382,12 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><strong>Background</strong></a></li>
   <li><a href="#setting-up-notebook-environment" id="toc-setting-up-notebook-environment" class="nav-link" data-scroll-target="#setting-up-notebook-environment"><strong>Setting up notebook environment</strong></a></li>
   <li><a href="#import-libraries" id="toc-import-libraries" class="nav-link" data-scroll-target="#import-libraries"><strong>Import libraries</strong></a></li>
-  <li><a href="#plotting-in-r-using-ggplot2-and-in-python-using-plotnine" id="toc-plotting-in-r-using-ggplot2-and-in-python-using-plotnine" class="nav-link" data-scroll-target="#plotting-in-r-using-ggplot2-and-in-python-using-plotnine"><strong>Plotting in R using ggplot2 and in Python using plotnine</strong></a>
+  <li><a href="#plotting-in-r-using-ggplot2-and-plotnine" id="toc-plotting-in-r-using-ggplot2-and-plotnine" class="nav-link" data-scroll-target="#plotting-in-r-using-ggplot2-and-plotnine"><strong>Plotting in R using ggplot2 and plotnine</strong></a>
   <ul>
   <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><strong>ggplot2</strong></a></li>
   <li><a href="#plotnine" id="toc-plotnine" class="nav-link" data-scroll-target="#plotnine"><strong>plotnine</strong></a></li>
   </ul></li>
+  <li><a href="#regarding-reproducibility-of-projects-in-r" id="toc-regarding-reproducibility-of-projects-in-r" class="nav-link" data-scroll-target="#regarding-reproducibility-of-projects-in-r"><strong>Regarding reproducibility of projects in R</strong></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jhylin/Data_in_life_blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -400,14 +402,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="background" class="level5">
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
 <p>The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R’s strong statistical packages and Python’s well-developed and maintained machine learning packages in some of our scientific research work.</p>
-<p>For rpy2 package, I’ve tried it in a separate post (<strong>add link</strong>). Interestingly, I had to pause in the middle of working on it due to an issue about plotting and started working on current post using reticulate. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
+<p>For rpy2 package, I’ve tried it in a separate post (<strong>add link</strong>). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
 <p>For <a href="https://rstudio.github.io/reticulate/index.html">reticulate package</a>, the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I’ve changed the title of this post to reflect this.</p>
 <p><br></p>
 </section>
 <section id="setting-up-notebook-environment" class="level5">
 <h5 class="anchored" data-anchor-id="setting-up-notebook-environment"><strong>Setting up notebook environment</strong></h5>
 <p>Steps I’ve taken:</p>
-<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the associated <a href="https://github.com/jhylin/Back_to_basics">repository</a> created using the uv project management structure as well. This step has been done prior to the executions of the following steps.</p>
+<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well. This step has been done prior to the executions of the following steps.</p>
 <ol type="1">
 <li><p>Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (<a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">reference</a>). The versions of R and Python used here are suggested by the <a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">old reference post about using rpy2 from 2022</a>. So far when I’ve tried it with reticulate package, it works so I’ll leave them as how they are now.</p></li>
 <li><p>Install R’s language server. All R packages are to be installed via R console/terminal (not in notebooks, otherwise you may run into some error messages).</p></li>
@@ -484,8 +486,8 @@ NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
 <p>I have a feeling now that it’s easier to use reticulate package for the purpose of combining Python and R in one place.</p>
 <p><br></p>
 </section>
-<section id="plotting-in-r-using-ggplot2-and-in-python-using-plotnine" class="level5">
-<h5 class="anchored" data-anchor-id="plotting-in-r-using-ggplot2-and-in-python-using-plotnine"><strong>Plotting in R using ggplot2 and in Python using plotnine</strong></h5>
+<section id="plotting-in-r-using-ggplot2-and-plotnine" class="level5">
+<h5 class="anchored" data-anchor-id="plotting-in-r-using-ggplot2-and-plotnine"><strong>Plotting in R using ggplot2 and plotnine</strong></h5>
 <p>Next example is using Python code to read a dataframe using Pandas.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">## This is the code for read_df.py</span></span>
@@ -502,7 +504,7 @@ NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
 <p><br></p>
 <section id="ggplot2" class="level6">
 <h6 class="anchored" data-anchor-id="ggplot2"><strong>ggplot2</strong></h6>
-<p>Then I’m using R’s well-known plotting package, <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, to plot a scatter plot based on a sample dataset using read_df.py as an example shown below.</p>
+<p>Then I’m using R’s well-known plotting package, <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, to plot a scatter plot as an example shown below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data using read_df.py</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source_python</span>(<span class="st">"read_df.py"</span>)</span>
@@ -546,9 +548,14 @@ NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
 </div>
 </div>
 <p>All plots shown in this post using reticulate and the other post using rpy2 should look the same by using the same set of data but different code in two different programming languages (which means I’ve somewhat achieved my small goal here!).</p>
-
-
+<p><br></p>
 </section>
+</section>
+<section id="regarding-reproducibility-of-projects-in-r" class="level5">
+<h5 class="anchored" data-anchor-id="regarding-reproducibility-of-projects-in-r"><strong>Regarding reproducibility of projects in R</strong></h5>
+<p>I realise after finishing these two posts about using R and Python together that I should’ve created two separate repositories and virtual environments where one is based on Python and the other based on R to improve the reproducibilities of the work (hmm… currently it may look messy with what I’ve done here, as these two posts are in a Python-based virtual environment). It is possible and most likely recommended to set up a R virtual environment when working on R-related projects. This <a href="https://posit.co/blog/renv-project-environments-for-r/">introductory post</a> about <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> will help with this.</p>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
