@@ -401,14 +401,14 @@ gtag('config', 'G-5CHVP3K63C', { 'anonymize_ip': true});
 <section id="background" class="level5">
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
 <p>The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R’s strong statistical packages and Python’s well-developed and maintained machine learning packages in some of our scientific research work.</p>
-<p>For rpy2 package, I’ve tried it in a separate post (<strong>add link</strong>). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
+<p>For rpy2 package, I’ve tried it in a <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html">separate post</a>. Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
 <p>For <a href="https://rstudio.github.io/reticulate/index.html">reticulate package</a>, the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I’ve changed the title of this post to reflect this.</p>
 <p><br></p>
 </section>
 <section id="setting-up-notebook-environment" class="level5">
 <h5 class="anchored" data-anchor-id="setting-up-notebook-environment"><strong>Setting up notebook environment</strong></h5>
 <p>Steps I’ve taken:</p>
-<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well. This step has been done prior to the executions of the following steps.</p>
+<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well (please also see this <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html#regarding-reproducibility-of-projects-in-r">part</a> regarding virtual environment in R). This step has been done prior to the executions of the following steps.</p>
 <ol type="1">
 <li><p>Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (<a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">reference</a>). The versions of R and Python used here are suggested by the <a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">old reference post about using rpy2 from 2022</a>. So far when I’ve tried it with reticulate package, it works so I’ll leave them as how they are now.</p></li>
 <li><p>Install R’s language server. All R packages are to be installed via R console/terminal (not in notebooks, otherwise you may run into some error messages).</p></li>

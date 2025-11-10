@@ -14,7 +14,7 @@ format: html
 
 The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R's strong statistical packages and Python's well-developed and maintained machine learning packages in some of our scientific research work.
 
-For rpy2 package, I've tried it in a separate post (**add link**). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I've since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.
+For rpy2 package, I've tried it in a [separate post](https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I've since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.
 
 For [reticulate package](https://rstudio.github.io/reticulate/index.html), the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I've changed the title of this post to reflect this.
 
@@ -24,7 +24,7 @@ For [reticulate package](https://rstudio.github.io/reticulate/index.html), the c
 
 Steps I've taken:
 
-Initial preparation - this notebook has been created using a virtual environment from uv, with the [associated repository](https://github.com/jhylin/Back_to_basics) created using the uv project management structure as well. This step has been done prior to the executions of the following steps.
+Initial preparation - this notebook has been created using a virtual environment from uv, with the [associated repository](https://github.com/jhylin/Back_to_basics) created using the uv project management structure as well (please also see this [part](https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html#regarding-reproducibility-of-projects-in-r) regarding virtual environment in R). This step has been done prior to the executions of the following steps.
 
 1.  Install R with version at least 4.0 or above, and Python with version at least 3.7 or above ([reference](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/)). The versions of R and Python used here are suggested by the [old reference post about using rpy2 from 2022](https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/). So far when I've tried it with reticulate package, it works so I'll leave them as how they are now.
 

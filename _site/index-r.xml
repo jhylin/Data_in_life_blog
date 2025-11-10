@@ -25,14 +25,14 @@
 <section id="background" class="level5">
 <h5 class="anchored" data-anchor-id="background"><strong>Background</strong></h5>
 <p>The main goal here is to try using Python and R concurrently in a notebook setting. Both programming languages have their weaknesses and strengths, and also differences and similarities. By combining them together, we can leverage R’s strong statistical packages and Python’s well-developed and maintained machine learning packages in some of our scientific research work.</p>
-<p>For rpy2 package, I’ve tried it in a separate post (<strong>add link</strong>). Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
+<p>For rpy2 package, I’ve tried it in a <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/1_Using_r_in_python_rpy2.html">separate post</a>. Interestingly, I had to pause in the middle of working on it due to an issue about plotting. I’ve since returned to it after trying out reticulate, and have found a way to generate a plot using ggplot2 in rpy2.</p>
 <p>For <a href="https://rstudio.github.io/reticulate/index.html">reticulate package</a>, the concept is reversed where we are trying to call Python in a R environment as it is a R-based package. So I’ve changed the title of this post to reflect this.</p>
 <p><br></p>
 </section>
 <section id="setting-up-notebook-environment" class="level5">
 <h5 class="anchored" data-anchor-id="setting-up-notebook-environment"><strong>Setting up notebook environment</strong></h5>
 <p>Steps I’ve taken:</p>
-<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well. This step has been done prior to the executions of the following steps.</p>
+<p>Initial preparation - this notebook has been created using a virtual environment from uv, with the <a href="https://github.com/jhylin/Back_to_basics">associated repository</a> created using the uv project management structure as well (please also see this <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html#regarding-reproducibility-of-projects-in-r">part</a> regarding virtual environment in R). This step has been done prior to the executions of the following steps.</p>
 <ol type="1">
 <li><p>Install R with version at least 4.0 or above, and Python with version at least 3.7 or above (<a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">reference</a>). The versions of R and Python used here are suggested by the <a href="https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/">old reference post about using rpy2 from 2022</a>. So far when I’ve tried it with reticulate package, it works so I’ll leave them as how they are now.</p></li>
 <li><p>Install R’s language server. All R packages are to be installed via R console/terminal (not in notebooks, otherwise you may run into some error messages).</p></li>
@@ -366,7 +366,7 @@ font-style: inherit;">"Max_Phase"</span>)))</span>
 
 
 <p>This is something I’ve always wanted to try, that is using both R and Python in one place, so here it is.</p>
-<p>Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I’ll try rpy2 first in this post. For the notes about using reticulate package, it’ll be in a separate post (<strong>add link</strong>).</p>
+<p>Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I’ll try rpy2 first in this post. For the notes about using reticulate package, it’ll be in a <a href="https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html">separate post</a>.</p>
 <p>There will be two different versions of code below where one is based on using R dataframe in Python and ggplot2, and the other one is based on pandas dataframe in Python with ggplot2. From my little experience using both versions of code, I’d say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course… there are always new things to learn for sure).</p>
 <p><br></p>
 <section id="setting-up-notebook-environment" class="level5">
@@ -399,7 +399,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 <section id="using-r-dataframe-in-python-and-ggplot2" class="level5">
 <h5 class="anchored" data-anchor-id="using-r-dataframe-in-python-and-ggplot2"><strong>Using R dataframe in python and ggplot2</strong></h5>
-<div id="8de755d4" class="cell" data-execution_count="1">
+<div id="e9920198" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> rpy2</span>
@@ -504,20 +504,43 @@ font-style: inherit;">## this code also seems to work but with no plot shown</sp
 background-color: null;
 font-style: inherit;"># print(p)</span></span></code></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>R callback write-console: In addition:   
-R callback write-console: Warning message:
-  
-R callback write-console: In (function (filename = "Rplot%03d.png", width = 480, height = 480,  :  
-R callback write-console: 
-   
-R callback write-console:  failed to load cairo DLL
-  </code></pre>
+<pre><code>Error importing in API mode: ImportError('dlopen(/Users/jenniferlin/Data_in_life_blog/.venv/lib/python3.12/site-packages/_rinterface_cffi_api.abi3.so, 0x0002): symbol not found in flat namespace (_R_BaseEnv)')
+Trying to import in ABI mode.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Max_Phase"          "Polar.Surface.Area" "HBA"               
 [4] "HBD"                "X.RO5.Violations"   "QED.Weighted"      
 [7] "CX.LogP"            "CX.LogD"            "Heavy.Atoms"       
 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>R callback write-console: In addition:   
+R callback write-console: Warning messages:
+  
+R callback write-console: 1:   
+R callback write-console: In grSoftVersion() :  
+R callback write-console: 
+   
+R callback write-console:  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 0x0006): Library not loaded: '/opt/X11/lib/libSM.6.dylib'
+  Referenced from: '/Library/Frameworks/R.framework/Versions/4.5-x86_64/Resources/modules/R_X11.so'
+  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/usr/local/lib/libSM.6.dylib' (no such file), '/usr/lib/libSM.6.dylib' (no such file)
+  
+R callback write-console: 2:   
+R callback write-console: In cairoVersion() :  
+R callback write-console: 
+   
+R callback write-console:  unable to load shared object '/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/library/grDevices/libs//cairo.so, 0x0006): Library not loaded: '/opt/X11/lib/libSM.6.dylib'
+  Referenced from: '/Library/Frameworks/R.framework/Versions/4.5-x86_64/Resources/library/grDevices/libs/cairo.so'
+  Reason: tried: '/opt/X11/lib/libSM.6.dylib' (no such file), '/usr/local/lib/libSM.6.dylib' (no such file), '/usr/lib/libSM.6.dylib' (no such file)
+  
+R callback write-console: 3:   
+R callback write-console: In (function (filename = "Rplot%03d.png", width = 480, height = 480,  :  
+R callback write-console: 
+   
+R callback write-console:  failed to load cairo DLL
+  </code></pre>
 </div>
 </div>
 <p><br></p>
@@ -530,40 +553,40 @@ R callback write-console:  failed to load cairo DLL
 </section>
 <section id="using-pandas-and-ggplot2" class="level5">
 <h5 class="anchored" data-anchor-id="using-pandas-and-ggplot2"><strong>Using pandas and ggplot2</strong></h5>
-<div id="68e5aced" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+<div id="c3dd826a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># python version used</span></span>
-<span id="cb5-2"><span class="im" style="color: #00769E;
+<span id="cb6-2"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> sys</span>
-<span id="cb5-3"><span class="bu" style="color: null;
+<span id="cb6-3"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(sys.version)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3.12.7 (main, Oct 16 2024, 09:10:10) [Clang 18.1.8 ]</code></pre>
 </div>
 </div>
-<div id="5f0fa845" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+<div id="982d5eeb" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Load R magic</span></span>
-<span id="cb7-2"><span class="op" style="color: #5E5E5E;
+<span id="cb8-2"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span>load_ext rpy2.ipython</span>
-<span id="cb7-3"></span>
-<span id="cb7-4"><span class="im" style="color: #00769E;
+<span id="cb8-3"></span>
+<span id="cb8-4"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> pd</span>
-<span id="cb7-5"></span>
-<span id="cb7-6">df <span class="op" style="color: #5E5E5E;
+<span id="cb8-5"></span>
+<span id="cb8-6">df <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"df_ml.csv"</span>)</span>
-<span id="cb7-7">df <span class="op" style="color: #5E5E5E;
+<span id="cb8-7">df <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> df.rename(columns<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -576,12 +599,8 @@ background-color: null;
 font-style: inherit;">"Polar Surface Area"</span>: <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"PSA"</span>})</span>
-<span id="cb7-8">df.head()</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The rpy2.ipython extension is already loaded. To reload it, use:
-  %reload_ext rpy2.ipython</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<span id="cb8-8">df.head()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -667,7 +686,7 @@ font-style: inherit;">"PSA"</span>})</span>
 </div>
 </div>
 </div>
-<div id="f584b099" class="cell" data-execution_count="4">
+<div id="c5401f06" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> rpy2.robjects <span class="im" style="color: #00769E;

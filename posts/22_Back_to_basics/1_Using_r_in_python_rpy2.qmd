@@ -12,7 +12,7 @@ format: html
 
 This is something I've always wanted to try, that is using both R and Python in one place, so here it is.
 
-Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I'll try rpy2 first in this post. For the notes about using reticulate package, it'll be in a separate post (**add link**).
+Essentially, I think there are two packages that may do the trick - one is rpy2 and the other is reticulate. I'll try rpy2 first in this post. For the notes about using reticulate package, it'll be in a [separate post](https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html).
 
 There will be two different versions of code below where one is based on using R dataframe in Python and ggplot2, and the other one is based on pandas dataframe in Python with ggplot2. From my little experience using both versions of code, I'd say the second one using pandas and ggplot2 works better than the first (other more experienced users may have different opinions of course... there are always new things to learn for sure).
 
