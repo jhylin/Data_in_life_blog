@@ -10,7 +10,7 @@
 <atom:link href="https://jhylin.github.io/Data_in_life_blog/index-r.xml" rel="self" type="application/rss+xml"/>
 <description>A blog website about using software tools to decipher drug discovery and development data</description>
 <generator>quarto-1.7.31</generator>
-<lastBuildDate>Sat, 08 Nov 2025 11:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 09 Nov 2025 11:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Python in R - reticulate</title>
   <dc:creator>Jennifer HY Lin</dc:creator>
@@ -352,7 +352,7 @@ font-style: inherit;">"Max_Phase"</span>)))</span>
   <category>Python</category>
   <category>R</category>
   <guid>https://jhylin.github.io/Data_in_life_blog/posts/22_Back_to_basics/2_Using_python_in_r_reticulate.html</guid>
-  <pubDate>Sat, 08 Nov 2025 11:00:00 GMT</pubDate>
+  <pubDate>Sun, 09 Nov 2025 11:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Using R in Python - rpy2</title>

@@ -1,7 +1,7 @@
 ---
 title: "Using Python in R - reticulate"
 author: Jennifer HY Lin
-date: 2025-11-9
+date: 2025-11-10
 draft: false
 categories: 
     - Notes
