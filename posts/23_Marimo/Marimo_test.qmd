@@ -5,6 +5,9 @@ date: "2026-1-5"
 draft: true
 filters:
     - marimo-team/marimo
+pyproject: 
+    dependencies:
+    - pandas==2.2.3
 ---
 
 This is a [Marimo](https://docs.marimo.io/) notebook currently in test mode inside a Quarto blog. 
@@ -47,3 +50,11 @@ mo.md("2026 is " + "here! " * slider.value)
 <br>
 
 I'll need to explore other things to try later in Marimo...!
+
+```python {.marimo}
+## 5/2/26: for marimo 0.13.3 - unable to load pandas even though it's installed in uv venv... the marimo-quarto plugin is being revamped/updated currently as shown in comments in issues from its repo... may leave this aside for a while and use marimo notebook via other route instead
+
+# import pandas as pd
+# df = pd.read_csv("ache_chembl.csv")
+# df.head()
+```
