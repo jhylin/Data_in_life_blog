@@ -1,0 +1,12 @@
+{
+  "hash": "46a56caa395a67e81f1d4807833c84de",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"A Marimo notebook in Quarto - tbc\"\nauthor: Jennifer HY Lin\ndate: \"2026-1-5\"\ndraft: true\nfilters:\n    - marimo-team/marimo\npyproject: \n    dependencies:\n    - pandas==2.2.3\n---\n\nThis is a [Marimo](https://docs.marimo.io/) notebook currently in test mode inside a Quarto blog. \n\nFew things to note so far after using the new [Quarto-Marimo extension](https://github.com/marimo-team/quarto-marimo):\n\n1. Marimo version 0.13.3 works currently and likely not other newer versions (noted a few issues logged about this on the extension's GitHub repo when using more current versions; may still need to try versions 0.14.3 and/or 0.17.3)\n\n2. This Quarto-Marimo integration works in a Quarto project such as a blog.\n\n3. The reactivity of Marimo notebooks inside Quarto blog may take a few seconds to load.\n\n<br>\n\nBelow are sample code from Marimo with my little adaptation for a test drive.\n\n#### Just another Quarto project\n\n```{marimo .python}\n#| echo: true\nimport marimo as mo\nslider = mo.ui.slider(1, 10, 1, label=\"Look, a slider!\")\nslider\n```\n\n<br>\n\nWhen the slider is moved to the left or right, the word, \"here!\" will change accordingly.\n\n<br>\n\n#### More things\n\nAnd we can respond!\n\n```{marimo .python}\n# No echo here means we do not show the code\nmo.md(\"2026 is \" + \"here! \" * slider.value)\n```\n<br>\n\nI'll need to explore other things to try later in Marimo...!\n\n```{marimo .python}\n## 5/2/26: for marimo v0.13.3 and v0.14.3 (tested on 12/2/26) - unable to load pandas even though it's installed in uv venv... slider works fine. The marimo-quarto plugin is being revamped/updated currently as shown in comments in issues from its repo... may leave this aside for a while and use marimo notebook via other route instead\n## 12/2/26: for marimo v0.17.3, slider has disappeared and unable to load pandas as well. \n## 12/2/26: for marimo v0.19.10, the quarto-marimo notebook is unable to be previewed at all.\n\nimport pandas as pd\ndf = pd.read_csv(\"ache_chembl.csv\")\ndf.head()\n```\n\n",
+    "supporting": [
+      "Marimo_test_files/figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
