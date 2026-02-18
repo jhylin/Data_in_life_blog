@@ -1,23 +1,27 @@
 ---
 title: "A test drive of Marimo notebook in Quarto blog"
 author: Jennifer HY Lin
-date: "2026-2-12"
+date: "2026-2-18"
 draft: true
+categories: 
+    - Marimo
 filters:
     - marimo-team/marimo
 ---
 
-This is a [Marimo](https://docs.marimo.io/) notebook that I've started to test in January 2026 inside a Quarto blog. This notebook uses Marimo v0.14.3.
+This is a [Marimo](https://docs.marimo.io/) notebook using Marimo v0.14.3 that I've started to test in January 2026 inside a Quarto blog. 
 
 Few things to note so far after using the new [Quarto-Marimo extension](https://github.com/marimo-team/quarto-marimo):
 
-1. Initally in Januray, I've found out that only Marimo version 0.13.3 works and likely not other newer versions (noted a few issues logged about this on the extension's GitHub repo when using later versions). However, in February, I've found out this may not be the case (see below).
+1. I've found out in Januray that only Marimo version 0.13.3 works and likely not other newer versions (noted a few issues logged about this on the extension's GitHub repo). However, in February, this may not be the case (see below).
 
 2. This Quarto-Marimo integration works in a Quarto project such as a blog.
 
-3. The reactivity of Marimo notebooks inside Quarto blog may take a few seconds to a few minutes to load.
+3. The reactivity of Marimo notebooks inside Quarto blog may take ***a few seconds up to a minute to load***.
 
 <br>
+
+#### **Sample code**
 
 Below are sample code from Marimo with my little adaptation for a test drive.
 
@@ -48,14 +52,18 @@ mo.md("2026 is " + "here! " * slider.value)
 
 #### **Reading a .csv file using pandas**
 
-This part is the more challenging one as I've gone back and forth with different versions of Marimo to see how to load a dataframe. 
+This part is more challenging as I need to go back and forth with different versions of Marimo to see how to load a dataframe. 
+
+After testing a few different versions of marimo, I have figured out how to read a simple .csv file using pandas. The versions of marimo that will work are 0.13.3, 0.14.3 and 0.17.3. It may initially show an error message saying no module named "pandas" is found, but after waiting for a minute or two, it'll load on the static HTML page and a dataframe will appear (as shown below). 
 
 ```python {.marimo}
-## 12/2/26: for marimo v0.17.3, slider has disappeared but pandas is working with dataframe loaded;
-## for marimo v0.19.10, the quarto-marimo notebook is unable to be previewed in HTML page at all 
-## (suspect the team has not had the time to update the code base to account for the Marimo plugin for Quarto yet...).
-
 #| echo: true
+## 12/2/26: for marimo v0.17.3, slider has disappeared 
+## but pandas is working with dataframe loaded;
+## for marimo v0.19.10, the notebook is unable to be previewed in HTML page at all 
+## (suspect the team has not had the time to update the code base 
+## to account for the Marimo plugin for Quarto yet...).
+
 # below works with marimo v0.13.3, v0.14.3 and v0.17.3 for now
 import pandas as pd
 df = pd.read_csv("https://raw.githubusercontent.com/jhylin/Data_in_life_blog/refs/heads/main/posts/16_ML2-1_Decision_tree/ache_chembl.csv")
@@ -63,8 +71,6 @@ df.head(10)
 ```
 <br>
 
-After testing a few different versions of marimo, I have figured out how to read a simple .csv file using pandas. The versions of marimo that will work are 0.13.3, 0.14.3 and 0.17.3. It may initiall show an error message saying no module named "pandas" is found but give it a minute or two, it'll load on the static HTML page and a dataframe will appear. 
+According to this [clip](https://www.youtube.com/watch?v=dbPj3GOFa-g) about Quarto-Marimo extension (especially the last part about Marimo plugin for Quarto), polars dataframe library may not work as well as pandas due to some upstream limitation of polars as not all of its depended software packages support WASM (WebAssembly) yet. 
 
-According to this [clip](https://www.youtube.com/watch?v=dbPj3GOFa-g) about Quarto-Marimo extension (especially the last part about Marimo plugin for Quarto), polars dataframe library may not work as well due to some upstream limitation of polars itself as not all of its depended software packages support WASM (WebAssembly) yet. 
-
-To read a .csv file, I've found the best way is via URL so far (likely due to the nature of WASM-enabled HTML page and this reminds me of my old blog post that used [shinylive](https://shiny.posit.co/py/get-started/shinylive.html)). 
+To read a .csv file, I've found the best way is to use URL (likely due to the nature of WASM-enabled HTML page and this reminds me of my old blog post that used [shinylive](https://shiny.posit.co/py/get-started/shinylive.html)). 
