@@ -2,11 +2,11 @@
 
 #### **Introduction**
 
-This website serves as my portfolio in a blog style on data science or cheminformatics projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical or drug discovery (current) or healthcare (earlier) themes due to my background. Each project will be showcased in a blog post format, published by using Quarto. Currently, I'm aiming to post one post or project every quarter if possible. Most of the projects are done in Python with a smaller portion of posts in R, and also with an even smaller number of posts in Rust as experiments only.
+This website serves as my portfolio in a blog style on data science or cheminformatics projects that I'm interested in. These projects tend to be heavily infused with pharmaceutical or drug discovery (current) or healthcare (earlier) themes. Each project will be showcased in a blog post format, published by using Quarto. Most of the projects are done in Python with a smaller portion of posts in R, and also with an even smaller number of posts in Rust as experiments only. In general, I'll try to post once every quarter but this may be further relaxed due to various circumstances.
 
 #### **Code**
 
-All the code used in each post are available in the [posts](https://github.com/jhylin/Data_in_life_blog/tree/main/posts) folder, which contains every blog post I've worked on in chronological order. I've also saved some of the posts (based on Jupyter notebook or Quarto Markdown documents) in separate GitHub repositories which may be easier to work with if anyone's interested.
+All of the code used in each post are available in the [posts](https://github.com/jhylin/Data_in_life_blog/tree/main/posts) folder, which contains every blog post I've worked on in chronological order. I've also saved some of the posts (based on Jupyter notebook or Quarto Markdown documents) in separate GitHub repositories which may be easier to work with if anyone's interested.
 
 #### **Site deployment**
 
