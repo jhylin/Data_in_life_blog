@@ -1,23 +1,23 @@
 ---
 title: "A test drive of Marimo notebook in Quarto blog"
 author: Jennifer HY Lin
-date: "2026-2-18"
-draft: true
+date: "2026-4-3"
+draft: false
 categories: 
     - Marimo
 filters:
     - marimo-team/marimo
 ---
 
-This is a [Marimo](https://docs.marimo.io/) notebook using Marimo v0.14.3 that I've started to test in January 2026 inside a Quarto blog. 
+This is a [Marimo](https://docs.marimo.io/) notebook using Marimo v0.14.3 that I've started to test in January 2026 inside a Quarto blog.
 
 Few things to note so far after using the new [Quarto-Marimo extension](https://github.com/marimo-team/quarto-marimo):
 
-1. I've found out in Januray that only Marimo version 0.13.3 works and likely not other newer versions (noted a few issues logged about this on the extension's GitHub repo). However, in February, this may not be the case (see below).
+1.  I've found out in Januray that only Marimo version 0.13.3 works and likely not other newer versions (noted a few issues logged about this on the extension's GitHub repo). However, in February, this may not be the case (see below).
 
-2. This Quarto-Marimo integration works in a Quarto project such as a blog.
+2.  This Quarto-Marimo integration works in a Quarto project such as a blog.
 
-3. The reactivity of Marimo notebooks inside Quarto blog may take ***a few seconds up to a minute to load***.
+3.  The reactivity of Marimo notebooks inside Quarto blog may take ***a few seconds up to a minute to load***.
 
 <br>
 
@@ -27,7 +27,7 @@ Below are sample code from Marimo with my little adaptation for a test drive.
 
 #### Just another Quarto project
 
-```python {.marimo}
+``` {.python .marimo}
 #| echo: true
 import marimo as mo
 slider = mo.ui.slider(1, 10, 1, label="Look, a slider!")
@@ -44,19 +44,20 @@ When the slider is moved to the left or right, the word, "here!" will change acc
 
 And we can respond!
 
-```python {.marimo}
+``` {.python .marimo}
 # No echo here means we do not show the code
 mo.md("2026 is " + "here! " * slider.value)
 ```
+
 <br>
 
 #### **Reading a .csv file using pandas**
 
-This part is more challenging as I need to go back and forth with different versions of Marimo to see how to load a dataframe. 
+This part is more challenging as I need to go back and forth with different versions of Marimo to see how to load a dataframe.
 
-After testing a few different versions of marimo, I have figured out how to read a simple .csv file using pandas. The versions of marimo that will work are 0.13.3, 0.14.3 and 0.17.3. It may initially show an error message saying no module named "pandas" is found, but after waiting for a minute or two, it'll load on the static HTML page and a dataframe will appear (as shown below). 
+After testing a few different versions of marimo, I have figured out how to read a simple .csv file using pandas. The versions of marimo that will work are 0.13.3, 0.14.3 and 0.17.3. It may initially show an error message saying no module named "pandas" is found, but after waiting for a minute or two, it'll load on the static HTML page and a dataframe will appear (as shown below).
 
-```python {.marimo}
+``` {.python .marimo}
 #| echo: true
 ## 12/2/26: for marimo v0.17.3, slider has disappeared 
 ## but pandas is working with dataframe loaded;
@@ -69,8 +70,9 @@ import pandas as pd
 df = pd.read_csv("https://raw.githubusercontent.com/jhylin/Data_in_life_blog/refs/heads/main/posts/16_ML2-1_Decision_tree/ache_chembl.csv")
 df.head(10)
 ```
+
 <br>
 
-According to this [clip](https://www.youtube.com/watch?v=dbPj3GOFa-g) about Quarto-Marimo extension (especially the last part about Marimo plugin for Quarto), polars dataframe library may not work as well as pandas due to some upstream limitation of polars as not all of its depended software packages support WASM (WebAssembly) yet. 
+According to this [clip](https://www.youtube.com/watch?v=dbPj3GOFa-g) about Quarto-Marimo extension (especially the last part about Marimo plugin for Quarto), polars dataframe library may not work as well as pandas due to some upstream limitation of polars as not all of its depended software packages support WASM (WebAssembly) yet.
 
-To read a .csv file, I've found the best way is to use URL (likely due to the nature of WASM-enabled HTML page and this reminds me of my old blog post that used [shinylive](https://shiny.posit.co/py/get-started/shinylive.html)). 
+To read a .csv file, I've found the best way is to use URL as the data source (likely due to the nature of WASM-enabled HTML page and this reminds me of my old blog post that used [shinylive](https://shiny.posit.co/py/get-started/shinylive.html)).
