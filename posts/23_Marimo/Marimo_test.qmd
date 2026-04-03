@@ -5,6 +5,7 @@ date: "2026-4-3"
 draft: false
 categories: 
     - Marimo
+    - Notes
 filters:
     - marimo-team/marimo
 ---
