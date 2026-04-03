@@ -13,8 +13,6 @@ website:
       - past_projects.qmd
       - icon: github
         href: https://github.com/jhylin
-      - icon: twitter
-        href: https://twitter.com/jenhylin
       - text: CV
         href: https://jhylin.github.io/CV_resume_quarto/
       - icon: rss
