@@ -16733,9 +16733,10 @@ Colovic, Mirjana B., Danijela Z. Krstic, Tamara D. Lazarevic-Pasti, Aleksandra M
 
 <p><strong><em>The final deployed app is on Shinyapps.io</em></strong>:</p>
 <ul>
-<li><p>Link: <a href="https://jhylin.shinyapps.io/molviz_app/">here</a> or please visit https://jhylin.shinyapps.io/molviz_app/</p></li>
+<li><p>Link: <a href="https://jhylin.shinyapps.io/molviz_app/">here</a> or please visit https://jhylin.shinyapps.io/molviz_app/, or alternatively at <a href="https://huggingface.co/spaces/jhylin/Molviz_app" class="uri">https://huggingface.co/spaces/jhylin/Molviz_app</a></p></li>
 <li><p>Code: <a href="https://github.com/jhylin/Molviz_app">here</a> or please visit https://github.com/jhylin/Molviz_app</p></li>
 </ul>
+<p><strong>Update on 29/7/2026</strong>: <em>I’ve come across the news update recently that Posit is slowly going to phase out several of its different platforms including shinyapps.io and start integrating them into one uniformed platform. I’ve gone back to visit my old HF account and realised that the app is actually running fine currently (!), except that sometimes the images of molecules may get over blown that’ll cover some of the other surrounding texts underneath. So another link to this old app has been added at the top. Perhaps I should look at updating/upgrading the app in fact if time allows…</em></p>
 <p><br></p>
 <section id="background---how-the-app-started" class="level5">
 <h5 class="anchored" data-anchor-id="background---how-the-app-started"><strong>Background - how the app started</strong></h5>
@@ -16794,7 +16795,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 <section id="app_molviz_v6_hf.py" class="level6">
 <h6 class="anchored" data-anchor-id="app_molviz_v6_hf.py"><strong>app_molviz_v6_hf.py</strong></h6>
-<p>This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace. The main difference I was testing was on how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, there was actually another problem in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.</p>
+<p>This was basically the final version of the app, but with code edited to attempt to deploy the app on HuggingFace (HF). The main difference I was testing was on how to store the saved images as Docker was new to me at the time, and then while I was thinking about changing the Dockerfile, there was actually another problem in relation to the cairosvg code. Because of this, I then placed this deployment on hold in order to buy more time to figure out code, and also to try Shinyapps.io to see if this could be deployed.</p>
 <p><br></p>
 </section>
 <section id="app_molviz_v6.py-or-app.py" class="level6">
@@ -16820,7 +16821,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 <section id="app_sample.py" class="level6">
 <h6 class="anchored" data-anchor-id="app_sample.py"><strong>app_sample.py</strong></h6>
-<p>This file was provided by Posit (formerly known as RStudio) from their Python for Shiny app template in HuggingFace as an example script for an app.</p>
+<p>This file was provided by Posit (formerly known as RStudio) from their Python for Shiny app template in HF as an example script for an app.</p>
 <p><br></p>
 </section>
 </section>
@@ -16831,7 +16832,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </section>
 <section id="app-deployment" class="level5">
 <h5 class="anchored" data-anchor-id="app-deployment"><strong>App deployment</strong></h5>
-<p>There were two places I’ve tried so far, which were HuggingFace and Shinyapps.io. As mentioned briefly earlier under the subsection of “app_molviz_v6_hf.py”, it turned out cairosvg code didn’t quite play out as expected. I have so far not returned to fix this yet on HuggingFace, since I’ve managed to deploy the app on Shinyapps.io. I had a feeling I might need to revert back to the older code version with poorer image resolutions, so that was also another reason why I haven’t fixed it yet as I’d prefer to keep the better resolution one (unless someone has better ideas out there).</p>
+<p>There were two places I’ve tried so far, which were HF and Shinyapps.io. As mentioned briefly earlier under the subsection of “app_molviz_v6_hf.py”, it turned out cairosvg code didn’t quite play out as expected. I have so far not returned to fix this yet on HF, since I’ve managed to deploy the app on Shinyapps.io. I had a feeling I might need to revert back to the older code version with poorer image resolutions, so that was also another reason why I haven’t fixed it yet as I’d prefer to keep the better resolution one (unless someone has better ideas out there).</p>
 <p>However, deploying the app to Shinyapps.io also wasn’t a smooth ride as well, there were some problems initially. The very first problem I got was being told by the error message that rsconnect-python was only compatible with Python version 3.7, 3.8, 3.9 and 3.10 only. I did some information digging in the Posit community forum, and I think several people mentioned using 3.9 without any problems to deploy their apps. Python version 3.11 definitely did not work at all so please avoid for now if anyone would like to try using Shiny for Python app (unless updated by rsconnect-Python in the future).</p>
 <p>So I think the ideal app building workflow might be like this:</p>
 <p><em>Note: all code examples below are to be run in the command line interface</em></p>
